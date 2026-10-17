@@ -261,3 +261,21 @@ Session layout:
    context holds the images at full fidelity instead of a summary.
 4. Keep every verification script runnable with one command (`make check` or
    `tools/check_all.sh`) so a new session can confirm the state before touching anything.
+
+### Handoff prompt (required at the end of every phase)
+
+When a phase is finished (or a session ends mid-phase), the agent must end its last
+message with a **ready-to-paste prompt for the next agent**, in a fenced code block. The
+prompt is self-contained and includes:
+
+1. Which model the next session should use (from the table above) and which phase/step
+   it starts on.
+2. The files to read first (`PLAN.md`, `STATUS.md`, plus the phase-specific inputs such as
+   `reference/pin_nets_by_component.md` or the page PNGs).
+3. The exact command that verifies the current state (e.g. `tools/check_all.sh`) and what
+   its output looked like at handoff.
+4. Known open problems or decisions left for the next phase.
+5. The definition of done for the next phase, including which verification must pass.
+
+The same prompt is also saved as the `## Next prompt` section of `STATUS.md`, so it is
+committed and not lost if the chat is closed.
