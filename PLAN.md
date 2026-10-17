@@ -278,5 +278,5 @@ prompt is self-contained and includes:
 4. Known open problems or decisions left for the next phase.
 5. The definition of done for the next phase, including which verification must pass.
 
-The same prompt is also saved as the `## Next prompt` section of `STATUS.md`, so it is
-committed and not lost if the chat is closed.
+The same prompt is written to `next_prompt.md` (replacing the previous one) and committed,
+so it is not lost if the chat is closed. `STATUS.md` only points to it.
