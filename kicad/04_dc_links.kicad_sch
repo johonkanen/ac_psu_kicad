@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "77555dae-d247-4a02-b3c2-361e6dd455b8")
+	(paper "A3")
+	(title_block
+		(title "Inverter PSU - DC links")
+		(company "Inverter PSU")
+		(rev "v3")
+		(comment 1 "Redrawn from Proteus single_phase_inverter_psu_v3")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

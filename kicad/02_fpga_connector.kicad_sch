@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "0c464531-2888-4030-a48f-206eea772b7f")
+	(paper "A3")
+	(title_block
+		(title "Inverter PSU - fpga connector")
+		(company "Inverter PSU")
+		(rev "v3")
+		(comment 1 "Redrawn from Proteus single_phase_inverter_psu_v3")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

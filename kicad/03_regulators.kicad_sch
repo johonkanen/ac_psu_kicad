@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "99505613-b120-415e-b617-5faeb6d53b7f")
+	(paper "A3")
+	(title_block
+		(title "Inverter PSU - regulators")
+		(company "Inverter PSU")
+		(rev "v3")
+		(comment 1 "Redrawn from Proteus single_phase_inverter_psu_v3")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

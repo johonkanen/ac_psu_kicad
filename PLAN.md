@@ -73,12 +73,13 @@ Rules that make the later net mapping work:
   C3M0065090D (gate/drain/source = 1/2/3), the 10-pin EF20 transformer, relays, shunts,
   CM chokes, the "HB GT CONNECTOR" (only pins 15–48 used), J11 (38-pin, 50 mil), J12.
 - Use the IPC net names as KiCad net labels wherever the Proteus net has a real name
-  (`G1_GATE_HI`, `PWM_TRANS1_ISO`, `ISOGND`, …). Auto-named Proteus nets (`#00123` style
-  are absent here; all 208 nets look named) – still, the comparison in Phase 4 is done
+  (`G1_GATE_HI`, `PWM_TRANS1_ISO`, `ISOGND`, …). 74 Proteus nets are auto-named
+  (`#00xxx`); the comparison in Phase 4 is done
   by pad-set equivalence, not by name, so naming is only a convenience.
-- Power symbols: `GND`, `PGND`, `ISOGND`, `ISOPGND`, `DGND`, `3V3`, `3V3_ISO`, `5V`,
-  `5V_ISOL`, `20V`, `20V_ISO_SEC`, `DC+`, `ISODC+`, `RET_ISO`. Create them as project
-  power symbols so the names match the IPC exactly.
+- Power symbols (project library, names = IPC nets): `GND`, `PGND`, `ISOGND`, `ISOPGND`,
+  `DGND`, `DAB_GROUND`, `RET_ISO`, `VCC`, `3V3_ISO`, `5V`, `5V_ISOL`, `20V`, `20V_ISO_SEC`,
+  `DC+`, `ISODC+`. There is no `3V3` net: the PDF's `3V3`/`3v3` terminals are net `VCC`, and
+  `DC-`/`AGND` are net `GND` (see STATUS.md, Phase 1 transcription rules).
 - Sheet order (easiest first, builds the label vocabulary): 2 fpga connector → 3
   regulators → 11 signal isolators → 10 → 9 primary side ADC → 8 SDM current → 1 afe →
   5 VSI → 6 DAB → 4 DC links → 7 Auxiliary supply.

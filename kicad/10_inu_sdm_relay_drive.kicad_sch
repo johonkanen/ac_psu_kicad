@@ -1,0 +1,15 @@
+(kicad_sch
+	(version 20260101)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "86dc95ff-6292-4863-886f-aab216f585af")
+	(paper "A3")
+	(title_block
+		(title "Inverter PSU - INU SDM and relay drive")
+		(company "Inverter PSU")
+		(rev "v3")
+		(comment 1 "Redrawn from Proteus single_phase_inverter_psu_v3")
+	)
+	(lib_symbols)
+	(embedded_fonts no)
+)

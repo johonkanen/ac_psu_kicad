@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-17
+Updated: 2026-10-17 (Phase 1 preparation done)
 
 ## Phase 0 – done
 
@@ -48,54 +48,139 @@ unnetted mounting holes (3.0 mm).
 - PDF net labels are sometimes lowercase (`lemout`, `filter_input`); IPC names are
   uppercase. Use the IPC spelling in KiCad.
 
+## Phase 1 preparation – done (Opus 5.5)
+
+New files:
+
+- `tools/sexpr.py` – KiCad s-expression reader/writer (stdlib).
+- `tools/gen_symbols.py` → `lib/ac_psu.kicad_sym` (47 symbols, generated; `--check` verifies
+  it is up to date). Simple parts are flattened copies of KiCad 10 std symbols with pins
+  renumbered (diodes `A`/`C`; C3M0065090D 1=G 2=D 3=S; 2N7000 1=D 2=G 3=S as in Proteus;
+  FKK5R0020FE 1/3 one end, 2/4 other end; WE-CMBNC windings 1-4 and 2-3). ICs, relay,
+  EF20, IW1830, connectors are boxes with the **Proteus** pin names. 15 power symbols with
+  IPC net names + `PWR_FLAG`. `ETD34_TRAN_1P1S` (TR1) has `on_board no`.
+- `lib/part_map.csv` – refdes → PDF sheet, `ac_psu:` symbol, value (268 rows = 267 IPC parts
+  + TR1). Values are only filled for non-passives; R/C values come from the PDF.
+- `tools/check_symbols.py` – pin set of every mapped symbol (all units) == IPC pin ids of
+  that refdes; every IPC refdes mapped; power symbol names are IPC nets.
+- `tools/compare_netlists.py` – exports the kicadxml netlist and compares by pad-set
+  equivalence. Only refdes present in KiCad are pin-compared, so it works sheet by sheet.
+  Reports missing/extra parts, missing/extra pins, merged nets (KiCad net with pins of
+  several IPC nets), split nets, N/C mismatches (incl. KiCad-unconnected pin of a multi-pin
+  IPC net), name hints, and a per-sheet drawn/total summary. `--sheet N` limits the
+  missing-part list to PDF page N; `--allow-missing` makes missing parts warnings.
+  Parts with "exclude from board" (TR1) and `#` refs are ignored. Tested on a throw-away
+  fixture with deliberate errors (merge, split, extra part, unplaced units, N/C flags).
+- `tools/make_skeleton.py` (one-shot, refuses to overwrite) → `kicad/ac_psu.kicad_pro`,
+  `kicad/sym-lib-table` (`ac_psu` → `${KIPRJMOD}/../lib/ac_psu.kicad_sym`), root sheet
+  `kicad/ac_psu.kicad_sch` with 11 hierarchical sheets `01 afe` … `11 signal isolators`
+  (files `kicad/01_afe.kicad_sch` …; sheet 10 is untitled in the PDF → `INU SDM and relay
+  drive`). All sub-sheets are empty, A3.
+- `tools/sch_builder.py` – helper to write sub-sheets from Python: `Sheet(path).place(sym,
+  ref, x, y, rot, unit, value)` returns pin connection points; `power`, `pwr_flag`, `label`,
+  `glabel`, `no_connect`, `wire`, `junction`, `text`, `save`. Rotation verified via netlist.
+- `tools/erc.sh` – ERC via kicad-cli, fails on ERC errors, report in `reports/erc.rpt`.
+- `tools/check_all.sh` now also runs: symbol library up to date, symbol pin sets, ERC,
+  netlist comparison (`--allow-missing` until all sheets are drawn – remove it then).
+
+### Last verification (`tools/check_all.sh`)
+
+```
+ipc356: nets=208, refdes_raw=265, tht_records=562, smd_records=513, nc_pads=34, vias=173, holes=4, parts=267
+gen_symbols: lib/ac_psu.kicad_sym up to date (47 symbols)
+symbols: 31 part types, 268 refdes, 15 power symbols
+symbols: OK
+erc: 0 errors, 0 warnings (reports/erc.rpt)
+compare: parts 0/267 present, 267 missing, 0 extra; pins compared 0, wrong-net pins 0; IPC nets touched 0, complete 0
+compare: per sheet (drawn/total) 1:0/48 2:0/8 3:0/18 4:0/37 5:0/43 6:0/16 7:0/31 8:0/22 9:0/10 10:0/23 11:0/11
+compare: OK
+ALL CHECKS PASSED
+```
+
+### Findings
+
+- **REF3025 pinout**: Proteus/IPC have REF1/REF2 pin 1 = GND, 2 = VIN, 3 = VOUT. The TI
+  SOT-23 pinout (and KiCad's `REF3025`) is 1 = IN, 2 = OUT, 3 = GND. The project symbol
+  follows Proteus (pin ids must match the IPC). Either the Proteus footprint numbers pads
+  differently from their physical position, or the board has REF1/REF2 wired wrong –
+  check in Phase 2 (pad geometry vs footprint) and tell the user.
+- There is **no `3V3` net**: every `3V3`/`3v3` terminal in the PDF is net `VCC`
+  (`VCC/VDD=POWER`). `DC-` and `AGND` (sheet 9) are net `GND`. Sheet 7's `ISO_GND`
+  terminal is wired to `RET_iso` → net `RET_ISO` (it is *not* `ISOGND`).
+- The relays have refdes **R20/R79** and pins 1,2,3,5,6 (no 4). PWM1 (IW1830) has no pin 6.
+- J7 is a single-pin PIN terminal (like J5, J9, J10), not a gate-driver connector.
+- Gate-driver connectors J1–J4, J6, J8 have pins 15–26, 29–40, 43–48 only.
+
+### Transcription rules (for the sheet sessions)
+
+- Use only `ac_psu:` symbols, exactly the `lib_id` in `lib/part_map.csv` for each refdes.
+  Refdes exactly as there (R256, PE1…, DAB_PRI_1, FILTER_IN, INU_OUT2, …).
+- Power nets → power symbols: GND, PGND, ISOGND, ISOPGND, DGND, DAB_GROUND, RET_ISO, VCC,
+  3V3_ISO, 5V, 5V_ISOL, 20V, 20V_ISO_SEC, DC+, ISODC+ (mapping above for 3V3/DC-/AGND/ISO_GND).
+  Add PWR_FLAGs where ERC reports undriven power pins (each power net once, on the sheet
+  where it is generated or enters).
+- Other named nets → labels with the IPC spelling (uppercase, e.g. `lemout` → `LEMOUT`,
+  `filter_input` → `FILTER_INPUT`, `Mdata` → `MDATA`). Proteus terminals are global, so use
+  **global labels** for every net that appears on more than one sheet; local labels are fine
+  for nets that stay on one sheet. Auto-named `#00xxx` nets need no label (plain wires).
+- N/C pins in the IPC (place a no-connect flag): J1-25 J1-39 J2-25 J3-25 J3-39 J4-39
+  J6-25 J6-39 J8-25 J11-38 TR2-5 TR2-8 TR2-9 TR2-10 U3-4 U10-4 R20-5 R79-5 U17-1…16.
+  R87 pins 4/5 have no net: place R87 unit D (4-5) with no-connect flags, or leave it
+  unplaced (compare reports it as info only).
+- Single-pin nets ADA0, ADA4, ADA5, ADA6 (U11 inputs) and DGND (U11-6): label/power
+  symbol on one pin; ERC "isolated label" warnings for them are expected.
+- TR1 (sheet 6) is drawn with `ETD34_TRAN_1P1S` (excluded from board); its pins connect to
+  DAB_SOURCE_HI_PRI / DAB_CAP_PRI / DAB_SOURCE_HI_SEC / DAB_CAP_SEC as in the PDF.
+- Keep symbols, wires and labels on the 1.27 mm grid (ERC flags off-grid ends).
+- After each sheet: `tools/check_all.sh` (or `tools/compare_netlists.py --sheet N` and
+  `tools/erc.sh`). Target per sheet: 0 missing on that sheet, 0 compare errors, 0 ERC errors.
+
 ## Next
 
-Phase 1 (PLAN.md section 3), first session: Opus 5.5 – comparison script, project
-skeleton, symbol library, power symbols. Sheet transcription afterwards with Fable 5.1.
+Phase 1 transcription: Fable 5.1, one sheet per turn, order 2 → 3 → 11 → 10 → 9 → 8 → 1 →
+5 → 6 → 4 → 7 (PLAN.md section 3).
 
 ## Next prompt
 
 ```
-Read PLAN.md and STATUS.md in /home/jari/dev/ac_psu_kicad. Use Opus 5.5.
-Phase 0 is done; start Phase 1 (PLAN.md section 3), the preparatory part only (the
-11-sheet transcription is a later Fable 5.1 session).
+Read PLAN.md and STATUS.md in /home/jari/dev/ac_psu_kicad. Use Fable 5.1.
+Phase 1 preparation is done; start the Phase 1 sheet transcription (PLAN.md section 3):
+redraw the 11 Proteus sheets into the existing KiCad sub-sheets kicad/01_afe.kicad_sch …
+kicad/11_signal_isolators.kicad_sch, one sheet per turn, in the order
+2 → 3 → 11 → 10 → 9 → 8 → 1 → 5 → 6 → 4 → 7.
 
-Read first: PLAN.md sections 3, 6.1 and 9; STATUS.md "Findings that matter for Phase 1";
-reference/pin_nets_by_component.md and reference/pins_by_net.md (generated from the IPC
-file; reference/ipc356_pads.json has the same data machine-readable).
-Tools: tools/bin/kipy (AppImage python with pcbnew), tools/bin/kicad-cli (10.0.7); both
-mount the AppImage on demand. Never run the AppImage with --version (it hangs).
+Read first: STATUS.md "Findings" and "Transcription rules" (3V3→VCC, DC-/AGND→GND,
+ISO_GND→RET_ISO, N/C list, TR1, R87, single-pin nets); lib/part_map.csv (refdes → sheet,
+ac_psu: symbol, value); reference/pin_nets_by_component.md (pin → net per refdes, the
+authority); source/schematic_pdf/hi-NN.png (page renders; read values and layout there,
+source/schematic_pdf/single_phase_inverter_psu_v3.PDF for zoom if needed).
+Tools: tools/sch_builder.py writes sub-sheets from Python (place/power/pwr_flag/label/
+glabel/no_connect/wire; returns pin connection points, rotation verified). Symbols:
+lib/ac_psu.kicad_sym, generated by tools/gen_symbols.py – change the generator, not the
+file, if a symbol needs fixing, then re-run tools/check_symbols.py.
+tools/bin/kicad-cli (10.0.7) mounts the AppImage on demand; never run the AppImage with
+--version (it hangs).
 
 Verify state first: tools/check_all.sh. At handoff it printed
-  ipc356: nets=208, refdes_raw=265, tht_records=562, smd_records=513, nc_pads=34,
-          vias=173, holes=4, parts=267
+  ipc356: nets=208, ... parts=267
+  gen_symbols: lib/ac_psu.kicad_sym up to date (47 symbols)
+  symbols: OK
+  erc: 0 errors, 0 warnings (reports/erc.rpt)
+  compare: parts 0/267 present, 267 missing, 0 extra; pins compared 0, wrong-net pins 0; ...
+  compare: per sheet (drawn/total) 1:0/48 2:0/8 3:0/18 4:0/37 5:0/43 6:0/16 7:0/31 8:0/22 9:0/10 10:0/23 11:0/11
   ALL CHECKS PASSED
 
-Tasks:
-1. tools/compare_netlists.py (PLAN.md 6.1): export the KiCad netlist with
-   `kicad-cli sch export netlist --format kicadxml`, compare against
-   reference/ipc356_pads.json by pad-set equivalence per net (names only as hints;
-   74 nets are auto-named #00xxx). Report wrong-net pins, missing/extra parts and pins,
-   N/C mismatches. Support per-sheet progress (e.g. --sheet or a summary of which IPC
-   refdes are already present) so it is useful while only some sheets are drawn.
-   Ignore TR1 (off-board, "Exclude from board"). Add it to tools/check_all.sh.
-2. KiCad project skeleton kicad/ac_psu.kicad_pro + root sheet with 11 hierarchical
-   sheets named after the Proteus sheets (see PLAN.md section 1 / source/schematic_pdf).
-3. lib/ac_psu.kicad_sym: project symbols whose pin numbers equal the IPC pin ids
-   (diodes A/C, C3M0065090D 1/2/3, shunt FKK5R0020FE 1..4, relays 1..6, EF20 TR2 1..10,
-   WE-CMBNC chokes, IW1830, VXO7805-500, terminals, ACIN/ACOUT with two pads numbered 1,
-   connectors J1..J12 with only the used pins) and project power symbols with names
-   exactly as in the IPC (GND, PGND, ISOGND, ISOPGND, DGND, 3V3, 3V3_ISO, 5V, 5V_ISOL,
-   20V, 20V_ISO_SEC, DC+, ISODC+, RET_ISO, VCC – check the actual list in
-   reference/pins_by_net.md). Check every symbol's pin set against the IPC table with a
-   script, not by eye.
-4. Run ERC on the skeleton via kicad-cli.
+Per sheet: draw it readably (layout like the PDF, wires not just labels), set values from
+the PDF, then run tools/compare_netlists.py --sheet N and tools/erc.sh. A sheet is done when
+that page has 0 missing parts, compare reports 0 errors and ERC 0 errors (warnings for
+single-pin nets are expected). Fix diffs before moving on. Commit after each sheet and
+update the per-sheet line in STATUS.md.
 
-Open points: Proteus pin ids vs KiCad standard symbols (use project copies where
-they differ); TR1 handling; R87 pins 4/5 have no net; single-pin nets ADA0/4/5/6, DGND.
+Open points: REF3025 pinout differs from the TI datasheet (Proteus 1=GND 2=VIN 3=VOUT) –
+keep the Proteus ids, flagged for Phase 2; whether to place R87 unit D (pins 4/5 no net).
 
-Done when: tools/check_all.sh runs compare_netlists.py against the (still empty)
-schematic and reports all 267 IPC parts as missing without crashing; the symbol pin-set
-check passes for every part type; ERC runs; STATUS.md updated, committed, and the
-session ends with the handoff prompt for the Fable 5.1 sheet-transcription session.
+Done when: all 11 sheets drawn; tools/compare_netlists.py (without --allow-missing) reports
+267/267 parts present and 0 errors; ERC 0 errors; --allow-missing removed from
+tools/check_all.sh and it passes; STATUS.md updated, committed, and the session ends with
+the handoff prompt for Phase 2 (Opus 5.5, footprints + geometric check).
 ```
