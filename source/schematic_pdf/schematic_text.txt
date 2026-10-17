@@ -1,0 +1,1239 @@
+              A                      B                         C                           D                        E                               F                      G                                H                                  J                              K
+
+                                                        DC+
+                                                                                                                                                               R20
+
+
+
+
+                                                                                                                                                                                                                                            ac_in_1
+                                                                                                                                            20V                 COIL_2        NO
+                                                                                                                                                           6                          3                                                                      PE4     PE2
+0                                                                                                                                                          5
+                                                                                                                                                                COM_2      COIL_1
+                                                                                                                                                                                      2
+                                                                                                                                                                                                           relay_drive                                                                        0
+                                                                                                                                                                           COM_1
+                                                                                                                                                                                      1
+                                                                                                                                                               SLA-12VDC-SL-A
+                                                                                                                            R48                                                                  2
+                                                                                                                                                                                                       R10           1
+                                                                                                                        3                       4
+                                           Q1                                   Q3                                      1
+                                                                                                                              3       4
+                                                                                                                                                2                                                      TWW10J15RE                                     C13                   C14
+                                                                                                     SHUNT1                   1       2                        SHUNT2
+1                                          C3M0065090D                          C3M0065090D                                                                                                                                                                                                   1
+
+
+
+
+                                                                                                                                                                                          jee
+                  G1_GATE_HI                                                                                                                                                                                                                           2n2                  2n2
+                                                                                                                            FKK5R0020FE-TR                                 J5
+                                                 G3_GATE_HI
+                                                                                                        FILTER_OUT                                  afe_1_out_measured 1
+              G1_SOURCE_HI
+                                                                                                                                                                                                                                                                                      ACIN1
+                                                                                                                    1               lemout                                 PIN                        cmfilt1                                                                     1
+                                          G3_SOURCE_HI
+
+
+
+
+                                                                                                                                                               2
+
+
+
+
+                                                                                                                                                                                 3
+
+
+
+
+                                                                                                                                                                                                                     2
+
+
+
+
+                                                                                                                                                                                                                                                 3
+                                                                                                              PIN                                                                                                                                                                     PIN
+2                                                                                                                                                                                                                                                                                             2
+                                                                                                                              C21                                                                     C24                                                           C25
+                                                                                     AFE_OUT                                                        7u                                                7u                                                            7u
+                                                                                1                       FILTER_IN
+
+
+
+
+                                                                                                                                                               1
+
+
+
+
+                                                                                                                                                                                 4
+
+
+
+
+                                                                                                                                                                                                                     1
+
+
+
+
+                                                                                                                                                                                                                                                 4
+                                                                                     PIN
+                                                                                                                                                                                                                                                                                  ACIN2
+3                                                                                                                   1        filter_input                          CM1                                 cmfilt2             CM2                         AC_in2                     1           3
+                                                                                                                                                                   WE-CMBNC                                                WE-CMBNC
+                                                                                                              PIN                                                                                                                                                                     PIN
+                                           Q2
+              G2_Gate_LO                   C3M0065090D                          Q4                                                        C19            C20
+                                                                                C3M0065090D                                               2n2            2n2                                    C22                        C23
+4                                                                                                                                                                                               2n2                        2n2                                                                4
+                                          G4_Gate_LO
+                                                                                                                            R4         R11                                                                                                                         R95      R14
+    G2_Source_LO                                                                                                                                                                                                                                                   91K      91K
+                                                                                                                            91K        91K
+                                         G4_Source_LO
+
+                                                                                                                                                         PE1
+                                                                                                                                                                                                           PE3       PE1
+5                                                                                                                           R5         R2                                                                                                                          R12      R15               5
+                                                                                                                                                                                                                         R21                                       91K      91K
+                                                                                                                            91K        91K                                            REF_1V65
+                                                        PGND                                                                                                                                                             10k
+                                                                                                                                                                                                                               3V3
+                   3V3
+                                                                                               R7
+                                                                     REF_1V65
+                                                                                                                            R6         R3                                                                                            U1:A                          R13      R16
+6                                                                                              1k                                                                                                                                                                  91K      91K               6
+
+
+
+
+                                                                                                                                                                                                                               8
+                                                                                                 3V3                        91K        91K
+
+                         C26                                                                                                                                                         R18                                              3
+                         100n                                                                          U1:B                                                                                                      1
+                                                                                                                                                    ADA2
+                                                                                                                                                                                                                                      2
+                                                                                                8
+
+
+
+
+                                                                                                                                                                                     100
+
+                                                                   R9                                   5
+7                                                                                                                                                                                                                                                                                             7
+
+
+
+
+                                                                                                                                                                                                                               4
+                                                                                     7
+                   DC-            ADA3                                                                                                                                                                                               OPA2353UA
+                                                                   100                                  6
+
+                                                                                                                                                                                                                               DC-
+                                                                                                4
+
+
+
+
+        PE1        PE2      PE3      PE4                                                               OPA2353UA                                                                                                         R17
+8                                                                                                                                                                                                                                                                                             8
+                                                                                                                                                                                                                         10k
+                                                                                                DC-
+                                                                                               R8                                                                          FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                                    DATE:
+        1
+
+
+                   1
+
+
+
+                            1
+
+
+
+                                     1
+
+
+
+
+                                                                                               10k                                                                         DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                                    26/01/2025
+9                                                                                                                                                                          PATH:
+                                                                                                                                                                                  afe                               PAGE:                                                                     9
+       PE1 PE2             PE3      PE4                                                                                                                                                                                                                             1    of 11
+       PIN         PIN     PIN      PIN                                                                                                                                    BY: JH                                                         REV:         0            TIME:    11.34.56
+              A                      B                         C                           D                        E                               F                      G                                H                                  J                              K
+       A            B                     C                     D                       E                F                    G                      H                      J                     K
+
+
+                        J1                                                                         J2
+0                  15          16
+                                                                                              15          16
+                                                                                                                                                                         J3                                 0
+                   17          18                                                                                                                                   15              16
+    G2_SOURCE_LO                          G2_SOURCE_LO                                        17          18
+                   19          20                                          G3_SOURCE_HI                              G3_SOURCE_HI                                   17              18
+                                                                                              19          20                           DAB_SOURCE_HI_PRI                                     DAB_SOURCE_HI_PR
+                   21          22                                                                                                                                   19              20
+                                                                                              21          22
+                   23          24                                                                                                                                   21              22
+      G2_GATE_LO                          G2_GATE_LO                                          23          24
+                   25          26                                            G3_GATE_HI                              G3_GATE_HI                                     23              24
+                                                                                              25          26                               DAB_GATE_HI_PRI                                   DAB_GATE_HI_PRI
+                                                                                                                                                                    25              26
+1                  29          30                                                                                                                                                                           1
+                                                                                              29          30
+                   31          32                                                                                                                                   29              30
+    G4_SOURCE_LO                          G4_SOURCE_LO                                        31          32
+                   33          34                                          G1_SOURCE_HI                              G1_SOURCE_HI                                   31              32
+                                                                                              33          34                          DAB_SOURCE_LO_PRI                                      DAB_SOURCE_LO_P
+                   35          36                                                                                                                                   33              34
+                                                                                              35          36
+                   37          38                                                                                                                                   35              36
+      G4_GATE_LO                          G4_GATE_LO                                          37          38
+                   39          40                                         G1_GATE_HI                                 G1_GATE_HI                                     37              38
+                                                                                              39          40                               DAB_GATE_LO_PRI                                   DAB_GATE_LO_PRI
+                                                                    SDM_RAW_VOLTAGE                                                                                 39              40
+2                  43          44                                                                                                                                                                           2
+        PWM_G4                            PWM_G2                                              43          44
+                   45          46                                              PWM_G1                                PWM_G3                                         43              44
+             5v                           GND                                                 45          46                               DAB_PWM_PRI_HI                                    DAB_PWM_PRI_LO
+                   47          48                                                   5v                               GND                                            45              46
+     PWM_TRANS1                           20V                                                 47          48                                           5v                                    GND
+                                                                            PWM_TRANS2                               20V                                            47              48
+                                                                                                                                              PWM_TRANS3                                     20V
+                        HB GT CONNECTOR
+                                                                                                   HB GT CONNECTOR
+                                                                                                                                                                         HB GT CONNECTOR
+3                                                                                                                                                                                                           3
+                        J6                                                                         J8                                                                    J4
+                   15          16                                                             15          16
+                                                                                                                                                                    15              16
+                   17          18                                                             17          18
+           Q8_S                               Q8_S                               Q5_S                                Q5_S                                           17              18
+                   19          20                                                             19          20                          DAB_SOURCE_LO_SEC                                      DAB_SOURCE_LO_S
+                                                                                                                                                                    19              20
+                   21          22                                                             21          22
+4                                                                                                                                                                   21              22                      4
+                   23          24                                                             23          24
+           Q8_G                               Q8_G                               Q5_G                                Q5_G                                           23              24
+                   25          26                                                             25          26                              DAB_GATE_LO_SEC                                    DAB_GATE_LO_SEC
+                                                                                                                                                                    25              26
+                                                                                                                                     iso_DAB_sdm_raw_voltage
+                   29          30                                                             29          30
+                                                                                                                                                                    29              30
+                   31          32                                                             31          32
+           Q6_S                               Q6_S                               Q7_S                                Q7_S                                           31              32
+                   33          34                                                             33          34                          DAB_SOURCE_HI_SEC                                      DAB_SOURCE_HI_SE
+                                                                                                                                                                    33              34
+5                  35          36                                                             35          36                                                                                                5
+                                                                                                                                                                    35              36
+                   37          38                                                             37          38
+           Q6_G                               Q6_G                             Q7_G                                  Q7_G                                           37              38
+                   39          40                                                             39          40                               DAB_GATE_HI_SEC                                   DAB_GATE_HI_SEC
+                                                              iso_afe_SDM_raw_voltage                                                                               39              40
+                   43          44                                                             43          44
+        PWM_Q6                            PWM_Q8                               PWM_Q7                                PWM_Q5                                         43              44
+                   45          46                                                             45          46                               DAB_PWM_HI_SEC                                    DAB_PWM_LO_SEC
+         5V_ISOL                          ISOGND                                5V_ISOL                              ISOGND                                         45              46
+                   47          48                                                             47          48                                      5V_ISOL                                    ISOGND
+     PWM_TRANS5                           20V_ISO_SEC                       PWM_TRANS6                               20V_ISO_SEC                                    47              48
+6                                                                                                                                             PWM_TRANS4                                     20V_ISO_SEC 6
+                        HB GT CONNECTOR                      J11                                   HB GT CONNECTOR
+                                                                                                                                                                         HB GT CONNECTOR
+                                                        38            37
+                                                                                  PWM_Q7
+                                                        36            35
+                        GPIO_BYPASS_RLY_ISO                                       PWM_TRANS5
+                                                        34            33
+                                  MDATA_INU                                       PWM_Q8
+                                                        32            31
+                                  INU_ADCLK                                       PWM_Q6
+                                                        30            29
+7                                    PWM_Q5
+                                                        28            27
+                                                                                  DAB_PWM_LO_SEC                                                     J12                                                    7
+                                PWM_TRANS6                                        DAB_PWM_HI_SEC
+                                                        26            25                                                                        43             44
+                                 MDATA_DAB                                        PWM_TRANS4                                      ISOGND                                 5V_ISOL
+                                                        24            23                                                                        45             46
+                                 ADCLK_DAB                                        DAB_PWM_PRI_LO_ISO                              ISOGND                                 5V_ISOL
+                                                        22            21                                                                        47             48
+                         DAB_PWM_PRI_HI_ISO                                       PWM_G3_ISO                                      ISOGND                                 5V_ISOL
+                                                        20            19
+                                PWM_G1_ISO                                        PWM_G2_ISO
+                                                        18            17                                                                             2X3 PIN 50TH CONNECTOR
+                                PWM_G4_ISO                                        PWM_TRANS3_ISO
+8                                                       16            15                                                                                                                                    8
+                            PWM_TRANS2_ISO                                        PWM_TRANS1_ISO
+                                                        14            13
+                                    CLK1_ISO                                      CS1_ISO
+                                                        12            11
+                                 SDATA1_ISO                                       ADASEL0_ISO
+                                ADASEL1_ISO
+                                                        10
+                                                         8
+                                                                      9
+                                                                      7
+                                                                                  ADASEL2_ISO                                 FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                       DATE:
+                   GPIO_BYPASS_RLY_ISOLATED
+                                  MDATA_ISO
+                                                         6            5
+                                                                                  ADCLK_ISO
+                                                                                  ISOGND                                      DESIGN TITLE: Inverter PSU
+                                                                                                                                                                       26/01/2025
+                                                         4            3
+9
+                                     ISOADA1
+                                      ISOGND
+                                                         2            1
+                                                                                  ISOADA2
+                                                                                  ISOADA3                                     PATH:
+                                                                                                                                     fpga connector                    PAGE:                                9
+                                                                                                                                                                                         2   of 11
+                                                             38 PIN HEADER 50TH                                               BY: JH                                     REV:   0        TIME:   11.34.56
+       A            B                     C                     D                       E                F                    G                      H                      J                     K
+    A                      B                                       C                          D              E                  F                               G                   H                         J                      K
+
+                                                                                                                             REF1
+                                                                                                                             REF3025
+0                                                                  U3                                                                                                                                                                          0
+                                                             1                     4                                                                                        R19
+                    5v                                              IN        NR
+                                                             2                     5                                     2                              3
+                                                                    GND      OUT                     3v3   3v3                VIN            VOUT                                               REF_1V65
+                                                             3                                                                                                              420R
+                                                                    EN
+                                   C70                             TPS73033DBVT                                                                                            C40          R30
+1                                  100n
+                                                                                              C69                   C16
+                                                                                                                                       GND                                 1u
+                                                                                                                                                                                        820R                                                   1
+                                                                                              100n
+                                                                                                                    1u
+                                                                                                                                       1
+
+
+
+
+2                                                      GND
+                                                                                                                                       GND                                                                                                     2
+
+
+                                   U9
+                               1
+              20V                   +VIN
+3                              2                                                                                                                                                                                                               3
+                                    GND/-VOUT
+                               3
+               5v                   +VOUT/GND
+
+        GND                        VXO7805-500
+
+
+
+4                                                                                                                                                                                                                                              4
+
+
+
+
+5                                                          U10                                                                                                                                                                                 5
+                                                       1                      4
+    5V_ISOL                                                  IN         NR
+                                                       2                      5
+                                                       3
+                                                             GND       OUT                    3V3_ISO                                            REF2
+                                                             EN                                                                                  REF3025
+                          C4                               TPS73033DBVT
+                                                                                       C3
+6                         100n
+                                                                                       100n                                                  2                                  3
+                                                                                                                                                                                         R32                                                   6
+                                                                                                                 3V3_ISO                          VIN               VOUT                                          REF_1V65_ISO
+                                                                                                                                                                                         420R
+                                                                                                                                                                                        C6             R40
+                                                                                                                                                            GND                         1u
+                                                                                                                                       C5                                                              820R
+                                                                                                                                       1u
+                                                                                                                                                            1
+                                          ISOGND
+
+
+
+
+7                                                                                                                                                                                                                                              7
+
+
+
+                                                                                                                                                        ISOGND
+                                                       U8
+8                                                  1                                                                                                                                                                                           8
+         20V_ISO_SEC                                       +VIN
+                                                   2
+                                                           GND
+                                                   3
+                5V_ISOL                                    +VOUT                                                                                                FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                         DATE:
+                                                       VXO7805-1000
+                                                                                                                                                                DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                         26/01/2025
+9                              ISOGND                                                                                                                           PATH:
+                                                                                                                                                                       regulators                        PAGE:                                 9
+                                                                                                                                                                                                                           3     of 11
+                                                                                                                                                                BY: JH                                     REV:    0       TIME:    11.34.56
+    A                      B                                       C                          D              E                  F                               G                   H                         J                      K
+            A                   B                           C                 D                        E                         F           G                                    H                                 J                           K
+
+
+
+
+                                                        DC+
+                                                                                                                                                                      R37
+0                                                                                                                                                                                                   DC-                                                      0
+
+
+
+
+                                                                                                                                                                        3V3
+                                                                                                                                                                      10k
+                                                                                                 R41              R27            R35
+                                                                                  DC+
+                                                                                                 91K              91K            91K                                                     U14
+                                                                  C7
+
+
+
+
+                                                                                                                                                                            5
+1                                                                                                                                                                                                                                                            1
+        1
+
+
+
+
+                            1
+
+
+
+
+                                               1
+                                                                   2n2
+                                                                                                                                                                  3                                       R39
+             C11                C12                C79                                                                                                                                          1
+                                                                                                                                                                                                                                                    ADA1
+             SNAP_IN_35MM                          SNAP_IN_35MM                    PE8                                                                            4                                       8.2k
+                                SNAP_IN_35MM
+        2
+
+
+
+
+                            2
+
+
+
+
+                                               2
+                                                                                                                                                                                                                                                3V3
+                                                                                                                                                                                                                                 C42
+
+
+
+
+                                                                                                                                                                            2
+                                                                  C10                                                                                                                    TLV316IDBVR                             1n
+2                                                                  2n2                                                                                                                                                                                       2
+                                                                                                 R42              R28            R36
+                                                                               PGND
+
+
+
+
+                                                                                                                                                                        DC-
+                                                                                                 91K              91K            91K                                                                                                                  C27
+                                                                                                                                                                                                                                                      100n
+                                                                                                                                                                                                                          DC-
+         PE8
+                                                                                                                                                                      R38
+3                                                       PGND                                                                                                          10k
+                                                                                                                                                                                                                                                             3
+                                                                                         Measurement connection
+                                                                                                                                                                                                                                                DC-
+
+
+
+
+                                                                                                                                                 3V3_ISO
+                                                                                                 R96
+         1
+
+
+
+
+                                                                                  PGND                                  DC-
+                                                                                                 0r
+4                                                                                                                                                                                                                                                            4
+        PE8
+        PIN                                                                                      R97                                                       C87
+                                                                                                                                                                                                            R1
+
+
+
+
+                                                                                                                                                                                      3V3_ISO
+                                                                             ISOPGND                                    ISOGND                             100n
+                                                                                                 0r                                                                                                                                   ISOGND
+                                                                                                                                                                                                            10k
+5                                                                                                          R81            R80          R82                                                                                                                   5
+                                                        ISODC+
+
+
+
+
+                                                                                    ISODC+
+                                                                                                           91K            91K          91K                                                          U2
+                                                                                                                                                 ISOGND
+
+
+
+
+                                                                                                                                                                                          5
+                                                                                                                                                                              3                                  R77
+6                                                                                                                                                                                                    1                                                       6
+                                                                                                                                                                                                                                              ISOADA3
+                                                                                  PE5                                                                                         4                                  8.2k
+                                                                   C59                                                                                                                                                                C2
+
+
+
+
+                                                                                                                                                                                          2
+    1
+
+
+
+
+                        1
+
+
+
+
+                                               1
+
+
+
+
+                                                                       2n2                                                                                                                          TLV316IDBVR                       1n
+        C61                 C72                    C8                                                      R83            R84          R85
+7       SNAP_IN_35MM                               SNAP_IN_35MM                    ISOPGND
+                                                                                                                                                                                  ISOGND                                                                     7
+                            SNAP_IN_35MM                                                                   91K            91K          91K
+    2
+
+
+
+
+                        2
+
+
+
+
+                                               2
+
+
+
+
+                                                                                                                                                                                                                        ISOGND
+                                                                   C60                                                                                                            R76
+                                                                       2n2
+                                                                                                                                                                                  10k
+8                                                                                                                                                                                                                                                            8
+
+                                                                                                                                             FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                      DATE:
+                                                        ISOPGND
+
+
+
+
+                                                                                                                                             DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                      26/01/2025
+9                                                                                                                                            PATH:
+                                                                                                                                                    DC links                          PAGE:                                                                  9
+                                                                                                                                                                                                                                      4    of 11
+                                                                                                                                             BY: JH                                                              REV:    0            TIME:    11.34.56
+            A                   B                           C                 D                        E                         F           G                                    H                                 J                           K
+            A                        B                         C                                      D                                 E                              F                             G                                H                          J                        K
+
+                                IKZ50N65EH5XKSA1                             INU_SHUNT1                                 INU_SHUNT2                                           20V_ISO_SEC
+                                                                                                                                                                                                                         RELAY_DRIVE_ISO
+0                                                                                                                                                                                                                                                                                                       0
+                                             ISODC+                                                   R91                                                                                     R79
+                                                                                                  2                      1
+                                                                                                          2         1
+                                                                                                  4                      3                                                                         COIL_2          NO
+                                                                                                          4         3                                                                    6                                     3
+                                                                                                                                                                                                   COM_2        COIL_1
+                                                                                                                                                                                         5                                     2
+                                                              Q7                                      FKK5R0020FE-TR                                                                                            COM_1
+
+
+
+
+                                                                                 inductor_input
+                                                                                                                                                                                                                               1
+                                                      C3M0065090D                                                                                                                             SLA-12VDC-SL-A
+1                                                                                                                                                                                                                                                                                                       1
+                                Q5
+                                C3M0065090D
+     Q5_G
+                                                                                                                          J10                                                                                                                                                                     ACOUT1
+                                                                                                                                    1                         inu_Filter_input                                                     afe_relay                              AC_out_1            1
+                                         Q7_G
+
+
+
+
+                                                                                                                                                                                   2
+
+
+
+
+                                                                                                                                                                                                            3
+                                         Q7_S                                                                             PIN                                                                                                                                                                     PIN
+2    Q5_S                                                                                                                                                                                                                                                                                               2
+                                              INU_OUT2                                                                                                                  C33                                                    C34
+                                         1                                                                                                                              7u                                                     7u
+                                              PIN
+
+
+
+
+                                                                                                                                                                                   1
+
+
+
+
+                                                                                                                                                                                                            4
+                                                                                                          J7             J9                                                                                                                                                                   ACOUT2
+3                                                                                                     1                         1           inductor_output                                  CM3                                                                     AC_out_2                 1         3
+                                Q6                                         Q8                                                                                                                WE-CMBNC
+                                C3M0065090D                                C3M0065090D                    PIN            PIN                                                                                                                                                                      PIN
+    Q6_G
+                                                                                                                                                                   C30                       C29                         C32                     C31
+                                     Q8_G                                                                                                                             2n2                    2n2                         2n2                     2n2
+4 Q6_S
+                                                                                                                                                   R60          R62                                                                                                             R65      R70            4
+                                     Q8_S                                                                                                                                                                                                                                       91K      91K
+                                                                                                                                                   91K          91K
+
+                                                                                                                                                                                 PE6
+                                                                                                                                                                                                                                       PE7
+                                                                                                                                                   R61          R63                                                                                                             R66      R69
+5                                                                                                                                                                                                                                              R46                              91K      91K            5
+                                                                                                                                                   91K          91K                                         REF_1V65_ISO
+                                                    ISOPGND                                                                                                                                                                                    10k
+                                                                                                                                                                                                                                                3V3_ISO
+                3V3_ISO
+                                                                                                              R52
+                                                               REF_1V65_ISO
+                                                                                                                                                                                                                                                         U7:B                   R67      R68
+                                                                                                              10k                                                                                                                                                               91K      91K
+6                                                                                                                                                  R71          R256                                                                                                                                    6
+
+
+
+
+                                                                                                                                                                                                                                                     8
+                                                                                                              3V3_ISO
+                                                                                                                                                   91K          91K
+                                                                                                                                                                                                                 R56                                      5
+                      C38                                                                                               U7:A                                                            ISOADA2
+                                                                                                                                                                                                                                          7
+                                                                                                                                                                                                                                                          6
+                                                                                                               8
+
+
+
+
+                      100n                                                                                                                                                                                       8.2k
+                                                                                                                         3                                                    3V3_ISO
+                                                                    R54
+
+
+
+
+                                                                                                                                                                                                                                                     4
+7                                             ISOADA1
+                                                                                                  1
+                                                                                                                                                                                                                                                         OPA2353UA
+                                                                                                                                                                                                                                                                                                        7
+                                                                    8.2k                                                 2
+                ISOGND
+
+                                                                                                                                                                                                                                               ISOGND
+                                                                                                               4
+
+
+
+
+                                                                                                                        OPA2353UA                                                      C56
+      PE5       PE6       PE7                                                                                                                                                          100n                                                    R51
+8                                                                                                                                                                                                                                              10k                                                      8
+                                                                                                              ISOGND
+                                                                                                              R53                                                             ISOGND                  FILE NAME:   single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                                                              DATE:
+      1
+
+
+                1
+
+
+
+                          1
+
+
+
+
+                                                                                                              10k
+                                                                                                                                                                                                     DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                                                              26/01/2025
+9                                                                                                                                                                                                    PATH:
+                                                                                                                                                                                                            VSI                               PAGE:                                                     9
+      PE5 PE6             PE7                                                                                                                                                                                                                                                   5     of 11
+      PIN   PIN           PIN                                                                                                                                                                         BY: JH                                                  REV:    0         TIME:    11.34.56
+            A                        B                         C                                      D                                 E                              F                             G                                H                          J                        K
+          A              B         C          D                              E                          F   G                       H                     J                K
+
+
+
+0                                                                                                                                                                                    0
+
+
+
+
+1                                                                                                                                                                                    1
+                                       DC+                                                                                     ISODC+
+
+
+                                                                       DAB_PRI_1
+2                                                                      PIN                                                                                                           2
+
+                             Q9               C35               C1                                               Q11                      C48         C47
+                                              2.2u              2.2u                                             C3M0065090D              2.2u        2.2u
+                             C3M0065090D
+
+
+
+
+                                                                       1
+                                                                                        DAB_GATE_HI_SEC
+      DAB_GATE_HI_PRI
+3                                                                                                                                                                                    3
+                                                                                     DAB_SOURCE_HI_SEC
+                                                                                      TR1                                DAB_SEC_1                DAB_SEC_2
+    DAB_SOURCE_HI_PRI                                                                                                                             PIN
+                                                                                 1                  3                1
+                                                                DAB_PRI_2
+
+
+
+                                                  dab_cap_pri
+                                                                PIN                                                      PIN
+4                                                                                                                                                                                    4
+
+
+
+
+                                                                                                                                                      1
+                                                                1
+                                                                                 2                  4                                   DAB_CAP_SEC
+
+5                                                                                     ETD34 TRAN 1P1S                                                                                5
+                             Q10
+                             C3M0065090D                                                                         Q12
+       DAB_GATE_LO_PRI                                                                                           C3M0065090D
+    DAB_SOURCE_LO_PRI                                                                  DAB_GATE_LO_SEC
+                                              C46               C45                                                                       C50         C49
+6                                             2.2u              2.2u                                                                      2.2u        2.2u                           6
+                                                                                     DAB_SOURCE_LO_SEC
+
+
+
+
+                                                                                                                         DAB_GROUND
+                                       PGND
+7                                                                                                                                                                                    7
+
+
+
+
+8                                                                                                                                                                                    8
+
+                                                                                                            FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                     DATE:
+
+                                                                                                            DESIGN TITLE: Inverter PSU
+                                                                                                                                                     26/01/2025
+9                                                                                                           PATH:
+                                                                                                                   Dual Active Bridge                PAGE:                           9
+                                                                                                                                                                  6   of 11
+                                                                                                            BY: JH                               REV:         0   TIME:   11.34.56
+          A              B         C          D                              E                          F   G                       H                     J                K
+             A                 B                            C                   D                           E                        F                                                G              H                        J                        K
+  vsense nominal = 1.536 V
+0
+  vsense OVP threshold = 1.838 V                                                                                                                                                                                                                                     0
+  Isense pk = 1V                                                                              D2
+  Vpeak = 520V                  20V                                                                                                                                                   TR2
+
+
+
+
+                                                                 DC-
+                                                                                              ES1A
+                                                                       C28             C41                                                                                       1                    10
+                                                                       220u            4.7u
+1                                                                                                                                                                                2                    9                                                              1
+                                                                                                                                                                                                           Sec11
+                                                                                                                                                                                 3                    8
+                                                C67                    C58                                                                                                                                          D1
+                                                     100u
+                                                                        22u
+                                                                                       C57                                                                                       4                    7
+                                                                                       22u                                                                                                                                                             20V_ISO_sec
+                                                                                                                                                                                 5                    6             ES1A
+2
+                                               5V                                                                                                                                                                                 C36          C15                   2
+                                                                                                                                                                                                                                  4.7u         220u
+                                                                                                                                                                                      EF20
+                                                                                                                                                                                                                                                       RET_iso
+
+
+
+
+                                                                                                                                                          aux_fb
+         DC+
+
+
+3
+    TR1 : core 227nh                                                                                                                                                                                                                                                 3
+    TR1 : 52/8/3||7/3/3/42                                  R43                                                                    R24
+                                                            1M                                                                  1M                     C62
+                                                                                                                                                       470p
+
+
+
+
+                                                                                                                                                              aux_switch_node
+4                                                                                                                                                                                                                                                                    4
+                                                            R34                                                                                       R23
+                                                            1M                                                                                                                                                     R49
+                                                                                                                                                      100R                                                                               20V_ISO_sec
+                                                                                                                                                                                                                   12.1K
+
+
+5     V5.1        R64 = 39k/ v2 trans                       R33                                      C68                                               D6                                                                                                            5
+                                                            1M                                       100n
+                                                                                                                                                       S1M
+                                    D7                                                                                                                                                                                                     RET_iso
+                         20V
+                  R44               ZLLS400TA
+                  39k
+                                                                                                                PWM1
+6                                                                                                           1                        8                                                                                                                               6
+                                                                                                                 Vcc           D
+                  R25          aux_feedback
+                                                R31                                                         2                  D
+                                                                                                                                     7
+    aux_fb                                                                                                       Vsense
+
+
+
+
+                                                                                                                                         aux_isense
+                  15k                           1k
+                                                                                                                                     5
+                                                                                                                               S
+
+                                                                                                            3                        4
+                                                                                                                                                      R45
+7                       C63        R26        R29                        C65        C66                          GND      I_sense                                                                                                                                    7
+                        22pf       NA         1.2k                       4.7u       4.7u                                                              2.49R
+                                                                                                                IW1830
+                                                                                                                                                      R47
+                                                                                                                                                      2.49R
+
+8                                                                                                                                                                                                                                                                    8
+                                                                                                                                                                                DC-
+                                                                                                      DC-
+
+                                                                                                     RET_iso                  ISO_GND
+                                                                                                                                                                                      FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                                               DATE:
+               Vsense @ 1.536V = 5.8368Vaux                                                                                                                                           DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                                               26/01/2025
+9                                                                                                                                                                                            Auxiliary supply                  PAGE:                                 9
+                                                                                                                 Isense ocp = 1.15V                                                   PATH:                                                7   of 11
+                                                                                                                                                                                      BY: JH                               REV:   0        TIME:      11.34.56
+             A                 B                            C                   D                           E                        F                                                G              H                        J                        K
+    A                      B                     C                        D                       E                                F                      G                          H             J                        K
+
+                                                                                                                                                                       3v3
+0                                                                                                                                                                                                                                     0
+                                                     R59
+         SDM_raw_voltage                                                                                                                                                      C64
+                                                     470R                                                                                                                     100n
+
+1                                                                    D8             C73               C71                                                                                                                             1
+                                                                                    100n              100n
+                                                                     MM3Z5V1T1_1
+                                                                                                                        U5                                             GND
+                                                                          R57                                       1                            8
+                                                 shunt2                                                                     VDD1        VDD2                                 3v3
+                                                                          10R                                       2                            7                                       R55
+                                                                                                                            VIN+       MCLKIN                                ADclk
+                                                                          R58                                       3                            6
+                                                                                                                            VIN-        MDAT                                                     Mdata
+2                                                shunt1
+                                                                                                                    4
+                                                                                                                            GND1        GND2
+                                                                                                                                                 5
+                                                                                                                                                                             GND         33R                                          2
+                                                                          10R
+                                                                                                                        ADUM7701-8BRIZ-RL7
+
+
+
+
+3                                                                                          C52               C53                                                                                                                      3
+                                                                                           220p              220p
+
+
+
+
+4                                                                                                                                                                                                                                     4
+
+
+
+
+                                                                                                                                                         3V3_ISO
+5                                                                                                                                                                                                                                     5
+
+                                                       R75
+    iso_DAB_sdm_raw_voltage                                                                                                                                    C80
+                                                       470R                                                                                                    100n
+
+6                                                                                     C77               C76                                                                                                                           6
+                                                                                      100n              100n
+
+                                                                                                                            U6                           ISOGND
+                                                                              R73                                       1                            8
+                                                     dab_shunt1                                                              VDD1        VDD2                                  3V3_ISO
+                                                                                                                        2                            7
+                                                                              10R                                            VIN+       MCLKIN                                 ADclk_dab R72
+                                                                              R74                                       3                            6
+7                                                                                                                       4
+                                                                                                                             VIN-        MDAT
+                                                                                                                                                     5
+                                                                                                                                                                                                       Mdata_dab                      7
+                                                 DAB_SHUNT2                                                                  GND1        GND2                                  ISOGND     33R
+                                                                              10R
+                                                                                                                            ADUM7701-8BRIZ-RL7
+
+
+
+8                                  R64                                                                                                                                                                                                8
+                               2             1                                               C74               C75
+          dab_shunt1                2    1                  DAB_SHUNT2                       220p              220p
+                               4             3
+          dab_ground                4    3                  ISOPGND                                                                                       FILE NAME:    single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                   DATE:
+                                   FKK5R0020FE-TR
+                                                                                                                                                          DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                   26/01/2025
+9                                                                                                                                                         PATH:
+                                                                                                                                                                 SDM current measurements          PAGE:                              9
+                                                                                                                                                                                                                   8   of 11
+                                                                                                                                                          BY: JH                                REV:     0         TIME:   11.34.56
+    A                      B                     C                        D                       E                                F                      G                          H             J                        K
+    A                          B                   C                     D             E          F                 G                    H              J                    K
+
+
+
+0   3V3                                                                                                                                                                               0
+
+
+
+          C39                                                                                   3V3
+          1u     AGND        DC-
+1                                                                                                                                                                                     1
+                                                                                                                                             R87:A
+    DC-                                                                                           L1                                                                CS1
+                                                                                                  22uH                                       RESISTOR_ARRAY
+                              check logic
+2                                                                        U12                                                                 R87:B                                    2
+                                                                                                                                                                    SDATA1
+
+
+
+
+                                                                    5
+                              U11                                                                                 AD1                        RESISTOR_ARRAY
+                        13                     3              3                  R86                          8                      1
+          ADA2                 X0          X                                                                       AINM         CS
+                        14                                                   1                                7                      2
+          ADA1                 X1                                                                                  AINP        SDO
+                        15                                    4                  10R                          6                      3
+          ADA0                 X2                                                                                  AVDD       SCLK           R87:C
+                        12                                                                                    5                      4
+3         ADA3                 X3                                                                                  GND        DVDD                                                    3
+                         1                                                                                                                                          CLK1
+          ADA4                 X4                      C18
+
+
+
+                                                                    2
+                         5                                                                                        ADS7056                    RESISTOR_ARRAY
+          AGND                 X5                      100n              TLV316IDBVR
+                         2
+          ADA5                 X6
+          ADA6
+                         4
+                               X7                                                          C9          C17
+                                                                                                       100n
+                        11                                                                 1n
+    ADASEL0                    A
+                        10
+4   ADASEL1                    B                                                                                                                                                      4
+                         9
+    ADASEL2                    C
+                         6
+      DGND                     INH
+                                                                                                AGND
+                              SN74LV4051                          AGND
+                              VDD=3V3
+                              VEE=AGND
+5                             VSS=AGND                                                                                                                                                5
+
+
+
+
+6                                                                                                                                                                                     6
+
+
+
+
+7                                                                                                                                                                                     7
+
+
+
+
+8                                                                                                                                                                                     8
+
+                                                                                                                     FILE NAME:   single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                             DATE:
+
+                                                                                                                    DESIGN TITLE: Inverter PSU
+                                                                                                                                                             26/01/2025
+9                                                                                                                   PATH:
+                                                                                                                           primary side ADC                  PAGE:                    9
+                                                                                                                                                                9    of 11
+                                                                                                                     BY: JH                          REV:   0   TIME:      11.34.56
+    A                          B                   C                     D             E          F                 G                    H              J                    K
+    A                      B                         C                         D                   E                              F                       G                           H                       J                      K
+                                                                                                                                                                3V3_ISO
+
+0                                                                                                                                                                                                                                              0
+                                                               R94
+          iso_afe_SDM_raw_voltage
+                                                               470R                                                                                                      C37
+                                                                                                                                                                         100n
+
+                                                                                   D9            C78           C55
+1                                                                                                100n          100n                                                                                                                            1
+                                                                                   MM3Z5V1T1_1
+
+                                                                                        R92                                      U4                             ISOGND
+                                                                                                                             1                        8
+                                                            INU_SHUNT1                                                            VDD1    VDD2                    3V3_ISO
+                                                                                        10R                                  2                        7                         R50
+                                                                                                                                  VIN+   MCLKIN                   INU_ADclk
+                                                                                        R93                                  3                        6
+                                                                                                                                  VIN-    MDAT                                                    Mdata_INU
+                                                                                                                             4                        5                         33R
+                                                            INU_SHUNT2                                                            GND1    GND2                    ISOGND
+2                                                                                       10R                                                                                                                                                    2
+                                                                                                                                 ADUM7701-8BRIZ-RL7
+
+
+
+
+3
+                                                                                                        C51           C54                                                                                                                      3
+                                                                                                        220p          220p
+                                     relay_drive
+
+
+
+
+4                                                                                                                                                                                                                                              4
+
+                                                                                                                                                           relay_drive_iso
+
+                  D10 D5                                                                                                                    D4        D3
+    20V
+5                                                                                                               20V_ISO_SEC                                                                                                                    5
+           ZLLS400TA       ZLLS400TA
+                                                                                                                                      ZLLS400TA       ZLLS400TA
+
+
+                                                   Q14                                                                                                                        Q13
+                                                   2n7000    R89                                                                                                                          R78
+6                                                                                    GPIO_BYPASS_RLY                                                                          2n7000                                                           6
+                                                             2.2k                                                                                                                                                 GPIO_BYPASS_RLY_ISO
+                                                                                                                                                                                          2.2k
+                                                            C44             R90                                                                                                           C43         R88
+                                                            100n            2.2k
+                                                                                                                                                                                          100n        2.2k
+
+7                                                                                                                                                                                                                                              7
+                                    GND
+                                                                      GND                                                                                     ISOGND
+                                                                                                                                                                                                 ISOGND
+
+
+
+8                                                                                                                                                                                                                                              8
+
+                                                                                                                                                           FILE NAME:   single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                                                                   DATE:
+
+                                                                                                                                                          DESIGN TITLE: Inverter PSU
+                                                                                                                                                                                                   26/01/2025
+9                                                                                                                                                                                                                           PAGE:              9
+                                                                                                                                                          PATH:                                                            10 of 11
+                                                                                                                                                           BY: JH                                         REV:      0       TIME:   11.34.56
+    A                      B                         C                         D                   E                              F                       G                           H                       J                      K
+    A         B                    C                D                 E                       F              G                       H                    J                K
+
+
+
+0                                                                                                                                                                                    0
+
+
+                                                                          U15
+                                                                 16                       1
+        3V3                                                                VDD2    VDD1                                                         3V3_ISO
+                                                                 15                       2
+                                                       ADASEL0             B1        A1           ADASEL0_ISO
+1                                                                14                       3                                                                                          1
+                                                       ADASEL1             B2        A2           ADASEL1_ISO
+                                                                 13                       4
+                    C85                                ADASEL2
+                                                                 12
+                                                                           B3        A3
+                                                                                          5
+                                                                                                  ADASEL2_ISO                       C86
+                    100n               R22     GPIO_BYPASS_RLY
+                                                                 11
+                                                                           B4        A4
+                                                                                          6
+                                                                                                  GPIO_BYPASS_RLY_ISOlated          100n
+                           ADCLK                                           B5        A5           ADCLK_ISO
+                                       39R                       10                       7
+                                                        MDATA              B6        A6           MDATA_ISO
+                                                                  9                       8
+        GND                                                                GND2    GND1                                                         ISOGND
+2                                                                         Si8661BD-B-IS                                                                                              2
+
+                                                                          U13
+                                                                 16                       1
+              3V3                                                          VDD2    VDD1                                           3V3_ISO
+                                                                 15                       2
+                                                  PWM_TRANS3               B1        A1           PWM_TRANS3_ISO
+                                                                 14                       3
+                                                  PWM_TRANS2               B2        A2           PWM_TRANS2_ISO
+3                                                                13                       4                                                                                          3
+                                        C84       PWM_TRANS1
+                                                                 12
+                                                                           B3        A3
+                                                                                          5
+                                                                                                  PWM_TRANS1_ISO           C83
+                                        100n            CLK1               B4        A4           CLK1_ISO                 100n
+                                                                 11                       6
+                                                         CS1               B5        A5           CS1_ISO
+                                                                 10                       7
+                                                      SDATA1               B6        A6           SDATA1_ISO
+                                                                  9                       8
+              DC-                                                          GND2    GND1                                           ISOGND
+                                                                          Si8661BD-B-IS
+4                                                                                                                                                                                    4
+                                                                          U16
+                                                                 16                       1
+              3V3                                                          VDD2    VDD1                                               3V3_ISO
+                                                                 15                       2
+                                               DAB_PWM_PRI_LO              B1        A1           DAB_PWM_PRI_LO_ISO
+                                                                 14                       3
+                                               DAB_PWM_PRI_HI              B2        A2           DAB_PWM_PRI_HI_ISO
+                                        C81           PWM_G3
+                                                                 13
+                                                                           B3        A3
+                                                                                          4
+                                                                                                  PWM_G3_ISO                 C82
+5                                       100n                     12                       5                                  100n                                                    5
+                                                      PWM_G1               B4        A4           PWM_G1_ISO
+                                                                 11                       6
+                                                      PWM_G2               B5        A5           PWM_G2_ISO
+                                                                 10                       7
+                                                      PWM_G4               B6        A6           PWM_G4_ISO
+                                                                  9                       8
+              GND                                                          GND2    GND1                                               ISOGND
+                                                                          Si8660BD-B-IS
+
+6                                                                         U17                                                                                                        6
+                                                                 16                       1
+                                                                           VDD2    VDD1
+                                                                 15                       2
+                                                                           B1        A1
+                                                                 14                       3
+                                                                           B2        A2
+                                                                 13                       4
+                                                                           B3        A3
+                                                                 12                       5
+                                                                           B4        A4
+                                                                 11                       6
+                                                                           B5        A5
+7                                                                10
+                                                                           B6        A6
+                                                                                          7                                                                                          7
+                                                                  9                       8
+                                                                           GND2    GND1
+                                                                          Si8661BD-B-IS
+
+
+
+8                                                                                                                                                                                    8
+
+                                                                                                              FILE NAME:   single_phase_inverter_psu_v3.pdsprj
+                                                                                                                                                      DATE:
+
+                                                                                                             DESIGN TITLE: Inverter PSU
+                                                                                                                                                      26/01/2025
+9                                                                                                            PATH:
+                                                                                                                    signal isolators                  PAGE:                          9
+                                                                                                                                                                  11 of 11
+                                                                                                              BY: JH                                  REV:    0   TIME:   11.34.56
+    A         B                    C                D                 E                       F              G                       H                    J                K
+

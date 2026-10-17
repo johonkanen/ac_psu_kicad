@@ -1,0 +1,13 @@
+# KiCad
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.kicad_prl
+*-backups/
+_autosave-*
+fp-info-cache
+*.lck
+
+# Scratch
+__pycache__/
+*.pyc
+build/
