@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# The AppImage's python3.11 with the pcbnew bindings importable.
+source "$(dirname "$(readlink -f "$0")")/../kicad_env.sh" || exit 1
+PYTHONPATH="$KICAD_PYTHONPATH${PYTHONPATH:+:$PYTHONPATH}" exec "$KICAD_MOUNT/bin/python3.11" "$@"
