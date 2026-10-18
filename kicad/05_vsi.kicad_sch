@@ -2509,7 +2509,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a7e985fa-29a0-46f5-b890-1725ecc1dccd")
+		(uuid "5684ebce-9e2b-4249-8a5d-9bdf7a94aedc")
 		(property "Reference" "Q5"
 			(at 55.88 49.53 0)
 			(effects
@@ -2556,13 +2556,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "110b905a-281f-46c4-a460-ef75e32c4238")
+			(uuid "365dac3a-a2e6-495d-9a13-1fbb9c7ba6bc")
 		)
 		(pin "1"
-			(uuid "9e5d22bd-0b1a-46e1-a15f-f7ebaccbe538")
+			(uuid "1e6b5160-4711-46ed-b126-1571845bdb56")
 		)
 		(pin "3"
-			(uuid "3ef2e660-a5d4-4aad-adb5-284da802ab69")
+			(uuid "faea39ae-ca41-479b-990b-c6fd58457b69")
 		)
 		(instances
 			(project "ac_psu"
@@ -2581,7 +2581,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "828ac528-bb07-4c98-a671-e9c6b1e8a437")
+		(uuid "d57ae4a2-ad79-425a-be12-5f90ceb71332")
 		(property "Reference" "Q6"
 			(at 55.88 87.63 0)
 			(effects
@@ -2628,13 +2628,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "1e75abcb-6b12-407c-b053-21924a8c6e9f")
+			(uuid "5ebf8bc5-9572-4aa4-961d-d0884783a33a")
 		)
 		(pin "1"
-			(uuid "26e01bad-fa8e-42e7-b4fe-049c7b650fe0")
+			(uuid "79224aa8-9849-407e-abed-94d14d3f78b2")
 		)
 		(pin "3"
-			(uuid "0f9041c2-fd40-4437-b028-b4cb565ac262")
+			(uuid "bde254f4-4ba4-41f7-8432-5c2a715fed02")
 		)
 		(instances
 			(project "ac_psu"
@@ -2653,7 +2653,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f1790490-158f-4182-b3c5-dd13bda91717")
+		(uuid "62941e0f-2bfe-42e6-94e7-ba9253b0c5c4")
 	)
 	(wire
 		(pts
@@ -2663,7 +2663,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d92a3bcc-e87f-4166-9328-d3fabb33e8f1")
+		(uuid "1f87491d-66ff-422e-8c7b-781b2fa5b7a9")
 	)
 	(wire
 		(pts
@@ -2673,7 +2673,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3333ba33-21af-4a3d-8cb6-639adac371ea")
+		(uuid "c24bad15-6df8-45db-af2c-13e8fd699e59")
 	)
 	(wire
 		(pts
@@ -2683,7 +2683,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "44d475c9-bfbd-4e55-ae4d-1e3404fab277")
+		(uuid "000383b3-7e95-464c-8cb0-6e06f37e4495")
 	)
 	(global_label "Q5_G"
 		(shape passive)
@@ -2695,7 +2695,7 @@
 			)
 			(justify right)
 		)
-		(uuid "b873ed8d-3426-41d5-ac13-d35b0a0a4ea2")
+		(uuid "38f71eb4-96c3-4c8a-8e9e-c6abe83e3c6a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 40.64 50.8 0)
 			(effects
@@ -2715,7 +2715,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "66522b63-3d37-49f2-90a2-3fa93291c10e")
+		(uuid "93181f52-1725-412a-b9a9-84a9973dc68e")
 	)
 	(global_label "Q6_G"
 		(shape passive)
@@ -2727,7 +2727,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a0c5f005-4631-44bb-8f27-68048ec62471")
+		(uuid "3b1ba97f-a5fb-4a36-8c34-c028e04455f6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 40.64 88.9 0)
 			(effects
@@ -2743,7 +2743,7 @@
 		(at 53.34 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "3c7267d3-d7c8-4983-bd4c-02db9d020a30")
+		(uuid "118ff1c3-04f0-483f-989a-b9e3dcf87980")
 	)
 	(wire
 		(pts
@@ -2753,7 +2753,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ae9d0521-e3c3-4bbf-976f-60a5f12419dd")
+		(uuid "b4311381-d7fb-44a4-98f2-8e58b4786e1a")
 	)
 	(global_label "Q5_S"
 		(shape passive)
@@ -2765,7 +2765,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ecb1a99b-68d4-419f-bc21-e67c798142fd")
+		(uuid "96d02edf-02c0-4425-9b0a-389ae52c238c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 60.96 69.85 0)
 			(effects
@@ -2785,7 +2785,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fc12270c-0c2a-4ab1-b318-aa111135b298")
+		(uuid "de98c3b6-0c63-4b3d-8675-ed5ecc25ed36")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -2795,7 +2795,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "65ae375b-b98c-428a-8e44-fb8bac4566a4")
+		(uuid "5bb3fd5c-19a7-4c53-a019-908264d914fb")
 		(property "Reference" "INU_OUT2"
 			(at 73.66 68.58 90)
 			(effects
@@ -2842,7 +2842,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "cc9293a7-62fe-46b2-930c-9c08d0ee9a6f")
+			(uuid "1c48b7ec-f3e9-45f3-9bbd-6fe4faf17b0f")
 		)
 		(instances
 			(project "ac_psu"
@@ -2861,7 +2861,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "956e7513-f8dd-464c-a1d8-1c5a7e0472c4")
+		(uuid "c222ef32-537a-422b-9bbd-9c2ed356b73c")
 		(property "Reference" "Q7"
 			(at 106.68 49.53 0)
 			(effects
@@ -2908,13 +2908,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "3004c57b-c1be-41be-9760-d66794d2f171")
+			(uuid "ea15dde9-4b18-49e9-8f25-aac0b4e4efe8")
 		)
 		(pin "1"
-			(uuid "6dd2f65b-cbe6-478b-a006-a8b08388d49f")
+			(uuid "fbc0c3df-3923-4670-8774-20db3b73d619")
 		)
 		(pin "3"
-			(uuid "1b77a5f7-86cf-40bf-80eb-e5e1cc5f2b27")
+			(uuid "cf7cc3dc-bbc5-4d34-8224-0d7224bf8c34")
 		)
 		(instances
 			(project "ac_psu"
@@ -2933,7 +2933,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "040b4b95-3382-4ca3-8b9f-78bd6a3278c3")
+		(uuid "d884ae8b-471d-41bb-ab22-4ee0fb06423d")
 		(property "Reference" "Q8"
 			(at 106.68 87.63 0)
 			(effects
@@ -2980,13 +2980,13 @@
 			)
 		)
 		(pin "2"
-			(uuid "4922d25d-d382-4321-9c4d-5b625a2b730c")
+			(uuid "f3b0ac4d-e1b4-43c8-8624-7a130369e96f")
 		)
 		(pin "1"
-			(uuid "9a2384ab-4d57-4a08-a64d-152eee66d93b")
+			(uuid "9487579e-de2b-4d7d-93c3-f32bd5f2dcff")
 		)
 		(pin "3"
-			(uuid "2a2dceda-c9ab-489a-88de-6cfd7e5d8070")
+			(uuid "427b6ef1-6761-4548-adab-c1f394c50373")
 		)
 		(instances
 			(project "ac_psu"
@@ -3005,7 +3005,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f63c8c9a-1b59-4b7d-ba61-e8bd3b8ce842")
+		(uuid "a8db05ec-9d0f-443c-8425-c002dd1e6895")
 	)
 	(wire
 		(pts
@@ -3015,7 +3015,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "16af179b-23de-4f7b-8109-9b797b1fbd1b")
+		(uuid "43e46b63-8574-44b9-9e50-d57b87089c79")
 	)
 	(wire
 		(pts
@@ -3025,7 +3025,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9ef1fc29-64c3-42f8-857f-233d0103c0ea")
+		(uuid "97efe082-dd95-4513-a56d-dde39ed487c8")
 	)
 	(wire
 		(pts
@@ -3035,7 +3035,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bce4dcb0-8540-4028-a63b-bef27e0c1df6")
+		(uuid "4d1dd70b-e832-4bbe-af3d-7dc4bd72ed56")
 	)
 	(global_label "Q7_G"
 		(shape passive)
@@ -3047,7 +3047,7 @@
 			)
 			(justify right)
 		)
-		(uuid "dc57181b-677d-4738-a20d-5794aa8821af")
+		(uuid "8ebe8174-4f3e-4832-9fce-b59e5283c43a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 50.8 0)
 			(effects
@@ -3067,7 +3067,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4f5fb36d-f156-4792-88e8-fac3828702e6")
+		(uuid "c66af8c7-93ef-4382-851f-c42fcdc96207")
 	)
 	(global_label "Q8_G"
 		(shape passive)
@@ -3079,7 +3079,7 @@
 			)
 			(justify right)
 		)
-		(uuid "173ebfef-fe66-42cb-93d8-8eec4f979708")
+		(uuid "979a90cd-c5b5-40dd-b475-db6b4e12282f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 88.9 0)
 			(effects
@@ -3095,7 +3095,7 @@
 		(at 104.14 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4b1d0e16-2188-463f-9718-97ebd337301d")
+		(uuid "f20b7a9f-d76f-4eba-97de-5f4bc403017a")
 	)
 	(wire
 		(pts
@@ -3105,7 +3105,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "69d285df-6a1c-409c-891f-908e624b0c45")
+		(uuid "cc46d911-c09e-49ae-86bb-3b5ae54610ea")
 	)
 	(global_label "Q7_S"
 		(shape passive)
@@ -3117,7 +3117,7 @@
 			)
 			(justify left)
 		)
-		(uuid "31e28894-b5e5-401a-b20d-de5c3d1200ee")
+		(uuid "e69a2733-cc24-43b0-b560-92d02c6096ca")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 69.85 0)
 			(effects
@@ -3137,13 +3137,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9eef81d3-e77e-4cb4-b2ce-2f6b0b1209c2")
+		(uuid "223f7c82-222f-4f4d-81cc-4b344c02738d")
 	)
 	(junction
 		(at 76.2 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "cc021ad3-a393-4e1a-b80b-7e0d26079302")
+		(uuid "4dca853c-6a91-49b3-81d9-281f33e4f66e")
 	)
 	(symbol
 		(lib_id "ac_psu:ISODC+")
@@ -3153,7 +3153,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ee864009-d9d4-47bb-8e8c-17e8c50e7c46")
+		(uuid "41e7d7a6-2fe1-4212-a88a-0f78a9390d2a")
 		(property "Reference" "#PWR001"
 			(at 76.2 39.37 0)
 			(effects
@@ -3199,7 +3199,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "9befa61e-5bd5-4c49-94c0-00c938560c92")
+			(uuid "8a77a1b5-6222-4bc6-ba90-9a17b60c3a33")
 		)
 		(instances
 			(project "ac_psu"
@@ -3218,7 +3218,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8748a04c-79b0-45c1-b9fe-6ade054fb190")
+		(uuid "fdc12b7e-cc8e-444d-9b70-ec90414cb6d7")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -3228,7 +3228,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9a4cd2b2-d893-4a5e-bc24-51348476f39d")
+		(uuid "9bbf3315-8412-4dce-a0c7-56d1ccc13e02")
 		(property "Reference" "#FLG002"
 			(at 76.2 40.005 0)
 			(effects
@@ -3274,7 +3274,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "1af44f93-ef8e-4090-bde5-1dac7d8af2e4")
+			(uuid "032079d1-d044-4df4-89fd-9dfe999efbb0")
 		)
 		(instances
 			(project "ac_psu"
@@ -3293,13 +3293,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ad45c28a-fb3c-4bb1-8ee7-dc32209e9af5")
+		(uuid "d7e077d3-accc-41f3-bc6b-bc762f473f8a")
 	)
 	(junction
 		(at 76.2 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4928ce10-72dd-4b4c-ab62-bc82c4b7d65e")
+		(uuid "79184325-e5b2-466d-82fe-86d04870d924")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOPGND")
@@ -3309,7 +3309,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0469e475-a7bf-4a89-b55a-a440b5285056")
+		(uuid "941b1414-c435-46ac-bd8d-ccde58c7d997")
 		(property "Reference" "#PWR003"
 			(at 76.2 110.49 0)
 			(effects
@@ -3355,7 +3355,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "9abf3bc9-23e7-4932-87da-24fdbb70b8c4")
+			(uuid "59d02b75-8f24-440c-8d98-9ebf912b34ed")
 		)
 		(instances
 			(project "ac_psu"
@@ -3375,7 +3375,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "64f26edb-5d6d-4aed-aa06-f8e59e00de16")
+		(uuid "08c3593a-6c09-4fd1-b4ff-11550fb8e141")
 	)
 	(text "PDF note: IKZ50N65EH5XKSA1 (alternative switch)."
 		(exclude_from_sim no)
@@ -3386,7 +3386,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4bcfb65b-941d-4c8d-9bc4-9af6ee0aa662")
+		(uuid "fbbc3dc3-90e8-462b-97ea-a35a23414408")
 	)
 	(symbol
 		(lib_id "ac_psu:FKK5R0020FE-TR")
@@ -3396,7 +3396,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c9a3fe44-74b5-45aa-afc3-bea8406e2b9c")
+		(uuid "e6078dec-04f2-4707-a6d2-295b9a0143d4")
 		(property "Reference" "R91"
 			(at 146.05 44.45 0)
 			(effects
@@ -3443,16 +3443,16 @@
 			)
 		)
 		(pin "1"
-			(uuid "5e8c8ede-bd8d-49a6-8ba7-3aba87a754e5")
+			(uuid "beb4b20e-8bd1-4777-9c30-9071a98a1f34")
 		)
 		(pin "3"
-			(uuid "3f5b2b4e-7791-4257-b3ea-239687cf9423")
+			(uuid "7a0e5cff-2b27-4a3b-9c63-2a0785ef0a4d")
 		)
 		(pin "4"
-			(uuid "2223c1b9-72a0-46ef-9490-9e39e51be8fa")
+			(uuid "dcfe1595-202c-4809-b371-45498d850773")
 		)
 		(pin "2"
-			(uuid "1719c1d3-8e81-4880-b7d0-a04b05cc99a9")
+			(uuid "3fd0a745-f125-4def-83cb-388fabe778ea")
 		)
 		(instances
 			(project "ac_psu"
@@ -3471,7 +3471,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9ccc163f-947d-41f6-88fd-19feecb2adae")
+		(uuid "736a833c-75c2-4436-97a2-98b0f623f1f4")
 	)
 	(global_label "INU_SHUNT2"
 		(shape passive)
@@ -3483,7 +3483,7 @@
 			)
 			(justify left)
 		)
-		(uuid "8ce0e717-c95a-41f8-83fc-eb8eaae14ce2")
+		(uuid "f881ead3-28fd-47c3-90e6-326c08b2a75c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 149.86 38.1 0)
 			(effects
@@ -3503,7 +3503,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2faaadf4-2f91-4b67-b779-98cd4108da6d")
+		(uuid "7f53e844-ff68-4a5d-99ff-9568f25d7a16")
 	)
 	(global_label "INU_SHUNT1"
 		(shape passive)
@@ -3515,7 +3515,7 @@
 			)
 			(justify right)
 		)
-		(uuid "4dd61f82-b5ae-4ae8-950e-5d9e4c24ed19")
+		(uuid "49a365e4-17e7-4fe9-8790-9947a9c8ff93")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 149.86 53.34 0)
 			(effects
@@ -3535,7 +3535,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "358522f1-2369-4bee-9147-dd853f16df6e")
+		(uuid "3eb2c15f-7cc1-4fcc-9bba-23f547624952")
 	)
 	(global_label "Q7_S"
 		(shape passive)
@@ -3547,7 +3547,7 @@
 			)
 			(justify left)
 		)
-		(uuid "05d23f7c-0c62-4640-964e-e16498bfa7b0")
+		(uuid "25515268-fc02-4ad2-b0ee-3b9bd24743de")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 160.02 43.18 0)
 			(effects
@@ -3567,7 +3567,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2a0f4a37-04d1-46ce-9e22-20fe695fb6fb")
+		(uuid "769c51d7-95e2-4004-8280-b02ac93477dd")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -3577,7 +3577,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d4edba0f-e8be-4f8f-9e2b-8de62f21906c")
+		(uuid "1e57263f-18db-4a70-a863-a18ceed7cbe9")
 		(property "Reference" "J7"
 			(at 165.1 46.99 90)
 			(effects
@@ -3624,7 +3624,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "1838e681-1282-4331-86dc-8990da7a1a96")
+			(uuid "12d99ebc-e8c3-4877-a125-491f834429fc")
 		)
 		(instances
 			(project "ac_psu"
@@ -3644,7 +3644,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4c4ff1a1-a036-4ea2-b177-433c94cee4c2")
+		(uuid "8131d198-a569-402a-bdd1-6339d23fa138")
 	)
 	(text "1/2 = INU_SHUNT2/INU_SHUNT1 sense -> U4 (sheet 10)."
 		(exclude_from_sim no)
@@ -3655,7 +3655,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "baac2907-a83d-438d-8fd8-1dc801b6e26e")
+		(uuid "d5888f2d-e670-464b-b01e-590c68c6516e")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -3665,7 +3665,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "aa80de82-0981-4fc1-9133-39303332686f")
+		(uuid "4077a1b4-37fa-4870-adaa-7f89767c11ca")
 		(property "Reference" "J10"
 			(at 215.9 43.942 0)
 			(effects
@@ -3710,7 +3710,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "67de73b3-62f2-4fba-8908-869e8e1a4ac2")
+			(uuid "462dd6e9-fcce-4357-83be-4ca47f0e446f")
 		)
 		(instances
 			(project "ac_psu"
@@ -3729,7 +3729,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "576aaec5-c9b7-4071-9fb7-2e27f4c6906d")
+		(uuid "c9a8e95e-a636-4b71-ba88-0b115e3873ea")
 		(property "Reference" "J9"
 			(at 215.9 67.818 0)
 			(effects
@@ -3774,7 +3774,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "212eb9a1-da4c-4eeb-b61c-91a237ed6703")
+			(uuid "fec50cfc-db09-42b1-8433-9ef0a4222591")
 		)
 		(instances
 			(project "ac_psu"
@@ -3793,7 +3793,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3bdbf091-a714-4b50-afce-346488b77bb7")
+		(uuid "14cdc055-24e0-489c-a9a7-3d0a6400d6c2")
 	)
 	(wire
 		(pts
@@ -3803,7 +3803,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "83d90413-a523-4869-8b13-09832d7e13aa")
+		(uuid "de4b4f21-aa57-40aa-ad05-319c68b50ec2")
 	)
 	(label "INU_FILTER_INPUT"
 		(at 210.82 50.8 0)
@@ -3813,7 +3813,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "cadbddc7-dfe1-4420-98fa-70b82066cea9")
+		(uuid "ef2966e3-5de6-4fef-b2f0-dc27541046e5")
 	)
 	(label "INDUCTOR_OUTPUT"
 		(at 203.2 60.96 0)
@@ -3823,19 +3823,19 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "45c5b6a3-501c-4ecf-ae76-4e1413fa7df2")
+		(uuid "29462f1a-e20c-4b13-bc98-b96e392994e5")
 	)
 	(junction
 		(at 223.52 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "17f83a22-b596-4fd8-bef1-204eeecbd10f")
+		(uuid "af6362d5-6efb-4fb2-87fa-5e6e2aabb820")
 	)
 	(junction
 		(at 223.52 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a0eea7eb-14dd-4276-882d-7441c4193ec7")
+		(uuid "eced96fb-3ece-4993-854f-649c7b1e3a55")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -3845,7 +3845,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "38b7c181-f03d-4422-8927-b444fe8d2bd8")
+		(uuid "d414f1da-2df6-43d2-b76a-7ede8b702327")
 		(property "Reference" "C30"
 			(at 227.71 41.91 0)
 			(effects
@@ -3890,10 +3890,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "7ab33bb3-cc06-4295-9eca-fbb0e98a85d5")
+			(uuid "16ffed70-2383-4791-9d8e-11ae2dfb6864")
 		)
 		(pin "2"
-			(uuid "00aed84e-7c13-4aa4-a6f7-8083d8ee5f5a")
+			(uuid "3269caf3-e71f-44d8-b132-f8f39ae436ca")
 		)
 		(instances
 			(project "ac_psu"
@@ -3912,7 +3912,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5cdcd99d-4228-4fe1-8eb7-9056280f9633")
+		(uuid "b21f2a4f-9b19-4f35-a025-3c9605f856a6")
 	)
 	(wire
 		(pts
@@ -3922,7 +3922,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6ec698c5-c56b-4f22-bb55-bd97e34322c2")
+		(uuid "95213367-6b76-433a-b078-21d462ef424f")
 	)
 	(global_label "PE6"
 		(shape passive)
@@ -3934,7 +3934,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c5f73b1f-1a57-40d1-b819-82ce02538508")
+		(uuid "c82cdb0a-84b4-4710-91fa-eb3102742c2d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 223.52 36.83 0)
 			(effects
@@ -3954,7 +3954,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8b0e60cc-9885-4a4c-92fd-4316370a91e6")
+		(uuid "c2d1d2eb-ba34-443e-a6c5-af6afd559c22")
 		(property "Reference" "C29"
 			(at 227.71 67.31 0)
 			(effects
@@ -3999,10 +3999,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "debb02b9-49d9-4cf1-9926-7c9515b2734c")
+			(uuid "d6ca1f83-2eb5-44d1-b7d9-0eadcad81422")
 		)
 		(pin "2"
-			(uuid "99511959-6f5d-40c1-beb8-ee0d781beb34")
+			(uuid "cd49e1d7-ced8-4611-b847-7e75d18edc14")
 		)
 		(instances
 			(project "ac_psu"
@@ -4021,7 +4021,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "84b25d43-0598-48ef-9672-a59540333063")
+		(uuid "4ced75af-0b93-4f82-a7cd-44b9b1a2ef4e")
 	)
 	(wire
 		(pts
@@ -4031,7 +4031,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cccf87eb-e84e-47d0-8705-b8ad8713ca3e")
+		(uuid "19b839d0-6355-42cf-979d-0f3dca91b30b")
 	)
 	(global_label "PE6"
 		(shape passive)
@@ -4043,7 +4043,7 @@
 			)
 			(justify right)
 		)
-		(uuid "744f0ea8-ed5b-4d7c-a3fa-f8ddbe474e2b")
+		(uuid "8d26f604-e4d4-442c-9f70-c046ff8c3d39")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 223.52 74.93 0)
 			(effects
@@ -4063,7 +4063,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e8376249-b18a-4b46-82b1-ec531b459378")
+		(uuid "55fb5d29-4ef0-4158-a0bd-58b1fac4f833")
 		(property "Reference" "C33"
 			(at 235.33 54.61 0)
 			(effects
@@ -4108,10 +4108,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "8953f33c-d597-4369-8f0e-4552b4643c83")
+			(uuid "35147fbd-4012-4d9f-8522-bb10496c4d65")
 		)
 		(pin "2"
-			(uuid "ba8def1e-221d-4645-9918-b37100ad61bb")
+			(uuid "d9628988-6c13-4fa6-a4dc-1061a9f72c16")
 		)
 		(instances
 			(project "ac_psu"
@@ -4130,7 +4130,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "76e03b5c-157e-4832-b01b-303651776470")
+		(uuid "1da191bc-d6c6-4022-98c4-d8ff657d44ca")
 	)
 	(wire
 		(pts
@@ -4140,7 +4140,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3d7450bb-f77d-46f4-ac32-3c2489538a0a")
+		(uuid "809e7bb4-8ca4-4b68-abaa-c7ff7788557e")
 	)
 	(wire
 		(pts
@@ -4150,7 +4150,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cf488766-f26f-45b0-be29-c4a1eaa23ab3")
+		(uuid "941a4829-7596-4156-8867-ff1f21257df5")
 	)
 	(wire
 		(pts
@@ -4160,19 +4160,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a1428e94-8186-40a0-bfa9-44b84b26bbe6")
+		(uuid "f84b3493-2385-49e6-8275-a89dc0a3f0e3")
 	)
 	(junction
 		(at 231.14 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50aa0e53-88b1-4cca-bcff-769e1697c87c")
+		(uuid "54fb50bd-48d9-47af-a472-3581d063e0fa")
 	)
 	(junction
 		(at 231.14 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c7986e7f-554e-4ed2-a160-de1cd2aa2105")
+		(uuid "15ecf59f-fab9-4bd9-b089-c200c29e5337")
 	)
 	(symbol
 		(lib_id "ac_psu:WE-CMBNC")
@@ -4182,7 +4182,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "10157f7e-619f-44a8-99ea-e0cd364d1fdd")
+		(uuid "c241034d-0f51-41e0-82eb-4a89646261ef")
 		(property "Reference" "CM3"
 			(at 241.3 51.435 0)
 			(effects
@@ -4227,16 +4227,16 @@
 			)
 		)
 		(pin "1"
-			(uuid "e7770e43-4c7d-4e86-b2ed-075fd0105ff4")
+			(uuid "11b3001f-c5d8-48ef-b7c9-859fa29c1370")
 		)
 		(pin "2"
-			(uuid "389dd904-ff15-4445-8863-45d550940757")
+			(uuid "504243c4-b46d-4f56-a5a9-76f91cdf71f8")
 		)
 		(pin "3"
-			(uuid "48cd44ad-4dd3-43a8-b5f5-84069de67778")
+			(uuid "2d692a26-a447-4dc8-be1a-2ecd562c1f6b")
 		)
 		(pin "4"
-			(uuid "2dd5c05a-4ed5-4b4a-911f-44cec7e7e8fd")
+			(uuid "c22d00ba-33e7-4252-8197-23427524bcef")
 		)
 		(instances
 			(project "ac_psu"
@@ -4255,7 +4255,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "99a3c3cd-950f-4871-8207-42928c043077")
+		(uuid "3dbee529-905b-423e-8228-26796f0cc078")
 	)
 	(wire
 		(pts
@@ -4265,7 +4265,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5cbf66cc-0f8a-4ed3-9c77-06c9f4013002")
+		(uuid "955ab510-63d0-48ba-88d0-1656ca5abfa2")
 	)
 	(wire
 		(pts
@@ -4275,7 +4275,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "939c3186-bab8-48f5-adf0-5c585f9966ac")
+		(uuid "739d0f72-c8a4-47fc-a3f2-ebf05298cc56")
 	)
 	(wire
 		(pts
@@ -4285,7 +4285,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "750c89c1-4273-4117-a0ff-004f21b3363e")
+		(uuid "9539699e-2efd-487b-b47b-8b844cb99c92")
 	)
 	(wire
 		(pts
@@ -4295,7 +4295,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2b536ec3-3520-4a57-81ff-df4a2fef2535")
+		(uuid "c381f361-c77b-4b2c-b1a5-b7cdb2f55d03")
 	)
 	(wire
 		(pts
@@ -4305,19 +4305,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "29b29ea2-4c5c-4f1d-b222-8860669d4694")
+		(uuid "0d9733ac-90f8-49c1-a4ab-04a250151dac")
 	)
 	(junction
 		(at 254 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "79440b1f-beeb-4405-96fc-4d88c0ca7617")
+		(uuid "475a7ce9-991c-4b18-a5f0-5cf672ab5b32")
 	)
 	(junction
 		(at 254 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "3829b39b-1c89-462f-9038-418e7ba51a9e")
+		(uuid "a25b69ba-990b-4b13-933c-513954da69b7")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4327,7 +4327,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "cc9469e6-e50f-4df1-be37-1f7eab79e5bc")
+		(uuid "5b9c6b5f-ede2-4e9d-b4da-766b69281d89")
 		(property "Reference" "C32"
 			(at 258.19 41.91 0)
 			(effects
@@ -4372,10 +4372,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "723689b2-8437-4a61-aad6-6312e7102d64")
+			(uuid "4445059e-dc69-496c-b619-9c6066ef8267")
 		)
 		(pin "2"
-			(uuid "708e013e-57c7-43e4-bca1-801429276752")
+			(uuid "0099fc55-4355-43dc-9cd0-92574c4e10de")
 		)
 		(instances
 			(project "ac_psu"
@@ -4394,7 +4394,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5efd8805-d900-4d2c-b6d5-08bee86dbb83")
+		(uuid "b45e2f88-83c6-413b-8cce-531c4479e181")
 	)
 	(wire
 		(pts
@@ -4404,7 +4404,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c2f8dbab-b366-4f3d-a8d3-5511e0ac9996")
+		(uuid "a463259d-751c-4856-9785-492a8f1ca1d4")
 	)
 	(global_label "PE7"
 		(shape passive)
@@ -4416,7 +4416,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7f31ecdf-3738-409f-a079-9901779d664d")
+		(uuid "5a37f37e-a991-4372-9a69-8d9065c53a6f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 254 36.83 0)
 			(effects
@@ -4436,7 +4436,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a4d4042d-8300-4a86-846f-d095b0d39ebb")
+		(uuid "daf7e32d-a27c-4251-a0ad-1ae102303da1")
 		(property "Reference" "C31"
 			(at 258.19 67.31 0)
 			(effects
@@ -4481,10 +4481,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "1757de74-5573-4591-b8fb-1ab885c18986")
+			(uuid "11a8ba2e-6beb-417e-9054-8fb627430dc2")
 		)
 		(pin "2"
-			(uuid "8dfd5bbb-deed-4d55-8767-7bf0399f108e")
+			(uuid "bb6cd82c-c0e5-4471-87e9-75f6e9a396ab")
 		)
 		(instances
 			(project "ac_psu"
@@ -4503,7 +4503,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "008f2e60-283d-45f8-864e-aee5df352e4f")
+		(uuid "454e627c-1ae1-4be9-bedc-ed8cad602521")
 	)
 	(wire
 		(pts
@@ -4513,7 +4513,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fd153642-5d5a-470c-9ca4-14aac519623b")
+		(uuid "1b6b189f-14fb-4cad-8c45-681a5ce220ae")
 	)
 	(global_label "PE7"
 		(shape passive)
@@ -4525,7 +4525,7 @@
 			)
 			(justify right)
 		)
-		(uuid "35f17edf-5d1e-4a89-b7ff-23b9db44b2d2")
+		(uuid "d8a84c95-f968-4d2a-85dd-3ef24e6f6419")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 254 74.93 0)
 			(effects
@@ -4545,7 +4545,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "29d32a7e-ca66-458e-8f5a-5940d739547a")
+		(uuid "43b33255-e9bd-4916-88c0-01011ff28d07")
 		(property "Reference" "C34"
 			(at 265.81 54.61 0)
 			(effects
@@ -4590,10 +4590,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "c7de7ea8-0e2c-42ba-9a88-7df2a3ec4dd4")
+			(uuid "388f49b1-aa87-4506-8118-df035cb67b88")
 		)
 		(pin "2"
-			(uuid "d8fae984-6478-448a-aacb-8eafdba72ac0")
+			(uuid "cb7f009c-8766-47ba-a557-492971d23404")
 		)
 		(instances
 			(project "ac_psu"
@@ -4612,7 +4612,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b83caa2f-fc59-400b-bc7b-59a3775e4e14")
+		(uuid "7ace2c1e-3a3a-4dfc-879d-8244466604e0")
 	)
 	(wire
 		(pts
@@ -4622,19 +4622,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9964bc2a-f1f5-4be3-b53f-660d22937bfd")
+		(uuid "ccc7a225-b8c8-4bb4-82a5-d29e078fb927")
 	)
 	(junction
 		(at 261.62 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "695dc1f6-c4e0-41f8-a979-5a465d471dd8")
+		(uuid "2c37b9b4-0dd4-4e62-b833-83506c0ddba6")
 	)
 	(junction
 		(at 261.62 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a70bfec6-4b26-4279-b1bd-332c6303dd8c")
+		(uuid "b3b3f75e-9617-45cd-a673-c7b0c9d0f82f")
 	)
 	(label "AFE_RELAY"
 		(at 247.65 50.8 0)
@@ -4644,7 +4644,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "0174bfe9-08e4-410b-957e-d2a8d6994cf1")
+		(uuid "3f6eadb6-0923-4b36-b030-154d9fe55406")
 	)
 	(wire
 		(pts
@@ -4654,7 +4654,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ecd92a6e-e674-46ed-8aef-c1a326c46249")
+		(uuid "a853ba8e-e040-4de4-a807-afd2138df7ea")
 	)
 	(wire
 		(pts
@@ -4664,7 +4664,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7fb52acf-123a-48fb-b3e1-9565831a2a33")
+		(uuid "355dda96-83fe-491e-a65a-ac250d8b31f1")
 	)
 	(symbol
 		(lib_id "ac_psu:SLA-12VDC-SL-A")
@@ -4674,7 +4674,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7cd9f67f-4dd2-4ab7-bb28-fcac8abd7190")
+		(uuid "169ef6f2-cdb2-4685-a817-3f0fd0bccdc4")
 		(property "Reference" "R79"
 			(at 271.78 26.67 0)
 			(effects
@@ -4721,19 +4721,19 @@
 			)
 		)
 		(pin "6"
-			(uuid "d5ee5751-859d-4da2-9887-92e8c0d8eb91")
+			(uuid "96956dfc-190e-47c9-8c70-05d027124646")
 		)
 		(pin "5"
-			(uuid "eafe49a0-9448-47b3-a1f4-e5020cad178a")
+			(uuid "63c73a75-66d4-4fcc-983c-a8b73dfe5a49")
 		)
 		(pin "3"
-			(uuid "e4377fae-d51a-4a9e-b031-28678bcc0cd1")
+			(uuid "6a08ae17-5eb1-42a2-982e-d5a40ab91200")
 		)
 		(pin "2"
-			(uuid "7c8215a0-b17b-4d43-b8f5-8a6ffd8d544b")
+			(uuid "75e213c4-0882-45d8-976c-e84dd8ee7735")
 		)
 		(pin "1"
-			(uuid "fd352a91-939d-4175-b35e-8c45125b4e6a")
+			(uuid "6dd8aa2b-18e3-459c-b594-6687f51b7407")
 		)
 		(instances
 			(project "ac_psu"
@@ -4752,7 +4752,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7157eb8c-395e-4759-a26b-d7ffbadc63d3")
+		(uuid "a5cea045-06d2-4b14-8282-9fc7b2cd0087")
 	)
 	(wire
 		(pts
@@ -4762,7 +4762,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "81f39afd-ce6c-46ea-9e1d-c50c90fa290b")
+		(uuid "a661e9f2-2087-4640-acb6-2b2c877cf0dd")
 	)
 	(wire
 		(pts
@@ -4772,7 +4772,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6d291730-1e94-423a-958f-c0ff314e4ef8")
+		(uuid "74bebef4-e019-42ca-8ada-67af5c8e0cb5")
 	)
 	(global_label "AC_OUT_1"
 		(shape passive)
@@ -4784,7 +4784,7 @@
 			)
 			(justify left)
 		)
-		(uuid "162fe49f-ff23-47cc-8e53-ecd988adb180")
+		(uuid "539f81d3-0a06-4497-b94b-7ce607c067c8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 307.34 30.48 0)
 			(effects
@@ -4804,7 +4804,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8a55fbc8-f2b8-4a50-abb1-257b24f2786c")
+		(uuid "3330be3e-aeaa-4d33-9244-4716a09431e3")
 		(property "Reference" "ACOUT1"
 			(at 320.04 29.21 90)
 			(effects
@@ -4851,7 +4851,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "1b6a0f78-2638-4c7b-a3cc-dc3fcb9119da")
+			(uuid "ed9e86da-003a-411a-bc4f-ea41da6bf5e3")
 		)
 		(instances
 			(project "ac_psu"
@@ -4870,7 +4870,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2389b49d-c237-45d6-bd34-5cb1647dcdb9")
+		(uuid "0093d36b-814e-48ff-b733-5a510b6ad73c")
 	)
 	(global_label "RELAY_DRIVE_ISO"
 		(shape passive)
@@ -4882,7 +4882,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ae21e1a4-e4ae-4745-a1eb-1873fe94aeff")
+		(uuid "0dc1e62f-ed53-4895-a418-d6bfa412b3a6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 299.72 33.02 0)
 			(effects
@@ -4902,7 +4902,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f434aafd-1bab-4d31-819a-39e172a71db0")
+		(uuid "19d57cc6-d7bd-4313-a82f-0d8d6d660164")
 	)
 	(symbol
 		(lib_id "ac_psu:20V_ISO_SEC")
@@ -4912,7 +4912,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c429a11a-40f1-42b4-86c7-8fa192694a57")
+		(uuid "0bb5e370-e912-4e88-8846-ae4b25a107f6")
 		(property "Reference" "#PWR004"
 			(at 264.16 34.29 0)
 			(effects
@@ -4958,7 +4958,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "cc3c7b2d-3067-4d31-b295-d7fb4f829c40")
+			(uuid "2da553b2-9e9c-4c82-846d-93daa11a821c")
 		)
 		(instances
 			(project "ac_psu"
@@ -4971,7 +4971,7 @@
 	)
 	(no_connect
 		(at 269.24 33.02)
-		(uuid "b0aedc7a-a92d-423a-baee-9dc22a597a3b")
+		(uuid "51a984a9-8333-43d0-911c-3739ec70e957")
 	)
 	(wire
 		(pts
@@ -4981,7 +4981,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "44d92f7a-1425-4947-9278-b430c9f49873")
+		(uuid "58315793-5953-4cf8-a33a-6a0c39b131b5")
 	)
 	(global_label "AC_OUT_2"
 		(shape passive)
@@ -4993,7 +4993,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ffc733b3-7817-46a8-882a-4f86bc024846")
+		(uuid "54db9c68-c0c1-4189-a52b-6f1ca54fd588")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 307.34 60.96 0)
 			(effects
@@ -5013,7 +5013,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d22c0db4-0e30-4fd4-8062-265cc8d3f58b")
+		(uuid "84a40f0c-c901-4ded-ac68-bf67ada85fc3")
 		(property "Reference" "ACOUT2"
 			(at 320.04 59.69 90)
 			(effects
@@ -5060,7 +5060,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "78e9452e-2d29-4991-a0c6-61e6b7715f26")
+			(uuid "a30fb4cd-2d10-4844-af36-9731ea686e5a")
 		)
 		(instances
 			(project "ac_psu"
@@ -5080,7 +5080,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "dc0f522a-9b9b-4c2f-a49a-8bc516520688")
+		(uuid "2f3b7c8d-beaa-4b74-a87e-f1dc918c8ae2")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5090,7 +5090,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "fb9d35df-796d-4bb0-bee1-ab592b49ff80")
+		(uuid "6aac2f60-a86a-4212-bdcb-ee9e57949adf")
 		(property "Reference" "R60"
 			(at 212.47 74.93 0)
 			(effects
@@ -5135,10 +5135,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "29d67832-a67e-461e-9a76-1fde2ed3559a")
+			(uuid "f9c2769b-4a88-471c-b95e-8a87749a2f0c")
 		)
 		(pin "2"
-			(uuid "26682d82-4dec-4641-98ee-43c8056504ae")
+			(uuid "62fe8456-96fd-4fb2-8657-861b064cfcdc")
 		)
 		(instances
 			(project "ac_psu"
@@ -5157,7 +5157,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c3753d81-585f-49f4-9fd3-2b083f0a4bf0")
+		(uuid "2959cb74-ef26-4da1-a605-a03941533172")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5167,7 +5167,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "63e37a16-3181-4185-87da-946d63ab21ea")
+		(uuid "49f89eee-e83e-4ddb-9aff-f949cc5e77af")
 		(property "Reference" "R61"
 			(at 212.47 85.09 0)
 			(effects
@@ -5212,10 +5212,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "ba31ec30-6762-49e8-ae5a-921d9db045f8")
+			(uuid "ea0dce18-07c3-416e-a5c7-85144585670f")
 		)
 		(pin "2"
-			(uuid "f1c22651-8b23-4c22-954f-6a1e4efbde66")
+			(uuid "e9b5476b-8cbe-47d4-9e98-50bb3cf12fde")
 		)
 		(instances
 			(project "ac_psu"
@@ -5234,7 +5234,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9cea267d-29f6-4a33-952d-18c661372cf6")
+		(uuid "0ff8cd26-4b24-49dd-b00a-9955f89d2714")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5244,7 +5244,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f38a03aa-8255-471d-8c01-381fe47f7bee")
+		(uuid "92e3f336-a8de-4ecb-b81d-688565bf1554")
 		(property "Reference" "R71"
 			(at 212.47 95.25 0)
 			(effects
@@ -5289,10 +5289,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "9d983ed3-c201-448d-92e1-376bc97f7991")
+			(uuid "ae636453-7408-4eee-a309-16c7ba913894")
 		)
 		(pin "2"
-			(uuid "3adb3863-4bc8-4896-9171-3137403239ce")
+			(uuid "096e90f7-f389-40e8-858a-41fd089fcc5c")
 		)
 		(instances
 			(project "ac_psu"
@@ -5311,7 +5311,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6f576e7d-f390-45af-b87d-03556733bba0")
+		(uuid "79023d01-beb2-4c2c-a83c-6ef808a8fa1c")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5321,7 +5321,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1955329c-547d-4acf-a42c-4c925c8f4e9b")
+		(uuid "821cb4a8-2d09-47d0-a116-c39046cf1c7c")
 		(property "Reference" "R62"
 			(at 196.47 74.93 0)
 			(effects
@@ -5366,10 +5366,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "2f240fb0-f02e-43ab-987d-b1ca1de458c7")
+			(uuid "df257000-8e00-432a-9659-60097c87ca20")
 		)
 		(pin "2"
-			(uuid "21885c43-346c-4137-b6e9-60301626b4a9")
+			(uuid "20ca942c-9a4d-4ab5-8b32-a9d963e1df97")
 		)
 		(instances
 			(project "ac_psu"
@@ -5388,7 +5388,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bec6900c-3c71-4dd6-a290-9adc7eb70f9c")
+		(uuid "345befad-bace-492e-8a73-a732f1b5abf9")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5398,7 +5398,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d16207b5-51c9-4b88-b7f0-4710f180cf90")
+		(uuid "0fafba6f-9cfd-4f66-8169-fc143bcf7e2c")
 		(property "Reference" "R63"
 			(at 196.47 85.09 0)
 			(effects
@@ -5443,10 +5443,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "3602f18c-b61c-47a9-9f47-f5c3100a36f7")
+			(uuid "5a41c38a-4f18-416d-ad9b-ce91a18e8c0f")
 		)
 		(pin "2"
-			(uuid "8e69296d-40bb-463e-9578-dbe3a9dc08ee")
+			(uuid "00b4653c-0e7c-4832-8b80-67194c0bc1e9")
 		)
 		(instances
 			(project "ac_psu"
@@ -5465,7 +5465,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3be7c0d3-2b56-4319-97af-260240e6972f")
+		(uuid "5cb2a21a-5e7a-4fd5-a0b1-cf6ee463bc39")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5475,7 +5475,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9308eb56-3d85-4472-87ea-fd308e0c8499")
+		(uuid "84c646b8-e2ac-4e8a-a411-a5a2fd5c7f42")
 		(property "Reference" "R256"
 			(at 195.92 95.25 0)
 			(effects
@@ -5520,10 +5520,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "2b0bf7f3-320a-431d-a5a1-2085aa454a0c")
+			(uuid "60e47077-9589-44aa-80f9-f5c6de32a7a3")
 		)
 		(pin "2"
-			(uuid "ea3eddcb-8cff-4c99-aeb5-d4668a70e7aa")
+			(uuid "2f1d09fe-fe2f-4578-804d-4e5617e39bb7")
 		)
 		(instances
 			(project "ac_psu"
@@ -5542,7 +5542,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "20b9932d-291a-4d25-863b-ef18c1a94a44")
+		(uuid "5a593781-7ae6-417c-aac6-16d6d233cece")
 	)
 	(symbol
 		(lib_id "ac_psu:OPA2353UA")
@@ -5552,7 +5552,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "234343c3-4e0e-4b0f-9c58-ac26f78a54ea")
+		(uuid "0728c560-b379-4a47-932c-d9d852bd2e50")
 		(property "Reference" "U7"
 			(at 228.6 101.6 0)
 			(effects
@@ -5599,13 +5599,13 @@
 			)
 		)
 		(pin "1"
-			(uuid "854ca075-2d15-4e24-bafa-b1f982d11f09")
+			(uuid "9799ebf2-5cfb-44d2-b5a6-d2da69cf0591")
 		)
 		(pin "2"
-			(uuid "ebc45376-16dc-469f-aa38-05e22f17b630")
+			(uuid "c2b0cbed-3696-41c1-8ce2-d45ac998b489")
 		)
 		(pin "3"
-			(uuid "fb93e036-bb3b-4500-a3ba-1619b1c4b43d")
+			(uuid "2e9a76a9-8b42-44c7-bc0b-209012463bfa")
 		)
 		(instances
 			(project "ac_psu"
@@ -5624,7 +5624,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "52e5048e-0068-4c26-9de3-209b7c967a99")
+		(uuid "71228d8c-9315-4c6a-bb41-599074a0174e")
 	)
 	(wire
 		(pts
@@ -5634,7 +5634,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5fba03ba-1e86-4f07-9696-e612280887e5")
+		(uuid "e26c0998-0e78-4c6b-8860-01ca26e5a7ef")
 	)
 	(wire
 		(pts
@@ -5644,7 +5644,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "550caf60-52c4-4574-b3c3-d5a18e8c94d1")
+		(uuid "338fea27-3157-44a3-bff3-8c36527c10be")
 	)
 	(wire
 		(pts
@@ -5654,7 +5654,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea03d020-f7c7-440f-8bad-8fd680444202")
+		(uuid "95ad8957-fe63-4ab4-95bd-cfc2f822a879")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5664,7 +5664,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f5bcbdf8-6476-4ea1-aaa0-12c0435b78f8")
+		(uuid "dc51640d-e9c5-45fa-b319-7dcce1395d32")
 		(property "Reference" "R52"
 			(at 222.63 95.25 0)
 			(effects
@@ -5709,10 +5709,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "312df08f-4cf2-4b38-8f38-0bd22ef7ca21")
+			(uuid "5772097d-5a11-44da-b52e-b66ae162ab0b")
 		)
 		(pin "2"
-			(uuid "33b3a97f-4f34-4728-9431-6afe64c033e2")
+			(uuid "d2c30de0-6dbc-4c94-bf66-d5b9ba9de263")
 		)
 		(instances
 			(project "ac_psu"
@@ -5731,13 +5731,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b8f2fdc-7b38-4543-b4e8-d806eb19481f")
+		(uuid "52776aed-aebb-4b6b-8b60-ca8251ccd4dc")
 	)
 	(junction
 		(at 218.44 104.14)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9c614ff2-22ed-4038-bd97-07adcd4330a4")
+		(uuid "d2fd400a-20eb-43a5-8e9b-6a70e5aee2dc")
 	)
 	(wire
 		(pts
@@ -5747,7 +5747,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9a90053b-6231-4d7d-9678-d9464b544c70")
+		(uuid "27346d80-388c-4431-bdc3-527dc123df52")
 	)
 	(global_label "REF_1V65_ISO"
 		(shape passive)
@@ -5759,7 +5759,7 @@
 			)
 			(justify left)
 		)
-		(uuid "4be272ff-207b-42a4-87f9-84883d35ced4")
+		(uuid "cf86f03c-fed2-4d9a-8c22-67eb5892e47b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 218.44 90.17 0)
 			(effects
@@ -5779,13 +5779,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "04069cca-b2e2-4573-8ebe-bf0dc3f9e875")
+		(uuid "dd95b6e5-e415-4b73-91c7-2da72c525096")
 	)
 	(junction
 		(at 238.76 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "cc85c2ed-e2ed-4b84-805d-234f1d0be3f4")
+		(uuid "07e499ee-06ab-492a-8823-60399baf85b4")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -5795,7 +5795,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d6b492e7-9ce4-4a42-b0c2-0f7a1449ccfd")
+		(uuid "8ec60458-6cdf-47eb-9f41-bdf5301e6f21")
 		(property "Reference" "R54"
 			(at 246.38 104.14 90)
 			(effects
@@ -5840,10 +5840,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "5e08d639-7f38-4b1d-878c-0d7125db52bd")
+			(uuid "770e1125-ac9d-4c33-8d73-a076e9f1a712")
 		)
 		(pin "2"
-			(uuid "35f23a57-fb12-4807-bb0a-dfe4e4fd5c08")
+			(uuid "78d5d681-fe1b-4a6f-9dd8-82610ccded36")
 		)
 		(instances
 			(project "ac_psu"
@@ -5862,7 +5862,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e17c80fe-1e5b-4d2d-b461-1f18cd25299e")
+		(uuid "d9f3d638-bbf9-4f4e-b54b-9f89589fd6d6")
 	)
 	(wire
 		(pts
@@ -5872,7 +5872,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ac4bc706-5316-4635-99c1-aa5b79502676")
+		(uuid "082e1afb-a147-495b-8ff8-7f82b6224d15")
 	)
 	(global_label "ISOADA1"
 		(shape passive)
@@ -5884,7 +5884,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7cb4b2ca-d53c-4244-87a8-6b4e30e6390d")
+		(uuid "9b14707c-cfc6-46d4-a5fa-176ad28fb676")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 252.73 106.68 0)
 			(effects
@@ -5904,7 +5904,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2a8e38f8-8d13-4c02-b446-28f626fcd7dc")
+		(uuid "99b1d5af-a48e-4b43-937f-da893a184caf")
 		(property "Reference" "R53"
 			(at 228.6 116.33 90)
 			(effects
@@ -5949,10 +5949,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "dc7e9083-9d85-439b-8c1d-5f24dfb0fa27")
+			(uuid "15e15d58-e70e-4ca5-86f9-2a0e57182cec")
 		)
 		(pin "2"
-			(uuid "493219b1-44c2-414f-9375-6ce85dad6e04")
+			(uuid "31303ae5-48d2-42fb-998a-de65a2a1d6c7")
 		)
 		(instances
 			(project "ac_psu"
@@ -5971,7 +5971,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "497e75f7-9a83-4824-85a6-c2fd2135b6d4")
+		(uuid "f6087120-a507-4347-bc09-197d89685369")
 	)
 	(wire
 		(pts
@@ -5981,7 +5981,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0d8fd5a7-d7dc-420a-81c8-a9acedfd2752")
+		(uuid "f71dbb21-466d-4bea-8661-681c950b58e5")
 	)
 	(wire
 		(pts
@@ -5991,7 +5991,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ce72ecae-3948-40a7-91e3-c7db9f7eef1f")
+		(uuid "52bbef2a-c85a-40a1-9bc0-f0681b8f32cf")
 	)
 	(wire
 		(pts
@@ -6001,7 +6001,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "35c904fe-913c-4f9c-86b5-049ecfd6e4a6")
+		(uuid "a0ec8555-2ed8-4c29-a0a8-bef9c1d9a43a")
 	)
 	(wire
 		(pts
@@ -6011,7 +6011,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8dadf333-04f6-43a3-be59-c6d536ef1f80")
+		(uuid "f26a8b63-f989-443d-b68f-2a85b8fafd07")
 	)
 	(wire
 		(pts
@@ -6021,13 +6021,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "192e9b37-afac-4b65-a5fe-c9cfdf0b5921")
+		(uuid "d876e9de-8ddc-4b84-9add-4980392c5384")
 	)
 	(junction
 		(at 220.98 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "088b0e30-31a0-4a3a-b702-29c427f22bc3")
+		(uuid "6f6074c3-2032-4810-af88-6574bbb93ead")
 	)
 	(text "U7:A measures the filter voltage (INU_FILTER_INPUT - INDUCTOR_OUTPUT) around REF_1V65_ISO -> ISOADA1."
 		(exclude_from_sim no)
@@ -6038,7 +6038,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "aaf641c1-ef3c-470e-9e7d-c2030443bebf")
+		(uuid "e2adab2e-1552-4bb4-80da-078a750918bb")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6048,7 +6048,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8fd0ff12-2f30-4bab-85a0-90eedb502ed0")
+		(uuid "ddef799a-9d4c-4787-9938-f1785d82c852")
 		(property "Reference" "R65"
 			(at 311.53 120.65 0)
 			(effects
@@ -6093,10 +6093,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "07c0c32c-7630-4025-b1df-f2c6c8c176c7")
+			(uuid "2cf6ba2a-831d-479b-9ded-45923bbedf27")
 		)
 		(pin "2"
-			(uuid "32258e4d-bc1b-4883-a54b-231c4f00da47")
+			(uuid "27f2345e-2cbf-42cc-a08a-9eb62c45bc0b")
 		)
 		(instances
 			(project "ac_psu"
@@ -6115,7 +6115,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0d9fabd6-92e1-4340-9259-646252a1adaf")
+		(uuid "77616dcf-eb1d-4d36-95fd-9f37f6d5ee31")
 	)
 	(wire
 		(pts
@@ -6125,7 +6125,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "40ea3376-9032-46b1-a674-df346540c4e0")
+		(uuid "6e80b3e6-660f-43ce-aa9a-1674bebd5c6f")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6135,7 +6135,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3d7cffb2-2cb8-461e-9de4-3bac26cd903d")
+		(uuid "7142d185-ee3f-4331-8cd2-6b4e15514c03")
 		(property "Reference" "R66"
 			(at 311.53 130.81 0)
 			(effects
@@ -6180,10 +6180,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "95ca17bb-bc3a-4fdb-bf3b-0d65a4d71b06")
+			(uuid "bf48164e-61bb-40b7-8252-47f00bc22cd1")
 		)
 		(pin "2"
-			(uuid "3c7769b6-b895-44e0-8bab-fbd3d5a55417")
+			(uuid "ad4f5d6b-bbad-438d-9df7-8eec4646ee33")
 		)
 		(instances
 			(project "ac_psu"
@@ -6202,7 +6202,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e4cbd13f-45e9-4372-9ef5-32caf9852a7f")
+		(uuid "7f81f833-26b8-4c84-9ff2-050bfcc5379e")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6212,7 +6212,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f905f3df-d4a9-43eb-8cdf-3d7ed450828e")
+		(uuid "d48d4c67-2e45-48ca-9cc9-d61fb46a65ec")
 		(property "Reference" "R67"
 			(at 311.53 140.97 0)
 			(effects
@@ -6257,10 +6257,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "0f1cdc2f-f233-4610-ab98-ed5deb255777")
+			(uuid "035ccfd9-dd32-42e0-b0c8-b0e0f894c6ed")
 		)
 		(pin "2"
-			(uuid "ac2a384f-8f03-4ec2-8a6d-b5aecb9edece")
+			(uuid "c95f2c58-6a77-4a6f-8c88-dca0f923e878")
 		)
 		(instances
 			(project "ac_psu"
@@ -6279,7 +6279,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0fe49444-e9b4-4f08-8cc4-0a6c9966ac60")
+		(uuid "ad8d386a-6c38-4f07-bdf8-6878ac3287bc")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6289,7 +6289,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "20308f57-e2f2-4ecd-800b-46f679b34170")
+		(uuid "4614d1fe-7066-4fd3-aafa-c554f0eafb17")
 		(property "Reference" "R70"
 			(at 295.53 120.65 0)
 			(effects
@@ -6334,10 +6334,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "d0632a47-3e4b-4f7a-aafc-31ab14bc645a")
+			(uuid "cccba49f-4869-4d6a-a296-fb9d9a643ca2")
 		)
 		(pin "2"
-			(uuid "78db6955-537c-4b29-99f8-63ed4f65a104")
+			(uuid "3eb11727-7c85-4b65-82c4-cede76570d00")
 		)
 		(instances
 			(project "ac_psu"
@@ -6356,7 +6356,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "95aeee72-6666-4b50-af43-26e37dab1b53")
+		(uuid "1b4c51ed-da0c-48bf-8abd-304c564d6539")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6366,7 +6366,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7c548160-7782-4983-b46c-09ce95d07656")
+		(uuid "1f4f4f9d-12e8-4f07-bf37-62a3c1389c56")
 		(property "Reference" "R69"
 			(at 295.53 130.81 0)
 			(effects
@@ -6411,10 +6411,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "70102e5f-0935-4e99-a4e6-5f4768c574f2")
+			(uuid "854aadd6-b708-4e90-a7e8-b6d5f3707436")
 		)
 		(pin "2"
-			(uuid "c0b3615c-d2a4-4f97-ae49-3e298d287e8c")
+			(uuid "92808f0e-b57b-4e96-9487-1cbb3bee78fc")
 		)
 		(instances
 			(project "ac_psu"
@@ -6433,7 +6433,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "021e1a52-14ee-433f-a47d-d82f82d22a2a")
+		(uuid "c99d10f0-921e-4015-b608-c6cb2c63748a")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6443,7 +6443,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a9d0b065-6dff-41a0-8e90-6dd41a151790")
+		(uuid "01248ac9-9567-40d1-9805-70620231efc3")
 		(property "Reference" "R68"
 			(at 295.53 140.97 0)
 			(effects
@@ -6488,10 +6488,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "c5130c52-aca7-4be4-b5f1-f4d91a2e0606")
+			(uuid "f940f2b0-ead1-4fe2-8a72-1d196aef69fc")
 		)
 		(pin "2"
-			(uuid "e87dd02a-4e85-48b4-b2ad-d102bbcb343c")
+			(uuid "0a97b705-b3e7-436d-b03c-da43c7bd28ca")
 		)
 		(instances
 			(project "ac_psu"
@@ -6510,7 +6510,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5c83d5d9-4441-44b2-8c83-4bc1f29d9fdd")
+		(uuid "659b7138-c1ad-4fe9-9337-f4b5e2b0a293")
 	)
 	(symbol
 		(lib_id "ac_psu:OPA2353UA")
@@ -6520,7 +6520,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0948e153-cf6a-4ae2-bd1b-6be08f52c610")
+		(uuid "b9907e5e-d999-410f-a4fd-17c00e6650c5")
 		(property "Reference" "U7"
 			(at 327.66 147.32 0)
 			(effects
@@ -6567,13 +6567,13 @@
 			)
 		)
 		(pin "5"
-			(uuid "b10af7e3-a21a-4b2a-8a4e-f49c77f04483")
+			(uuid "e8b37828-e561-4878-a926-16042d3fbf4a")
 		)
 		(pin "6"
-			(uuid "35e5ddd2-17c1-4a03-8b39-c76633ec79f0")
+			(uuid "f1fa06af-1821-4c5a-9146-ca6a1bdf6131")
 		)
 		(pin "7"
-			(uuid "e71eb1a3-b4a7-423f-bbab-44364aa779f7")
+			(uuid "339af0cf-a5f3-419e-8f9f-c3b856a39f8e")
 		)
 		(instances
 			(project "ac_psu"
@@ -6592,7 +6592,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5bf09dcf-dd06-4f42-bf79-f12d67c4e545")
+		(uuid "6044f649-c4dd-4faa-ab89-92433b072ccd")
 	)
 	(wire
 		(pts
@@ -6602,7 +6602,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1da2e766-d31d-4ab9-897f-e5f797b4d7d5")
+		(uuid "dcc2dd33-51f0-45d6-a9c6-d54d76611754")
 	)
 	(wire
 		(pts
@@ -6612,7 +6612,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "748421c8-fb49-4ff2-a443-81705b9781d1")
+		(uuid "8ce84db0-1ac4-47ef-918c-d6bbe5b358ab")
 	)
 	(wire
 		(pts
@@ -6622,7 +6622,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0d0b4531-e125-4198-9370-4941d86fbfb4")
+		(uuid "db545209-0e52-4203-97e3-29de9827af37")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6632,7 +6632,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "78334d74-f07e-49a5-802c-07677b82c4ba")
+		(uuid "9f1e96cb-dc02-44c3-aec4-0bfa30c22255")
 		(property "Reference" "R46"
 			(at 321.69 140.97 0)
 			(effects
@@ -6677,10 +6677,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "1e692243-7bf8-45d1-a68b-c41608ced285")
+			(uuid "3435923a-0253-412c-8425-3ca8a71382c0")
 		)
 		(pin "2"
-			(uuid "f7ef1504-6bde-4bef-9837-543b4292a403")
+			(uuid "bd2d6dbb-ea04-4b86-8bed-d6fb3858425e")
 		)
 		(instances
 			(project "ac_psu"
@@ -6699,7 +6699,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a1473180-d366-4688-948f-200e2285a6db")
+		(uuid "d7feeda9-392b-4bdd-8ae5-fd3352c5b55a")
 	)
 	(wire
 		(pts
@@ -6709,13 +6709,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "02ff7911-e2b2-41cd-822d-ea91d219bb00")
+		(uuid "2c286bbe-a2a4-4a55-aa51-297d133c6656")
 	)
 	(junction
 		(at 317.5 149.86)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7a84fe6d-623e-41c1-b9f3-8f14ec14d092")
+		(uuid "d55fa0e9-ea6e-4c25-858f-a28f26e20492")
 	)
 	(wire
 		(pts
@@ -6725,7 +6725,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b0c2bcc9-dae9-406e-9650-eec035a2a909")
+		(uuid "0869f361-33a4-4f2a-b6f5-d80b53f8c997")
 	)
 	(global_label "REF_1V65_ISO"
 		(shape passive)
@@ -6737,7 +6737,7 @@
 			)
 			(justify left)
 		)
-		(uuid "35d51023-d053-4f5a-83b5-336e5404cbec")
+		(uuid "531eae06-b7d1-429c-afee-9956902d2888")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 135.89 0)
 			(effects
@@ -6757,13 +6757,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "92e7eb16-7753-4df3-b98b-31f072f7acc2")
+		(uuid "e965294b-6a48-4541-b1e2-39ad687339ef")
 	)
 	(junction
 		(at 337.82 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "37c333ba-6b7d-4a46-8247-08ebb458cc3a")
+		(uuid "92eb2e48-695e-4b6f-aa47-721a95174d8d")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -6773,7 +6773,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "cf52768e-ce86-47bf-a454-ad0960f977d9")
+		(uuid "37271ad7-9743-442c-98f4-1c6005adaab6")
 		(property "Reference" "R56"
 			(at 345.44 149.86 90)
 			(effects
@@ -6818,10 +6818,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "3e767d8a-a266-44fb-9d50-507382157e73")
+			(uuid "65197662-1aae-4088-8112-3951f06776ca")
 		)
 		(pin "2"
-			(uuid "4f37e2e1-e053-4716-82bd-21244416934b")
+			(uuid "75be02bc-2523-40ee-9c75-2d477e14b848")
 		)
 		(instances
 			(project "ac_psu"
@@ -6840,7 +6840,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9dc59953-9b52-4d30-bd81-88c3c38c93fa")
+		(uuid "73bb0f33-3a98-4a8d-aabb-33f46cf753a5")
 	)
 	(wire
 		(pts
@@ -6850,7 +6850,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "34d43929-5dae-4544-b856-8ca6a63934a0")
+		(uuid "de6aad1c-30c0-4a41-a105-f5d1b5fe8f6d")
 	)
 	(global_label "ISOADA2"
 		(shape passive)
@@ -6862,7 +6862,7 @@
 			)
 			(justify left)
 		)
-		(uuid "73e2e65e-aaa9-4a6b-8d7e-bdb5a2f3d86d")
+		(uuid "ce147612-dfd3-49b8-828f-585bc56883eb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 351.79 152.4 0)
 			(effects
@@ -6882,7 +6882,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9f513dfa-a15c-4ffc-bf4a-936331dc87ec")
+		(uuid "5d1531b8-3ac5-44f0-bb4b-fcbdc598c2aa")
 		(property "Reference" "R51"
 			(at 327.66 162.05 90)
 			(effects
@@ -6927,10 +6927,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "936f3433-f747-4510-829f-66978b9fea37")
+			(uuid "dae39b7c-5c29-4b05-9ea7-c0df76bbe690")
 		)
 		(pin "2"
-			(uuid "5e2e32dd-dde5-4f5d-8cac-786aa645aec4")
+			(uuid "a3bbc07e-7ef3-4cd4-b80e-f1e02130b38e")
 		)
 		(instances
 			(project "ac_psu"
@@ -6949,7 +6949,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cddd3b42-3830-48d5-a0c7-2920ae1aaad4")
+		(uuid "b81b9762-09e6-41dd-9bb3-60bd4aa6a127")
 	)
 	(wire
 		(pts
@@ -6959,7 +6959,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b71a384-542b-4399-80d9-5d9291bc4817")
+		(uuid "7ac3f78d-f8bb-4256-b485-dd724d8c9379")
 	)
 	(wire
 		(pts
@@ -6969,7 +6969,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5f168bf3-8881-4481-be44-fe6a5b58cacc")
+		(uuid "62f38a3f-f461-485e-ba3c-a596f9f2b119")
 	)
 	(wire
 		(pts
@@ -6979,13 +6979,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "74496e7d-474a-410b-9416-ccf4bdfad808")
+		(uuid "a9c97a72-7e64-4e72-a68a-d536702039e6")
 	)
 	(junction
 		(at 320.04 154.94)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4a04fb11-dd76-4eab-acf2-a2a5f1a4a604")
+		(uuid "05931a7d-51f1-41e2-acbe-c95f68cbb324")
 	)
 	(global_label "AC_OUT_2"
 		(shape passive)
@@ -6997,7 +6997,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9b0138ef-8048-4d0f-8e7b-725339d61571")
+		(uuid "9ec79bd7-934e-40d3-8d0e-8dfe98c132ce")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 307.34 106.68 0)
 			(effects
@@ -7019,7 +7019,7 @@
 			)
 			(justify left)
 		)
-		(uuid "0b035a63-195b-42b1-b011-d131c5b2cc74")
+		(uuid "e725b191-c95d-4945-aae2-f1e1ed517fb3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 299.72 106.68 0)
 			(effects
@@ -7040,7 +7040,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "567ba36a-4374-44b3-a1bc-6582a894a852")
+		(uuid "e6fd004b-bc2c-42d1-886f-6a238fc09f66")
 	)
 	(symbol
 		(lib_id "ac_psu:OPA2353UA")
@@ -7050,7 +7050,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "821de370-cca1-49a0-b34e-26a91a46ff9e")
+		(uuid "fd741c82-224b-4be4-adc6-361b066388f0")
 		(property "Reference" "U7"
 			(at 41.74 151.13 0)
 			(effects
@@ -7095,10 +7095,10 @@
 			)
 		)
 		(pin "4"
-			(uuid "9fbe7436-b175-46bb-9773-c2dbbde6b8c8")
+			(uuid "e142180c-fccb-471a-900f-3876e9881447")
 		)
 		(pin "8"
-			(uuid "e19365e8-f812-49ed-800a-f4d094458a99")
+			(uuid "57e1c6a5-abbd-4b93-963a-fdad73a667ed")
 		)
 		(instances
 			(project "ac_psu"
@@ -7117,7 +7117,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c9e73d5f-6fc4-4325-9722-ebfd14777d57")
+		(uuid "637519b0-a910-4da9-889e-74d5e28e69f7")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -7127,7 +7127,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "97dd7eb0-58e9-41e9-81cb-81493a2d3afe")
+		(uuid "c7992d8a-f903-40c3-95f3-1ec013b15bca")
 		(property "Reference" "#PWR005"
 			(at 35.56 146.05 0)
 			(effects
@@ -7173,7 +7173,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "bdcbe0fa-c5df-423a-b1c0-37c97809f92b")
+			(uuid "b1953a26-4551-47f3-abdc-1ea1f57069d7")
 		)
 		(instances
 			(project "ac_psu"
@@ -7192,7 +7192,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "67871b1b-27aa-48c1-bbff-d9d45ccf8faf")
+		(uuid "0e9105fa-ba4a-4abe-8987-f73438ae090c")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7202,7 +7202,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3d063b7d-a82f-41de-bb8c-a5a2fd59104f")
+		(uuid "71e0ad59-00b4-4500-b4fb-5208ce34f416")
 		(property "Reference" "#PWR006"
 			(at 35.56 168.91 0)
 			(effects
@@ -7248,7 +7248,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "c8abc474-4695-4821-a7b5-b8bd6e1f8432")
+			(uuid "1867c5b7-09a4-44c5-8a06-989e3486f505")
 		)
 		(instances
 			(project "ac_psu"
@@ -7267,7 +7267,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f7de638a-743b-4492-a2fb-cbd001964f15")
+		(uuid "ce0ea6b4-f43b-495f-badc-117dda6979ea")
 		(property "Reference" "C38"
 			(at 60.07 151.13 0)
 			(effects
@@ -7312,10 +7312,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "ecf5b98e-8a79-483d-aa3d-13acb7476956")
+			(uuid "74bc61c8-a243-4285-b4f3-4859dedda64b")
 		)
 		(pin "2"
-			(uuid "20281a99-09da-4453-8822-f929e8471a59")
+			(uuid "8a054088-a5e3-4433-9580-62005ee710a0")
 		)
 		(instances
 			(project "ac_psu"
@@ -7334,7 +7334,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "390cdcdb-f105-4c69-b3e7-0cce40449201")
+		(uuid "f3d32131-26b9-4e3f-b2d0-c6699dcc78fe")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -7344,7 +7344,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0b4092dd-1adc-4a77-8966-85dda7fb95da")
+		(uuid "4d511abf-80be-45e6-94c5-bceba2015363")
 		(property "Reference" "#PWR007"
 			(at 55.88 149.86 0)
 			(effects
@@ -7390,7 +7390,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "49f6047c-5432-4da8-8ef1-095bc32c177b")
+			(uuid "2e48206b-f45b-418d-be39-3918e21cf6ba")
 		)
 		(instances
 			(project "ac_psu"
@@ -7409,7 +7409,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d0e9e299-1d4b-440d-ab39-348917026f10")
+		(uuid "c1165e9c-3cf5-43d9-80ea-ce952f4667a9")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7419,7 +7419,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "f9253a09-3452-49ce-9e6d-5cd2e1f970b2")
+		(uuid "201eebaa-503f-4c94-8652-5b3af0e49bf8")
 		(property "Reference" "#PWR008"
 			(at 55.88 165.1 0)
 			(effects
@@ -7465,7 +7465,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "dc41c535-69d8-4bad-8074-c9d825c3aacc")
+			(uuid "52e944a9-d6d0-4ae8-b906-c5bdace02bc0")
 		)
 		(instances
 			(project "ac_psu"
@@ -7484,7 +7484,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bdf3a344-0c90-4d17-8b33-28f3182b5d0f")
+		(uuid "d3b7aee8-c034-4ff2-b687-b23d2a514975")
 		(property "Reference" "C56"
 			(at 70.23 151.13 0)
 			(effects
@@ -7529,10 +7529,10 @@
 			)
 		)
 		(pin "1"
-			(uuid "4711627a-6829-4c45-adb0-9d7787a0a49e")
+			(uuid "d0309457-c062-4a56-94fa-ec75af363f23")
 		)
 		(pin "2"
-			(uuid "815f6ed8-8f29-4507-8cb3-9012d83a9cbc")
+			(uuid "4a0fbe88-4bbc-4741-889d-d2537f2df948")
 		)
 		(instances
 			(project "ac_psu"
@@ -7551,7 +7551,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "be4cd038-31c6-42b3-a00b-f5721fb15cc6")
+		(uuid "7f16aa2b-f639-4fa0-b93a-4c61a144431f")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -7561,7 +7561,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b6811ac2-eb96-4e45-a829-758a9a4f34d9")
+		(uuid "d9b7ad4e-aa2f-4248-9d3c-387feb03bf99")
 		(property "Reference" "#PWR009"
 			(at 66.04 149.86 0)
 			(effects
@@ -7607,7 +7607,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "d014aa3d-75ad-4bb5-93eb-be78922223dc")
+			(uuid "5fe278dd-3d18-4e6e-aa14-3622ec95fc6f")
 		)
 		(instances
 			(project "ac_psu"
@@ -7626,7 +7626,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea63a5e9-d3f1-4abe-9387-b54cb16da7d4")
+		(uuid "14cddb5f-20f6-49b3-a990-c8fa74fcb07d")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7636,7 +7636,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4ea472b6-acfd-40bb-a29e-4cb5b6977eaa")
+		(uuid "d0c2d695-f6d6-42e0-b9a0-9739831ad076")
 		(property "Reference" "#PWR010"
 			(at 66.04 165.1 0)
 			(effects
@@ -7682,7 +7682,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "e82a7cec-ce98-49d6-8fee-9f4fae4d0bdf")
+			(uuid "a53009d1-7c3d-4b02-901c-7ba98e72d5eb")
 		)
 		(instances
 			(project "ac_psu"
@@ -7701,7 +7701,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bb4b2882-1524-49da-8482-097229387958")
+		(uuid "d6813ea0-468c-408a-a2c0-ff9f880ec6a2")
 		(property "Reference" "PE5"
 			(at 25.4 197.358 0)
 			(effects
@@ -7746,7 +7746,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "4f8cb4f8-59c8-4ad1-bdc2-054d893d484d")
+			(uuid "ffb0e3cb-654a-461b-b1fb-db0a9d7aea82")
 		)
 		(instances
 			(project "ac_psu"
@@ -7765,7 +7765,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8764cd72-99f4-4c67-b1ec-ffae1d7be25e")
+		(uuid "be88143c-ee08-4de5-b4ad-71d6d3b5ae05")
 	)
 	(global_label "PE5"
 		(shape passive)
@@ -7777,7 +7777,7 @@
 			)
 			(justify left)
 		)
-		(uuid "583758d5-a0ae-4a9c-90ac-dacb32339ff9")
+		(uuid "52e068eb-022c-4ede-84af-aafe194d57b9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 25.4 187.96 0)
 			(effects
@@ -7797,7 +7797,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3292bfc9-08b6-4f06-a5ea-39f14c8de5c9")
+		(uuid "749d2ed5-fa66-44c4-be24-c4cdcc6c65c2")
 		(property "Reference" "PE6"
 			(at 35.56 197.358 0)
 			(effects
@@ -7842,7 +7842,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "1065f2dd-caae-4a9f-a06c-0ab69819e72e")
+			(uuid "690be5b5-7177-456f-8bf8-115c3db50ee4")
 		)
 		(instances
 			(project "ac_psu"
@@ -7861,7 +7861,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9d02df8d-47d5-4223-b9c7-db520427f102")
+		(uuid "0dc722d2-c8eb-4286-8d12-75ceb252f1d5")
 	)
 	(global_label "PE6"
 		(shape passive)
@@ -7873,7 +7873,7 @@
 			)
 			(justify left)
 		)
-		(uuid "950cf8fe-5e52-424f-a547-cf563395c434")
+		(uuid "6f10df9d-2b08-433a-9200-91d5ec192dcb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 35.56 187.96 0)
 			(effects
@@ -7893,7 +7893,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1046f283-24af-4fe7-8c25-c6d07d8edb06")
+		(uuid "eddb78e3-490e-407e-8b70-6a4d784a03f5")
 		(property "Reference" "PE7"
 			(at 45.72 197.358 0)
 			(effects
@@ -7938,7 +7938,7 @@
 			)
 		)
 		(pin "1"
-			(uuid "6a6579d7-ff0b-4628-a56c-1aef8ae24c56")
+			(uuid "811e3be2-060c-4cb6-9326-1053be802872")
 		)
 		(instances
 			(project "ac_psu"
@@ -7957,7 +7957,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "944b87af-5eef-4581-be78-d58c7fd6cc42")
+		(uuid "2fc4e3e5-5399-40be-bda6-6e5d557a3be0")
 	)
 	(global_label "PE7"
 		(shape passive)
@@ -7969,7 +7969,7 @@
 			)
 			(justify left)
 		)
-		(uuid "b4dc760f-57d6-409b-9c51-d8e0b47e6ef6")
+		(uuid "7424ba3f-d6a0-4596-8b79-8f317a46fb1e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 45.72 187.96 0)
 			(effects

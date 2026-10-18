@@ -267,10 +267,14 @@ def terminal(sh, ref, x, y, direction="up"):
 
 
 def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_label, first=g(12), top_plus=None,
-             opamp=("OPA2353UA", "U1"), rval="91K"):
-    """OPA2353 difference amplifier (sheets 1 and 5): three `rval` resistors per input from `top` down to the op-amp (plus chain in the inner
-    column xa, minus chain in the outer column xb), r_ref from the + node up to ref_label,
-    r_fb feedback, r_out to out_label. Returns the chain top points (plus, minus)."""
+             opamp=("OPA2353UA", "U1"), rval="91K", pins=None, ref_power=None, out_cap=None, top_power=None):
+    """Difference amplifier (sheets 1, 4, 5): three `rval` resistors per input from `top` down
+    to the op-amp (plus chain in the inner column xa = xb + 6 grid, minus chain in xb), r_ref
+    from the + node up to ref_label (a global label, or a power symbol pointing left when
+    ref_power is set), r_fb feedback, r_out to out_label. pins = (plus, minus, out) pin
+    numbers (default by OPA2353 unit); out_cap = (ref, val, gnd_net) hangs a capacitor from
+    the output label node to gnd_net; top_power = (plus_net, minus_net) puts power symbols on
+    the chain tops instead of leaving them for the caller. Returns a dict of points."""
     xa = xb + g(6)
     rows_ = [top + first + g(8 * i) for i in range(3)]
     for col, chain, text, t0 in ((xa, plus, None, top_plus if top_plus is not None else top), (xb, minus, "left", top)):
@@ -282,22 +286,39 @@ def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_
     yu = rows_[2] + g(8)
     xu = xa + g(16)
     u = sh.place(opamp[0], opamp[1], xu, yu, unit=unit, value=opamp[0])
-    pinp, pinm, out = (u.pin(5), u.pin(6), u.pin(7)) if unit == 2 else (u.pin(3), u.pin(2), u.pin(1))
+    if pins is None:
+        pins = (5, 6, 7) if unit == 2 else (3, 2, 1)
+    pinp, pinm, out = (u.pin(p) for p in pins)
     sh.wire((xa, rows_[2] + 3.81), (xa, pinp[1]), pinp)
     sh.wire((xb, rows_[2] + 3.81), (xb, pinm[1]), pinm)
     xr = xa + g(8)
     _, rt, rb = vert2(sh, "R", r_ref[0], xr, pinp[1] - g(6), r_ref[1], top=1)
     sh.wire(rb, (xr, pinp[1])); sh.junction(xr, pinp[1])
-    sh.wire(rt, up(rt, 2)); sh.glabel(ref_label, *up(rt, 2), 90)
+    sh.wire(rt, up(rt, 2))
+    if ref_power:
+        power_at(sh, ref_power, up(rt, 2), "left")
+    else:
+        sh.glabel(ref_label, *up(rt, 2), 90)
     n = right(out, 2)
     sh.wire(out, n); sh.junction(*n)
     _, ol, or_ = horiz2(sh, "R", r_out[0], xu + g(14), yu, r_out[1], left=2)
-    sh.wire(n, ol); glabel_right(sh, out_label, or_, 2)
+    sh.wire(n, ol)
+    lab = right(or_, 2)
+    if out_cap:
+        sh.wire(or_, lab); sh.junction(*lab)
+        sh.wire(lab, right(lab, 4)); sh.glabel(out_label, *right(lab, 4), 0)
+        _, ct, cb = vert2(sh, "C", out_cap[0], lab[0], lab[1] + g(6), out_cap[1], top=1)
+        sh.wire(lab, ct); sh.wire(cb, down(cb, 2)); power_at(sh, out_cap[2], down(cb, 2), "down")
+    else:
+        glabel_right(sh, out_label, or_, 2)
     fb = yu + g(6)
     _, fl, fr = horiz2(sh, "R", r_fb[0], xu, fb, r_fb[1], left=2, text="below")
     sh.wire(n, (n[0], fb), fr)
     sh.wire(fl, (pinm[0], fb), pinm)
     sh.junction(*pinm)
-    return (xa, top_plus if top_plus is not None else top), (xb, top)
-
-
+    pa = (xa, top_plus if top_plus is not None else top)
+    pm = (xb, top)
+    if top_power:
+        power_at(sh, top_power[0], pa, "up")
+        power_at(sh, top_power[1], pm, "left")
+    return {"plus_top": pa, "minus_top": pm, "u": u, "xu": xu, "yu": yu}

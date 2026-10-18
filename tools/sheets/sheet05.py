@@ -113,9 +113,9 @@ diff_amp(sh, XB, BOT, 1, ["R60", "R61", "R71"], ["R62", "R63", "R256"], ("R52", 
          ("R53", "10k"), ("R54", "8.2k"), "ISOADA1", top_plus=TOP, opamp=("OPA2353UA", "U7"))
 sh.text("U7:A measures the filter voltage (INU_FILTER_INPUT - INDUCTOR_OUTPUT) around REF_1V65_ISO -> ISOADA1.",
         XB - g(6), BOT + g(50))
-pa, pm = diff_amp(sh, g(236), g(84), 2, ["R65", "R66", "R67"], ["R70", "R69", "R68"], ("R46", "10k"), "REF_1V65_ISO",
+r = diff_amp(sh, g(236), g(84), 2, ["R65", "R66", "R67"], ["R70", "R69", "R68"], ("R46", "10k"), "REF_1V65_ISO",
                   ("R51", "10k"), ("R56", "8.2k"), "ISOADA2", opamp=("OPA2353UA", "U7"))
-sh.glabel("AC_OUT_2", *pa, 90); sh.glabel("AC_OUT_1", *pm, 90)
+sh.glabel("AC_OUT_2", *r["plus_top"], 90); sh.glabel("AC_OUT_1", *r["minus_top"], 90)
 sh.text("U7:B measures the output voltage (AC_OUT_2 - AC_OUT_1) around REF_1V65_ISO -> ISOADA2.", g(230), g(84) + g(50))
 
 # U7 supply pins (unit C), C38 and C56
