@@ -146,13 +146,13 @@ pins on undrawn parts ("pending sheets ..."); it becomes an error once all its p
 
 | Sheet | Parts | Status |
 |---|---|---|
-| 2 fpga connector | 8/8 | done 2026-10-18; compare 0 errors (2 pending splits PGND/ISOPGND), ERC 0 errors / 38 isolated-label warnings |
+| 2 fpga connector | 8/8 | done 2026-10-18; compare 0 errors, ERC 0 errors (source groups use PGND/ISOPGND/DAB_GROUND power symbols, see notes) |
 | 3 regulators | 18/18 | done 2026-10-18; compare 0 errors, ERC 0 errors |
-| 11 signal isolators | 0/11 | |
-| 10 INU SDM and relay drive | 0/23 | |
-| 9 primary side ADC | 0/10 | |
-| 8 SDM current measurements | 0/22 | |
-| 1 afe | 0/48 | |
+| 11 signal isolators | 11/11 | done 2026-10-18; compare 0 errors, ERC 0 errors |
+| 10 INU SDM and relay drive | 23/23 | done 2026-10-18; compare 0 errors, ERC 0 errors |
+| 9 primary side ADC | 10/10 | done 2026-10-18; compare 0 errors, ERC 0 errors (R87:D placed with N/C flags) |
+| 8 SDM current measurements | 22/22 | done 2026-10-18; compare 0 errors, ERC 0 errors |
+| 1 afe | 48/48 | done 2026-10-18; compare 0 errors, ERC 0 errors |
 | 5 VSI | 0/43 | |
 | 6 Dual Active Bridge | 0/16 | |
 | 4 DC links | 0/37 | |
@@ -167,9 +167,29 @@ Notes:
   or swaps field justification for rotated symbols); `vert2`/`horiz2` in `_common.py` place a
   two-pin part with a chosen pin at the top/left – check the IPC pin order (on sheet 3 every
   capacitor has pin 1 on the ground side).
-- Sheet 2 labels follow the PDF (`G2_SOURCE_LO`, `DAB_SOURCE_LO_SEC`, `Q6_S`, …); the IPC
-  names of those nets are PGND/DAB_GROUND/ISOPGND because they are tied to the power net on
-  sheets 1/4/5/6 – the comparison is by pad set, so the names are only hints.
+- **PDF alias labels of power nets**: the PDF labels J1 15-20 / 29-34 and J3 29-34 as
+  `G2_SOURCE_LO` / `G4_SOURCE_LO` / `DAB_SOURCE_LO_PRI`, J6 15-20 / 29-34 as `Q8_S` / `Q6_S`,
+  J4 15-20 as `DAB_SOURCE_LO_SEC`; in the layout these are the power nets PGND, ISOPGND and
+  DAB_GROUND. KiCad ERC reports *multiple_net_names* (error) when such a label shares a net
+  with a power symbol, so sheet 2 uses the power symbols and shows the PDF names in brackets
+  (rule: power nets → power symbols). Signal aliases that differ only in case are spelled
+  like the IPC (`LEMOUT`, `FILTER_INPUT`, `SHUNT1`, ...).
+- PWR_FLAG placement so far: GND, 20V, ISOGND, 20V_ISO_SEC temporarily on sheet 2 (move to
+  sheet 7); DC+ and PGND on sheet 1 (AFE); ISOPGND and DAB_GROUND on sheet 8 (R64 shunt);
+  DGND and the L1-filtered ADC supply on sheet 9; the floating VDD1/GND1 rails of U4/U5/U6 on
+  sheets 10/8. Do not add second flags for these on sheets 4–7.
+- Kelvin shunts: R48 pins 1 and 3 are the same net (SHUNT1) in the IPC, so they are wired
+  together on sheet 1 (the symbol has no internal connection); R91 (sheet 5) has 4 distinct
+  nets, R64 (sheet 8) too.
+- Sheet 8 lower half: the PDF shows an unlabelled zener next to R75; it has no refdes and no
+  pads in the IPC, so it is not drawn (text note on the sheet).
+- R87 unit D (pins 4/5, no net in the IPC) is placed on sheet 9 with no-connect flags so the
+  footprint's pads exist; compare treats the no-net pins as info.
+- Two-pin parts get centred Reference/Value text from `sch_builder.place()` (KiCad mirrors
+  or swaps field justification for rotated symbols); `vert2`/`horiz2` in `_common.py` place a
+  two-pin part with a chosen pin at the top/left (rotation derived from the library pin
+  geometry) – check the IPC pin order (most capacitors have pin 1 on the ground side).
+  `terminal()` draws the Proteus PIN terminals, `adum_block()` the ADuM7701 blocks.
 
 ## Next
 
