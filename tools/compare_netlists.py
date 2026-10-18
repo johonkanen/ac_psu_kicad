@@ -10,7 +10,8 @@ the pin comparison, so the check is meaningful while sheets are still missing.
   tools/compare_netlists.py --netlist x.xml    # use an existing kicadxml netlist
   tools/compare_netlists.py --allow-missing    # missing parts do not fail the check
 
-Errors (non-zero exit): pins on the wrong net (merged or split nets), pins
+Errors (non-zero exit): pins on the wrong net (merged or split nets; a split is only a
+warning while the IPC net still has pins on parts that are not drawn yet), pins
 connected in KiCad that are N/C in Proteus (and vice versa), missing/extra pins,
 extra parts, and missing parts unless --allow-missing.
 Parts whose symbol is excluded from the board (TR1) are ignored.
@@ -168,9 +169,17 @@ def compare(comps, k_pin_net, ipc_pin_net, part_map, sheet=None, allow_missing=F
             continue
         ranked = sorted(groups.items(), key=lambda g: (-len(g[1]), natkey(g[0][0])))
         parts = [f"[{kn}: {fmt(gp)}]" for (kn, _), gp in ranked]
-        errors.append(f"IPC net {ig[0]} split over KiCad nets " + " ".join(parts))
-        for _, gp in ranked[1:]:
-            wrong |= gp
+        # A split may still be joined by a sheet that is not drawn yet (e.g. G2_SOURCE_LO
+        # meets PGND on sheet 1): a warning while the IPC net has pins on undrawn parts.
+        pending = sorted({sheet_of.get(rp[0], 0) for rp in ipc_pin_net
+                          if ipc_group(rp) == ig and rp[0] not in present})
+        if pending:
+            warnings.append(f"IPC net {ig[0]} split (pending sheets {' '.join(map(str, pending))}) "
+                            "over KiCad nets " + " ".join(parts))
+        else:
+            errors.append(f"IPC net {ig[0]} split over KiCad nets " + " ".join(parts))
+            for _, gp in ranked[1:]:
+                wrong |= gp
     # connected in Proteus, explicitly unconnected in KiCad
     for rp in sorted(common, key=pinkey):
         ig = ipc_group(rp)

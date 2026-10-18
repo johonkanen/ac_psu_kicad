@@ -83,6 +83,16 @@ class Sheet:
             if ref.startswith("#PWR") and ref[4:].isdigit():
                 self.pwr = max(self.pwr, int(ref[4:]))
 
+    def clear(self):
+        """Remove everything drawn so far (symbols, wires, labels, ...) and empty lib_symbols,
+        so a sheet script can be re-run from scratch. Header, uuid, paper and title block stay."""
+        drawn = {"symbol", "wire", "bus", "junction", "label", "global_label", "hierarchical_label",
+                 "no_connect", "text", "polyline", "rectangle", "bus_entry", "image", "text_box"}
+        self.tree[:] = [c for c in self.tree if not (isinstance(c, list) and c[0] in drawn)]
+        del self.cache[1:]
+        self.pwr = 0
+        return self
+
     def _add(self, node):
         i = next(k for k, c in enumerate(self.tree) if isinstance(c, list) and c[0] in ("sheet_instances", "embedded_fonts"))
         self.tree.insert(i, node)
@@ -93,7 +103,9 @@ class Sheet:
             s[1] = f"ac_psu:{name}"
             self.cache.append(s)
 
-    def place(self, name, ref, x, y, rot=0, unit=1, value=None, fields=None):
+    def place(self, name, ref, x, y, rot=0, unit=1, value=None, fields=None, value_at=None):
+        """value_at = (x, y, angle, justify) overrides the Value field placement (absolute
+        sheet coordinates; angle is relative to the symbol, as KiCad stores it)."""
         sym = lib()[name]
         self._cache(name)
         ob = find(sym, "on_board")
@@ -108,6 +120,10 @@ class Sheet:
             at = props[key][3] if key in props else [Sym("at"), 0, 0, 0]
             dx, dy = _rot(float(at[1]), float(at[2]), rot)
             hide = key not in ("Reference", "Value") or (is_power and key == "Reference")
+            if key == "Value" and value_at:
+                node.append([Sym("property"), key, val, [Sym("at"), value_at[0], value_at[1], value_at[2]],
+                             _eff(value_at[3], hide=hide)])
+                continue
             node.append([Sym("property"), key, val, [Sym("at"), _r(x + dx), _r(y - dy), 0], _eff(hide=hide)])
         for key, val in (fields or {}).items():
             node.append([Sym("property"), key, val, [Sym("at"), x, y, 0], _eff(hide=True)])
@@ -127,21 +143,23 @@ class Sheet:
         self._add(node)
         return Placed(ref, pins)
 
-    def power(self, net, x, y, rot=0):
+    def power(self, net, x, y, rot=0, value_at=None):
         self.pwr += 1
-        return self.place(net, f"#PWR{self.pwr:03d}", x, y, rot)
+        return self.place(net, f"#PWR{self.pwr:03d}", x, y, rot, value_at=value_at)
 
     def pwr_flag(self, x, y, rot=0):
         self.pwr += 1
         return self.place("PWR_FLAG", f"#FLG{self.pwr:03d}", x, y, rot)
 
     def label(self, name, x, y, rot=0):
-        self._add([Sym("label"), name, [Sym("at"), x, y, rot], _eff("left bottom"), [Sym("uuid"), U()]])
+        just = {0: "left bottom", 90: "left bottom", 180: "right bottom", 270: "right bottom"}[rot % 360]
+        self._add([Sym("label"), name, [Sym("at"), x, y, rot], _eff(just), [Sym("uuid"), U()]])
 
     def glabel(self, name, x, y, rot=0, shape="passive"):
+        just = {0: "left", 90: "left", 180: "right", 270: "right"}[rot % 360]
         self._add([Sym("global_label"), name, [Sym("shape"), Sym(shape)], [Sym("at"), x, y, rot],
-                   [Sym("fields_autoplaced"), Sym("yes")], _eff("left"), [Sym("uuid"), U()],
-                   [Sym("property"), "Intersheetrefs", "${INTERSHEET_REFS}", [Sym("at"), x, y, 0], _eff("left", hide=True)]])
+                   [Sym("fields_autoplaced"), Sym("yes")], _eff(just), [Sym("uuid"), U()],
+                   [Sym("property"), "Intersheetrefs", "${INTERSHEET_REFS}", [Sym("at"), x, y, 0], _eff(just, hide=True)]])
 
     def no_connect(self, x, y):
         self._add([Sym("no_connect"), [Sym("at"), x, y], [Sym("uuid"), U()]])
