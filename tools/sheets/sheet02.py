@@ -3,21 +3,34 @@
 from _common import *  # noqa: F401,F403
 
 
-def hb_connector(sh, ref, x, y, *, top, mid, p25, low, gate, p39, p43, p44, p45, p46, p47, p48):
+def hb_connector(sh, ref, x, y, *, top, mid, p25, low, gate, p39, p43, p44, p45, p46, p47, p48,
+                 top_power=None, low_power=None):
     """HB GT CONNECTOR. top: label of pins 15-20, mid: 21-26 (p25 separately: None = N/C
-    or a label), low: 29-34, gate: 35-40 (p39 separately). 45/46/48 are power nets."""
+    or a label), low: 29-34, gate: 35-40 (p39 separately). 45/46/48 are power nets.
+    top_power/low_power: the source group is a power net (PGND, ISOPGND, DAB_GROUND) in the
+    IPC; it gets power symbols and `top`/`low` is only shown as a note (Proteus label)."""
     j = sh.place("HB_GT_CONNECTOR", ref, x, y, value="HB GT CONNECTOR")
     P = j.pin
-    bus_group(sh, [P(15), P(17), P(19)], P(17), "left", label=top)
-    bus_group(sh, [P(16), P(18), P(20)], P(18), "right", label=top)
+    if top_power:
+        bus_group(sh, [P(15), P(17), P(19)], P(17), "left", power=top_power)
+        bus_group(sh, [P(16), P(18), P(20)], P(18), "right", power=top_power)
+        sh.text(f"({top})", P(16)[0] + g(10), P(19)[1] + 0.6)
+    else:
+        bus_group(sh, [P(15), P(17), P(19)], P(17), "left", label=top)
+        bus_group(sh, [P(16), P(18), P(20)], P(18), "right", label=top)
     bus_group(sh, [P(21), P(23)], P(23), "left", label=mid)
     bus_group(sh, [P(22), P(24), P(26)], P(24), "right", label=mid)
     if p25:
         glabel_left(sh, p25, P(25), 4)
     else:
         sh.no_connect(*P(25))
-    bus_group(sh, [P(29), P(31), P(33)], P(31), "left", label=low)
-    bus_group(sh, [P(30), P(32), P(34)], P(32), "right", label=low)
+    if low_power:
+        bus_group(sh, [P(29), P(31), P(33)], P(31), "left", power=low_power)
+        bus_group(sh, [P(30), P(32), P(34)], P(32), "right", power=low_power)
+        sh.text(f"({low})", P(30)[0] + g(10), P(33)[1] + 0.6)
+    else:
+        bus_group(sh, [P(29), P(31), P(33)], P(31), "left", label=low)
+        bus_group(sh, [P(30), P(32), P(34)], P(32), "right", label=low)
     bus_group(sh, [P(35), P(37)], P(37), "left", label=gate)
     bus_group(sh, [P(36), P(38), P(40)], P(38), "right", label=gate)
     if p39:
@@ -44,24 +57,30 @@ Y1, Y2 = g(42), g(96)
 # Row 1 (primary side, PDF top row): J1, J2, J3
 hb_connector(sh, "J1", X1, Y1, top="G2_SOURCE_LO", mid="G2_GATE_LO", p25=None,
              low="G4_SOURCE_LO", gate="G4_GATE_LO", p39=None,
-             p43="PWM_G4", p44="PWM_G2", p45="5V", p46="GND", p47="PWM_TRANS1", p48="20V")
+             p43="PWM_G4", p44="PWM_G2", p45="5V", p46="GND", p47="PWM_TRANS1", p48="20V",
+             top_power="PGND", low_power="PGND")
 hb_connector(sh, "J2", X2, Y1, top="G3_SOURCE_HI", mid="G3_GATE_HI", p25=None,
              low="G1_SOURCE_HI", gate="G1_GATE_HI", p39="SDM_RAW_VOLTAGE",
              p43="PWM_G1", p44="PWM_G3", p45="5V", p46="GND", p47="PWM_TRANS2", p48="20V")
 hb_connector(sh, "J3", X3, Y1, top="DAB_SOURCE_HI_PRI", mid="DAB_GATE_HI_PRI", p25=None,
              low="DAB_SOURCE_LO_PRI", gate="DAB_GATE_LO_PRI", p39=None,
-             p43="DAB_PWM_PRI_HI", p44="DAB_PWM_PRI_LO", p45="5V", p46="GND", p47="PWM_TRANS3", p48="20V")
+             p43="DAB_PWM_PRI_HI", p44="DAB_PWM_PRI_LO", p45="5V", p46="GND", p47="PWM_TRANS3", p48="20V",
+             low_power="PGND")
 # Row 2 (isolated side): J6, J8, J4
 hb_connector(sh, "J6", X1, Y2, top="Q8_S", mid="Q8_G", p25=None,
              low="Q6_S", gate="Q6_G", p39=None,
-             p43="PWM_Q6", p44="PWM_Q8", p45="5V_ISOL", p46="ISOGND", p47="PWM_TRANS5", p48="20V_ISO_SEC")
+             p43="PWM_Q6", p44="PWM_Q8", p45="5V_ISOL", p46="ISOGND", p47="PWM_TRANS5", p48="20V_ISO_SEC",
+             top_power="ISOPGND", low_power="ISOPGND")
 hb_connector(sh, "J8", X2, Y2, top="Q5_S", mid="Q5_G", p25=None,
              low="Q7_S", gate="Q7_G", p39="ISO_AFE_SDM_RAW_VOLTAGE",
              p43="PWM_Q7", p44="PWM_Q5", p45="5V_ISOL", p46="ISOGND", p47="PWM_TRANS6", p48="20V_ISO_SEC")
 hb_connector(sh, "J4", X3, Y2, top="DAB_SOURCE_LO_SEC", mid="DAB_GATE_LO_SEC", p25="ISO_DAB_SDM_RAW_VOLTAGE",
              low="DAB_SOURCE_HI_SEC", gate="DAB_GATE_HI_SEC", p39=None,
              p43="DAB_PWM_HI_SEC", p44="DAB_PWM_LO_SEC", p45="5V_ISOL", p46="ISOGND", p47="PWM_TRANS4",
-             p48="20V_ISO_SEC")
+             p48="20V_ISO_SEC", top_power="DAB_GROUND")
+
+sh.text("Source pins of the gate-driver connectors are power nets in the layout (PGND, ISOPGND, DAB_GROUND);", g(20), g(130))
+sh.text("the Proteus labels (G2_SOURCE_LO, Q8_S, DAB_SOURCE_LO_SEC, ...) are shown in brackets.", g(20), g(133))
 
 # J11 - 38 pin 50 mil header to the FPGA board (isolated side)
 j11 = sh.place("HEADER_38_50MIL", "J11", g(80), g(160), value="38 PIN HEADER 50TH")

@@ -132,17 +132,135 @@ def flagged_power(sh, net, x, y):
     return (x, y)
 
 
-def vert2(sh, sym, ref, x, y, value=None, top=1):
+def _two_pin_rot(sym, pin, want):
+    """Rotation that puts `pin` of two-pin symbol `sym` at `want` ('top' or 'left')."""
+    from sch_builder import lib, _rot
+    from sexpr import find, walk
+    for p in walk(lib()[sym], "pin"):
+        if find(p, "number")[1] == str(pin):
+            at = find(p, "at")
+            px, py = float(at[1]), float(at[2])
+            break
+    else:
+        raise KeyError(f"{sym} has no pin {pin}")
+    for rot in (0, 90, 180, 270):
+        dx, dy = _rot(px, py, rot)      # lib coords, y up
+        if want == "top" and abs(dx) < 1e-6 and dy > 0:
+            return rot
+        if want == "left" and abs(dy) < 1e-6 and dx < 0:
+            return rot
+    raise ValueError(f"{sym} pin {pin} cannot be placed at {want}")
+
+
+def vert2(sh, sym, ref, x, y, value=None, top=1, **kw):
     """Two-pin symbol (R, C, D, L ...) placed vertically with pin `top` at the top.
     Returns (placed, top_point, bottom_point)."""
-    p = sh.place(sym, ref, x, y, 0 if str(top) == "1" else 180, value=value)
+    p = sh.place(sym, ref, x, y, _two_pin_rot(sym, top, "top"), value=value, **kw)
     pins = sorted(p.pins.values(), key=lambda q: q[1])
     return p, pins[0], pins[-1]
 
 
-def horiz2(sh, sym, ref, x, y, value=None, left=1):
+def horiz2(sh, sym, ref, x, y, value=None, left=1, **kw):
     """Two-pin symbol placed horizontally with pin `left` on the left.
     Returns (placed, left_point, right_point)."""
-    p = sh.place(sym, ref, x, y, 90 if str(left) == "1" else 270, value=value)
+    p = sh.place(sym, ref, x, y, _two_pin_rot(sym, left, "left"), value=value, **kw)
     pins = sorted(p.pins.values(), key=lambda q: q[0])
     return p, pins[0], pins[-1]
+
+
+def adum_block(sh, UX, UY, ref, value, raw_label, r_raw, zener, caps_vdd, vinp, vinm, gnd1_label,
+               vdd2, gnd2, clk_label, r_mdat, mdat_label, decoupling, note=None):
+    """ADuM7701 sigma-delta modulator floating on a shunt, drawn like the Proteus sheets 8/10:
+    VDD1 rail fed through r_raw from raw_label and clamped by `zener` (None = no diode in the
+    IPC), caps_vdd = two (ref, val) on that rail, vinp/vinm = ((rref, rval), label, (cref, cval))
+    series resistor + cap for VIN+/VIN-, GND1 rail = gnd1_label (the VIN- resistor's far side).
+    Right side: vdd2/gnd2 power nets, clk_label on MCLKIN, r_mdat = (ref, val) into mdat_label,
+    decoupling = (ref, val) cap between vdd2 and gnd2."""
+    u = sh.place("ADUM7701-8BRIZ", ref, UX, UY, value=value)
+    VDD1, VINP, VINM, GND1 = u.pin(1), u.pin(2), u.pin(3), u.pin(4)
+    VDD2, MCLK, MDAT, GND2 = u.pin(8), u.pin(7), u.pin(6), u.pin(5)
+    T = UY - g(10)          # VDD1 rail (Proteus auto-net)
+    B = UY + g(16)          # GND1 rail
+    XL = UX - g(74)         # left end of the rails (cap bank)
+    sh.wire(VDD1, (UX - g(12), VDD1[1]), (UX - g(12), T), (XL, T))
+    sh.wire(GND1, (UX - g(11), GND1[1]), (UX - g(11), B), (XL, B))
+    # VIN+ : series R from its label, C to the GND1 rail
+    (rr, rv), lab, (cr, cv) = vinp
+    _, rl, rr_ = horiz2(sh, "R", rr, UX - g(36), VINP[1], rv, left=2, text="above")
+    sh.wire(VINP, rr_)
+    sh.junction(UX - g(30), VINP[1])
+    _, ct, cb = vert2(sh, "C", cr, UX - g(30), UY + g(10), cv, top=1, text="left")
+    sh.wire((UX - g(30), VINP[1]), ct)
+    sh.wire(cb, (cb[0], B))
+    sh.junction(cb[0], B)
+    glabel_left(sh, lab, rl, 2)
+    # VIN- : drops below the IC, series R from its label (= GND1 net), C to the rail
+    (rr, rv), lab, (cr, cv) = vinm
+    row = UY + g(6)
+    sh.wire(VINM, (UX - g(12), VINM[1]), (UX - g(12), row))
+    _, rl, rr_ = horiz2(sh, "R", rr, UX - g(24), row, rv, left=2, text="below")
+    sh.wire((UX - g(12), row), rr_)
+    sh.junction(UX - g(16), row)
+    _, ct, cb = vert2(sh, "C", cr, UX - g(16), UY + g(10), cv, top=1)
+    sh.wire((UX - g(16), row), ct)
+    sh.wire(cb, (cb[0], B))
+    sh.junction(cb[0], B)
+    sh.wire(rl, (rl[0], B))
+    sh.junction(rl[0], B)
+    # cap bank between the rails (+ zener, cathode to VDD1)
+    mid = (T + B) / 2
+    bank = [(UX - g(58), ("C", caps_vdd[0][0], caps_vdd[0][1], 1, None)),
+            (UX - g(66), ("C", caps_vdd[1][0], caps_vdd[1][1], 1, None))]
+    if zener:
+        bank.append((UX - g(74), ("D_Zener", zener[0], zener[1], "C", "left")))
+    for xcol, (sym, cref, cval, top, text) in bank:
+        _, pt, pb = vert2(sh, sym, cref, xcol, mid, cval, top=top, text=text)
+        sh.wire(pt, (xcol, T))
+        sh.wire(pb, (xcol, B))
+        if xcol != XL:
+            sh.junction(xcol, T)
+            sh.junction(xcol, B)
+    if not zener:
+        sh.text("(Proteus shows an unlabelled zener here; it has no refdes and is not in the layout)",
+                XL - g(2), mid + g(1))
+    # raw supply through r_raw into the VDD1 rail
+    _, rl, rr_ = horiz2(sh, "R", r_raw[0], UX - g(84), T, r_raw[1], left=2)
+    sh.wire((XL, T), rr_)
+    glabel_left(sh, raw_label, rl, 2)
+    sh.wire((XL, B), (XL - g(2), B))
+    sh.glabel(gnd1_label, XL - g(2), B, 180)
+    # both floating supply pins are fed from passives only -> power flags
+    sh.pwr_flag(UX - g(52), T, 0)
+    sh.junction(UX - g(52), T)
+    sh.pwr_flag(UX - g(52), B, 180)
+    sh.junction(UX - g(52), B)
+    # isolated / logic side
+    sh.wire(VDD2, right(VDD2, 4))
+    power_at(sh, vdd2, right(VDD2, 4), "up")
+    sh.wire(GND2, right(GND2, 4))
+    power_at(sh, gnd2, right(GND2, 4), "down")
+    glabel_right(sh, clk_label, MCLK, 4)
+    _, rl, rr_ = horiz2(sh, "R", r_mdat[0], UX + g(22), MDAT[1], r_mdat[1], left=1, text="below")
+    sh.wire(MDAT, rl)
+    glabel_right(sh, mdat_label, rr_, 2)
+    cx = UX + g(50)
+    _, ct, cb = vert2(sh, "C", decoupling[0], cx, UY, decoupling[1], top=2)
+    sh.wire(ct, up(ct, 2))
+    power_at(sh, vdd2, up(ct, 2), "up")
+    sh.wire(cb, down(cb, 2))
+    power_at(sh, gnd2, down(cb, 2), "down")
+    if note:
+        sh.text(note, UX - g(94), B + g(8))
+    return u
+
+
+def terminal(sh, ref, x, y, direction="up"):
+    """Proteus-style PIN terminal (ac_psu:PIN) with its connection point at (x, y) and the
+    circle pointing in `direction`. Texts are kept horizontal beside the circle."""
+    rot = {"up": 0, "left": 90, "down": 180, "right": 270}[direction]
+    kw = {}
+    if direction == "right":     # KiCad mirrors justification for rot 270: "right" draws left-justified
+        kw = dict(ref_at=(x + 5.08, y - 1.27, 90, "right"), value_at=(x + 5.08, y + 1.27, 90, "right"))
+    elif direction == "left":
+        kw = dict(ref_at=(x - 5.08, y - 1.27, 270, "left"), value_at=(x - 5.08, y + 1.27, 270, "left"))
+    return sh.place("PIN", ref, x, y, rot, value="PIN", **kw)

@@ -103,9 +103,11 @@ class Sheet:
             s[1] = f"ac_psu:{name}"
             self.cache.append(s)
 
-    def place(self, name, ref, x, y, rot=0, unit=1, value=None, fields=None, value_at=None):
+    def place(self, name, ref, x, y, rot=0, unit=1, value=None, fields=None, value_at=None, text=None, ref_at=None):
         """value_at = (x, y, angle, justify) overrides the Value field placement (absolute
-        sheet coordinates; angle is relative to the symbol, as KiCad stores it)."""
+        sheet coordinates; angle is relative to the symbol, as KiCad stores it).
+        text: for two-pin parts, where Reference+Value go: 'above'/'below' (horizontal part)
+        or 'left'/'right' (vertical part); default is beside / above-and-below."""
         sym = lib()[name]
         self._cache(name)
         ob = find(sym, "on_board")
@@ -114,32 +116,8 @@ class Sheet:
                 [Sym("on_board"), Sym("no" if ob and ob[1] == "no" else "yes")], [Sym("dnp"), Sym("no")],
                 [Sym("uuid"), U()]]
         is_power = find(sym, "power") is not None
-        props = {p[1]: p for p in find_all(sym, "property")}
-        two_pin = len(list(walk(sym, "pin"))) == 2 and not is_power
-        for key in ("Reference", "Value", "Footprint", "Datasheet", "Description"):
-            val = {"Reference": ref, "Value": value or props["Value"][2]}.get(key, props.get(key, [0, 0, ""])[2])
-            at = props[key][3] if key in props else [Sym("at"), 0, 0, 0]
-            dx, dy = _rot(float(at[1]), float(at[2]), rot)
-            hide = key not in ("Reference", "Value") or (is_power and key == "Reference")
-            if key == "Value" and value_at:
-                node.append([Sym("property"), key, val, [Sym("at"), value_at[0], value_at[1], value_at[2]],
-                             _eff(value_at[3], hide=hide)])
-                continue
-            if two_pin and key in ("Reference", "Value"):
-                # KiCad mirrors/swaps field justification for rotated symbols, so use centred
-                # text: beside a vertical part, above/below a horizontal one.
-                fa = {0: 0, 90: 270, 180: 0, 270: 90}[rot % 360]
-                sign = -1 if key == "Reference" else 1
-                if rot % 180 == 0:
-                    fx, fy = x + 2.54 + 0.55 * len(val), y + sign * 1.27
-                else:
-                    fx, fy = x, y + sign * 2.54
-                node.append([Sym("property"), key, val, [Sym("at"), _r(fx), _r(fy), fa], _eff(hide=hide)])
-                continue
-            node.append([Sym("property"), key, val, [Sym("at"), _r(x + dx), _r(y - dy), 0], _eff(hide=hide)])
-        for key, val in (fields or {}).items():
-            node.append([Sym("property"), key, val, [Sym("at"), x, y, 0], _eff(hide=True)])
         pins = {}
+        pin_nodes = []
         for sub in find_all(sym, "symbol"):
             u = int(sub[1].rsplit("_", 2)[1])
             if u not in (0, unit):
@@ -149,7 +127,51 @@ class Sheet:
                 at = find(p, "at")
                 dx, dy = _rot(float(at[1]), float(at[2]), rot)
                 pins[num] = (_r(x + dx), _r(y - dy))
-                node.append([Sym("pin"), num, [Sym("uuid"), U()]])
+                pin_nodes.append([Sym("pin"), num, [Sym("uuid"), U()]])
+        two_pin = len(pins) == 2 and not is_power
+        if two_pin:
+            (ax, ay), (bx, by) = pins.values()
+            vertical = abs(ax - bx) < 1e-6
+        props = {p[1]: p for p in find_all(sym, "property")}
+        for key in ("Reference", "Value", "Footprint", "Datasheet", "Description"):
+            val = {"Reference": ref, "Value": value or props["Value"][2]}.get(key, props.get(key, [0, 0, ""])[2])
+            at = props[key][3] if key in props else [Sym("at"), 0, 0, 0]
+            dx, dy = _rot(float(at[1]), float(at[2]), rot)
+            hide = key not in ("Reference", "Value") or (is_power and key == "Reference")
+            override = value_at if key == "Value" else ref_at if key == "Reference" else None
+            if override:
+                node.append([Sym("property"), key, val, [Sym("at"), override[0], override[1], override[2]],
+                             _eff(override[3], hide=hide)])
+                continue
+            if two_pin and key in ("Reference", "Value"):
+                # KiCad mirrors/swaps field justification for rotated symbols, so use centred
+                # text: beside a vertical part, above/below a horizontal one.
+                fa = {0: 0, 90: 270, 180: 0, 270: 90}[rot % 360]
+                sign = -1 if key == "Reference" else 1
+                if vertical:
+                    side = -1 if text == "left" else 1
+                    fx, fy = x + side * (2.54 + 0.55 * len(val)), y + sign * 1.27
+                elif text in ("above", "below"):
+                    base = -3.81 if text == "above" else 2.03
+                    fx, fy = x, y + base + (0 if key == "Reference" else 1.78)
+                else:
+                    fx, fy = x, y + sign * 2.54
+                node.append([Sym("property"), key, val, [Sym("at"), _r(fx), _r(fy), fa], _eff(hide=hide)])
+                continue
+            # multi-pin symbols: keep the library field placement (meant for rot 0; a symbol
+            # rotated 180 gets its left/right justification mirrored by KiCad, so swap it)
+            just = None
+            if key in props:
+                eff = find(props[key], "effects")
+                j = find(eff, "justify") if eff else None
+                if j:
+                    just = " ".join(str(a) for a in j[1:])
+                    if rot % 360 == 180:
+                        just = just.replace("left", "L").replace("right", "left").replace("L", "right")
+            node.append([Sym("property"), key, val, [Sym("at"), _r(x + dx), _r(y - dy), 0], _eff(just, hide=hide)])
+        for key, val in (fields or {}).items():
+            node.append([Sym("property"), key, val, [Sym("at"), x, y, 0], _eff(hide=True)])
+        node.extend(pin_nodes)
         node.append([Sym("instances"), [Sym("project"), self.project,
                                         [Sym("path"), self.inst_path, [Sym("reference"), ref], [Sym("unit"), unit]]]])
         self._add(node)
