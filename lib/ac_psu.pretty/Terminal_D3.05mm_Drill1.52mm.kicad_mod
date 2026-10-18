@@ -1,0 +1,74 @@
+(footprint "Terminal_D3.05mm_Drill1.52mm"
+	(version 20260206)
+	(generator "ac_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "Single PIN terminal (ac_psu, pads from IPC-D-356A PE8)")
+	(property "Reference" "REF**"
+		(at 0 -3.344 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Terminal_D3.05mm_Drill1.52mm"
+		(at 0 3.344 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -2.024 -2.024)
+		(end 2.024 2.024)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_rect
+		(start -2.144 -2.144)
+		(end 2.144 2.144)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+	)
+	(fp_rect
+		(start -2.524 -2.524)
+		(end 2.524 2.524)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 3.048 3.048)
+		(drill 1.524)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+)

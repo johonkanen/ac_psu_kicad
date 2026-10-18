@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-18 (Phase 1 done – schematic redrawn and verified against the IPC netlist)
+Updated: 2026-10-18 (Phase 2 done – footprints assigned and verified against the IPC pad geometry)
 
 ## Phase 0 – done
 
@@ -236,9 +236,135 @@ Visual check of every sheet: `reports/render/NN_*.png` (regenerate with
 scripts in `tools/sheets/` are the editable source of the sub-sheets (rerun a script, then
 `tools/check_all.sh`).
 
+## Phase 2 footprints – done (Opus 5.5, 2026-10-18)
+
+New / changed files:
+
+- `tools/fpgeom.py` – footprint pad loader (.kicad_mod → pads, Y up) and the rigid fit
+  (pads matched by number, least-squares rotation snapped to 45°, mirror for bottom side,
+  pads sharing a number paired by permutation) + pad-size comparison. Its docstring has the
+  **KiCad placement recipe** (see below).
+- `tools/gen_footprints.py` → `lib/footprint_map.csv` (refdes → footprint, generated) and
+  `lib/ac_psu.pretty/` (20 project footprints, generated). `--check` verifies both are up to
+  date (needs the AppImage mount for the KiCad base footprints). Assignment = `RULES` keyed by
+  symbol + IPC pad pattern (pad count, span, pad size, drill); project footprints = `PROJECT`
+  (derived from a KiCad footprint: renumber / drop pads / move pad centres onto the Proteus
+  positions, or built from the IPC pads).
+- `kicad/fp-lib-table` registers `ac_psu` → `${KIPRJMOD}/../lib/ac_psu.pretty` (KiCad std
+  libraries come from the global table).
+- `tools/sch_builder.py`: `place()` fills the Footprint field from `lib/footprint_map.csv`;
+  **UUIDs are now deterministic** (uuid5 per sheet file; symbol/pin UUIDs keyed by refdes, unit
+  and pin number, the rest by drawing order). Re-running a sheet script now reproduces the
+  file byte for byte, so the symbol UUIDs the PCB will link to stay stable. All 11 sheets were
+  regenerated (no layout change).
+- `tools/check_footprints.py` – reads the Footprint field of every symbol in `kicad/*.kicad_sch`,
+  checks it equals `lib/footprint_map.csv`, fits each footprint onto the IPC pads and fails on a
+  missing footprint, pad-number mismatch, or residual > 0.05 mm. `--pcbnew` (under `kipy`) also
+  places every footprint on a pcbnew BOARD with the KiCad recipe and re-measures the pads.
+  Writes `reports/footprint_fit.csv` (per part: side, angle, origin in IPC and KiCad
+  coordinates, worst residual, size/drill deltas – the input for Phase 3 placement) and
+  `reports/footprint_pads.csv` (per pad: residual, IPC vs footprint size and drill).
+  Negative-tested (plain SOT-23 for REF1 → 0.151 mm, plain SOT-23-5 for U2 → 0.068 mm,
+  empty field → error).
+- `tools/check_all.sh`: new steps "Footprint library and map up to date" and
+  "Footprints vs IPC pad geometry".
+
+KiCad placement recipe (verified with pcbnew 10.0.7 on all 267 parts, worst 0.038 mm):
+position = (x, −y) of the IPC origin; top part → `SetOrientationDegrees(angle)`; bottom part →
+`Flip(pos, FLIP_DIRECTION_LEFT_RIGHT)` then `SetOrientationDegrees((180 + angle) % 360)`.
+`reports/footprint_fit.csv` already has `kicad_x, kicad_y, kicad_orientation`. 190 parts top,
+77 bottom (all bottom parts are SMD). THT parts are taken as top side; every THT pattern fits
+unmirrored (the chiral ones – PWM1 DIP-8 – confirm top), so no THT part is on the bottom.
+
+### Footprint decisions
+
+| Parts | Footprint | Worst residual |
+|---|---|---|
+| R 0402 (33) | `Resistor_SMD:R_0402_1005Metric` | 0.010 |
+| R 0603 (4) + R25/R26/R29/R31/R44 (Proteus pads 1.73 mm apart) | `Resistor_SMD:R_0603_1608Metric` | 0.038 |
+| R59/R75/R94 0805 | `Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder` | 0.000 |
+| R23/R24/R45/R47/R49 1206 | `Resistor_SMD:R_1206_3216Metric` | 0.013 |
+| R 1206 with pads 3.15 mm apart (41) | `Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder` | 0.025 |
+| R10 TWW10J15RE | `Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm` | 0.000 |
+| C 0402 (28) / 0603 (15) | `Capacitor_SMD:C_0402_1005Metric` / `C_0603_1608Metric` | 0.030 / 0.025 |
+| C 1206 (9, incl. C67) | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 0.013 |
+| C 2220 2.2u (8) | `Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder` | 0.038 |
+| C 2n2 THT P7.5 (14) | `Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm` (Proteus silk ~13 × 6 mm) | 0.000 |
+| C21/C24/C25/C33/C34 7u P27.5 | `Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4` | 0.000 |
+| SNAP_IN_35MM (6) | `Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn` | 0.000 |
+| C15/C28 EEEFTE221XAP | `ac_psu:CP_Elec_6.3x7.7_EEEFTE221XAP` (KiCad graphics, Proteus pads) | 0.000 |
+| D1/D2/D6 SMA | `ac_psu:D_SMA_AC` (KiCad D_SMA, pads C/A, Proteus centres) | 0.000 |
+| D3–D5/D7/D10, D8/D9 SOD-323 | `ac_psu:D_SOD-323_AC` (KiCad HandSoldering, pads C/A, Proteus centres) | 0.001 |
+| L1 | `Inductor_SMD:L_0805_2012Metric` | 0.025 |
+| Q13/Q14 2N7000, REF1/REF2 | `ac_psu:SOT-23_Proteus` (KiCad SOT-23 renumbered 3→1, 1→2, 2→3) | 0.020 |
+| U2/U12/U14 TLV316, U3/U10 TPS73033 | `ac_psu:SOT-23-5_TLV316` / `SOT-23-5_TPS73033` (Proteus rows 2.39 / 2.50 mm) | 0.001 |
+| U1/U7 OPA2353UA | `Package_SO:TSSOP-8_3x3mm_P0.65mm` (the pads are MSOP/TSSOP-8, not SO-8) | 0.000 |
+| U11 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 0.013 |
+| U13/U15/U16/U17 | `Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm` (U16 at 225°) | 0.030 |
+| U4/U5/U6 ADuM7701 | `ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701` (rows 9.70 mm) | 0.001 |
+| AD1 ADS7056 | `ac_psu:X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056` (Proteus pads and sizes) | 0.000 |
+| R87 | `ac_psu:R_Array_Convex_4x0402_Proteus` (pads 4/5 kept, no net) | 0.000 |
+| PWM1 IW1830 | `Package_DIP:DIP-8-N6_W7.62mm` | 0.000 |
+| Q1–Q12 | `Package_TO_SOT_THT:TO-247-3_Vertical` (1=G 2=D 3=S) | 0.011 |
+| J1–J4, J6, J8 | `ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48` (pads 1–14, 27, 28, 41, 42 removed) | 0.000 |
+| J11 / J12 | `Connector_PinHeader_1.27mm:PinHeader_2x19_P1.27mm_Vertical` / `ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48` | 0.000 |
+| U8/U9 VXO7805 | `Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT` | 0.000 |
+| TR2, CM1–CM3, R48/R64/R91, R20/R79 | `ac_psu:Transformer_EF20_2x5_P3.81mm`, `L_CommonMode_WE-CMBNC`, `R_Shunt_FKK5R0020FE`, `Relay_SLA-12VDC-SL-A` (built from the IPC pads; simple rectangle outlines) | 0.000 |
+| PIN terminals | `ac_psu:Terminal_D4.0mm_Drill{2.0,2.55,3.0}mm`, `Terminal_D3.05mm_Drill1.52mm`; ACIN1/2, ACOUT1/2 `Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm` (two pads "1") | 0.000 |
+| TR1 | none (excluded from board) | – |
+
+41 distinct footprints (21 KiCad library, 20 project). Footprints built purely from the IPC
+pads have generic rectangle body/courtyard outlines (TR2 22 × 14 mm from the Proteus silk;
+others pad box + 0.5 mm) – refine in Phase 3 if courtyard DRC needs it.
+
+### Residual report
+
+`tools/check_footprints.py`: 267/267 parts, 898 pads (894 pins + the 4 duplicate "1" holes
+of ACIN/ACOUT), worst residual **0.038 mm** (R 0603 group with Proteus pads 1.73 mm apart,
+C 2220). Per footprint: `tools/check_footprints.py -v`; per pad: `reports/footprint_pads.csv`.
+
+Pad sizes: KiCad sizes accepted (PLAN.md 4.3). Largest differences: TO-247 (KiCad 2.5 × 4.5
+oval vs Proteus 3.05 round), snap-in caps (4.0 vs 5.08), C_Rect P27.5 / R10 / C_Disc
+(2.0–2.4 vs 1.52–2.29). **Drills where KiCad is smaller than Proteus**: TO-247 1.5 vs 1.651,
+VXO7805 1.0 vs 1.2, C21/C25/C33/C34 1.2 vs 1.27, snap-in 2.0 vs 2.032 – the user may want the
+Proteus drills (then derive a project footprint with `ipc_sizes=True` in `gen_footprints.py`).
+
+### Polarity / pinout findings (for the user)
+
+- **REF1/REF2 (REF3025) – board is wired correctly.** In the IPC the pad Proteus calls 1 (GND)
+  sits alone on one side of the SOT-23 and pads 2 (VIN) and 3 (VOUT) on the other. A top-side
+  (unmirrored) fit of KiCad's JEDEC SOT-23 matches only with Proteus 1 = JEDEC pin 3,
+  Proteus 2 = pin 1, Proteus 3 = pin 2 (0.020 mm; the plain numbering gives 0.151 mm). TI's
+  REF3025 pinout is 1 = IN, 2 = OUT, 3 = GND, so physically IN = VCC, OUT = VOUT net,
+  GND = GND. Proteus simply numbers the SOT-23 pads differently. Same for Q13/Q14 (2N7000 in
+  SOT-23, Proteus 1 = D, 2 = G, 3 = S): JEDEC pin 3 = D, 1 = G, 2 = S – also correct.
+- **C67 (100 µF, 5 V)** sits on a plain 1206 land pattern identical to C57/C58 (22 µF ceramics);
+  the Proteus top silk and assembly layers show a plain 1206 box with no polarity mark (C28/C15,
+  the SMD electrolytics, have a bar at their negative pad 2). So the Proteus footprint is
+  non-polar and "pin 1 on GND" is only pad numbering: fine for a 100 µF ceramic, but if a
+  polarized part (tantalum/polymer) is fitted, the board does not show its polarity. KiCad
+  footprint: the same non-polar 1206 as C57/C58. Note: sheet 7 draws C67 with `C_Polarized`
+  (pin 1 at GND) while `lib/part_map.csv` says `ac_psu:C` – left as drawn; switch the symbol to
+  `C` in `tools/sheets/sheet07.py` if the part is ceramic.
+
+### Last verification (`tools/check_all.sh`, Phase 2 done)
+
+```
+pcbnew 10.0.7
+ipc356: nets=208, refdes_raw=265, tht_records=562, smd_records=513, nc_pads=34, vias=173, holes=4, parts=267
+gen_symbols: lib/ac_psu.kicad_sym up to date (47 symbols)
+symbols: OK
+erc: 0 errors, 8 warnings (reports/erc.rpt)
+compare: parts 267/267 present, 0 missing, 0 extra; pins compared 894, wrong-net pins 0; IPC nets touched 244, complete 244
+gen_footprints: 267 parts, 41 footprints (20 project), up to date
+check_footprints: pcbnew placement of 267 parts, worst pad offset 0.038 mm
+check_footprints: 267/267 parts fitted, 898 pads, 41 footprints, worst residual 0.038 mm (limit 0.05)
+ALL CHECKS PASSED
+```
+
 ## Next
 
-Phase 2 – footprints and geometric check (Opus 5.5), PLAN.md section 4. Then Phase 3.
+Phase 3 – PCB build, gerber → tracks/vias, net assignment, zones (Opus 5.5), PLAN.md section 5.
 
 ## Next prompt
 

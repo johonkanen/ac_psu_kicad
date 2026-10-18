@@ -11,6 +11,8 @@ step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" python3 tools/check_symbols.py
 step "ERC" tools/erc.sh
 step "Netlist comparison vs IPC" python3 tools/compare_netlists.py
+step "Footprint library and map up to date" python3 tools/gen_footprints.py --check
+step "Footprints vs IPC pad geometry" tools/bin/kipy tools/check_footprints.py --pcbnew
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

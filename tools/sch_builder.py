@@ -11,7 +11,11 @@
     sh.wire(u3.pin("5"), c69.pin("2"))      # straight or L-shaped wire
     sh.save()
 
-Symbols come from lib/ac_psu.kicad_sym (copied into the sheet's lib_symbols).
+Symbols come from lib/ac_psu.kicad_sym (copied into the sheet's lib_symbols); the Footprint
+field comes from lib/footprint_map.csv (tools/gen_footprints.py).
+UUIDs are deterministic (uuid5 per sheet file: symbols/pins keyed by refdes, unit and pin,
+everything else by drawing order), so re-running a sheet script keeps the symbol UUIDs the
+PCB links to.
 Coordinates are schematic mm (Y down); keep them on the 1.27 mm grid.
 rot = 0/90/180/270 (counter-clockwise, as in eeschema). Pin positions returned
 by .pin() are the connection points.
@@ -26,6 +30,9 @@ from sexpr import Sym, find, find_all, load, save, walk  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _LIB = None
+_FOOTPRINTS = None
+_UUID_NS = None
+_UUID_N = 0
 
 
 def lib():
@@ -35,8 +42,34 @@ def lib():
     return _LIB
 
 
-def U():
-    return str(uuid.uuid4())
+def footprint(ref):
+    """Footprint of a refdes from lib/footprint_map.csv ('' if none)."""
+    global _FOOTPRINTS
+    if _FOOTPRINTS is None:
+        import csv
+        path = os.path.join(ROOT, "lib", "footprint_map.csv")
+        _FOOTPRINTS = {}
+        if os.path.exists(path):
+            with open(path) as f:
+                _FOOTPRINTS = {r["refdes"]: r["footprint"]
+                               for r in csv.DictReader(l for l in f if not l.startswith("# "))}
+    return _FOOTPRINTS.get(ref, "")
+
+
+def _uuid_seed(fname):
+    global _UUID_NS, _UUID_N
+    _UUID_NS = uuid.uuid5(uuid.NAMESPACE_URL, "ac_psu/" + fname)
+    _UUID_N = 0
+
+
+def U(key=None):
+    global _UUID_N
+    if _UUID_NS is None:
+        return str(uuid.uuid4())
+    if key is None:
+        _UUID_N += 1
+        key = f"#{_UUID_N}"
+    return str(uuid.uuid5(_UUID_NS, key))
 
 
 def _eff(justify=None, hide=False):
@@ -76,6 +109,7 @@ class Sheet:
         if not sheet:
             raise ValueError(f"{fname} is not a sheet of {project}.kicad_sch")
         self.inst_path = f"/{find(root, 'uuid')[1]}/{find(sheet[0], 'uuid')[1]}"
+        _uuid_seed(fname)
         self.cache = find(self.tree, "lib_symbols")
         self.pwr = 0
         for s in find_all(self.tree, "symbol"):
@@ -91,6 +125,7 @@ class Sheet:
         self.tree[:] = [c for c in self.tree if not (isinstance(c, list) and c[0] in drawn)]
         del self.cache[1:]
         self.pwr = 0
+        _uuid_seed(os.path.basename(self.path))
         return self
 
     def _add(self, node):
@@ -114,7 +149,7 @@ class Sheet:
         node = [Sym("symbol"), [Sym("lib_id"), f"ac_psu:{name}"], [Sym("at"), x, y, rot], [Sym("unit"), unit],
                 [Sym("exclude_from_sim"), Sym("no")], [Sym("in_bom"), Sym("yes")],
                 [Sym("on_board"), Sym("no" if ob and ob[1] == "no" else "yes")], [Sym("dnp"), Sym("no")],
-                [Sym("uuid"), U()]]
+                [Sym("uuid"), U(f"sym:{ref}:{unit}")]]
         is_power = find(sym, "power") is not None
         pins = {}
         pin_nodes = []
@@ -127,7 +162,7 @@ class Sheet:
                 at = find(p, "at")
                 dx, dy = _rot(float(at[1]), float(at[2]), rot)
                 pins[num] = (_r(x + dx), _r(y - dy))
-                pin_nodes.append([Sym("pin"), num, [Sym("uuid"), U()]])
+                pin_nodes.append([Sym("pin"), num, [Sym("uuid"), U(f"pin:{ref}:{unit}:{num}")]])
         two_pin = len(pins) == 2 and not is_power
         if two_pin:
             (ax, ay), (bx, by) = pins.values()
@@ -135,6 +170,8 @@ class Sheet:
         props = {p[1]: p for p in find_all(sym, "property")}
         for key in ("Reference", "Value", "Footprint", "Datasheet", "Description"):
             val = {"Reference": ref, "Value": value or props["Value"][2]}.get(key, props.get(key, [0, 0, ""])[2])
+            if key == "Footprint":
+                val = footprint(ref) or val
             at = props[key][3] if key in props else [Sym("at"), 0, 0, 0]
             dx, dy = _rot(float(at[1]), float(at[2]), rot)
             hide = key not in ("Reference", "Value") or (is_power and key == "Reference")
