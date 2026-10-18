@@ -10,8 +10,7 @@ step "IPC-D-356A parser self-check" python3 tools/ipc356.py --check
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
 step "Symbol pin sets vs IPC" python3 tools/check_symbols.py
 step "ERC" tools/erc.sh
-# --allow-missing while Phase 1 sheets are still being drawn; drop it when all 11 sheets are done.
-step "Netlist comparison vs IPC" python3 tools/compare_netlists.py --allow-missing
+step "Netlist comparison vs IPC" python3 tools/compare_netlists.py
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

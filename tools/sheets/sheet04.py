@@ -12,11 +12,11 @@ def dc_link(y0, caps, yc, pos_net, neg_net, pe_label=None, pe_terminal=None):
     """Three snap-in capacitors (pin 1 = positive rail) and the two Y caps `yc` (upper: pin 2 =
     positive rail, pin 1 = PE node; lower: pin 2 = PE node, pin 1 = negative rail)."""
     T, B, M = y0, y0 + g(24), y0 + g(12)
-    xs = [g(20), g(32), g(44)]
+    xs = [g(20), g(36), g(52)]
     for x, ref in zip(xs, caps):
         _, t, b = vert2(sh, "C_Polarized", ref, x, M, "SNAP_IN_35MM", top=1)
         sh.wire(t, (x, T)); sh.wire(b, (x, B))
-    xy = g(56)
+    xy = g(64)
     _, t, b = vert2(sh, "C", yc[0], xy, y0 + g(6), "2n2", top=2)
     sh.wire(t, (xy, T)); sh.wire(b, (xy, M))
     _, t, b = vert2(sh, "C", yc[1], xy, y0 + g(18), "2n2", top=2)
@@ -24,8 +24,8 @@ def dc_link(y0, caps, yc, pos_net, neg_net, pe_label=None, pe_terminal=None):
     sh.wire((xs[0], T), (xy, T)); sh.wire((xs[0], B), (xy, B))
     for x in xs[1:]:
         sh.junction(x, T); sh.junction(x, B)
-    power_at(sh, pos_net, (g(38), T), "up"); sh.junction(g(38), T)
-    power_at(sh, neg_net, (g(38), B), "down"); sh.junction(g(38), B)
+    power_at(sh, pos_net, (g(44), T), "up"); sh.junction(g(44), T)
+    power_at(sh, neg_net, (g(44), B), "down"); sh.junction(g(44), B)
     sh.wire((xy, M), (xy + g(6), M))
     if pe_terminal:
         terminal(sh, pe_terminal, xy + g(6), M, "right")
@@ -51,14 +51,14 @@ r = diff_amp(sh, g(150), g(24), 1, ["R41", "R27", "R35"], ["R42", "R28", "R36"],
 u = r["u"]
 sh.wire(u.pin(5), up(u.pin(5), 2)); power_at(sh, "VCC", up(u.pin(5), 2), "up")
 sh.wire(u.pin(2), down(u.pin(2), 2)); power_at(sh, "GND", down(u.pin(2), 2), "down")
-sh.text("U14: (DC+ - PGND) / 3 x 91K, output -> ADA1 (sheet 9). DC- in the PDF = GND.", g(144), g(24) + g(50))
+sh.text("U14: (DC+ - PGND) / 3 x 91K, output -> ADA1 (sheet 9). DC- in the PDF = GND.", g(144), g(24) + g(56))
 r = diff_amp(sh, g(150), g(84), 1, ["R81", "R80", "R82"], ["R83", "R84", "R85"], ("R1", "10k"), None,
              ("R76", "10k"), ("R77", "8.2k"), "ISOADA3", opamp=("TLV316IDBVR", "U2"), pins=(3, 4, 1),
              ref_power="ISOGND", out_cap=("C2", "1n", "ISOGND"), top_power=("ISODC+", "ISOPGND"))
 u = r["u"]
 sh.wire(u.pin(5), up(u.pin(5), 2)); power_at(sh, "3V3_ISO", up(u.pin(5), 2), "up")
 sh.wire(u.pin(2), down(u.pin(2), 2)); power_at(sh, "ISOGND", down(u.pin(2), 2), "down")
-sh.text("U2: (ISODC+ - ISOPGND) / 3 x 91K, output -> ISOADA3 (J11).", g(144), g(84) + g(50))
+sh.text("U2: (ISODC+ - ISOPGND) / 3 x 91K, output -> ISOADA3 (J11).", g(144), g(84) + g(56))
 
 # decoupling
 for x, ref, vdd, gnd in ((g(210), "C27", "VCC", "GND"), (g(210), "C87", "3V3_ISO", "ISOGND")):
