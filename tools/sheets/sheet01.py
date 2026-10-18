@@ -107,8 +107,8 @@ sh.label("JEE", cm2r + g(1), TOP, 0)
 E = cm2r + g(20)
 rows(cm2r, E)
 # inrush resistor R10 up to the mains input, relay R20 in parallel
-RT = TOP - g(16)
-_, r10t, r10b = vert2(sh, "R", "R10", E, TOP - g(8), "TWW10J15RE", top=1)
+RT = TOP - g(24)
+_, r10t, r10b = vert2(sh, "R", "R10", E, TOP - g(12), "TWW10J15RE", top=1)
 sh.wire(r10b, (E, TOP)); sh.wire(r10t, (E, RT))
 sh.junction(E, RT)
 rl = sh.place("SLA-12VDC-SL-A", "R20", E - g(22), RT + 2.54, value="SLA-12VDC-SL-A")
@@ -125,48 +125,14 @@ terminal(sh, "ACIN1", E + g(8), RT, "right")
 sh.wire((E, BOT), (E + g(8), BOT)); sh.glabel("AC_IN2", E + g(4), BOT, 270)
 terminal(sh, "ACIN2", E + g(8), BOT, "right")
 sh.text("EMI filter between the mains (ACIN1/ACIN2) and FILTER_IN/FILTER_OUT; R10 limits inrush until R20 closes.",
-        X0, TOP - g(20))
+        X0, TOP - g(30))
 
 
 # ---- difference amplifiers -----------------------------------------------------------------
-def diff_amp(xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_label, first=g(12), top_plus=None):
-    """Three 91K resistors per input from `top` down to the op-amp (plus chain in the inner
-    column xa, minus chain in the outer column xb), r_ref from the + node up to ref_label,
-    r_fb feedback, r_out to out_label. Returns the chain top points (plus, minus)."""
-    xa = xb + g(6)
-    rows_ = [top + first + g(8 * i) for i in range(3)]
-    for col, chain, text, t0 in ((xa, plus, "left", top_plus if top_plus is not None else top), (xb, minus, None, top)):
-        prev = (col, t0)
-        for ref, row in zip(chain, rows_):
-            _, t, b = vert2(sh, "R", ref, col, row, "91K", top=2, text=text)
-            sh.wire(prev, t)
-            prev = b
-    yu = rows_[2] + g(8)
-    xu = xa + g(12)
-    u = sh.place("OPA2353UA", "U1", xu, yu, unit=unit, value="OPA2353UA")
-    pinp, pinm, out = (u.pin(5), u.pin(6), u.pin(7)) if unit == 2 else (u.pin(3), u.pin(2), u.pin(1))
-    sh.wire((xa, rows_[2] + 3.81), (xa, pinp[1]), pinp)
-    sh.wire((xb, rows_[2] + 3.81), (xb, pinm[1]), pinm)
-    xr = xa + g(4)
-    _, rt, rb = vert2(sh, "R", r_ref[0], xr, pinp[1] - g(6), r_ref[1], top=1)
-    sh.wire(rb, (xr, pinp[1])); sh.junction(xr, pinp[1])
-    sh.wire(rt, up(rt, 2)); sh.glabel(ref_label, *up(rt, 2), 90)
-    n = right(out, 2)
-    sh.wire(out, n); sh.junction(*n)
-    _, ol, or_ = horiz2(sh, "R", r_out[0], xu + g(14), yu, r_out[1], left=2)
-    sh.wire(n, ol); glabel_right(sh, out_label, or_, 2)
-    fb = yu + g(6)
-    _, fl, fr = horiz2(sh, "R", r_fb[0], xu, fb, r_fb[1], left=2, text="below")
-    sh.wire(n, (n[0], fb), fr)
-    sh.wire(fl, (pinm[0], fb), pinm)
-    sh.junction(*pinm)
-    return (xa, top_plus if top_plus is not None else top), (xb, top)
-
-
-diff_amp(XB, BOT, 2, ["R4", "R5", "R6"], ["R11", "R2", "R3"], ("R7", "1k"), "REF_1V65",
+diff_amp(sh, XB, BOT, 2, ["R4", "R5", "R6"], ["R11", "R2", "R3"], ("R7", "1k"), "REF_1V65",
          ("R8", "10k"), ("R9", "100"), "ADA3", top_plus=TOP)
 sh.text("U1:B measures the filter voltage (LEMOUT - FILTER_INPUT) around REF_1V65 -> ADA3.", XB - g(6), BOT + g(50))
-pa, pm = diff_amp(g(236), g(84), 1, ["R95", "R12", "R13"], ["R14", "R15", "R16"], ("R21", "10k"), "REF_1V65",
+pa, pm = diff_amp(sh, g(236), g(84), 1, ["R95", "R12", "R13"], ["R14", "R15", "R16"], ("R21", "10k"), "REF_1V65",
                   ("R17", "10k"), ("R18", "100"), "ADA2")
 sh.glabel("AC_IN2", *pa, 90); sh.glabel("AC_IN_1", *pm, 90)
 sh.text("U1:A measures the mains voltage (AC_IN2 - AC_IN_1) around REF_1V65 -> ADA2.", g(230), g(84) + g(50))
@@ -176,7 +142,7 @@ PX, PY = g(30), g(120)
 u1c = sh.place("OPA2353UA", "U1", PX, PY, unit=3, value="OPA2353UA")
 sh.wire(u1c.pin(8), up(u1c.pin(8), 2)); power_at(sh, "VCC", up(u1c.pin(8), 2), "up")
 sh.wire(u1c.pin(4), down(u1c.pin(4), 2)); power_at(sh, "GND", down(u1c.pin(4), 2), "down")
-_, ct, cb = vert2(sh, "C", "C26", PX + g(8), PY, "100n", top=2)
+_, ct, cb = vert2(sh, "C", "C26", PX + g(14), PY, "100n", top=2)
 sh.wire(ct, up(ct, 2)); power_at(sh, "VCC", up(ct, 2), "up")
 sh.wire(cb, down(cb, 2)); power_at(sh, "GND", down(cb, 2), "down")
 sh.text("3V3 / DC- in the Proteus schematic = VCC / GND", PX - g(6), PY + g(12))

@@ -153,7 +153,7 @@ pins on undrawn parts ("pending sheets ..."); it becomes an error once all its p
 | 9 primary side ADC | 10/10 | done 2026-10-18; compare 0 errors, ERC 0 errors (R87:D placed with N/C flags) |
 | 8 SDM current measurements | 22/22 | done 2026-10-18; compare 0 errors, ERC 0 errors |
 | 1 afe | 48/48 | done 2026-10-18; compare 0 errors, ERC 0 errors |
-| 5 VSI | 0/43 | |
+| 5 VSI | 43/43 | done 2026-10-18; compare 0 errors, ERC 0 errors |
 | 6 Dual Active Bridge | 0/16 | |
 | 4 DC links | 0/37 | |
 | 7 Auxiliary supply | 0/31 | |

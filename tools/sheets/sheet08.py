@@ -26,12 +26,12 @@ r64 = sh.place("FKK5R0020FE-TR", "R64", SX, SY, value="FKK5R0020FE-TR",
 p1, p2, p3, p4 = r64.pin(1), r64.pin(2), r64.pin(3), r64.pin(4)
 sh.wire(p1, up(p1, 2)); sh.glabel("DAB_SHUNT2", *up(p1, 2), 90)
 sh.wire(p2, down(p2, 2)); sh.glabel("DAB_SHUNT1", *down(p2, 2), 270)
-sh.wire(p3, right(p3, 14)); power_at(sh, "ISOPGND", right(p3, 14), "up")
-sh.wire(p4, right(p4, 14)); power_at(sh, "DAB_GROUND", right(p4, 14), "down")
+sh.wire(p3, right(p3, 16)); power_at(sh, "ISOPGND", right(p3, 16), "up")
+sh.wire(p4, right(p4, 16)); power_at(sh, "DAB_GROUND", right(p4, 16), "down")
 # ISOPGND and DAB_GROUND are only joined through this shunt: flag both here
 sh.pwr_flag(*right(p3, 6), rot=0); sh.junction(*right(p3, 6))
 sh.pwr_flag(*right(p4, 6), rot=180); sh.junction(*right(p4, 6))
 sh.text("R64: 2 mOhm Kelvin shunt between ISOPGND and the DAB secondary ground DAB_GROUND (J4 15-20).",
-        SX - g(20), SY + g(12))
+        SX + g(6), SY + g(10))
 sh.save()
 print("sheet08: written")
