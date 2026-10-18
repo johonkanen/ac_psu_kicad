@@ -93,10 +93,10 @@ bus_group(sh, [P(43), P(45), P(47)], P(45), "left", power="ISOGND")
 bus_group(sh, [P(44), P(46), P(48)], P(46), "right", power="5V_ISOL")
 
 # Power flags: these supplies enter the board through J1-J4/J6/J8 (20V, 5V, GND) and J12
-# (5V_ISOL, ISOGND). 20V/20V_ISO_SEC/5V/5V_ISOL are also generated on sheets 3 and 7; the
+# (ISOGND). 5V and 5V_ISOL are driven by U9/U8 on sheet 3; 20V, 20V_ISO_SEC, GND, ISOGND are generated on sheet 7, so their
 # flags live here until those sheets are drawn, then move there (one flag per net).
 sh.text("PWR_FLAGs for the supplies entering through the connectors (temporary, see STATUS.md)", g(150), g(172))
-for i, net in enumerate(["5V", "GND", "20V", "5V_ISOL", "ISOGND", "20V_ISO_SEC"]):
+for i, net in enumerate(["GND", "20V", "ISOGND", "20V_ISO_SEC"]):
     flagged_power(sh, net, g(152 + 12 * i), g(182))
 
 sh.save()

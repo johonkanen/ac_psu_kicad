@@ -130,3 +130,19 @@ def flagged_power(sh, net, x, y):
         sh.wire((x, y), q)
         sh.pwr_flag(q[0], q[1], 0)
     return (x, y)
+
+
+def vert2(sh, sym, ref, x, y, value=None, top=1):
+    """Two-pin symbol (R, C, D, L ...) placed vertically with pin `top` at the top.
+    Returns (placed, top_point, bottom_point)."""
+    p = sh.place(sym, ref, x, y, 0 if str(top) == "1" else 180, value=value)
+    pins = sorted(p.pins.values(), key=lambda q: q[1])
+    return p, pins[0], pins[-1]
+
+
+def horiz2(sh, sym, ref, x, y, value=None, left=1):
+    """Two-pin symbol placed horizontally with pin `left` on the left.
+    Returns (placed, left_point, right_point)."""
+    p = sh.place(sym, ref, x, y, 90 if str(left) == "1" else 270, value=value)
+    pins = sorted(p.pins.values(), key=lambda q: q[0])
+    return p, pins[0], pins[-1]

@@ -22,7 +22,7 @@ import sys
 import uuid
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sexpr import Sym, find, find_all, load, save  # noqa: E402
+from sexpr import Sym, find, find_all, load, save, walk  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _LIB = None
@@ -115,6 +115,7 @@ class Sheet:
                 [Sym("uuid"), U()]]
         is_power = find(sym, "power") is not None
         props = {p[1]: p for p in find_all(sym, "property")}
+        two_pin = len(list(walk(sym, "pin"))) == 2 and not is_power
         for key in ("Reference", "Value", "Footprint", "Datasheet", "Description"):
             val = {"Reference": ref, "Value": value or props["Value"][2]}.get(key, props.get(key, [0, 0, ""])[2])
             at = props[key][3] if key in props else [Sym("at"), 0, 0, 0]
@@ -123,6 +124,17 @@ class Sheet:
             if key == "Value" and value_at:
                 node.append([Sym("property"), key, val, [Sym("at"), value_at[0], value_at[1], value_at[2]],
                              _eff(value_at[3], hide=hide)])
+                continue
+            if two_pin and key in ("Reference", "Value"):
+                # KiCad mirrors/swaps field justification for rotated symbols, so use centred
+                # text: beside a vertical part, above/below a horizontal one.
+                fa = {0: 0, 90: 270, 180: 0, 270: 90}[rot % 360]
+                sign = -1 if key == "Reference" else 1
+                if rot % 180 == 0:
+                    fx, fy = x + 2.54 + 0.55 * len(val), y + sign * 1.27
+                else:
+                    fx, fy = x, y + sign * 2.54
+                node.append([Sym("property"), key, val, [Sym("at"), _r(fx), _r(fy), fa], _eff(hide=hide)])
                 continue
             node.append([Sym("property"), key, val, [Sym("at"), _r(x + dx), _r(y - dy), 0], _eff(hide=hide)])
         for key, val in (fields or {}).items():

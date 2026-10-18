@@ -147,7 +147,7 @@ pins on undrawn parts ("pending sheets ..."); it becomes an error once all its p
 | Sheet | Parts | Status |
 |---|---|---|
 | 2 fpga connector | 8/8 | done 2026-10-18; compare 0 errors (2 pending splits PGND/ISOPGND), ERC 0 errors / 38 isolated-label warnings |
-| 3 regulators | 0/18 | |
+| 3 regulators | 18/18 | done 2026-10-18; compare 0 errors, ERC 0 errors |
 | 11 signal isolators | 0/11 | |
 | 10 INU SDM and relay drive | 0/23 | |
 | 9 primary side ADC | 0/10 | |
@@ -160,9 +160,13 @@ pins on undrawn parts ("pending sheets ..."); it becomes an error once all its p
 
 Notes:
 
-- PWR_FLAGs for 5V, GND, 20V, 5V_ISOL, ISOGND, 20V_ISO_SEC are temporarily on sheet 2
-  (they enter through the connectors). Move each to its generating sheet (3, 7) when that
-  sheet is drawn – one flag per net.
+- PWR_FLAGs for GND, 20V, ISOGND, 20V_ISO_SEC are temporarily on sheet 2 (they enter
+  through the connectors). Move them to sheet 7 (aux supply) when it is drawn – one flag per
+  net. 5V/5V_ISOL/VCC/3V3_ISO are driven by power-output pins on sheet 3 (no flag needed).
+- Two-pin parts get centred Reference/Value text from `sch_builder.place()` (KiCad mirrors
+  or swaps field justification for rotated symbols); `vert2`/`horiz2` in `_common.py` place a
+  two-pin part with a chosen pin at the top/left – check the IPC pin order (on sheet 3 every
+  capacitor has pin 1 on the ground side).
 - Sheet 2 labels follow the PDF (`G2_SOURCE_LO`, `DAB_SOURCE_LO_SEC`, `Q6_S`, …); the IPC
   names of those nets are PGND/DAB_GROUND/ISOPGND because they are tied to the power net on
   sheets 1/4/5/6 – the comparison is by pad set, so the names are only hints.
