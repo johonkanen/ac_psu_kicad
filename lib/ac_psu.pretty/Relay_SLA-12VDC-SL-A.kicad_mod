@@ -4,7 +4,7 @@
 	(layer "F.Cu")
 	(descr "Songle SLA-12VDC-SL-A relay, Proteus land pattern (pads 1,2,3,5,6) (ac_psu, pads from IPC-D-356A R20)")
 	(property "Reference" "REF**"
-		(at 0 -12.07 0)
+		(at 0 -11.57 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -14,7 +14,7 @@
 		)
 	)
 	(property "Value" "Relay_SLA-12VDC-SL-A"
-		(at 0 12.07 0)
+		(at 0 11.57 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -25,8 +25,8 @@
 	)
 	(attr through_hole)
 	(fp_rect
-		(start -10.8 -10.75)
-		(end 10.8 10.75)
+		(start -10.3 -10.25)
+		(end 10.3 10.25)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -35,8 +35,8 @@
 		(layer "F.Fab")
 	)
 	(fp_rect
-		(start -10.92 -10.87)
-		(end 10.92 10.87)
+		(start -10.42 -10.37)
+		(end 10.42 10.37)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -45,8 +45,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_rect
-		(start -11.3 -11.25)
-		(end 11.3 11.25)
+		(start -10.55 -10.5)
+		(end 10.55 10.5)
 		(stroke
 			(width 0.05)
 			(type solid)

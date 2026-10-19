@@ -1,0 +1,634 @@
+[
+ {
+  "layer": "B.Cu",
+  "index": 0,
+  "net": "PGND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "B.Cu",
+  "index": 1,
+  "net": "G1_SOURCE_HI",
+  "order": 11,
+  "width": 0.1524,
+  "group": 42
+ },
+ {
+  "layer": "B.Cu",
+  "index": 2,
+  "net": "SHUNT1",
+  "order": 15,
+  "width": 0.254,
+  "group": 463
+ },
+ {
+  "layer": "B.Cu",
+  "index": 3,
+  "net": "DC+",
+  "order": 18,
+  "width": 0.254,
+  "group": 64
+ },
+ {
+  "layer": "B.Cu",
+  "index": 4,
+  "net": "DAB_CAP_PRI",
+  "order": 21,
+  "width": 0.1524,
+  "group": 388
+ },
+ {
+  "layer": "B.Cu",
+  "index": 5,
+  "net": "ISODC+",
+  "order": 25,
+  "width": 0.1524,
+  "group": 66
+ },
+ {
+  "layer": "B.Cu",
+  "index": 6,
+  "net": "Q7_S",
+  "order": 30,
+  "width": 0.1524,
+  "group": 355
+ },
+ {
+  "layer": "B.Cu",
+  "index": 7,
+  "net": "Q5_S",
+  "order": 34,
+  "width": 0.1016,
+  "group": 343
+ },
+ {
+  "layer": "B.Cu",
+  "index": 8,
+  "net": "DAB_SOURCE_HI_SEC",
+  "order": 38,
+  "width": 0.1016,
+  "group": 114
+ },
+ {
+  "layer": "B.Cu",
+  "index": 9,
+  "net": "Net-(J7-Pad1)",
+  "order": 42,
+  "width": 0.254,
+  "group": 642
+ },
+ {
+  "layer": "B.Cu",
+  "index": 10,
+  "net": "/01 afe/LEMOUT",
+  "order": 44,
+  "width": 0.1524,
+  "group": 69
+ },
+ {
+  "layer": "B.Cu",
+  "index": 11,
+  "net": "/01 afe/JEE",
+  "order": 54,
+  "width": 0.1524,
+  "group": 62
+ },
+ {
+  "layer": "B.Cu",
+  "index": 12,
+  "net": "AC_IN_1",
+  "order": 59,
+  "width": 0.1524,
+  "group": 118
+ },
+ {
+  "layer": "B.Cu",
+  "index": 13,
+  "net": "AC_OUT_1",
+  "order": 64,
+  "width": 0.254,
+  "group": 124
+ },
+ {
+  "layer": "B.Cu",
+  "index": 14,
+  "net": "/05 VSI/INDUCTOR_OUTPUT",
+  "order": 68,
+  "width": 0.1524,
+  "group": 79
+ },
+ {
+  "layer": "B.Cu",
+  "index": 15,
+  "net": "RET_ISO",
+  "order": 74,
+  "width": 0.1524,
+  "group": 133
+ },
+ {
+  "layer": "B.Cu",
+  "index": 16,
+  "net": "20V_ISO_SEC",
+  "order": 79,
+  "width": 0.1524,
+  "group": 139
+ },
+ {
+  "layer": "F.Cu",
+  "index": 0,
+  "net": "GND",
+  "order": 0,
+  "width": 0.1524,
+  "group": 27
+ },
+ {
+  "layer": "F.Cu",
+  "index": 1,
+  "net": "5V",
+  "order": 5,
+  "width": 0.1524,
+  "group": 26
+ },
+ {
+  "layer": "F.Cu",
+  "index": 2,
+  "net": "ISOGND",
+  "order": 9,
+  "width": 0.1524,
+  "group": 249
+ },
+ {
+  "layer": "F.Cu",
+  "index": 3,
+  "net": "5V_ISOL",
+  "order": 14,
+  "width": 0.1524,
+  "group": 309
+ },
+ {
+  "layer": "F.Cu",
+  "index": 4,
+  "net": "3V3_ISO",
+  "order": 18,
+  "width": 0.1524,
+  "group": 252
+ },
+ {
+  "layer": "F.Cu",
+  "index": 5,
+  "net": "DC+",
+  "order": 22,
+  "width": 0.1524,
+  "group": 64
+ },
+ {
+  "layer": "F.Cu",
+  "index": 6,
+  "net": "G3_SOURCE_HI",
+  "order": 32,
+  "width": 0.1524,
+  "group": 30
+ },
+ {
+  "layer": "F.Cu",
+  "index": 7,
+  "net": "PGND",
+  "order": 36,
+  "width": 0.1524,
+  "group": 0
+ },
+ {
+  "layer": "F.Cu",
+  "index": 8,
+  "net": "ISOPGND",
+  "order": 42,
+  "width": 0.254,
+  "group": 67
+ },
+ {
+  "layer": "F.Cu",
+  "index": 9,
+  "net": "DAB_CAP_PRI",
+  "order": 52,
+  "width": 0.254,
+  "group": 388
+ },
+ {
+  "layer": "F.Cu",
+  "index": 10,
+  "net": "DAB_SOURCE_HI_PRI",
+  "order": 56,
+  "width": 0.1524,
+  "group": 108
+ },
+ {
+  "layer": "F.Cu",
+  "index": 11,
+  "net": "ISODC+",
+  "order": 60,
+  "width": 0.1524,
+  "group": 66
+ },
+ {
+  "layer": "F.Cu",
+  "index": 12,
+  "net": "DAB_GROUND",
+  "order": 64,
+  "width": 0.1524,
+  "group": 117
+ },
+ {
+  "layer": "F.Cu",
+  "index": 13,
+  "net": "DAB_CAP_SEC",
+  "order": 69,
+  "width": 0.1524,
+  "group": 390
+ },
+ {
+  "layer": "F.Cu",
+  "index": 14,
+  "net": "ISODC+",
+  "order": 75,
+  "width": 0.1524,
+  "group": 66
+ },
+ {
+  "layer": "F.Cu",
+  "index": 15,
+  "net": "DAB_SOURCE_HI_SEC",
+  "order": 79,
+  "width": 0.1524,
+  "group": 114
+ },
+ {
+  "layer": "F.Cu",
+  "index": 16,
+  "net": "/07 Auxiliary supply/AUX_SWITCH_NODE",
+  "order": 82,
+  "width": 0.1524,
+  "group": 129
+ },
+ {
+  "layer": "F.Cu",
+  "index": 17,
+  "net": "GND",
+  "order": 87,
+  "width": 0.1524,
+  "group": 27
+ },
+ {
+  "layer": "F.Cu",
+  "index": 18,
+  "net": "AUX_FB",
+  "order": 92,
+  "width": 0.1524,
+  "group": 130
+ },
+ {
+  "layer": "F.Cu",
+  "index": 19,
+  "net": "GND",
+  "order": 95,
+  "width": 0.1524,
+  "group": 27
+ },
+ {
+  "layer": "F.Cu",
+  "index": 20,
+  "net": "20V",
+  "order": 99,
+  "width": 0.1524,
+  "group": 29
+ },
+ {
+  "layer": "F.Cu",
+  "index": 21,
+  "net": "Net-(D1-PadA)",
+  "order": 106,
+  "width": 0.1524,
+  "group": 134
+ },
+ {
+  "layer": "F.Cu",
+  "index": 22,
+  "net": "RET_ISO",
+  "order": 109,
+  "width": 0.1524,
+  "group": 133
+ },
+ {
+  "layer": "F.Cu",
+  "index": 23,
+  "net": "20V_ISO_SEC",
+  "order": 115,
+  "width": 0.1524,
+  "group": 139
+ },
+ {
+  "layer": "F.Cu",
+  "index": 24,
+  "net": "/01 afe/FILTER_INPUT",
+  "order": 133,
+  "width": 0.1524,
+  "group": 68
+ },
+ {
+  "layer": "F.Cu",
+  "index": 25,
+  "net": "/01 afe/CMFILT2",
+  "order": 138,
+  "width": 0.254,
+  "group": 60
+ },
+ {
+  "layer": "F.Cu",
+  "index": 26,
+  "net": "/01 afe/CMFILT1",
+  "order": 141,
+  "width": 0.1524,
+  "group": 61
+ },
+ {
+  "layer": "F.Cu",
+  "index": 27,
+  "net": "AC_IN2",
+  "order": 145,
+  "width": 0.1524,
+  "group": 63
+ },
+ {
+  "layer": "F.Cu",
+  "index": 28,
+  "net": "/01 afe/JEE",
+  "order": 150,
+  "width": 0.1524,
+  "group": 62
+ },
+ {
+  "layer": "F.Cu",
+  "index": 29,
+  "net": "/05 VSI/INU_FILTER_INPUT",
+  "order": 160,
+  "width": 0.1524,
+  "group": 78
+ },
+ {
+  "layer": "F.Cu",
+  "index": 30,
+  "net": "AC_OUT_2",
+  "order": 166,
+  "width": 0.254,
+  "group": 85
+ },
+ {
+  "layer": "F.Cu",
+  "index": 31,
+  "net": "/05 VSI/AFE_RELAY",
+  "order": 172,
+  "width": 0.254,
+  "group": 84
+ },
+ {
+  "layer": "F.Cu",
+  "index": 32,
+  "net": "/07 Auxiliary supply/AUX_FEEDBACK",
+  "order": 180,
+  "width": 0.1524,
+  "group": 151
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 0,
+  "net": "DAB_GATE_HI_SEC",
+  "order": 0,
+  "width": 0.1016,
+  "group": 112
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 1,
+  "net": "GND",
+  "order": 7,
+  "width": 0.1016,
+  "group": 27
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 2,
+  "net": "ISOGND",
+  "order": 50,
+  "width": 0.1524,
+  "group": 249
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 3,
+  "net": "Q8_G",
+  "order": 100,
+  "width": 0.1524,
+  "group": 319
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 4,
+  "net": "G2_GATE_LO",
+  "order": 102,
+  "width": 0.254,
+  "group": 6
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 5,
+  "net": "G2_GATE_LO",
+  "order": 103,
+  "width": 0.254,
+  "group": 6
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 6,
+  "net": "PGND",
+  "order": 106,
+  "width": 0.254,
+  "group": 0
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 7,
+  "net": "G3_GATE_HI",
+  "order": 109,
+  "width": 0.254,
+  "group": 36
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 8,
+  "net": "G1_GATE_HI",
+  "order": 112,
+  "width": 0.254,
+  "group": 48
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 9,
+  "net": "DAB_SOURCE_HI_PRI",
+  "order": 115,
+  "width": 0.254,
+  "group": 108
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 10,
+  "net": "PGND",
+  "order": 119,
+  "width": 0.254,
+  "group": 0
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 11,
+  "net": "Q7_G",
+  "order": 125,
+  "width": 0.254,
+  "group": 361
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 12,
+  "net": "Q5_G",
+  "order": 128,
+  "width": 0.254,
+  "group": 349
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 13,
+  "net": "Q6_G",
+  "order": 131,
+  "width": 0.254,
+  "group": 331
+ },
+ {
+  "layer": "In1.Cu",
+  "index": 14,
+  "net": "DAB_GATE_LO_SEC",
+  "order": 133,
+  "width": 0.254,
+  "group": 115
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 0,
+  "net": "DAB_SOURCE_HI_SEC",
+  "order": 0,
+  "width": 0.1016,
+  "group": 114
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 1,
+  "net": "VCC",
+  "order": 6,
+  "width": 0.1016,
+  "group": 195
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 2,
+  "net": "3V3_ISO",
+  "order": 47,
+  "width": 0.1524,
+  "group": 252
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 3,
+  "net": "ISOPGND",
+  "order": 81,
+  "width": 0.1524,
+  "group": 67
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 4,
+  "net": "PGND",
+  "order": 84,
+  "width": 0.254,
+  "group": 0
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 5,
+  "net": "G4_GATE_LO",
+  "order": 90,
+  "width": 0.254,
+  "group": 18
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 6,
+  "net": "G3_SOURCE_HI",
+  "order": 93,
+  "width": 0.254,
+  "group": 30
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 7,
+  "net": "G1_SOURCE_HI",
+  "order": 99,
+  "width": 0.254,
+  "group": 42
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 8,
+  "net": "DAB_GATE_HI_PRI",
+  "order": 103,
+  "width": 0.254,
+  "group": 106
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 9,
+  "net": "DAB_GATE_LO_PRI",
+  "order": 106,
+  "width": 0.254,
+  "group": 109
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 10,
+  "net": "Q7_S",
+  "order": 109,
+  "width": 0.254,
+  "group": 355
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 11,
+  "net": "Q5_S",
+  "order": 114,
+  "width": 0.254,
+  "group": 343
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 12,
+  "net": "ISOPGND",
+  "order": 120,
+  "width": 0.254,
+  "group": 67
+ },
+ {
+  "layer": "In2.Cu",
+  "index": 13,
+  "net": "DAB_GROUND",
+  "order": 124,
+  "width": 0.254,
+  "group": 117
+ }
+]

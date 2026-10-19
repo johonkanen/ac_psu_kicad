@@ -4,7 +4,7 @@
 	(layer "F.Cu")
 	(descr "Single PIN terminal (ac_psu, pads from IPC-D-356A PE8)")
 	(property "Reference" "REF**"
-		(at 0 -3.344 0)
+		(at 0 -2.844 0)
 		(layer "F.SilkS")
 		(effects
 			(font
@@ -14,7 +14,7 @@
 		)
 	)
 	(property "Value" "Terminal_D3.05mm_Drill1.52mm"
-		(at 0 3.344 0)
+		(at 0 2.844 0)
 		(layer "F.Fab")
 		(effects
 			(font
@@ -24,9 +24,9 @@
 		)
 	)
 	(attr through_hole)
-	(fp_rect
-		(start -2.024 -2.024)
-		(end 2.024 2.024)
+	(fp_circle
+		(center 0 0)
+		(end 1.524 0)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -34,9 +34,9 @@
 		(fill no)
 		(layer "F.Fab")
 	)
-	(fp_rect
-		(start -2.144 -2.144)
-		(end 2.144 2.144)
+	(fp_circle
+		(center 0 0)
+		(end 1.644 0)
 		(stroke
 			(width 0.12)
 			(type solid)
@@ -44,9 +44,9 @@
 		(fill no)
 		(layer "F.SilkS")
 	)
-	(fp_rect
-		(start -2.524 -2.524)
-		(end 2.524 2.524)
+	(fp_circle
+		(center 0 0)
+		(end 1.774 0)
 		(stroke
 			(width 0.05)
 			(type solid)

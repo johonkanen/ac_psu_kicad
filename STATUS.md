@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-18 (Phase 2 done – footprints assigned and verified against the IPC pad geometry)
+Updated: 2026-10-19 (Phase 3 done – PCB built from the Proteus gerbers, every copper item on its net, DRC 0 shorts / 0 unconnected)
 
 ## Phase 0 – done
 
@@ -290,32 +290,34 @@ unmirrored (the chiral ones – PWM1 DIP-8 – confirm top), so no THT part is o
 | C 1206 (9, incl. C67) | `Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder` | 0.013 |
 | C 2220 2.2u (8) | `Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder` | 0.038 |
 | C 2n2 THT P7.5 (14) | `Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm` (Proteus silk ~13 × 6 mm) | 0.000 |
-| C21/C24/C25/C33/C34 7u P27.5 | `Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4` | 0.000 |
-| SNAP_IN_35MM (6) | `Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn` | 0.000 |
+| C21/C25/C33/C34 7u P27.5 (Proteus drill 1.27) / C24 (Proteus drill 1.016) | `ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus` (Phase 3: Proteus pads/drills) / `Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4` | 0.000 |
+| SNAP_IN_35MM (6) | `ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus` (Phase 3: Proteus 5.08 pads, 2.032 drills) | 0.000 |
 | C15/C28 EEEFTE221XAP | `ac_psu:CP_Elec_6.3x7.7_EEEFTE221XAP` (KiCad graphics, Proteus pads) | 0.000 |
 | D1/D2/D6 SMA | `ac_psu:D_SMA_AC` (KiCad D_SMA, pads C/A, Proteus centres) | 0.000 |
 | D3–D5/D7/D10, D8/D9 SOD-323 | `ac_psu:D_SOD-323_AC` (KiCad HandSoldering, pads C/A, Proteus centres) | 0.001 |
 | L1 | `Inductor_SMD:L_0805_2012Metric` | 0.025 |
-| Q13/Q14 2N7000, REF1/REF2 | `ac_psu:SOT-23_Proteus` (KiCad SOT-23 renumbered 3→1, 1→2, 2→3) | 0.020 |
-| U2/U12/U14 TLV316, U3/U10 TPS73033 | `ac_psu:SOT-23-5_TLV316` / `SOT-23-5_TPS73033` (Proteus rows 2.39 / 2.50 mm) | 0.001 |
-| U1/U7 OPA2353UA | `Package_SO:TSSOP-8_3x3mm_P0.65mm` (the pads are MSOP/TSSOP-8, not SO-8) | 0.000 |
-| U11 | `Package_SO:TSSOP-16_4.4x5mm_P0.65mm` | 0.013 |
-| U13/U15/U16/U17 | `Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm` (U16 at 225°) | 0.030 |
+| Q13/Q14 2N7000, REF1/REF2 | `ac_psu:SOT-23_Proteus` (KiCad SOT-23 renumbered 3→1, 1→2, 2→3; Phase 3: Proteus pad sizes and centres) | 0.020 |
+| U2/U12/U14 TLV316, U3/U10 TPS73033 | `ac_psu:SOT-23-5_TLV316` (Phase 3: Proteus pad sizes) / `SOT-23-5_TPS73033` (Proteus rows 2.39 / 2.50 mm) | 0.001 |
+| U1/U7 OPA2353UA | `ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus` (the pads are MSOP/TSSOP-8, not SO-8; Phase 3: Proteus pads, no 0.2 mm footprint clearance) | 0.000 |
+| U11 | `ac_psu:TSSOP-16_4.4x5mm_P0.65mm_Proteus` (Phase 3: Proteus pads) | 0.013 |
+| U13/U15/U16/U17 | `ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus` (U16 at 225°; Phase 3: Proteus pads) | 0.030 |
 | U4/U5/U6 ADuM7701 | `ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701` (rows 9.70 mm) | 0.001 |
 | AD1 ADS7056 | `ac_psu:X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056` (Proteus pads and sizes) | 0.000 |
 | R87 | `ac_psu:R_Array_Convex_4x0402_Proteus` (pads 4/5 kept, no net) | 0.000 |
 | PWM1 IW1830 | `Package_DIP:DIP-8-N6_W7.62mm` | 0.000 |
-| Q1–Q12 | `Package_TO_SOT_THT:TO-247-3_Vertical` (1=G 2=D 3=S) | 0.011 |
-| J1–J4, J6, J8 | `ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48` (pads 1–14, 27, 28, 41, 42 removed) | 0.000 |
-| J11 / J12 | `Connector_PinHeader_1.27mm:PinHeader_2x19_P1.27mm_Vertical` / `ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48` | 0.000 |
-| U8/U9 VXO7805 | `Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT` | 0.000 |
+| Q1–Q12 | `ac_psu:TO-247-3_Vertical_Proteus` (1=G 2=D 3=S; Phase 3: Proteus 3.048 pads, 1.651 drills) | 0.011 |
+| J1–J4, J6, J8 | `ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48` (pads 1–14, 27, 28, 41, 42 removed; Phase 3: Proteus 0.812 pads) | 0.000 |
+| J11 / J12 | `ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus` (Phase 3: Proteus 0.812 pads) / `ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48` | 0.000 |
+| U8/U9 VXO7805 | `ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus` (Phase 3: Proteus 1.8 pads, 1.2 drills) | 0.000 |
 | TR2, CM1–CM3, R48/R64/R91, R20/R79 | `ac_psu:Transformer_EF20_2x5_P3.81mm`, `L_CommonMode_WE-CMBNC`, `R_Shunt_FKK5R0020FE`, `Relay_SLA-12VDC-SL-A` (built from the IPC pads; simple rectangle outlines) | 0.000 |
 | PIN terminals | `ac_psu:Terminal_D4.0mm_Drill{2.0,2.55,3.0}mm`, `Terminal_D3.05mm_Drill1.52mm`; ACIN1/2, ACOUT1/2 `Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm` (two pads "1") | 0.000 |
 | TR1 | none (excluded from board) | – |
 
-41 distinct footprints (21 KiCad library, 20 project). Footprints built purely from the IPC
-pads have generic rectangle body/courtyard outlines (TR2 22 × 14 mm from the Proteus silk;
-others pad box + 0.5 mm) – refine in Phase 3 if courtyard DRC needs it.
+41 distinct footprints (21 KiCad library, 20 project) at the end of Phase 2; 42 (14 KiCad
+library, 28 project) after the Phase 3 pad/drill decisions. Footprints built purely from the IPC
+pads have generic outlines (TR2 22 × 14 mm body from the Proteus silk, others the pad box);
+Phase 3 tightened their courtyards to 0.25 mm around body and pads (circles for single PIN
+terminals).
 
 ### Residual report
 
@@ -328,6 +330,8 @@ oval vs Proteus 3.05 round), snap-in caps (4.0 vs 5.08), C_Rect P27.5 / R10 / C_
 (2.0–2.4 vs 1.52–2.29). **Drills where KiCad is smaller than Proteus**: TO-247 1.5 vs 1.651,
 VXO7805 1.0 vs 1.2, C21/C25/C33/C34 1.2 vs 1.27, snap-in 2.0 vs 2.032 – the user may want the
 Proteus drills (then derive a project footprint with `ipc_sizes=True` in `gen_footprints.py`).
+**Resolved in Phase 3** (user decision 2026-10-19): these parts now use the Proteus drills and
+pads, and 8 SMD/header packages use the Proteus pad sizes, see "Phase 3 – footprint changes".
 
 ### Polarity / pinout findings (for the user)
 
@@ -362,9 +366,134 @@ check_footprints: 267/267 parts fitted, 898 pads, 41 footprints, worst residual 
 ALL CHECKS PASSED
 ```
 
+## Phase 3 PCB – done (Opus 5.5, 2026-10-19)
+
+`kicad/ac_psu.kicad_pcb` is generated by re-runnable scripts; `tools/make_pcb.sh` runs them in
+order (≈10 s) and two runs give a byte-identical board (UUIDs seeded per script with
+`KIID.SeedGenerator`). Do not hand-edit the board while it is still generated – change the
+scripts (or stop regenerating it and say so here).
+
+| Step | Script | What it does |
+|---|---|---|
+| 3a | `tools/build_pcb.py` | Exports the kicadxml netlist, creates the board (4 Cu layers, Proteus origin, KiCad y = −IPC y), one footprint per symbol (TR1 skipped) with reference, value, Datasheet/Description, symbol link (path = sheet path + symbol UUID, sheet name/file → DRC schematic parity 0) and pad nets; placement from `reports/footprint_fit.csv` with the Phase 2 recipe; outline on Edge.Cuts from Mechanical 1 (246.8 × 154.7 mm); mounting holes H1–H4 = `ac_psu:Terminal_D4.0mm_Drill3.0mm`, board-only, no net, at the IPC 'hole' records; design rules (below); User.1–4 renamed `Proteus.{F,In1,In2,B}.Pours`; board thickness 2.267 mm (Proteus stack). |
+| 3b | `tools/gerber_to_tracks.py` | Parses the copper and drill gerbers (`tools/gerber.py`). Conductor D01 draws → 4052 tracks; **pour edge strokes are not tracks** (Proteus strokes every G36 region and every clear hole with the pour's edge width, 0.1016/0.1524/0.254 mm; a draw whose ends are consecutive region vertices is a stroke – stroke count equals region edge count on every layer); ViaPad flashes on all 4 layers + ViaDrill → 173 through vias 0.4572/0.3 (= the 173 IPC vias); every pad flash lands on a footprint pad, every drill on a pad hole or via; positive G36 outlines → User.1–4 (79 pours); the 3 NonConductor draws (two floating 0.15 mm lines beside J6 pins 29–34, top) → F.Cu graphic lines, no net. `load_copper()` is the shared reader (tracks, vias, pad flashes, pours with their holes and stroke width). |
+| 3c | `tools/assign_nets.py` | Union-find over copper shapes (`tools/geom2d.py`: segment/polygon cores grown by a radius, pours with holes). Stage A (Proteus pad flashes + tracks + vias): 447 groups, 0 shorts, 16 orphans (vias that only touch pours), 45 opens (connections through pours) – expected. Stage B (+ Proteus pours): **248 groups = 244 KiCad nets + 4 mounting holes, 0 shorts, 0 orphans, 0 opens**; every track/via gets its group's net (4225), every pour its net → `reports/pour_nets.json`. Via nets cross-checked against the IPC via records (IPC → KiCad net map built from the pads, 208 nets 1:1). `--check`: same analysis on the saved board with KiCad pads, tracks, vias and the filled zones; every item must carry its group's net. Report `reports/assign_nets.txt`. |
+| 3d | `tools/pours_to_zones.py` | One ZONE per pour: outline = Proteus copper = region grown by half the stroke minus its clear holes shrunk by half the stroke (62 stroke-closed holes vanish, 405 kept), net from `pour_nets.json`, solid pad connection, min width 0.1 mm, islands removed, priority = Proteus draw order; filled with ZONE_FILLER. |
+| 5 | `tools/drc.py` | `kicad-cli pcb drc --schematic-parity --severity-all` → `reports/drc.json` (not committed); fails on shorts, unconnected items, parity issues and error types not in its `ACCEPTED` list. |
+| – | `tools/check_board.py` | Saved board vs IPC: 898 pads within 0.05 mm (worst 0.038) and on the IPC net (IPC ↔ KiCad nets 1:1 via the pads, N/C pins on no/`unconnected-` nets), 4 mounting holes (plated 3.0/4.0, no net), 173 vias at the IPC via positions on the IPC net, every track/via/zone has a net. |
+
+How Proteus pours work (and why the zones look like this): the pour copper is the G36 region
+plus its edge stroke; clear (`%LPC%`) regions after it are its holes: clearance cut-outs around
+other-net copper, **thermal reliefs** (a hole around a same-net pad bridged by short spoke
+*tracks*, which are imported as ordinary tracks), and deliberate isolation of a same-net via or
+pad from the pour on that layer. Pads inside the pour without a hole are connected solid. The
+zones keep every hole, so the KiCad fill reproduces the Proteus copper; KiCad's 0.15 mm
+clearance applies on top (it only bites where a KiCad pad is larger than the Proteus pad).
+Exported F.Cu (kicad-cli svg) was compared by eye with a render of the Proteus top copper:
+same pours, holes, spokes and tracks.
+
+Design rules (board setup, stored in `kicad/ac_psu.kicad_pro`): clearance 0.15 mm (Proteus
+uses 6 mil: the smallest gap between different nets in the gerbers is 0.1514 mm, arc
+rounding), min track 0.1 mm (thinnest Proteus track 0.1016), via 0.45 min / annular 0.075 /
+drill 0.3 (Proteus vias 0.4572/0.3), hole clearance 0.15, hole-to-hole 0.25, copper-edge 0.25;
+Default netclass 0.254 track, 0.4572/0.3 via.
+
+### Phase 3 – footprint changes (user decision 2026-10-19)
+
+The first DRC with KiCad library pads gave 2 shorts (U11 pins 9–11 touched the ADA3 track
+routed past their ends; U2 pin 3 touched an ISOGND track), 54 clearance errors and 4 mask
+bridges – all where KiCad pads are larger than the Proteus pads and reach Proteus tracks. The
+user chose (1) Proteus pad sizes for exactly those packages and (2) Proteus pads + drills
+where the KiCad drill was smaller than Proteus. `tools/gen_footprints.py` now derives
+(`ipc_sizes=True`, pad centres and sizes/drills from one IPC part, KiCad graphics kept):
+
+| Footprint | From | Change |
+|---|---|---|
+| `PinHeader_2x24_P1.27mm_Vertical_Pins15-48` (J1–J4, J6, J8), `PinHeader_2x19_P1.27mm_Vertical_Proteus` (J11) | J1 / J11 | pads 1.0 → 0.812 mm |
+| `TSSOP-16_4.4x5mm_P0.65mm_Proteus` (U11), `TSSOP-8_3x3mm_P0.65mm_Proteus` (U1, U7) | U11 / U1 | pads 1.475×0.4 → 1.1×0.4; TSSOP-8's 0.2 mm footprint clearance dropped (Proteus land patterns use the board rule) |
+| `SOT-23-5_TLV316` (U2, U12, U14), `SOT-23_Proteus` (Q13, Q14, REF1, REF2) | U2 / REF1 | pads 1.325×0.6 → 0.635×0.508; 1.475×0.6 → 1.016×0.889 |
+| `SOIC-16W_7.5x10.3mm_P1.27mm_Proteus` (U13, U15–U17) | U13 | pads 2.05×0.6 → 1.85×0.65 |
+| `TO-247-3_Vertical_Proteus` (Q1–Q12) | Q1 | pads 3.048 round (pin 1 square), drill 1.5 → 1.651 |
+| `Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus` (U8, U9) | U8 | pads 1.8, drill 1.0 → 1.2 |
+| `C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus` (C21, C25, C33, C34) | C21 | pads 2.286, drill 1.2 → 1.27 (C24 keeps the KiCad footprint: its Proteus drill is 1.016) |
+| `CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus` (C8, C11, C12, C61, C72, C79) | C11 | pads 4.0 → 5.08, drill 2.0 → 2.032 |
+
+Courtyards of the footprints built from the IPC pads (TR2, CM1–3, R48/R64/R91, R20/R79, PIN
+terminals, ACIN/ACOUT, mounting holes) were tightened from pad box + 1.0 mm to 0.25 mm around
+body and pads (circles for single round PIN terminals): 60 → 50 courtyard overlaps.
+The schematic sheets were re-run so their Footprint fields follow `lib/footprint_map.csv`
+(only Footprint fields changed).
+
+### Remaining DRC items (all justified, `tools/drc.py` passes)
+
+| Type | Count | Why it stays |
+|---|---|---|
+| shorting_items / unconnected / schematic parity | 0 / 0 / 0 | – |
+| courtyards_overlap (error) | 50 | Proteus placed parts closer than KiCad's IPC-7351 courtyards (mostly 0402/1206 passives beside ICs, film/disc caps, terminals). Parts sit exactly at the Proteus positions; accepted in `tools/drc.py`. |
+| pth_inside_courtyard (error) | 6 | J4 pins 47/48 inside J6's courtyard (the 2×24 outline still covers J6's unfitted pins 1–14; physical 2×24 housings would clear by ≈0.1 mm), J12 pins inside U8's courtyard (see U8/U9 finding). Accepted. |
+| silk_overlap / silk_over_copper / silk_edge_clearance (warning) | 199 / 199 / 12 | KiCad footprint silk and default reference positions on a dense Proteus placement (PLAN 3e: silk comes from the KiCad footprints; refdes positions could be taken from the Proteus assembly layers later). |
+| via_dangling (warning) | 2 | Proteus copper as drawn: GND via at (91.80, −49.09) and VCC via at (43.69, −20.29) (IPC coordinates, Y up) connect on one layer only. |
+| track_dangling (warning) | 1 | 0.14 mm PWM_TRANS5 stub on In2.Cu at (47.7, 43.6) (IPC coordinates) in the Proteus copper. |
+
+### Findings (for the user / Phase 4)
+
+- **U8/U9 (VXO7805) body side**: the Proteus top silk draws the converter body (11.5 × 7.3 mm)
+  entirely on the −y side of the pin row (away from J12), the KiCad R-78E footprint puts most
+  of the body on the +y side, over J12's pins (hence the J12/U8 courtyard errors). Pads and pin
+  order match, so only the body/courtyard graphics differ. Check the VXO7805 datasheet: if
+  Proteus is right, mirror the body graphics in the project footprint
+  (`Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus`).
+- C67 symbol (`C_Polarized` on sheet 7 vs `ac_psu:C` in part_map, non-polar 1206 land pattern)
+  is still open (Phase 2 finding).
+- KiCad pads are still larger than Proteus on footprints that have no DRC conflict (e.g.
+  0402/0603/1206 passives, J12, TPS73033). The gerber round trip (Phase 4) will show them.
+
+### pcbnew 10.0.7 quirks found in Phase 3
+
+- `board.Remove(item)` + garbage collection of the item's Python proxy breaks SWIG's type
+  table: later calls return untyped `SwigPyObject`s (`GetNetInfo()`, `ZONE.Outline()`) and
+  "memory leak … no destructor found" floods stderr. Use `board.Delete(item)`; set
+  `thisown = False` on items created in Python after `board.Add()`.
+- `LoadBoard` re-derives track nets from the connected pads (a wrong net written into the file
+  is silently corrected on load), and `SaveBoard` writes the board design settings into the
+  `.kicad_pro`.
+- `KIID.SeedGenerator(n)` makes new UUIDs reproducible.
+
+### Last verification (`tools/check_all.sh`, Phase 3 done)
+
+```
+pcbnew 10.0.7
+ipc356: nets=208, refdes_raw=265, tht_records=562, smd_records=513, nc_pads=34, vias=173, holes=4, parts=267
+gen_symbols: lib/ac_psu.kicad_sym up to date (47 symbols)
+symbols: OK
+erc: 0 errors, 8 warnings (reports/erc.rpt)
+compare: parts 267/267 present, 0 missing, 0 extra; pins compared 894, wrong-net pins 0; IPC nets touched 244, complete 244
+gen_footprints: 267 parts, 42 footprints (28 project), up to date
+check_footprints: pcbnew placement of 267 parts, worst pad offset 0.038 mm
+check_footprints: 267/267 parts fitted, 898 pads, 42 footprints, worst residual 0.038 mm (limit 0.05)
+check_board: 271 footprints, 898 pads, worst pad offset 0.038 mm (limit 0.05), 208 IPC nets mapped 1:1, 4 mounting holes
+check_board: 4052 tracks, 173 vias, 79 zones
+assign_nets: after zone fill: 248 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
+drc: 469 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:     50 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
+drc:      6 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
+drc:    199 warning  silk_overlap
+drc:    199 warning  silk_over_copper
+drc:     12 warning  silk_edge_clearance
+drc:      2 warning  via_dangling
+drc:      1 warning  track_dangling
+ALL CHECKS PASSED
+```
+
+Negative tests: footprint moved 0.1 mm → check_board fails; via deleted → check_board and
+assign_nets --check (open VCC) fail; track net changed in memory → assign_nets --check reports
+the foreign net.
+
 ## Next
 
-Phase 3 – PCB build, gerber → tracks/vias, net assignment, zones (Opus 5.5), PLAN.md section 5.
+Phase 4 – verification and final review (Fable 5.1), PLAN.md section 6: gerber round trip
+(KiCad gerbers vs Proteus, per copper layer), IPC-356 pad list from KiCad vs Proteus, an
+independent read of the whole result, and the open findings above (U8/U9 body side, C67).
 
 ## Next prompt
 

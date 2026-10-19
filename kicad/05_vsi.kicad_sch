@@ -2528,7 +2528,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 55.88 48.26 0)
 			(effects
 				(font
@@ -2600,7 +2600,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 55.88 86.36 0)
 			(effects
 				(font
@@ -2880,7 +2880,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 106.68 48.26 0)
 			(effects
 				(font
@@ -2952,7 +2952,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 106.68 86.36 0)
 			(effects
 				(font
@@ -4080,7 +4080,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4"
+		(property "Footprint" "ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus"
 			(at 232.1052 59.69 0)
 			(effects
 				(font
@@ -4562,7 +4562,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4"
+		(property "Footprint" "ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus"
 			(at 262.5852 59.69 0)
 			(effects
 				(font
@@ -5571,7 +5571,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus"
 			(at 228.6 106.68 0)
 			(effects
 				(font
@@ -6539,7 +6539,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus"
 			(at 327.66 152.4 0)
 			(effects
 				(font
@@ -7067,7 +7067,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:TSSOP-8_3x3mm_P0.65mm"
+		(property "Footprint" "ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus"
 			(at 38.1 152.4 0)
 			(effects
 				(font

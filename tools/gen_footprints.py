@@ -49,8 +49,10 @@ RULES = [
     ("C", dict(tht=False, span=3.15, pad=(1.016, 1.524)), "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder", "1206"),
     ("C", dict(tht=False, span=5.20, pad=(1.397, 5.257)), "Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder", "2220"),
     ("C", dict(tht=True, span=7.50), "Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm", "2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"),
+    ("C", dict(tht=True, span=27.50, drill=1.27), "ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus",
+     "7u film, P27.5, Proteus 1.27 mm drill"),
     ("C", dict(tht=True, span=27.50), "Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4", "7u film, P27.5"),
-    ("C_Polarized", dict(tht=True, span=10.00), "Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn", "SNAP_IN_35MM"),
+    ("C_Polarized", dict(tht=True, span=10.00), "ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus", "SNAP_IN_35MM, Proteus pads/drills"),
     ("C_Polarized", dict(tht=False, span=4.50), "ac_psu:CP_Elec_6.3x7.7_EEEFTE221XAP", "EEEFTE221XAP SMD electrolytic"),
     ("D", dict(), "ac_psu:D_SMA_AC", "SMA (ES1A, S1M)"),
     ("D_Schottky", dict(), "ac_psu:D_SOD-323_AC", "SOD-323 (ZLLS400TA)"),
@@ -60,20 +62,20 @@ RULES = [
     ("REF3025", dict(), "ac_psu:SOT-23_Proteus", "SOT-23, Proteus pad numbering"),
     ("TLV316IDBVR", dict(), "ac_psu:SOT-23-5_TLV316", "SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"),
     ("TPS73033DBVT", dict(), "ac_psu:SOT-23-5_TPS73033", "SOT-23-5 (DBV), Proteus pad rows 2.50 mm apart"),
-    ("OPA2353UA", dict(), "Package_SO:TSSOP-8_3x3mm_P0.65mm", "pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)"),
-    ("SN74LV4051", dict(), "Package_SO:TSSOP-16_4.4x5mm_P0.65mm", "TSSOP-16"),
-    ("Si8660BD-B-IS", dict(), "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm", "SOIC-16W"),
-    ("Si8661BD-B-IS", dict(), "Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm", "SOIC-16W"),
+    ("OPA2353UA", dict(), "ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus", "pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)"),
+    ("SN74LV4051", dict(), "ac_psu:TSSOP-16_4.4x5mm_P0.65mm_Proteus", "TSSOP-16"),
+    ("Si8660BD-B-IS", dict(), "ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus", "SOIC-16W"),
+    ("Si8661BD-B-IS", dict(), "ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus", "SOIC-16W"),
     ("ADUM7701-8BRIZ", dict(), "ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701", "SOIC127P1031X265-8N"),
     ("ADS7056", dict(), "ac_psu:X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056", "X2QFN-8 (RUG)"),
     ("RESISTOR_ARRAY_4", dict(), "ac_psu:R_Array_Convex_4x0402_Proteus", "4x0402 array"),
     ("IW1830", dict(), "Package_DIP:DIP-8-N6_W7.62mm", "DIP-8 without pin 6"),
-    ("C3M0065090D", dict(), "Package_TO_SOT_THT:TO-247-3_Vertical", "TO-247-3, 1=G 2=D 3=S"),
+    ("C3M0065090D", dict(), "ac_psu:TO-247-3_Vertical_Proteus", "TO-247-3, 1=G 2=D 3=S"),
     ("HB_GT_CONNECTOR", dict(), "ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48", "2x24 1.27 mm, pins 15-26/29-40/43-48 only"),
-    ("HEADER_38_50MIL", dict(), "Connector_PinHeader_1.27mm:PinHeader_2x19_P1.27mm_Vertical", "2x19 1.27 mm"),
+    ("HEADER_38_50MIL", dict(), "ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus", "2x19 1.27 mm"),
     ("HEADER_2X3_43_48", dict(), "ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48", "2x3 1.27 mm, pads 43-48"),
-    ("VXO7805-1000", dict(), "Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT", "SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"),
-    ("VXO7805-500", dict(), "Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT", "SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"),
+    ("VXO7805-1000", dict(), "ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus", "SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"),
+    ("VXO7805-500", dict(), "ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus", "SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"),
     ("EF20_AUX_TRANS", dict(), "ac_psu:Transformer_EF20_2x5_P3.81mm", "EF20, pads 1-10"),
     ("WE-CMBNC", dict(), "ac_psu:L_CommonMode_WE-CMBNC", "WE-CMBNC 4-pin choke"),
     ("FKK5R0020FE-TR", dict(), "ac_psu:R_Shunt_FKK5R0020FE", "4-terminal shunt"),
@@ -100,10 +102,11 @@ PROJECT = {
     "D_SOD-323_AC": dict(base="Diode_SMD:D_SOD-323_HandSoldering", renumber={"1": "C", "2": "A"}, ipc="D3",
                          descr="SOD-323 diode, pads C/A, Proteus pad positions"),
     "SOT-23_Proteus": dict(base="Package_TO_SOT_SMD:SOT-23", renumber={"3": "1", "1": "2", "2": "3"},
+                           ipc="REF1", ipc_sizes=True,
                            descr="SOT-23 with Proteus pad numbering: pad 1 = JEDEC pin 3 (single side), "
-                                 "pad 2 = JEDEC pin 1, pad 3 = JEDEC pin 2"),
-    "SOT-23-5_TLV316": dict(base="Package_TO_SOT_SMD:SOT-23-5", ipc="U2",
-                            descr="SOT-23-5, Proteus pad positions (rows 2.39 mm apart)"),
+                                 "pad 2 = JEDEC pin 1, pad 3 = JEDEC pin 2; Proteus pad sizes"),
+    "SOT-23-5_TLV316": dict(base="Package_TO_SOT_SMD:SOT-23-5", ipc="U2", ipc_sizes=True,
+                            descr="SOT-23-5, Proteus land pattern (rows 2.39 mm apart)"),
     "SOT-23-5_TPS73033": dict(base="Package_TO_SOT_SMD:SOT-23-5", ipc="U3",
                               descr="SOT-23-5, Proteus pad positions (rows 2.50 mm apart)"),
     "SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701": dict(base="Package_SO:SOIC-8_7.5x5.85mm_P1.27mm", ipc="U6",
@@ -113,8 +116,31 @@ PROJECT = {
     "R_Array_Convex_4x0402_Proteus": dict(base="Resistor_SMD:R_Array_Convex_4x0402", ipc="R87",
                                           descr="4x0402 resistor array, Proteus pad positions"),
     "PinHeader_2x24_P1.27mm_Vertical_Pins15-48": dict(
-        base="Connector_PinHeader_1.27mm:PinHeader_2x24_P1.27mm_Vertical", drop="J1",
-        descr="2x24 1.27 mm header position, only pins 15-26, 29-40, 43-48 fitted (HB GT CONNECTOR)"),
+        base="Connector_PinHeader_1.27mm:PinHeader_2x24_P1.27mm_Vertical", drop="J1", ipc="J1", ipc_sizes=True,
+        descr="2x24 1.27 mm header position, only pins 15-26, 29-40, 43-48 fitted (HB GT CONNECTOR), "
+              "Proteus pads (0.812 mm)"),
+    "PinHeader_2x19_P1.27mm_Vertical_Proteus": dict(
+        base="Connector_PinHeader_1.27mm:PinHeader_2x19_P1.27mm_Vertical", ipc="J11", ipc_sizes=True,
+        descr="2x19 1.27 mm header, Proteus pads (0.812 mm)"),
+    # Proteus pad sizes where the KiCad pads reach Proteus tracks (Phase 3 DRC, user decision
+    # 2026-10-19), Proteus pads and drills where the KiCad drill is smaller than Proteus'
+    "TSSOP-8_3x3mm_P0.65mm_Proteus": dict(base="Package_SO:TSSOP-8_3x3mm_P0.65mm", ipc="U1", ipc_sizes=True,
+                                          descr="TSSOP/MSOP-8, Proteus land pattern"),
+    "TSSOP-16_4.4x5mm_P0.65mm_Proteus": dict(base="Package_SO:TSSOP-16_4.4x5mm_P0.65mm", ipc="U11", ipc_sizes=True,
+                                             descr="TSSOP-16, Proteus land pattern"),
+    "SOIC-16W_7.5x10.3mm_P1.27mm_Proteus": dict(base="Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm", ipc="U13",
+                                                ipc_sizes=True, descr="SOIC-16W, Proteus land pattern"),
+    "TO-247-3_Vertical_Proteus": dict(base="Package_TO_SOT_THT:TO-247-3_Vertical", ipc="Q1", ipc_sizes=True,
+                                      descr="TO-247-3, Proteus pads (3.048 mm) and drills (1.651 mm)"),
+    "Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus": dict(
+        base="Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT", ipc="U8", ipc_sizes=True,
+        descr="SIP-3 P2.54, Proteus pads (1.8 mm) and drills (1.2 mm)"),
+    "C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus": dict(
+        base="Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4", ipc="C21", ipc_sizes=True,
+        descr="Film capacitor P27.5, Proteus pads (2.286 mm) and drills (1.27 mm)"),
+    "CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus": dict(
+        base="Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn", ipc="C11", ipc_sizes=True,
+        descr="35 mm snap-in electrolytic, Proteus pads (5.08 mm) and drills (2.032 mm)"),
     "PinHeader_2x03_P1.27mm_Vertical_Pins43-48": dict(
         base="Connector_PinHeader_1.27mm:PinHeader_2x03_P1.27mm_Vertical",
         renumber={str(i): str(42 + i) for i in range(1, 7)}, descr="2x3 1.27 mm header, pads numbered 43-48"),
@@ -265,6 +291,10 @@ def derive(name, spec, ipc):
                     drill = sexpr.find(pad, "drill")
                     drill[1:] = [q["drill"]]
             at[1:] = [_r4(x), _r4(-y)] + ([_r4(rot)] if abs(rot) > 1e-9 else [])
+    if spec.get("ipc_sizes"):
+        # Proteus land pattern -> the board's Proteus clearance rule, not a library override
+        # (KiCad's TSSOP-8 carries a footprint clearance of 0.2 mm)
+        base[:] = [c for c in base if not (isinstance(c, list) and c and c[0] == "clearance")]
     for prop in sexpr.find_all(base, "property"):
         if prop[1] == "Value":
             prop[2] = name
@@ -290,6 +320,12 @@ def _rect(x0, y0, x1, y1, layer, width):
             [Sym("layer"), "F." + layer]]
 
 
+def _circle(r, layer, width):
+    return [Sym("fp_circle"), [Sym("center"), 0, 0], [Sym("end"), _r4(r), 0],
+            [Sym("stroke"), [Sym("width"), width], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("no")],
+            [Sym("layer"), "F." + layer]]
+
+
 def from_ipc(name, spec, ipc):
     pads = ipc[spec["ipc"]]
     mirror = pads[0]["side"] == "bottom"
@@ -307,23 +343,26 @@ def from_ipc(name, spec, ipc):
         ext.append((x - cx - hw, y - cy - hh, x - cx + hw, y - cy + hh))
     bx0, by0 = min(e[0] for e in ext), min(e[1] for e in ext)
     bx1, by1 = max(e[2] for e in ext), max(e[3] for e in ext)
+    # body = spec["body"] or the pad extents; courtyard 0.25 mm around body and pads (KLC),
+    # a circle for single round pins (PIN terminals) so neighbours are not blocked diagonally
     if spec.get("body"):
         w, h = spec["body"]
         fx0, fy0, fx1, fy1 = -w / 2, -h / 2, w / 2, h / 2
     else:
-        fx0, fy0, fx1, fy1 = bx0 - 0.5, by0 - 0.5, bx1 + 0.5, by1 + 0.5
-    cx0, cy0 = min(fx0, bx0) - 0.5, min(fy0, by0) - 0.5
-    cx1, cy1 = max(fx1, bx1) + 0.5, max(fy1, by1) + 0.5
+        fx0, fy0, fx1, fy1 = bx0, by0, bx1, by1
+    cx0, cy0 = min(fx0, bx0) - 0.25, min(fy0, by0) - 0.25
+    cx1, cy1 = max(fx1, bx1) + 0.25, max(fy1, by1) + 0.25
     sx0, sy0, sx1, sy1 = fx0 - 0.12, fy0 - 0.12, fx1 + 0.12, fy1 + 0.12
+    round_pin = len(pads) == 1 and abs(pads[0]["pad_w"] - pads[0]["pad_h"]) < 1e-6 and not spec.get("body")
     # file coordinates are Y down
     node = [Sym("footprint"), name, [Sym("version"), 20260206], [Sym("generator"), "ac_psu_gen_footprints"],
             [Sym("layer"), "F.Cu"], [Sym("descr"), f"{spec['descr']} (ac_psu, pads from IPC-D-356A {spec['ipc']})"],
             [Sym("property"), "Reference", "REF**", [Sym("at"), 0, _r4(-sy1 - 1.2), 0], [Sym("layer"), "F.SilkS"], _eff()],
             [Sym("property"), "Value", name, [Sym("at"), 0, _r4(-sy0 + 1.2), 0], [Sym("layer"), "F.Fab"], _eff()],
             [Sym("attr"), Sym("through_hole" if tht else "smd")],
-            _rect(fx0, -fy1, fx1, -fy0, "Fab", 0.1),
-            _rect(sx0, -sy1, sx1, -sy0, "SilkS", 0.12),
-            _rect(cx0, -cy1, cx1, -cy0, "CrtYd", 0.05),
+            *([_circle(fx1, "Fab", 0.1), _circle(sx1, "SilkS", 0.12), _circle(cx1, "CrtYd", 0.05)] if round_pin else
+              [_rect(fx0, -fy1, fx1, -fy0, "Fab", 0.1), _rect(sx0, -sy1, sx1, -sy0, "SilkS", 0.12),
+               _rect(cx0, -cy1, cx1, -cy0, "CrtYd", 0.05)]),
             [Sym("fp_text"), Sym("user"), "${REFERENCE}", [Sym("at"), 0, 0, 0], [Sym("layer"), "F.Fab"], _eff()]]
     for p, x, y in zip(pads, xs, ys):
         px, py = _r4(x - cx), _r4(-(y - cy))

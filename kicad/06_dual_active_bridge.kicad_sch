@@ -1928,7 +1928,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 81.28 48.26 0)
 			(effects
 				(font
@@ -2000,7 +2000,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 81.28 86.36 0)
 			(effects
 				(font
@@ -2582,7 +2582,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 137.16 48.26 0)
 			(effects
 				(font
@@ -2654,7 +2654,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-3_Vertical"
+		(property "Footprint" "ac_psu:TO-247-3_Vertical_Proteus"
 			(at 137.16 86.36 0)
 			(effects
 				(font

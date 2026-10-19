@@ -13,11 +13,11 @@ C4,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C5,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C6,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C7,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
-C8,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
+C8,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C9,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C10,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
-C11,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
-C12,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
+C11,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
+C12,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C13,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C14,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C15,ac_psu:C_Polarized,ac_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,EEEFTE221XAP SMD electrolytic
@@ -26,11 +26,11 @@ C17,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C18,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C19,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C20,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
-C21,ac_psu:C,Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4,"7u film, P27.5"
+C21,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C22,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C23,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C24,ac_psu:C,Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4,"7u film, P27.5"
-C25,ac_psu:C,Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4,"7u film, P27.5"
+C25,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C26,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C27,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C28,ac_psu:C_Polarized,ac_psu:CP_Elec_6.3x7.7_EEEFTE221XAP,EEEFTE221XAP SMD electrolytic
@@ -38,8 +38,8 @@ C29,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Prote
 C30,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C31,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C32,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
-C33,ac_psu:C,Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4,"7u film, P27.5"
-C34,ac_psu:C,Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4,"7u film, P27.5"
+C33,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
+C34,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C35,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C36,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C37,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -66,7 +66,7 @@ C57,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C58,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C59,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C60,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
-C61,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
+C61,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C62,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C63,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C64,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -77,14 +77,14 @@ C68,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C69,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C70,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C71,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C72,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
+C72,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C73,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C74,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C75,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C76,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C77,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C78,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C79,ac_psu:C_Polarized,Capacitor_THT:CP_Radial_D35.0mm_P10.00mm_SnapIn,SNAP_IN_35MM
+C79,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C80,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C81,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C82,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -123,7 +123,7 @@ J7,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
 J8,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J9,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
 J10,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
-J11,ac_psu:HEADER_38_50MIL,Connector_PinHeader_1.27mm:PinHeader_2x19_P1.27mm_Vertical,2x19 1.27 mm
+J11,ac_psu:HEADER_38_50MIL,ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus,2x19 1.27 mm
 J12,ac_psu:HEADER_2X3_43_48,ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48,"2x3 1.27 mm, pads 43-48"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 PE1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
@@ -135,18 +135,18 @@ PE6,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 PE7,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 PE8,ac_psu:PIN,ac_psu:Terminal_D3.05mm_Drill1.52mm,PIN terminal
 PWM1,ac_psu:IW1830,Package_DIP:DIP-8-N6_W7.62mm,DIP-8 without pin 6
-Q1,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q2,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q3,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q4,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q5,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q6,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q7,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q8,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q9,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q10,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q11,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
-Q12,ac_psu:C3M0065090D,Package_TO_SOT_THT:TO-247-3_Vertical,"TO-247-3, 1=G 2=D 3=S"
+Q1,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q2,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q3,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q4,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q5,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q6,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q7,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q8,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q9,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q10,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q11,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
+Q12,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
 Q13,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 Q14,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 R1,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
@@ -251,20 +251,20 @@ REF1,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 REF2,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 TR1,ac_psu:ETD34_TRAN_1P1S,,not on the board
 TR2,ac_psu:EF20_AUX_TRANS,ac_psu:Transformer_EF20_2x5_P3.81mm,"EF20, pads 1-10"
-U1,ac_psu:OPA2353UA,Package_SO:TSSOP-8_3x3mm_P0.65mm,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
+U1,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U2,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
 U3,ac_psu:TPS73033DBVT,ac_psu:SOT-23-5_TPS73033,"SOT-23-5 (DBV), Proteus pad rows 2.50 mm apart"
 U4,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U5,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U6,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
-U7,ac_psu:OPA2353UA,Package_SO:TSSOP-8_3x3mm_P0.65mm,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
-U8,ac_psu:VXO7805-1000,Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
-U9,ac_psu:VXO7805-500,Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
+U7,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
+U8,ac_psu:VXO7805-1000,ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
+U9,ac_psu:VXO7805-500,ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
 U10,ac_psu:TPS73033DBVT,ac_psu:SOT-23-5_TPS73033,"SOT-23-5 (DBV), Proteus pad rows 2.50 mm apart"
-U11,ac_psu:SN74LV4051,Package_SO:TSSOP-16_4.4x5mm_P0.65mm,TSSOP-16
+U11,ac_psu:SN74LV4051,ac_psu:TSSOP-16_4.4x5mm_P0.65mm_Proteus,TSSOP-16
 U12,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
-U13,ac_psu:Si8661BD-B-IS,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W
+U13,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U14,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
-U15,ac_psu:Si8661BD-B-IS,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W
-U16,ac_psu:Si8660BD-B-IS,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W
-U17,ac_psu:Si8661BD-B-IS,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,SOIC-16W
+U15,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
+U16,ac_psu:Si8660BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
+U17,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
