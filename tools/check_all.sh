@@ -16,6 +16,8 @@ step "Footprints vs IPC pad geometry" tools/bin/kipy tools/check_footprints.py -
 step "Board pads, holes, vias vs IPC" tools/bin/kipy tools/check_board.py
 step "Board copper connectivity after zone fill" tools/bin/kipy tools/assign_nets.py --check
 step "DRC with schematic parity" python3 tools/drc.py
+step "IPC-D-356 from the board vs Proteus" python3 tools/ipc356_diff.py
+step "Gerber round trip vs Proteus (copper, drills)" python3 tools/gerber_roundtrip.py --check
 
 echo
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || echo "SOME CHECKS FAILED"

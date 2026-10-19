@@ -1,17 +1,20 @@
-"""Minimal Gerber X2 reader for the Proteus CADCAM files (stdlib only).
+"""Minimal Gerber X2 reader for the Proteus CADCAM files and KiCad's plots (stdlib only).
 
-Covers what Proteus 8.12 writes: %FSLAX45Y45*%, %MOMM*%, G01 linear interpolation only
-(G02/G03 are rejected), D01 draws, D02 moves, D03 flashes, G36/G37 regions with several
-contours, %LPD*% / %LPC*% polarity, standard C/R apertures, and the PPAD aperture macros
-(a single outline primitive, code 4). The aperture function comes from the preceding
-%TA.AperFunction,...*% attribute.
+Covers what Proteus 8.12 and kicad-cli 10 write: %FSLAX45Y45*% / %FSLAX46Y46*%, %MOMM*%,
+G01 linear interpolation only (G02/G03 are rejected), D01 draws, D02 moves, D03 flashes,
+G36/G37 regions with several contours, %LPD*% / %LPC*% polarity, standard C/R/O apertures,
+and aperture macros: Proteus' PPAD (one outline primitive, code 4) and KiCad's RoundRect
+(primitives 4, 1 and 20 with $n modifier expressions). The aperture function comes from the
+preceding %TA.AperFunction,...*% attribute; KiCad's object attributes (%TO.P refdes,pin,
+%TO.N net, %TO.C component) are attached to the objects they apply to.
 
 Coordinates are returned in mm in the Gerber frame (= IPC frame, Y up).
 
 parse(path) -> Gerber with
-  apertures {dcode: Aperture(shape, params, function, outline)}
-  objects   [Draw | Flash | Region] in file order, each with .dark (polarity)
+  apertures {dcode: Aperture(shape, params, function, outline, primitives)}
+  objects   [Draw | Flash | Region] in file order, each with .dark (polarity) and .attrs
 """
+import math
 import re
 from dataclasses import dataclass, field
 
@@ -19,10 +22,11 @@ from dataclasses import dataclass, field
 @dataclass
 class Aperture:
     dcode: int
-    shape: str            # C, R, or a macro name
-    params: tuple         # C: (d,), R: (w, h)
+    shape: str            # C, R, O, or a macro name
+    params: tuple         # C: (d,), R / O: (w, h), macro: the modifiers
     function: str         # e.g. "Conductor", "ViaPad", "ComponentPad", "SMDPad,CuDef"
-    outline: list = None  # macro outline points (mm, relative to the flash point)
+    outline: list = None  # macro with a single outline primitive: its points (mm, relative)
+    primitives: list = None  # macro: [("poly", [(x, y), ...]) | ("circle", d, cx, cy)], all dark
 
     @property
     def diameter(self):
@@ -37,6 +41,7 @@ class Draw:
     x2: float
     y2: float
     dark: bool
+    attrs: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -45,12 +50,14 @@ class Flash:
     x: float
     y: float
     dark: bool
+    attrs: dict = field(default_factory=dict)
 
 
 @dataclass
 class Region:
     contours: list        # [[(x, y), ...], ...] closed (first point == last point)
     dark: bool
+    attrs: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -65,6 +72,62 @@ class Gerber:
 
 
 _COORD = re.compile(r"([XYIJ])([+-]?\d+)")
+_EXPR_OK = re.compile(r"^[\d.\s$+\-xX/()]*$")
+
+
+def _macro_eval(expr, mods):
+    """Value of a macro primitive modifier: a number or an expression in $n (x = multiply)."""
+    if not _EXPR_OK.match(expr):
+        raise ValueError(f"unsupported macro expression {expr!r}")
+    e = re.sub(r"\$(\d+)", lambda m: f"({mods[int(m.group(1)) - 1]!r})", expr)
+    e = e.replace("x", "*").replace("X", "*")
+    return float(eval(e, {"__builtins__": {}}, {}))  # only digits, $n, + - * / ( ) survive the regex
+
+
+def _rot(pts, deg):
+    if not deg:
+        return pts
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return [(x * c - y * s, x * s + y * c) for x, y in pts]
+
+
+def _macro_primitives(name, prims, mods):
+    """Resolve a macro's primitives for one aperture definition (mm, relative to the flash)."""
+    out = []
+    for p in prims:
+        v = [_macro_eval(e, mods) for e in p]
+        code = int(v[0])
+        if code == 4:         # outline: exposure, n, x0, y0, ..., xn, yn, rotation
+            if v[1] != 1:
+                raise ValueError(f"macro {name}: clear outline primitive")
+            n = int(v[2])
+            pts = [(v[3 + 2 * i], v[4 + 2 * i]) for i in range(n + 1)]
+            out.append(("poly", _rot(pts, v[3 + 2 * (n + 1)])))
+        elif code == 1:       # circle: exposure, diameter, cx, cy [, rotation]
+            if v[1] != 1:
+                raise ValueError(f"macro {name}: clear circle primitive")
+            cx, cy = _rot([(v[3], v[4])], v[5] if len(v) > 5 else 0)[0]
+            out.append(("circle", v[2], cx, cy))
+        elif code == 20:      # vector line: exposure, width, x1, y1, x2, y2, rotation
+            if v[1] != 1:
+                raise ValueError(f"macro {name}: clear line primitive")
+            w, x1, y1, x2, y2 = v[2] / 2, v[3], v[4], v[5], v[6]
+            dx, dy = x2 - x1, y2 - y1
+            L = math.hypot(dx, dy)
+            if L == 0:
+                continue
+            nx, ny = -dy / L * w, dx / L * w
+            pts = [(x1 + nx, y1 + ny), (x2 + nx, y2 + ny), (x2 - nx, y2 - ny), (x1 - nx, y1 - ny)]
+            out.append(("poly", _rot(pts, v[7])))
+        elif code == 21:      # center line: exposure, w, h, cx, cy, rotation
+            if v[1] != 1:
+                raise ValueError(f"macro {name}: clear center line primitive")
+            w, h, cx, cy = v[2] / 2, v[3] / 2, v[4], v[5]
+            pts = [(cx - w, cy - h), (cx + w, cy - h), (cx + w, cy + h), (cx - w, cy + h)]
+            out.append(("poly", _rot(pts, v[6])))
+        else:
+            raise ValueError(f"macro {name}: unsupported primitive {code}")
+    return out
 
 
 def parse(path):
@@ -82,6 +145,7 @@ def parse(path):
     in_region = False
     contour = None
     region = None
+    attrs = {}
     for tok in tokens:
         if tok.startswith("%"):
             body = tok[1:-1]
@@ -98,28 +162,39 @@ def parse(path):
                 g.attributes[k] = v
             elif body.startswith("TA.AperFunction"):
                 func = body[len("TA.AperFunction,"):-1]
+            elif body.startswith("TO."):
+                k, _, v = body[3:-1].partition(",")
+                attrs = dict(attrs)
+                attrs[k] = v
             elif body.startswith("TD"):
-                func = ""
+                name = body[2:-1]
+                if not name or name.startswith("TA") or name == "AperFunction":
+                    func = ""
+                if not name or name.startswith("TO"):
+                    attrs = {}
+                elif name.startswith("."):
+                    attrs = {k: v for k, v in attrs.items() if k != name[1:]}
             elif body.startswith("LP"):
                 dark = body[2] == "D"
             elif body.startswith("AM"):
                 name, _, rest = body[2:].partition("*")
-                nums = [float(t) for t in re.findall(r"[+-]?\d+\.?\d*", rest)]
-                # primitive 4: 4, exposure, n, x0, y0, ..., xn, yn, rotation
-                if not nums or nums[0] != 4:
-                    raise ValueError(f"{path}: unsupported macro {name}")
-                n = int(nums[2])
-                pts = [(nums[3 + 2 * i], nums[4 + 2 * i]) for i in range(n + 1)]
-                if nums[3 + 2 * (n + 1)] != 0:
-                    raise ValueError(f"{path}: rotated macro {name}")
-                macros[name] = pts
+                prims = []
+                for stmt in rest.split("*"):
+                    stmt = stmt.strip()
+                    if not stmt or stmt.startswith("0"):   # empty or comment
+                        continue
+                    prims.append([e.strip() for e in stmt.split(",")])
+                macros[name] = prims
             elif body.startswith("AD"):
                 m = re.match(r"ADD(\d+)([A-Za-z_][A-Za-z0-9_]*)(?:,([^*]*))?\*", body)
                 d, shape = int(m.group(1)), m.group(2)
                 params = tuple(float(p) for p in m.group(3).split("X")) if m.group(3) else ()
                 ap = Aperture(d, shape, params, func)
-                if shape not in ("C", "R"):
-                    ap.outline = macros[shape]
+                if shape not in ("C", "R", "O"):
+                    ap.primitives = _macro_primitives(shape, macros[shape], params)
+                    polys = [p for p in ap.primitives if p[0] == "poly"]
+                    if len(ap.primitives) == 1 and polys:
+                        ap.outline = polys[0][1]
                 g.apertures[d] = ap
             continue
         w = tok[:-1]
@@ -132,7 +207,7 @@ def parse(path):
         if w in ("G02", "G03", "G75", "G74"):
             raise ValueError(f"{path}: arcs not supported ({w})")
         if w == "G36":
-            in_region, region, contour = True, Region([], dark), None
+            in_region, region, contour = True, Region([], dark, attrs), None
             continue
         if w == "G37":
             if contour and len(contour) > 1:
@@ -164,8 +239,8 @@ def parse(path):
             else:
                 raise ValueError(f"{path}: flash inside region")
         elif op == "1":
-            g.objects.append(Draw(cur_ap, x, y, nx, ny, dark))
+            g.objects.append(Draw(cur_ap, x, y, nx, ny, dark, attrs))
         elif op == "3":
-            g.objects.append(Flash(cur_ap, nx, ny, dark))
+            g.objects.append(Flash(cur_ap, nx, ny, dark, attrs))
         x, y = nx, ny
     return g
