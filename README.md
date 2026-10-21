@@ -60,6 +60,8 @@ run `git submodule update --init`). Board values (source files, refdes/net fix-u
 counts, layers, outline) are in `p2k_config.py`. The scripts in `tools/` are the ones not
 moved yet; they import the shared modules from `p2k`. Wrappers: `tools/p2k/bin/p2k <tool>`,
 `tools/p2k/bin/kipy` (KiCad's Python with pcbnew), `tools/p2k/bin/kicad-cli`.
+The generic migration method distilled from this board, the playbook, is in proteus2kicad
+(`tools/p2k/CONVERSION_PLAYBOOK.md`).
 
 ## Checks
 
