@@ -73,8 +73,8 @@ def power_at(sh, net, p, direction):
     """Power symbol whose connection point is p, body pointing in `direction`
     ('up', 'down', 'left', 'right'). Works for the ground-style (pin dir 270) and
     supply-style (pin dir 90) project power symbols."""
-    from sch_builder import lib
-    from sexpr import find, walk
+    from p2k.sch_builder import lib
+    from p2k.sexpr import find, walk
     sym = lib()[net]
     pin_dir = int(float(find(next(walk(sym, "pin")), "at")[3]))
     body = {90: "up", 270: "down"}[pin_dir]
@@ -117,8 +117,8 @@ def flagged_power(sh, net, x, y):
     """A power symbol with a PWR_FLAG attached by a short vertical wire (supply symbols
     point up with the flag below, ground symbols point down with the flag above).
     Returns the power-symbol connection point (x, y)."""
-    from sch_builder import lib
-    from sexpr import find, walk
+    from p2k.sch_builder import lib
+    from p2k.sexpr import find, walk
     pin_dir = int(float(find(next(walk(lib()[net], "pin")), "at")[3]))
     if pin_dir == 90:      # supply style: body up
         power_at(sh, net, (x, y), "up")
@@ -135,8 +135,8 @@ def flagged_power(sh, net, x, y):
 
 def _two_pin_rot(sym, pin, want):
     """Rotation that puts `pin` of two-pin symbol `sym` at `want` ('top' or 'left')."""
-    from sch_builder import lib, _rot
-    from sexpr import find, walk
+    from p2k.sch_builder import lib, _rot
+    from p2k.sexpr import find, walk
     for p in walk(lib()[sym], "pin"):
         if find(p, "number")[1] == str(pin):
             at = find(p, "at")
