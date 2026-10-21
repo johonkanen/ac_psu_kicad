@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Phase 3a: create kicad/ac_psu.kicad_pcb from the schematic, footprints placed where Proteus
-put them (run under tools/bin/kipy). Re-runnable: the board is rebuilt from scratch.
+put them (run under tools/p2k/bin/kipy). Re-runnable: the board is rebuilt from scratch.
 
 There is no headless "Update PCB from schematic", so this does it in Python:
   - export the kicadxml netlist (kicad-cli) and create one footprint per symbol (TR1 and other
@@ -16,7 +16,7 @@ There is no headless "Update PCB from schematic", so this does it in Python:
 
 Tracks, vias and zones are added by the later steps (tools/make_pcb.sh runs them all).
 
-Usage: tools/bin/kipy tools/build_pcb.py
+Usage: tools/p2k/bin/kipy tools/build_pcb.py
 """
 import csv
 import os
@@ -25,8 +25,9 @@ import sys
 import pcbnew
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 import board_common as bc  # noqa: E402
-import gerber  # noqa: E402
+from p2k import gerber  # noqa: E402
 from gen_footprints import footprint_path  # noqa: E402
 
 FIT_CSV = os.path.join(bc.REPORTS, "footprint_fit.csv")

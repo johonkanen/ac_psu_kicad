@@ -49,14 +49,15 @@ from PIL import Image, ImageDraw
 from scipy import ndimage
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import gerber  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k import gerber  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOARD = os.path.join(ROOT, "kicad", "ac_psu.kicad_pcb")
 CADCAM = os.path.join(ROOT, "source", "cadcam")
 IPC_JSON = os.path.join(ROOT, "reference", "ipc356_pads.json")
 OUT = os.path.join(ROOT, "reports", "roundtrip")
-CLI = os.path.join(ROOT, "tools", "bin", "kicad-cli")
+CLI = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
 
 RES = 0.025          # mm per pixel of the comparison raster
 TOL = 0.05           # mm, geometric tolerance (same as the pad position tolerance)

@@ -16,7 +16,8 @@ import subprocess
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sexpr import Sym, dump, find, find_all, load, parse, save, walk  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k.sexpr import Sym, dump, find, find_all, load, parse, save, walk  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIB_PATH = os.path.join(ROOT, "lib", "ac_psu.kicad_sym")
@@ -24,7 +25,7 @@ LIB = "ac_psu"
 
 
 def std_lib_dir():
-    mount = subprocess.run(["bash", "-c", f"source {ROOT}/tools/kicad_env.sh >/dev/null && echo $KICAD_MOUNT"],
+    mount = subprocess.run(["bash", "-c", f"source {ROOT}/tools/p2k/bin/kicad_env.sh >/dev/null && echo $KICAD_MOUNT"],
                            capture_output=True, text=True, check=True).stdout.strip()
     return os.path.join(mount, "share", "kicad", "symbols")
 

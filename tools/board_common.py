@@ -1,5 +1,5 @@
 """Shared bits of the Phase 3 board scripts (build_pcb, gerber_to_tracks, assign_nets,
-pours_to_zones, check_board). Run under tools/bin/kipy (needs pcbnew) except where noted.
+pours_to_zones, check_board). Run under tools/p2k/bin/kipy (needs pcbnew) except where noted.
 
 Coordinates: the IPC file and the gerbers use mm with Y up; the KiCad board uses the same
 origin with Y down, so KiCad (x, y) = (x, -y) of the IPC/gerber point (PLAN.md 3a).
@@ -52,7 +52,7 @@ def export_netlist():
     comps: {ref: dict(value, footprint, fields, sheet_tstamps, tstamps, sheetname,
                       sheetfile, excluded)}
     nets:  {name: [(ref, pin), ...]}"""
-    cli = os.path.join(ROOT, "tools", "bin", "kicad-cli")
+    cli = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
     with tempfile.TemporaryDirectory() as tmp:
         out = os.path.join(tmp, "netlist.xml")
         r = subprocess.run([cli, "sch", "export", "netlist", "--format", "kicadxml", "-o", out, SCHEMATIC],

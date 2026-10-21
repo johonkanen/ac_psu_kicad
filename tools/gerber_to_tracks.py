@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 3b: Proteus copper gerbers -> KiCad tracks and vias (run under tools/bin/kipy).
+"""Phase 3b: Proteus copper gerbers -> KiCad tracks and vias (run under tools/p2k/bin/kipy).
 
 Reads the 4 copper gerbers and the plated drill gerber (tools/gerber.py) and, on
 kicad/ac_psu.kicad_pcb (made by build_pcb.py):
@@ -22,7 +22,7 @@ Tracks and vias get no net here; tools/assign_nets.py assigns them.
 
 load_copper() is the shared reader (also used by assign_nets.py and pours_to_zones.py).
 
-Usage: tools/bin/kipy tools/gerber_to_tracks.py
+Usage: tools/p2k/bin/kipy tools/gerber_to_tracks.py
 """
 import math
 import os
@@ -30,9 +30,10 @@ import sys
 from collections import Counter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 import board_common as bc  # noqa: E402
-import geom2d  # noqa: E402
-import gerber  # noqa: E402
+from p2k import geom2d  # noqa: E402
+from p2k import gerber  # noqa: E402
 
 VIA_PAD = 0.4572
 VIA_DRILL = 0.3

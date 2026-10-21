@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Phase 3c: give every imported copper item its net, and check copper connectivity
-(run under tools/bin/kipy).
+(run under tools/p2k/bin/kipy).
 
 Geometric union-find (tools/geom2d.py) over the copper items, per layer: pads, tracks, vias
 (all layers) and pours. Every connected group takes the net of its pads (KiCad nets from
@@ -21,7 +21,7 @@ Default mode (after gerber_to_tracks.py), Proteus geometry:
 Report: reports/assign_nets.txt (default mode writes the stage A/B sections, --check
 replaces its own section at the end).
 
-Usage: tools/bin/kipy tools/assign_nets.py [--check]
+Usage: tools/p2k/bin/kipy tools/assign_nets.py [--check]
 """
 import json
 import math
@@ -32,8 +32,9 @@ from collections import defaultdict
 import pcbnew
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 import board_common as bc  # noqa: E402
-import geom2d  # noqa: E402
+from p2k import geom2d  # noqa: E402
 from gerber_to_tracks import VIA_PAD, flash_shape, load_copper  # noqa: E402
 
 REPORT = os.path.join(bc.REPORTS, "assign_nets.txt")

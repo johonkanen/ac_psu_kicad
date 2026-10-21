@@ -7,7 +7,7 @@
 # Verify with tools/check_all.sh (board checks: check_board.py, assign_nets.py --check, drc.py).
 set -eu
 cd "$(dirname "$0")/.."
-tools/bin/kipy tools/build_pcb.py
-tools/bin/kipy tools/gerber_to_tracks.py
-tools/bin/kipy tools/assign_nets.py
-tools/bin/kipy tools/pours_to_zones.py
+tools/p2k/bin/kipy tools/build_pcb.py
+tools/p2k/bin/kipy tools/gerber_to_tracks.py
+tools/p2k/bin/kipy tools/assign_nets.py
+tools/p2k/bin/kipy tools/pours_to_zones.py

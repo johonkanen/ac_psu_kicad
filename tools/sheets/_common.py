@@ -9,7 +9,8 @@ import sys
 TOOLS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(TOOLS)
 sys.path.insert(0, TOOLS)
-from sch_builder import Sheet  # noqa: E402,F401
+sys.path.insert(0, os.path.join(TOOLS, "p2k"))  # proteus2kicad
+from p2k.sch_builder import Sheet  # noqa: E402,F401
 
 G = 1.27  # grid
 

@@ -60,7 +60,7 @@ def load_ipc():
 
 
 def export_netlist(sch, out):
-    cli = os.path.join(ROOT, "tools", "bin", "kicad-cli")
+    cli = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
     r = subprocess.run([cli, "sch", "export", "netlist", "--format", "kicadxml", "-o", out, sch],
                        capture_output=True, text=True)
     if r.returncode != 0:

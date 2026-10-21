@@ -11,7 +11,8 @@ import sys
 import uuid
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from sexpr import Sym, save  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k.sexpr import Sym, save  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 KDIR = os.path.join(ROOT, "kicad")
@@ -81,7 +82,7 @@ def main():
     if existing and not force:
         sys.exit(f"make_skeleton: refusing to overwrite {existing} (use --force)")
 
-    mount = subprocess.run(["bash", "-c", f"source {ROOT}/tools/kicad_env.sh >/dev/null && echo $KICAD_MOUNT"],
+    mount = subprocess.run(["bash", "-c", f"source {ROOT}/tools/p2k/bin/kicad_env.sh >/dev/null && echo $KICAD_MOUNT"],
                            capture_output=True, text=True, check=True).stdout.strip()
     pro = json.load(open(os.path.join(mount, "share", "kicad", "template", "kicad.kicad_pro")))
     pro["meta"]["filename"] = f"{PROJECT}.kicad_pro"

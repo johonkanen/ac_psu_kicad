@@ -5,7 +5,7 @@
 Exports kicad/ac_psu.kicad_pcb with `kicad-cli pcb export ipcd356`, parses it (KiCad writes
 units CUST 0 = 0.0001 inch, net names of more than 14 characters as NNAME aliases, refdes
 truncated to 6 characters like Proteus, vias with refdes VIA, the mounting holes H1..H4 as N/C)
-and matches every Proteus record (tools/ipc356.py) to a KiCad record:
+and matches every Proteus record (p2k ipc356) to a KiCad record:
   pads   same truncated refdes and pin id, nearest position (two pads numbered 1 on
          ACIN/ACOUT, FILTER_IN/FILTER_OUT share the truncated refdes), within TOL;
   vias   nearest KiCad via within TOL;
@@ -30,11 +30,12 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import ipc356  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k import ipc356  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOARD = ROOT / "kicad" / "ac_psu.kicad_pcb"
-CLI = ROOT / "tools" / "bin" / "kicad-cli"
+CLI = ROOT / "tools" / "p2k" / "bin" / "kicad-cli"
 TOL = 0.05        # mm, position
 DRILL_TOL = 0.005  # mm (KiCad writes 0.0001 inch = 0.00254 mm)
 COPPER_LAYERS = 4

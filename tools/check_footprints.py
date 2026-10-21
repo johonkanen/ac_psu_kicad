@@ -4,7 +4,7 @@
 For every IPC refdes: take the Footprint field from the schematic (kicad/*.kicad_sch), load
 the footprint (ac_psu -> lib/ac_psu.pretty, others from the KiCad AppImage libraries), match
 pads by number and solve the rigid transform (rotation, mirror for bottom-side parts,
-translation) onto the IPC pad centres (tools/fpgeom.py). Fails when a part has no
+translation) onto the IPC pad centres (p2k fpgeom). Fails when a part has no
 footprint, pad numbers differ, or any pad is more than 0.05 mm off. Pad size / drill
 differences are only reported (KiCad sizes are accepted, PLAN.md 4.3).
 
@@ -13,15 +13,15 @@ as bottom only when the pad pattern fits mirrored but not unmirrored (chiral pat
 
 Writes reports/footprint_fit.csv (placement per part: side, angle, origin in IPC
 coordinates and as KiCad position/orientation, worst residual - input for Phase 3
-placement; the KiCad recipe is in tools/fpgeom.py) and
+placement; the KiCad recipe is in p2k fpgeom) and
 reports/footprint_pads.csv (residual and size difference per pad).
 
-With --pcbnew (run under tools/bin/kipy) every footprint is also loaded with pcbnew, placed
+With --pcbnew (run under tools/p2k/bin/kipy) every footprint is also loaded with pcbnew, placed
 on an empty BOARD with that KiCad recipe, and its pad positions are compared with the IPC pads
 again - this pins down the placement convention Phase 3 uses.
 
 Usage: python3 tools/check_footprints.py [-v]
-       tools/bin/kipy tools/check_footprints.py --pcbnew [-v]
+       tools/p2k/bin/kipy tools/check_footprints.py --pcbnew [-v]
 """
 import csv
 import glob
@@ -29,11 +29,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import fpgeom  # noqa: E402
-import sexpr  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k import fpgeom  # noqa: E402
+from p2k import sexpr  # noqa: E402
 from gen_footprints import MAP_CSV, footprint_path  # noqa: E402
 
-ROOT = fpgeom.ROOT
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOL = 0.05
 REPORTS = os.path.join(ROOT, "reports")
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 3d: Proteus pours -> KiCad zones, then fill (run under tools/bin/kipy).
+"""Phase 3d: Proteus pours -> KiCad zones, then fill (run under tools/p2k/bin/kipy).
 
 Input: the Proteus pours from the copper gerbers (gerber_to_tracks.load_copper) and their
 nets from reports/pour_nets.json (assign_nets.py). For each pour:
@@ -17,7 +17,7 @@ nets from reports/pour_nets.json (assign_nets.py). For each pour:
 Existing zones are removed first (re-runnable). The zones are filled with ZONE_FILLER and
 the board is saved.
 
-Usage: tools/bin/kipy tools/pours_to_zones.py
+Usage: tools/p2k/bin/kipy tools/pours_to_zones.py
 """
 import json
 import os

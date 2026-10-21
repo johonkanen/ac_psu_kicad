@@ -28,7 +28,7 @@ ACCEPTED = {
 
 
 def main():
-    cli = os.path.join(ROOT, "tools", "bin", "kicad-cli")
+    cli = os.path.join(ROOT, "tools", "p2k", "bin", "kicad-cli")
     os.makedirs(os.path.dirname(REPORT), exist_ok=True)
     r = subprocess.run([cli, "pcb", "drc", "--schematic-parity", "--severity-all", "--format", "json",
                         "-o", REPORT, BOARD], capture_output=True, text=True)

@@ -10,7 +10,7 @@ Vias:  every IPC via has a board via at its position (0.01 mm) on the IPC net, a
        via is an IPC via.
 Copper: every track and via has a net, every zone has a net (after tools/make_pcb.sh).
 
-Usage: tools/bin/kipy tools/check_board.py [--pads-only]
+Usage: tools/p2k/bin/kipy tools/check_board.py [--pads-only]
 """
 import math
 import os

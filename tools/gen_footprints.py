@@ -25,11 +25,12 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import fpgeom  # noqa: E402
-import sexpr  # noqa: E402
-from sexpr import Sym  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+from p2k import fpgeom  # noqa: E402
+from p2k import sexpr  # noqa: E402
+from p2k.sexpr import Sym  # noqa: E402
 
-ROOT = fpgeom.ROOT
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRETTY = os.path.join(ROOT, "lib", "ac_psu.pretty")
 MAP_CSV = os.path.join(ROOT, "lib", "footprint_map.csv")
 PART_MAP = os.path.join(ROOT, "lib", "part_map.csv")
@@ -159,12 +160,12 @@ TOL_KICAD = 0.045   # use a KiCad footprint unchanged up to this residual
 
 
 def kicad_footprint_dir():
-    state = f"{os.environ.get('TMPDIR', '/tmp')}/ac_psu_kicad_mount.{os.getuid()}"
+    state = f"{os.environ.get('TMPDIR', '/tmp')}/p2k_kicad_mount.{os.getuid()}"
     mount = os.environ.get("KICAD_MOUNT") or (open(state).read().strip() if os.path.exists(state) else "")
     d = os.path.join(mount, "share", "kicad", "footprints")
     if not mount or not os.path.isdir(d):
-        sys.exit("gen_footprints: KiCad AppImage not mounted - run `source tools/kicad_env.sh` "
-                 "(or any tools/bin wrapper) first")
+        sys.exit("gen_footprints: KiCad AppImage not mounted - run `source tools/p2k/bin/kicad_env.sh` "
+                 "(or any tools/p2k/bin wrapper) first")
     return d
 
 
