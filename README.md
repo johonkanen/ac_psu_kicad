@@ -52,6 +52,15 @@ reports/     generated reports: footprint fit, net assignment, pour nets (commit
   with `--version`; it hangs.
 - Python 3 for the plain scripts.
 
+## Tools
+
+The generic tools are the shared [proteus2kicad](https://github.com/johonkanen/proteus2kicad)
+repository, a git submodule in `tools/p2k` (clone with `git clone --recurse-submodules`, or
+run `git submodule update --init`). Board values (source files, refdes/net fix-ups, expected
+counts, layers, outline) are in `p2k_config.py`. The scripts in `tools/` are the ones not
+moved yet; they import the shared modules from `p2k`. Wrappers: `tools/p2k/bin/p2k <tool>`,
+`tools/p2k/bin/kipy` (KiCad's Python with pcbnew), `tools/p2k/bin/kicad-cli`.
+
 ## Checks
 
 Run everything with one command:
@@ -64,8 +73,9 @@ It runs:
 
 | Step | Script |
 |---|---|
-| KiCad environment (pcbnew 10.0.7 loads) | `tools/bin/kipy` |
-| IPC parser self-check | `tools/ipc356.py --check` |
+| KiCad environment (pcbnew 10.0.7 loads) | `tools/p2k/bin/kipy` |
+| IPC parser self-check | `tools/p2k/bin/p2k ipc356 --check` |
+| Gerber X2 flashes and drills vs IPC, outline | `tools/p2k/bin/p2k check_sources` |
 | Symbol library is up to date with its generator | `tools/gen_symbols.py --check` |
 | Symbol pin sets match the IPC pins for every refdes | `tools/check_symbols.py` |
 | ERC | `tools/erc.sh` (report in `reports/erc.rpt`) |
@@ -82,11 +92,11 @@ or split nets, N/C mismatches, missing or extra parts and pins, and progress per
 Use `--sheet N` to check one sheet while drawing.
 
 Other tools: `gen_symbols.py` builds `lib/ac_psu.kicad_sym` from KiCad standard symbols
-and box symbols; `sch_builder.py` is a small library for writing schematic sheets from
-Python; `sexpr.py` reads and writes KiCad s-expression files; `make_skeleton.py` created
+and box symbols; `p2k.sch_builder` is a small library for writing schematic sheets from
+Python; `p2k.sexpr` reads and writes KiCad s-expression files; `make_skeleton.py` created
 the project skeleton once; `tools/sheets/sheetNN.py` generate the 11 sheets.
 
 The PCB is rebuilt with `tools/make_pcb.sh`: `build_pcb.py` (footprints, nets, outline,
 mounting holes), `gerber_to_tracks.py` (Proteus copper gerbers → tracks and vias, using
-`gerber.py`), `assign_nets.py` (nets by copper connectivity, `geom2d.py`) and
+`p2k.gerber`), `assign_nets.py` (nets by copper connectivity, `p2k.geom2d`) and
 `pours_to_zones.py` (Proteus pours → filled zones). The output is reproducible byte for byte.

@@ -1,6 +1,28 @@
 # Status
 
-Updated: 2026-10-19 (Phase 4 done – gerber round trip and IPC-D-356 diff against Proteus pass; the migration is complete apart from the open points listed under Phase 4)
+Updated: 2026-10-21 (tools moved to the shared proteus2kicad submodule; design files unchanged)
+
+## Shared tools – proteus2kicad (2026-10-21, branch `p2k-submodule`)
+
+- The generic tools moved to https://github.com/johonkanen/proteus2kicad, a submodule at
+  `tools/p2k` (pinned commit): `sexpr`, `geom2d`, `gerber`, `fpgeom`, `sch_builder`,
+  `render_sheet`, `ipc356`, and the `kipy` / `kicad-cli` / `kicad_env.sh` wrappers (mount
+  state now `/tmp/p2k_kicad_mount.<uid>`). Board values are in `p2k_config.py`. The other
+  scripts in `tools/` stay here for now and import the shared modules from `p2k`; they move
+  to proteus2kicad when tube_psu_kicad needs them, with this board as the regression test.
+  Paths in the phase sections below (`tools/bin/kipy`, `tools/ipc356.py`, …) are historical.
+- New check in `check_all.sh`: `p2k check_sources` (Gerber X2 pad/via/drill flashes vs IPC,
+  outline 246.8 × 154.7 mm) – passes.
+- Regression proof: `tools/check_all.sh` output identical to before apart from the new step
+  and the extra IPC counts (records 1075, smd_top 341, smd_bottom 172, free_pads 0).
+  Regenerating everything from a fresh `--recurse-submodules` clone (`p2k ipc356`,
+  `gen_symbols`, the 11 sheet scripts, `gen_footprints`, `make_pcb.sh`, `assign_nets --check`)
+  reproduces every committed file byte for byte; `kicad/`, `lib/`, `reports/` are unchanged
+  against `main`. `make_skeleton` (one-shot, random UUIDs) runs. `reference/` changed only in
+  format: new column `refdes_proteus` (= `refdes` on this board) and header lines; pad, net
+  and alias data identical.
+
+Previous update: 2026-10-19 (Phase 4 done – gerber round trip and IPC-D-356 diff against Proteus pass; the migration is complete apart from the open points listed under Phase 4)
 
 ## Phase 0 – done
 
