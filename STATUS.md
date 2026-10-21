@@ -21,6 +21,9 @@ Updated: 2026-10-21 (tools moved to the shared proteus2kicad submodule; design f
   against `main`. `make_skeleton` (one-shot, random UUIDs) runs. `reference/` changed only in
   format: new column `refdes_proteus` (= `refdes` on this board) and header lines; pad, net
   and alias data identical.
+- `tools/regen_check.sh [REF]`: the regression check above as a script (clean clone,
+  regenerate everything, fail on any difference; negative-tested with a changed sheet value).
+  Run it, plus `tools/check_all.sh`, after every `tools/p2k` bump.
 
 Previous update: 2026-10-19 (Phase 4 done – gerber round trip and IPC-D-356 diff against Proteus pass; the migration is complete apart from the open points listed under Phase 4)
 
