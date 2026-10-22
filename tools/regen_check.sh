@@ -8,11 +8,10 @@ set -u
 src="$(cd "$(dirname "$0")/.." && pwd)"
 ref="${1:-HEAD}"
 tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
+# The submodule comes from the source checkout, so an unpushed tools/p2k commit works too.
 git clone -q "$src" "$tmp/c" && cd "$tmp/c" && git checkout -q "$(git -C "$src" rev-parse "$ref")" \
-    && git submodule -q update --init || { echo "regen_check: clone failed"; exit 1; }
-# a local submodule commit not yet pushed: take it from the source checkout
-git -C tools/p2k cat-file -e "$(git -C "$src" rev-parse "$ref:tools/p2k")" 2>/dev/null \
-    || git -C tools/p2k fetch -q "$src/tools/p2k" && git submodule -q update
+    && git submodule -q init && git config submodule.tools/p2k.url "$src/tools/p2k" \
+    && git -c protocol.file.allow=always submodule -q update || { echo "regen_check: clone failed"; exit 1; }
 fail=0
 run() { "$@" >/dev/null 2>&1 || { echo "regen_check: FAILED: $*"; fail=1; }; }
 (cp -r . "$tmp/skel" && cd "$tmp/skel" && tools/p2k/bin/p2k make_skeleton --force >/dev/null) \
