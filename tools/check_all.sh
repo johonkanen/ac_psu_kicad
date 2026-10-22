@@ -10,9 +10,9 @@ step "KiCad environment" tools/p2k/bin/kipy -c "import pcbnew; v = pcbnew.GetBui
 step "IPC-D-356A parser self-check" tools/p2k/bin/p2k ipc356 --check
 step "Gerber X2 export vs IPC (pads, vias, drills, outline)" tools/p2k/bin/p2k check_sources
 step "Symbol library up to date" python3 tools/gen_symbols.py --check
-step "Symbol pin sets vs IPC" python3 tools/check_symbols.py
+step "Symbol pin sets vs IPC" tools/p2k/bin/p2k check_symbols
 step "ERC" tools/erc.sh
-step "Netlist comparison vs IPC" python3 tools/compare_netlists.py
+step "Netlist comparison vs IPC" tools/p2k/bin/p2k compare_netlists
 step "Footprint library and map up to date" python3 tools/gen_footprints.py --check
 step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy tools/check_footprints.py --pcbnew
 step "Board pads, holes, vias vs IPC" tools/p2k/bin/kipy tools/check_board.py

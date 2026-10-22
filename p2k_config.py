@@ -9,6 +9,29 @@ PROJECT = "ac_psu"  # KiCad project / library name
 CADCAM = "source/cadcam"
 IPC = "source/cadcam/single_phase_inverter_psu_v3 - CADCAM Netlist.IPC"
 
+# --- Schematic skeleton (make_skeleton) ----------------------------------------------
+
+# (Proteus page, sheet name, file) - names as in the PDF title blocks
+SHEETS = [
+    (1, "afe", "01_afe.kicad_sch"),
+    (2, "fpga connector", "02_fpga_connector.kicad_sch"),
+    (3, "regulators", "03_regulators.kicad_sch"),
+    (4, "DC links", "04_dc_links.kicad_sch"),
+    (5, "VSI", "05_vsi.kicad_sch"),
+    (6, "Dual Active Bridge", "06_dual_active_bridge.kicad_sch"),
+    (7, "Auxiliary supply", "07_auxiliary_supply.kicad_sch"),
+    (8, "SDM current measurements", "08_sdm_current_measurements.kicad_sch"),
+    (9, "primary side ADC", "09_primary_side_adc.kicad_sch"),
+    (10, "INU SDM and relay drive", "10_inu_sdm_relay_drive.kicad_sch"),  # untitled in the PDF
+    (11, "signal isolators", "11_signal_isolators.kicad_sch"),
+]
+SCH_TITLE = "Inverter PSU"
+SCH_COMPANY = "Inverter PSU"
+SCH_REV = "v3"
+SCH_COMMENT = "Redrawn from Proteus single_phase_inverter_psu_v3"
+SCH_NOTE = ("Inverter PSU v3 - redrawn from Proteus. One sheet per Proteus PDF page.\n"
+            "Net names follow the IPC-D-356A netlist (reference/pins_by_net.md).")
+
 # --- IPC-D-356A fix-ups (ipc356) -----------------------------------------------------
 
 # (truncated refdes, x_um, y_um) -> full refdes. Nets confirmed on the PDF:

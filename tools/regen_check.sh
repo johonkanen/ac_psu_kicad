@@ -3,7 +3,7 @@
 # temporary directory, regenerate every generated file there, and fail if anything differs
 # from the commit. Run after bumping tools/p2k (commit the bump first, or pass a ref).
 #   tools/regen_check.sh [REF]      (default: HEAD)
-# make_skeleton.py is one-shot with random UUIDs: it is only run, not compared.
+# make_skeleton is one-shot with random UUIDs: it is only run, not compared.
 set -u
 src="$(cd "$(dirname "$0")/.." && pwd)"
 ref="${1:-HEAD}"
@@ -15,7 +15,7 @@ git -C tools/p2k cat-file -e "$(git -C "$src" rev-parse "$ref:tools/p2k")" 2>/de
     || git -C tools/p2k fetch -q "$src/tools/p2k" && git submodule -q update
 fail=0
 run() { "$@" >/dev/null 2>&1 || { echo "regen_check: FAILED: $*"; fail=1; }; }
-(cp -r . "$tmp/skel" && cd "$tmp/skel" && python3 tools/make_skeleton.py --force >/dev/null) \
+(cp -r . "$tmp/skel" && cd "$tmp/skel" && tools/p2k/bin/p2k make_skeleton --force >/dev/null) \
     || { echo "regen_check: FAILED: make_skeleton"; fail=1; }
 run tools/p2k/bin/p2k ipc356
 run python3 tools/gen_symbols.py

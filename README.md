@@ -79,23 +79,23 @@ It runs:
 | IPC parser self-check | `tools/p2k/bin/p2k ipc356 --check` |
 | Gerber X2 flashes and drills vs IPC, outline | `tools/p2k/bin/p2k check_sources` |
 | Symbol library is up to date with its generator | `tools/gen_symbols.py --check` |
-| Symbol pin sets match the IPC pins for every refdes | `tools/check_symbols.py` |
+| Symbol pin sets match the IPC pins for every refdes | `tools/p2k/bin/p2k check_symbols` |
 | ERC | `tools/erc.sh` (report in `reports/erc.rpt`) |
-| Schematic netlist vs IPC netlist | `tools/compare_netlists.py` |
+| Schematic netlist vs IPC netlist | `tools/p2k/bin/p2k compare_netlists` |
 | Footprint library and map are up to date | `tools/gen_footprints.py --check` |
 | Footprint pads fit the IPC pads (≤ 0.05 mm) | `tools/check_footprints.py --pcbnew` |
 | Board pads/holes/vias vs IPC (position and net) | `tools/check_board.py` |
 | Copper connectivity after zone fill: 0 shorts, 0 opens, every item on its group's net | `tools/assign_nets.py --check` |
 | DRC with schematic parity: 0 shorts, 0 unconnected | `tools/drc.py` (report in `reports/drc.json`) |
 
-`compare_netlists.py` exports the KiCad netlist and compares nets as sets of
+`p2k compare_netlists` exports the KiCad netlist and compares nets as sets of
 (refdes, pin), so net names do not have to match. It reports pins on the wrong net, merged
 or split nets, N/C mismatches, missing or extra parts and pins, and progress per sheet.
 Use `--sheet N` to check one sheet while drawing.
 
 Other tools: `gen_symbols.py` builds `lib/ac_psu.kicad_sym` from KiCad standard symbols
-and box symbols; `p2k.sch_builder` is a small library for writing schematic sheets from
-Python; `p2k.sexpr` reads and writes KiCad s-expression files; `make_skeleton.py` created
+and box symbols (helpers in `p2k.symgen`); `p2k.sch_builder` is a small library for writing schematic sheets from
+Python; `p2k.sexpr` reads and writes KiCad s-expression files; `p2k make_skeleton` created
 the project skeleton once; `tools/sheets/sheetNN.py` generate the 11 sheets.
 
 The PCB is rebuilt with `tools/make_pcb.sh`: `build_pcb.py` (footprints, nets, outline,
