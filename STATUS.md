@@ -24,6 +24,10 @@ Updated: 2026-10-21 (tools moved to the shared proteus2kicad submodule; design f
 - `tools/regen_check.sh [REF]`: the regression check above as a script (clean clone,
   regenerate everything, fail on any difference; negative-tested with a changed sheet value).
   Run it, plus `tools/check_all.sh`, after every `tools/p2k` bump.
+- 2026-10-22 (tube_psu Phase 1 preparation): `check_symbols`, `compare_netlists`,
+  `make_skeleton`, the generator helpers of `gen_symbols` (`p2k.symgen`) and the generic sheet
+  helpers of `tools/sheets/_common.py` (`p2k.sheetkit`) moved to proteus2kicad; skeleton values
+  in `p2k_config.py` (`SHEETS`, `SCH_*`). `check_all.sh` output identical, `regen_check.sh` OK.
 
 Previous update: 2026-10-19 (Phase 4 done – gerber round trip and IPC-D-356 diff against Proteus pass; the migration is complete apart from the open points listed under Phase 4)
 
