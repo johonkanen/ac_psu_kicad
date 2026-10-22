@@ -1,6 +1,81 @@
 # Status
 
-Updated: 2026-10-21 (tools moved to the shared proteus2kicad submodule; design files unchanged)
+Updated: 2026-10-22 (v4 design fixes started: analysis only, see "v4 design fixes – in progress")
+
+## v4 design fixes – in progress (2026-10-22, stopped on request before any design edit)
+
+State: **no design file changed yet** (schematic sheets, lib/, board, checks untouched;
+`tools/check_all.sh` still passes exactly as in Phase 4). Only new file: `tools/v4/render_area.py`
+(kicad-cli SVG export of a board rectangle, IPC frame, cropped via viewBox, PNG via
+p2k.render_sheet.svg_to_png). User decisions are recorded in next_prompt.md.
+
+| Fix | State |
+|---|---|
+| 1 RET_ISO -> ISOGND | not started (analysed) |
+| 2 U11-6 INH DGND -> GND | not started (analysed) |
+| 3 ADA2/ADA3 1 nF caps | not started (placement planned) |
+| 4 ADuM7701 RC compensation | not started (U6 planned; U4/U5 need a decision, see below) |
+| 5 R48 Kelvin split | not started (pin roles verified, copper to cut identified) |
+
+Findings (IPC frame, mm, Y up):
+
+- **Fix 1**: RET_ISO copper = F.Cu + B.Cu zones (bbox x 91.4–98.6, y −24.6…−13.1), vias (93.535, −18.204)
+  and (95.516, −21.635), short pad stubs. No ISOGND copper next to it on F/B (20V_ISO_SEC pours
+  around it); the In1 ISOGND zone only covers x ≥ 105.6 for y ≥ −18.75 and does not reach the area.
+  U8-2 (ISOGND) is the THT pad at (106.85, −20.15). Plan: re-net all RET_ISO items to ISOGND and add
+  a new In1.Cu ISOGND zone ≈ x 91…107.6, y −24…−13.3 (TR2-6 and U8-2 are THT and connect in it, the
+  two existing vias stitch the F/B pours), plus 2–3 extra stitching vias near C15-2/C36-2; primary TR2
+  pins are at y ≈ −33.5 (keep ≥ 8 mm).
+- **Fix 2**: U11 pads 5/7/8 GND at x 60.599/59.299/58.649, pad 6 at 59.949, y −0.98 (0.4 × 1.1 pads,
+  0.65 pitch). Plan: F.Cu track 0.25 mm pad 6 → pad 7 (and/or 5) along y −0.98. GND is the In1 plane.
+- **Fix 3**: C42 is 0402 C1523 (0402B102K500NT, X7R 1 nF) to GND. Plan (bottom side, In1 GND plane
+  under it): via on the F.Cu ADA2 track at (59.6, −8.5) → C88 bottom 0402 horizontal, pad ADA2
+  (59.6, −9.35), pad GND (60.56, −9.35), GND via (61.4, −9.35); via on the ADA3 diagonal at
+  (57.6, −6.741) → C89 bottom 0402 vertical, pad ADA3 (57.6, −7.55), pad GND (57.6, −8.51), GND via
+  (57.6, −9.35). All clearances computed by hand (≥ 0.29 mm), not yet DRC-checked.
+- **Fix 4**: only 1206 C0G 100 nF is stocked at JLC: **C170182** (1206N104J500CT, NP0 50 V,
+  166k); 0805/0603 C0G 100 nF have no stock. 12.4 R 0402: C477607 (Yageo RC0402FR-0712R4L, 3075)
+  or C48971941 (10k stock). New refdes C90 (U4), C91 (U5), C92 (U6); C88/C89 for fix 3 (highest
+  existing C is C87). **Layout problem**: at every ADuM7701 the VIN+ and VIN− nodes (series-R
+  output pads, pins 2/3, 220 pF caps) are fenced in by GND1 copper and each other, so a 1206 across
+  them cannot be routed on one layer without a via. U6 (top, DAB, low-voltage domain): fine with
+  vias – plan C92 on B.Cu under U6 at ≈ (108.6, 33.0) horizontal, via VIN− on the F.Cu VIN− track at
+  (108.6, 34.306), via VIN+ at (111.3, 34.3) with a short F.Cu stub from R73-1. **U4 and U5 float on
+  switching nodes** (U4: INU shunt R91 between Q7_S and J7; U5: AFE shunt R48 at G1_SOURCE_HI) and
+  the F.Cu above them is an HV pour (ISODC+ above U4, PGND above U5). A via there needs a copper-pour
+  keep-out on F.Cu; the designer's HV spacing between F.Cu pours is 1.5 mm (ISODC+ vs ISOPGND /
+  DAB_SOURCE_HI_SEC), so a keep-out radius ≈ 1.8 mm. Proposed U4: C90 bottom horizontal centre
+  (10.233, 37.3) (VIN+ pad at 11.708 fed straight down from R92-1, VIN− pad at 8.758), VIN− via on the
+  R93-1 → C51-1 track at (11.678, 43.35), In1.Cu track to a via at (8.758, 39.0), F.Cu keep-out circles
+  around both vias. U5 not yet placed (space right of R57 between U5 and R48-2 is 5.3 mm high;
+  vertical 1206 fits only with a courtyard overlap with U5). **Ask the user** whether vias with F.Cu
+  keep-outs in the HV pours are acceptable for U4/U5 (alternative: larger local re-route).
+- **Fix 5 – pin roles verified**: FKK5R0020FE footprint: pads 1/2 are 2.9 × 1.0 (sense), 3/4 are
+  2.9 × 5.6 (force), same for R91/R64 whose 1/2 go to the ADuM side. R48-1 (2.1, −67.3) sense,
+  R48-3 (2.1, −71.4) force. SHUNT1 IPC pins: sense side U5-4, R58-2, C53-2, C52-2, D8-A, C71-2, C73-2,
+  R48-1; force side R48-3, J5-1 (no SHUNT1 vias). Copper joining pad 1 to pad 3 (B.Cu, 0.152 mm,
+  track UUID prefixes): 6d2b9d20 (3.891,−67.3)→(4.317,−67.726), 47f9249c →(4.317,−68.667),
+  ed249079 →(4.317,−70.893), 92ba5e51 →(3.816,−71.394), a8f6a816 →(2.106,−71.394), 5286c9b7 →(2.1,−71.4).
+  The force side is the B.Cu SHUNT1 zone (bbox x −24.1…3.6, y −80.6…−68.4) with J5-1 and the pad-3
+  spokes. Plan: delete those 6 tracks, keep pad 1 → (3.891,−67.3) → U5 side; net names: sense keeps
+  SHUNT1, force becomes SHUNT1_FORCE (deviation: R48-3, J5-1); verify the zone does not touch the
+  sense copper (assign_nets --check).
+
+Planned infrastructure (not written yet): `lib/v4_deviations.csv` (kinds merge / pin / part / add /
+value) + `lib/v4_copper.csv` (added vias, changed copper areas) read by a project module
+(`tools/deviations.py`); thin wrappers for p2k compare_netlists / check_symbols (replace their IPC
+loaders with the deviated reference); deviation support in board_common.ipc_records (unless
+AC_PSU_PROTEUS=1), check_board, check_footprints, gen_footprints (added parts), ipc356_diff,
+gerber_roundtrip (accepted areas/drills). make_pcb.sh: build the Proteus board from the schematic
+at tag `proteus-conversion-complete` (git archive kicad/ lib/) into build/proteus/ with
+AC_PSU_BOARD / schematic / reports env overrides; regen_check compares it with the tag's
+kicad/ac_psu.kicad_pcb and reports/pour_nets.json. No submodule change needed.
+
+Next steps, in order: (1) get the user's answer on vias + F.Cu keep-outs for U4/U5; (2) deviation
+files + module + wrappers + make_pcb/regen_check change, check_all passing on the unchanged design;
+(3) schematic changes (sheet07 ISOGND, sheet09 GND + C88/C89, sheet01 R48 split, _common.adum_block
+cdiff + 12.4R on sheets 08/10, part_map, gen_footprints, gen_symbols drop DGND/RET_ISO, text notes);
+(4) board edit scripts tools/v4/fix_1..5.py run once; (5) checks, renders, JLC BOM, STATUS, commit.
 
 ## Shared tools – proteus2kicad (2026-10-21, branch `p2k-submodule`)
 
