@@ -1,0 +1,2180 @@
+[
+ {
+  "refs": "R1,R8,R17,R21,R37,R38,R46,R51,R52,R53,R76",
+  "qty": 11,
+  "value": "10k",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C25744",
+    "componentModelEn": "0402WGF1002TCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 18409801,
+    "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C60489",
+    "componentModelEn": "RC0402JR-0710KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 12665111,
+    "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C60490",
+    "componentModelEn": "RC0402FR-0710KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 5073357,
+    "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C174175",
+    "componentModelEn": "RCT0210KJLF",
+    "componentBrandEn": "HKR(Hong Kong Resistors)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4293268,
+    "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R7",
+  "qty": 1,
+  "value": "1k",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C11702",
+    "componentModelEn": "0402WGF1001TCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 20112768,
+    "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906899",
+    "componentModelEn": "FRC0402J102 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 17712619,
+    "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906864",
+    "componentModelEn": "FRC0402F1001TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 14767745,
+    "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C105637",
+    "componentModelEn": "RC0402JR-071KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 9067214,
+    "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R9,R18",
+  "qty": 2,
+  "value": "100R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C25076",
+    "componentModelEn": "0402WGF1000TCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 7637041,
+    "describe": "-55℃~+155℃ 100Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C106232",
+    "componentModelEn": "RC0402FR-07100RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 8993276,
+    "describe": "-55℃~+155℃ 100Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C106233",
+    "componentModelEn": "RC0402JR-07100RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 5623622,
+    "describe": "-55℃~+155℃ 100Ω 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C174142",
+    "componentModelEn": "RCT02100RJLF",
+    "componentBrandEn": "HKR(Hong Kong Resistors)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1780410,
+    "describe": "-55℃~+155℃ 100Ω 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R19,R32",
+  "qty": 2,
+  "value": "420R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C4156213",
+    "componentModelEn": "CR204200F",
+    "componentBrandEn": "Meritek",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-55℃~+155℃ 420Ω 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C4211696",
+    "componentModelEn": "CRCW0402420RJNTD",
+    "componentBrandEn": "Vishay Intertech",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-55℃~+155℃ 420Ω 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount"
+   }
+  ]
+ },
+ {
+  "refs": "R22",
+  "qty": 1,
+  "value": "39R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C2909354",
+    "componentModelEn": "FRC0402F39R0TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 142622,
+    "describe": "-55℃~+155℃ 39Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906939",
+    "componentModelEn": "FRC0402J390 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 65447,
+    "describe": "-55℃~+155℃ 39Ω 50V 62.5mW Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C413054",
+    "componentModelEn": "ERJ2RKF39R0X",
+    "componentBrandEn": "PANASONIC",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 39020,
+    "describe": "-55℃~+155℃ 100mW 39Ω Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C25110",
+    "componentModelEn": "0402WGF390JTCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 24678,
+    "describe": "-55℃~+155℃ 39Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R30,R40",
+  "qty": 2,
+  "value": "820R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C54920831",
+    "componentModelEn": "HRC0402J821 DNTO",
+    "componentBrandEn": "HWA CHN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 642769,
+    "describe": "-55℃~+155℃ 50V 62.5mW 820Ω Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2909387",
+    "componentModelEn": "FRC0402F8200TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 317979,
+    "describe": "-55℃~+155℃ 50V 62.5mW 820Ω Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C140124",
+    "componentModelEn": "RC-02K8200FT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 129994,
+    "describe": "-55℃~+155℃ 50V 62.5mW 820Ω Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2933122",
+    "componentModelEn": "FRC0402J821 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 103939,
+    "describe": "-55℃~+155℃ 50V 62.5mW 820Ω Thick Film Resistor ±100ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R39,R54,R56,R77",
+  "qty": 4,
+  "value": "8.2k",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C25924",
+    "componentModelEn": "0402WGF8201TCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": true,
+    "stockCount": 165262,
+    "describe": "-55℃~+155℃ 50V 62.5mW 8.2kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2909385",
+    "componentModelEn": "FRC0402F8201TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 424948,
+    "describe": "-55℃~+155℃ 50V 62.5mW 8.2kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C413094",
+    "componentModelEn": "ERJ2RKF8201X",
+    "componentBrandEn": "PANASONIC",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 102924,
+    "describe": "-55℃~+155℃ 100mW 8.2kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C19267412",
+    "componentModelEn": "FRQ0402F8201TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 68542,
+    "describe": "-55℃~+155℃ 50V 62.5mW 8.2kΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R50,R55,R72",
+  "qty": 3,
+  "value": "33R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C25105",
+    "componentModelEn": "0402WGF330JTCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2296664,
+    "describe": "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C138002",
+    "componentModelEn": "RC0402FR-0733RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6735387,
+    "describe": "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C22369191",
+    "componentModelEn": "RCA0233RJLF",
+    "componentBrandEn": "HKR(Hong Kong Resistors)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4285993,
+    "describe": "-55℃~+155℃ 33Ω 50V 62.5mW ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906868",
+    "componentModelEn": "FRC0402F33R0TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2085832,
+    "describe": "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R57,R58,R73,R74,R86,R92,R93",
+  "qty": 7,
+  "value": "10R",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C25077",
+    "componentModelEn": "0402WGF100JTCE",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 3588874,
+    "describe": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906862",
+    "componentModelEn": "FRC0402F10R0TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2980554,
+    "describe": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C137925",
+    "componentModelEn": "RC0402JR-0710RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1143792,
+    "describe": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±200ppm/℃ ±5% 0402 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C138066",
+    "componentModelEn": "RC0402FR-0710RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 829945,
+    "describe": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R25",
+  "qty": 1,
+  "value": "15k",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C22809",
+    "componentModelEn": "0603WAF1502T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 3929058,
+    "describe": "-55℃~+155℃ 100mW 15kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906995",
+    "componentModelEn": "FRC0603F1502TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4514703,
+    "describe": "-55℃~+155℃ 100mW 15kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907104",
+    "componentModelEn": "FRC0603J153 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1122671,
+    "describe": "-55℃~+155℃ 100mW 15kΩ 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C125928",
+    "componentModelEn": "AC0603FR-0715KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 723301,
+    "describe": "-55℃~+155℃ 100mW 15kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R29",
+  "qty": 1,
+  "value": "1.2k",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C22765",
+    "componentModelEn": "0603WAF1201T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2406732,
+    "describe": "-55℃~+155℃ 1.2kΩ 100mW 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C22369955",
+    "componentModelEn": "RCA031K2JLF",
+    "componentBrandEn": "HKR(Hong Kong Resistors)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1689654,
+    "describe": "-55℃~+155℃ 1.2kΩ 100mW 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2906976",
+    "componentModelEn": "FRC0603F1201TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1395297,
+    "describe": "-55℃~+155℃ 1.2kΩ 100mW 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C114605",
+    "componentModelEn": "RC0603FR-071K2L",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 952128,
+    "describe": "-55℃~+155℃ 1.2kΩ 100mW 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R31",
+  "qty": 1,
+  "value": "1k",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C21190",
+    "componentModelEn": "0603WAF1001T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 36618921,
+    "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C22548",
+    "componentModelEn": "RC0603FR-071KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 11066837,
+    "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C25585",
+    "componentModelEn": "0603WAJ0102T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6865418,
+    "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C14676",
+    "componentModelEn": "RC0603JR-071KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6033513,
+    "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R44",
+  "qty": 1,
+  "value": "39k",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C23153",
+    "componentModelEn": "0603WAF3902T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 639099,
+    "describe": "-55℃~+155℃ 100mW 39kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2930098",
+    "componentModelEn": "FRC0603F3902TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1266758,
+    "describe": "-55℃~+155℃ 100mW 39kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C163424",
+    "componentModelEn": "RC0603FR-0739KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 278581,
+    "describe": "-55℃~+155℃ 100mW 39kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907160",
+    "componentModelEn": "FRC0603J393 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 235366,
+    "describe": "-55℃~+155℃ 100mW 39kΩ 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R78,R88,R89,R90",
+  "qty": 4,
+  "value": "2.2k",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C4190",
+    "componentModelEn": "0603WAF2201T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 6171632,
+    "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907005",
+    "componentModelEn": "FRC0603F2201TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4345983,
+    "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907117",
+    "componentModelEn": "FRC0603J222 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2518011,
+    "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±100ppm/℃ ±5% 0603 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C114662",
+    "componentModelEn": "RC0603FR-072K2L",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2303486,
+    "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R59,R75,R94",
+  "qty": 3,
+  "value": "470R",
+  "pkg": "0805",
+  "cands": [
+   {
+    "componentCode": "C17710",
+    "componentModelEn": "0805W8F4700T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2438315,
+    "describe": "-55℃~+155℃ 125mW 150V 470Ω Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907267",
+    "componentModelEn": "FRC0805F4700TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1643913,
+    "describe": "-55℃~+155℃ 125mW 150V 470Ω Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907329",
+    "componentModelEn": "FRC0805J471 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1247290,
+    "describe": "-55℃~+155℃ 125mW 150V 470Ω Thick Film Resistor ±100ppm/℃ ±5% 0805 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C119076",
+    "componentModelEn": "RS-05K471JT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 273811,
+    "describe": "-55℃~+155℃ 125mW 150V 470Ω Thick Film Resistor ±100ppm/℃ ±5% 0805 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R2,R3,R4,R5,R6,R11,R12,R13,R14,R15,R16,R27,R28,R35,R36,R41,R42,R60,R61,R62,R63,R65,R66,R67,R68,R69,R70,R71,R80,R81,R82,R83,R84,R85,R95,R256",
+  "qty": 36,
+  "value": "91k",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C2933767",
+    "componentModelEn": "FRC1206F9102TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 102917,
+    "describe": "-55℃~+155℃ 200V 250mW 91kΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2933797",
+    "componentModelEn": "FRC1206J913 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 30929,
+    "describe": "-55℃~+155℃ 200V 250mW 91kΩ Thick Film Resistor ±100ppm/℃ ±5% 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C17981",
+    "componentModelEn": "1206W4F9102T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 17934,
+    "describe": "-55℃~+155℃ 200V 250mW 91kΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C246059",
+    "componentModelEn": "RC1206FR-0791KL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6098,
+    "describe": "-55℃~+155℃ 200V 250mW 91kΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R24,R33,R34,R43",
+  "qty": 4,
+  "value": "1M",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C17927",
+    "componentModelEn": "1206W4F1004T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 3885489,
+    "describe": "-55℃~+155℃ 1MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907441",
+    "componentModelEn": "FRC1206J105 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1546628,
+    "describe": "-55℃~+155℃ 1MΩ 200V 250mW Thick Film Resistor ±100ppm/℃ ±5% 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907373",
+    "componentModelEn": "FRC1206F1004TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1309251,
+    "describe": "-55℃~+155℃ 1MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C108083",
+    "componentModelEn": "RC1206FR-071ML",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 659457,
+    "describe": "-55℃~+155℃ 1MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R96,R97",
+  "qty": 2,
+  "value": "0R",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C17888",
+    "componentModelEn": "1206W4F0000T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2020050,
+    "describe": "-55℃~+155℃ 0Ω 200V 250mW Thick Film Resistor ±1% ±800ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C22356801",
+    "componentModelEn": "RCA060RLF",
+    "componentBrandEn": "HKR(Hong Kong Resistors)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 7932095,
+    "describe": "-55℃~+155℃ 0Ω 200V 250mW Thick Film Resistor 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907406",
+    "componentModelEn": "FRC1206P000 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3783680,
+    "describe": "-55℃~+155℃ 0Ω 200V 250mW Thick Film Resistor ±5% 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907363",
+    "componentModelEn": "FRC1206F0000TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1797262,
+    "describe": "-55℃~+155℃ 0Ω 200V 250mW Thick Film Resistor ±1% 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R23",
+  "qty": 1,
+  "value": "100R",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C17901",
+    "componentModelEn": "1206W4F1000T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2595675,
+    "describe": "-55℃~+155℃ 100Ω 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907422",
+    "componentModelEn": "FRC1206J101 TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2440276,
+    "describe": "-55℃~+155℃ 100Ω 200V 250mW Thick Film Resistor ±100ppm/℃ ±5% 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2907369",
+    "componentModelEn": "FRC1206F1000TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2127074,
+    "describe": "-55℃~+155℃ 100Ω 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C137392",
+    "componentModelEn": "RC1206FR-07100RL",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 834751,
+    "describe": "-55℃~+155℃ 100Ω 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R45,R47",
+  "qty": 2,
+  "value": "2.49R",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C54921468",
+    "componentModelEn": "HRC1206F2R49HNTN",
+    "componentBrandEn": "HWA CHN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 10000,
+    "describe": "-55℃~+155℃ 2.49Ω 200V 250mW Thick Film Resistor ±1% ±400ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C48392013",
+    "componentModelEn": "CL1206FN2R49PS",
+    "componentBrandEn": "CHANGLONG",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 5772,
+    "describe": "-55℃~+70℃ 2.49Ω 200V 250mW Thick Film Resistor ±1% ±200ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C49654295",
+    "componentModelEn": "GR1206F2R49T5G00",
+    "componentBrandEn": "GiantOhm",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4800,
+    "describe": "-55℃~+155℃ 2.49Ω 200V 250mW Thick Film Resistor ±1% ±200ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C2933666",
+    "componentModelEn": "FRC1206F2R49TS",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4727,
+    "describe": "-55℃~+155℃ 2.49Ω 200V 250mW Thick Film Resistor ±1% ±200ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R49",
+  "qty": 1,
+  "value": "12.1k",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C247391",
+    "componentModelEn": "1206W4F1212T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4993,
+    "describe": "-55℃~+155℃ 12.1kΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C3445691",
+    "componentModelEn": "CR1206F41212G",
+    "componentBrandEn": "LIZ Elec",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4955,
+    "describe": "-55℃~+125℃ 12.1kΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C488627",
+    "componentModelEn": "RC1206FR-0712K1L",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4805,
+    "describe": "-55℃~+155℃ 12.1kΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   },
+   {
+    "componentCode": "C322836",
+    "componentModelEn": "RS-06K1212FT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4726,
+    "describe": "-55℃~+155℃ 12.1kΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C2,C9,C42",
+  "qty": 3,
+  "value": "1nF",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C1523",
+    "componentModelEn": "0402B102K500NT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2705733,
+    "describe": "1nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C106205",
+    "componentModelEn": "CC0402KRX7R9BB102",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 8057194,
+    "describe": "1nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C466233",
+    "componentModelEn": "TCC0402X7R102K500AT",
+    "componentBrandEn": "CCTC",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2125541,
+    "describe": "1nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C126532",
+    "componentModelEn": "GCM155R71H102KA37D",
+    "componentBrandEn": "Murata Electronics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2014694,
+    "describe": "1nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C3,C4,C17,C18,C26,C27,C37,C38,C56,C64,C69,C70,C80,C81,C82,C83,C84,C85,C86,C87",
+  "qty": 20,
+  "value": "100nF",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C1525",
+    "componentModelEn": "CL05B104KO5NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 37057375,
+    "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C307331",
+    "componentModelEn": "CL05B104KB54PNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 21763955,
+    "describe": "100nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C60474",
+    "componentModelEn": "CC0402KRX7R7BB104",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 12037929,
+    "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C131394",
+    "componentModelEn": "CC0402KRX7R9BB104",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 7833201,
+    "describe": "100nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C5,C6,C16,C39,C40",
+  "qty": 5,
+  "value": "1uF",
+  "pkg": "0402",
+  "cands": [
+   {
+    "componentCode": "C52923",
+    "componentModelEn": "CL05A105KA5NQNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 7768392,
+    "describe": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C29266",
+    "componentModelEn": "CL05A105KO5NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2861657,
+    "describe": "16V 1uF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C107372",
+    "componentModelEn": "CL05A105KQ5NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1399333,
+    "describe": "1uF 6.3V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C87145",
+    "componentModelEn": "LMK105BJ105KV-F",
+    "componentBrandEn": "Taiyo Yuden",
+    "componentSpecificationEn": "0402",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1370379,
+    "describe": "10V 1uF X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C43,C44,C55,C71,C73,C76,C77,C78",
+  "qty": 8,
+  "value": "100nF",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C14663",
+    "componentModelEn": "CC0603KRX7R9BB104",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 46012201,
+    "describe": "100nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C286510",
+    "componentModelEn": "0603B104M500NT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3572673,
+    "describe": "100nF 50V X7R ±20% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C235731",
+    "componentModelEn": "FN18X104K500PBG",
+    "componentBrandEn": "PSA(Prosperity Dielectrics)",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2831096,
+    "describe": "100nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C1591",
+    "componentModelEn": "CL10B104KB8NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2429630,
+    "describe": "100nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C51,C52,C53,C54,C74,C75",
+  "qty": 6,
+  "value": "220pF",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C1603",
+    "componentModelEn": "CL10B221KB8NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 1104923,
+    "describe": "220pF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C388907",
+    "componentModelEn": "GCM1885C2A221JA16D",
+    "componentBrandEn": "Murata Electronics",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1363920,
+    "describe": "100V 220pF C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C107081",
+    "componentModelEn": "CC0603KRX7R9BB221",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1083448,
+    "describe": "220pF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C106210",
+    "componentModelEn": "CC0603JRNPO9BN221",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 256985,
+    "describe": "220pF 50V NP0 ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C63",
+  "qty": 1,
+  "value": "22pF",
+  "pkg": "0603",
+  "cands": [
+   {
+    "componentCode": "C1653",
+    "componentModelEn": "CL10C220JB8NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2021657,
+    "describe": "22pF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C105620",
+    "componentModelEn": "CC0603JRNPO9BN220",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3591623,
+    "describe": "22pF 50V NP0 ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C7419421",
+    "componentModelEn": "FCC0603N220J500CT",
+    "componentBrandEn": "FOJAN",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 561994,
+    "describe": "22pF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C326840",
+    "componentModelEn": "CC0603FRNPO9BN220",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "0603",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 530690,
+    "describe": "22pF 50V NP0 ±1% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C36,C41,C65,C66",
+  "qty": 4,
+  "value": "4.7uF",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C29823",
+    "componentModelEn": "1206B475K500NT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 580043,
+    "describe": "4.7uF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C51205",
+    "componentModelEn": "CL31B475KBHNNNE",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 269368,
+    "describe": "4.7uF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C237304",
+    "componentModelEn": "GRM31CC72A475KE11L",
+    "componentBrandEn": "Murata Electronics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 231974,
+    "describe": "100V 4.7uF X7S ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C77096",
+    "componentModelEn": "GRM31CR71H475KA12L",
+    "componentBrandEn": "Murata Electronics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 138022,
+    "describe": "4.7uF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C57,C58",
+  "qty": 2,
+  "value": "22uF",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C12891",
+    "componentModelEn": "CL31A226KAHNNNE",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 1718289,
+    "describe": "22uF 25V X5R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C5672",
+    "componentModelEn": "CL31A226KPHNNNE",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": true,
+    "stockCount": 76573,
+    "describe": "10V 22uF X5R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C87996",
+    "componentModelEn": "CL31B226KPHNNNE",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 165234,
+    "describe": "10V 22uF X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C342620",
+    "componentModelEn": "C3216X5R1V226MTJ00E",
+    "componentBrandEn": "TDK",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 154469,
+    "describe": "22uF 35V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C62",
+  "qty": 1,
+  "value": "470pF",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C377098",
+    "componentModelEn": "TCC1206X7R471K102DTS",
+    "componentBrandEn": "CCTC",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 422697,
+    "describe": "1kV 470pF X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C9189",
+    "componentModelEn": "1206B471K102NT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 92213,
+    "describe": "1kV 470pF X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C107177",
+    "componentModelEn": "CC1206JKNPOCBN471",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 72036,
+    "describe": "1kV 470pF NP0 ±5% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C107197",
+    "componentModelEn": "CC1206KKX7RCBB471",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 46312,
+    "describe": "1kV 470pF X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C67",
+  "qty": 1,
+  "value": "100uF",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C15008",
+    "componentModelEn": "CL31A107MQHNNNE",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 1927079,
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C380356",
+    "componentModelEn": "TCC1206X5R107M6R3HT",
+    "componentBrandEn": "CCTC",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 231717,
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C87164",
+    "componentModelEn": "JMK316BJ107ML-T",
+    "componentBrandEn": "Taiyo Yuden",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 107223,
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C77085",
+    "componentModelEn": "GRM31CR60J107ME39L",
+    "componentBrandEn": "Murata Electronics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 83294,
+    "describe": "100uF 6.3V X5R ±20% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C68",
+  "qty": 1,
+  "value": "100nF",
+  "pkg": "1206",
+  "cands": [
+   {
+    "componentCode": "C24497",
+    "componentModelEn": "CL31B104KBCNNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 1063399,
+    "describe": "100nF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C110255",
+    "componentModelEn": "1206B104K101NT",
+    "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2209492,
+    "describe": "100V 100nF X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C82601",
+    "componentModelEn": "CC1206KRX7R9BB104",
+    "componentBrandEn": "YAGEO",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1636288,
+    "describe": "100nF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C93194",
+    "componentModelEn": "1206B104K500CT",
+    "componentBrandEn": "Walsin Tech Corp",
+    "componentSpecificationEn": "1206",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 768137,
+    "describe": "100nF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C1,C35,C45,C46,C47,C48,C49,C50",
+  "qty": 8,
+  "value": "2.2uF",
+  "pkg": "2220",
+  "cands": [
+   {
+    "componentCode": "C153032",
+    "componentModelEn": "FS55X225K251EGG",
+    "componentBrandEn": "PSA(Prosperity Dielectrics)",
+    "componentSpecificationEn": "2220",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 23205,
+    "describe": "2.2uF 250V X7R ±10% 2220 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C445674",
+    "componentModelEn": "C5750X6S2W225KT000N",
+    "componentBrandEn": "TDK",
+    "componentSpecificationEn": "2220",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1510,
+    "describe": "2.2uF 450V X6S ±10% 2220 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C3845592",
+    "componentModelEn": "2220B225K251CT",
+    "componentBrandEn": "Walsin Tech Corp",
+    "componentSpecificationEn": "2220",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1186,
+    "describe": "2.2uF 250V X7R ±10% 2220 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   },
+   {
+    "componentCode": "C694537",
+    "componentModelEn": "CKG57NX7R2E225MT009W",
+    "componentBrandEn": "TDK",
+    "componentSpecificationEn": "2220",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 877,
+    "describe": "2.2uF 250V X7R ±20% 2220 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "L1",
+  "qty": 1,
+  "value": "22uH",
+  "pkg": "0805",
+  "cands": [
+   {
+    "componentCode": "C32375",
+    "componentModelEn": "SDFL2012T220KTF",
+    "componentBrandEn": "Sunlord",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": true,
+    "stockCount": 14076,
+    "describe": "1.1Ω 16MHz 22uH 30@1MHz 5mA Multilayer inductor ±10% 0805 Inductors (SMD) ROHS"
+   },
+   {
+    "componentCode": "C6364733",
+    "componentModelEn": "AHW2012FE220KTF",
+    "componentBrandEn": "APV",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 36103,
+    "describe": "15 2.288Ω 20MHz 22uH 340mA Wire-wound chip inductor ±10% 0805 Inductors (SMD) ROHS"
+   },
+   {
+    "componentCode": "C383411",
+    "componentModelEn": "MLZ2012N220LT000",
+    "componentBrandEn": "TDK",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 25432,
+    "describe": "22uH 300mA 670mΩ 70mA Multilayer inductor ±20% 0805 Inductors (SMD) ROHS"
+   },
+   {
+    "componentCode": "C88185",
+    "componentModelEn": "MLZ2012P220WT000",
+    "componentBrandEn": "TDK",
+    "componentSpecificationEn": "0805",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 18943,
+    "describe": "1.25Ω 100mA 220mA 22uH Multilayer inductor ±20% 0805 Inductors (SMD) ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "C15,C28",
+  "qty": 2,
+  "value": "EEE-FTE221XAP",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C190724",
+    "componentModelEn": "EEEFTE221XAP",
+    "componentBrandEn": "PANASONIC",
+    "componentSpecificationEn": "SMD,D6.3xL7.7mm",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4272,
+    "describe": "-55℃~+105℃ 160mΩ@100kHz 2000hrs@105℃ 220uF 25V 6.3mm 600mA@100kHz 8mm Polarized ±20% SMD,D6.3xL7.7mm Aluminum Electrolytic Capacitors - SMD ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "D1,D2",
+  "qty": 2,
+  "value": "ES1A",
+  "pkg": "SMA",
+  "cands": [
+   {
+    "componentCode": "C184448",
+    "componentModelEn": "ES1A",
+    "componentBrandEn": "onsemi",
+    "componentSpecificationEn": "SMA(DO-214AC)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 13835,
+    "describe": "-55℃~+150℃ 1.47W 15ns 1A 30A 50V 5uA@50V 920mV@1A SMA(DO-214AC) Fast Recovery / High Efficiency Diodes ROHS"
+   },
+   {
+    "componentCode": "C437839",
+    "componentModelEn": "ES1A",
+    "componentBrandEn": "Shandong Jingdao Microelectronics",
+    "componentSpecificationEn": "SMA",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 10646,
+    "describe": "-55℃~+150℃ 1 Independent 1A 1V@1A 30A 35ns 50V 5uA@50V SMA Fast Recovery / High Efficiency Diodes ROHS"
+   },
+   {
+    "componentCode": "C5293681",
+    "componentModelEn": "ES1A",
+    "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "componentSpecificationEn": "SMAJ",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 4576,
+    "describe": "-55℃~+150℃ 1 Independent 1A 30A 35ns 50V 5uA 950mV@1A SMAJ Fast Recovery / High Efficiency Diodes ROHS"
+   },
+   {
+    "componentCode": "C674398",
+    "componentModelEn": "ES1A-13-F",
+    "componentBrandEn": "Diodes Incorporated",
+    "componentSpecificationEn": "SMA",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3722,
+    "describe": "-55℃~+150℃ 1A 25ns 30A 50V 5uA@50V 920mV@1A SMA Fast Recovery / High Efficiency Diodes ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "D6",
+  "qty": 1,
+  "value": "S1M",
+  "pkg": "SMA",
+  "cands": [
+   {
+    "componentCode": "C144860",
+    "componentModelEn": "S1M-E3/61T",
+    "componentBrandEn": "Vishay Intertech",
+    "componentSpecificationEn": "SMA(DO-214AC)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 199670,
+    "describe": "-55℃~+150℃ 1 Independent 1.1V@1A 1A 1kV 1uA@1kV 30A SMA(DO-214AC) Diodes - General Purpose ROHS"
+   },
+   {
+    "componentCode": "C64915",
+    "componentModelEn": "S1M",
+    "componentBrandEn": "MDD(Microdiode Semiconductor)",
+    "componentSpecificationEn": "SMA(DO-214AC)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 171206,
+    "describe": "-55℃~+150℃ 1.1V@1A 1A 1kV 30A 5uA@1kV Independent SMA(DO-214AC) Diodes - General Purpose ROHS"
+   },
+   {
+    "componentCode": "C155378",
+    "componentModelEn": "S1M-13-F",
+    "componentBrandEn": "Diodes Incorporated",
+    "componentSpecificationEn": "SMA(DO-214AC)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 169582,
+    "describe": "-65℃~+150℃ 1 Independent 1.1V@1A 1A 1kV 5uA@1kV SMA(DO-214AC) Diodes - General Purpose ROHS"
+   },
+   {
+    "componentCode": "C232826",
+    "componentModelEn": "S1M",
+    "componentBrandEn": "onsemi",
+    "componentSpecificationEn": "SMA(DO-214AC)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 72946,
+    "describe": "-55℃~+150℃ 1 Independent 1.1V@1A 1A 1kV 1uA@1kV 30A SMA(DO-214AC) Diodes - General Purpose ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "D3,D4,D5,D7,D10",
+  "qty": 5,
+  "value": "ZLLS400TA",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C460267",
+    "componentModelEn": "ZLLS400TA",
+    "componentBrandEn": "Diodes Incorporated",
+    "componentSpecificationEn": "SOD-323",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2600,
+    "describe": "1 Independent 10uA@30V 12A 40V 520mA 800mV@1.5A SOD-323 Schottky Diodes ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "D8,D9",
+  "qty": 2,
+  "value": "MM3Z5V1T1G",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C75074",
+    "componentModelEn": "MM3Z5V1T1G",
+    "componentBrandEn": "onsemi",
+    "componentSpecificationEn": "SOD-323",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 56560,
+    "describe": "-65℃~+150℃ 1 Independent 2uA@2V 300mW 4.8V~5.4V 5.1V 500Ω 60Ω SOD-323 Zener Diodes ROHS"
+   },
+   {
+    "componentCode": "C53100346",
+    "componentModelEn": "MM3Z5V1T1G",
+    "componentBrandEn": "TECH PUBLIC",
+    "componentSpecificationEn": "SOD-323",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 7522,
+    "describe": "1 Independent 200mW 2uA@2V 4.8V~5.4V 5.1V 500Ω 60Ω SOD-323 Zener Diodes ROHS"
+   },
+   {
+    "componentCode": "C3764862",
+    "componentModelEn": "MM3Z5V1T1GX",
+    "componentBrandEn": "Nexperia",
+    "componentSpecificationEn": "SOD-323",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3000,
+    "describe": "1 Independent 2uA@1.5V 300mW 4.84V~5.37V 5.1V ±5% SOD-323 Zener Diodes ROHS"
+   },
+   {
+    "componentCode": "C9900010085",
+    "componentModelEn": "MM3Z5V1T1G",
+    "componentBrandEn": "JLCPCB Assembly",
+    "componentSpecificationEn": "SOD-323",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "SOD-323 SMT ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "Q13,Q14",
+  "qty": 2,
+  "value": "2N7002",
+  "pkg": "SOT-23",
+  "cands": [
+   {
+    "componentCode": "C8545",
+    "componentModelEn": "2N7002",
+    "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "base",
+    "preferredComponentFlag": false,
+    "stockCount": 2768412,
+    "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5Ω@10V 60V N-Channel ±20V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "componentCode": "C85047",
+    "componentModelEn": "2N7002K-7",
+    "componentBrandEn": "Diodes Incorporated",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 876781,
+    "describe": "-55℃~+150℃ 1 N-channel 1.2Ω@10V、1.4Ω@5V 1.6V 2.9pF 300pC@4.5V 30pF 380mA 4.2pF 540mW 60V SOT-23 MOSFETs ROHS"
+   },
+   {
+    "componentCode": "C65189",
+    "componentModelEn": "2N7002,215",
+    "componentBrandEn": "Nexperia",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 418215,
+    "describe": "-65℃~+150℃ 1 N-channel 2.5V 300mA 50pF 5Ω@10V 60V 830mW SOT-23 MOSFETs ROHS"
+   },
+   {
+    "componentCode": "C85049",
+    "componentModelEn": "2N7002-7-F",
+    "componentBrandEn": "Diodes Incorporated",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 328810,
+    "describe": "-55℃~+150℃ 1 N-channel 2.5V 210mA 223pC@4.5V 370mW 50pF 5pF 60V 7.5Ω@5V SOT-23 MOSFETs ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "REF1,REF2",
+  "qty": 2,
+  "value": "REF3025AIDBZR",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C11334",
+    "componentModelEn": "REF3025AIDBZR",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3652,
+    "describe": "-40℃~+125℃@(Ta) 2.55V~5.5V 2.5V 25mA 28uVp-p 50uA 75ppm/℃ 80uVrms Fixed Series ±0.2% SOT-23 Voltage Reference ROHS"
+   },
+   {
+    "componentCode": "C55191125",
+    "componentModelEn": "REF3025AIDBZR-TP",
+    "componentBrandEn": "TECH PUBLIC",
+    "componentSpecificationEn": "SOT-23",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 1291,
+    "describe": "SOT-23 Voltage Reference ROHS"
+   },
+   {
+    "componentCode": "C2156676",
+    "componentModelEn": "REF3025AIDBZRG4",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "SOT-23-3",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃@(Ta) 2.55V~5.5V 25mA 28uVp-p 50uA 75ppm/℃ 80uVrms Fixed Series ±0.2% SOT-23-3 Voltage Reference ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "AD1",
+  "qty": 1,
+  "value": "ADS7056IRUGR",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C2669798",
+    "componentModelEn": "ADS7056IRUGR",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "X2-QFN-8(1.5x1.5)",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 52,
+    "describe": "-40℃~+125℃ 1 1.75ppm/℃ 14 2.35V~3.6V 2.5MHz 20nA 2LSB 60MHz 74.9dB Built-in No SAR SPI X2-QFN-8(1.5x1.5) Analog to Digital Converters (ADC) ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U1,U7",
+  "qty": 2,
+  "value": "OPA2353EA",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C2870302",
+    "componentModelEn": "OPA2353EA/2K5",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "VSSOP-8",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 18,
+    "describe": "-40℃~+85℃ 0.5pA 10pA 150uV/℃ 2 2.7V~5.5V 22V/us 40mA 44MHz 5.2mA 5.5V 5nV/√Hz@10kHz 86dB 8mV Rail-to-Rail Input, Rail-to-Rail Output VSSOP-8 Operational Amplifier ROHS"
+   },
+   {
+    "componentCode": "C6943655",
+    "componentModelEn": "OPA2353EA",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "-",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "- Operational Amplifier ROHS"
+   },
+   {
+    "componentCode": "C9900101784",
+    "componentModelEn": "OPA2353EA/250",
+    "componentBrandEn": "JLCPCB Assembly",
+    "componentSpecificationEn": "VSSOP-8",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "VSSOP-8 New Arrivals ROHS"
+   },
+   {
+    "componentCode": "C2060435",
+    "componentModelEn": "OPA2353EA/250G4",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "VSSOP-8",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+85℃ 0.15pA 10pA 2 2.5mA 2.7V~5.5V 22V/us 3mV 40mA 44MHz 5nV/√Hz@10kHz 5uV/℃ 86dB Built-in compensation Rail-to-Rail Input, Rail-to-Rail Output VSSOP-8 Operational Amplifier ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U2,U12,U14",
+  "qty": 3,
+  "value": "TLV316IDBVR",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C575578",
+    "componentModelEn": "TLV316IDBVR",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "SOT-23-5",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6325,
+    "describe": "-40℃~+125℃ 1 1.8V~5.5V 10MHz 10pA 10pA 12nV/√Hz@1kHz 2uV/℃ 400uA 50mA 6V/us 750uV 90dB Built-in compensation、ESD protection、EMI filtering/RF suppression Rail-to-Rail Input, Rail-to-Rail Output SOT-23-5 Operational Amplifier ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U3,U10",
+  "qty": 2,
+  "value": "TPS73033DBVR",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C57424",
+    "componentModelEn": "TPS73033DBVR",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "SOT-23-5",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 3239,
+    "describe": "-40℃~+125℃@(Tj) 1 200mA 210mV@(200mA) 250uA 3.3V 5.5V 68dB@(100Hz) Fixed Over Current Protection、Over Temperature Protection、Enable Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   },
+   {
+    "componentCode": "C3749348",
+    "componentModelEn": "TPS73033DBVRG4",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "SOT-23-5",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6,
+    "describe": "-40℃~+125℃@(Tj) 1 120mV@(200mA) 170uA 200mA 3.3V 33uVrms 5.5V 68dB@(100Hz) Fixed Over Current Protection、Over Temperature Protection、Enable Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U4,U5,U6",
+  "qty": 3,
+  "value": "ADUM7701-8BRIZ",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C661332",
+    "componentModelEn": "ADUM7701-8BRIZ",
+    "componentBrandEn": "Analog Devices",
+    "componentSpecificationEn": "SOIC-8-300mil",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 0 150kV/us 16 2 5700 5MHz~21MHz Digital isolation interface、Bipolar input ±2LSB ±320mV SOIC-8-300mil Isolated ADCs ROHS"
+   },
+   {
+    "componentCode": "C661333",
+    "componentModelEn": "ADUM7701-8BRIZ-RL",
+    "componentBrandEn": "Analog Devices",
+    "componentSpecificationEn": "SOIC-8-300mil",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 0 150kV/us 16 2 5700 5MHz~21MHz Digital isolation interface、Bipolar input ±2LSB ±320mV SOIC-8-300mil Isolated ADCs ROHS"
+   },
+   {
+    "componentCode": "C661334",
+    "componentModelEn": "ADUM7701-8BRIZ-RL7",
+    "componentBrandEn": "Analog Devices",
+    "componentSpecificationEn": "SOIC-8-300mil",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 0 150kV/us 16 2 5700 5MHz~21MHz Digital isolation interface、Bipolar input ±2LSB ±320mV SOIC-8-300mil Isolated ADCs ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U11",
+  "qty": 1,
+  "value": "SN74LV4051APWR",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C7793",
+    "componentModelEn": "SN74LV4051APWR",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "TSSOP-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2415,
+    "describe": "-40℃~+85℃ 2V~5.5V 35MHz 4ns 75Ω 8:1 TSSOP-16 Analog Switches, Multiplexers ROHS"
+   },
+   {
+    "componentCode": "C2673191",
+    "componentModelEn": "SN74LV4051APWRG4",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "TSSOP-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+85℃ 22Ω 2V~5.5V 35MHz 7ns 8:1 Bidirectional analog channel TSSOP-16 Analog Switches, Multiplexers ROHS"
+   },
+   {
+    "componentCode": "C3210551",
+    "componentModelEn": "SN74LV4051APWR-M",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "-",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "- Signal Switches, Multiplexers, Decoders ROHS"
+   },
+   {
+    "componentCode": "C3657194",
+    "componentModelEn": "SN74LV4051APWRE4",
+    "componentBrandEn": "Texas Instruments",
+    "componentSpecificationEn": "TSSOP-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+85℃ 22Ω 23.4pF 25MHz 2V~5.5V 600ps 8 8:1 TSSOP-16 Analog Switches, Multiplexers ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U13,U15,U17",
+  "qty": 3,
+  "value": "SI8661BD-B-IS",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C25490831",
+    "componentModelEn": "SI8661BD-B-ISR",
+    "componentBrandEn": "SKYWORKS/SILICON LABS",
+    "componentSpecificationEn": "SOIC-16-300mil",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 2,
+    "describe": "-40℃~+125℃ 1 13ns 150Mbps 2.375V~5.5V 2.375V~5.5V 5 5000 50kV/us 6 Fail-safe output、Power-on reset、Output status configurable Low Level SOIC-16-300mil Digital Isolators ROHS"
+   },
+   {
+    "componentCode": "C5754765",
+    "componentModelEn": "SI8661BD-B-IS2",
+    "componentBrandEn": "Skyworks Solutions",
+    "componentSpecificationEn": "SOIC-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 1 150Mbps 5 5000 50kV/us 6 Fail-safe output、Power-on reset Low Level SOIC-16 Digital Isolators ROHS"
+   },
+   {
+    "componentCode": "C7010924",
+    "componentModelEn": "SI8661BD-B-IS2R",
+    "componentBrandEn": "Skyworks Solutions",
+    "componentSpecificationEn": "SOIC-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 1 150Mbps 5 5000 50kV/us Low Level SOIC-16 Digital Isolators ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "U16",
+  "qty": 1,
+  "value": "SI8660BD-B-IS",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C461898",
+    "componentModelEn": "SI8660BD-B-ISR",
+    "componentBrandEn": "SKYWORKS/SILICON LABS",
+    "componentSpecificationEn": "SOIC-16-300mil",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 6,
+    "describe": "-40℃~+125℃ 0 150Mbps 2.375V~5.5V 2.375V~5.5V 5000 50kV/us 6 8ns Low Level SOIC-16-300mil Digital Isolators ROHS"
+   },
+   {
+    "componentCode": "C7081286",
+    "componentModelEn": "SI8660BD-B-IS",
+    "componentBrandEn": "Skyworks Solutions",
+    "componentSpecificationEn": "SOIC-16",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+125℃ 0 150Mbps 5000 50kV/us 6 6 Fail-safe output、Power-on reset Low Level SOIC-16 Digital Isolators ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "R48,R64,R91",
+  "qty": 3,
+  "value": "FKK5R0020FE",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C2482698",
+    "componentModelEn": "FKK5R0020FE-TR",
+    "componentBrandEn": "Ohmite",
+    "componentSpecificationEn": "SMD",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "2mΩ 5W Current Sense Resistor ±1% ±40ppm/℃ SMD Current Sense Resistors / Shunt Resistors ROHS"
+   }
+  ]
+ },
+ {
+  "refs": "PWM1",
+  "qty": 1,
+  "value": "IW1830",
+  "pkg": null,
+  "cands": [
+   {
+    "componentCode": "C17325147",
+    "componentModelEn": "IW1830-00",
+    "componentBrandEn": "RENESAS",
+    "componentSpecificationEn": "PDIP-7",
+    "componentLibraryType": "expand",
+    "preferredComponentFlag": false,
+    "stockCount": 0,
+    "describe": "-40℃~+150℃@(TJ) 700V 79kHz 85V~264V Flyback Isolation PDIP-7 AC-DC Controllers and Regulators ROHS"
+   }
+  ]
+ }
+]
