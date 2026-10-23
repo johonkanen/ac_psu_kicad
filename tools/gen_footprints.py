@@ -136,7 +136,9 @@ PROJECT = {
                                       descr="TO-247-3, Proteus pads (3.048 mm) and drills (1.651 mm)"),
     "Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus": dict(
         base="Converter_DCDC:Converter_DCDC_RECOM_R-78E-0.5_THT", ipc="U8", ipc_sizes=True,
-        descr="SIP-3 P2.54, Proteus pads (1.8 mm) and drills (1.2 mm)"),
+        flip_body=2.54, descr="SIP-3 P2.54, Proteus pads (1.8 mm) and drills (1.2 mm); body on the "
+                               "component-face side of the pin row like the Proteus silk (photo of the built "
+                               "board, 2026-10-23), R-78E graphics mirrored"),
     "C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus": dict(
         base="Capacitor_THT:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4", ipc="C21", ipc_sizes=True,
         descr="Film capacitor P27.5, Proteus pads (2.286 mm) and drills (1.27 mm)"),
@@ -298,6 +300,8 @@ def derive(name, spec, ipc):
                     drill = sexpr.find(pad, "drill")
                     drill[1:] = [q["drill"]]
             at[1:] = [_r4(x), _r4(-y)] + ([_r4(rot)] if abs(rot) > 1e-9 else [])
+    if spec.get("flip_body") is not None:
+        _flip_body(base, spec["flip_body"])
     if spec.get("ipc_sizes"):
         # Proteus land pattern -> the board's Proteus clearance rule, not a library override
         # (KiCad's TSSOP-8 carries a footprint clearance of 0.2 mm)
@@ -315,6 +319,30 @@ def derive(name, spec, ipc):
     if gen is not None:
         gen[1] = "ac_psu_gen_footprints"
     return base
+
+
+def _flip_body(base, xc):
+    """Mirror the graphics (lines, texts, courtyard, 3D model) across the pin row y = 0, pads
+    unchanged: the body ends up on the other side of the pins. The 3D model is turned 180 deg
+    about the pin row centre x = xc (the pin order of a symmetric SIP body is kept)."""
+    for item in base:
+        if not (isinstance(item, list) and item):
+            continue
+        if item[0] in ("fp_line", "fp_rect", "fp_circle", "fp_arc"):
+            for key in ("start", "end", "center", "mid"):
+                pt = sexpr.find(item, key)
+                if pt is not None:
+                    pt[2] = _r4(-float(pt[2]))
+        elif item[0] == "fp_poly":
+            for pt in sexpr.find_all(sexpr.find(item, "pts"), "xy"):
+                pt[2] = _r4(-float(pt[2]))
+        elif item[0] in ("property", "fp_text"):
+            at = sexpr.find(item, "at")
+            if at is not None:
+                at[2] = _r4(-float(at[2]))
+        elif item[0] == "model":
+            sexpr.find(sexpr.find(item, "offset"), "xyz")[1] = _r4(2 * xc)
+            sexpr.find(sexpr.find(item, "rotate"), "xyz")[3] = 180
 
 
 def _eff(size=1.0, thick=0.15):

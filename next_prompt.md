@@ -20,20 +20,23 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
   compare: parts 272/272 present ... wrong-net pins 0 ... compare: OK (with 11 deviation values)
   check_board: 276 footprints, 908 pads ... 207 IPC nets mapped 1:1; 13 v4 vias; OK
   assign_nets: 247 groups, 0 shorts, 0 orphans, 0 opens
-  drc: 470 violations, 0 shorts, 0 unconnected, 0 parity issues (51 courtyards_overlap, 6 pth_inside_courtyard)
+  drc: 468 violations, 0 shorts, 0 unconnected, 0 parity issues (53 courtyards_overlap, 2 pth_inside_courtyard)
   ipc356_diff: 207 Proteus nets mapped 1:1, 0 mismatches; 23 v4 records
   roundtrip: only pad shape / clearance / v4 deviation clusters, drills 0 mismatches
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
-1. Results of the user's GUI review of the v4 changes (list in STATUS "For the KiCad GUI"):
-   F.Cu pour keep-outs at U4/U5, C91 placement (courtyard overlap with U5), silk of C88-C92,
-   the new In1 ISOGND zone under TR2's secondary.
-2. Measured shunt inductance -> re-pick the series resistors (R_leg = 2.5 Ohm per nH with
-   100 nF): sheet08.py/sheet10.py values, the value rows in lib/v4_deviations.csv, a board script
-   for the footprint values, fab/jlc_bom.csv.
-3. Older optional clean-up (Phase 4 "Final state"): U8/U9 body graphics, C67 symbol, silk
-   positions, KiCad vs Proteus pad sizes/drills - now as board scripts, not make_pcb.sh changes.
+(Done: the user's GUI review of v4 - nothing to change; U8/U9 body side - v4 fix 6. The shunt
+inductance is 5-10 nH, not measured accurately; 12.4R stays as the placeholder.)
+1. Aux flyback redesign (reports/aux_flyback/README.md: INN3694C, EE25, 2 x 15 V / 20 W) into
+   sheet 7 and the board - write a v5 plan first (needs new symbols/footprints and GUI routing).
+2. Older optional clean-up (Phase 4 "Final state"): C67 symbol (ceramic or polarized?), silk
+   positions, KiCad vs Proteus pad sizes/drills - as board scripts, not make_pcb.sh changes.
+3. Manufacturing: JLC alternatives for parts not in stock (fab/), THT stock check, CPL file,
+   assumed voltage ratings to confirm.
+4. If the shunt inductance is measured: re-pick the series resistors (R_leg = 2.5 Ohm per nH
+   with 100 nF): sheet08.py/sheet10.py values, value rows in lib/v4_deviations.csv, a board
+   script for the footprint values, fab/jlc_bom.csv.
 
 Done when: the chosen points are implemented, tools/check_all.sh and tools/regen_check.sh pass,
 STATUS.md has a short section, next_prompt.md is replaced, committed (Co-Authored-By: Claude

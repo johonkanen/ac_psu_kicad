@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-23 (v4 design fixes done: board frozen, edited by tools/v4/fix_*.py; see "v4 design fixes – done")
+Updated: 2026-10-23 (v4 design fixes done, + fix 6 U8/U9 body side from a photo; board frozen, edited by tools/v4/fix_*.py; see "v4 design fixes – done")
 
 ## v4 design fixes – done (2026-10-23)
 
@@ -12,10 +12,10 @@ Coordinates below: mm, IPC frame (Y up), like the rest of this file; KiCad y = �
 
 - `kicad/ac_psu.kicad_pcb` is no longer generated from the Proteus gerbers. It was the
   Proteus-generated board at tag `proteus-conversion-complete`; the v4 changes were made by
-  one-shot pcbnew scripts `tools/v4/fix_1_ret_iso.py … fix_5_r48_kelvin.py` (helpers in
+  one-shot pcbnew scripts `tools/v4/fix_1_ret_iso.py … fix_6_u8u9_body.py` (helpers in
   `tools/v4/v4board.py`, run in order by `tools/v4/apply_all.sh`, log in
   `reports/v4_board_edits.txt`). Each script refuses to run twice; applied to the tag's board they
-  reproduce the committed board byte for byte (UUID seeds 4101–4105). Further board changes:
+  reproduce the committed board byte for byte (UUID seeds 4101–4106; re-checked after fix 6). Further board changes:
   new scripts (or the KiCad GUI, then say so here).
 - `tools/make_pcb.sh` never writes the design board: it rebuilds the *Proteus* board from the
   tag's schematic/footprint fit/reports (`git archive`) into
@@ -122,16 +122,33 @@ Verified first: FKK5R0020FE land pattern pads 1/2 are 2.9 × 1.0 mm (sense), 3/4
   parts. Pad 3, J5-1, the B.Cu pour (x −24.1…3.6, y −80.6…−68.4) and its 8 spoke/stub tracks →
   `/01 afe/SHUNT1_FORCE`. The two nets now meet only inside the shunt (assign_nets: 0 shorts).
 
+### Fix 6 – U8/U9 (VXO7805) body side (2026-10-23)
+
+The open Phase 2/4 point "U8/U9 body side" is settled by the user's photo of the built board:
+the modules' component faces (toroid, SMD parts) point away from J12 (the photo was matched to
+the board by C28, TR2 and the C67/C58/C57 silk). With the datasheet's side view (pin row 1.8 mm
+from the module-PCB face, 5.4 mm from the component face) the body is on the side of the pin row
+away from J12, as the Proteus silk draws it; the datasheet's "recommended layout" view was the
+wrong one. Change: `tools/gen_footprints.py` `flip_body` mirrors the R-78E graphics (silk, fab,
+courtyard, texts) of `Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus` across the pin row and turns
+the 3D model 180° about the pin-row centre; pads unchanged. `tools/v4/fix_6_u8u9_body.py` copies
+the new graphics, field positions and model onto U8 and U9 (no copper or net change, no deviation
+rows). Courtyard now 2.275 mm toward J12, 6.775 mm away (the R-78E body is 8.6 mm deep, the
+VXO78 7.2 mm, so it is conservative). DRC: the 4 J12-pin / U8 `pth_inside_courtyard` errors are
+gone; U9 now also overlaps C57 and C58 (as before C67): on the built board these 1206 parts sit
+under U9's component-side overhang (visible in the photo), so the overlap is real and fine.
+Render: `reports/v4/fix6_F.png`.
+
 ### Renders (checked by eye)
 
 Schematic: `reports/render/{01,07,08,09,10}_*.png`. Board (kicad-cli SVG, `tools/v4/render_area.py`):
 `reports/v4/fix1_In1.png`, `fix1_B.png`, `fix2_F.png`, `fix3_FB.png`, `fix4_U4.png`, `fix4_U5.png`,
-`fix4_U6.png`, `fix5_B.png`.
+`fix4_U6.png`, `fix5_B.png`, `fix6_F.png`.
 
 ### DRC
 
-470 violations (Phase 4: 469): 0 shorts, 0 unconnected, 0 parity; courtyards_overlap 51 (+1:
-C91/U5, see fix 4), pth_inside_courtyard 6, warnings unchanged (silk 199/199/12, via_dangling 2,
+468 violations (Phase 4: 469): 0 shorts, 0 unconnected, 0 parity; courtyards_overlap 53 (+1:
+C91/U5, see fix 4; +2: U9/C57, U9/C58, see fix 6), pth_inside_courtyard 2 (−4, fix 6), warnings unchanged (silk 199/199/12, via_dangling 2,
 track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, the same 8 warnings.
 
 ### For the KiCad GUI (by eye)
@@ -144,10 +161,13 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 - Fix 1: the new In1 zone under the aux-transformer secondary (TR2-7 switching node gets 0.15 mm
   zone clearance on In1); check against your isolation rules.
 
+User review 2026-10-23: nothing to change. Shunt inductance not measured accurately (5–10 nH,
+about 5 nH); the 12.4R placeholder (5 nH) stays.
+
 `tools/regen_check.sh` (clean clone of 9fada64, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
-### Last verification (`tools/check_all.sh`, v4 done)
+### Last verification (`tools/check_all.sh`, v4 fix 6 done)
 
 ```
 pcbnew 10.0.7
@@ -174,9 +194,9 @@ check_board: 4062 tracks, 186 vias, 84 zones
 check_board: OK
 assign_nets: after zone fill: 247 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
-drc: 470 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
-drc:     51 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
-drc:      6 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
+drc: 468 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc:     53 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
+drc:      2 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
 drc:    199 warning  silk_overlap
 drc:    199 warning  silk_over_copper
 drc:     12 warning  silk_edge_clearance
@@ -833,7 +853,7 @@ FAILED (the moved record breaks the 1:1 net mapping, the shifted one has no reco
   track, no zone. Confirmed.
 - **Dangling via/track warnings**: the copper is Proteus' to 0.05 mm, so the two vias
   connected on one layer only and the 0.14 mm PWM_TRANS5 stub are Proteus artefacts. Confirmed.
-- **U8/U9 (VXO7805) body side** – still open, now with the datasheet facts (CUI VXO78-500,
+- **U8/U9 (VXO7805) body side** – resolved 2026-10-23 by v4 fix 6 (photo of the built board: Proteus was right). Was: still open, now with the datasheet facts (CUI VXO78-500,
   rev. 05/2023, mechanical drawing p. 3): body 10.0 × 7.2 × 11.0 mm, pins Ø 1.2 on 2.54 mm, pin
   row 1.80 mm from the module-PCB face and 5.40 mm from the component face; the front view
   (component side, toroid visible) numbers the pins 1-2-3 left to right. With pin 1 at −x
@@ -869,7 +889,7 @@ FAILED (the moved record breaks the 1:1 net mapping, the shifted one has no reco
   courtyard errors and 413 silk/dangling warnings accepted, see Phase 3); KiCad copper = Proteus
   copper to 0.05 mm except pad shapes (listed above); KiCad IPC-D-356 = Proteus IPC-D-356
   (positions, sides, nets).
-- Open points (user decisions): U8/U9 body graphics, C67 symbol, silk/refdes positions
+- Open points (user decisions): U8/U9 body graphics (done: v4 fix 6), C67 symbol, silk/refdes positions
   (KiCad footprint defaults, PLAN 3e), KiCad vs Proteus pad sizes where DRC does not force a
   choice, KiCad drills larger than Proteus on C_Disc/J12/PWM1/R10/C24.
 
