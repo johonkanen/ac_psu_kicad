@@ -22,6 +22,7 @@ export AC_PSU_BOARD="$PWD/$OUT/src/kicad/ac_psu.kicad_pcb"   # next to the tag's
 rm -f "$AC_PSU_BOARD"
 export AC_PSU_SCHEMATIC="$PWD/$OUT/src/kicad/ac_psu.kicad_sch"
 export AC_PSU_REPORTS="$PWD/$OUT/src/reports"
+export AC_PSU_PRETTY="$PWD/$OUT/src/lib/ac_psu.pretty"            # the tag's project footprints
 tools/p2k/bin/kipy tools/build_pcb.py
 tools/p2k/bin/kipy tools/gerber_to_tracks.py
 tools/p2k/bin/kipy tools/assign_nets.py

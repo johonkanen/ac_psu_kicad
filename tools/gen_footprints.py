@@ -32,7 +32,8 @@ from p2k.sexpr import Sym  # noqa: E402
 import deviations  # noqa: E402  (v4 added parts)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRETTY = os.path.join(ROOT, "lib", "ac_psu.pretty")
+# AC_PSU_PRETTY: tools/make_pcb.sh loads the tag's project footprints for the Proteus board
+PRETTY = os.environ.get("AC_PSU_PRETTY") or os.path.join(ROOT, "lib", "ac_psu.pretty")
 MAP_CSV = os.path.join(ROOT, "lib", "footprint_map.csv")
 PART_MAP = os.path.join(ROOT, "lib", "part_map.csv")
 
