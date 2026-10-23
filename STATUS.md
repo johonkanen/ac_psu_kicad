@@ -166,7 +166,7 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 User review 2026-10-23: nothing to change. Shunt inductance not measured accurately (5–10 nH,
 about 5 nH); the 12.4R placeholder (5 nH) stays.
 
-`tools/regen_check.sh` (clean clone of 9fada64, regenerate everything incl. the Proteus board
+`tools/regen_check.sh` (clean clone of 4a37c5b, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
 ### Last verification (`tools/check_all.sh`, v4 fix 6 done)
