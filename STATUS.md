@@ -144,6 +144,9 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 - Fix 1: the new In1 zone under the aux-transformer secondary (TR2-7 switching node gets 0.15 mm
   zone clearance on In1); check against your isolation rules.
 
+`tools/regen_check.sh` (clean clone of 07221a9, regenerate everything incl. the Proteus board
+from the tag): `regen_check: OK (every generated file byte-identical)`.
+
 ### Last verification (`tools/check_all.sh`, v4 done)
 
 ```
