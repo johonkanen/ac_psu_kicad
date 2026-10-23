@@ -5,9 +5,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
 == F.Cu: Proteus copper 19439.7 mm^2, KiCad copper 19462.9 mm^2
    raw XOR 134.64 mm^2; after 0.05 mm tolerance: only Proteus 39.59 mm^2, only KiCad 59.17 mm^2, 814 clusters (612 below 0.01 mm^2)
    pad shape   188 clusters, 59.80 mm^2
-   v4 deviation   13 clusters, 37.76 mm^2
-   other         1 clusters, 0.03 mm^2
-   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 1490 draws / 916 flashes, 1 not on Proteus copper (4 explained by pad shape)
+   v4 deviation   14 clusters, 37.80 mm^2
+   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 1490 draws / 916 flashes, 0 not on Proteus copper (5 explained by pad shape)
    MISSING   KiCad flash ViaPad 0.4572 mm at (57.600, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near U11-9 (ADASEL2) 2.87 mm
    MISSING   KiCad flash ViaPad 0.4572 mm at (61.400, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near U14-4 (#00228) 2.25 mm
    MISSING   KiCad flash ViaPad 0.4572 mm at (111.300, 34.300) {'N': 'Net-(U6-VIN+)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R73-1 (#00360) 0.74 mm
@@ -33,7 +32,6 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape     4 clusters, only KiCad   0.09 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus  (1 parts: J11)
    pad shape     2 clusters, only KiCad   0.08 mm^2, only Proteus   0.00 mm^2  ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus  (1 parts: U8)
    pad shape     3 clusters, only KiCad   0.03 mm^2, only Proteus   0.00 mm^2  ac_psu:SOT-23-5_TPS73033  (2 parts: U10 U3)
-   other      only KiCad    0.034 mm^2 at (  59.613,   -0.987) 0.12x0.28 mm  near U11-7 (GND) 0.31 mm, via (GND) 1.07 mm
    v4 deviation only Proteus  9.257 mm^2 at (   8.756,   38.998) 3.48x3.48 mm  near J8-48 (20V_ISO_SEC) 17.15 mm, via (#00275) 6.12 mm
    v4 deviation only Proteus  9.239 mm^2 at (   4.198,  -62.752) 3.48x3.48 mm  near J1-16 (PGND) 15.54 mm, via (GND) 13.09 mm
    v4 deviation only Proteus  9.239 mm^2 at (   9.298,  -65.502) 3.48x3.48 mm  near J1-15 (PGND) 10.45 mm, via (GND) 16.96 mm
@@ -43,6 +41,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    v4 deviation only KiCad    0.193 mm^2 at (  61.400,   -9.350) 0.50x0.50 mm  near U14-4 (#00228) 2.25 mm, via (VCC) 1.61 mm
    v4 deviation only KiCad    0.043 mm^2 at (  57.719,   -6.627) 0.33x0.30 mm  near U11-9 (ADASEL2) 0.93 mm, via (GND) 4.26 mm
    v4 deviation only KiCad    0.036 mm^2 at (  57.472,   -6.853) 0.30x0.30 mm  near U11-9 (ADASEL2) 1.19 mm, via (GND) 3.93 mm
+   v4 deviation only KiCad    0.034 mm^2 at (  59.613,   -0.987) 0.12x0.28 mm  near U11-7 (GND) 0.31 mm, via (GND) 1.07 mm
    v4 deviation only KiCad    0.029 mm^2 at ( 108.600,   34.491) 0.40x0.10 mm  near R74-1 (#00361) 0.73 mm, via (20V_ISO_SEC) 7.95 mm
    v4 deviation only KiCad    0.029 mm^2 at ( 108.600,   34.134) 0.40x0.10 mm  near R74-1 (#00361) 0.72 mm, via (20V_ISO_SEC) 7.63 mm
    v4 deviation only KiCad    0.026 mm^2 at (  59.600,   -8.308) 0.35x0.10 mm  near U11-10 (ADASEL1) 1.66 mm, via (VCC) 2.45 mm
@@ -905,7 +904,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape  only Proteus  0.010 mm^2 at (-107.069,  -63.848) 0.12x0.15 mm  near R89-2 (GPIO_BYPASS_RLY) 0.62 mm, via (GPIO_BYPASS_RLY) 3.85 mm
    pad shape  only Proteus  0.010 mm^2 at (-105.748,  -65.831) 0.15x0.12 mm  near R90-2 (GND) 0.62 mm, via (GND) 2.36 mm
 
-== drills: 12 KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv
+== drills: 13 KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv
 == drills: Proteus 562, KiCad 575, matched 562 within 0.05 mm
     173 x Proteus 0.3000 mm -> KiCad 0.3000 mm
     218 x Proteus 0.5588 mm -> KiCad 0.5580 mm
@@ -925,4 +924,3 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
      12 x Proteus 2.0320 mm -> KiCad 2.0320 mm
      21 x Proteus 2.5500 mm -> KiCad 2.5500 mm
      12 x Proteus 3.0000 mm -> KiCad 3.0000 mm
-   ERROR KiCad ViaDrill 0.3 mm at (57.6, -9.35) has no Proteus drill
