@@ -13,9 +13,11 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BOARD = os.environ.get("AC_PSU_BOARD") or os.path.join(ROOT, "kicad", "ac_psu.kicad_pcb")  # env: tests
-SCHEMATIC = os.path.join(ROOT, "kicad", "ac_psu.kicad_sch")
-REPORTS = os.path.join(ROOT, "reports")
+# The env overrides are used by tools/make_pcb.sh (Proteus board from the tagged schematic into
+# build/proteus/) and by tests; by default the scripts work on the v4 design in kicad/.
+BOARD = os.environ.get("AC_PSU_BOARD") or os.path.join(ROOT, "kicad", "ac_psu.kicad_pcb")
+SCHEMATIC = os.environ.get("AC_PSU_SCHEMATIC") or os.path.join(ROOT, "kicad", "ac_psu.kicad_sch")
+REPORTS = os.environ.get("AC_PSU_REPORTS") or os.path.join(ROOT, "reports")
 CADCAM = os.path.join(ROOT, "source", "cadcam")
 IPC_JSON = os.path.join(ROOT, "reference", "ipc356_pads.json")
 TOL = 0.05  # mm, pad position tolerance against the IPC file
@@ -43,8 +45,11 @@ def gerber_path(name):
 
 
 def ipc_records():
+    """IPC records with the v4 deviations applied (tools/deviations.py; raw Proteus data when
+    AC_PSU_PROTEUS=1, as tools/make_pcb.sh sets it)."""
+    import deviations
     with open(IPC_JSON) as f:
-        return json.load(f)["pads"]
+        return deviations.apply_records(json.load(f)["pads"])
 
 
 def export_netlist():

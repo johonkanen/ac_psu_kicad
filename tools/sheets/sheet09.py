@@ -20,16 +20,24 @@ for pin, lab in ((13, "ADA2"), (14, "ADA1"), (15, "ADA0"), (12, "ADA3"), (1, "AD
     glabel_left(sh, lab, u11.pin(pin))
 sh.wire(u11.pin(5), left(u11.pin(5), 4)); power_at(sh, "GND", left(u11.pin(5), 4), "left")   # X5
 inh = u11.pin(6)
-sh.wire(inh, left(inh, 6)); power_at(sh, "DGND", left(inh, 6), "left")
-sh.pwr_flag(*left(inh, 3), rot=180); sh.junction(*left(inh, 3))
+sh.wire(inh, left(inh, 6)); power_at(sh, "GND", left(inh, 6), "left")   # v4: was the floating net DGND
+sh.text("v4: INH (pin 6) tied to GND (v3: single-pin net DGND, floating).", MX - g(8), MY + g(33))
 vdd = u11.pin(16)
 sh.wire(vdd, up(vdd, 2)); power_at(sh, "VCC", up(vdd, 2), "up")
 vee, vss = u11.pin(7), u11.pin(8)
 gy = vee[1] + g(2)
 sh.wire(vee, (vee[0], gy), (vss[0], gy), vss)
 sh.junction(MX, gy); power_at(sh, "GND", (MX, gy), "down")
-sh.text("VDD = 3V3 (VCC), VEE = VSS = AGND (GND); INH tied to the single-pin net DGND.", MX - g(8), MY + g(30))
+sh.text("VDD = 3V3 (VCC), VEE = VSS = AGND (GND).", MX - g(8), MY + g(30))
 sh.text("check logic", MX - g(18), MY - g(26))
+
+# v4: 1 nF filter caps on the mux inputs ADA2 / ADA3 (ADA1 has C42 on sheet 4), next to U11
+for i, (ref, lab) in enumerate((("C88", "ADA2"), ("C89", "ADA3"))):
+    x = g(16 + 10 * i)
+    _, ct, cb = vert2(sh, "C", ref, x, g(104), "1n", top=1)
+    sh.wire(ct, up(ct, 2)); sh.glabel(lab, *up(ct, 2), 90)
+    sh.wire(cb, down(cb, 2)); power_at(sh, "GND", down(cb, 2), "down")
+sh.text("v4: C88/C89 1n (0402, as C42) filter the mux inputs ADA2/ADA3; placed next to U11.", g(10), g(114))
 
 # U12 unity-gain buffer
 OX, OY = g(100), g(58)

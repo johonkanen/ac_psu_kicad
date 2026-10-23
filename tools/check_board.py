@@ -20,6 +20,7 @@ import pcbnew
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import board_common as bc  # noqa: E402
+import deviations  # noqa: E402
 
 
 def mm(v):
@@ -34,6 +35,7 @@ def check_pads(board, recs, errors):
     mapping, problems = bc.ipc_to_kicad_nets(board)
     errors.extend(problems)
     worst, npads, used = 0.0, 0, set()
+    v4pads, pending = [], []
     for fp in board.GetFootprints():
         ref = fp.GetReference()
         if fp.IsBoardOnly():
@@ -44,6 +46,16 @@ def check_pads(board, recs, errors):
             c = pad.GetPosition()
             x, y = mm(c.x), -mm(c.y)
             cands = ipc.get(key, [])
+            added = deviations.added_parts().get(ref)
+            if added and not cands:
+                # v4 part: no Proteus position; its pads must be on the listed nets
+                want = added["pins"].get(pad.GetNumber())
+                if want is None:
+                    errors.append(f"{ref}-{pad.GetNumber()}: v4 part pad not in lib/v4_deviations.csv")
+                else:
+                    v4pads.append(f"{ref}-{pad.GetNumber()}@({x:.3f},{y:.3f})")
+                    pending.append((ref, pad.GetNumber(), want, pad.GetNetname()))
+                continue
             if not cands:
                 errors.append(f"{ref}-{pad.GetNumber()}: footprint pad without IPC pad")
                 continue
@@ -59,6 +71,11 @@ def check_pads(board, recs, errors):
                     errors.append(f"{ref}-{pad.GetNumber()}: N/C in IPC but on net {kn}")
             elif mapping.get(q["net"]) != kn:
                 errors.append(f"{ref}-{pad.GetNumber()}: net {kn}, IPC net {q['net']} -> {mapping.get(q['net'])}")
+    for ref, pin, want, kn in pending:
+        if mapping.get(want, want) != kn:
+            errors.append(f"{ref}-{pin}: net {kn}, v4 list {want} -> {mapping.get(want)}")
+    if v4pads:
+        print(f"check_board: v4 pads without Proteus pad (nets checked): {' '.join(v4pads)}")
     for key, qs in ipc.items():
         for q in qs:
             if id(q) not in used:
@@ -115,10 +132,23 @@ def check_copper(board, recs, mapping, errors):
             errors.append(f"IPC via ({q['x_mm']}, {q['y_mm']}): IPC net {q['net']} has no KiCad net")
         elif hit.GetNetname() != want:
             errors.append(f"via ({q['x_mm']}, {q['y_mm']}): net {hit.GetNetname()!r}, IPC {q['net']} -> {want}")
+    v4vias = deviations.vias()
+    nv4 = 0
     for v in vias:
         if v.m_Uuid.AsString() not in matched:
             c = v.GetPosition()
-            errors.append(f"board via ({mm(c.x):.3f}, {-mm(c.y):.3f}) is not an IPC via")
+            x, y = mm(c.x), -mm(c.y)
+            hit = [d for d in v4vias if math.hypot(d[0] - x, d[1] - y) < 0.01]
+            if not hit:
+                errors.append(f"board via ({x:.3f}, {y:.3f}) is neither an IPC via nor a v4 via (lib/v4_copper.csv)")
+            elif mapping.get(hit[0][2], hit[0][2]) != v.GetNetname():
+                errors.append(f"v4 via ({x:.3f}, {y:.3f}): net {v.GetNetname()}, list {hit[0][2]}")
+            else:
+                nv4 += 1
+    if nv4 != len(v4vias):
+        errors.append(f"{len(v4vias)} v4 vias listed, {nv4} found on the board")
+    if v4vias:
+        print(f"check_board: {nv4} v4 vias (lib/v4_copper.csv) at their positions and nets")
     nonet = [t for t in tracks if t.GetNetCode() <= 0]
     if nonet:
         errors.append(f"{len(nonet)} tracks without net")

@@ -777,236 +777,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:DGND"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#PWR"
-				(at 0 -6.35 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "DGND"
-				(at 0 -3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Power symbol for net \"DGND\" (IPC net name)"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "DGND_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "DGND_1_1"
-				(pin power_in line
-					(at 0 0 270)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "ac_psu:PWR_FLAG"
-			(power global)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(in_pos_files yes)
-			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "#FLG"
-				(at 0 1.905 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "PWR_FLAG"
-				(at 0 3.81 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "Special symbol for telling ERC where power comes from"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "flag power"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_0"
-				(pin power_out line
-					(at 0 0 90)
-					(length 0)
-					(name ""
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "ac_psu:TLV316IDBVR"
 			(pin_names
 				(offset 0.127)
@@ -1728,6 +1498,121 @@
 								(size 1.27 1.27)
 							)
 						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "ac_psu:PWR_FLAG"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 			)
@@ -2732,7 +2617,7 @@
 		(uuid "ad7a106e-d7b7-5976-b5cb-5cccaa6dabe3")
 	)
 	(symbol
-		(lib_id "ac_psu:DGND")
+		(lib_id "ac_psu:GND")
 		(at 45.72 104.14 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2749,7 +2634,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "DGND"
+		(property "Value" "GND"
 			(at 42.42 104.14 270)
 			(effects
 				(font
@@ -2776,7 +2661,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"DGND\" (IPC net name)"
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
 			(at 45.72 104.14 0)
 			(effects
 				(font
@@ -2797,75 +2682,15 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "ac_psu:PWR_FLAG")
-		(at 49.53 104.14 180)
-		(unit 1)
+	(text "v4: INH (pin 6) tied to GND (v3: single-pin net DGND, floating)."
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "07e7fa3a-cfed-549a-ad45-c7b5d362742f")
-		(property "Reference" "#FLG005"
-			(at 49.53 106.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
+		(at 53.34 130.81 0)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify left bottom)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 49.53 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 49.53 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 49.53 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 49.53 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b7d5cf5a-401e-56c2-b5ef-2e3d5dd3bfc7")
-		)
-		(instances
-			(project "ac_psu"
-				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#FLG005")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(junction
-		(at 49.53 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
 		(uuid "5b8172a9-4ef1-5545-a337-2b12a789bc99")
 	)
 	(wire
@@ -2886,8 +2711,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1d9034b3-95b0-5baa-8a4d-75fa71a50287")
-		(property "Reference" "#PWR006"
+		(uuid "fc08f76e-3aec-545d-a649-4192d1698f3a")
+		(property "Reference" "#PWR005"
 			(at 63.5 62.23 0)
 			(effects
 				(font
@@ -2932,12 +2757,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "cbdec16d-4941-5eed-8e93-0e9f1b29a70f")
+			(uuid "bdad9f3d-a459-5d2d-9eb2-ae89a5debae6")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR006")
+					(reference "#PWR005")
 					(unit 1)
 				)
 			)
@@ -2987,8 +2812,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "de0fa835-343f-5c3d-9946-ffd736cdda74")
-		(property "Reference" "#PWR007"
+		(uuid "1d9034b3-95b0-5baa-8a4d-75fa71a50287")
+		(property "Reference" "#PWR006"
 			(at 63.5 125.73 0)
 			(effects
 				(font
@@ -3033,18 +2858,18 @@
 			)
 		)
 		(pin "1"
-			(uuid "405804c0-3bc4-5b1e-8566-d4f585d3f853")
+			(uuid "cbdec16d-4941-5eed-8e93-0e9f1b29a70f")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR007")
+					(reference "#PWR006")
 					(unit 1)
 				)
 			)
 		)
 	)
-	(text "VDD = 3V3 (VCC), VEE = VSS = AGND (GND); INH tied to the single-pin net DGND."
+	(text "VDD = 3V3 (VCC), VEE = VSS = AGND (GND)."
 		(exclude_from_sim no)
 		(at 53.34 127 0)
 		(effects
@@ -3065,6 +2890,365 @@
 			(justify left bottom)
 		)
 		(uuid "50c02cae-cd38-5fcc-8f23-4d51a79f9fac")
+	)
+	(symbol
+		(lib_id "ac_psu:C")
+		(at 20.32 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "73152bfa-8975-52cb-92cc-e2b7e88d4f44")
+		(property "Reference" "C88"
+			(at 24.51 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1n"
+			(at 23.96 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 21.2852 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 20.32 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3ce913d1-e630-57cb-85fe-ff60faa4d9a1")
+		)
+		(pin "2"
+			(uuid "cff276aa-e3d0-5d66-ac51-75189115454f")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
+					(reference "C88")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 20.32 128.27) (xy 20.32 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "554be66d-0b79-5ef6-89ec-d20ef72b822b")
+	)
+	(global_label "ADA2"
+		(shape passive)
+		(at 20.32 125.73 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4f9d2291-4eb0-5dc3-9df4-4dc14281c01f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 20.32 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 20.32 135.89) (xy 20.32 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac3d6c13-4020-58e4-b3c2-56525a0c6815")
+	)
+	(symbol
+		(lib_id "ac_psu:GND")
+		(at 20.32 138.43 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "de0fa835-343f-5c3d-9946-ffd736cdda74")
+		(property "Reference" "#PWR007"
+			(at 20.32 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 20.32 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 20.32 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 20.32 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 20.32 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "405804c0-3bc4-5b1e-8566-d4f585d3f853")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
+					(reference "#PWR007")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ac_psu:C")
+		(at 33.02 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "05a21443-3649-5745-8e01-79417cfc3bc4")
+		(property "Reference" "C89"
+			(at 37.21 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1n"
+			(at 36.66 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 33.9852 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 33.02 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4a6956e7-61dd-5c0f-b541-269c692e162f")
+		)
+		(pin "2"
+			(uuid "3a837526-0bfe-57e9-bdc9-e08465e6e99b")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
+					(reference "C89")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 33.02 128.27) (xy 33.02 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "81567de3-9e1d-53fc-a8cf-f9835679e0be")
+	)
+	(global_label "ADA3"
+		(shape passive)
+		(at 33.02 125.73 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9d1297a6-e9bc-5eac-8062-78f104d6d367")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 33.02 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 33.02 135.89) (xy 33.02 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c849f28e-4972-525e-8d56-6dde51cae327")
+	)
+	(symbol
+		(lib_id "ac_psu:GND")
+		(at 33.02 138.43 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "dc13370c-6aa0-5750-8f96-6f618a67a766")
+		(property "Reference" "#PWR008"
+			(at 33.02 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 33.02 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"GND\" (IPC net name)"
+			(at 33.02 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e9e2444d-63a6-5e51-885a-7fbb7a54c9be")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
+					(reference "#PWR008")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "v4: C88/C89 1n (0402, as C42) filter the mux inputs ADA2/ADA3; placed next to U11."
+		(exclude_from_sim no)
+		(at 12.7 144.78 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ec95e93-0840-56b2-91fc-c0a138e644dd")
 	)
 	(symbol
 		(lib_id "ac_psu:TLV316IDBVR")
@@ -3153,7 +3337,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "554be66d-0b79-5ef6-89ec-d20ef72b822b")
+		(uuid "90c921b5-1f1e-5a3d-9652-c99b1123530c")
 	)
 	(wire
 		(pts
@@ -3163,7 +3347,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4f9d2291-4eb0-5dc3-9df4-4dc14281c01f")
+		(uuid "9f5dfe39-b162-57ce-8938-7e3db1bce0aa")
 	)
 	(wire
 		(pts
@@ -3173,7 +3357,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ac3d6c13-4020-58e4-b3c2-56525a0c6815")
+		(uuid "d3dcc26b-a69a-5afb-bb41-563769e5a095")
 	)
 	(wire
 		(pts
@@ -3183,7 +3367,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "81567de3-9e1d-53fc-a8cf-f9835679e0be")
+		(uuid "0f720d82-d4e1-5891-be4d-e302301d2b75")
 	)
 	(wire
 		(pts
@@ -3193,7 +3377,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9d1297a6-e9bc-5eac-8062-78f104d6d367")
+		(uuid "f0362148-2b9a-5157-8824-ea401ab81957")
 	)
 	(wire
 		(pts
@@ -3203,7 +3387,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c849f28e-4972-525e-8d56-6dde51cae327")
+		(uuid "b3a3c960-cabd-5bdc-957d-f3bbfb742c30")
 	)
 	(wire
 		(pts
@@ -3213,13 +3397,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9ec95e93-0840-56b2-91fc-c0a138e644dd")
+		(uuid "3aa3a7a4-f2bd-523f-8e70-85a7e5ceb578")
 	)
 	(junction
 		(at 137.16 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "90c921b5-1f1e-5a3d-9652-c99b1123530c")
+		(uuid "d2fee61f-8228-516f-b63a-4e08fd6fa0da")
 	)
 	(wire
 		(pts
@@ -3229,7 +3413,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9f5dfe39-b162-57ce-8938-7e3db1bce0aa")
+		(uuid "1d1f21cc-a319-5067-83d3-cbeb1ba6e15f")
 	)
 	(wire
 		(pts
@@ -3239,7 +3423,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d3dcc26b-a69a-5afb-bb41-563769e5a095")
+		(uuid "6cf34f12-e044-5385-8c3e-44d091ecba55")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3249,8 +3433,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "dc13370c-6aa0-5750-8f96-6f618a67a766")
-		(property "Reference" "#PWR008"
+		(uuid "1eed46c8-45ad-5e5a-828e-540ebfcf50db")
+		(property "Reference" "#PWR009"
 			(at 124.46 90.17 0)
 			(effects
 				(font
@@ -3295,12 +3479,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "e9e2444d-63a6-5e51-885a-7fbb7a54c9be")
+			(uuid "a6651326-1caa-5a26-956f-f40091aa9288")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR008")
+					(reference "#PWR009")
 					(unit 1)
 				)
 			)
@@ -3381,13 +3565,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0f720d82-d4e1-5891-be4d-e302301d2b75")
+		(uuid "9fbb0e1e-3f8a-5dc1-852e-bec87daa787c")
 	)
 	(junction
 		(at 160.02 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f0362148-2b9a-5157-8824-ea401ab81957")
+		(uuid "6c297781-5acf-5161-8656-3513ac760a66")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -3464,7 +3648,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b3a3c960-cabd-5bdc-957d-f3bbfb742c30")
+		(uuid "854955c3-b1fb-5f0f-afdc-76a88c1f947e")
 	)
 	(wire
 		(pts
@@ -3474,7 +3658,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3aa3a7a4-f2bd-523f-8e70-85a7e5ceb578")
+		(uuid "1d95db59-5620-59c7-9bf0-6e0bdce9dbb3")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3484,8 +3668,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1eed46c8-45ad-5e5a-828e-540ebfcf50db")
-		(property "Reference" "#PWR009"
+		(uuid "31845d1b-2fed-5add-9c08-4091feebd704")
+		(property "Reference" "#PWR010"
 			(at 160.02 91.44 0)
 			(effects
 				(font
@@ -3530,12 +3714,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "a6651326-1caa-5a26-956f-f40091aa9288")
+			(uuid "b7d9a628-66f1-5c3a-8712-48b702fb1aaa")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR009")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -3636,7 +3820,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d2fee61f-8228-516f-b63a-4e08fd6fa0da")
+		(uuid "21da7c65-cd25-5c94-ac26-f5319ddcc352")
 	)
 	(wire
 		(pts
@@ -3646,7 +3830,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1d1f21cc-a319-5067-83d3-cbeb1ba6e15f")
+		(uuid "379a6487-9a97-5b44-b297-79dc69293485")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3656,8 +3840,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "31845d1b-2fed-5add-9c08-4091feebd704")
-		(property "Reference" "#PWR010"
+		(uuid "d13790cd-04c2-5c63-901a-ad6800f3672c")
+		(property "Reference" "#PWR011"
 			(at 196.85 71.12 0)
 			(effects
 				(font
@@ -3703,12 +3887,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "b7d9a628-66f1-5c3a-8712-48b702fb1aaa")
+			(uuid "258f3e22-c239-516d-97ea-9907da81dd97")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR010")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -3722,7 +3906,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6cf34f12-e044-5385-8c3e-44d091ecba55")
+		(uuid "c6414725-9086-5709-a511-44d46f9a152d")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3732,8 +3916,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d13790cd-04c2-5c63-901a-ad6800f3672c")
-		(property "Reference" "#PWR011"
+		(uuid "b4c2c8c9-56fc-54c7-8c4e-89f97cf595b6")
+		(property "Reference" "#PWR012"
 			(at 205.74 87.63 0)
 			(effects
 				(font
@@ -3778,12 +3962,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "258f3e22-c239-516d-97ea-9907da81dd97")
+			(uuid "4ccb953d-586c-5904-a093-b292169897c8")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR011")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -3797,7 +3981,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9fbb0e1e-3f8a-5dc1-852e-bec87daa787c")
+		(uuid "67a8ccf2-1cec-5159-a879-830bac4ec225")
 	)
 	(wire
 		(pts
@@ -3807,7 +3991,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6c297781-5acf-5161-8656-3513ac760a66")
+		(uuid "2ce0c929-d5f3-5e33-b6d4-415e80e02729")
 	)
 	(wire
 		(pts
@@ -3817,7 +4001,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "854955c3-b1fb-5f0f-afdc-76a88c1f947e")
+		(uuid "abc8c19c-d190-57dd-b00c-89b5384b970a")
 	)
 	(wire
 		(pts
@@ -3827,7 +4011,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1d95db59-5620-59c7-9bf0-6e0bdce9dbb3")
+		(uuid "767cb307-39ca-5b3d-832a-e423062b785a")
 	)
 	(wire
 		(pts
@@ -3837,7 +4021,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "21da7c65-cd25-5c94-ac26-f5319ddcc352")
+		(uuid "fee23bea-e0b9-56ed-92a6-b80677e527af")
 	)
 	(wire
 		(pts
@@ -3847,13 +4031,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "379a6487-9a97-5b44-b297-79dc69293485")
+		(uuid "54eb6ba7-3fbc-5b77-b8ff-06a530725934")
 	)
 	(junction
 		(at 227.33 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c6414725-9086-5709-a511-44d46f9a152d")
+		(uuid "f9f9793e-d64c-5310-aa3e-ad1d1c5b4e77")
 	)
 	(symbol
 		(lib_id "ac_psu:L")
@@ -3930,7 +4114,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "67a8ccf2-1cec-5159-a879-830bac4ec225")
+		(uuid "57eaf35f-6271-58db-b119-eeb9eb45957c")
 	)
 	(symbol
 		(lib_id "ac_psu:VCC")
@@ -3940,8 +4124,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b4c2c8c9-56fc-54c7-8c4e-89f97cf595b6")
-		(property "Reference" "#PWR012"
+		(uuid "c1ee67f6-eedd-559d-997a-f3f3355cdf17")
+		(property "Reference" "#PWR013"
 			(at 190.5 53.34 0)
 			(effects
 				(font
@@ -3986,12 +4170,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4ccb953d-586c-5904-a093-b292169897c8")
+			(uuid "f4940323-60b5-5d12-ba04-d59125348258")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR012")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -4005,7 +4189,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2ce0c929-d5f3-5e33-b6d4-415e80e02729")
+		(uuid "8e3f8cb8-1832-579b-8c3b-9b7ffb06c36a")
 	)
 	(wire
 		(pts
@@ -4015,13 +4199,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "abc8c19c-d190-57dd-b00c-89b5384b970a")
+		(uuid "e4dd0c63-4dec-5949-a867-7dc74603c393")
 	)
 	(junction
 		(at 190.5 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "767cb307-39ca-5b3d-832a-e423062b785a")
+		(uuid "151b2a7f-f43a-5157-8b89-b38b29d79a54")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -4031,8 +4215,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7ffcdfe6-00e0-58f5-b65b-0c4705a5d9a9")
-		(property "Reference" "#FLG013"
+		(uuid "2714c3fb-5236-5ec2-aaee-8f5d967d31dd")
+		(property "Reference" "#FLG014"
 			(at 177.8 61.595 0)
 			(effects
 				(font
@@ -4077,12 +4261,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "e39ba7a3-dc88-5c8a-b5b8-9190c103987b")
+			(uuid "132172bb-f3f2-5630-8597-af8720f58a06")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#FLG013")
+					(reference "#FLG014")
 					(unit 1)
 				)
 			)
@@ -4092,7 +4276,7 @@
 		(at 177.8 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "fee23bea-e0b9-56ed-92a6-b80677e527af")
+		(uuid "9c4688e8-9aa1-5313-b37d-bc7467da4c40")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4169,13 +4353,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "54eb6ba7-3fbc-5b77-b8ff-06a530725934")
+		(uuid "8fcf182d-b517-586e-9faf-677070c1df21")
 	)
 	(junction
 		(at 259.08 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f9f9793e-d64c-5310-aa3e-ad1d1c5b4e77")
+		(uuid "f4353e42-1864-52ba-a41f-2eea2551bb46")
 	)
 	(wire
 		(pts
@@ -4185,7 +4369,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "57eaf35f-6271-58db-b119-eeb9eb45957c")
+		(uuid "2625baa5-c4af-53a0-8b15-992f6ed22728")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4262,13 +4446,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8e3f8cb8-1832-579b-8c3b-9b7ffb06c36a")
+		(uuid "d3a922c0-af1f-5c9a-b375-7053bafe8ca0")
 	)
 	(junction
 		(at 266.7 63.5)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e4dd0c63-4dec-5949-a867-7dc74603c393")
+		(uuid "2d93e637-17ff-58bd-97a8-289949918893")
 	)
 	(wire
 		(pts
@@ -4278,7 +4462,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "151b2a7f-f43a-5157-8b89-b38b29d79a54")
+		(uuid "8365bffd-62f1-515a-a2ee-1f9fb06435ea")
 	)
 	(wire
 		(pts
@@ -4288,13 +4472,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9c4688e8-9aa1-5313-b37d-bc7467da4c40")
+		(uuid "26ab7623-833d-5725-8b80-aa1af84917ff")
 	)
 	(junction
 		(at 262.89 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8fcf182d-b517-586e-9faf-677070c1df21")
+		(uuid "5cd16f10-e0be-571b-8fb0-06037fb529bf")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -4304,8 +4488,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e04c39cb-63ab-5e67-824e-33c24e3523ef")
-		(property "Reference" "#PWR014"
+		(uuid "7c59ffa7-9da7-5b3d-b9e4-fdd9f0632f93")
+		(property "Reference" "#PWR015"
 			(at 262.89 80.01 0)
 			(effects
 				(font
@@ -4350,12 +4534,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ce5047bb-58a0-5ff3-a08d-6cdbb66c9cbd")
+			(uuid "6bca8092-bb4b-54d8-a515-f834021035d0")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/84146e90-3f8f-448f-a6c9-f1cf0e53125a"
-					(reference "#PWR014")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -4436,7 +4620,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f4353e42-1864-52ba-a41f-2eea2551bb46")
+		(uuid "f932b54f-c039-561c-9e0d-dac9c02727d2")
 	)
 	(wire
 		(pts
@@ -4446,7 +4630,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2625baa5-c4af-53a0-8b15-992f6ed22728")
+		(uuid "3b0b2ba8-f294-5812-809a-ec3a8569ab72")
 	)
 	(global_label "CS1"
 		(shape passive)
@@ -4458,7 +4642,7 @@
 			)
 			(justify left)
 		)
-		(uuid "d3a922c0-af1f-5c9a-b375-7053bafe8ca0")
+		(uuid "fccfc6d4-963f-5ac1-804c-1a6c8f38091d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 242.57 71.12 0)
 			(effects
@@ -4478,7 +4662,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2d93e637-17ff-58bd-97a8-289949918893")
+		(uuid "03dbeb9d-50d9-5fd9-99cf-1c7f01349337")
 	)
 	(wire
 		(pts
@@ -4488,7 +4672,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8365bffd-62f1-515a-a2ee-1f9fb06435ea")
+		(uuid "7ab93db1-88d7-54d2-a568-9f4182dc72c3")
 	)
 	(symbol
 		(lib_id "ac_psu:RESISTOR_ARRAY_4")
@@ -4565,7 +4749,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "26ab7623-833d-5725-8b80-aa1af84917ff")
+		(uuid "7e5e43c7-d573-5608-8af3-f20126cf5ccb")
 	)
 	(wire
 		(pts
@@ -4575,7 +4759,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5cd16f10-e0be-571b-8fb0-06037fb529bf")
+		(uuid "37634084-4c29-53d1-86e7-f911326e5482")
 	)
 	(global_label "SDATA1"
 		(shape passive)
@@ -4587,7 +4771,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f932b54f-c039-561c-9e0d-dac9c02727d2")
+		(uuid "6deaeb90-6109-59e8-8097-4dd785afa69d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 247.65 86.36 0)
 			(effects
@@ -4607,7 +4791,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3b0b2ba8-f294-5812-809a-ec3a8569ab72")
+		(uuid "87da7185-186c-5490-8e96-c08a39685e2f")
 	)
 	(wire
 		(pts
@@ -4617,7 +4801,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fccfc6d4-963f-5ac1-804c-1a6c8f38091d")
+		(uuid "54c111ff-b1d0-5aee-9451-9a18fb9c8b6d")
 	)
 	(symbol
 		(lib_id "ac_psu:RESISTOR_ARRAY_4")
@@ -4694,7 +4878,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "03dbeb9d-50d9-5fd9-99cf-1c7f01349337")
+		(uuid "41a0121f-9c37-579e-b47e-b66fb0129e14")
 	)
 	(wire
 		(pts
@@ -4704,7 +4888,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7ab93db1-88d7-54d2-a568-9f4182dc72c3")
+		(uuid "13c63cb9-6dcf-5233-a6a2-c9ab50d0a320")
 	)
 	(global_label "CLK1"
 		(shape passive)
@@ -4716,7 +4900,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7e5e43c7-d573-5608-8af3-f20126cf5ccb")
+		(uuid "97785d1c-1cd5-5d94-9c6c-58e312cbac0c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 247.65 93.98 0)
 			(effects
@@ -4797,11 +4981,11 @@
 	)
 	(no_connect
 		(at 237.49 101.6)
-		(uuid "37634084-4c29-53d1-86e7-f911326e5482")
+		(uuid "9e2bf8bf-e17f-504c-bfa1-4f296fd20f69")
 	)
 	(no_connect
 		(at 245.11 101.6)
-		(uuid "6deaeb90-6109-59e8-8097-4dd785afa69d")
+		(uuid "8b6c6dca-2596-5a89-a402-7d5b0c63045e")
 	)
 	(text "R87:D (pads 4/5) has no net in the Proteus layout."
 		(exclude_from_sim no)
@@ -4812,7 +4996,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "87da7185-186c-5490-8e96-c08a39685e2f")
+		(uuid "8eefad3b-ed2a-577f-85e7-3d00fd3f31a2")
 	)
 	(embedded_fonts no)
 )

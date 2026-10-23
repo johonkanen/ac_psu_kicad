@@ -29,6 +29,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k
 from p2k import fpgeom  # noqa: E402
 from p2k import sexpr  # noqa: E402
 from p2k.sexpr import Sym  # noqa: E402
+import deviations  # noqa: E402  (v4 added parts)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PRETTY = os.path.join(ROOT, "lib", "ac_psu.pretty")
@@ -217,6 +218,11 @@ def assign():
             errors.append(f"{ref}: no footprint rule for {sym} (n={f['n']} span={f['span']:.2f} pads={f['pads']})")
             continue
         out[ref] = hits[0]
+    # v4: parts added to the Proteus design (lib/v4_deviations.csv, no IPC pads)
+    for ref, p in deviations.added_parts().items():
+        if ref not in pm:
+            errors.append(f"{ref}: v4 part missing from lib/part_map.csv")
+        out[ref] = (p["footprint"], f"v4 fix {p['fix']}: {p['note']}")
     return out, errors
 
 

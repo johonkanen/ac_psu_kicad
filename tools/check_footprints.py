@@ -33,6 +33,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k
 from p2k import fpgeom  # noqa: E402
 from p2k import sexpr  # noqa: E402
 from gen_footprints import MAP_CSV, footprint_path  # noqa: E402
+import deviations  # noqa: E402  (v4 added parts have no IPC pads)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TOL = 0.05
@@ -112,6 +113,7 @@ def main():
     cache = {}
     fit_rows, pad_rows = [], []
     per_fp = {}
+    v4parts = []
     for ref in sorted(sch):
         fps, on_board = sch[ref]
         if not on_board:
@@ -119,7 +121,20 @@ def main():
                 errors.append(f"{ref}: excluded from board but has footprint {sorted(fps)}")
             continue
         if ref not in ipc:
-            errors.append(f"{ref}: on the board in the schematic but not in the IPC file")
+            added = deviations.added_parts().get(ref)
+            if not added:
+                errors.append(f"{ref}: on the board in the schematic but not in the IPC file")
+                continue
+            # v4 part: footprint as listed, pads = the listed pins (no Proteus geometry to fit)
+            fpid = next(iter(fps)) if len(fps) == 1 else None
+            if fpid != added["footprint"] or fmap.get(ref) != fpid:
+                errors.append(f"{ref}: footprint {sorted(fps)}, map {fmap.get(ref)}, v4 list {added['footprint']}")
+                continue
+            path = footprint_path(fpid)
+            nums = {p["num"] for p in fpgeom.load_footprint(path)} if os.path.exists(path) else set()
+            if nums != set(added["pins"]):
+                errors.append(f"{ref}: footprint pads {sorted(nums)} != v4 pins {sorted(added['pins'])}")
+            v4parts.append(ref)
     for ref in sorted(ipc):
         if ref not in sch:
             errors.append(f"{ref}: not in the schematic")
@@ -208,7 +223,8 @@ def main():
         print("check_footprints: ERROR " + e)
     worst = max((float(r[9]) for r in fit_rows), default=0.0)
     print(f"check_footprints: {len(fit_rows)}/{len(ipc)} parts fitted, {len(pad_rows)} pads, "
-          f"{len(per_fp)} footprints, worst residual {worst:.3f} mm (limit {TOL})")
+          f"{len(per_fp)} footprints, worst residual {worst:.3f} mm (limit {TOL})"
+          + (f"; v4 parts without IPC pads (footprint/pads checked): {' '.join(v4parts)}" if v4parts else ""))
     print("check_footprints: " + ("FAILED" if errors else "OK"))
     sys.exit(1 if errors else 0)
 

@@ -93,6 +93,11 @@ C84,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C85,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C86,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C87,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
+C88,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA2 (like C42 on ADA1)
+C89,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA3
+C90,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U4 differential 100n C0G (shunt L compensation)
+C91,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U5 differential 100n C0G
+C92,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U6 differential 100n C0G
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke

@@ -18,7 +18,7 @@ from p2k.symgen import *  # noqa: E402,F401,F403
 from p2k.symgen import run  # noqa: E402
 
 
-GROUNDS = ["GND", "PGND", "ISOGND", "ISOPGND", "DGND", "DAB_GROUND", "RET_ISO"]
+GROUNDS = ["GND", "PGND", "ISOGND", "ISOPGND", "DAB_GROUND"]  # v4: DGND, RET_ISO merged into GND / ISOGND
 SUPPLIES = ["VCC", "3V3_ISO", "5V", "5V_ISOL", "20V", "20V_ISO_SEC", "DC+", "ISODC+"]
 
 

@@ -3,7 +3,7 @@
 20 V primary output (D2 from the aux winding, C28/C41), 5 V rail caps (C67/C58/C57), startup
 resistors R43/R34/R33 + D7 into Vcc, RCD snubber R24/C62/R23/D6, feedback divider R44||R25 /
 R26||R29 with C63 into Vsense via R31, sense resistors R45||R47, isolated 20V_ISO_SEC output
-(D1, C36, C15, R49) referenced to RET_ISO."""
+(D1, C36, C15, R49) referenced to ISOGND (v4; RET_ISO in v3)."""
 from _common import *  # noqa: F401,F403
 
 sh = sheet("07_auxiliary_supply.kicad_sch")
@@ -130,9 +130,9 @@ for x, ref, val, sym, top in ((g(152), "C36", "4.7u", "C", 1), (g(160), "C15", "
     sh.wire(t, (x, RISO)); sh.junction(x, RISO)
     sh.wire(b, (x, RRET)); sh.junction(x, RRET)
 flagged_power(sh, "20V_ISO_SEC", g(180), RISO)
-flagged_power(sh, "RET_ISO", g(180), RRET)
-sh.text("The PDF's ISO_GND terminal is wired to RET_iso: net RET_ISO (not ISOGND). 20V_ISO_SEC feeds U8 (sheet 3) and the", g(126), g(56))
-sh.text("isolated gate drivers; RET_ISO has no other connection on this board.", g(126), g(59))
+power_at(sh, "ISOGND", (g(180), RRET), "down")   # v4: was RET_ISO
+sh.text("v4: the isolated 20 V return is ISOGND (v3: the PDF's ISO_GND terminal was wired to RET_iso, net RET_ISO,", g(126), g(56))
+sh.text("not connected to ISOGND although U8 and the gate drivers J4/J6/J8 return 20V_ISO_SEC on ISOGND).", g(126), g(59))
 
 # PDF notes
 for i, t in enumerate(("PDF notes: vsense nominal = 1.536 V, vsense OVP threshold = 1.838 V, Isense pk = 1 V, Vpeak = 520 V",

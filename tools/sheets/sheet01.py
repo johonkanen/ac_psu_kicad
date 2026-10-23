@@ -39,14 +39,16 @@ sh.text("AFE half bridges. Q2/Q4 sources are PGND (Proteus calls them G2_Source_
 SX, SY = g(118), g(36)
 r48 = sh.place("FKK5R0020FE-TR", "R48", SX, SY, value="FKK5R0020FE-TR",
                ref_at=(SX - g(3), SY - 1.27, 0, "right"), value_at=(SX - g(3), SY + 1.27, 0, "right"))
-j5 = right(r48.pin(3), 6)
-sh.wire(r48.pin(1), up(r48.pin(1), 2), (j5[0], up(r48.pin(1), 2)[1]), j5)   # pins 1 and 3 = SHUNT1
-sh.glabel("SHUNT1", SX + g(4), up(r48.pin(1), 2)[1], 90)
+j5 = right(r48.pin(3), 16)
+# v4: Kelvin connection restored - pin 1 (sense) = SHUNT1 to U5 only, pin 3 (force) = SHUNT1_FORCE -> J5
+sh.wire(r48.pin(1), up(r48.pin(1), 2)); sh.glabel("SHUNT1", *up(r48.pin(1), 2), 90)
 sh.wire(r48.pin(2), down(r48.pin(2), 2)); sh.glabel("SHUNT2", *down(r48.pin(2), 2), 270)
-sh.wire(r48.pin(3), j5); sh.junction(*j5); terminal(sh, "J5", *j5, "right")
+sh.wire(r48.pin(3), j5); terminal(sh, "J5", *j5, "right")
+sh.label("SHUNT1_FORCE", *right(r48.pin(3), 2))
 glabel_right(sh, "G1_SOURCE_HI", r48.pin(4), 6)
-sh.text("R48 2 mOhm shunt: 4 = Q1/Q2 midpoint, 1/3 = SHUNT1 -> J5 (afe_1_out_measured),", SX - g(16), SY + g(14))
-sh.text("2 = SHUNT2 sense. U5 (sheet 8) floats on SHUNT1/SHUNT2.", SX - g(16), SY + g(17))
+sh.text("R48 2 mOhm shunt: 4 = Q1/Q2 midpoint (force), 3 = SHUNT1_FORCE -> J5 (afe_1_out_measured),", SX - g(16), SY + g(14))
+sh.text("1/2 = SHUNT1/SHUNT2 sense to U5 (sheet 8), which floats on SHUNT1.", SX - g(16), SY + g(17))
+sh.text("v4: pins 1 and 3 are no longer tied (v3: both on SHUNT1, Kelvin sense defeated).", SX - g(16), SY + g(20))
 
 # ---- EMI filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)

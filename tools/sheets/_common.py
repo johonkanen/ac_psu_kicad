@@ -16,13 +16,14 @@ from p2k.sheetkit import *  # noqa: E402,F401,F403  (generic helpers)
 from p2k.sheetkit import _two_pin_rot  # noqa: E402,F401
 
 def adum_block(sh, UX, UY, ref, value, raw_label, r_raw, zener, caps_vdd, vinp, vinm, gnd1_label,
-               vdd2, gnd2, clk_label, r_mdat, mdat_label, decoupling, note=None):
+               vdd2, gnd2, clk_label, r_mdat, mdat_label, decoupling, note=None, cdiff=None):
     """ADuM7701 sigma-delta modulator floating on a shunt, drawn like the Proteus sheets 8/10:
     VDD1 rail fed through r_raw from raw_label and clamped by `zener` (None = no diode in the
     IPC), caps_vdd = two (ref, val) on that rail, vinp/vinm = ((rref, rval), label, (cref, cval))
     series resistor + cap for VIN+/VIN-, GND1 rail = gnd1_label (the VIN- resistor's far side).
     Right side: vdd2/gnd2 power nets, clk_label on MCLKIN, r_mdat = (ref, val) into mdat_label,
-    decoupling = (ref, val) cap between vdd2 and gnd2."""
+    decoupling = (ref, val) cap between vdd2 and gnd2. cdiff = (ref, val) differential cap
+    between VIN+ and VIN- (v4 shunt-inductance compensation, pin 1 = VIN+)."""
     u = sh.place("ADUM7701-8BRIZ", ref, UX, UY, value=value)
     VDD1, VINP, VINM, GND1 = u.pin(1), u.pin(2), u.pin(3), u.pin(4)
     VDD2, MCLK, MDAT, GND2 = u.pin(8), u.pin(7), u.pin(6), u.pin(5)
@@ -54,6 +55,16 @@ def adum_block(sh, UX, UY, ref, value, raw_label, r_raw, zener, caps_vdd, vinp, 
     sh.junction(cb[0], B)
     sh.wire(rl, (rl[0], B))
     sh.junction(rl[0], B)
+    if cdiff:
+        xd = UX - g(19)
+        mid = round(((VINP[1] + row) / 2) / 1.27) * 1.27
+        _, dt, db = vert2(sh, "C", cdiff[0], xd, mid, cdiff[1], top=1, text="right")
+        sh.wire((xd, VINP[1]), dt); sh.junction(xd, VINP[1])
+        sh.wire(db, (xd, row)); sh.junction(xd, row)
+        sh.text(f"v4: {cdiff[0]} {cdiff[1]} (1206) across VIN+/VIN- compensates the shunt inductance:",
+                UX - g(94), B + g(11))
+        sh.text("tau = L/R = 2.5 us; with 100 nF use R_leg = 2.5 Ohm per nH of shunt L "
+                "(4 nH -> 10R, 5 nH -> 12.4R, 6 nH -> 15R).", UX - g(94), B + g(14))
     # cap bank between the rails (+ zener, cathode to VDD1)
     mid = (T + B) / 2
     bank = [(UX - g(58), ("C", caps_vdd[0][0], caps_vdd[0][1], 1, None)),

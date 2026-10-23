@@ -32,6 +32,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 from p2k import ipc356  # noqa: E402
+import deviations  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOARD = ROOT / "kicad" / "ac_psu.kicad_pcb"
@@ -105,6 +106,8 @@ def main():
     ap.add_argument("-v", action="store_true")
     args = ap.parse_args()
     _, prot = ipc356.parse(ipc356.DEFAULT_IPC)
+    prot = deviations.apply_records(prot)   # v4 net changes (lib/v4_deviations.csv)
+    v4parts, v4vias = deviations.added_parts(), deviations.vias()
     if args.kicad:
         kic = parse_kicad(args.kicad)
     else:
@@ -136,8 +139,16 @@ def main():
         used.add(id(r))
         worst = max(worst, d)
         pairs.append((p, r))
+    v4recs = []
     for r in kic:
         if id(r) not in used:
+            if r["kind"] == "pad" and r["refdes"] in v4parts and r["pin"] in v4parts[r["refdes"]]["pins"]:
+                v4recs.append((r, v4parts[r["refdes"]]["pins"][r["pin"]]))
+                continue
+            hit = [v for v in v4vias if r["kind"] == "via" and math.hypot(v[0] - r["x_mm"], v[1] - r["y_mm"]) < TOL]
+            if hit:
+                v4recs.append((r, hit[0][2]))
+                continue
             errors.append(f"KiCad {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}) net {r['net']}: no Proteus record (line {r['line']})")
 
     # net mapping by pad-set equivalence (component pads with a real net on both sides)
@@ -153,6 +164,14 @@ def main():
         if len(ns) > 1:
             errors.append(f"KiCad net {k} spans Proteus nets {sorted(ns)}")
     mapping = {n: next(iter(ks)) for n, ks in fwd.items() if len(ks) == 1}
+    for r, want in v4recs:   # v4 pads / vias: on the listed net
+        if mapping.get(want) != r["net"]:
+            errors.append(f"v4 {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): "
+                          f"KiCad net {r['net']}, listed {want} -> {mapping.get(want)}")
+    nv4p = sum(1 for r, _ in v4recs if r["kind"] == "pad")
+    if nv4p != sum(len(p["pins"]) for p in v4parts.values()) or len(v4recs) - nv4p != len(v4vias):
+        errors.append(f"v4 records: {nv4p} pads, {len(v4recs) - nv4p} vias found; "
+                      f"listed {sum(len(p['pins']) for p in v4parts.values())} pads, {len(v4vias)} vias")
 
     stats = Counter()
     size_diff = Counter()
@@ -192,6 +211,9 @@ def main():
           f"worst position offset {worst:.3f} mm (limit {TOL})")
     print(f"ipc356_diff: {len(mapping)} Proteus nets mapped 1:1 onto KiCad nets, "
           f"{len(errors)} mismatches")
+    if not deviations.proteus_mode():
+        print(f"ipc356_diff: v4 deviations applied ({deviations.summary()}); "
+              f"{len(v4recs)} KiCad records of v4 parts/vias, nets checked")
     if drill_larger:
         print("ipc356_diff: KiCad drill larger (footprint kept): " +
               ", ".join(f"{n}x {a}->{b}" for (a, b), n in sorted(drill_larger.items())))

@@ -1,0 +1,39 @@
+# Intended deviations of the v4 design from the Proteus v3 original (IPC-D-356A netlist).
+# Read by tools/deviations.py; every check that compares with Proteus applies exactly these and
+# nothing else. Kinds:
+#   merge  from = IPC net, to = IPC net: every pad and via of `from` is on `to`
+#   pin    ref-pin moves from IPC net `from` to net `to` (a new net name is allowed)
+#   part   ref is a new part (not in the IPC); to = footprint lib id
+#   add    pin of a new part on net `to` (an IPC net name, or a new net of a `pin` row)
+#   value  value of ref changes from `from` to `to` (checked against the schematic)
+kind,ref,pin,from,to,fix,note
+merge,,,RET_ISO,ISOGND,1,isolated 20 V return (TR2-6 C15-2 C36-2 R49-1 + 2 vias) joined to ISOGND
+merge,,,DGND,GND,2,U11-6 INH tied to GND (was the floating single-pin net DGND)
+part,C88,,,Capacitor_SMD:C_0402_1005Metric,3,1n filter cap on mux input ADA2 (like C42 on ADA1)
+add,C88,1,,ADA2,3,
+add,C88,2,,GND,3,
+value,C88,,,1n,3,
+part,C89,,,Capacitor_SMD:C_0402_1005Metric,3,1n filter cap on mux input ADA3
+add,C89,1,,ADA3,3,
+add,C89,2,,GND,3,
+value,C89,,,1n,3,
+part,C90,,,Capacitor_SMD:C_1206_3216Metric,4,U4 differential 100n C0G (shunt L compensation)
+add,C90,1,,#00428,4,U4-2 VIN+
+add,C90,2,,#00429,4,U4-3 VIN-
+value,C90,,,100n C0G,4,
+part,C91,,,Capacitor_SMD:C_1206_3216Metric,4,U5 differential 100n C0G
+add,C91,1,,#00349,4,U5-2 VIN+
+add,C91,2,,#00350,4,U5-3 VIN-
+value,C91,,,100n C0G,4,
+part,C92,,,Capacitor_SMD:C_1206_3216Metric,4,U6 differential 100n C0G
+add,C92,1,,#00360,4,U6-2 VIN+
+add,C92,2,,#00361,4,U6-3 VIN-
+value,C92,,,100n C0G,4,
+value,R92,,10R,12.4R,4,U4 VIN+ series R
+value,R93,,10R,12.4R,4,U4 VIN- series R
+value,R57,,10R,12.4R,4,U5 VIN+ series R
+value,R58,,10R,12.4R,4,U5 VIN- series R
+value,R73,,10R,12.4R,4,U6 VIN+ series R
+value,R74,,10R,12.4R,4,U6 VIN- series R
+pin,R48,3,SHUNT1,SHUNT1_FORCE,5,R48 force pad (current path) separated from the sense net
+pin,J5,1,SHUNT1,SHUNT1_FORCE,5,AFE output terminal on the force side

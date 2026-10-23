@@ -50,6 +50,7 @@ from scipy import ndimage
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
+import deviations  # noqa: E402  (v4: lib/v4_copper.csv areas and vias)
 from p2k import gerber  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -293,8 +294,9 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     clearance = grow(k_bigger, CLEARANCE + TOL) & ~Kpads
     miss_P = coverage(gp, K, canvas, clearance | pad_xor)   # Proteus items without KiCad copper under them
     miss_K = coverage(gk, P, canvas, pad_xor)               # KiCad items without Proteus copper under them
-    unexpl_P = [m for m in miss_P if m[6]]
-    unexpl_K = [m for m in miss_K if m[6]]
+    v4miss = [m for m in miss_P + miss_K if m[6] and deviations.in_area(layer, m[1], m[2])]
+    unexpl_P = [m for m in miss_P if m[6] and m not in v4miss]
+    unexpl_K = [m for m in miss_K if m[6] and m not in v4miss]
     # Proteus copper too thin for the zone fill: copper that an opening of ZONE_MIN_WIDTH removes
     thin = P & ~ndimage.binary_opening(P, structure=disk(ZONE_MIN_WIDTH / 2 / RES))
     labels, n = ndimage.label(diff, structure=np.ones((3, 3)))
@@ -316,7 +318,10 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
         elif side == "Proteus" and (thin[sl][m] | pad_xor[sl][m] | clearance[sl][m]).all():
             cat = "zone fill"
         else:
-            cat = "other"
+            x0, y0 = canvas.mm(sl[1].start, sl[0].stop)
+            x1, y1 = canvas.mm(sl[1].stop, sl[0].start)
+            inside = all(deviations.in_area(layer, a, b) for a in (x0, x1) for b in (y0, y1))
+            cat = "v4 deviation" if inside else "other"
         pad, dp = nearest(ipc_pads, x, y)
         via, dv = nearest(ipc_vias, x, y)
         clusters.append(dict(cat=cat, side=side, area=area, x=x, y=y, w=wid, h=hgt,
@@ -329,7 +334,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
         if c["area"] >= MIN_AREA:
             by_cat[c["cat"]] += 1
             area_cat[c["cat"]] += c["area"]
-    summ = dict(layer=layer, miss_P=unexpl_P, miss_K=unexpl_K,
+    summ = dict(layer=layer, miss_P=unexpl_P, miss_K=unexpl_K, v4miss=v4miss,
                 copper_P=int(P.sum()) * px_area, copper_K=int(K.sum()) * px_area,
                 xor=int(xor.sum()) * px_area, onlyP=int(onlyP.sum()) * px_area, onlyK=int(onlyK.sum()) * px_area,
                 clusters=len(clusters), small=sum(1 for c in clusters if c["area"] < MIN_AREA),
@@ -337,7 +342,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     report.append(f"== {layer}: Proteus copper {summ['copper_P']:.1f} mm^2, KiCad copper {summ['copper_K']:.1f} mm^2")
     report.append(f"   raw XOR {summ['xor']:.2f} mm^2; after {TOL} mm tolerance: only Proteus {summ['onlyP']:.2f} mm^2, "
                   f"only KiCad {summ['onlyK']:.2f} mm^2, {len(clusters)} clusters ({summ['small']} below {MIN_AREA} mm^2)")
-    for cat in ("pad shape", "clearance", "zone fill", "other"):
+    for cat in ("pad shape", "clearance", "zone fill", "v4 deviation", "other"):
         if by_cat[cat]:
             report.append(f"   {cat:10s} {by_cat[cat]:4d} clusters, {area_cat[cat]:.2f} mm^2")
     nd_p, nf_p = sum(isinstance(o, gerber.Draw) for o in gp.objects), sum(isinstance(o, gerber.Flash) for o in gp.objects)
@@ -365,7 +370,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     for fp, (n, ak, ap_, refs) in sorted(per_fp.items(), key=lambda kv: -(kv[1][1] + kv[1][2])):
         report.append(f"   pad shape  {n:4d} clusters, only KiCad {ak:6.2f} mm^2, only Proteus {ap_:6.2f} mm^2  {fp}  "
                       f"({len(refs)} parts: {' '.join(sorted(refs)[:6])}{' ...' if len(refs) > 6 else ''})")
-    order = {"other": 0, "clearance": 1, "zone fill": 2, "pad shape": 3}
+    order = {"other": 0, "v4 deviation": 1, "clearance": 2, "zone fill": 3, "pad shape": 4}
     for c in sorted(clusters, key=lambda c: (order[c["cat"]], -c["area"])):
         if c["area"] < MIN_AREA:
             continue
@@ -415,9 +420,17 @@ def compare_drills(kdir, report):
         pairs[(d, dk)] += 1
         if dk < d - DRILL_TOL:
             errors.append(f"drill at ({x}, {y}): Proteus {d} mm, KiCad {dk} mm is smaller")
+    v4 = deviations.vias()
+    nv4 = 0
     for i in np.nonzero(~used)[0]:
         x, y, d, fn = K[i]
+        if any(math.hypot(vx - x, vy - y) < TOL for vx, vy, _, _ in v4) and abs(d - 0.3) <= DRILL_TOL:
+            nv4 += 1
+            continue
         errors.append(f"KiCad {fn} {d} mm at ({x}, {y}) has no Proteus drill")
+    if nv4 != len(v4):
+        errors.append(f"{len(v4)} v4 vias listed, {nv4} v4 via drills found")
+    report.append(f"== drills: {nv4} KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv")
     report.append(f"== drills: Proteus {len(P)}, KiCad {len(K)}, matched {int(used.sum())} within {TOL} mm")
     for (d, dk), n in sorted(pairs.items()):
         note = "" if abs(d - dk) <= DRILL_TOL else ("  KiCad footprint drill kept (larger)" if dk > d else "  SMALLER")
@@ -470,10 +483,11 @@ def main():
     other = sum(len(s["other"]) for s in summaries)
     missing = sum(len(s["miss_P"]) + len(s["miss_K"]) for s in summaries)
     for s in summaries:
-        cats = ", ".join(f"{s['by_cat'][c]} {c}" for c in ("pad shape", "clearance", "zone fill", "other") if s["by_cat"][c])
+        cats = ", ".join(f"{s['by_cat'][c]} {c}" for c in ("pad shape", "clearance", "zone fill", "v4 deviation", "other") if s["by_cat"][c])
         print(f"roundtrip: {s['layer']:6s} XOR {s['xor']:7.2f} mm^2, beyond {TOL} mm: only Proteus {s['onlyP']:6.2f}, "
               f"only KiCad {s['onlyK']:6.2f} mm^2; clusters >= {MIN_AREA} mm^2: {cats or 'none'}; "
-              f"draws/flashes off the other copper: {len(s['miss_P'])} Proteus, {len(s['miss_K'])} KiCad")
+              f"draws/flashes off the other copper: {len(s['miss_P'])} Proteus, {len(s['miss_K'])} KiCad"
+              + (f" (+{len(s['v4miss'])} inside v4 areas)" if s["v4miss"] else ""))
     for s in summaries:
         for c in s["other"]:
             print(f"roundtrip: {s['layer']} OTHER only {c['side']} {c['area']:.3f} mm^2 at ({c['x']:.3f}, {c['y']:.3f}) near {c['pad']}, {c['via']}")
