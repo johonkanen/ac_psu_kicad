@@ -1,40 +1,29 @@
-"""Footprint assignment and the project footprint library (stdlib only).
+"""Footprint assignment and the project footprint library of ac_psu (stdlib only).
 
-Writes
-  lib/footprint_map.csv  refdes -> footprint (every IPC part; TR1 has none, it is not on the board)
+Writes (through the shared generator p2k.footprints)
+  lib/footprint_map.csv  refdes -> footprint (every IPC part; TR1 has none, it is not on the board:
+                         OFF_BOARD_PARTS in p2k_config.py)
   lib/ac_psu.pretty/     project footprints (derived from KiCad library footprints, or built
                          from the IPC-D-356A pad geometry where KiCad has nothing that fits)
 
 Usage: python3 tools/gen_footprints.py [--check]
 
-Assignment: every IPC refdes is classified by its symbol (lib/part_map.csv) and its IPC pad
-pattern (pad count, largest pad-to-pad distance = "span", pad size, drill). RULES maps that to
-a footprint; the first matching rule wins and every refdes must match one.
-
-Pad numbers always equal the IPC pin ids. Policy (PLAN.md 4.3): use the KiCad library
-footprint unchanged when its pads land within 0.045 mm of the IPC pads; otherwise derive a
-project footprint from it with the pad centres moved onto the Proteus positions (KiCad pad
-sizes kept unless `ipc_sizes`), or build one from the IPC pads when KiCad has no such package.
-tools/check_footprints.py verifies the result (residual < 0.05 mm per pad).
+This file holds what is decided for this board: RULES (symbol + IPC pad pattern -> footprint)
+and PROJECT (the project footprint specs); the rule syntax and the spec keys are documented in
+tools/p2k/p2k/footprints.py. Pad numbers always equal the IPC pin ids. Policy (PLAN.md 4.3): use
+the KiCad library footprint unchanged when its pads land within 0.045 mm of the IPC pads;
+otherwise derive a project footprint from it with the pad centres moved onto the Proteus
+positions (KiCad pad sizes kept unless `ipc_sizes`), or build one from the IPC pads when KiCad
+has no such package. tools/check_footprints.py verifies the result (residual < 0.05 mm per pad).
 """
-import copy
-import csv
-import io
-import math
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
-from p2k import fpgeom  # noqa: E402
-from p2k import sexpr  # noqa: E402
-from p2k.sexpr import Sym  # noqa: E402
+from p2k import footprints  # noqa: E402
+from p2k.footprints import footprint_path  # noqa: E402,F401  (used by build_pcb.py)
 import deviations  # noqa: E402  (v4 added parts)
-
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PRETTY = os.path.join(ROOT, "lib", "ac_psu.pretty")
-MAP_CSV = os.path.join(ROOT, "lib", "footprint_map.csv")
-PART_MAP = os.path.join(ROOT, "lib", "part_map.csv")
 
 # (symbol, conditions, footprint, note). Conditions: n = pad count, tht, span (mm, +-0.02),
 # pad = (w, h) of the IPC pads (sorted), drill.
@@ -160,298 +149,11 @@ PROJECT = {
 TOL_KICAD = 0.045   # use a KiCad footprint unchanged up to this residual
 
 
-def kicad_footprint_dir():
-    state = f"{os.environ.get('TMPDIR', '/tmp')}/p2k_kicad_mount.{os.getuid()}"
-    mount = os.environ.get("KICAD_MOUNT") or (open(state).read().strip() if os.path.exists(state) else "")
-    d = os.path.join(mount, "share", "kicad", "footprints")
-    if not mount or not os.path.isdir(d):
-        sys.exit("gen_footprints: KiCad AppImage not mounted - run `source tools/p2k/bin/kicad_env.sh` "
-                 "(or any tools/p2k/bin wrapper) first")
-    return d
-
-
-def footprint_path(fpid):
-    nick, _, name = fpid.partition(":")
-    if nick == "ac_psu":
-        return os.path.join(PRETTY, name + ".kicad_mod")
-    return os.path.join(kicad_footprint_dir(), nick + ".pretty", name + ".kicad_mod")
-
-
-def part_map():
-    with open(PART_MAP) as f:
-        return {r["refdes"]: r for r in csv.DictReader(l for l in f if not l.startswith("# "))}
-
-
-def features(pads):
-    span = max((math.hypot(a["x_mm"] - b["x_mm"], a["y_mm"] - b["y_mm"])
-                for a in pads for b in pads), default=0.0)
-    return {"n": len(pads), "tht": pads[0]["is_tht"], "span": span,
-            "pads": {tuple(sorted((p["pad_w"], p["pad_h"]))) for p in pads},
-            "drills": {p["drill"] for p in pads}}
-
-
-def match(sym, cond, f):
-    for key, want in cond.items():
-        if key == "n" and f["n"] != want:
-            return False
-        if key == "tht" and f["tht"] != want:
-            return False
-        if key == "span" and abs(f["span"] - want) > 0.02:
-            return False
-        if key == "pad" and f["pads"] != {tuple(sorted(want))}:
-            return False
-        if key == "drill" and f["drills"] != {want}:
-            return False
-    return True
-
-
-def assign():
-    """refdes -> (footprint, note) for every IPC part."""
-    pm = part_map()
-    ipc = fpgeom.ipc_pads_by_refdes()
-    out, errors = {}, []
-    for ref in sorted(ipc):
-        sym = pm[ref]["lib_id"].split(":", 1)[1]
-        f = features(ipc[ref])
-        hits = [(fp, note) for s, cond, fp, note in RULES if s == sym and match(sym, cond, f)]
-        if not hits:
-            errors.append(f"{ref}: no footprint rule for {sym} (n={f['n']} span={f['span']:.2f} pads={f['pads']})")
-            continue
-        out[ref] = hits[0]
-    # v4: parts added to the Proteus design (lib/v4_deviations.csv, no IPC pads)
-    for ref, p in deviations.added_parts().items():
-        if ref not in pm:
-            errors.append(f"{ref}: v4 part missing from lib/part_map.csv")
-        out[ref] = (p["footprint"], f"v4 fix {p['fix']}: {p['note']}")
-    return out, errors
-
-
-# ---------------------------------------------------------------- footprint building
-
-def _side_mirror(pads, fp_pads=None):
-    """Mirror flag for building from a refdes: bottom SMD parts are mirrored; THT parts
-    are taken as top side unless only the mirrored fit works."""
-    side = pads[0]["side"]
-    if side == "bottom":
-        return [True]
-    if side == "top":
-        return [False]
-    return [False, True]
-
-
-def _to_fp(fitres, qx, qy):
-    """Board (IPC, Y up) point -> footprint frame (Y up) for a fit result."""
-    a = math.radians(fitres["angle"])
-    dx, dy = qx - fitres["tx"], qy - fitres["ty"]
-    x = math.cos(a) * dx + math.sin(a) * dy
-    y = -math.sin(a) * dx + math.cos(a) * dy
-    return (-x if fitres["mirror"] else x), y
-
-
-def _fp_rot(fitres, qrot):
-    r = qrot - fitres["angle"]
-    return (-r if fitres["mirror"] else r) % 180.0
-
-
-def _r4(v):
-    v = round(v, 4)
-    return 0 if v == 0 else v
-
-
-def derive(name, spec, ipc):
-    base = sexpr.load(footprint_path(spec["base"]))
-    base[1] = name
-    ren = spec.get("renumber", {})
-    for pad in sexpr.find_all(base, "pad"):
-        pad[1] = ren.get(str(pad[1]), str(pad[1]))
-    keep_ref = spec.get("drop")
-    if keep_ref:
-        pins = {p["pin"] for p in ipc[keep_ref]}
-        base[:] = [c for c in base if not (isinstance(c, list) and c and c[0] == "pad" and str(c[1]) not in pins)]
-    if spec.get("ipc"):
-        ref = spec["ipc"]
-        pads = ipc[ref]
-        fp_pads = []
-        nodes = {}
-        for pad in sexpr.find_all(base, "pad"):
-            if str(pad[2]) == "np_thru_hole":
-                continue
-            at, size = sexpr.find(pad, "at"), sexpr.find(pad, "size")
-            d = {"num": str(pad[1]), "kind": str(pad[2]), "x": float(at[1]), "y": -float(at[2]),
-                 "rot": float(at[3]) if len(at) > 3 else 0.0, "w": float(size[1]), "h": float(size[2]), "drill": 0.0}
-            nodes[id(d)] = pad
-            fp_pads.append(d)
-        fits = [fpgeom.fit(fp_pads, pads, m) for m in _side_mirror(pads)]
-        fr = min(fits, key=lambda r: r["max_res"])
-        if fr["missing"] or fr["extra"] or fr["count_diff"]:
-            raise SystemExit(f"{name}: pad numbers of {spec['base']} do not match {ref}: {fr}")
-        for num, f, q, _ in fr["pads"]:
-            pad = nodes[id(f)]
-            x, y = _to_fp(fr, q["x_mm"], q["y_mm"])
-            at = sexpr.find(pad, "at")
-            rot = float(at[3]) if len(at) > 3 else 0.0
-            if spec.get("ipc_sizes"):
-                rot = _fp_rot(fr, q["rot"])
-                size = sexpr.find(pad, "size")
-                size[1:] = [q["pad_w"], q["pad_h"]]
-                if q["is_tht"]:
-                    drill = sexpr.find(pad, "drill")
-                    drill[1:] = [q["drill"]]
-            at[1:] = [_r4(x), _r4(-y)] + ([_r4(rot)] if abs(rot) > 1e-9 else [])
-    if spec.get("ipc_sizes"):
-        # Proteus land pattern -> the board's Proteus clearance rule, not a library override
-        # (KiCad's TSSOP-8 carries a footprint clearance of 0.2 mm)
-        base[:] = [c for c in base if not (isinstance(c, list) and c and c[0] == "clearance")]
-    for prop in sexpr.find_all(base, "property"):
-        if prop[1] == "Value":
-            prop[2] = name
-    descr = sexpr.find(base, "descr")
-    text = f"{spec['descr']} (ac_psu, derived from {spec['base']})"
-    if descr is None:
-        base.insert(4, [Sym("descr"), text])
-    else:
-        descr[1] = text
-    gen = sexpr.find(base, "generator")
-    if gen is not None:
-        gen[1] = "ac_psu_gen_footprints"
-    return base
-
-
-def _eff(size=1.0, thick=0.15):
-    return [Sym("effects"), [Sym("font"), [Sym("size"), size, size], [Sym("thickness"), thick]]]
-
-
-def _rect(x0, y0, x1, y1, layer, width):
-    return [Sym("fp_rect"), [Sym("start"), _r4(x0), _r4(y0)], [Sym("end"), _r4(x1), _r4(y1)],
-            [Sym("stroke"), [Sym("width"), width], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("no")],
-            [Sym("layer"), "F." + layer]]
-
-
-def _circle(r, layer, width):
-    return [Sym("fp_circle"), [Sym("center"), 0, 0], [Sym("end"), _r4(r), 0],
-            [Sym("stroke"), [Sym("width"), width], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("no")],
-            [Sym("layer"), "F." + layer]]
-
-
-def from_ipc(name, spec, ipc):
-    pads = ipc[spec["ipc"]]
-    mirror = pads[0]["side"] == "bottom"
-    m = -1.0 if mirror else 1.0
-    xs = [m * p["x_mm"] for p in pads]
-    ys = [p["y_mm"] for p in pads]
-    cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
-    tht = pads[0]["is_tht"]
-    # pad extents (axis-aligned bounding box of each pad, Y up, centred)
-    ext = []
-    for p, x, y in zip(pads, xs, ys):
-        a = math.radians(p["rot"])
-        hw = abs(math.cos(a)) * p["pad_w"] / 2 + abs(math.sin(a)) * p["pad_h"] / 2
-        hh = abs(math.sin(a)) * p["pad_w"] / 2 + abs(math.cos(a)) * p["pad_h"] / 2
-        ext.append((x - cx - hw, y - cy - hh, x - cx + hw, y - cy + hh))
-    bx0, by0 = min(e[0] for e in ext), min(e[1] for e in ext)
-    bx1, by1 = max(e[2] for e in ext), max(e[3] for e in ext)
-    # body = spec["body"] or the pad extents; courtyard 0.25 mm around body and pads (KLC),
-    # a circle for single round pins (PIN terminals) so neighbours are not blocked diagonally
-    if spec.get("body"):
-        w, h = spec["body"]
-        fx0, fy0, fx1, fy1 = -w / 2, -h / 2, w / 2, h / 2
-    else:
-        fx0, fy0, fx1, fy1 = bx0, by0, bx1, by1
-    cx0, cy0 = min(fx0, bx0) - 0.25, min(fy0, by0) - 0.25
-    cx1, cy1 = max(fx1, bx1) + 0.25, max(fy1, by1) + 0.25
-    sx0, sy0, sx1, sy1 = fx0 - 0.12, fy0 - 0.12, fx1 + 0.12, fy1 + 0.12
-    round_pin = len(pads) == 1 and abs(pads[0]["pad_w"] - pads[0]["pad_h"]) < 1e-6 and not spec.get("body")
-    # file coordinates are Y down
-    node = [Sym("footprint"), name, [Sym("version"), 20260206], [Sym("generator"), "ac_psu_gen_footprints"],
-            [Sym("layer"), "F.Cu"], [Sym("descr"), f"{spec['descr']} (ac_psu, pads from IPC-D-356A {spec['ipc']})"],
-            [Sym("property"), "Reference", "REF**", [Sym("at"), 0, _r4(-sy1 - 1.2), 0], [Sym("layer"), "F.SilkS"], _eff()],
-            [Sym("property"), "Value", name, [Sym("at"), 0, _r4(-sy0 + 1.2), 0], [Sym("layer"), "F.Fab"], _eff()],
-            [Sym("attr"), Sym("through_hole" if tht else "smd")],
-            *([_circle(fx1, "Fab", 0.1), _circle(sx1, "SilkS", 0.12), _circle(cx1, "CrtYd", 0.05)] if round_pin else
-              [_rect(fx0, -fy1, fx1, -fy0, "Fab", 0.1), _rect(sx0, -sy1, sx1, -sy0, "SilkS", 0.12),
-               _rect(cx0, -cy1, cx1, -cy0, "CrtYd", 0.05)]),
-            [Sym("fp_text"), Sym("user"), "${REFERENCE}", [Sym("at"), 0, 0, 0], [Sym("layer"), "F.Fab"], _eff()]]
-    for p, x, y in zip(pads, xs, ys):
-        px, py = _r4(x - cx), _r4(-(y - cy))
-        rot = (-p["rot"] if mirror else p["rot"]) % 180.0
-        at = [Sym("at"), px, py] + ([_r4(rot)] if rot else [])
-        if tht:
-            shape = "circle" if abs(p["pad_w"] - p["pad_h"]) < 1e-6 else "oval"
-            node.append([Sym("pad"), p["pin"], Sym("thru_hole"), Sym(shape), at,
-                         [Sym("size"), p["pad_w"], p["pad_h"]], [Sym("drill"), p["drill"]],
-                         [Sym("layers"), "*.Cu", "*.Mask"]])
-        else:
-            node.append([Sym("pad"), p["pin"], Sym("smd"), Sym("rect"), at,
-                         [Sym("size"), p["pad_w"], p["pad_h"]], [Sym("layers"), "F.Cu", "F.Paste", "F.Mask"]])
-    node.append([Sym("embedded_fonts"), Sym("no")])
-    return node
-
-
-def build_library():
-    ipc = fpgeom.ipc_pads_by_refdes()
-    out = {}
-    for name, spec in PROJECT.items():
-        node = derive(name, spec, ipc) if spec.get("base") else from_ipc(name, spec, ipc)
-        out[name + ".kicad_mod"] = sexpr.dump(node) + "\n"
-    return out
-
-
-def map_csv(assignment):
-    pm = part_map()
-    buf = io.StringIO()
-    buf.write("# refdes -> footprint, generated by tools/gen_footprints.py (do not edit)\n")
-    w = csv.writer(buf, lineterminator="\n")
-    w.writerow(["refdes", "lib_id", "footprint", "note"])
-    for ref in sorted(pm, key=lambda r: (r.rstrip("0123456789"), int(r[len(r.rstrip("0123456789")):] or 0), r)):
-        fp, note = assignment.get(ref, ("", "not on the board" if pm[ref]["lib_id"].endswith("ETD34_TRAN_1P1S") else ""))
-        w.writerow([ref, pm[ref]["lib_id"], fp, note])
-    return buf.getvalue()
-
-
 def main():
-    check = "--check" in sys.argv
-    assignment, errors = assign()
-    used = {fp.split(":", 1)[1] for fp, _ in assignment.values() if fp.startswith("ac_psu:")}
-    unused = sorted(set(PROJECT) - used)
-    undefined = sorted(used - set(PROJECT))
-    for n in unused:
-        errors.append(f"project footprint {n} is not used")
-    for n in undefined:
-        errors.append(f"project footprint {n} is not defined")
-    files = build_library()
-    files_map = map_csv(assignment)
-    stale = []
-    want = {os.path.join(PRETTY, k): v for k, v in files.items()}
-    want[MAP_CSV] = files_map
-    have = set()
-    if os.path.isdir(PRETTY):
-        have = {os.path.join(PRETTY, f) for f in os.listdir(PRETTY) if f.endswith(".kicad_mod")}
-    for path, text in want.items():
-        cur = open(path).read() if os.path.exists(path) else None
-        if cur != text:
-            stale.append(path)
-            if not check:
-                os.makedirs(os.path.dirname(path), exist_ok=True)
-                with open(path, "w") as f:
-                    f.write(text)
-    extra = sorted(have - set(want))
-    for path in extra:
-        stale.append(path)
-        if not check:
-            os.remove(path)
-    rel = [os.path.relpath(p, ROOT) for p in stale]
-    for e in errors:
-        print("gen_footprints: " + e)
-    nfp = len({fp for fp, _ in assignment.values()})
-    if check:
-        if rel:
-            print("gen_footprints: out of date: " + ", ".join(rel))
-        print(f"gen_footprints: {len(assignment)} parts, {nfp} footprints ({len(files)} project)"
-              + ("" if rel else ", up to date"))
-        sys.exit(1 if rel or errors else 0)
-    print(f"gen_footprints: {len(assignment)} parts, {nfp} footprints ({len(files)} project); "
-          f"wrote {len(rel)} file(s)")
-    sys.exit(1 if errors else 0)
+    # v4: parts added to the Proteus design (lib/v4_deviations.csv, no IPC pads)
+    added = {ref: {"footprint": p["footprint"], "note": f"v4 fix {p['fix']}: {p['note']}"}
+             for ref, p in deviations.added_parts().items()}
+    footprints.run(RULES, PROJECT, added=added)
 
 
 if __name__ == "__main__":

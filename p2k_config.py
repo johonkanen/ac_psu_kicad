@@ -5,6 +5,9 @@ IPC frame (Y up).
 
 PROJECT = "ac_psu"  # KiCad project / library name
 
+# Parts of lib/part_map.csv without IPC pads (footprint map note; gen_footprints does not fit them).
+OFF_BOARD_PARTS = {"TR1": "not on the board"}
+
 # Sources (relative to the repo root).
 CADCAM = "source/cadcam"
 IPC = "source/cadcam/single_phase_inverter_psu_v3 - CADCAM Netlist.IPC"
