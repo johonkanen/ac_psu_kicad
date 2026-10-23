@@ -103,3 +103,27 @@ DRILL_PLATED = "Drill TOP-BOT Plated"
 DRILL_NONPLATED = None  # the mounting holes are plated
 OUTLINE = "Mechanical 1"
 OUTLINE_RECT = (-128.2, -83.0, 246.8, 154.7)  # x, y, width, height
+
+# --- PCB (p2k.build_pcb, gerber_to_tracks, assign_nets, pours_to_zones, check_board, drc) ---
+# Paths: kicad/ac_psu.kicad_pcb by default; tools/board_common.py points them at
+# build/proteus/ for tools/make_pcb.sh.
+
+# Proteus stack: 4 x 0.036 Cu, 0.32 / 1.483 / 0.32 mm dielectric (CADCAM READ-ME)
+PCB_THICKNESS = 2.267
+# Rules from the Proteus data: thinnest conductor 0.1016 mm (D69), vias 0.4572 pad / 0.3 drill
+# (annular ring 0.0786 mm); clearance and edge clearance see STATUS.md.
+PCB_RULES = dict(
+    min_track=0.1, min_via=0.45, min_annular=0.075, min_drill=0.3,
+    clearance=0.15, hole_clearance=0.15, hole_to_hole=0.25, edge_clearance=0.25,
+    track=0.254, via=0.4572, via_drill=0.3,
+)
+# Unnetted plated mounting holes (IPC 'hole' records): board-only footprints H1..H4.
+HOLE_FOOTPRINT = "ac_psu:Terminal_D4.0mm_Drill3.0mm"
+HOLE_VALUE = "MountingHole_3.0mm"
+# Error-severity DRC types that remain by design (the Proteus layout as it is):
+DRC_ACCEPTED = {
+    # KiCad library courtyards are larger than the Proteus placement spacing (parts sit
+    # where Proteus put them; the Proteus silk outlines do not overlap).
+    "courtyards_overlap": "KiCad courtyards vs the Proteus placement",
+    "pth_inside_courtyard": "KiCad courtyards vs the Proteus placement",
+}
