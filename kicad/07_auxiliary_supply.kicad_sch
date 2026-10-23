@@ -2045,7 +2045,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:RET_ISO"
+		(symbol "ac_psu:ISOGND"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -2070,7 +2070,7 @@
 					)
 				)
 			)
-			(property "Value" "RET_ISO"
+			(property "Value" "ISOGND"
 				(at 0 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2102,7 +2102,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"RET_ISO\" (IPC net name)"
+			(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -2124,7 +2124,7 @@
 					)
 				)
 			)
-			(symbol "RET_ISO_0_1"
+			(symbol "ISOGND_0_1"
 				(polyline
 					(pts
 						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
@@ -2138,7 +2138,7 @@
 					)
 				)
 			)
-			(symbol "RET_ISO_1_1"
+			(symbol "ISOGND_1_1"
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
@@ -6633,7 +6633,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:RET_ISO")
+		(lib_id "ac_psu:ISOGND")
 		(at 228.6 55.88 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6650,7 +6650,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "RET_ISO"
+		(property "Value" "ISOGND"
 			(at 228.6 59.69 0)
 			(effects
 				(font
@@ -6676,7 +6676,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"RET_ISO\" (IPC net name)"
+		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
 			(at 228.6 55.88 0)
 			(effects
 				(font
@@ -6697,82 +6697,7 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 228.6 55.88) (xy 228.6 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8777ea4e-6d1d-59b8-a403-9e7600389072")
-	)
-	(symbol
-		(lib_id "ac_psu:PWR_FLAG")
-		(at 228.6 53.34 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "99448ac4-06f3-5f84-8061-b2dbec45452c")
-		(property "Reference" "#FLG020"
-			(at 228.6 51.435 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 228.6 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 228.6 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 228.6 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 228.6 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "88b9be20-5604-5680-abae-201c4a28a685")
-		)
-		(instances
-			(project "ac_psu"
-				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/e9f831a8-cac5-4226-8b62-2e91876072f4"
-					(reference "#FLG020")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(text "The PDF's ISO_GND terminal is wired to RET_iso: net RET_ISO (not ISOGND). 20V_ISO_SEC feeds U8 (sheet 3) and the"
+	(text "v4: the isolated 20 V return is ISOGND (v3: the PDF's ISO_GND terminal was wired to RET_iso, net RET_ISO,"
 		(exclude_from_sim no)
 		(at 160.02 71.12 0)
 		(effects
@@ -6781,9 +6706,9 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "512d574e-1b28-5b19-bb2b-460e2cf03a37")
+		(uuid "8777ea4e-6d1d-59b8-a403-9e7600389072")
 	)
-	(text "isolated gate drivers; RET_ISO has no other connection on this board."
+	(text "not connected to ISOGND although U8 and the gate drivers J4/J6/J8 return 20V_ISO_SEC on ISOGND)."
 		(exclude_from_sim no)
 		(at 160.02 74.93 0)
 		(effects
@@ -6792,7 +6717,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "65e3c9fc-6b5c-52c8-9c82-322b9b7778c4")
+		(uuid "512d574e-1b28-5b19-bb2b-460e2cf03a37")
 	)
 	(text "PDF notes: vsense nominal = 1.536 V, vsense OVP threshold = 1.838 V, Isense pk = 1 V, Vpeak = 520 V"
 		(exclude_from_sim no)
@@ -6803,7 +6728,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d3423a27-fa62-557c-bf7c-fdd7f521c4ae")
+		(uuid "65e3c9fc-6b5c-52c8-9c82-322b9b7778c4")
 	)
 	(text "Vsense @ 1.536 V = 5.8368 Vaux; Isense ocp = 1.15 V; V5.1; 'R64 = 39k / v2 trans' (refers to R44 here)"
 		(exclude_from_sim no)
@@ -6814,7 +6739,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "96924969-2c6d-58a4-9679-fb4062193763")
+		(uuid "d3423a27-fa62-557c-bf7c-fdd7f521c4ae")
 	)
 	(text "TR1 : core 227 nH, 52/8/3 || 7/3/3/42 (note printed on this page, TR1 is on sheet 6)"
 		(exclude_from_sim no)
@@ -6825,7 +6750,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "5f93d8cd-cdb6-5bce-95e9-8d6d8db219b2")
+		(uuid "96924969-2c6d-58a4-9679-fb4062193763")
 	)
 	(embedded_fonts no)
 )

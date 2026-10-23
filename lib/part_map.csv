@@ -93,6 +93,11 @@ C84,11,ac_psu:C,
 C85,11,ac_psu:C,
 C86,11,ac_psu:C,
 C87,4,ac_psu:C,
+C88,9,ac_psu:C,
+C89,9,ac_psu:C,
+C90,10,ac_psu:C,
+C91,8,ac_psu:C,
+C92,8,ac_psu:C,
 CM1,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM2,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM3,5,ac_psu:WE-CMBNC,WE-CMBNC

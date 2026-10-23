@@ -2,10 +2,17 @@ Gerber round trip: KiCad plot of kicad/ac_psu.kicad_pcb vs the Proteus CADCAM ge
 raster 0.025 mm/px, tolerance 0.05 mm, clusters >= 0.01 mm^2 counted, positions in the IPC frame (mm, Y up)
 board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
 
-== F.Cu: Proteus copper 19439.7 mm^2, KiCad copper 19501.2 mm^2
-   raw XOR 94.38 mm^2; after 0.05 mm tolerance: only Proteus 2.62 mm^2, only KiCad 58.34 mm^2, 800 clusters (612 below 0.01 mm^2)
+== F.Cu: Proteus copper 19439.7 mm^2, KiCad copper 19462.9 mm^2
+   raw XOR 134.64 mm^2; after 0.05 mm tolerance: only Proteus 39.59 mm^2, only KiCad 59.17 mm^2, 814 clusters (612 below 0.01 mm^2)
    pad shape   188 clusters, 59.80 mm^2
-   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 1488 draws / 903 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   v4 deviation   13 clusters, 37.76 mm^2
+   other         1 clusters, 0.03 mm^2
+   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 1490 draws / 916 flashes, 1 not on Proteus copper (4 explained by pad shape)
+   MISSING   KiCad flash ViaPad 0.4572 mm at (57.600, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near U11-9 (ADASEL2) 2.87 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (61.400, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near U14-4 (#00228) 2.25 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (111.300, 34.300) {'N': 'Net-(U6-VIN+)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R73-1 (#00360) 0.74 mm
+   MISSING   KiCad draw Conductor 0.25 mm at (59.624, -0.980) {'N': 'GND'} 14 samples off copper, 0 in clearance/pad shape, of 52; near U11-7 (GND) 0.32 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (110.930, 34.288) {'N': 'Net-(U6-VIN+)'} 28 samples off copper, 4 in clearance/pad shape, of 60; near R73-1 (#00360) 0.37 mm
    pad shape    48 clusters, only KiCad  20.37 mm^2, only Proteus   0.00 mm^2  ac_psu:TO-247-3_Vertical_Proteus  (12 parts: Q1 Q10 Q11 Q12 Q2 Q3 ...)
    pad shape    13 clusters, only KiCad  14.32 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm  (10 parts: C10 C19 C22 C29 C30 C31 ...)
    pad shape     9 clusters, only KiCad   9.95 mm^2, only Proteus   0.00 mm^2  ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus  (3 parts: C61 C72 C8)
@@ -26,6 +33,20 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape     4 clusters, only KiCad   0.09 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus  (1 parts: J11)
    pad shape     2 clusters, only KiCad   0.08 mm^2, only Proteus   0.00 mm^2  ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus  (1 parts: U8)
    pad shape     3 clusters, only KiCad   0.03 mm^2, only Proteus   0.00 mm^2  ac_psu:SOT-23-5_TPS73033  (2 parts: U10 U3)
+   other      only KiCad    0.034 mm^2 at (  59.613,   -0.987) 0.12x0.28 mm  near U11-7 (GND) 0.31 mm, via (GND) 1.07 mm
+   v4 deviation only Proteus  9.257 mm^2 at (   8.756,   38.998) 3.48x3.48 mm  near J8-48 (20V_ISO_SEC) 17.15 mm, via (#00275) 6.12 mm
+   v4 deviation only Proteus  9.239 mm^2 at (   4.198,  -62.752) 3.48x3.48 mm  near J1-16 (PGND) 15.54 mm, via (GND) 13.09 mm
+   v4 deviation only Proteus  9.239 mm^2 at (   9.298,  -65.502) 3.48x3.48 mm  near J1-15 (PGND) 10.45 mm, via (GND) 16.96 mm
+   v4 deviation only Proteus  9.236 mm^2 at (  11.679,   43.348) 3.48x3.48 mm  near J8-48 (20V_ISO_SEC) 12.08 mm, via (#00275) 10.69 mm
+   v4 deviation only KiCad    0.219 mm^2 at ( 111.263,   34.300) 0.62x0.50 mm  near R73-1 (#00360) 0.70 mm, via (20V_ISO_SEC) 9.29 mm
+   v4 deviation only KiCad    0.193 mm^2 at (  57.600,   -9.350) 0.50x0.50 mm  near U11-9 (ADASEL2) 2.87 mm, via (VCC) 3.08 mm
+   v4 deviation only KiCad    0.193 mm^2 at (  61.400,   -9.350) 0.50x0.50 mm  near U14-4 (#00228) 2.25 mm, via (VCC) 1.61 mm
+   v4 deviation only KiCad    0.043 mm^2 at (  57.719,   -6.627) 0.33x0.30 mm  near U11-9 (ADASEL2) 0.93 mm, via (GND) 4.26 mm
+   v4 deviation only KiCad    0.036 mm^2 at (  57.472,   -6.853) 0.30x0.30 mm  near U11-9 (ADASEL2) 1.19 mm, via (GND) 3.93 mm
+   v4 deviation only KiCad    0.029 mm^2 at ( 108.600,   34.491) 0.40x0.10 mm  near R74-1 (#00361) 0.73 mm, via (20V_ISO_SEC) 7.95 mm
+   v4 deviation only KiCad    0.029 mm^2 at ( 108.600,   34.134) 0.40x0.10 mm  near R74-1 (#00361) 0.72 mm, via (20V_ISO_SEC) 7.63 mm
+   v4 deviation only KiCad    0.026 mm^2 at (  59.600,   -8.308) 0.35x0.10 mm  near U11-10 (ADASEL1) 1.66 mm, via (VCC) 2.45 mm
+   v4 deviation only KiCad    0.026 mm^2 at (  59.600,   -8.692) 0.35x0.10 mm  near U11-10 (ADASEL1) 2.03 mm, via (VCC) 2.09 mm
    pad shape  only KiCad    2.513 mm^2 at (-102.123,  -42.823) 2.43x2.43 mm  near R10-1 (AC_IN_1) 0.03 mm, via (GPIO_BYPASS_RLY) 21.00 mm
    pad shape  only KiCad    1.229 mm^2 at ( -18.206,   10.906) 2.00x2.00 mm  near C72-1 (ISODC+) 2.84 mm, via (#00244) 19.27 mm
    pad shape  only KiCad    1.229 mm^2 at ( -14.194,   10.906) 2.00x2.00 mm  near C72-1 (ISODC+) 2.84 mm, via (#00244) 17.53 mm
@@ -215,10 +236,20 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape  only KiCad    0.011 mm^2 at (  51.788,  -16.788) 0.43x0.03 mm  near U3-5 (VCC) 0.67 mm, via (VCC) 1.08 mm
    pad shape  only Proteus  0.010 mm^2 at (  85.919,  -53.123) 0.12x0.15 mm  near R23-1 (#00340) 1.02 mm, via (GND) 4.26 mm
 
-== In1.Cu: Proteus copper 6395.0 mm^2, KiCad copper 6489.9 mm^2
-   raw XOR 99.09 mm^2; after 0.05 mm tolerance: only Proteus 0.00 mm^2, only KiCad 81.57 mm^2, 92 clusters (1 below 0.01 mm^2)
+== In1.Cu: Proteus copper 6395.0 mm^2, KiCad copper 6654.4 mm^2
+   raw XOR 265.62 mm^2; after 0.05 mm tolerance: only Proteus 0.33 mm^2, only KiCad 246.04 mm^2, 99 clusters (1 below 0.01 mm^2)
    pad shape    91 clusters, 81.57 mm^2
-   coverage: Proteus 2524 draws / 562 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 341 draws / 562 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   v4 deviation    7 clusters, 164.80 mm^2
+   coverage: Proteus 2524 draws / 562 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 343 draws / 575 flashes, 0 not on Proteus copper (9 explained by pad shape)
+   MISSING   KiCad flash ViaPad 0.4572 mm at (95.000, -19.250) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 4.06 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (94.500, -17.250) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 6.09 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (96.000, -15.500) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 7.85 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (4.200, -62.750) {'N': 'Net-(U5-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J1-16 (PGND) 15.54 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (9.300, -65.500) {'N': 'Net-(U5-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J1-15 (PGND) 10.44 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (8.758, 39.000) {'N': 'Net-(U4-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J8-48 (20V_ISO_SEC) 17.15 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (11.678, 43.350) {'N': 'Net-(U4-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J8-48 (20V_ISO_SEC) 12.08 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (6.750, -64.125) {'N': 'Net-(U5-VIN-)'} 464 samples off copper, 0 in clearance/pad shape, of 464; near J1-16 (PGND) 12.98 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (10.218, 41.175) {'N': 'Net-(U4-VIN-)'} 420 samples off copper, 0 in clearance/pad shape, of 420; near J8-48 (20V_ISO_SEC) 14.60 mm
    pad shape    28 clusters, only KiCad  31.36 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm  (14 parts: C10 C13 C14 C19 C20 C22 ...)
    pad shape    24 clusters, only KiCad  29.51 mm^2, only Proteus   0.00 mm^2  ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus  (6 parts: C11 C12 C61 C72 C79 C8)
    pad shape    13 clusters, only KiCad   5.13 mm^2, only Proteus   0.00 mm^2  ac_psu:TO-247-3_Vertical_Proteus  (4 parts: Q10 Q3 Q4 Q9)
@@ -228,6 +259,13 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape     8 clusters, only KiCad   1.00 mm^2, only Proteus   0.00 mm^2  ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus  (2 parts: U8 U9)
    pad shape     3 clusters, only KiCad   0.42 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48  (1 parts: J12)
    pad shape     4 clusters, only KiCad   0.09 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus  (1 parts: J11)
+   v4 deviation only KiCad   161.514 mm^2 at (  98.859,  -18.642) 17.62x11.03 mm  near U8-1 (20V_ISO_SEC) 5.69 mm, via (20V_ISO_SEC) 2.26 mm
+   v4 deviation only KiCad    1.499 mm^2 at (  10.222,   41.188) 3.40x4.85 mm  near J8-48 (20V_ISO_SEC) 14.59 mm, via (#00275) 8.31 mm
+   v4 deviation only KiCad    1.456 mm^2 at (   6.750,  -64.125) 5.60x3.25 mm  near J1-16 (PGND) 12.98 mm, via (GND) 14.87 mm
+   v4 deviation only Proteus  0.085 mm^2 at ( 111.299,   34.293) 0.65x0.65 mm  near J4-16 (DAB_GROUND) 15.75 mm, via (20V_ISO_SEC) 9.31 mm
+   v4 deviation only Proteus  0.084 mm^2 at (  59.606,   -8.490) 0.65x0.65 mm  near TR2-10 (N/C) 25.13 mm, via (VCC) 2.27 mm
+   v4 deviation only Proteus  0.079 mm^2 at ( 108.595,   34.300) 0.65x0.62 mm  near J4-16 (DAB_GROUND) 15.26 mm, via (20V_ISO_SEC) 7.78 mm
+   v4 deviation only Proteus  0.079 mm^2 at (  57.600,   -6.737) 0.65x0.62 mm  near TR2-10 (N/C) 27.78 mm, via (GND) 4.10 mm
    pad shape  only KiCad    2.513 mm^2 at (-102.123,  -42.823) 2.43x2.43 mm  near R10-1 (AC_IN_1) 0.03 mm, via (GPIO_BYPASS_RLY) 21.00 mm
    pad shape  only KiCad    2.513 mm^2 at ( -97.123,  -42.823) 2.43x2.43 mm  near R10-2 (JEE) 0.03 mm, via (GPIO_BYPASS_RLY) 21.84 mm
    pad shape  only KiCad    2.513 mm^2 at ( -83.823,  -47.823) 2.43x2.43 mm  near C24-1 (CMFILT1) 0.03 mm, via (GPIO_BYPASS_RLY) 25.12 mm
@@ -320,14 +358,22 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape  only KiCad    0.023 mm^2 at (  45.821,   22.271) 0.20x0.20 mm  near J11-1 (ISOADA3) 0.49 mm, via (ISOGND) 4.54 mm
    pad shape  only KiCad    0.023 mm^2 at (  46.529,   22.271) 0.20x0.20 mm  near J11-1 (ISOADA3) 0.49 mm, via (ISOGND) 3.84 mm
 
-== In2.Cu: Proteus copper 6519.7 mm^2, KiCad copper 6627.9 mm^2
-   raw XOR 112.07 mm^2; after 0.05 mm tolerance: only Proteus 0.04 mm^2, only KiCad 92.08 mm^2, 120 clusters (0 below 0.01 mm^2)
+== In2.Cu: Proteus copper 6519.7 mm^2, KiCad copper 6627.7 mm^2
+   raw XOR 114.97 mm^2; after 0.05 mm tolerance: only Proteus 0.54 mm^2, only KiCad 93.42 mm^2, 133 clusters (0 below 0.01 mm^2)
    pad shape   117 clusters, 92.08 mm^2
    clearance     3 clusters, 0.04 mm^2
-   coverage: Proteus 3065 draws / 562 flashes, 0 not on KiCad copper (3 explained by clearance / pad shape); KiCad 960 draws / 562 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   v4 deviation   13 clusters, 1.84 mm^2
+   coverage: Proteus 3065 draws / 562 flashes, 0 not on KiCad copper (3 explained by clearance / pad shape); KiCad 960 draws / 575 flashes, 0 not on Proteus copper (7 explained by pad shape)
    explained Proteus draw Conductor 0.1524 mm at (114.773, -16.181)  0 samples off copper, 13 in clearance/pad shape, of 35; near J12-43 (ISOGND) 0.79 mm
    explained Proteus draw Conductor 0.1524 mm at (113.659, -15.067)  0 samples off copper, 14 in clearance/pad shape, of 35; near J12-43 (ISOGND) 0.79 mm
    explained Proteus draw Conductor 0.1524 mm at (114.697, -15.143)  0 samples off copper, 13 in clearance/pad shape, of 53; near J12-43 (ISOGND) 0.79 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (95.000, -19.250) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 4.06 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (94.500, -17.250) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 6.09 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (96.000, -15.500) {'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near TR2-6 (RET_ISO) 7.85 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (4.200, -62.750) {'N': 'Net-(U5-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J1-16 (PGND) 15.54 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (9.300, -65.500) {'N': 'Net-(U5-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J1-15 (PGND) 10.44 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (8.758, 39.000) {'N': 'Net-(U4-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J8-48 (20V_ISO_SEC) 17.15 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (11.678, 43.350) {'N': 'Net-(U4-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J8-48 (20V_ISO_SEC) 12.08 mm
    pad shape    28 clusters, only KiCad  31.36 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm  (14 parts: C10 C13 C14 C19 C20 C22 ...)
    pad shape    24 clusters, only KiCad  29.51 mm^2, only Proteus   0.00 mm^2  ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus  (6 parts: C11 C12 C61 C72 C79 C8)
    pad shape    36 clusters, only KiCad  15.28 mm^2, only Proteus   0.00 mm^2  ac_psu:TO-247-3_Vertical_Proteus  (9 parts: Q1 Q11 Q12 Q2 Q3 Q5 ...)
@@ -337,6 +383,19 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape     6 clusters, only KiCad   1.07 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48  (1 parts: J12)
    pad shape     8 clusters, only KiCad   1.00 mm^2, only Proteus   0.00 mm^2  ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus  (2 parts: U8 U9)
    pad shape     4 clusters, only KiCad   0.09 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus  (1 parts: J11)
+   v4 deviation only KiCad    0.193 mm^2 at (  11.675,   43.350) 0.50x0.50 mm  near J8-48 (20V_ISO_SEC) 12.08 mm, via (#00275) 10.68 mm
+   v4 deviation only KiCad    0.193 mm^2 at (  96.000,  -15.500) 0.50x0.50 mm  near TR2-6 (RET_ISO) 7.85 mm, via (RET_ISO) 3.66 mm
+   v4 deviation only KiCad    0.193 mm^2 at (  94.500,  -17.250) 0.50x0.50 mm  near TR2-6 (RET_ISO) 6.09 mm, via (RET_ISO) 1.36 mm
+   v4 deviation only KiCad    0.193 mm^2 at (  95.000,  -19.250) 0.50x0.50 mm  near TR2-6 (RET_ISO) 4.06 mm, via (RET_ISO) 1.80 mm
+   v4 deviation only KiCad    0.193 mm^2 at (   4.200,  -62.750) 0.50x0.50 mm  near J1-16 (PGND) 15.54 mm, via (GND) 13.08 mm
+   v4 deviation only KiCad    0.193 mm^2 at (   9.300,  -65.500) 0.50x0.50 mm  near J1-15 (PGND) 10.44 mm, via (GND) 16.96 mm
+   v4 deviation only KiCad    0.185 mm^2 at (   8.763,   39.000) 0.48x0.50 mm  near J8-48 (20V_ISO_SEC) 17.15 mm, via (#00275) 6.13 mm
+   v4 deviation only Proteus  0.086 mm^2 at ( 111.298,   34.295) 0.65x0.65 mm  near J4-16 (DAB_GROUND) 15.75 mm, via (20V_ISO_SEC) 9.31 mm
+   v4 deviation only Proteus  0.084 mm^2 at (  59.606,   -8.490) 0.65x0.65 mm  near TR2-10 (N/C) 25.13 mm, via (VCC) 2.27 mm
+   v4 deviation only Proteus  0.084 mm^2 at (  57.606,   -9.340) 0.65x0.65 mm  near TR2-10 (N/C) 26.31 mm, via (VCC) 3.08 mm
+   v4 deviation only Proteus  0.084 mm^2 at (  61.406,   -9.340) 0.65x0.65 mm  near TR2-10 (N/C) 23.17 mm, via (VCC) 1.62 mm
+   v4 deviation only Proteus  0.079 mm^2 at ( 108.595,   34.300) 0.65x0.62 mm  near J4-16 (DAB_GROUND) 15.26 mm, via (20V_ISO_SEC) 7.78 mm
+   v4 deviation only Proteus  0.079 mm^2 at (  57.600,   -6.737) 0.65x0.62 mm  near TR2-10 (N/C) 27.78 mm, via (GND) 4.10 mm
    clearance  only Proteus  0.015 mm^2 at ( 113.605,  -15.176) 0.23x0.20 mm  near J12-43 (ISOGND) 0.75 mm, via (ISOGND) 6.89 mm
    clearance  only Proteus  0.013 mm^2 at ( 114.639,  -16.261) 0.20x0.28 mm  near J12-43 (ISOGND) 0.75 mm, via (ISOGND) 7.76 mm
    clearance  only Proteus  0.013 mm^2 at ( 114.664,  -15.163) 0.18x0.20 mm  near J12-43 (ISOGND) 0.75 mm, via (ISOGND) 7.93 mm
@@ -458,10 +517,46 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape  only KiCad    0.023 mm^2 at (  45.821,   22.271) 0.20x0.20 mm  near J11-1 (ISOADA3) 0.49 mm, via (ISOGND) 4.54 mm
    pad shape  only KiCad    0.023 mm^2 at (  46.529,   22.271) 0.20x0.20 mm  near J11-1 (ISOADA3) 0.49 mm, via (ISOGND) 3.84 mm
 
-== B.Cu: Proteus copper 15580.9 mm^2, KiCad copper 15707.4 mm^2
-   raw XOR 144.19 mm^2; after 0.05 mm tolerance: only Proteus 1.42 mm^2, only KiCad 99.01 mm^2, 445 clusters (129 below 0.01 mm^2)
+== B.Cu: Proteus copper 15580.9 mm^2, KiCad copper 15723.8 mm^2
+   raw XOR 162.12 mm^2; after 0.05 mm tolerance: only Proteus 2.19 mm^2, only KiCad 116.04 mm^2, 460 clusters (129 below 0.01 mm^2)
    pad shape   316 clusters, 99.90 mm^2
-   coverage: Proteus 3472 draws / 734 flashes, 0 not on KiCad copper (0 explained by clearance / pad shape); KiCad 1266 draws / 734 flashes, 0 not on Proteus copper (0 explained by pad shape)
+   v4 deviation   15 clusters, 17.81 mm^2
+   coverage: Proteus 3472 draws / 734 flashes, 0 not on KiCad copper (5 explained by clearance / pad shape); KiCad 1272 draws / 757 flashes, 0 not on Proteus copper (30 explained by pad shape)
+   MISSING   Proteus draw Conductor 0.1524 mm at (4.104, -67.513)  39 samples off copper, 0 in clearance/pad shape, of 49; near R48-1 (SHUNT1) 2.02 mm
+   MISSING   Proteus draw Conductor 0.1524 mm at (4.317, -68.196)  76 samples off copper, 0 in clearance/pad shape, of 76; near R48-1 (SHUNT1) 2.39 mm
+   MISSING   Proteus draw Conductor 0.1524 mm at (4.317, -69.780)  179 samples off copper, 0 in clearance/pad shape, of 179; near R48-3 (SHUNT1) 2.75 mm
+   MISSING   Proteus draw Conductor 0.1524 mm at (4.067, -71.143)  57 samples off copper, 0 in clearance/pad shape, of 57; near R48-3 (SHUNT1) 1.98 mm
+   MISSING   Proteus draw Conductor 0.1524 mm at (2.961, -71.394)  12 samples off copper, 0 in clearance/pad shape, of 137; near R48-3 (SHUNT1) 0.86 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (8.100, -62.550) {'P': 'C91,1', 'N': 'Net-(U5-VIN+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R57-1 (#00349) 1.65 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (8.100, -65.500) {'P': 'C91,2', 'N': 'Net-(U5-VIN-)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R48-2 (SHUNT2) 2.11 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (11.708, 37.300) {'P': 'C90,1', 'N': 'Net-(U4-VIN+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U4-1 (#00427) 3.31 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (8.758, 37.300) {'P': 'C90,2', 'N': 'Net-(U4-VIN-)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R92-2 (INU_SHUNT1) 4.34 mm
+   explained KiCad flash SMDPad,CuDef 0.14 mm at (57.600, -7.550) {'P': 'C89,1', 'N': 'ADA3'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R35-1 (#00226) 10.23 mm
+   explained KiCad flash SMDPad,CuDef 0.14 mm at (57.600, -8.510) {'P': 'C89,2', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R35-1 (#00226) 9.29 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (110.075, 33.000) {'P': 'C92,1', 'N': 'Net-(U6-VIN+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 16.75 mm
+   explained KiCad flash SMDPad,CuDef 0.25 mm at (107.125, 33.000) {'P': 'C92,2', 'N': 'Net-(U6-VIN-)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 16.50 mm
+   explained KiCad flash SMDPad,CuDef 0.14 mm at (59.600, -9.350) {'P': 'C88,1', 'N': 'ADA2'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R35-1 (#00226) 8.25 mm
+   explained KiCad flash SMDPad,CuDef 0.14 mm at (60.560, -9.350) {'P': 'C88,2', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R35-1 (#00226) 8.32 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (57.600, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R35-1 (#00226) 8.47 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (61.400, -9.350) {'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R35-1 (#00226) 8.47 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (57.600, -6.741) {'N': 'ADA3'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R35-1 (#00226) 11.02 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (59.600, -8.500) {'N': 'ADA2'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R35-1 (#00226) 9.10 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (111.300, 34.300) {'N': 'Net-(U6-VIN+)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 15.74 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (108.600, 34.306) {'N': 'Net-(U6-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 15.26 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (9.300, -65.500) {'N': 'Net-(U5-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R48-2 (SHUNT2) 2.92 mm
+   MISSING   KiCad flash ViaPad 0.4572 mm at (8.758, 39.000) {'N': 'Net-(U4-VIN-)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R92-2 (INU_SHUNT1) 2.92 mm
+   MISSING   KiCad draw Conductor 0.3 mm at (60.980, -9.350) {'N': 'GND'} 40 samples off copper, 28 in clearance/pad shape, of 68; near R35-1 (#00226) 8.38 mm
+   MISSING   KiCad draw Conductor 0.3 mm at (57.600, -8.930) {'N': 'GND'} 40 samples off copper, 28 in clearance/pad shape, of 68; near R35-1 (#00226) 8.88 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (57.600, -7.146) {'N': 'ADA3'} 37 samples off copper, 28 in clearance/pad shape, of 65; near R35-1 (#00226) 10.63 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (59.600, -8.925) {'N': 'ADA2'} 38 samples off copper, 30 in clearance/pad shape, of 68; near R35-1 (#00226) 8.68 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (110.688, 33.650) {'N': 'Net-(U6-VIN+)'} 67 samples off copper, 76 in clearance/pad shape, of 143; near J4-16 (DAB_GROUND) 16.23 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (107.862, 33.653) {'N': 'Net-(U6-VIN-)'} 91 samples off copper, 67 in clearance/pad shape, of 158; near J4-16 (DAB_GROUND) 15.86 mm
+   explained KiCad draw Conductor 0.2 mm at (7.845, -62.550) {'N': 'Net-(U5-VIN+)'} 0 samples off copper, 41 in clearance/pad shape, of 41; near R57-1 (#00349) 1.40 mm
+   explained KiCad draw Conductor 0.2 mm at (7.495, -62.645) {'N': 'Net-(U5-VIN+)'} 0 samples off copper, 22 in clearance/pad shape, of 22; near R57-1 (#00349) 1.04 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (6.931, -62.741) {'N': 'Net-(U5-VIN+)'} 22 samples off copper, 26 in clearance/pad shape, of 75; near R57-1 (#00349) 0.47 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (8.700, -65.500) {'N': 'Net-(U5-VIN-)'} 21 samples off copper, 76 in clearance/pad shape, of 97; near R48-2 (SHUNT2) 2.48 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (11.708, 39.239) {'N': 'Net-(U4-VIN+)'} 206 samples off copper, 76 in clearance/pad shape, of 311; near R92-1 (#00428) 1.94 mm
+   MISSING   KiCad draw Conductor 0.2 mm at (8.758, 38.150) {'N': 'Net-(U4-VIN-)'} 60 samples off copper, 77 in clearance/pad shape, of 137; near R92-2 (INU_SHUNT1) 3.60 mm
    pad shape   103 clusters, only KiCad  26.64 mm^2, only Proteus   0.00 mm^2  Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder  (36 parts: R11 R12 R13 R14 R15 R16 ...)
    pad shape    21 clusters, only KiCad  20.82 mm^2, only Proteus   0.00 mm^2  Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm  (13 parts: C10 C13 C14 C19 C20 C22 ...)
    pad shape    48 clusters, only KiCad  20.37 mm^2, only Proteus   0.00 mm^2  ac_psu:TO-247-3_Vertical_Proteus  (12 parts: Q1 Q10 Q11 Q12 Q2 Q3 ...)
@@ -478,6 +573,21 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape    20 clusters, only KiCad   0.43 mm^2, only Proteus   0.00 mm^2  ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701  (2 parts: U4 U5)
    pad shape     1 clusters, only KiCad   0.41 mm^2, only Proteus   0.00 mm^2  Resistor_THT:R_Radial_Power_L13.0mm_W9.0mm_P5.00mm  (1 parts: R10)
    pad shape     4 clusters, only KiCad   0.09 mm^2, only Proteus   0.00 mm^2  ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus  (1 parts: J11)
+   v4 deviation only KiCad    2.672 mm^2 at (  11.713,   37.772) 1.18x4.42 mm  near U4-1 (#00427) 2.96 mm, via (#00275) 8.84 mm
+   v4 deviation only KiCad    2.458 mm^2 at ( 110.216,   33.138) 2.08x2.48 mm  near J4-16 (DAB_GROUND) 16.64 mm, via (20V_ISO_SEC) 7.73 mm
+   v4 deviation only KiCad    2.425 mm^2 at ( 107.315,   33.158) 2.30x2.48 mm  near J4-16 (DAB_GROUND) 16.34 mm, via (20V_ISO_SEC) 6.21 mm
+   v4 deviation only KiCad    2.398 mm^2 at (   8.763,   37.482) 1.18x2.88 mm  near R92-2 (INU_SHUNT1) 4.17 mm, via (#00275) 5.88 mm
+   v4 deviation only KiCad    2.293 mm^2 at (   8.195,  -65.511) 2.38x1.18 mm  near R48-2 (SHUNT2) 2.15 mm, via (GND) 16.60 mm
+   v4 deviation only KiCad    2.120 mm^2 at (   8.047,  -62.557) 2.18x1.15 mm  near R57-1 (#00349) 1.59 mm, via (GND) 13.77 mm
+   v4 deviation only Proteus  0.770 mm^2 at (   4.244,  -69.436) 0.70x4.15 mm  near R48-3 (SHUNT1) 2.91 mm, via (GND) 19.76 mm
+   v4 deviation only KiCad    0.651 mm^2 at (  57.598,   -8.832) 0.65x1.38 mm  near R35-1 (#00226) 8.97 mm, via (GND) 3.16 mm
+   v4 deviation only KiCad    0.651 mm^2 at (  60.882,   -9.352) 1.38x0.65 mm  near R35-1 (#00226) 8.36 mm, via (VCC) 1.35 mm
+   v4 deviation only KiCad    0.626 mm^2 at (  59.599,   -9.041) 0.60x1.43 mm  near R35-1 (#00226) 8.56 mm, via (VCC) 1.77 mm
+   v4 deviation only KiCad    0.619 mm^2 at (  57.599,   -7.262) 0.65x1.35 mm  near R35-1 (#00226) 10.51 mm, via (GND) 3.78 mm
+   v4 deviation only KiCad    0.036 mm^2 at (  11.498,   43.350) 0.12x0.40 mm  near R93-1 (#00429) 0.94 mm, via (#00275) 10.54 mm
+   v4 deviation only KiCad    0.036 mm^2 at (   4.200,  -62.573) 0.40x0.12 mm  near R58-1 (#00350) 1.02 mm, via (GND) 12.91 mm
+   v4 deviation only KiCad    0.026 mm^2 at (  11.867,   43.350) 0.10x0.35 mm  near R93-1 (#00429) 0.93 mm, via (#00275) 10.84 mm
+   v4 deviation only KiCad    0.026 mm^2 at (   4.200,  -62.942) 0.35x0.10 mm  near R58-1 (#00350) 1.03 mm, via (GND) 13.28 mm
    pad shape  only KiCad    2.513 mm^2 at ( -83.823,  -47.823) 2.43x2.43 mm  near C24-1 (CMFILT1) 0.03 mm, via (GPIO_BYPASS_RLY) 25.12 mm
    pad shape  only KiCad    2.513 mm^2 at ( -56.323,  -47.823) 2.43x2.43 mm  near C24-2 (CMFILT2) 0.03 mm, via (LEMOUT) 28.56 mm
    pad shape  only KiCad    1.229 mm^2 at ( -11.206,  -30.694) 2.00x2.00 mm  near C79-1 (DC+) 2.84 mm, via (#00017) 8.24 mm
@@ -795,7 +905,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    pad shape  only Proteus  0.010 mm^2 at (-107.069,  -63.848) 0.12x0.15 mm  near R89-2 (GPIO_BYPASS_RLY) 0.62 mm, via (GPIO_BYPASS_RLY) 3.85 mm
    pad shape  only Proteus  0.010 mm^2 at (-105.748,  -65.831) 0.15x0.12 mm  near R90-2 (GND) 0.62 mm, via (GND) 2.36 mm
 
-== drills: Proteus 562, KiCad 562, matched 562 within 0.05 mm
+== drills: 12 KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv
+== drills: Proteus 562, KiCad 575, matched 562 within 0.05 mm
     173 x Proteus 0.3000 mm -> KiCad 0.3000 mm
     218 x Proteus 0.5588 mm -> KiCad 0.5580 mm
       6 x Proteus 0.5588 mm -> KiCad 0.6500 mm  KiCad footprint drill kept (larger)
@@ -814,3 +925,4 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
      12 x Proteus 2.0320 mm -> KiCad 2.0320 mm
      21 x Proteus 2.5500 mm -> KiCad 2.5500 mm
      12 x Proteus 3.0000 mm -> KiCad 3.0000 mm
+   ERROR KiCad ViaDrill 0.3 mm at (57.6, -9.35) has no Proteus drill

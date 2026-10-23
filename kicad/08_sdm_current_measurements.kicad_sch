@@ -1901,7 +1901,7 @@
 				)
 			)
 		)
-		(property "Value" "10R"
+		(property "Value" "12.4R"
 			(at 144.78 46.23 90)
 			(effects
 				(font
@@ -2129,7 +2129,7 @@
 				)
 			)
 		)
-		(property "Value" "10R"
+		(property "Value" "12.4R"
 			(at 160.02 62.23 90)
 			(effects
 				(font
@@ -2316,6 +2316,127 @@
 	)
 	(symbol
 		(lib_id "ac_psu:C")
+		(at 166.37 53.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a3a34ef1-ab43-5218-9c58-2c90fd8cbd0d")
+		(property "Reference" "C91"
+			(at 170.56 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n C0G"
+			(at 173.31 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 167.3352 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 166.37 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 166.37 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09d86b3c-5e6f-50bc-8d48-d12373c2df39")
+		)
+		(pin "2"
+			(uuid "b41c6a7b-4aa3-5d04-8bf9-6ce5256b1560")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/d4a5523b-62f8-497b-bac7-535f728f391e"
+					(reference "C91")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 166.37 48.26) (xy 166.37 49.53)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d84777c9-97a8-5dd7-94dc-f7b34f107a9b")
+	)
+	(junction
+		(at 166.37 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "29d4d6eb-ac44-536d-820b-c706e43c89ea")
+	)
+	(wire
+		(pts
+			(xy 166.37 57.15) (xy 166.37 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca487f20-3709-5eea-beb3-7c5dbd9f5c46")
+	)
+	(junction
+		(at 166.37 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "efecaecb-cb02-5331-bfff-c254e00082ff")
+	)
+	(text "v4: C91 100n C0G (1206) across VIN+/VIN- compensates the shunt inductance:"
+		(exclude_from_sim no)
+		(at 71.12 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8a1b48f-08d8-5b66-8202-1823865c6b17")
+	)
+	(text "tau = L/R = 2.5 us; with 100 nF use R_leg = 2.5 Ohm per nH of shunt L (4 nH -> 10R, 5 nH -> 12.4R, 6 nH -> 15R)."
+		(exclude_from_sim no)
+		(at 71.12 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b9be0b64-3222-5176-838e-0ce2fc158de3")
+	)
+	(symbol
+		(lib_id "ac_psu:C")
 		(at 116.84 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2389,7 +2510,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d84777c9-97a8-5dd7-94dc-f7b34f107a9b")
+		(uuid "91ea10d9-97a0-5123-b5db-5021fd939d0c")
 	)
 	(wire
 		(pts
@@ -2399,19 +2520,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "29d4d6eb-ac44-536d-820b-c706e43c89ea")
+		(uuid "4b1a8c5a-753e-5f86-a163-a2c1fae53cd1")
 	)
 	(junction
 		(at 116.84 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ca487f20-3709-5eea-beb3-7c5dbd9f5c46")
+		(uuid "775da1ed-8858-584e-a9d7-a369539f68aa")
 	)
 	(junction
 		(at 116.84 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "efecaecb-cb02-5331-bfff-c254e00082ff")
+		(uuid "e2bb17d2-b9ac-597e-839e-7016cb2a3b4f")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -2488,7 +2609,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d8a1b48f-08d8-5b66-8202-1823865c6b17")
+		(uuid "80ad20e7-386e-55bc-ac7e-0c804c22d2ce")
 	)
 	(wire
 		(pts
@@ -2498,19 +2619,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b9be0b64-3222-5176-838e-0ce2fc158de3")
+		(uuid "c5afd690-50cc-5e05-a3f6-eb157ca85a67")
 	)
 	(junction
 		(at 106.68 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "91ea10d9-97a0-5123-b5db-5021fd939d0c")
+		(uuid "f88b4099-b179-5738-b8e5-b7b07164084d")
 	)
 	(junction
 		(at 106.68 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4b1a8c5a-753e-5f86-a163-a2c1fae53cd1")
+		(uuid "5e2f4ba4-7a58-5f44-9cfa-15373ef5e948")
 	)
 	(symbol
 		(lib_id "ac_psu:D_Zener")
@@ -2587,7 +2708,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "775da1ed-8858-584e-a9d7-a369539f68aa")
+		(uuid "f101ad3c-81b5-5bbb-9104-4895d3c45a61")
 	)
 	(wire
 		(pts
@@ -2597,7 +2718,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e2bb17d2-b9ac-597e-839e-7016cb2a3b4f")
+		(uuid "59181c42-a02f-52d0-80c1-d690d2b2b80f")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -2674,7 +2795,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "80ad20e7-386e-55bc-ac7e-0c804c22d2ce")
+		(uuid "c79e107c-3fc1-5109-9b19-a349c4fb0b96")
 	)
 	(wire
 		(pts
@@ -2684,7 +2805,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c5afd690-50cc-5e05-a3f6-eb157ca85a67")
+		(uuid "02372bfd-dd27-554a-9cb1-ca3811c78636")
 	)
 	(wire
 		(pts
@@ -2694,7 +2815,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f88b4099-b179-5738-b8e5-b7b07164084d")
+		(uuid "c6fbb06b-7586-54da-81f1-a1e6dd5d2e90")
 	)
 	(global_label "SDM_RAW_VOLTAGE"
 		(shape passive)
@@ -2706,7 +2827,7 @@
 			)
 			(justify right)
 		)
-		(uuid "5e2f4ba4-7a58-5f44-9cfa-15373ef5e948")
+		(uuid "0cfffed5-6501-5649-bab3-c57fbc859bb7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 77.47 38.1 0)
 			(effects
@@ -2726,7 +2847,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f101ad3c-81b5-5bbb-9104-4895d3c45a61")
+		(uuid "66b497c1-5556-5b2e-b9c1-8d510d97e556")
 	)
 	(global_label "SHUNT1"
 		(shape passive)
@@ -2738,7 +2859,7 @@
 			)
 			(justify right)
 		)
-		(uuid "59181c42-a02f-52d0-80c1-d690d2b2b80f")
+		(uuid "c4fa5469-f344-5ff9-9a0a-911fa85a797d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 93.98 71.12 0)
 			(effects
@@ -2819,7 +2940,7 @@
 		(at 124.46 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c79e107c-3fc1-5109-9b19-a349c4fb0b96")
+		(uuid "538082ec-7396-55d9-8a14-c838e74a1bc6")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -2890,7 +3011,7 @@
 		(at 124.46 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "02372bfd-dd27-554a-9cb1-ca3811c78636")
+		(uuid "7a9631e0-fd70-5805-b7f6-8fc46b80c069")
 	)
 	(wire
 		(pts
@@ -2900,7 +3021,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c6fbb06b-7586-54da-81f1-a1e6dd5d2e90")
+		(uuid "826f6088-0d89-53d4-9d78-ce1d8d12ad59")
 	)
 	(symbol
 		(lib_id "ac_psu:VCC")
@@ -2975,7 +3096,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0cfffed5-6501-5649-bab3-c57fbc859bb7")
+		(uuid "64ddc426-9537-54f2-9b5c-89256ef4397e")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3050,7 +3171,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "66b497c1-5556-5b2e-b9c1-8d510d97e556")
+		(uuid "bd4b48dc-d749-56f4-ab97-9215759a1347")
 	)
 	(global_label "ADCLK"
 		(shape passive)
@@ -3062,7 +3183,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c4fa5469-f344-5ff9-9a0a-911fa85a797d")
+		(uuid "c91a76e0-4e76-590b-bb19-97f9f46c76b2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 208.28 48.26 0)
 			(effects
@@ -3149,7 +3270,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "538082ec-7396-55d9-8a14-c838e74a1bc6")
+		(uuid "1264c402-de15-57de-b592-8f50ab7e360a")
 	)
 	(wire
 		(pts
@@ -3159,7 +3280,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7a9631e0-fd70-5805-b7f6-8fc46b80c069")
+		(uuid "31fbbd60-58a3-598b-9d0e-e01303f4b0b4")
 	)
 	(global_label "MDATA"
 		(shape passive)
@@ -3171,7 +3292,7 @@
 			)
 			(justify left)
 		)
-		(uuid "826f6088-0d89-53d4-9d78-ce1d8d12ad59")
+		(uuid "2b9d2c96-1320-51ee-961c-1067b81e3987")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 224.79 50.8 0)
 			(effects
@@ -3258,7 +3379,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "64ddc426-9537-54f2-9b5c-89256ef4397e")
+		(uuid "5be0a179-93fa-50f2-b476-27484e9de717")
 	)
 	(symbol
 		(lib_id "ac_psu:VCC")
@@ -3333,7 +3454,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bd4b48dc-d749-56f4-ab97-9215759a1347")
+		(uuid "55ea25d7-b1b7-5147-b619-af66e76583d3")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -3400,7 +3521,7 @@
 			)
 		)
 	)
-	(text "U5 floats on the AFE shunt R48 (sheet 1): GND1 = SHUNT1 (also J5), VDD1 = 5.1 V from D8 via R59."
+	(text "U5 floats on the AFE shunt R48 (sheet 1): GND1 = SHUNT1 (R48 sense pin 1), VDD1 = 5.1 V from D8 via R59."
 		(exclude_from_sim no)
 		(at 71.12 81.28 0)
 		(effects
@@ -3409,7 +3530,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c91a76e0-4e76-590b-bb19-97f9f46c76b2")
+		(uuid "94b34c2b-d46f-5aef-bd74-633ed11b5caf")
 	)
 	(symbol
 		(lib_id "ac_psu:ADUM7701-8BRIZ")
@@ -3506,7 +3627,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1264c402-de15-57de-b592-8f50ab7e360a")
+		(uuid "e6724546-5cc2-50dc-9893-15179c4cf720")
 	)
 	(wire
 		(pts
@@ -3516,7 +3637,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "31fbbd60-58a3-598b-9d0e-e01303f4b0b4")
+		(uuid "0b880acb-d0ed-572e-a8b9-9ef3789f0f44")
 	)
 	(wire
 		(pts
@@ -3526,7 +3647,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2b9d2c96-1320-51ee-961c-1067b81e3987")
+		(uuid "bdd1f988-50ff-53dc-8e83-cc069b27797f")
 	)
 	(wire
 		(pts
@@ -3536,7 +3657,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5be0a179-93fa-50f2-b476-27484e9de717")
+		(uuid "1f09d6c7-f0ed-5b48-a318-dd817e33f163")
 	)
 	(wire
 		(pts
@@ -3546,7 +3667,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "55ea25d7-b1b7-5147-b619-af66e76583d3")
+		(uuid "9f33ed8c-c959-5b47-ae9a-c0e8e1c4114e")
 	)
 	(wire
 		(pts
@@ -3556,7 +3677,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "94b34c2b-d46f-5aef-bd74-633ed11b5caf")
+		(uuid "f04337a4-c451-5b25-b6df-667b8cd5179b")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -3575,7 +3696,7 @@
 				)
 			)
 		)
-		(property "Value" "10R"
+		(property "Value" "12.4R"
 			(at 144.78 127.51 90)
 			(effects
 				(font
@@ -3633,13 +3754,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e6724546-5cc2-50dc-9893-15179c4cf720")
+		(uuid "065107f3-dbd7-510b-82dc-b39b849cc282")
 	)
 	(junction
 		(at 152.4 129.54)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0b880acb-d0ed-572e-a8b9-9ef3789f0f44")
+		(uuid "2bfc2cb3-04bb-5608-946e-d8af0772bcf8")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -3716,7 +3837,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bdd1f988-50ff-53dc-8e83-cc069b27797f")
+		(uuid "eb5f48ae-91bc-54fa-83c0-af4ef03b29de")
 	)
 	(wire
 		(pts
@@ -3726,13 +3847,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1f09d6c7-f0ed-5b48-a318-dd817e33f163")
+		(uuid "1d8ce48c-ba03-594e-8c5f-94629e85af1e")
 	)
 	(junction
 		(at 152.4 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9f33ed8c-c959-5b47-ae9a-c0e8e1c4114e")
+		(uuid "7d260882-0bce-507c-8a23-2fe1081fd828")
 	)
 	(wire
 		(pts
@@ -3742,7 +3863,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f04337a4-c451-5b25-b6df-667b8cd5179b")
+		(uuid "4bf95bcd-db68-54ac-a22e-ddd29d041f9b")
 	)
 	(global_label "DAB_SHUNT1"
 		(shape passive)
@@ -3754,7 +3875,7 @@
 			)
 			(justify right)
 		)
-		(uuid "065107f3-dbd7-510b-82dc-b39b849cc282")
+		(uuid "0b47ce86-9d78-5c82-bf03-de032feb4620")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 138.43 129.54 0)
 			(effects
@@ -3774,7 +3895,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2bfc2cb3-04bb-5608-946e-d8af0772bcf8")
+		(uuid "75c33d10-1273-5d85-ade3-926bfdd4c770")
 	)
 	(wire
 		(pts
@@ -3784,7 +3905,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "eb5f48ae-91bc-54fa-83c0-af4ef03b29de")
+		(uuid "52df8959-a522-516f-971c-b868856140c0")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -3803,7 +3924,7 @@
 				)
 			)
 		)
-		(property "Value" "10R"
+		(property "Value" "12.4R"
 			(at 160.02 143.51 90)
 			(effects
 				(font
@@ -3861,7 +3982,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1d8ce48c-ba03-594e-8c5f-94629e85af1e")
+		(uuid "87350358-eeca-5dbc-8e43-47d41cff5c86")
 	)
 	(wire
 		(pts
@@ -3871,13 +3992,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7d260882-0bce-507c-8a23-2fe1081fd828")
+		(uuid "b39fce01-98fe-5eae-9573-d14979a65023")
 	)
 	(junction
 		(at 170.18 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4bf95bcd-db68-54ac-a22e-ddd29d041f9b")
+		(uuid "0395a4a5-65f9-53de-a0b7-c47714ec52f1")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -3954,7 +4075,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0b47ce86-9d78-5c82-bf03-de032feb4620")
+		(uuid "d38c49cc-873f-51f9-8a41-dcf0719a55ba")
 	)
 	(wire
 		(pts
@@ -3964,13 +4085,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "75c33d10-1273-5d85-ade3-926bfdd4c770")
+		(uuid "b37bb84c-09f8-5a73-b458-eef89c1be101")
 	)
 	(junction
 		(at 170.18 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "52df8959-a522-516f-971c-b868856140c0")
+		(uuid "d83334db-0516-53f3-925a-d99a0e6fbb88")
 	)
 	(wire
 		(pts
@@ -3980,13 +4101,134 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "87350358-eeca-5dbc-8e43-47d41cff5c86")
+		(uuid "a372fa31-f094-57cb-a86e-54a0d4cc86f5")
 	)
 	(junction
 		(at 156.21 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b39fce01-98fe-5eae-9573-d14979a65023")
+		(uuid "59759521-4e72-52ed-9b28-39d75008932c")
+	)
+	(symbol
+		(lib_id "ac_psu:C")
+		(at 166.37 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "91f98ffa-0c9d-5b09-974d-c83f01345c7d")
+		(property "Reference" "C92"
+			(at 170.56 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100n C0G"
+			(at 173.31 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
+			(at 167.3352 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 166.37 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 166.37 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b53b0d67-ac56-51cd-b15f-b0905315bda2")
+		)
+		(pin "2"
+			(uuid "e870459f-078d-515d-8edc-597154ec0435")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/d4a5523b-62f8-497b-bac7-535f728f391e"
+					(reference "C92")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 166.37 129.54) (xy 166.37 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d94c5a38-7132-58b2-8827-6f40b77b794a")
+	)
+	(junction
+		(at 166.37 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "da6c21e9-ef9f-5173-84e5-376b1b3274a5")
+	)
+	(wire
+		(pts
+			(xy 166.37 138.43) (xy 166.37 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f5aaefc-22a2-5413-9930-dead4dd517ee")
+	)
+	(junction
+		(at 166.37 139.7)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b904ef24-7c9b-5381-af52-e9587a22b88e")
+	)
+	(text "v4: C92 100n C0G (1206) across VIN+/VIN- compensates the shunt inductance:"
+		(exclude_from_sim no)
+		(at 71.12 166.37 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bb3f3d61-0200-5148-82f3-2ad1a68a3b96")
+	)
+	(text "tau = L/R = 2.5 us; with 100 nF use R_leg = 2.5 Ohm per nH of shunt L (4 nH -> 10R, 5 nH -> 12.4R, 6 nH -> 15R)."
+		(exclude_from_sim no)
+		(at 71.12 170.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f964f141-0619-55d7-a4c0-80781d9b67f9")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4063,7 +4305,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0395a4a5-65f9-53de-a0b7-c47714ec52f1")
+		(uuid "ba0115cf-8fab-5810-8406-9e679881e44b")
 	)
 	(wire
 		(pts
@@ -4073,19 +4315,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d38c49cc-873f-51f9-8a41-dcf0719a55ba")
+		(uuid "a0d9604c-e4e7-514e-a9b4-e3b3456f08d4")
 	)
 	(junction
 		(at 116.84 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "b37bb84c-09f8-5a73-b458-eef89c1be101")
+		(uuid "0ac1137b-5807-51a4-b274-408315f55c6b")
 	)
 	(junction
 		(at 116.84 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d83334db-0516-53f3-925a-d99a0e6fbb88")
+		(uuid "8425a205-6b34-5dc1-8351-311ac502e2b6")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4162,7 +4404,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a372fa31-f094-57cb-a86e-54a0d4cc86f5")
+		(uuid "356845db-8d8f-54d9-9d0c-adc789a52872")
 	)
 	(wire
 		(pts
@@ -4172,19 +4414,19 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "59759521-4e72-52ed-9b28-39d75008932c")
+		(uuid "634438e9-8d55-5993-b301-267407507f93")
 	)
 	(junction
 		(at 106.68 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d94c5a38-7132-58b2-8827-6f40b77b794a")
+		(uuid "0e91aeae-0a11-5778-9262-0ed404fce5f3")
 	)
 	(junction
 		(at 106.68 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "da6c21e9-ef9f-5173-84e5-376b1b3274a5")
+		(uuid "cace34b8-e5dc-53f7-8c43-8df2c523d33e")
 	)
 	(text "(Proteus shows an unlabelled zener here; it has no refdes and is not in the layout)"
 		(exclude_from_sim no)
@@ -4195,7 +4437,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7f5aaefc-22a2-5413-9930-dead4dd517ee")
+		(uuid "1879c690-f138-528c-8387-4a934c94ed30")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -4272,7 +4514,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b904ef24-7c9b-5381-af52-e9587a22b88e")
+		(uuid "546fa6ed-84cc-5d4a-b91a-96124371cb6e")
 	)
 	(wire
 		(pts
@@ -4282,7 +4524,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bb3f3d61-0200-5148-82f3-2ad1a68a3b96")
+		(uuid "c13d81aa-65dd-571d-9e0b-91033165d580")
 	)
 	(wire
 		(pts
@@ -4292,7 +4534,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f964f141-0619-55d7-a4c0-80781d9b67f9")
+		(uuid "31891a8e-9dec-5154-bd7d-c084bc870758")
 	)
 	(global_label "ISO_DAB_SDM_RAW_VOLTAGE"
 		(shape passive)
@@ -4304,7 +4546,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ba0115cf-8fab-5810-8406-9e679881e44b")
+		(uuid "1516ef71-ced1-54b3-b44a-8c92111381bc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 77.47 119.38 0)
 			(effects
@@ -4324,7 +4566,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a0d9604c-e4e7-514e-a9b4-e3b3456f08d4")
+		(uuid "60fdefa2-e245-56fe-a142-e3044e34bc48")
 	)
 	(global_label "DAB_SHUNT2"
 		(shape passive)
@@ -4336,7 +4578,7 @@
 			)
 			(justify right)
 		)
-		(uuid "0ac1137b-5807-51a4-b274-408315f55c6b")
+		(uuid "e7c4fa24-3f76-5ef5-87b1-9bbff789f8a2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 93.98 152.4 0)
 			(effects
@@ -4417,7 +4659,7 @@
 		(at 124.46 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8425a205-6b34-5dc1-8351-311ac502e2b6")
+		(uuid "9c8c9ec0-f38b-57fd-af2d-79426d1e0b3b")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -4488,7 +4730,7 @@
 		(at 124.46 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "356845db-8d8f-54d9-9d0c-adc789a52872")
+		(uuid "75c5d7c3-4370-503c-abc4-fc9d2d988110")
 	)
 	(wire
 		(pts
@@ -4498,7 +4740,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "634438e9-8d55-5993-b301-267407507f93")
+		(uuid "886a70cf-4aea-5d78-b31f-fcb0fb53ce26")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -4573,7 +4815,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0e91aeae-0a11-5778-9262-0ed404fce5f3")
+		(uuid "4f989afe-1375-56dc-a86e-aa29b0e75592")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -4648,7 +4890,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cace34b8-e5dc-53f7-8c43-8df2c523d33e")
+		(uuid "4748b189-67a9-51a4-8ce6-abd7e327defa")
 	)
 	(global_label "ADCLK_DAB"
 		(shape passive)
@@ -4660,7 +4902,7 @@
 			)
 			(justify left)
 		)
-		(uuid "1879c690-f138-528c-8387-4a934c94ed30")
+		(uuid "ecd7d29c-c7f9-5592-b63a-42a191e3529c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 208.28 129.54 0)
 			(effects
@@ -4747,7 +4989,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "546fa6ed-84cc-5d4a-b91a-96124371cb6e")
+		(uuid "a3dfc8b0-0937-5ed9-917e-853d44bd79fc")
 	)
 	(wire
 		(pts
@@ -4757,7 +4999,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c13d81aa-65dd-571d-9e0b-91033165d580")
+		(uuid "f4fde1a1-fc90-5bdc-a26b-cffac5ace0e4")
 	)
 	(global_label "MDATA_DAB"
 		(shape passive)
@@ -4769,7 +5011,7 @@
 			)
 			(justify left)
 		)
-		(uuid "31891a8e-9dec-5154-bd7d-c084bc870758")
+		(uuid "4a304e14-cabf-528e-aa7d-364bf208907a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 224.79 132.08 0)
 			(effects
@@ -4856,7 +5098,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1516ef71-ced1-54b3-b44a-8c92111381bc")
+		(uuid "2eae81f1-2818-5e99-af77-a9df29c3e2e0")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -4931,7 +5173,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "60fdefa2-e245-56fe-a142-e3044e34bc48")
+		(uuid "8963cf75-a5fa-50fd-984c-89a08fdd7b60")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -5007,7 +5249,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e7c4fa24-3f76-5ef5-87b1-9bbff789f8a2")
+		(uuid "985548d0-0a2d-5a08-9184-0a6e9f10f024")
 	)
 	(symbol
 		(lib_id "ac_psu:FKK5R0020FE-TR")
@@ -5092,7 +5334,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9c8c9ec0-f38b-57fd-af2d-79426d1e0b3b")
+		(uuid "04d231e3-7999-5d06-8e74-c04289d6c713")
 	)
 	(global_label "DAB_SHUNT2"
 		(shape passive)
@@ -5104,7 +5346,7 @@
 			)
 			(justify left)
 		)
-		(uuid "75c5d7c3-4370-503c-abc4-fc9d2d988110")
+		(uuid "d06f85a9-daac-589b-b522-17d83aa46112")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 76.2 182.88 0)
 			(effects
@@ -5124,7 +5366,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "886a70cf-4aea-5d78-b31f-fcb0fb53ce26")
+		(uuid "e9574484-0708-53c0-9370-c15fa925d9e3")
 	)
 	(global_label "DAB_SHUNT1"
 		(shape passive)
@@ -5136,7 +5378,7 @@
 			)
 			(justify right)
 		)
-		(uuid "4f989afe-1375-56dc-a86e-aa29b0e75592")
+		(uuid "854b5008-1bc6-58dd-9224-6187dc644b9c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 76.2 198.12 0)
 			(effects
@@ -5156,7 +5398,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4748b189-67a9-51a4-8ce6-abd7e327defa")
+		(uuid "ba4fdcce-7987-572e-9d40-99a2a4488512")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOPGND")
@@ -5231,7 +5473,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ecd7d29c-c7f9-5592-b63a-42a191e3529c")
+		(uuid "143ff15c-62cd-577c-af63-1d4a126b0356")
 	)
 	(symbol
 		(lib_id "ac_psu:DAB_GROUND")
@@ -5367,7 +5609,7 @@
 		(at 86.36 187.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a3dfc8b0-0937-5ed9-917e-853d44bd79fc")
+		(uuid "1d5db23e-f054-5d7d-85a2-ba7f34a30ff4")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -5438,7 +5680,7 @@
 		(at 86.36 193.04)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "f4fde1a1-fc90-5bdc-a26b-cffac5ace0e4")
+		(uuid "d22417cf-b53e-52a6-b2bb-7a44052e456e")
 	)
 	(text "R64: 2 mOhm Kelvin shunt between ISOPGND and the DAB secondary ground DAB_GROUND (J4 15-20)."
 		(exclude_from_sim no)
@@ -5449,7 +5691,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4a304e14-cabf-528e-aa7d-364bf208907a")
+		(uuid "79f2da9f-35c4-5fbf-92d6-8c85c5bdcda9")
 	)
 	(embedded_fonts no)
 )

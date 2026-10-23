@@ -1,0 +1,66 @@
+== fix 1: RET_ISO -> ISOGND
+  TR2-6: RET_ISO -> ISOGND
+  C15-2: RET_ISO -> ISOGND
+  C36-2: RET_ISO -> ISOGND
+  R49-1: RET_ISO -> ISOGND
+  24 tracks/vias/zones RET_ISO -> ISOGND
+  zone v4 fix 1 ISOGND under the 20 V iso return In1.Cu ISOGND prio 90: (91.0,-13.0) (108.6,-13.0) (108.6,-24.0) (91.0,-24.0)
+  via ISOGND at (96.000,-15.500) 0.4572/0.3
+  via ISOGND at (94.500,-17.250) 0.4572/0.3
+  via ISOGND at (95.000,-19.250) 0.4572/0.3
+== fix 2: U11 INH -> GND
+  U11-6: DGND -> GND
+  track F.Cu GND w0.25: (59.949,-0.980)-(59.299,-0.980)
+== fix 3: C88/C89 on ADA2/ADA3
+  C88 1n Capacitor_SMD:C_0402_1005Metric bottom at (60.080,-9.350) rot 0: pad1 ADA2 (59.6, -9.35), pad2 GND (60.56, -9.35)
+  via ADA2 at (59.600,-8.500) 0.4572/0.3
+  track B.Cu ADA2 w0.2: (59.600,-8.500)-(59.600,-9.350)
+  via GND at (61.400,-9.350) 0.4572/0.3
+  track B.Cu GND w0.3: (60.560,-9.350)-(61.400,-9.350)
+  C89 1n Capacitor_SMD:C_0402_1005Metric bottom at (57.600,-8.030) rot 270: pad1 ADA3 (57.6, -7.55), pad2 GND (57.6, -8.51)
+  via ADA3 at (57.600,-6.741) 0.4572/0.3
+  track B.Cu ADA3 w0.2: (57.600,-6.741)-(57.600,-7.550)
+  via GND at (57.600,-9.350) 0.4572/0.3
+  track B.Cu GND w0.3: (57.600,-8.510)-(57.600,-9.350)
+== fix 4: ADuM7701 RC compensation
+  R92 value 10R -> 12.4R
+  R93 value 10R -> 12.4R
+  R57 value 10R -> 12.4R
+  R58 value 10R -> 12.4R
+  R73 value 10R -> 12.4R
+  R74 value 10R -> 12.4R
+  C90 100n C0G Capacitor_SMD:C_1206_3216Metric bottom at (10.233,37.300) rot 180: pad1 Net-(U4-VIN+) (11.708, 37.3), pad2 Net-(U4-VIN-) (8.758, 37.3)
+  track B.Cu Net-(U4-VIN+) w0.2: (11.708,41.178)-(11.708,37.300)
+  via Net-(U4-VIN-) at (11.678,43.350) 0.4572/0.3
+  track In1.Cu Net-(U4-VIN-) w0.2: (11.678,43.350)-(8.758,39.000)
+  via Net-(U4-VIN-) at (8.758,39.000) 0.4572/0.3
+  track B.Cu Net-(U4-VIN-) w0.2: (8.758,39.000)-(8.758,37.300)
+  pour keep-out v4 fix 4 HV keep-out U4 via (11.678,43.35) F.Cu circle r1.8 at (11.678,43.350)
+  pour keep-out v4 fix 4 HV keep-out U4 via (8.758,39.0) F.Cu circle r1.8 at (8.758,39.000)
+  C91 100n C0G Capacitor_SMD:C_1206_3216Metric bottom at (8.100,-64.025) rot 270: pad1 Net-(U5-VIN+) (8.1, -62.55), pad2 Net-(U5-VIN-) (8.1, -65.5)
+  track B.Cu Net-(U5-VIN+) w0.2: (6.463,-62.741)-(7.400,-62.741)
+  track B.Cu Net-(U5-VIN+) w0.2: (7.400,-62.741)-(7.591,-62.550)
+  track B.Cu Net-(U5-VIN+) w0.2: (7.591,-62.550)-(8.100,-62.550)
+  via Net-(U5-VIN-) at (4.200,-62.750) 0.4572/0.3
+  track In1.Cu Net-(U5-VIN-) w0.2: (4.200,-62.750)-(9.300,-65.500)
+  via Net-(U5-VIN-) at (9.300,-65.500) 0.4572/0.3
+  track B.Cu Net-(U5-VIN-) w0.2: (9.300,-65.500)-(8.100,-65.500)
+  pour keep-out v4 fix 4 HV keep-out U5 via (4.2,-62.75) F.Cu circle r1.8 at (4.200,-62.750)
+  pour keep-out v4 fix 4 HV keep-out U5 via (9.3,-65.5) F.Cu circle r1.8 at (9.300,-65.500)
+  C92 100n C0G Capacitor_SMD:C_1206_3216Metric bottom at (108.600,33.000) rot 180: pad1 Net-(U6-VIN+) (110.075, 33.0), pad2 Net-(U6-VIN-) (107.125, 33.0)
+  track F.Cu Net-(U6-VIN+) w0.2: (110.560,34.276)-(111.300,34.300)
+  via Net-(U6-VIN+) at (111.300,34.300) 0.4572/0.3
+  track B.Cu Net-(U6-VIN+) w0.2: (111.300,34.300)-(110.075,33.000)
+  via Net-(U6-VIN-) at (108.600,34.306) 0.4572/0.3
+  track B.Cu Net-(U6-VIN-) w0.2: (108.600,34.306)-(107.125,33.000)
+== fix 5: R48 Kelvin split
+  deleted track B.Cu SHUNT1 (4.317,-67.726)-(4.317,-68.667) w0.152
+  deleted track B.Cu SHUNT1 (2.106,-71.394)-(2.100,-71.400) w0.152
+  deleted track B.Cu SHUNT1 (3.891,-67.300)-(4.317,-67.726) w0.152
+  deleted track B.Cu SHUNT1 (4.317,-70.893)-(3.816,-71.394) w0.152
+  deleted track B.Cu SHUNT1 (3.816,-71.394)-(2.106,-71.394) w0.152
+  deleted track B.Cu SHUNT1 (4.317,-68.667)-(4.317,-70.893) w0.152
+  new net /01 afe/SHUNT1_FORCE
+  R48-3: SHUNT1 -> /01 afe/SHUNT1_FORCE
+  J5-1: SHUNT1 -> /01 afe/SHUNT1_FORCE
+  9 force-side tracks/zones SHUNT1 -> /01 afe/SHUNT1_FORCE

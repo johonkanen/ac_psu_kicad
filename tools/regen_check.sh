@@ -3,7 +3,8 @@
 # temporary directory, regenerate every generated file there, and fail if anything differs
 # from the commit. Run after bumping tools/p2k (commit the bump first, or pass a ref).
 #   tools/regen_check.sh [REF]      (default: HEAD)
-# make_skeleton is one-shot with random UUIDs: it is only run, not compared.
+# make_skeleton is one-shot with random UUIDs: it is only run, not compared. The design board
+# kicad/ac_psu.kicad_pcb is not regenerated (frozen since v4, edited by tools/v4/fix_*.py).
 set -u
 src="$(cd "$(dirname "$0")/.." && pwd)"
 ref="${1:-HEAD}"
@@ -21,6 +22,13 @@ run python3 tools/gen_symbols.py
 for s in tools/sheets/sheet[0-9]*.py; do run python3 "$s"; done
 run python3 tools/gen_footprints.py
 run tools/make_pcb.sh
+# v4: the design board is frozen; make_pcb.sh rebuilds the Proteus board from the tagged
+# schematic into build/proteus/ - it must equal the tag's board and pour nets byte for byte.
+tag=proteus-conversion-complete
+git show "$tag:kicad/ac_psu.kicad_pcb" | cmp -s - build/proteus/src/kicad/ac_psu.kicad_pcb \
+    || { echo "regen_check: FAILED: Proteus board rebuild differs from $tag"; fail=1; }
+git show "$tag:reports/pour_nets.json" | cmp -s - build/proteus/src/reports/pour_nets.json \
+    || { echo "regen_check: FAILED: pour nets differ from $tag"; fail=1; }
 run tools/p2k/bin/kipy tools/assign_nets.py --check
 changed="$(git status --short)"
 if [ -n "$changed" ]; then echo "regen_check: regenerated files differ:"; echo "$changed"; fail=1; fi

@@ -1,0 +1,28 @@
+# Board copper of the v4 design that is not in the Proteus copper (IPC frame, mm, Y up).
+# Read by tools/deviations.py: check_board (vias), ipc356_diff (vias), gerber_roundtrip
+# (areas: copper differences inside are accepted and listed as v4 deviations, anything outside
+# still fails). Kinds:
+#   via   x,y = position, net = v4 net (an IPC net name or a new v4 net)
+#   area  layer (F.Cu/In1.Cu/In2.Cu/B.Cu or *), x,y - x1,y1 rectangle where the copper changed
+kind,layer,x,y,x1,y1,net,fix,note
+via,,96.0,-15.5,,,ISOGND,1,stitching F/B pours (former RET_ISO) to the new In1 ISOGND zone near C15-2
+via,,94.5,-17.25,,,ISOGND,1,stitching near C36-2
+via,,95.0,-19.25,,,ISOGND,1,stitching near R49-1
+area,In1.Cu,90.7,-24.3,108.9,-12.7,,1,new In1.Cu ISOGND zone (x 91.0..108.6 y -24.0..-13.0)
+area,*,93.9,-19.8,96.6,-14.9,,1,the 3 stitching vias
+area,F.Cu,59.1,-1.4,60.2,-0.55,,2,F.Cu track U11-6 -> U11-7 (GND)
+via,,59.6,-8.5,,,ADA2,3,C88 ADA2 via on the F.Cu ADA2 track
+via,,61.4,-9.35,,,GND,3,C88 GND via
+via,,57.6,-6.741,,,ADA3,3,C89 ADA3 via on the F.Cu ADA3 track
+via,,57.6,-9.35,,,GND,3,C89 GND via
+area,*,56.9,-10.0,62.0,-6.2,,3,C88/C89 pads, vias and tracks (bottom side)
+via,,11.678,43.35,,,#00429,4,U4 VIN- jumper via (F.Cu pour keep-out r 1.8)
+via,,8.758,39.0,,,#00429,4,U4 VIN- jumper via at C90 (F.Cu pour keep-out r 1.8)
+area,*,6.8,35.9,13.6,45.3,,4,C90 (U4) pads, tracks, In1 jumper, F.Cu ISODC+ keep-outs
+via,,4.2,-62.75,,,#00350,4,U5 VIN- jumper via (F.Cu pour keep-out r 1.8)
+via,,9.3,-65.5,,,#00350,4,U5 VIN- jumper via at C91 (F.Cu pour keep-out r 1.8)
+area,*,2.3,-67.4,11.2,-60.9,,4,C91 (U5) pads, tracks, In1 jumper, F.Cu PGND keep-outs
+via,,111.3,34.3,,,#00360,4,U6 VIN+ via to C92 (bottom)
+via,,108.6,34.306,,,#00361,4,U6 VIN- via to C92 (bottom)
+area,*,106.3,31.7,111.9,34.8,,4,C92 (U6, bottom) pads, vias, tracks
+area,B.Cu,1.9,-71.7,4.6,-67.5,,5,deleted B.Cu track R48 pad 1 -> pad 3 (Kelvin split)
