@@ -5,6 +5,6 @@
 #   tools/v4/apply_all.sh
 set -eu
 cd "$(dirname "$0")/../.."
-for f in fix_1_ret_iso fix_2_u11_inh fix_3_ada_caps fix_4_sdm_rc fix_5_r48_kelvin fix_6_u8u9_body fix_7_c67_ceramic; do
+for f in fix_1_ret_iso fix_2_u11_inh fix_3_ada_caps fix_4_sdm_rc fix_5_r48_kelvin fix_6_u8u9_body fix_7_c67_ceramic fix_8_silk_refdes; do
     tools/p2k/bin/kipy "tools/v4/$f.py"
 done
