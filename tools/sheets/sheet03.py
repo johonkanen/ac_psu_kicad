@@ -99,16 +99,18 @@ sh = sheet("03_regulators.kicad_sch")
 ldo(sh, "U3", g(80), g(40), "5V", "GND", "VCC", ("C70", "100n"), ("C69", "100n"))
 vxo(sh, "U9", "VXO7805-500", g(84), g(68), "20V", "GND", "5V")
 vref(sh, "REF1", g(160), g(40), "VCC", "GND", "REF_1V65", ("C16", "1u"), ("C40", "1u"),
-     ("R19", "420R"), ("R30", "820R"))
+     ("R19", "422R"), ("R30", "820R"))
 # isolated side
 ldo(sh, "U10", g(80), g(110), "5V_ISOL", "ISOGND", "3V3_ISO", ("C4", "100n"), ("C3", "100n"))
 vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "20V_ISO_SEC", "ISOGND", "5V_ISOL")
 vref(sh, "REF2", g(160), g(110), "3V3_ISO", "ISOGND", "REF_1V65_ISO", ("C5", "1u"), ("C6", "1u"),
-     ("R32", "420R"), ("R40", "820R"))
+     ("R32", "422R"), ("R40", "820R"))
 
 sh.text("3V3 / 3v3 in the Proteus schematic = net VCC (VCC/VDD=POWER); 3V3_ISO is the isolated 3.3 V.",
         g(20), g(166))
 sh.text("REF3025 pin ids follow Proteus (1=GND 2=VIN 3=VOUT), not the TI datasheet - see STATUS.md.",
         g(20), g(170))
+sh.text("v4: R19/R32 422R (E96, JLC stock) instead of 420R: 2.5 V x 820/(422+820) = 1.6506 V (420R: 1.6532 V).",
+        g(20), g(174))
 sh.save()
 print("sheet03: written")

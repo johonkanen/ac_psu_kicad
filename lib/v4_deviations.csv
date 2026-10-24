@@ -37,3 +37,5 @@ value,R73,,10R,12.4R,4,U6 VIN+ series R
 value,R74,,10R,12.4R,4,U6 VIN- series R
 pin,R48,3,SHUNT1,SHUNT1_FORCE,5,R48 force pad (current path) separated from the sense net
 pin,J5,1,SHUNT1,SHUNT1_FORCE,5,AFE output terminal on the force side
+value,R19,,420R,422R,9,REF1 divider top (420R not stocked at JLC; 422R gives 1.6506 V vs 1.6532 V)
+value,R32,,420R,422R,9,REF2 divider top (as R19)

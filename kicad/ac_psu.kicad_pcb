@@ -55040,7 +55040,7 @@
 				)
 			)
 		)
-		(property "Value" "420R"
+		(property "Value" "422R"
 			(at 0 1.17 90)
 			(layer "F.Fab")
 			(uuid "16bba2b0-1782-43b4-b412-fb035563ba15")
@@ -56170,7 +56170,7 @@
 				)
 			)
 		)
-		(property "Value" "420R"
+		(property "Value" "422R"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "0813acce-0fe6-49da-a40f-e9fec8e916b5")

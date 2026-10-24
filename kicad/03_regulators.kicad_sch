@@ -3173,7 +3173,7 @@
 				)
 			)
 		)
-		(property "Value" "420R"
+		(property "Value" "422R"
 			(at 231.14 53.34 270)
 			(effects
 				(font
@@ -4684,7 +4684,7 @@
 				)
 			)
 		)
-		(property "Value" "420R"
+		(property "Value" "422R"
 			(at 231.14 142.24 270)
 			(effects
 				(font
@@ -4942,6 +4942,17 @@
 			(justify left bottom)
 		)
 		(uuid "1d3bf41a-13a3-5e47-94fc-5729b5af71df")
+	)
+	(text "v4: R19/R32 422R (E96, JLC stock) instead of 420R: 2.5 V x 820/(422+820) = 1.6506 V (420R: 1.6532 V)."
+		(exclude_from_sim no)
+		(at 25.4 220.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3f2aec45-058e-5ecf-beb0-e18f97b01d6e")
 	)
 	(embedded_fonts no)
 )
