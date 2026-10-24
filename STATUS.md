@@ -2,6 +2,13 @@
 
 Updated: 2026-10-23 (v4 design fixes done, + fix 6 U8/U9 body side from a photo; board frozen, edited by tools/v4/fix_*.py; see "v4 design fixes – done")
 
+## v5 aux flyback – planned (2026-10-24)
+
+Plan in `V5_PLAN.md` (no design change yet): replace the sheet 7 IW1830/EF20 supply with the
+INN3694C/EE25 design of `reports/aux_flyback/`. User decisions D1–D6 (output mapping, 15 V vs
+20 V, DC↔ISO insulation class, controller stock, in place vs separate aux board, net names) come first.
+Finding: relays R20/R79 (12 V coils) run at 167 % on the 20 V rails.
+
 ## v4 design fixes – done (2026-10-23)
 
 Five design fixes for board revision v4 (built v3 boards needed bodges: missing ground
