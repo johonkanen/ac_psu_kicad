@@ -67,3 +67,6 @@
 == fix 6: U8/U9 body graphics away from J12
   U8 at (104.360,-20.100): body graphics from the library footprint, courtyard y -26.875 ... -17.825
   U9 at (106.660,-41.200): body graphics from the library footprint, courtyard y -47.975 ... -38.925
+== fix 7: C67 ceramic (symbol C)
+  C67 Datasheet: '' -> ''
+  C67 Description: 'Polarized capacitor, pin 1 = +' -> 'Unpolarized capacitor'

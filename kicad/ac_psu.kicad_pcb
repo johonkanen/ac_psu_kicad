@@ -20358,7 +20358,7 @@
 				)
 			)
 		)
-		(property "Description" "Polarized capacitor, pin 1 = +"
+		(property "Description" "Unpolarized capacitor"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)

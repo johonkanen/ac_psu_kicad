@@ -2336,7 +2336,7 @@
 		(uuid "fed21fb2-cd68-5aa3-b14f-d6e45e39d6b0")
 	)
 	(symbol
-		(lib_id "ac_psu:C_Polarized")
+		(lib_id "ac_psu:C")
 		(at 25.4 52.07 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2378,7 +2378,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor, pin 1 = +"
+		(property "Description" "Unpolarized capacitor"
 			(at 25.4 52.07 0)
 			(effects
 				(font
@@ -3002,7 +3002,7 @@
 			)
 		)
 	)
-	(text "C67: IPC pin 1 is on GND (C28/C15 have pin 1 on the + rail) - check footprint polarity in Phase 2."
+	(text "C67: 100 uF ceramic (X5R 1206, non-polar land pattern like C57/C58; v4 clean-up, was drawn polarized)."
 		(exclude_from_sim no)
 		(at 25.4 147.32 0)
 		(effects

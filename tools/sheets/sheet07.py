@@ -13,8 +13,8 @@ R20V, RGND, R5V = g(20), g(34), g(48)
 for x, ref, val, sym in ((g(20), "C28", "220u", "C_Polarized"), (g(28), "C41", "4.7u", "C")):
     _, t, b = vert2(sh, sym, ref, x, g(27), val, top=1)          # pin 1 = 20V
     sh.wire(t, (x, R20V)); sh.wire(b, (x, RGND))
-for x, ref, val, sym in ((g(20), "C67", "100u", "C_Polarized"), (g(28), "C58", "22u", "C"), (g(36), "C57", "22u", "C")):
-    _, t, b = vert2(sh, sym, ref, x, g(41), val, top=1)          # pin 1 = GND (!), pin 2 = 5V
+for x, ref, val, sym in ((g(20), "C67", "100u", "C"), (g(28), "C58", "22u", "C"), (g(36), "C57", "22u", "C")):
+    _, t, b = vert2(sh, sym, ref, x, g(41), val, top=1)          # pin 1 = GND, pin 2 = 5V
     sh.wire(t, (x, RGND)); sh.wire(b, (x, R5V))
 sh.wire((g(20), R20V), (g(40), R20V)); sh.junction(g(28), R20V)
 flagged_power(sh, "20V", g(40), R20V)
@@ -22,7 +22,7 @@ sh.wire((g(20), RGND), (g(44), RGND)); sh.junction(g(28), RGND); sh.junction(g(3
 flagged_power(sh, "GND", g(44), RGND)
 sh.wire((g(20), R5V), (g(40), R5V)); sh.junction(g(28), R5V); sh.junction(g(36), R5V)
 power_at(sh, "5V", (g(40), R5V), "right")
-sh.text("C67: IPC pin 1 is on GND (C28/C15 have pin 1 on the + rail) - check footprint polarity in Phase 2.", g(20), g(116))
+sh.text("C67: 100 uF ceramic (X5R 1206, non-polar land pattern like C57/C58; v4 clean-up, was drawn polarized).", g(20), g(116))
 
 # ---- DC+ rail, startup chain, snubber, C68 ---------------------------------------------------
 RDC = g(12)
