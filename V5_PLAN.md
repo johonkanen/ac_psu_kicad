@@ -53,6 +53,14 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    project footprints from the datasheets. The transformer is custom-wound, so JLC cannot assemble
    it: hand-fit it, like TR2 today.
 
+6. **Out2 power is too small for the new control card.** The efinix-soc-board session asks for
+   U8 (5V_ISOL) to be upgraded to 1.5–2 A for the Ti135 control card (0.72 A typical, 1.15 A
+   high at 5 V; `~/dev/efinix_soc_board/POWER_BUDGET.md`). On Out2 (`15V_ISO`) that is U8 at
+   up to about 7–8 W (1.45 A at 5 V with the gate-driver logic and U10, at 89–92 % efficiency),
+   plus the J4/J6/J8 gate-driver supplies and the R79 coil (≈ 0.5 W). That exceeds the README's
+   10 W per output. Re-balance the outputs before step 1 (for example Out2 13–14 W, Out1 6–7 W,
+   or a larger total), and re-check the INN3694C's power rating, ILIM and the core.
+
 ## 3. Decisions (answered 2026-10-24 except D4)
 
 - **D1 Output mapping – yes:** Out1 (regulated) → `20V`, renamed `15V`, on `GND`; Out2
