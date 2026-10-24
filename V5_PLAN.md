@@ -1,6 +1,8 @@
 # v5 plan – aux flyback redesign (INN3694C, EE25, 2 x 15 V)
 
-Status: plan only (2026-10-24), no design change yet. The converter and transformer design are
+Status: plan only (2026-10-24), no design change yet; to be acted on later. User decisions taken
+2026-10-24: D1 yes, D2 15 V is fine, D3 reinforced, D5 in place on the main board, D6 rename. D4
+(controller sourcing) is still open. The converter and transformer design are
 in `reports/aux_flyback/README.md` (commit 965a78b). This file says how to bring that design
 into the KiCad project, and which questions need answers first. Coordinates: mm, IPC frame (Y up).
 
@@ -26,21 +28,24 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    reinforced insulation from the primary to both outputs. On this board:
    - Out1 replaces `20V` (return `GND` = DC−), so it is in the primary domain. Primary ↔ Out1
      needs no insulation at all.
-   - Out2 replaces `20V_ISO_SEC`. Its barrier to the primary is DC ↔ ISO, whose rating is set by
-     TR1 and the isolator ICs, not by the IEC 62368-1 reinforced figure.
+   - Out2 replaces `20V_ISO_SEC` on `ISOGND`. The barrier that matters is
+     {primary, Out1, bias} ↔ Out2, and it must be reinforced (D3).
 
-   Re-run `transformer.py` with isolation sides [primary, primary, secondary, primary] and the
-   DC ↔ ISO insulation class (decision D3). This may remove two of the three margin-tape
-   barriers and free winding width.
+   Re-run `transformer.py` with isolation sides [primary, primary, secondary, primary]. Out2 then
+   needs reinforced margins and 3-layer tape on both of its faces. The primary ↔ Out1 barrier
+   becomes functional, so P1 → Out1 can be wound without margins. That frees winding width,
+   which may allow wider margins on Out2 for the IEC 60664-1 caveat in the README. The
+   reinforced barrier on the board, through the transformer and the slot, must match the
+   ADuM7701 / Si866x / TR1 barrier around it.
 2. **The InnoSwitch secondary side sits on Out1.** The secondary controller (SR FET drive, FB,
    VOUT pins) is referenced to Out1's return, which is `GND`, the same node as the primary
    `SOURCE`. That is allowed. The IC's internal FluxLink isolation is then simply unused between
    primary and Out1, so the "pending UL1577 / IEC 60747-17" note in the README no longer matters.
    An alternative is a primary-side-regulated part with the same transformer (decision D4).
-3. **The relays are already overdriven.** R20 and R79 (SLA-12VDC-SL-A, 12 V coil) run from 20 V
-   through a 2N7000 with no series resistor: 167 % of the rated coil voltage. At 15 V it is
-   125 %. Check the relay's maximum allowable coil voltage, or add a series resistor (in v5 or a
-   v4 fix).
+3. **Relay coils.** R20 and R79 (SLA-12VDC-SL-A, 12 V coil) run from the rails through a
+   2N7000 with no series resistor. With the two 15 V rails that is 125 % of the rated coil
+   voltage (v4: 167 % at 20 V). The user considers this acceptable; check the relay's maximum
+   coil voltage once.
 4. **15 V instead of 20 V** at the HB GT connectors' pin 48 is only a problem if the gate-driver
    boards need more than 15 V (decision D2). U8/U9 (VXO78, 6.5–36 V input) are fine with 15 V.
 5. **Stock.** INN3694C is JLC C567564, with 0 in stock on 2026-10-23. Neither the KiCad library nor
@@ -48,28 +53,21 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    project footprints from the datasheets. The transformer is custom-wound, so JLC cannot assemble
    it: hand-fit it, like TR2 today.
 
-## 3. Decisions for the user (answer before step 4)
+## 3. Decisions (answered 2026-10-24 except D4)
 
-- **D1 Output mapping:** Out1 (regulated) → `20V`, renamed `15V`, on `GND`; Out2 (cross-regulated)
-  → `20V_ISO_SEC`, renamed `15V_ISO`, on `ISOGND`. Recommended. The alternative swaps them, so
-  the isolated gate drivers get the regulated rail; FB and the SR controller then sit on ISOGND.
-- **D2 15 V is enough** for the gate-driver boards on J1–J8 (pin 48). If not, choose 18 V or
-  20 V outputs and redo the turns (NS/NB) in `params.py`.
-- **D3 DC ↔ ISO insulation class** for the transformer (functional, basic or reinforced) and the
-  working voltage across it (the ISO side carries the inverter's AC output). This sets margins,
-  tape and the creepage on the board.
+- **D1 Output mapping – yes:** Out1 (regulated) → `20V`, renamed `15V`, on `GND`; Out2
+  (cross-regulated) → `20V_ISO_SEC`, renamed `15V_ISO`, on `ISOGND`.
+- **D2 – 15 V is fine** for the gate-driver boards on J1–J8 (pin 48), so `params.py` keeps
+  VOUT = 15 V.
+- **D3 – reinforced** between {primary, Out1, bias} and Out2 (finding 1), in the transformer and
+  on the board.
 - **D4 Controller:** INN3694C (0 stock, buy elsewhere and hand-fit, or JLC global sourcing), or
   an alternative with stock (another InnoSwitch3-EP 900 V part, or a primary-side controller
-  such as the existing iW1830 with the new EE25 transformer and a 900 V+ MOSFET).
-- **D5 Where it goes:**
-  - (a) in place on the main board: delete the sheet 7 copper and re-place and re-route the
-    area in the KiCad GUI, with a slot under the transformer and IC;
-  - (b) a separate small aux board on headers/wires, which keeps the frozen main board almost
-    unchanged and lets the supply be tested on its own.
-
-  Option (b) is recommended for a first prototype.
-- **D6 Net names:** rename `20V` / `20V_ISO_SEC` to `15V` / `15V_ISO` (clear, but touches
-  sheets 2, 3, 10 and every deviation file), or keep the names with a note.
+  such as the existing iW1830 with the new EE25 transformer and a 900 V+ MOSFET). **Open.**
+- **D5 – in place on the main board:** it replaces the aux supply. Delete the sheet 7 copper,
+  then re-place and re-route the area in the KiCad GUI, with a slot under the transformer and IC.
+- **D6 – rename** `20V` / `20V_ISO_SEC` to `15V` / `15V_ISO`. This touches sheets 1, 2, 3, 5, 7
+  and 10, the deviation files and the checks; the renamed nets go into the v5 deviation list.
 
 ## 4. Steps (after the decisions)
 
@@ -107,15 +105,16 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    removed parts and their pins, nets that exist only inside the block, and copper clusters
    inside the area. Everything outside the block keeps the Proteus parity checks. Negative-test
    it: a part outside the block that is removed or renetted must still fail.
-5. **Board (D5).**
-   - (a) In place: a `tools/v5/` script deletes the removed footprints and the copper inside the
-     area and places the new footprints at agreed positions. Routing, pours and the slot are done
-     in the KiCad GUI and recorded in STATUS.md, which ends the "frozen board edited only by
-     scripts" rule for this area. A net class `HV_AUX` sets clearance for DC+, the drain node and
-     the clamp (500 V working: ≥ 2.5 mm on external layers, and the creepage from D3 between the
-     domains).
-   - (b) Separate board: a new KiCad project `aux/` (2-layer), with a connector footprint on the
-     main board placed by a v5 script in the freed area.
+5. **Board (D5: in place).** A `tools/v5/` script deletes the removed footprints and the copper
+   inside the area, then places the new footprints at agreed positions. Routing, pours and the
+   slot are done in the KiCad GUI and recorded in STATUS.md, which ends the "frozen board edited
+   only by scripts" rule for this area.
+
+   A net class `HV_AUX` sets the clearance for DC+, the drain node and the clamp (500 V working:
+   ≥ 2.5 mm on external layers). The reinforced creepage between the GND and ISOGND domains is
+   kept across the transformer, the slot and the Out2 copper, including on the inner layers.
+   Check the space first: the EE25 bobbin is larger than the EF20, and the InSOP-24D needs
+   its own slot.
 6. **Checks.** ERC, `tools/check_all.sh` (with the v5 deviations), DRC with the new net class,
    `tools/regen_check.sh`, renders of the area, and the JLC BOM/CPL refreshed.
 7. **Bring-up** (README): measure Lp (MKF predicts +12 %), the drain peak at 500 V, the clamp
