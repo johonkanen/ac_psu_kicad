@@ -15,3 +15,4 @@ build/
 # Generated reports
 reports/erc.rpt
 reports/drc.json
+fab/out/
