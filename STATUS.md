@@ -1,13 +1,79 @@
 # Status
 
-Updated: 2026-10-23 (v4 design fixes done, + fix 6 U8/U9 body side from a photo; board frozen, edited by tools/v4/fix_*.py; see "v4 design fixes – done")
+Updated: 2026-10-24 (clean-up and JLC files done: fixes 7–9, fab/; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
 ## v5 aux flyback – planned (2026-10-24)
 
 Plan in `V5_PLAN.md` (no design change yet): replace the sheet 7 IW1830/EF20 supply with the
-INN3694C/EE25 design of `reports/aux_flyback/`. User decisions D1–D6 (output mapping, 15 V vs
-20 V, DC↔ISO insulation class, controller stock, in place vs separate aux board, net names) come first.
-Finding: relays R20/R79 (12 V coils) run at 167 % on the 20 V rails.
+INN3694C/EE25 design of `reports/aux_flyback/`. User decisions (2026-10-24): D1 Out1 → `20V`
+(GND), Out2 → `20V_ISO_SEC` (ISOGND); D2 15 V is enough; D3 reinforced between {primary, Out1,
+bias} and Out2; D5 in place on the main board; D6 rename to `15V` / `15V_ISO`. **D4 (controller
+sourcing) is still open.** Plan only – act on it when the user asks.
+Relays R20/R79 (12 V coils): today 167 % on the 20 V rails, with the two 15 V rails 125 %; the
+user considers that acceptable.
+
+## Clean-up and JLC (2026-10-24)
+
+Board edits as before (one-shot scripts, seeds 4107–4109, `tools/v4/apply_all.sh` on the tag's
+board reproduces the committed board and `reports/v4_board_edits.txt` byte for byte).
+
+- **C67 ceramic (fix 7)** – sheet 7 draws C67 with `C` instead of `C_Polarized` (non-polar 1206
+  land pattern like C57/C58, no polarity mark in Proteus); fix 7 copies the symbol's Description
+  to the footprint (schematic parity). BOM: Murata GRM31CR61A107MEA8L 100 µF 10 V X5R (C883598).
+  *A decision the user can reverse* (if a tantalum/polymer part is wanted: symbol back, and the
+  board needs a polarity mark).
+- **Silkscreen references (fix 8)** – `tools/v4/fix_8_silk_refdes.py` moves the Reference fields
+  (only) off pads (+0.1 mm), other silk (+0.05 mm), other references (+0.3 mm, 0.05 mm where
+  nothing else fits) and the board edge (0.3 mm): candidates around the courtyard, angle 0/90,
+  1.0 mm text or 0.8 mm as a fallback. 276 references: 146 already clear, 128 moved, 2 left
+  (DAB_SEC_1 – between the Q11/Q12 outlines, R58 – crowded U5 corner). DRC warnings:
+  silk_overlap 199 → 35, silk_edge_clearance 12 → 0, silk_over_copper with a reference 6 → 0.
+  KiCad caps every DRC type at 199, so the old silk counts were really higher; the 199
+  silk_over_copper that remain are footprint outlines over the enlarged Proteus THT pads
+  (snap-in C8/C72/…, MKS film caps) – a footprint-graphics change, not done. Renders
+  `reports/v4/fix8_afe_F.png`, `fix8_aux_F.png`, `fix8_U5_B.png`.
+- **R19/R32 422R (fix 9)** – 420R is not an E96 value and not stocked; 422R gives 2.5 V ×
+  820/1242 = 1.6506 V (420R: 1.6532 V). Sheet 3 values + note, two `value` rows in
+  `lib/v4_deviations.csv`, board values.
+- **Pad sizes / drills (KiCad vs Proteus): no change, closed** unless the user objects. The KiCad
+  IPC pads are DRC-clean and assemble well at JLC (0402/0603 KiCad pads are the smaller ones);
+  the larger KiCad drills (C_Disc, J12, PWM1, R10, C24) are the pin-fitting library values.
+- **JLC manufacturing** – `fab/README.md`: BOM 53 lines / 203 parts, all in stock for one board
+  (`fab/jlc_bom_check.py`, `fab/jlc_stock_2026-10-24.json`; tight: SI8660BD 6, OPA2353EA 16,
+  ADS7056 52); `fab/hand_fit.csv` for the rest; `fab/make_fab.sh` makes the gerber/drill zip
+  (fab/out/, not committed) and `fab/jlc_cpl.csv` (rotation corrections per package – check in
+  JLC's preview). 12.4R (C477607) for a 5 nH shunt inductance. Substitutions in the BOM only
+  (schematic unchanged):
+  - U4/U5/U6 ADuM7701-8BRIZ (0 stock) → **TI AMC1306M25DWVR** (C471874, 313): same 8 pin
+    functions and 8-lead wide SOIC (11.5 mm span), ±250 mV / ±320 mV clip, 5–21 MHz, data after
+    the rising clock edge, reinforced. Differences: 32-clock test pattern at power-up, AVDD
+    ≥ 3.0 V. Confidence high for pins/package (TI datasheet SBAS734D vs this project's
+    ADuM7701 symbol), medium for the FPGA side (check the decimation filter start-up).
+  - U13/U15 Si8661BD-B-IS (2 in stock) → **Chipanalog CA-IS3761LW** (C528659, 2607): identical
+    16-pin assignment incl. the reverse channel (pin 10 in → pin 7 out), default low.
+    Confidence high (Chipanalog CA-IS376x pin table). U17 is the unfitted spare.
+  - R87 value unknown in the Proteus data (only "RESISTOR_ARRAY") → **assumed** 4 × 33R
+    (4D02, C25501), SPI series termination.
+  - C1/C35/C45–C50 2.2 µF 2220: 250 V part → TDK 450 V X6S (C445674); each sees half of DC+.
+  - 14 × 2n2 disc → TDK CS45 X1/Y2 (C96522).
+  - Not available at JLC / hand-fit (`fab/hand_fit.csv`): FKK5R0020FE shunts (no JLC part fits
+    the 4-terminal land pattern), snap-in 470 µF 450 V, 7 µF MKS4 film, WE-CMBNC chokes,
+    TWW10J15RE, VXO7805 (R-78E5.0 clones in stock – check their body side vs fix 6), the 1.27 mm
+    connectors, TO-247 (23 in stock but heatsink-mounted), terminals, C68, IW1830/TR2 (v5).
+  - Voltage ratings checked against the nets: 91k chains are 3 × 91k from DC+/ISODC+/AC nodes
+    (≤ 167 V each at 500 V on 200 V parts – no 500 V 1206 in stock); 0402/0603/1206 caps on
+    3V3/5V/20V rails are 16–50 V (fine); **C68 (100 nF 1206, DC+ to GND) had a 50 V part in the
+    BOM** – it needs ≥ 630 V (Samsung CL31B104KIHNNNE 1 kV, 0 stock → hand-fit).
+
+Questions for the user:
+1. DC+ maximum: the DC link snap-ins are 450 V parts but the aux spec says 100–500 V. Which is it?
+   (Sets the 91k and 2220 margins.)
+2. C68: which part was fitted on the built boards? (BOM had 50 V.)
+3. R87 value (33R assumed).
+4. Y capacitors (2n2 discs to PE): Y2 enough, or Y1 (reinforced) needed?
+5. The 7 µF film caps C21/C24/C25/C33/C34: X2 rating / voltage, and the WE-CMBNC order codes.
+6. AMC1306M25 instead of ADuM7701: OK for the FPGA firmware (start-up test pattern)?
+7. Header gender for J1–J4/J6/J8/J11/J12, and whether JLC should place the THT relays and Y caps.
 
 ## v4 design fixes – done (2026-10-23)
 
@@ -176,7 +242,7 @@ about 5 nH); the 12.4R placeholder (5 nH) stays.
 `tools/regen_check.sh` (clean clone of 4a37c5b, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
-### Last verification (`tools/check_all.sh`, v4 fix 6 done)
+### Last verification (`tools/check_all.sh`, clean-up fixes 7–9 done)
 
 ```
 pcbnew 10.0.7
@@ -187,8 +253,8 @@ gen_symbols: lib/ac_psu.kicad_sym up to date (45 symbols)
 symbols: 31 part types, 273 refdes, 13 power symbols
 symbols: OK
 erc: 0 errors, 8 warnings (reports/erc.rpt)
-v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 11 values; copper: 13 new vias, 8 changed areas
-compare_v4: 11 deviation values checked against the schematic
+v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 13 values; copper: 13 new vias, 8 changed areas
+compare_v4: 13 deviation values checked against the schematic
 compare: parts 272/272 present, 0 missing, 0 extra; pins compared 904, wrong-net pins 0; IPC nets touched 243, complete 243
 compare: per sheet (drawn/total) 1:48/48 2:8/8 3:18/18 4:37/37 5:43/43 6:16/16 7:31/31 8:24/24 9:12/12 10:24/24 11:11/11
 compare: OK
@@ -203,18 +269,17 @@ check_board: 4062 tracks, 186 vias, 84 zones
 check_board: OK
 assign_nets: after zone fill: 247 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
-drc: 468 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc: 292 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
 drc:     53 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
 drc:      2 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
-drc:    199 warning  silk_overlap
 drc:    199 warning  silk_over_copper
-drc:     12 warning  silk_edge_clearance
+drc:     35 warning  silk_overlap
 drc:      2 warning  via_dangling
 drc:      1 warning  track_dangling
 drc: OK
 ipc356_diff: Proteus 1075 records, KiCad 1098; matched 1075 (898 pads incl. 36 N/C, 173 vias, 4 holes), worst position offset 0.039 mm (limit 0.05)
 ipc356_diff: 207 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
-ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 11 values; copper: 13 new vias, 8 changed areas); 23 KiCad records of v4 parts/vias, nets checked
+ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 13 values; copper: 13 new vias, 8 changed areas); 23 KiCad records of v4 parts/vias, nets checked
 ipc356_diff: KiCad drill larger (footprint kept): 6x 0.558->0.65, 7x 0.762->0.8, 28x 0.812->1.001, 2x 1.01->1.199, 2x 1.016->1.199
 ipc356_diff: pads with another size in KiCad (info): C 150, D 20, J 6, L 2, PWM 7, R 184, U 37
 ipc356_diff: OK

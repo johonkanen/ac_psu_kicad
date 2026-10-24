@@ -4,8 +4,9 @@ Ready-to-paste prompt for the next agent session.
 
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
-converted from Proteus, tag proteus-conversion-complete; v4 design fixes done). Read README.md,
-STATUS.md (first "v4 design fixes – done", then "Shared tools" and the Phase 4 "Final state"),
+converted from Proteus, tag proteus-conversion-complete; v4 design fixes, clean-up and JLC files
+done). Read README.md, STATUS.md (first "Clean-up and JLC", "v4 design fixes – done", then
+"Shared tools"), fab/README.md, V5_PLAN.md,
 and tools/check_all.sh. Never run the KiCad AppImage with --version.
 
 Rules since v4: the design board kicad/ac_psu.kicad_pcb is frozen - change it only with small
@@ -17,26 +18,27 @@ Proteus original must be listed in lib/v4_deviations.csv (nets, parts, values) o
 lib/v4_copper.csv (vias, changed copper areas); anything else fails the checks.
 
 Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at handoff:
-  compare: parts 272/272 present ... wrong-net pins 0 ... compare: OK (with 11 deviation values)
+  compare: parts 272/272 present ... wrong-net pins 0 ... compare: OK (with 13 deviation values)
   check_board: 276 footprints, 908 pads ... 207 IPC nets mapped 1:1; 13 v4 vias; OK
   assign_nets: 247 groups, 0 shorts, 0 orphans, 0 opens
-  drc: 468 violations, 0 shorts, 0 unconnected, 0 parity issues (53 courtyards_overlap, 2 pth_inside_courtyard)
+  drc: 292 violations, 0 shorts, 0 unconnected, 0 parity issues (53 courtyards_overlap, 2 pth_inside_courtyard,
+       35 silk_overlap, 199 silk_over_copper = footprint outlines over Proteus THT pads)
   ipc356_diff: 207 Proteus nets mapped 1:1, 0 mismatches; 23 v4 records
   roundtrip: only pad shape / clearance / v4 deviation clusters, drills 0 mismatches
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
-(Done: the user's GUI review of v4 - nothing to change; U8/U9 body side - v4 fix 6. The shunt
-inductance is 5-10 nH, not measured accurately; 12.4R stays as the placeholder.)
-1. Aux flyback redesign (reports/aux_flyback/README.md: INN3694C, EE25, 2 x 15 V / 20 W) into
-   sheet 7 and the board - write a v5 plan first (needs new symbols/footprints and GUI routing).
-2. Older optional clean-up (Phase 4 "Final state"): C67 symbol (ceramic or polarized?), silk
-   positions, KiCad vs Proteus pad sizes/drills - as board scripts, not make_pcb.sh changes.
-3. Manufacturing: JLC alternatives for parts not in stock (fab/), THT stock check, CPL file,
-   assumed voltage ratings to confirm.
+1. v5 aux flyback: plan in V5_PLAN.md, decisions taken except D4 (controller sourcing); act on
+   it only when the user asks.
+2. The user's answers to the questions in STATUS "Clean-up and JLC" (DC+ max, C68 part, R87
+   value, Y1/Y2, film caps / chokes, AMC1306 vs firmware, header gender, THT at JLC), then
+   update fab/jlc_bom.csv / fab/hand_fit.csv (and the design if a value changes).
+3. Optional: footprint silk outlines clipped around the enlarged Proteus THT pads (the 199
+   silk_over_copper warnings) - gen_footprints change + a board script like fix 6.
 4. If the shunt inductance is measured: re-pick the series resistors (R_leg = 2.5 Ohm per nH
    with 100 nF): sheet08.py/sheet10.py values, value rows in lib/v4_deviations.csv, a board
    script for the footprint values, fab/jlc_bom.csv.
+Before an order: fab/make_fab.sh, fab/jlc_bom_check.py N, check rotations in JLC's preview.
 
 Done when: the chosen points are implemented, tools/check_all.sh and tools/regen_check.sh pass,
 STATUS.md has a short section, next_prompt.md is replaced, committed (Co-Authored-By: Claude
