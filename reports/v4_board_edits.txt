@@ -203,3 +203,14 @@
 == fix 9: R19/R32 422R
   R19 value 420R -> 422R
   R32 value 420R -> 422R
+== fix 10: U8 K7805-2000R3, C93/C94
+  U8 value VXO7805-1000 -> K7805-2000R3
+  C93 10u 50V Capacitor_SMD:C_1210_3225Metric bottom at (105.400,-22.900) rot 0: pad1 20V_ISO_SEC (103.925, -22.9), pad2 ISOGND (106.875, -22.9)
+  track B.Cu 20V_ISO_SEC w0.6: (104.360,-20.100)-(104.360,-22.900)
+  track B.Cu 20V_ISO_SEC w0.6: (104.360,-22.900)-(103.925,-22.900)
+  track B.Cu ISOGND w0.6: (106.900,-20.100)-(106.875,-22.900)
+  C94 22u 10V Capacitor_SMD:C_0805_2012Metric bottom at (109.440,-23.300) rot 270: pad1 5V_ISOL (109.44, -22.35), pad2 ISOGND (109.44, -24.25)
+  track B.Cu 5V_ISOL w0.6: (109.440,-20.100)-(109.440,-22.350)
+  track B.Cu ISOGND w0.6: (109.440,-24.000)-(106.875,-24.000)
+  track B.Cu ISOGND w0.6: (106.875,-24.000)-(106.875,-22.900)
+  C94 reference at (111.250,-23.300) angle 90

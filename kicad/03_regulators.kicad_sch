@@ -3989,7 +3989,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "VXO7805-1000"
+		(property "Value" "K7805-2000R3"
 			(at 99.06 181.61 0)
 			(effects
 				(font
@@ -4280,6 +4280,462 @@
 		)
 	)
 	(symbol
+		(lib_id "ac_psu:C")
+		(at 139.7 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "83832670-dd08-5a50-a0dd-afa25421d897")
+		(property "Reference" "C93"
+			(at 143.89 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10u 50V"
+			(at 146.09 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric"
+			(at 140.6652 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 139.7 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ad7c52e9-7162-576f-94e8-915522715812")
+		)
+		(pin "2"
+			(uuid "394c39a7-d498-5620-bcb0-ce270b7accb5")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "C93")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 139.7 173.99) (xy 139.7 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "57482368-3b55-59cc-bca5-be96aeaa1ab8")
+	)
+	(symbol
+		(lib_id "ac_psu:20V_ISO_SEC")
+		(at 139.7 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a9f993e7-193d-5bd6-a2d2-3e6e2252df5a")
+		(property "Reference" "#PWR015"
+			(at 139.7 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "20V_ISO_SEC"
+			(at 139.7 167.894 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+			(at 139.7 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "94d83704-ff1e-5fde-9f70-c289f8767894")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 139.7 181.61) (xy 139.7 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aeeaad1e-b315-5612-86f3-a23108ca97b4")
+	)
+	(symbol
+		(lib_id "ac_psu:ISOGND")
+		(at 139.7 184.15 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0bd01dc0-fb32-5dab-83e7-fcae6970148c")
+		(property "Reference" "#PWR016"
+			(at 139.7 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "ISOGND"
+			(at 139.7 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 139.7 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
+			(at 139.7 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9f51f929-5ded-5e08-a84c-9657bd306965")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "#PWR016")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "ac_psu:C")
+		(at 152.4 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3d3255ea-3e1f-50c0-b013-b4caac85adbe")
+		(property "Reference" "C94"
+			(at 156.59 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "22u 10V"
+			(at 158.79 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+			(at 153.3652 181.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 152.4 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4ebedec9-cd4e-5148-b9db-c424d9cd601f")
+		)
+		(pin "2"
+			(uuid "3197609a-2fa5-566b-bdbd-cd1879eeb38e")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "C94")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 152.4 173.99) (xy 152.4 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb485fb3-005a-5d8b-b1a5-89da7267b029")
+	)
+	(symbol
+		(lib_id "ac_psu:5V_ISOL")
+		(at 152.4 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3b5e9499-919b-57ac-b34a-240b05bf2d9d")
+		(property "Reference" "#PWR017"
+			(at 152.4 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "5V_ISOL"
+			(at 152.4 167.894 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"5V_ISOL\" (IPC net name)"
+			(at 152.4 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "35e6080b-6351-552a-a3b6-a9a70c3d7e46")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 152.4 181.61) (xy 152.4 184.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6325e7c6-1a06-5ecd-bbaa-55119a7ba0be")
+	)
+	(symbol
+		(lib_id "ac_psu:ISOGND")
+		(at 152.4 184.15 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4aa807ae-5cb9-5af3-82cd-cfef63a4f5ce")
+		(property "Reference" "#PWR018"
+			(at 152.4 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "ISOGND"
+			(at 152.4 187.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
+			(at 152.4 184.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f193e36c-31d8-5b5e-9973-da92370e2b6c")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
+					(reference "#PWR018")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(text "v4: U8 K7805-2000R3 (Mornsun, 5 V / 2 A, 8-36 V in) instead of VXO7805-1000 for the isolated control card;"
+		(exclude_from_sim no)
+		(at 127 190.5 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7762033c-779e-5079-811b-925f63d8479e")
+	)
+	(text "C93 input 10u 50V (22u 50V not stocked in 1206/1210), C94 output 22u 10V, next to U8's pins (bottom side)."
+		(exclude_from_sim no)
+		(at 127 194.31 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "430bf4e7-ba72-549e-93aa-7e4c5c7b29bf")
+	)
+	(symbol
 		(lib_id "ac_psu:REF3025")
 		(at 203.2 139.7 0)
 		(unit 1)
@@ -4359,8 +4815,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a9f993e7-193d-5bd6-a2d2-3e6e2252df5a")
-		(property "Reference" "#PWR015"
+		(uuid "b534580c-7f23-5070-837a-28c2795b7823")
+		(property "Reference" "#PWR019"
 			(at 172.72 143.51 0)
 			(effects
 				(font
@@ -4405,12 +4861,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "94d83704-ff1e-5fde-9f70-c289f8767894")
+			(uuid "4367585c-455a-5b0a-883a-f1ac67c160c8")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
-					(reference "#PWR015")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -4424,7 +4880,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "57482368-3b55-59cc-bca5-be96aeaa1ab8")
+		(uuid "33f98ac9-7193-5dab-b40b-7b259ffb0bc5")
 	)
 	(symbol
 		(lib_id "ac_psu:C")
@@ -4501,13 +4957,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "aeeaad1e-b315-5612-86f3-a23108ca97b4")
+		(uuid "0b5e6963-a41a-50c9-8669-6cdd206be163")
 	)
 	(junction
 		(at 180.34 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "fb485fb3-005a-5d8b-b1a5-89da7267b029")
+		(uuid "427a324e-9c01-5c8c-9c87-3a0254c22258")
 	)
 	(wire
 		(pts
@@ -4517,7 +4973,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6325e7c6-1a06-5ecd-bbaa-55119a7ba0be")
+		(uuid "280fbb85-ac90-5a0d-bd2b-de76dd35872c")
 	)
 	(wire
 		(pts
@@ -4527,13 +4983,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7762033c-779e-5079-811b-925f63d8479e")
+		(uuid "59a1370c-0ea0-5436-8206-cb5288e6529d")
 	)
 	(junction
 		(at 203.2 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "430bf4e7-ba72-549e-93aa-7e4c5c7b29bf")
+		(uuid "c7119ed4-6b70-5cbd-8aec-8fcf817899ca")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -4543,8 +4999,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0bd01dc0-fb32-5dab-83e7-fcae6970148c")
-		(property "Reference" "#PWR016"
+		(uuid "1b13d8a9-f3fc-5a31-977e-f60707a1831c")
+		(property "Reference" "#PWR020"
 			(at 203.2 163.83 0)
 			(effects
 				(font
@@ -4589,12 +5045,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "9f51f929-5ded-5e08-a84c-9657bd306965")
+			(uuid "6a5c0cbc-22e1-56b6-8d7b-cd2912f32756")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/25c5ca54-388f-4b9c-876e-19a6fbb99a35"
-					(reference "#PWR016")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -4742,7 +5198,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "33f98ac9-7193-5dab-b40b-7b259ffb0bc5")
+		(uuid "d04f4935-d98c-5936-8d41-5432713d9bac")
 	)
 	(wire
 		(pts
@@ -4752,13 +5208,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0b5e6963-a41a-50c9-8669-6cdd206be163")
+		(uuid "87fc995f-5384-5bd4-b225-bff1ac317b2d")
 	)
 	(junction
 		(at 220.98 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "427a324e-9c01-5c8c-9c87-3a0254c22258")
+		(uuid "57d18955-d94f-54dc-a9e8-f9a4d1694fd3")
 	)
 	(wire
 		(pts
@@ -4768,7 +5224,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "280fbb85-ac90-5a0d-bd2b-de76dd35872c")
+		(uuid "9010d508-48ed-5a8e-adf8-c5dd5ca1fcf1")
 	)
 	(symbol
 		(lib_id "ac_psu:R")
@@ -4845,7 +5301,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "59a1370c-0ea0-5436-8206-cb5288e6529d")
+		(uuid "fd299369-54ae-574a-b6f7-fad0c8203338")
 	)
 	(wire
 		(pts
@@ -4855,13 +5311,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c7119ed4-6b70-5cbd-8aec-8fcf817899ca")
+		(uuid "4dfd3eb4-53d6-5587-bb18-870b3754bde8")
 	)
 	(junction
 		(at 241.3 139.7)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d04f4935-d98c-5936-8d41-5432713d9bac")
+		(uuid "6d7fa833-c376-5c02-84b7-8bebbeef3d20")
 	)
 	(wire
 		(pts
@@ -4871,7 +5327,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "87fc995f-5384-5bd4-b225-bff1ac317b2d")
+		(uuid "1d3bf41a-13a3-5e47-94fc-5729b5af71df")
 	)
 	(wire
 		(pts
@@ -4881,7 +5337,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "57d18955-d94f-54dc-a9e8-f9a4d1694fd3")
+		(uuid "3f2aec45-058e-5ecf-beb0-e18f97b01d6e")
 	)
 	(global_label "REF_1V65_ISO"
 		(shape passive)
@@ -4893,7 +5349,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9010d508-48ed-5a8e-adf8-c5dd5ca1fcf1")
+		(uuid "60c172fd-b794-5cfb-8fd1-690e918e26a4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 246.38 139.7 0)
 			(effects
@@ -4913,13 +5369,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fd299369-54ae-574a-b6f7-fad0c8203338")
+		(uuid "f50204ce-b597-5157-bbf1-8e1c8b25a149")
 	)
 	(junction
 		(at 220.98 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4dfd3eb4-53d6-5587-bb18-870b3754bde8")
+		(uuid "db452042-2767-5b30-9af3-e0da72718807")
 	)
 	(text "3V3 / 3v3 in the Proteus schematic = net VCC (VCC/VDD=POWER); 3V3_ISO is the isolated 3.3 V."
 		(exclude_from_sim no)
@@ -4930,7 +5386,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "6d7fa833-c376-5c02-84b7-8bebbeef3d20")
+		(uuid "6f3ea089-0e74-5a42-95fb-0c8a68050163")
 	)
 	(text "REF3025 pin ids follow Proteus (1=GND 2=VIN 3=VOUT), not the TI datasheet - see STATUS.md."
 		(exclude_from_sim no)
@@ -4941,7 +5397,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "1d3bf41a-13a3-5e47-94fc-5729b5af71df")
+		(uuid "a3762df0-a626-5bdd-b0c5-aea15f4c5f99")
 	)
 	(text "v4: R19/R32 422R (E96, JLC stock) instead of 420R: 2.5 V x 820/(422+820) = 1.6506 V (420R: 1.6532 V)."
 		(exclude_from_sim no)
@@ -4952,7 +5408,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3f2aec45-058e-5ecf-beb0-e18f97b01d6e")
+		(uuid "b2b09ee5-4a25-5fc4-a3e0-cc527cedf66b")
 	)
 	(embedded_fonts no)
 )

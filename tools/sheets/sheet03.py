@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Sheet 3 - regulators (PDF page 3): U3/U10 TPS73033 LDOs, U9/U8 VXO7805 switchers,
-REF1/REF2 REF3025 references with 1.65 V dividers."""
+REF1/REF2 REF3025 references with 1.65 V dividers. v4: U8 is a Mornsun K7805-2000R3 (5 V / 2 A,
+same SIP-3 pinout) with C93 / C94 at its input / output (datasheet Fig. 2)."""
 from _common import *  # noqa: F401,F403
 
 
@@ -76,10 +77,10 @@ def vref(sh, ref, x, y, vin, gnd, out_label, cin, cout, rtop, rbot):
     return u
 
 
-def vxo(sh, ref, sym, x, y, vin, gnd, vout):
+def vxo(sh, ref, sym, x, y, vin, gnd, vout, value=None):
     """VXO7805 module (all pins on the left): +VIN from a supply, GND down, +VOUT to a
-    supply symbol pointing left."""
-    u = sh.place(sym, ref, x, y, value=sym)
+    supply symbol pointing left. `value`: a pin-compatible part on the same symbol."""
+    u = sh.place(sym, ref, x, y, value=value or sym)
     VIN, GND, VOUT = u.pin(1), u.pin(2), u.pin(3)
     vin_p = (VIN[0] - g(14), VIN[1])
     sh.wire(VIN, vin_p)
@@ -102,7 +103,16 @@ vref(sh, "REF1", g(160), g(40), "VCC", "GND", "REF_1V65", ("C16", "1u"), ("C40",
      ("R19", "422R"), ("R30", "820R"))
 # isolated side
 ldo(sh, "U10", g(80), g(110), "5V_ISOL", "ISOGND", "3V3_ISO", ("C4", "100n"), ("C3", "100n"))
-vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "20V_ISO_SEC", "ISOGND", "5V_ISOL")
+vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "20V_ISO_SEC", "ISOGND", "5V_ISOL", value="K7805-2000R3")
+# v4: K7805-2000R3 input / output capacitors (Mornsun datasheet Fig. 2), pin 1 = rail, pin 2 = ISOGND
+for x, ref, val, rail in ((g(110), "C93", "10u 50V", "20V_ISO_SEC"), (g(120), "C94", "22u 10V", "5V_ISOL")):
+    _, t, b = vert2(sh, "C", ref, x, g(140), val, top=1)
+    sh.wire(t, up(t, 2)); power_at(sh, rail, up(t, 2), "up")
+    sh.wire(b, down(b, 2)); power_at(sh, "ISOGND", down(b, 2), "down")
+sh.text("v4: U8 K7805-2000R3 (Mornsun, 5 V / 2 A, 8-36 V in) instead of VXO7805-1000 for the isolated control card;",
+        g(100), g(150))
+sh.text("C93 input 10u 50V (22u 50V not stocked in 1206/1210), C94 output 22u 10V, next to U8's pins (bottom side).",
+        g(100), g(153))
 vref(sh, "REF2", g(160), g(110), "3V3_ISO", "ISOGND", "REF_1V65_ISO", ("C5", "1u"), ("C6", "1u"),
      ("R32", "422R"), ("R40", "820R"))
 

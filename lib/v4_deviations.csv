@@ -39,3 +39,12 @@ pin,R48,3,SHUNT1,SHUNT1_FORCE,5,R48 force pad (current path) separated from the 
 pin,J5,1,SHUNT1,SHUNT1_FORCE,5,AFE output terminal on the force side
 value,R19,,420R,422R,9,REF1 divider top (420R not stocked at JLC; 422R gives 1.6506 V vs 1.6532 V)
 value,R32,,420R,422R,9,REF2 divider top (as R19)
+value,U8,,VXO7805-1000,K7805-2000R3,10,isolated 5 V module upgraded to Mornsun K7805-2000R3 (5 V / 2 A) for the control card
+part,C93,,,Capacitor_SMD:C_1210_3225Metric,10,U8 input cap (K7805-2000R3 datasheet Fig. 2)
+add,C93,1,,20V_ISO_SEC,10,U8-1 VIN
+add,C93,2,,ISOGND,10,U8-2 GND
+value,C93,,,10u 50V,10,
+part,C94,,,Capacitor_SMD:C_0805_2012Metric,10,U8 output cap (K7805-2000R3 datasheet Fig. 2)
+add,C94,1,,5V_ISOL,10,U8-3 VOUT
+add,C94,2,,ISOGND,10,U8-2 GND
+value,C94,,,22u 10V,10,

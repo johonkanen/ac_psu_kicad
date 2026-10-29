@@ -98,6 +98,8 @@ C89,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux inpu
 C90,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U4 differential 100n C0G (shunt L compensation)
 C91,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U5 differential 100n C0G
 C92,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U6 differential 100n C0G
+C93,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v4 fix 10: U8 input cap (K7805-2000R3 datasheet Fig. 2)
+C94,ac_psu:C,Capacitor_SMD:C_0805_2012Metric,v4 fix 10: U8 output cap (K7805-2000R3 datasheet Fig. 2)
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke

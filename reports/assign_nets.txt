@@ -65,5 +65,5 @@ items 5127, groups 447, shorts 0, orphans 16, opens 45
 items 5206, groups 248, shorts 0, orphans 0, opens 0
 == assignment: 4225 tracks/vias got a net, 0 without
 == after zone fill (KiCad pads, tracks, vias, filled zones)
-items 5240, groups 247, shorts 0, orphans 0, opens 0
+items 5250, groups 247, shorts 0, orphans 0, opens 0
 items carrying another net than their group: 0
