@@ -1,6 +1,6 @@
 # Status
 
-Updated: 2026-10-24 (clean-up and JLC files done: fixes 7–9, fab/; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-10-29 (U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
 ## v5 aux flyback – planned (2026-10-24)
 
@@ -65,15 +65,48 @@ board reproduces the committed board and `reports/v4_board_edits.txt` byte for b
     3V3/5V/20V rails are 16–50 V (fine); **C68 (100 nF 1206, DC+ to GND) had a 50 V part in the
     BOM** – it needs ≥ 630 V (Samsung CL31B104KIHNNNE 1 kV, 0 stock → hand-fit).
 
-Questions for the user:
-1. DC+ maximum: the DC link snap-ins are 450 V parts but the aux spec says 100–500 V. Which is it?
-   (Sets the 91k and 2220 margins.)
-2. C68: which part was fitted on the built boards? (BOM had 50 V.)
-3. R87 value (33R assumed).
-4. Y capacitors (2n2 discs to PE): Y2 enough, or Y1 (reinforced) needed?
-5. The 7 µF film caps C21/C24/C25/C33/C34: X2 rating / voltage, and the WE-CMBNC order codes.
-6. AMC1306M25 instead of ADuM7701: OK for the FPGA firmware (start-up test pattern)?
-7. Header gender for J1–J4/J6/J8/J11/J12, and whether JLC should place the THT relays and Y caps.
+User answers (2026-10-29) – all questions closed:
+- DC+ maximum 450 V (the snap-ins are 450 V parts, OK). Margins at 450 V: 91k chains 150 V per
+  200 V resistor (75 %), 2220 split caps 225 V on 450 V (50 %), C68 450 V on 500 V (90 %).
+- C68: the built boards had a 630 V part. No ≥ 630 V 1206 is stocked at JLC; the BOM uses the
+  closest, TCC1206X7R104K501HT 500 V (C5448934); hand-fit Samsung CL31B104KIHNNNE (1 kV) if
+  more margin is wanted.
+- R87 = 4 × 33R, confirmed. Y2 is enough for the 2n2 discs.
+- C21/C24/C25/C33/C34: 7 µF 250 VAC film capacitors (hand-fit).
+- J1–J4, J6, J8, J11, J12: female 1.27 mm sockets (hand-fit).
+- The user places the THT relays and the Y capacitors: moved out of the JLC BOM/CPL to
+  `fab/hand_fit.csv`. JLC BOM now 54 lines / 190 SMD parts, all in stock.
+- AMC1306M25DWVR (C471874) is the **accepted** substitution for U4/U5/U6 (the start-up test
+  pattern is fine for the firmware).
+- CM1–CM3 and the main inductors: sourced by the user (AliExpress) and hand-soldered, no order
+  code; the off-board inductors (J7/J9) are the user's too.
+
+## U8 → Mornsun K7805-2000R3 (fix 10, 2026-10-29)
+
+Requested by the efinix control-card session (`~/dev/efinix_soc_board/POWER_BUDGET.md`: the
+Ti135 card on J12 needs more than the 1 A of the VXO7805-1000 on 5V_ISOL). U8 becomes the
+Mornsun K7805-2000R3 (5 V / 2 A, 8–36 V in, SIP-3 1 Vin / 2 GND / 3 Vout, 2.54 mm, Ø1.2 mm holes,
+body 11.5 × 9.0 × 17.5 mm standing, pin row 2.15 mm from one face; datasheet rev 2019.10.24-A/5).
+- Value only on the board (same footprint, which U9 shares; U9 stays VXO7805-500). The courtyard
+  (R-78E graphics mirrored by fix 6: 2.275 mm toward J12, 6.775 mm away) is 0.075 mm short of
+  the K7805's 6.85 mm depth away from J12 – kept, no separate footprint variant.
+- Datasheet Fig. 2 capacitors, new v4 parts on the bottom side just south of U8's pins:
+  C93 10 µF 50 V X7R 1210 (Samsung CL32B106KBJNNNE, C138687 – no 22 µF 50 V is stocked in
+  1206/1210; the nearest is 1812 FS43X226K500ERG C22388553) between pin 1 (20V_ISO_SEC, also in
+  the B.Cu pour) and pin 2 (ISOGND, on the In1 ISOGND zone); C94 22 µF 10 V 0805
+  (CL21A226MPQNNNE, C29277) under pin 3 (5V_ISOL), its ISOGND pad tied to C93's. 0.6 mm B.Cu
+  tracks. Render `reports/v4/fix10_U8_B.png`.
+- Deviation rows: U8 value, parts C93/C94 with 4 pins and values, B.Cu area. Sheet 3 + part map.
+- BOM: C93/C94 at JLC; the genuine Mornsun module on the hand-fit list (JLC has clones only,
+  e.g. YLPTEC C18212380).
+- 2 A at 5 V is ≈ 11 W from 20V_ISO_SEC; the present IW1830 aux supply was not designed for it –
+  see `V5_PLAN.md` (Out2 power vs the upgraded U8).
+
+Replay note: the board scripts' UUIDs depend on `kicad/ac_psu.kicad_pro` too (pcbnew loads it
+with the board), so `apply_all.sh` reproduces the board only with the committed project file.
+On 2026-10-29 the sheets and the project file were re-saved from outside this session (newer
+eeschema format, netlist unchanged, plus `kicad/.history/`); they were restored to the committed
+versions (a patch was kept in the session scratchpad), `kicad/.history/` is untracked.
 
 ## v4 design fixes – done (2026-10-23)
 
@@ -242,7 +275,7 @@ about 5 nH); the 12.4R placeholder (5 nH) stays.
 `tools/regen_check.sh` (clean clone of 0a717b6, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
-### Last verification (`tools/check_all.sh`, clean-up fixes 7–9 done)
+### Last verification (`tools/check_all.sh`, fix 10 done)
 
 ```
 pcbnew 10.0.7
@@ -250,22 +283,22 @@ ipc356: nets=208, records=1075, refdes_raw=265, tht_records=562, smd_records=513
 ipc356: OK
 check_sources: OK
 gen_symbols: lib/ac_psu.kicad_sym up to date (45 symbols)
-symbols: 31 part types, 273 refdes, 13 power symbols
+symbols: 31 part types, 275 refdes, 13 power symbols
 symbols: OK
 erc: 0 errors, 8 warnings (reports/erc.rpt)
-v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 13 values; copper: 13 new vias, 8 changed areas
-compare_v4: 13 deviation values checked against the schematic
-compare: parts 272/272 present, 0 missing, 0 extra; pins compared 904, wrong-net pins 0; IPC nets touched 243, complete 243
-compare: per sheet (drawn/total) 1:48/48 2:8/8 3:18/18 4:37/37 5:43/43 6:16/16 7:31/31 8:24/24 9:12/12 10:24/24 11:11/11
+v4 deviations: 2 net merges, 2 pin moves, 7 new parts (14 pins), 16 values; copper: 13 new vias, 9 changed areas
+compare_v4: 16 deviation values checked against the schematic
+compare: parts 274/274 present, 0 missing, 0 extra; pins compared 908, wrong-net pins 0; IPC nets touched 243, complete 243
+compare: per sheet (drawn/total) 1:48/48 2:8/8 3:20/20 4:37/37 5:43/43 6:16/16 7:31/31 8:24/24 9:12/12 10:24/24 11:11/11
 compare: OK
-gen_footprints: 272 parts, 43 footprints (28 project), up to date
+gen_footprints: 274 parts, 45 footprints (28 project), up to date
 check_footprints: pcbnew placement of 267 parts, worst pad offset 0.038 mm
-check_footprints: 267/267 parts fitted, 898 pads, 42 footprints, worst residual 0.038 mm (limit 0.05); v4 parts without IPC pads (footprint/pads checked): C88 C89 C90 C91 C92
+check_footprints: 267/267 parts fitted, 898 pads, 42 footprints, worst residual 0.038 mm (limit 0.05); v4 parts without IPC pads (footprint/pads checked): C88 C89 C90 C91 C92 C93 C94
 check_footprints: OK
-check_board: v4 pads without Proteus pad (nets checked): C91-1@(8.100,-62.550) C91-2@(8.100,-65.500) C90-1@(11.708,37.300) C90-2@(8.758,37.300) C89-1@(57.600,-7.550) C89-2@(57.600,-8.510) C92-1@(110.075,33.000) C92-2@(107.125,33.000) C88-1@(59.600,-9.350) C88-2@(60.560,-9.350)
-check_board: 276 footprints, 908 pads, worst pad offset 0.038 mm (limit 0.05), 207 IPC nets mapped 1:1, 4 mounting holes
+check_board: v4 pads without Proteus pad (nets checked): C91-1@(8.100,-62.550) C91-2@(8.100,-65.500) C93-1@(103.925,-22.900) C93-2@(106.875,-22.900) C90-1@(11.708,37.300) C90-2@(8.758,37.300) C89-1@(57.600,-7.550) C89-2@(57.600,-8.510) C92-1@(110.075,33.000) C92-2@(107.125,33.000) C94-1@(109.440,-22.350) C94-2@(109.440,-24.250) C88-1@(59.600,-9.350) C88-2@(60.560,-9.350)
+check_board: 278 footprints, 912 pads, worst pad offset 0.038 mm (limit 0.05), 207 IPC nets mapped 1:1, 4 mounting holes
 check_board: 13 v4 vias (lib/v4_copper.csv) at their positions and nets
-check_board: 4062 tracks, 186 vias, 84 zones
+check_board: 4068 tracks, 186 vias, 84 zones
 check_board: OK
 assign_nets: after zone fill: 247 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
@@ -277,16 +310,16 @@ drc:     35 warning  silk_overlap
 drc:      2 warning  via_dangling
 drc:      1 warning  track_dangling
 drc: OK
-ipc356_diff: Proteus 1075 records, KiCad 1098; matched 1075 (898 pads incl. 36 N/C, 173 vias, 4 holes), worst position offset 0.039 mm (limit 0.05)
+ipc356_diff: Proteus 1075 records, KiCad 1102; matched 1075 (898 pads incl. 36 N/C, 173 vias, 4 holes), worst position offset 0.039 mm (limit 0.05)
 ipc356_diff: 207 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
-ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 5 new parts (10 pins), 13 values; copper: 13 new vias, 8 changed areas); 23 KiCad records of v4 parts/vias, nets checked
+ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 7 new parts (14 pins), 16 values; copper: 13 new vias, 9 changed areas); 27 KiCad records of v4 parts/vias, nets checked
 ipc356_diff: KiCad drill larger (footprint kept): 6x 0.558->0.65, 7x 0.762->0.8, 28x 0.812->1.001, 2x 1.01->1.199, 2x 1.016->1.199
 ipc356_diff: pads with another size in KiCad (info): C 150, D 20, J 6, L 2, PWM 7, R 184, U 37
 ipc356_diff: OK
 roundtrip: F.Cu   XOR  134.64 mm^2, beyond 0.05 mm: only Proteus  39.59, only KiCad  59.17 mm^2; clusters >= 0.01 mm^2: 188 pad shape, 14 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+5 inside v4 areas)
 roundtrip: In1.Cu XOR  265.62 mm^2, beyond 0.05 mm: only Proteus   0.33, only KiCad 246.04 mm^2; clusters >= 0.01 mm^2: 91 pad shape, 7 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+9 inside v4 areas)
 roundtrip: In2.Cu XOR  114.97 mm^2, beyond 0.05 mm: only Proteus   0.54, only KiCad  93.42 mm^2; clusters >= 0.01 mm^2: 117 pad shape, 3 clearance, 13 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+7 inside v4 areas)
-roundtrip: B.Cu   XOR  162.12 mm^2, beyond 0.05 mm: only Proteus   2.19, only KiCad 116.04 mm^2; clusters >= 0.01 mm^2: 316 pad shape, 15 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+23 inside v4 areas)
+roundtrip: B.Cu   XOR  173.21 mm^2, beyond 0.05 mm: only Proteus   2.19, only KiCad 127.01 mm^2; clusters >= 0.01 mm^2: 316 pad shape, 18 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+26 inside v4 areas)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
 roundtrip: OK
 ALL CHECKS PASSED
