@@ -1,16 +1,17 @@
 Comment,Designator,Footprint,Source,Note
+SLA-12VDC-SL-A,"R20,R79",Relay_SLA,JLC C55194 or distributor,THT relays placed by the user
+2.2nF X1/Y2 disc (TDK CS45-E2GA222M-NKA),"C7,C10,C13,C14,C19,C20,C22,C23,C29,C30,C31,C32,C59,C60",C_Disc P7.5,JLC C96522 or distributor,Y2 is enough (user confirmed); placed by the user
 C3M0065090D,"Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12",TO-247-3,JLC C5713513 (23 in stock 2026-10-24),heatsink-mounted SiC MOSFETs: fit by hand with the heatsink
 B43504A5477M (470uF 450V snap-in),"C8,C11,C12,C61,C72,C79",CP_Radial_D35 P10 snap-in,distributor (JLC 0 stock),value/MPN from the built board (photo); DC link rating 450 V: see question on DC+ max
-7u film (MKS4 P27.5),"C21,C24,C25,C33,C34",C_Rect 33x20 P27.5,distributor,value from Proteus only; voltage class (X2 on mains?) to confirm
-WE-CMBNC,"CM1,CM2,CM3",L_CommonMode_WE-CMBNC,Wurth (distributor),exact order code not in the Proteus data
+7uF 250VAC film capacitor (MKS4 P27.5),"C21,C24,C25,C33,C34",C_Rect 33x20 P27.5,distributor,250 VAC film capacitors (user confirmed 2026-10-29)
+WE-CMBNC,"CM1,CM2,CM3",L_CommonMode_WE-CMBNC,sourced by the user (AliExpress),"hand-soldered by the user, no order code needed"
 TWW10J15RE,R10,R_Radial_Power P5,distributor (JLC 0 stock),inrush resistor 15R 10W
 FKK5R0020FE-TR,"R48,R64,R91",R_Shunt_FKK5R0020FE (4-terminal),distributor (Ohmite; JLC C2482698 0 stock),no JLC part fits the 4-terminal land pattern
 VXO7805-500 / R-78E5.0-0.5,U9,SIP-3 P2.54,CUI distributor or JLC C18212367 (YLPTEC R-78E5.0-0.5),clone: same pinout; check its body side vs fix 6 before fitting
-VXO7805-1000 / R-78E5.0-1.0,U8,SIP-3 P2.54,CUI distributor or JLC C22371890 (YLPTEC R-78E5.0-1.0),as U9
-100nF >=630V 1206,C68,1206,distributor (Samsung CL31B104KIHNNNE 1 kV; JLC C2909296 0 stock),DC+ to GND: the BOM's 50 V part was wrong; replaced in v5 aux redesign
-HB GT connector 1.27mm 2x24 (pins 15-26 29-40 43-48),"J1,J2,J3,J4,J6,J8",PinHeader 2x24 P1.27 partial,distributor,mating gender to the gate-driver boards to confirm
-38 pin header 1.27mm 2x19,J11,PinHeader 2x19 P1.27,distributor,FPGA board connector
-2x3 pin 1.27mm,J12,PinHeader 2x03 P1.27,JLC C7470088 (1271WV-2x3P male) if male,gender to confirm
+K7805-2000R3 (Mornsun),U8,SIP-3 P2.54,"Mornsun via a distributor (genuine part); JLC has clones only, e.g. YLPTEC C18212380","v4 fix 10: 5 V / 2 A for the isolated control card (efinix POWER_BUDGET.md); body 11.5 x 9.0 x 17.5 mm standing, away from J12"
+1.27mm 2x24 female socket (pins 15-26 29-40 43-48 used),"J1,J2,J3,J4,J6,J8",PinHeader 2x24 P1.27 partial,distributor,female (user confirmed); mates with the gate-driver boards
+1.27mm 2x19 female socket,J11,PinHeader 2x19 P1.27,distributor,female (user confirmed); FPGA board connector
+1.27mm 2x3 female socket,J12,PinHeader 2x03 P1.27,distributor,female (user confirmed)
 PIN terminals,"ACIN1,ACIN2,ACOUT1,ACOUT2,PE1,PE2,PE3,PE4,PE5,PE6,PE7,PE8,AFE_OUT,FILTER_IN,FILTER_OUT,INU_OUT2,J5,J7,J9,J10,DAB_PRI_1,DAB_PRI_2,DAB_SEC_1,DAB_SEC_2",Terminal_*,hand wiring,wire/pin terminals
 IW1830,PWM1,DIP-8,distributor (JLC C17325147 0 stock),replaced in v5 (aux flyback redesign)
 EF20_AUX_TRANS,TR2,Transformer_EF20,custom wound,replaced in v5
