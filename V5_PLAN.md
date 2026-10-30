@@ -143,7 +143,7 @@ which needs ≥ 950 V parts):
 
 | Part | Package | Rds(on) at 10 V | JLC / stock 2026-10-30 | Note |
 |---|---|---|---|---|
-| **Infineon IPN95R2K0P7** | **SOT-223** | 2.0 Ω | C3278575 / 75 | Smallest; CoolMOS P7, 330 pF Ciss, 10 nC. ≈ 0.1 W conduction at 400 V, ≈ 0.4–0.8 W at 100 V hot: needs a copper area of ≈ 1–2 cm² on the drain tab, which is the switch node (keep it small for EMI; use the source side and a thermal pad). |
+| Infineon IPN95R2K0P7 (only if the input stays ≥ 300 V; see 5.1) | SOT-223 | 2.0 Ω | C3278575 / 75 | Smallest; CoolMOS P7, 330 pF Ciss, 10 nC. ≈ 0.1 W conduction at 400 V, ≈ 0.4–0.8 W at 100 V hot: needs a copper area of ≈ 1–2 cm² on the drain tab, which is the switch node (keep it small for EMI; use the source side and a thermal pad). |
 | Infineon IPN95R3K7P7 | SOT-223 | 3.7 Ω | C3278582 / 172 | More stock, twice the conduction loss. |
 | ST STD6N95K5 | DPAK (TO-252) | 1.25 Ω | C455168 / 112 254 | Large stock and lower loss, with a bigger tab (≈ 6.6 × 6.1 mm). The fallback if the SOT-223 parts run out. |
 | Infineon IPD95R1K2P7 | DPAK | 1.2 Ω | C536916 / 1528 | Same class as STD6N95K5. |
@@ -162,6 +162,65 @@ Step changes for this choice: step 2 follows the UCC28710 application circuit (n
 FB divider on Out1; a VS divider from the bias winding, a CS resistor, a 950 V MOSFET, and diodes on
 both outputs). Step 3 drops the InSOP-24D footprint (SOIC-7 and SOT-223 are KiCad library
 footprints).
+
+### 5.1 Full power at 100 V, passive cooling (user, 2026-10-30)
+
+DC+ is rated 100–450 V, and the aux supply must deliver full power at 100 V: the control card
+(FPGA, Ethernet, LCD), the 5 V logic and all the gate-drive supplies. The supply is passively
+cooled inside a closed chassis.
+
+**Power budget (estimate, to confirm).** Output side:
+
+| Load | Estimate |
+|---|---|
+| Out2: U8 (card 5.8 W high case + gate-driver logic + U10) / 0.9 | ≈ 7–8 W |
+| Out2: J4/J6/J8 gate-drive supplies | ≈ 3 W |
+| Out2: R79 coil | 0.5 W |
+| Out1: J1–J3 gate drives | ≈ 3 W |
+| Out1: U9 5 V logic | ≈ 1–2 W |
+| Out1: R20 coil | 0.5 W |
+
+Each gate-driver board is assumed at about 1 W. The SiC gate charge itself is only ≈ 20–40 mW per
+switch at 30/66 kHz; the drivers' isolated DC/DCs dominate. The total is **≈ 15–20 W, so design for
+25 W output (≈ 29 W input) at 100 V.**
+
+**The README transformer cannot do that.** The UCC28710 is primary-side regulated and needs DCM:
+on-time plus demagnetisation time must fit in the switching period.
+- With VOR ≈ 104 V at 100 V input, the DCM boundary is D ≈ 0.51.
+- The maximum input power is then (Vin·D)² / (2·Lp·fsw) = 51² / (2 · 1.19 mH · 70 kHz) ≈ 15.6 W.
+
+Redesign for:
+- **Lp ≈ 0.5–0.6 mH** at 70 kHz (≤ 0.64 mH at the boundary, with margin for the PSR sampling
+  window).
+- **Or a higher VOR** (≈ 130–150 V gives D ≈ 0.57–0.6 and allows ≈ 0.7–0.9 mH). The drain peak then
+  rises to ≈ 450 + 150 + overshoot ≈ 780 V, still under 950 V. Choose by the transformer losses.
+- Primary at 0.5 mH: Ipk ≈ 1.46 A, Irms ≈ 0.6 A, stored energy ≈ 0.53 mJ per cycle.
+- On EE25 (Ae ≈ 52 mm²) at 0.3 T that is ≈ 47 primary turns and a gap of ≈ 0.3 mm. It is feasible,
+  but re-run MKF for copper and core loss at 100 V in a hot enclosure.
+- If the losses come out over ≈ 1.5 W, step up to E30/EF25.
+
+**MOSFET for continuous 100 V operation.** Hot Rds(on) is about 2.2 × the 25 °C value; the
+switching loss is ≈ 0.25 W turn-off at 250 V / 1.46 A.
+
+| Part | Package | Rds(on) 25 °C | Conduction loss hot at 100 V | JLC / stock 2026-10-30 |
+|---|---|---|---|---|
+| **Infineon IPD95R450P7** | DPAK | 0.45 Ω | ≈ 0.36 W | C3289115 / 112 |
+| Infineon IPD95R750P7 | DPAK | 0.75 Ω | ≈ 0.6 W | C536918 / 97 |
+| ST STD6N95K5 | DPAK | 1.25 Ω | ≈ 1.0 W | C455168 / 112 254 (fallback) |
+| ST STB20N95K5 | D2PAK | 0.275 Ω | ≈ 0.2 W | C500935 / 895 (if DPAK runs hot) |
+| ~~IPN95R2K0P7~~ | SOT-223 | 2.0 Ω | ≈ 1.6 W | too hot for 100 V continuous; dropped |
+
+Choose the IPD95R450P7, about 0.6 W in total. Its tab is the drain, i.e. the switch node, so
+keep that copper small: cool it through a source-side and inner-layer copper spread with thermal
+vias, not a large drain pour. Check the 35 nC Qg against the UCC28710 DRV current.
+
+**Thermal budget in the closed chassis:**
+- FET ≈ 0.6 W, clamp ≈ 1–1.3 W (more at the higher Ipk), transformer ≈ 1–1.5 W, output diodes
+  ≈ 0.5–0.8 W: ≈ 3.5–4 W in the aux area.
+- Give the clamp TVS and the diodes copper too.
+- Measure the internal air temperature on the v3 build, then check the N87 core loss, the
+  electrolytic capacitor life and the U8 K7805-2000R3 derating (the 5 V version derates from
+  ≈ 55–71 °C ambient).
 
 ## 6. Not part of v5
 
