@@ -351,10 +351,10 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 User review 2026-10-23: nothing to change. Shunt inductance not measured accurately (5–10 nH,
 about 5 nH); the 12.4R placeholder (5 nH) stays.
 
-`tools/regen_check.sh` (clean clone of 445b424, regenerate everything incl. the Proteus board
+`tools/regen_check.sh` (clean clone of 5fec258, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
-### Last verification (`tools/check_all.sh`, fix 10 done)
+### Last verification (`tools/check_all.sh`, fix 12 done)
 
 ```
 pcbnew 10.0.7
@@ -362,43 +362,43 @@ ipc356: nets=208, records=1075, refdes_raw=265, tht_records=562, smd_records=513
 ipc356: OK
 check_sources: OK
 gen_symbols: lib/ac_psu.kicad_sym up to date (45 symbols)
-symbols: 31 part types, 275 refdes, 13 power symbols
+symbols: 31 part types, 291 refdes, 13 power symbols
 symbols: OK
 erc: 0 errors, 8 warnings (reports/erc.rpt)
-v4 deviations: 2 net merges, 2 pin moves, 7 new parts (14 pins), 16 values; copper: 13 new vias, 9 changed areas
-compare_v4: 16 deviation values checked against the schematic
-compare: parts 274/274 present, 0 missing, 0 extra; pins compared 908, wrong-net pins 0; IPC nets touched 243, complete 243
-compare: per sheet (drawn/total) 1:48/48 2:8/8 3:20/20 4:37/37 5:43/43 6:16/16 7:31/31 8:24/24 9:12/12 10:24/24 11:11/11
+v4 deviations: 2 net merges, 2 pin moves, 23 new parts (46 pins), 37 values; copper: 20 new vias, 24 changed areas
+compare_v4: 37 deviation values checked against the schematic
+compare: parts 290/290 present, 0 missing, 0 extra; pins compared 940, wrong-net pins 0; IPC nets touched 243, complete 243
+compare: per sheet (drawn/total) 1:52/52 2:8/8 3:22/22 4:41/41 5:49/49 6:16/16 7:31/31 8:24/24 9:12/12 10:24/24 11:11/11
 compare: OK
-gen_footprints: 274 parts, 45 footprints (28 project), up to date
+gen_footprints: 290 parts, 45 footprints (28 project), up to date
 check_footprints: pcbnew placement of 267 parts, worst pad offset 0.038 mm
-check_footprints: 267/267 parts fitted, 898 pads, 42 footprints, worst residual 0.038 mm (limit 0.05); v4 parts without IPC pads (footprint/pads checked): C88 C89 C90 C91 C92 C93 C94
+check_footprints: 267/267 parts fitted, 898 pads, 42 footprints, worst residual 0.038 mm (limit 0.05); v4 parts without IPC pads (footprint/pads checked): C100 C101 C102 C103 C104 C105 C106 C107 C108 C109 C110 C88 C89 C90 C91 C92 C93 C94 C95 C96 C97 C98 C99
 check_footprints: OK
-check_board: v4 pads without Proteus pad (nets checked): C91-1@(8.100,-62.550) C91-2@(8.100,-65.500) C93-1@(103.925,-22.900) C93-2@(106.875,-22.900) C90-1@(11.708,37.300) C90-2@(8.758,37.300) C89-1@(57.600,-7.550) C89-2@(57.600,-8.510) C92-1@(110.075,33.000) C92-2@(107.125,33.000) C94-1@(109.440,-22.350) C94-2@(109.440,-24.250) C88-1@(59.600,-9.350) C88-2@(60.560,-9.350)
-check_board: 278 footprints, 912 pads, worst pad offset 0.038 mm (limit 0.05), 207 IPC nets mapped 1:1, 4 mounting holes
-check_board: 13 v4 vias (lib/v4_copper.csv) at their positions and nets
-check_board: 4068 tracks, 186 vias, 84 zones
+check_board: v4 pads without Proteus pad (nets checked): C110-1@(114.443,12.395) C110-2@(113.483,12.395) C105-1@(78.657,35.237) C105-2@(79.617,35.237) C104-1@(74.487,39.317) C104-2@(74.487,38.357) C108-1@(84.787,40.717) C108-2@(84.787,39.757) C97-1@(54.230,-0.139) C97-2@(53.270,-0.139) C95-1@(54.230,-6.439) C95-2@(53.270,-6.439) C109-1@(53.890,3.920) C109-2@(53.890,4.880) C103-1@(74.487,36.457) C103-2@(74.487,37.417) C102-1@(94.987,36.380) C102-2@(94.987,35.420) C101-1@(88.787,38.630) C101-2@(88.787,37.670) C91-1@(8.100,-62.550) C91-2@(8.100,-65.500) C96-1@(50.200,-6.900) C96-2@(51.160,-6.900) C93-1@(103.925,-22.900) C93-2@(106.875,-22.900) C98-1@(51.200,1.580) C98-2@(51.200,0.620) C106-1@(82.930,38.000) C106-2@(82.930,37.040) C90-1@(11.708,37.300) C90-2@(8.758,37.300) C89-1@(57.600,-7.550) C89-2@(57.600,-8.510) C92-1@(110.075,33.000) C92-2@(107.125,33.000) C100-1@(59.810,-15.300) C100-2@(58.850,-15.300) C107-1@(77.360,41.020) C107-2@(78.320,41.020) C99-1@(61.950,-13.800) C99-2@(61.950,-14.760) C94-1@(109.440,-22.350) C94-2@(109.440,-24.250) C88-1@(59.600,-9.350) C88-2@(60.560,-9.350)
+check_board: 294 footprints, 944 pads, worst pad offset 0.038 mm (limit 0.05), 207 IPC nets mapped 1:1, 4 mounting holes
+check_board: 20 v4 vias (lib/v4_copper.csv) at their positions and nets
+check_board: 4099 tracks, 193 vias, 84 zones
 check_board: OK
 assign_nets: after zone fill: 247 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net
 assign_nets: OK (report reports/assign_nets.txt)
-drc: 292 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
+drc: 293 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json)
 drc:     53 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
 drc:      2 error    pth_inside_courtyard  accepted: KiCad courtyards vs the Proteus placement
 drc:    199 warning  silk_over_copper
-drc:     35 warning  silk_overlap
+drc:     36 warning  silk_overlap
 drc:      2 warning  via_dangling
 drc:      1 warning  track_dangling
 drc: OK
-ipc356_diff: Proteus 1075 records, KiCad 1102; matched 1075 (898 pads incl. 36 N/C, 173 vias, 4 holes), worst position offset 0.039 mm (limit 0.05)
+ipc356_diff: Proteus 1075 records, KiCad 1141; matched 1075 (898 pads incl. 36 N/C, 173 vias, 4 holes), worst position offset 0.039 mm (limit 0.05)
 ipc356_diff: 207 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
-ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 7 new parts (14 pins), 16 values; copper: 13 new vias, 9 changed areas); 27 KiCad records of v4 parts/vias, nets checked
+ipc356_diff: v4 deviations applied (v4 deviations: 2 net merges, 2 pin moves, 23 new parts (46 pins), 37 values; copper: 20 new vias, 24 changed areas); 66 KiCad records of v4 parts/vias, nets checked
 ipc356_diff: KiCad drill larger (footprint kept): 6x 0.558->0.65, 7x 0.762->0.8, 28x 0.812->1.001, 2x 1.01->1.199, 2x 1.016->1.199
 ipc356_diff: pads with another size in KiCad (info): C 150, D 20, J 6, L 2, PWM 7, R 184, U 37
 ipc356_diff: OK
-roundtrip: F.Cu   XOR  134.64 mm^2, beyond 0.05 mm: only Proteus  39.59, only KiCad  59.17 mm^2; clusters >= 0.01 mm^2: 188 pad shape, 14 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+5 inside v4 areas)
-roundtrip: In1.Cu XOR  265.62 mm^2, beyond 0.05 mm: only Proteus   0.33, only KiCad 246.04 mm^2; clusters >= 0.01 mm^2: 91 pad shape, 7 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+9 inside v4 areas)
-roundtrip: In2.Cu XOR  114.97 mm^2, beyond 0.05 mm: only Proteus   0.54, only KiCad  93.42 mm^2; clusters >= 0.01 mm^2: 117 pad shape, 3 clearance, 13 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+7 inside v4 areas)
-roundtrip: B.Cu   XOR  173.21 mm^2, beyond 0.05 mm: only Proteus   2.19, only KiCad 127.01 mm^2; clusters >= 0.01 mm^2: 316 pad shape, 18 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+26 inside v4 areas)
+roundtrip: F.Cu   XOR  143.26 mm^2, beyond 0.05 mm: only Proteus  39.59, only KiCad  66.96 mm^2; clusters >= 0.01 mm^2: 192 pad shape, 46 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+23 inside v4 areas)
+roundtrip: In1.Cu XOR  267.16 mm^2, beyond 0.05 mm: only Proteus   0.82, only KiCad 246.04 mm^2; clusters >= 0.01 mm^2: 91 pad shape, 13 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+9 inside v4 areas)
+roundtrip: In2.Cu XOR  116.76 mm^2, beyond 0.05 mm: only Proteus   1.12, only KiCad  93.42 mm^2; clusters >= 0.01 mm^2: 117 pad shape, 3 clearance, 20 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+7 inside v4 areas)
+roundtrip: B.Cu   XOR  179.57 mm^2, beyond 0.05 mm: only Proteus   2.19, only KiCad 133.24 mm^2; clusters >= 0.01 mm^2: 317 pad shape, 30 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+44 inside v4 areas)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
 roundtrip: OK
 ALL CHECKS PASSED
