@@ -1,5 +1,9 @@
 # Switching noise in the measurements – analysis (2026-10-30)
 
+**Applied 2026-10-30 as v4 fix 11/12** (findings 1, 2, 3 and 5, and the R7 value). Finding 4's
+R64 tuning and the firmware items are still open; see STATUS.md "v4 fix 11/12". U4/U5/U6 are now
+AMC1306M05 (±50 mV) in the BOM.
+
 Symptom on the built v3 boards (user): spikes at the switching edges in **all** voltage and current
 measurements, only while the power stages run; not a raised noise floor. The ADC samples
 free-running, not synchronised to the PWM. Switching frequencies: AFE and VSI 30 kHz, DAB 66 kHz.
@@ -134,8 +138,9 @@ ramp, which is over range for microseconds.
 **Still open:**
 - **(a) Measure or tune L**, starting with R64: re-pick R73/R74 with the 2.5 Ω/nH rule.
 - **(b) Common mode across the barrier.** U4/U5 have GND1 on the switch node. At 50 V/ns the
-  ≈ 1–2 pF barrier capacitance injects 50–100 mA spikes into GND/ISOGND next to U4/U5. That is
-  within CMTI: AMC1306M25 is ≥ 100 kV/µs, against 30–50 kV/µs here.
+  ≈ 1–2 pF barrier capacitance injects 50–100 mA spikes into GND/ISOGND next to U4/U5. The
+  AMC1306 CMTI is **50 kV/µs minimum, 100 typical** (SBAS734D), against 30–50 kV/µs here: little
+  margin at the minimum. Check the real edge rates, and slow the gates if needed.
   - It flows through the logic ground near MCLK/MDAT.
   - U5's MDAT goes through U15, U4's straight to J11.34.
   - Planes under U4/U5 and short clock returns matter (layout, v5).

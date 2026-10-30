@@ -12,11 +12,11 @@ merge,,,DGND,GND,2,U11-6 INH tied to GND (was the floating single-pin net DGND)
 part,C88,,,Capacitor_SMD:C_0402_1005Metric,3,1n filter cap on mux input ADA2 (like C42 on ADA1)
 add,C88,1,,ADA2,3,
 add,C88,2,,GND,3,
-value,C88,,,1n,3,
+value,C88,,,4.7n C0G,3,fix 11: 4.7n C0G with R18 8.2k (4.1 kHz)
 part,C89,,,Capacitor_SMD:C_0402_1005Metric,3,1n filter cap on mux input ADA3
 add,C89,1,,ADA3,3,
 add,C89,2,,GND,3,
-value,C89,,,1n,3,
+value,C89,,,4.7n C0G,3,fix 11: 4.7n C0G with R9 8.2k (4.1 kHz)
 part,C90,,,Capacitor_SMD:C_1206_3216Metric,4,U4 differential 100n C0G (shunt L compensation)
 add,C90,1,,#00428,4,U4-2 VIN+
 add,C90,2,,#00429,4,U4-3 VIN-
@@ -48,3 +48,72 @@ part,C94,,,Capacitor_SMD:C_0805_2012Metric,10,U8 output cap (K7805-2000R3 datash
 add,C94,1,,5V_ISOL,10,U8-3 VOUT
 add,C94,2,,ISOGND,10,U8-2 GND
 value,C94,,,22u 10V,10,
+value,R7,,1k,10k,11,U1B + leg matched to R8 (v3 1k: common-mode gain ~0.033; ADA3 scaling changes)
+value,R18,,100,8.2k,11,ADA2 output RC with C88 4.7n (4.1 kHz)
+value,R9,,100,8.2k,11,ADA3 output RC with C89 4.7n (4.1 kHz)
+value,C42,,1n,10n C0G,11,ADA1 (DC+) output RC with R39 8.2k (1.9 kHz)
+value,C2,,1n,10n C0G,11,ISOADA3 (ISODC+) output RC with R77 8.2k (1.9 kHz)
+part,C95,,,Capacitor_SMD:C_0402_1005Metric,11,U1A + leg (across R21)
+add,C95,1,,REF_1V65,11,
+add,C95,2,,#00016,11,
+value,C95,,,1n C0G,11,
+part,C96,,,Capacitor_SMD:C_0402_1005Metric,11,U1A feedback (across R17)
+add,C96,1,,#00018,11,
+add,C96,2,,#00017,11,
+value,C96,,,1n C0G,11,
+part,C97,,,Capacitor_SMD:C_0402_1005Metric,11,U1B + leg (across R7)
+add,C97,1,,REF_1V65,11,
+add,C97,2,,#00010,11,
+value,C97,,,1n C0G,11,
+part,C98,,,Capacitor_SMD:C_0402_1005Metric,11,U1B feedback (across R8)
+add,C98,1,,#00012,11,
+add,C98,2,,#00011,11,
+value,C98,,,1n C0G,11,
+part,C99,,,Capacitor_SMD:C_0402_1005Metric,11,U14 + leg (across R37)
+add,C99,1,,GND,11,
+add,C99,2,,#00226,11,
+value,C99,,,1n C0G,11,
+part,C100,,,Capacitor_SMD:C_0402_1005Metric,11,U14 feedback (across R38)
+add,C100,1,,#00227,11,
+add,C100,2,,#00228,11,
+value,C100,,,1n C0G,11,
+part,C101,,,Capacitor_SMD:C_0402_1005Metric,11,U2 + leg (across R1)
+add,C101,1,,ISOGND,11,
+add,C101,2,,#00242,11,
+value,C101,,,1n C0G,11,
+part,C102,,,Capacitor_SMD:C_0402_1005Metric,11,U2 feedback (across R76)
+add,C102,1,,#00243,11,
+add,C102,2,,#00244,11,
+value,C102,,,1n C0G,11,
+part,C103,,,Capacitor_SMD:C_0402_1005Metric,11,U7A + leg (across R52)
+add,C103,1,,REF_1V65_ISO,11,
+add,C103,2,,#00269,11,
+value,C103,,,1n C0G,11,
+part,C104,,,Capacitor_SMD:C_0402_1005Metric,11,U7A feedback (across R53)
+add,C104,1,,#00271,11,
+add,C104,2,,#00270,11,
+value,C104,,,1n C0G,11,
+part,C105,,,Capacitor_SMD:C_0402_1005Metric,11,U7B + leg (across R46)
+add,C105,1,,REF_1V65_ISO,11,
+add,C105,2,,#00275,11,
+value,C105,,,1n C0G,11,
+part,C106,,,Capacitor_SMD:C_0402_1005Metric,11,U7B feedback (across R51)
+add,C106,1,,#00277,11,
+add,C106,2,,#00276,11,
+value,C106,,,1n C0G,11,
+part,C107,,,Capacitor_SMD:C_0402_1005Metric,11,ISOADA1 filter (R54 8.2k: 4.1 kHz)
+add,C107,1,,ISOADA1,11,
+add,C107,2,,ISOGND,11,
+value,C107,,,4.7n C0G,11,
+part,C108,,,Capacitor_SMD:C_0402_1005Metric,11,ISOADA2 filter (R56 8.2k: 4.1 kHz)
+add,C108,1,,ISOADA2,11,
+add,C108,2,,ISOGND,11,
+value,C108,,,4.7n C0G,11,
+part,C109,,,Capacitor_SMD:C_0402_1005Metric,11,REF_1V65 decoupling
+add,C109,1,,REF_1V65,11,
+add,C109,2,,GND,11,
+value,C109,,,100n,11,
+part,C110,,,Capacitor_SMD:C_0402_1005Metric,11,REF_1V65_ISO decoupling
+add,C110,1,,REF_1V65_ISO,11,
+add,C110,2,,ISOGND,11,
+value,C110,,,100n,11,

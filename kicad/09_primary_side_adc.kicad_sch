@@ -2908,8 +2908,8 @@
 				)
 			)
 		)
-		(property "Value" "1n"
-			(at 23.96 133.35 0)
+		(property "Value" "4.7n C0G"
+			(at 27.26 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3082,8 +3082,8 @@
 				)
 			)
 		)
-		(property "Value" "1n"
-			(at 36.66 133.35 0)
+		(property "Value" "4.7n C0G"
+			(at 39.96 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3239,7 +3239,7 @@
 			)
 		)
 	)
-	(text "v4: C88/C89 1n (0402, as C42) filter the mux inputs ADA2/ADA3; placed next to U11."
+	(text "v4: C88/C89 4.7n C0G (0402) with R18/R9 8.2k filter ADA2/ADA3 at 4.1 kHz; placed next to U11."
 		(exclude_from_sim no)
 		(at 12.7 144.78 0)
 		(effects

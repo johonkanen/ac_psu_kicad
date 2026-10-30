@@ -131,12 +131,15 @@ sh.text("EMI filter between the mains (ACIN1/ACIN2) and FILTER_IN/FILTER_OUT; R1
 
 
 # ---- difference amplifiers -----------------------------------------------------------------
-diff_amp(sh, XB, BOT, 2, ["R4", "R5", "R6"], ["R11", "R2", "R3"], ("R7", "1k"), "REF_1V65",
-         ("R8", "10k"), ("R9", "100"), "ADA3", top_plus=TOP)
+diff_amp(sh, XB, BOT, 2, ["R4", "R5", "R6"], ["R11", "R2", "R3"], ("R7", "10k"), "REF_1V65",
+         ("R8", "10k"), ("R9", "8.2k"), "ADA3", top_plus=TOP, par_caps=("C97", "C98", "1n C0G"))
 sh.text("U1:B measures the filter voltage (LEMOUT - FILTER_INPUT) around REF_1V65 -> ADA3.", XB - g(6), BOT + g(50))
 r = diff_amp(sh, g(236), g(84), 1, ["R95", "R12", "R13"], ["R14", "R15", "R16"], ("R21", "10k"), "REF_1V65",
-                  ("R17", "10k"), ("R18", "100"), "ADA2")
+                  ("R17", "10k"), ("R18", "8.2k"), "ADA2", par_caps=("C95", "C96", "1n C0G"))
 sh.glabel("AC_IN2", *r["plus_top"], 90); sh.glabel("AC_IN_1", *r["minus_top"], 90)
+sh.text("v4: R7 10k (v3 1k: + leg unmatched, common-mode gain ~0.033 - ADA3 was FILTER_INPUT vs GND); "
+        "C95-C98 1n C0G across the 10k legs (15.9 kHz, tap-node HF filter); R18/R9 8.2k (v3 100R) with C88/C89 4.7n -> 4.1 kHz.",
+        XB - g(6), BOT + g(54))
 sh.text("U1:A measures the mains voltage (AC_IN2 - AC_IN_1) around REF_1V65 -> ADA2.", g(230), g(84) + g(50))
 
 # U1 supply pins (unit C) and C26

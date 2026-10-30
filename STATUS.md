@@ -1,8 +1,69 @@
 # Status
 
-Updated: 2026-10-30 (switching-noise analysis in reports/noise/, no design change); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Switching-noise analysis (2026-10-30, report only)
+## v4 fix 11/12 – measurement filters (2026-10-30)
+
+The user asked to apply the hardware findings 1–5 of `reports/noise/README.md`. The defaults below
+were taken without the user's answers to the report's questions; **all are reversible**.
+
+**Schematic (sheets 1, 3, 4, 5, 9; `_common.diff_amp` par_caps, `sheet03.vref` rcap):**
+- **C95–C106: 1 nF C0G 0402** across every 10k leg of the six difference amplifiers: U1A R21/R17,
+  U1B R7/R8, U14 R37/R38, U2 R1/R76, U7A R52/R53, U7B R46/R51. Corner 15.9 kHz; the tap nodes are
+  low-impedance at the switching edges (finding 1). The + leg cap goes to the amp's own reference
+  (REF_1V65, REF_1V65_ISO, GND or ISOGND).
+- **R7 1k → 10k** (finding 2): U1B's + leg is now matched. **The ADA3 firmware scaling changes**:
+  before, ADA3 ≈ 1.705 V + 0.0038·V(LEMOUT) − 0.0366·V(FILTER_INPUT), measured against GND; now
+  1.65 V + 0.0366·(V(LEMOUT) − V(FILTER_INPUT)).
+- **Output filters (finding 3):**
+  - AC signals: R18/R9 100R → 8.2k with C88/C89 1n → 4.7 nF C0G (ADA2, ADA3); new C107/C108
+    4.7 nF C0G on ISOADA1/ISOADA2 at R54/R56. All 4.1 kHz.
+  - DC links: C42/C2 1n → 10 nF C0G (ADA1, ISOADA3): 1.9 kHz.
+  - With the 15.9 kHz pole: −24 dB (AC) / −30 dB (DC) at 30 kHz, −37 / −45 dB at 66 kHz.
+  - Phase lag 0.87° (48 µs) at 50 Hz on the AC signals.
+  - **Source impedance at J11 for the control card (efinix session):** ISOADA1/2 are
+    8.2 kΩ ∥ 4.7 nF and ISOADA3 is 8.2 kΩ ∥ 10 nF, so the card's ADC sampling capacitor is fed
+    from those capacitors. ADA1–3 go through U11 and the U12 buffer to the ADS7056, which is fine.
+- **C109/C110: 100 nF** on REF_1V65 / REF_1V65_ISO (finding 5).
+- **R64 (DAB) L/R:** not changed. The shunt's L is not known (5–10 nH); 12.4 Ω per leg with
+  100 nF matches 5 nH (τ = 2.48 µs = L/R at 2 mΩ). For 10 nH use 25 Ω per leg. Tune R73/R74 on the
+  bench (noise report, measurement 6).
+
+**Board** (`tools/v4/fix_11_meas_filters.py`, seed 4111; `fix_12_silk_new_refs.py`, seed 4112):
+- **Top side, beside their resistor with two 0.25 mm tracks:** C95, C97, C101–C105, C109, C110,
+  and C108 (pad 2 on a via to the In1 ISOGND plane).
+- **Bottom side with vias** (the top was blocked by U1, U14 and the output resistors): C96, C98,
+  C99, C100, C106, C107.
+  - 7 new vias, all in `lib/v4_copper.csv` with their IPC nets, plus 15 changed-copper areas.
+  - The C98 via sits between R8-1 and R9-2 (same net, 0.05 mm from both pads; the vias are
+    tented).
+- **Six amplifier-output nets got new KiCad auto names**, e.g. `Net-(R17-Pad1)` →
+  `Net-(C96-Pad1)`; the board copper and pads are renamed to match.
+- Fix 12 re-runs fix 8's silkscreen placement for the new references. The only new silk warning
+  is R19's text over C109's outline; R19 had no free spot already in fix 8.
+- **DRC:** 293 violations (was 292), 0 shorts, 0 unconnected, 0 parity, no new courtyard
+  overlaps.
+- Renders: `reports/v4/fix11_U1.png`, `fix11_U14.png`, `fix11_U7_U2.png`, `fix11_REF2.png`.
+- `reports/v4_board_edits.txt` comes from the replay of fixes 1–12 on the tag's board. Fix 3
+  therefore logs C88/C89 with today's schematic value (4.7n C0G); fix 3's own run had 1n.
+
+**BOM (`fab/`):**
+- New lines: 1 nF C0G C307441 (12 caps), 4.7 nF C0G C1518204 (C88, C89, C107, C108),
+  10 nF C0G C22400107 (C2, C42).
+- Moved: R7 into the 10k line, R9/R18 into 8.2k, C109/C110 into 100 nF.
+- **U4/U5/U6 → AMC1306M05DWVR (C701717, user):**
+  - ±50 mV linear, ±64 mV clip, 4.9 kΩ input resistance, CMTI 50 kV/µs min / 100 typ
+    (checked in SBAS734D).
+  - ±25 A full scale on the 2 mΩ shunts, **5× more counts per amp than the M25: firmware
+    scale**.
+  - 2 × 12.4 Ω against 4.9 kΩ is ≈ 0.5 % gain error: calibrate it out.
+  - JLC has 5 in stock, enough for one board; Mouser/Digikey and hand-soldering otherwise.
+- **The minimum CMTI (50 kV/µs) is close to the SiC edge rates (30–50 V/ns).** Check the edge
+  rate of the AFE and VSI legs: U4/U5 float on the switch nodes.
+- Stock for 5 boards: every line except the AMC1306M05 (5 in stock).
+- CPL: 205 parts.
+
+## Switching-noise analysis (2026-10-30; hardware findings 1–5 applied in fix 11/12, see below)
 
 `reports/noise/README.md`: why every measurement showed spikes at the switching edges on the v3
 boards (AFE/VSI 30 kHz, DAB 66 kHz, free-running ADC). Top findings:
@@ -136,10 +197,10 @@ Coordinates below: mm, IPC frame (Y up), like the rest of this file; KiCad y = �
 
 - `kicad/ac_psu.kicad_pcb` is no longer generated from the Proteus gerbers. It was the
   Proteus-generated board at tag `proteus-conversion-complete`; the v4 changes were made by
-  one-shot pcbnew scripts `tools/v4/fix_1_ret_iso.py … fix_6_u8u9_body.py` (helpers in
+  one-shot pcbnew scripts `tools/v4/fix_1_ret_iso.py … fix_12_silk_new_refs.py` (helpers in
   `tools/v4/v4board.py`, run in order by `tools/v4/apply_all.sh`, log in
   `reports/v4_board_edits.txt`). Each script refuses to run twice; applied to the tag's board they
-  reproduce the committed board byte for byte (UUID seeds 4101–4106; re-checked after fix 6). Further board changes:
+  reproduce the committed board byte for byte (UUID seeds 4101–4112; re-checked after fix 12). Further board changes:
   new scripts (or the KiCad GUI, then say so here).
 - `tools/make_pcb.sh` never writes the design board: it rebuilds the *Proteus* board from the
   tag's schematic/footprint fit/reports (`git archive`) into

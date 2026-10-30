@@ -43,7 +43,7 @@ def ldo(sh, ref, x, y, vin, gnd, vout, cin, cout):
     return u
 
 
-def vref(sh, ref, x, y, vin, gnd, out_label, cin, cout, rtop, rbot):
+def vref(sh, ref, x, y, vin, gnd, out_label, cin, cout, rtop, rbot, rcap=None):
     """REF3025 block: Cin on the input, Cout on the output, divider rtop/rbot to a 1.65 V
     reference label. Pin ids follow Proteus (1=GND 2=VIN 3=VOUT), see STATUS.md."""
     u = sh.place("REF3025", ref, x, y, value="REF3025")
@@ -74,6 +74,11 @@ def vref(sh, ref, x, y, vin, gnd, out_label, cin, cout, rtop, rbot):
     sh.glabel(out_label, *lab, 0)
     sh.wire((c1b[0], rail_y), (r2b[0], rail_y))
     sh.junction(c2b[0], rail_y)
+    if rcap:   # v4: decoupling of the 1.65 V divider node (pin 1 = REF_1V65, 2 = gnd)
+        xc = x + g(26)
+        _, ct, cb = vert2(sh, "C", rcap[0], xc, y + g(6), rcap[1], top=1)
+        sh.wire(ct, (xc, VOUT[1])); sh.junction(xc, VOUT[1])
+        sh.wire(cb, (xc, rail_y)); sh.junction(xc, rail_y)
     return u
 
 
@@ -100,7 +105,7 @@ sh = sheet("03_regulators.kicad_sch")
 ldo(sh, "U3", g(80), g(40), "5V", "GND", "VCC", ("C70", "100n"), ("C69", "100n"))
 vxo(sh, "U9", "VXO7805-500", g(84), g(68), "20V", "GND", "5V")
 vref(sh, "REF1", g(160), g(40), "VCC", "GND", "REF_1V65", ("C16", "1u"), ("C40", "1u"),
-     ("R19", "422R"), ("R30", "820R"))
+     ("R19", "422R"), ("R30", "820R"), rcap=("C109", "100n"))
 # isolated side
 ldo(sh, "U10", g(80), g(110), "5V_ISOL", "ISOGND", "3V3_ISO", ("C4", "100n"), ("C3", "100n"))
 vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "20V_ISO_SEC", "ISOGND", "5V_ISOL", value="K7805-2000R3")
@@ -114,7 +119,7 @@ sh.text("v4: U8 K7805-2000R3 (Mornsun, 5 V / 2 A, 8-36 V in) instead of VXO7805-
 sh.text("C93 input 10u 50V (22u 50V not stocked in 1206/1210), C94 output 22u 10V, next to U8's pins (bottom side).",
         g(100), g(153))
 vref(sh, "REF2", g(160), g(110), "3V3_ISO", "ISOGND", "REF_1V65_ISO", ("C5", "1u"), ("C6", "1u"),
-     ("R32", "422R"), ("R40", "820R"))
+     ("R32", "422R"), ("R40", "820R"), rcap=("C110", "100n"))
 
 sh.text("3V3 / 3v3 in the Proteus schematic = net VCC (VCC/VDD=POWER); 3V3_ISO is the isolated 3.3 V.",
         g(20), g(166))
@@ -122,5 +127,7 @@ sh.text("REF3025 pin ids follow Proteus (1=GND 2=VIN 3=VOUT), not the TI datashe
         g(20), g(170))
 sh.text("v4: R19/R32 422R (E96, JLC stock) instead of 420R: 2.5 V x 820/(422+820) = 1.6506 V (420R: 1.6532 V).",
         g(20), g(174))
+sh.text("v4: C109/C110 100n decouple REF_1V65 / REF_1V65_ISO (279 R source, 28 us; v3: no capacitor).",
+        g(20), g(178))
 sh.save()
 print("sheet03: written")

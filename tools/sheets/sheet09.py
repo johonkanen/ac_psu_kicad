@@ -34,10 +34,10 @@ sh.text("check logic", MX - g(18), MY - g(26))
 # v4: 1 nF filter caps on the mux inputs ADA2 / ADA3 (ADA1 has C42 on sheet 4), next to U11
 for i, (ref, lab) in enumerate((("C88", "ADA2"), ("C89", "ADA3"))):
     x = g(16 + 10 * i)
-    _, ct, cb = vert2(sh, "C", ref, x, g(104), "1n", top=1)
+    _, ct, cb = vert2(sh, "C", ref, x, g(104), "4.7n C0G", top=1)
     sh.wire(ct, up(ct, 2)); sh.glabel(lab, *up(ct, 2), 90)
     sh.wire(cb, down(cb, 2)); power_at(sh, "GND", down(cb, 2), "down")
-sh.text("v4: C88/C89 1n (0402, as C42) filter the mux inputs ADA2/ADA3; placed next to U11.", g(10), g(114))
+sh.text("v4: C88/C89 4.7n C0G (0402) with R18/R9 8.2k filter ADA2/ADA3 at 4.1 kHz; placed next to U11.", g(10), g(114))
 
 # U12 unity-gain buffer
 OX, OY = g(100), g(58)

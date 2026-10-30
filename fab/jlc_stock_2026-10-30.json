@@ -2,35 +2,13 @@
  {
   "source": "bom",
   "comment": "10k",
-  "refs": "R1,R8,R17,R21,R37,R38,R46,R51,R52,R53,R76",
+  "refs": "R1,R7,R8,R17,R21,R37,R38,R46,R51,R52,R53,R76",
   "code": "C25744",
-  "need": 55,
-  "stock": 16836583,
+  "need": 60,
+  "stock": 16834110,
   "type": "base",
   "mpn": "0402WGF1002TCE",
   "describe": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
- },
- {
-  "source": "bom",
-  "comment": "1k",
-  "refs": "R7",
-  "code": "C11702",
-  "need": 5,
-  "stock": 21628271,
-  "type": "base",
-  "mpn": "0402WGF1001TCE",
-  "describe": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
- },
- {
-  "source": "bom",
-  "comment": "100R",
-  "refs": "R9,R18",
-  "code": "C25076",
-  "need": 10,
-  "stock": 6079874,
-  "type": "base",
-  "mpn": "0402WGF1000TCE",
-  "describe": "-55℃~+155℃ 100Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
  },
  {
   "source": "bom",
@@ -57,9 +35,9 @@
  {
   "source": "bom",
   "comment": "8.2k",
-  "refs": "R39,R54,R56,R77",
+  "refs": "R9,R18,R39,R54,R56,R77",
   "code": "C25924",
-  "need": 20,
+  "need": 30,
   "stock": 77376,
   "type": "expand",
   "mpn": "0402WGF8201TCE",
@@ -71,7 +49,7 @@
   "refs": "R50,R55,R72",
   "code": "C25105",
   "need": 15,
-  "stock": 1951037,
+  "stock": 1949964,
   "type": "base",
   "mpn": "0402WGF330JTCE",
   "describe": "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
@@ -82,7 +60,7 @@
   "refs": "R86",
   "code": "C25077",
   "need": 5,
-  "stock": 3191710,
+  "stock": 3191708,
   "type": "base",
   "mpn": "0402WGF100JTCE",
   "describe": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
@@ -104,7 +82,7 @@
   "refs": "R25",
   "code": "C22809",
   "need": 5,
-  "stock": 3602556,
+  "stock": 3602596,
   "type": "base",
   "mpn": "0603WAF1502T5E",
   "describe": "-55℃~+155℃ 100mW 15kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
@@ -126,7 +104,7 @@
   "refs": "R31",
   "code": "C21190",
   "need": 5,
-  "stock": 31325013,
+  "stock": 31319729,
   "type": "base",
   "mpn": "0603WAF1001T5E",
   "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
@@ -148,7 +126,7 @@
   "refs": "R78,R88,R89,R90",
   "code": "C4190",
   "need": 20,
-  "stock": 5501669,
+  "stock": 5501634,
   "type": "base",
   "mpn": "0603WAF2201T5E",
   "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
@@ -159,7 +137,7 @@
   "refs": "R59,R75,R94",
   "code": "C17710",
   "need": 15,
-  "stock": 2164445,
+  "stock": 2164425,
   "type": "base",
   "mpn": "0805W8F4700T5E",
   "describe": "-55℃~+155℃ 125mW 150V 470Ω Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS"
@@ -181,7 +159,7 @@
   "refs": "R24,R33,R34,R43",
   "code": "C17927",
   "need": 20,
-  "stock": 3536187,
+  "stock": 3536462,
   "type": "base",
   "mpn": "1206W4F1004T5E",
   "describe": "-55℃~+155℃ 1MΩ 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
@@ -192,7 +170,7 @@
   "refs": "R96,R97",
   "code": "C17888",
   "need": 10,
-  "stock": 1772789,
+  "stock": 1772659,
   "type": "base",
   "mpn": "1206W4F0000T5E",
   "describe": "-55℃~+155℃ 0Ω 200V 250mW Thick Film Resistor ±1% ±800ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
@@ -203,7 +181,7 @@
   "refs": "R23",
   "code": "C17901",
   "need": 5,
-  "stock": 2366334,
+  "stock": 2366534,
   "type": "base",
   "mpn": "1206W4F1000T5E",
   "describe": "-55℃~+155℃ 100Ω 200V 250mW Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
@@ -233,21 +211,54 @@
  {
   "source": "bom",
   "comment": "1nF",
-  "refs": "C2,C9,C42,C88,C89",
+  "refs": "C9",
   "code": "C1523",
-  "need": 25,
-  "stock": 2435935,
+  "need": 5,
+  "stock": 2435505,
   "type": "base",
   "mpn": "0402B102K500NT",
   "describe": "1nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
  },
  {
   "source": "bom",
+  "comment": "1nF C0G",
+  "refs": "C95,C96,C97,C98,C99,C100,C101,C102,C103,C104,C105,C106",
+  "code": "C307441",
+  "need": 60,
+  "stock": 283996,
+  "type": "expand",
+  "mpn": "CL05C102JB5NNNC",
+  "describe": "1nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+ },
+ {
+  "source": "bom",
+  "comment": "4.7nF C0G",
+  "refs": "C88,C89,C107,C108",
+  "code": "C1518204",
+  "need": 20,
+  "stock": 288272,
+  "type": "expand",
+  "mpn": "GRM1555C1H472JE01D",
+  "describe": "4.7nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+ },
+ {
+  "source": "bom",
+  "comment": "10nF C0G",
+  "refs": "C2,C42",
+  "code": "C22400107",
+  "need": 10,
+  "stock": 53894,
+  "type": "expand",
+  "mpn": "GRM1555C1H103JE01D",
+  "describe": "10nF 50V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
+ },
+ {
+  "source": "bom",
   "comment": "100nF",
-  "refs": "C3,C4,C17,C18,C26,C27,C37,C38,C56,C64,C69,C70,C80,C81,C82,C83,C84,C85,C86,C87",
+  "refs": "C3,C4,C17,C18,C26,C27,C37,C38,C56,C64,C69,C70,C80,C81,C82,C83,C84,C85,C86,C87,C109,C110",
   "code": "C1525",
-  "need": 100,
-  "stock": 35992725,
+  "need": 110,
+  "stock": 35992751,
   "type": "base",
   "mpn": "CL05B104KO5NNNC",
   "describe": "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -258,7 +269,7 @@
   "refs": "C5,C6,C16,C39,C40",
   "code": "C52923",
   "need": 25,
-  "stock": 10324368,
+  "stock": 10318217,
   "type": "base",
   "mpn": "CL05A105KA5NQNC",
   "describe": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -269,7 +280,7 @@
   "refs": "C43,C44,C55,C71,C73,C76,C77,C78",
   "code": "C14663",
   "need": 40,
-  "stock": 42220408,
+  "stock": 42219018,
   "type": "base",
   "mpn": "CC0603KRX7R9BB104",
   "describe": "100nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -280,7 +291,7 @@
   "refs": "C51,C52,C53,C54,C74,C75",
   "code": "C1603",
   "need": 30,
-  "stock": 867000,
+  "stock": 867090,
   "type": "base",
   "mpn": "CL10B221KB8NNNC",
   "describe": "220pF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -302,7 +313,7 @@
   "refs": "C63",
   "code": "C1653",
   "need": 5,
-  "stock": 2832823,
+  "stock": 2832753,
   "type": "base",
   "mpn": "CL10C220JB8NNNC",
   "describe": "22pF 50V C0G ±5% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -313,7 +324,7 @@
   "refs": "C36,C41,C65,C66",
   "code": "C29823",
   "need": 20,
-  "stock": 803407,
+  "stock": 803415,
   "type": "base",
   "mpn": "1206B475K500NT",
   "describe": "4.7uF 50V X7R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"
@@ -434,7 +445,7 @@
   "refs": "Q13,Q14",
   "code": "C8545",
   "need": 10,
-  "stock": 3413794,
+  "stock": 3413719,
   "type": "base",
   "mpn": "2N7002",
   "describe": "1 N-channel 115mA 2.5V 225mW 25pF 50pF 5pF 5Ω@10V 60V N-Channel ±20V SOT-23 MOSFETs ROHS"
@@ -529,14 +540,14 @@
  },
  {
   "source": "bom",
-  "comment": "AMC1306M25DWVR (accepted for ADuM7701-8BRIZ)",
+  "comment": "AMC1306M05DWVR (alt. for ADuM7701-8BRIZ)",
   "refs": "U4,U5,U6",
-  "code": "C471874",
+  "code": "C701717",
   "need": 15,
-  "stock": 163,
+  "stock": 5,
   "type": "expand",
-  "mpn": "AMC1306M25DWVR",
-  "describe": "-40℃~+125℃ 1 16 1LSB 3V~5.5V 78000Hz 78kHz Serial SOIC-8-300mil ADCs/DACs - Special Purpose ROHS"
+  "mpn": "AMC1306M05DWVR",
+  "describe": "-40℃~+125℃ 1 16 1LSB 3V~5.5V 78kHz Digital filtering、Bipolar input Serial port Sigma-Delta SOIC-8-300mil ADCs/DACs - Special Purpose ROHS"
  },
  {
   "source": "bom",
@@ -577,7 +588,7 @@
   "refs": "C94",
   "code": "C29277",
   "need": 5,
-  "stock": 515019,
+  "stock": 514933,
   "type": "expand",
   "mpn": "CL21A226MPQNNNE",
   "describe": "10V 22uF X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS"

@@ -100,6 +100,22 @@ C91,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U5 differential 100n C0G
 C92,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U6 differential 100n C0G
 C93,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v4 fix 10: U8 input cap (K7805-2000R3 datasheet Fig. 2)
 C94,ac_psu:C,Capacitor_SMD:C_0805_2012Metric,v4 fix 10: U8 output cap (K7805-2000R3 datasheet Fig. 2)
+C95,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U1A + leg (across R21)
+C96,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U1A feedback (across R17)
+C97,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U1B + leg (across R7)
+C98,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U1B feedback (across R8)
+C99,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U14 + leg (across R37)
+C100,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U14 feedback (across R38)
+C101,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U2 + leg (across R1)
+C102,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U2 feedback (across R76)
+C103,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U7A + leg (across R52)
+C104,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U7A feedback (across R53)
+C105,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U7B + leg (across R46)
+C106,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: U7B feedback (across R51)
+C107,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: ISOADA1 filter (R54 8.2k: 4.1 kHz)
+C108,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: ISOADA2 filter (R56 8.2k: 4.1 kHz)
+C109,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: REF_1V65 decoupling
+C110,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: REF_1V65_ISO decoupling
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke

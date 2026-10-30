@@ -97,7 +97,7 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    Write it as a new `tools/sheets/sheet07.py` (the v4 one stays in git history). Keep the 5 V
    capacitors C67/C58/C57, C68 and the rail flags. Remove PWM1, TR2, R43/R34/R33, D7, C65/C66,
    R24/C62/R23/D6, R44/R25/C63/R26/R29/R31, R45/R47, D2, D1, R49. New refdes continue from
-   C95 / R98 / D11 / U18 / T3 (check that they are free).
+   C111 / R98 / D11 / U18 / T3 (check that they are free; C95–C110 are fix 11).
 3. **Library.**
    - Symbols in `tools/gen_symbols.py`: INN3694C with all InSOP-24D pins, and the EE25 transformer
      (10 pins, winding dots, one unit, pin numbers as on the bobbin).

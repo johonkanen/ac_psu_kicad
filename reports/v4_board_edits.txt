@@ -12,12 +12,12 @@
   U11-6: DGND -> GND
   track F.Cu GND w0.25: (59.949,-0.980)-(59.299,-0.980)
 == fix 3: C88/C89 on ADA2/ADA3
-  C88 1n Capacitor_SMD:C_0402_1005Metric bottom at (60.080,-9.350) rot 0: pad1 ADA2 (59.6, -9.35), pad2 GND (60.56, -9.35)
+  C88 4.7n C0G Capacitor_SMD:C_0402_1005Metric bottom at (60.080,-9.350) rot 0: pad1 ADA2 (59.6, -9.35), pad2 GND (60.56, -9.35)
   via ADA2 at (59.600,-8.500) 0.4572/0.3
   track B.Cu ADA2 w0.2: (59.600,-8.500)-(59.600,-9.350)
   via GND at (61.400,-9.350) 0.4572/0.3
   track B.Cu GND w0.3: (60.560,-9.350)-(61.400,-9.350)
-  C89 1n Capacitor_SMD:C_0402_1005Metric bottom at (57.600,-8.030) rot 270: pad1 ADA3 (57.6, -7.55), pad2 GND (57.6, -8.51)
+  C89 4.7n C0G Capacitor_SMD:C_0402_1005Metric bottom at (57.600,-8.030) rot 270: pad1 ADA3 (57.6, -7.55), pad2 GND (57.6, -8.51)
   via ADA3 at (57.600,-6.741) 0.4572/0.3
   track B.Cu ADA3 w0.2: (57.600,-6.741)-(57.600,-7.550)
   via GND at (57.600,-9.350) 0.4572/0.3
@@ -214,3 +214,113 @@
   track B.Cu ISOGND w0.6: (109.440,-24.000)-(106.875,-24.000)
   track B.Cu ISOGND w0.6: (106.875,-24.000)-(106.875,-22.900)
   C94 reference at (111.250,-23.300) angle 90
+== fix 11: measurement filters (C95-C110, R7/R18/R9, C88/C89/C42/C2 values)
+  new net Net-(C96-Pad1)
+  3 tracks/vias/zones Net-(R17-Pad1) -> Net-(C96-Pad1)
+  new net Net-(C98-Pad1)
+  4 tracks/vias/zones Net-(R8-Pad1) -> Net-(C98-Pad1)
+  new net Net-(C100-Pad1)
+  6 tracks/vias/zones Net-(R38-Pad1) -> Net-(C100-Pad1)
+  new net Net-(C102-Pad1)
+  8 tracks/vias/zones Net-(R76-Pad1) -> Net-(C102-Pad1)
+  new net Net-(C104-Pad1)
+  5 tracks/vias/zones Net-(R53-Pad1) -> Net-(C104-Pad1)
+  new net Net-(C106-Pad1)
+  5 tracks/vias/zones Net-(R51-Pad1) -> Net-(C106-Pad1)
+  R17-1: Net-(R17-Pad1) -> Net-(C96-Pad1)
+  R18-2: Net-(R17-Pad1) -> Net-(C96-Pad1)
+  U1-1: Net-(R17-Pad1) -> Net-(C96-Pad1)
+  U1-7: Net-(R8-Pad1) -> Net-(C98-Pad1)
+  R8-1: Net-(R8-Pad1) -> Net-(C98-Pad1)
+  R9-2: Net-(R8-Pad1) -> Net-(C98-Pad1)
+  R38-1: Net-(R38-Pad1) -> Net-(C100-Pad1)
+  R39-2: Net-(R38-Pad1) -> Net-(C100-Pad1)
+  U14-1: Net-(R38-Pad1) -> Net-(C100-Pad1)
+  R76-1: Net-(R76-Pad1) -> Net-(C102-Pad1)
+  R77-2: Net-(R76-Pad1) -> Net-(C102-Pad1)
+  U2-1: Net-(R76-Pad1) -> Net-(C102-Pad1)
+  R53-1: Net-(R53-Pad1) -> Net-(C104-Pad1)
+  R54-2: Net-(R53-Pad1) -> Net-(C104-Pad1)
+  U7-1: Net-(R53-Pad1) -> Net-(C104-Pad1)
+  U7-7: Net-(R51-Pad1) -> Net-(C106-Pad1)
+  R51-1: Net-(R51-Pad1) -> Net-(C106-Pad1)
+  R56-2: Net-(R51-Pad1) -> Net-(C106-Pad1)
+  R7 value 1k -> 10k
+  R18 value 100 -> 8.2k
+  R9 value 100 -> 8.2k
+  C88 value 4.7n C0G -> 4.7n C0G
+  C89 value 4.7n C0G -> 4.7n C0G
+  C42 value 1n -> 10n C0G
+  C2 value 1n -> 10n C0G
+  C95 1n C0G Capacitor_SMD:C_0402_1005Metric top at (53.750,-6.439) rot 180: pad1 REF_1V65 (54.23, -6.439), pad2 Net-(U1A-+) (53.27, -6.439)
+  track F.Cu REF_1V65 w0.25: (54.010,-5.439)-(54.230,-6.439)
+  track F.Cu Net-(U1A-+) w0.25: (52.990,-5.439)-(53.270,-6.439)
+  C97 1n C0G Capacitor_SMD:C_0402_1005Metric top at (53.750,-0.139) rot 180: pad1 REF_1V65 (54.23, -0.139), pad2 Net-(U1B-+) (53.27, -0.139)
+  track F.Cu REF_1V65 w0.25: (54.010,-1.139)-(54.230,-0.139)
+  track F.Cu Net-(U1B-+) w0.25: (52.990,-1.139)-(53.270,-0.139)
+  C101 1n C0G Capacitor_SMD:C_0402_1005Metric top at (88.787,38.150) rot 270: pad1 ISOGND (88.787, 38.63), pad2 Net-(U2-+) (88.787, 37.67)
+  track F.Cu ISOGND w0.25: (89.787,38.910)-(88.787,38.630)
+  track F.Cu Net-(U2-+) w0.25: (89.787,37.890)-(88.787,37.670)
+  C102 1n C0G Capacitor_SMD:C_0402_1005Metric top at (94.987,35.900) rot 270: pad1 Net-(C102-Pad1) (94.987, 36.38), pad2 Net-(U2--) (94.987, 35.42)
+  track F.Cu Net-(C102-Pad1) w0.25: (93.987,36.410)-(94.987,36.380)
+  track F.Cu Net-(U2--) w0.25: (93.987,35.390)-(94.987,35.420)
+  C103 1n C0G Capacitor_SMD:C_0402_1005Metric top at (74.487,36.937) rot 90: pad1 REF_1V65_ISO (74.487, 36.457), pad2 Net-(U7A-+) (74.487, 37.417)
+  track F.Cu REF_1V65_ISO w0.25: (75.487,36.427)-(74.487,36.457)
+  track F.Cu Net-(U7A-+) w0.25: (75.487,37.447)-(74.487,37.417)
+  C104 1n C0G Capacitor_SMD:C_0402_1005Metric top at (74.487,38.837) rot 270: pad1 Net-(C104-Pad1) (74.487, 39.317), pad2 Net-(U7A--) (74.487, 38.357)
+  track F.Cu Net-(C104-Pad1) w0.25: (75.487,39.347)-(74.487,39.317)
+  track F.Cu Net-(U7A--) w0.25: (75.487,38.327)-(74.487,38.357)
+  C105 1n C0G Capacitor_SMD:C_0402_1005Metric top at (79.137,35.237) rot 0: pad1 REF_1V65_ISO (78.657, 35.237), pad2 Net-(U7B-+) (79.617, 35.237)
+  track F.Cu REF_1V65_ISO w0.25: (78.877,36.237)-(78.657,35.237)
+  track F.Cu Net-(U7B-+) w0.25: (79.897,36.237)-(79.617,35.237)
+  C109 100n Capacitor_SMD:C_0402_1005Metric top at (53.890,4.400) rot 90: pad1 REF_1V65 (53.89, 3.92), pad2 GND (53.89, 4.88)
+  track F.Cu REF_1V65 w0.25: (52.890,3.890)-(53.890,3.920)
+  track F.Cu GND w0.25: (52.890,4.910)-(53.890,4.880)
+  C110 100n Capacitor_SMD:C_0402_1005Metric top at (113.963,12.395) rot 180: pad1 REF_1V65_ISO (114.443, 12.395), pad2 ISOGND (113.483, 12.395)
+  track F.Cu REF_1V65_ISO w0.25: (114.723,11.395)-(114.443,12.395)
+  track F.Cu ISOGND w0.25: (113.703,11.395)-(113.483,12.395)
+  C108 4.7n C0G Capacitor_SMD:C_0402_1005Metric top at (84.787,40.237) rot 270: pad1 ISOADA2 (84.787, 40.717), pad2 ISOGND (84.787, 39.757)
+  track F.Cu ISOADA2 w0.25: (83.287,41.247)-(84.787,40.717)
+  via ISOGND at (84.787,39.007) 0.4572/0.3
+  track F.Cu ISOGND w0.3: (84.787,39.757)-(84.787,39.007)
+  C96 1n C0G Capacitor_SMD:C_0402_1005Metric bottom at (50.680,-6.900) rot 0: pad1 Net-(C96-Pad1) (50.2, -6.9), pad2 Net-(U1A--) (51.16, -6.9)
+  via Net-(C96-Pad1) at (49.700,-6.410) 0.4572/0.3
+  track B.Cu Net-(C96-Pad1) w0.25: (49.700,-6.410)-(50.200,-6.900)
+  track B.Cu Net-(U1A--) w0.25: (51.160,-6.900)-(51.520,-7.679)
+  C98 1n C0G Capacitor_SMD:C_0402_1005Metric bottom at (51.200,1.100) rot 270: pad1 Net-(C98-Pad1) (51.2, 1.58), pad2 Net-(U1B--) (51.2, 0.62)
+  via Net-(C98-Pad1) at (50.290,0.961) 0.4572/0.3
+  track B.Cu Net-(C98-Pad1) w0.25: (50.290,0.961)-(51.200,1.580)
+  track B.Cu Net-(U1B--) w0.25: (51.200,0.620)-(52.070,0.372)
+  C99 1n C0G Capacitor_SMD:C_0402_1005Metric bottom at (61.950,-14.280) rot 270: pad1 GND (61.95, -13.8), pad2 Net-(U14-+) (61.95, -14.76)
+  track B.Cu GND w0.25: (61.637,-12.690)-(61.950,-13.800)
+  track B.Cu Net-(U14-+) w0.25: (61.950,-14.760)-(62.276,-15.874)
+  C100 1n C0G Capacitor_SMD:C_0402_1005Metric bottom at (59.330,-15.300) rot 180: pad1 Net-(C100-Pad1) (59.81, -15.3), pad2 Net-(U14--) (58.85, -15.3)
+  via Net-(C100-Pad1) at (60.400,-14.500) 0.4572/0.3
+  track B.Cu Net-(C100-Pad1) w0.25: (60.400,-14.500)-(59.810,-15.300)
+  C106 1n C0G Capacitor_SMD:C_0402_1005Metric bottom at (82.930,37.520) rot 270: pad1 Net-(C106-Pad1) (82.93, 38.0), pad2 Net-(U7B--) (82.93, 37.04)
+  via Net-(C106-Pad1) at (82.552,38.502) 0.4572/0.3
+  via Net-(U7B--) at (83.316,36.521) 0.4572/0.3
+  track B.Cu Net-(C106-Pad1) w0.25: (82.552,38.502)-(82.930,38.000)
+  track B.Cu Net-(U7B--) w0.25: (82.930,37.040)-(83.316,36.521)
+  C107 4.7n C0G Capacitor_SMD:C_0402_1005Metric bottom at (77.840,41.020) rot 0: pad1 ISOADA1 (77.36, 41.02), pad2 ISOGND (78.32, 41.02)
+  via ISOADA1 at (76.674,41.137) 0.4572/0.3
+  track B.Cu ISOADA1 w0.25: (76.674,41.137)-(77.360,41.020)
+  track B.Cu ISOGND w0.3: (78.320,41.020)-(79.006,40.895)
+== fix 12: silkscreen references after fix 11 (C95-C110)
+  294 references on silk: 275 already clear, 16 moved, 3 without a free spot (left as they were: DAB_SEC_1 R19 R58)
+  C109: (52.730,4.400) -> (57.064,4.400) angle 90 size 0.8
+  R57: (6.501,-65.417) -> (6.501,-65.417) angle 90 size 0.8
+  C97: (53.750,-1.299) -> (54.262,-3.422) angle 90 size 0.8
+  C104: (75.647,38.837) -> (70.466,38.768) angle 0 size 1
+  R53: (71.979,38.792) -> (75.463,42.498) angle 0 size 1
+  R21: (53.500,-6.609) -> (55.919,-5.484) angle 0 size 1
+  R40: (114.189,12.596) -> (116.632,11.326) angle 0 size 1
+  R1: (88.256,38.355) -> (89.436,40.061) angle 0 size 1
+  R76: (95.157,35.900) -> (94.032,33.432) angle 90 size 1
+  C101: (89.947,38.150) -> (87.474,34.418) angle 0 size 1
+  U7: (77.385,35.542) -> (81.595,35.542) angle 0 size 1
+  R52: (74.317,36.937) -> (75.463,35.186) angle 0 size 1
+  C110: (113.963,11.235) -> (113.963,13.586) angle 0 size 1
+  R51: (84.457,38.237) -> (84.471,38.218) angle 90 size 0.8
+  C105: (79.137,36.397) -> (79.137,33.955) angle 0 size 1
+  C99: (60.790,-14.280) -> (61.950,-12.639) angle 0 size 1

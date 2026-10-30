@@ -113,14 +113,17 @@ def adum_block(sh, UX, UY, ref, value, raw_label, r_raw, zener, caps_vdd, vinp, 
 
 
 def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_label, first=g(12), top_plus=None,
-             opamp=("OPA2353UA", "U1"), rval="91K", pins=None, ref_power=None, out_cap=None, top_power=None):
+             opamp=("OPA2353UA", "U1"), rval="91K", pins=None, ref_power=None, out_cap=None, top_power=None,
+             par_caps=None):
     """Difference amplifier (sheets 1, 4, 5): three `rval` resistors per input from `top` down
     to the op-amp (plus chain in the inner column xa = xb + 6 grid, minus chain in xb), r_ref
     from the + node up to ref_label (a global label, or a power symbol pointing left when
     ref_power is set), r_fb feedback, r_out to out_label. pins = (plus, minus, out) pin
     numbers (default by OPA2353 unit); out_cap = (ref, val, gnd_net) hangs a capacitor from
     the output label node to gnd_net; top_power = (plus_net, minus_net) puts power symbols on
-    the chain tops instead of leaving them for the caller. Returns a dict of points."""
+    the chain tops instead of leaving them for the caller. par_caps = (ref_cap, fb_cap, val) puts
+    a capacitor in parallel with r_ref and with r_fb (v4: HF filter of the tap nodes). Returns a
+    dict of points."""
     xa = xb + g(6)
     rows_ = [top + first + g(8 * i) for i in range(3)]
     for col, chain, text, t0 in ((xa, plus, None, top_plus if top_plus is not None else top), (xb, minus, "left", top)):
@@ -141,6 +144,9 @@ def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_
     _, rt, rb = vert2(sh, "R", r_ref[0], xr, pinp[1] - g(6), r_ref[1], top=1)
     sh.wire(rb, (xr, pinp[1])); sh.junction(xr, pinp[1])
     sh.wire(rt, up(rt, 2))
+    if par_caps:
+        _, ct, cb = vert2(sh, "C", par_caps[0], xr - g(4), pinp[1] - g(6), par_caps[2], top=1)
+        sh.wire(ct, rt); sh.wire(cb, rb)
     if ref_power:
         power_at(sh, ref_power, up(rt, 2), "left")
     else:
@@ -162,6 +168,9 @@ def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_
     sh.wire(n, (n[0], fb), fr)
     sh.wire(fl, (pinm[0], fb), pinm)
     sh.junction(*pinm)
+    if par_caps:
+        _, cl, cr = horiz2(sh, "C", par_caps[1], xu, fb + g(4), par_caps[2], left=2, text="below")
+        sh.wire(cl, fl); sh.wire(cr, fr)
     pa = (xa, top_plus if top_plus is not None else top)
     pm = (xb, top)
     if top_power:

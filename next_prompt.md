@@ -30,11 +30,11 @@ Also tools/regen_check.sh must print "regen_check: OK".
 Open points (ask the user which to do):
 1. v5 aux flyback: plan in V5_PLAN.md, decisions taken except D4 (controller sourcing); act on
    it only when the user asks.
-2. Switching noise (reports/noise/README.md): ask the user which fixes to apply and whether
-   to do the v3 measurements first. BOM-value changes (R7 1k -> 10k, R18/R9 -> 8.2k, C88/C89 ->
-   4.7 nF, C42/C2 -> 10 nF) need value rows in lib/v4_deviations.csv and sheet scripts; the new
-   caps (12 x 1 nF across the 10k legs, 100 nF on REF_1V65/_ISO, 4.7 nF on ISOADA1/2) need a
-   board script (fix 11) after checking the room around U1/U7/U14/U2. Firmware items go to the user.
+2. Switching noise: hardware findings 1-5 applied as v4 fix 11/12 (STATUS "v4 fix 11/12"; the
+   defaults are reversible). Open for the user: firmware items (ADA3 and AMC1306M05 scale,
+   sinc window = PWM period, synchronised/averaged sampling, DAB at 60/90 kHz), R73/R74 for the
+   real R64 inductance, the AFE/VSI edge rate vs the AMC1306 CMTI (50 kV/us min), and the
+   measurements in reports/noise/README.md.
 3. JLC order (fab/README.md): all user questions are answered; before ordering run
    fab/make_fab.sh and fab/jlc_bom_check.py N, check rotations in JLC's preview. 20V_ISO_SEC
    must deliver ~11 W for the upgraded U8 (K7805-2000R3, fix 10) - part of the v5 aux work.

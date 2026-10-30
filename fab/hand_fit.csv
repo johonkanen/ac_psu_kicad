@@ -16,3 +16,4 @@ PIN terminals,"ACIN1,ACIN2,ACOUT1,ACOUT2,PE1,PE2,PE3,PE4,PE5,PE6,PE7,PE8,AFE_OUT
 IW1830,PWM1,DIP-8,distributor (JLC C17325147 0 stock),replaced in v5 (aux flyback redesign)
 EF20_AUX_TRANS,TR2,Transformer_EF20,custom wound,replaced in v5
 ADS7056IRUGR,AD1,X2QFN-8 1.5x1.5mm,bought by the user,"X2QFN-8 0.5 mm pitch is hard to hand-solder: send the user's parts to JLC as consigned parts, or reflow with hot air"
+AMC1306M05DWVR (backup),"U4,U5,U6",SOIC-8W 300mil,Mouser/Digikey,"In the JLC BOM (C701717, 5 in stock 2026-10-30, 3 per board); if JLC runs out, the user buys from Mouser/Digikey and hand-solders"

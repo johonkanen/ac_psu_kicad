@@ -110,12 +110,16 @@ sh.text("Output filter between the inverter (J9/J10, inductor on J7/J9 off-board
 
 # ---- difference amplifiers -----------------------------------------------------------------
 diff_amp(sh, XB, BOT, 1, ["R60", "R61", "R71"], ["R62", "R63", "R256"], ("R52", "10k"), "REF_1V65_ISO",
-         ("R53", "10k"), ("R54", "8.2k"), "ISOADA1", top_plus=TOP, opamp=("OPA2353UA", "U7"))
+         ("R53", "10k"), ("R54", "8.2k"), "ISOADA1", top_plus=TOP, opamp=("OPA2353UA", "U7"),
+         out_cap=("C107", "4.7n C0G", "ISOGND"), par_caps=("C103", "C104", "1n C0G"))
 sh.text("U7:A measures the filter voltage (INU_FILTER_INPUT - INDUCTOR_OUTPUT) around REF_1V65_ISO -> ISOADA1.",
         XB - g(6), BOT + g(50))
 r = diff_amp(sh, g(236), g(84), 2, ["R65", "R66", "R67"], ["R70", "R69", "R68"], ("R46", "10k"), "REF_1V65_ISO",
-                  ("R51", "10k"), ("R56", "8.2k"), "ISOADA2", opamp=("OPA2353UA", "U7"))
+                  ("R51", "10k"), ("R56", "8.2k"), "ISOADA2", opamp=("OPA2353UA", "U7"),
+                  out_cap=("C108", "4.7n C0G", "ISOGND"), par_caps=("C105", "C106", "1n C0G"))
 sh.glabel("AC_OUT_2", *r["plus_top"], 90); sh.glabel("AC_OUT_1", *r["minus_top"], 90)
+sh.text("v4: C103-C106 1n C0G across the 10k legs (15.9 kHz); C107/C108 4.7n on ISOADA1/2 (8.2k/4.7n = 4.1 kHz, v3: none).",
+        g(230), g(84) + g(54))
 sh.text("U7:B measures the output voltage (AC_OUT_2 - AC_OUT_1) around REF_1V65_ISO -> ISOADA2.", g(230), g(84) + g(50))
 
 # U7 supply pins (unit C), C38 and C56

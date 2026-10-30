@@ -47,18 +47,22 @@ sh.text("Measurement connections (0 R)", g(26), g(122))
 # DC-link voltage measurement amplifiers
 r = diff_amp(sh, g(150), g(24), 1, ["R41", "R27", "R35"], ["R42", "R28", "R36"], ("R37", "10k"), None,
              ("R38", "10k"), ("R39", "8.2k"), "ADA1", opamp=("TLV316IDBVR", "U14"), pins=(3, 4, 1),
-             ref_power="GND", out_cap=("C42", "1n", "GND"), top_power=("DC+", "PGND"))
+             ref_power="GND", out_cap=("C42", "10n C0G", "GND"), top_power=("DC+", "PGND"),
+             par_caps=("C99", "C100", "1n C0G"))
 u = r["u"]
 sh.wire(u.pin(5), up(u.pin(5), 2)); power_at(sh, "VCC", up(u.pin(5), 2), "up")
 sh.wire(u.pin(2), down(u.pin(2), 2)); power_at(sh, "GND", down(u.pin(2), 2), "down")
 sh.text("U14: (DC+ - PGND) / 3 x 91K, output -> ADA1 (sheet 9). DC- in the PDF = GND.", g(144), g(24) + g(56))
 r = diff_amp(sh, g(150), g(84), 1, ["R81", "R80", "R82"], ["R83", "R84", "R85"], ("R1", "10k"), None,
              ("R76", "10k"), ("R77", "8.2k"), "ISOADA3", opamp=("TLV316IDBVR", "U2"), pins=(3, 4, 1),
-             ref_power="ISOGND", out_cap=("C2", "1n", "ISOGND"), top_power=("ISODC+", "ISOPGND"))
+             ref_power="ISOGND", out_cap=("C2", "10n C0G", "ISOGND"), top_power=("ISODC+", "ISOPGND"),
+             par_caps=("C101", "C102", "1n C0G"))
 u = r["u"]
 sh.wire(u.pin(5), up(u.pin(5), 2)); power_at(sh, "3V3_ISO", up(u.pin(5), 2), "up")
 sh.wire(u.pin(2), down(u.pin(2), 2)); power_at(sh, "ISOGND", down(u.pin(2), 2), "down")
 sh.text("U2: (ISODC+ - ISOPGND) / 3 x 91K, output -> ISOADA3 (J11).", g(144), g(84) + g(56))
+sh.text("v4: C99-C102 1n C0G across the 10k legs (15.9 kHz); C42/C2 10n (v3 1n) -> 8.2k/10n = 1.9 kHz DC-link filters.",
+        g(144), g(84) + g(60))
 
 # decoupling
 for x, ref, vdd, gnd in ((g(210), "C27", "VCC", "GND"), (g(210), "C87", "3V3_ISO", "ISOGND")):
