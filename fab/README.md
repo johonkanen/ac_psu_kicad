@@ -2,13 +2,13 @@
 
 | File | |
 |---|---|
-| `jlc_bom.csv` | Assembly BOM in JLC's format (Comment, Designator, Footprint, JLCPCB Part #): 54 lines, 190 SMD parts that JLC places (no THT: the user fits relays, Y caps, modules and connectors) |
+| `jlc_bom.csv` | Assembly BOM in JLC's format (Comment, Designator, Footprint, JLCPCB Part #): 53 lines, 189 SMD parts that JLC places (no THT: the user fits relays, Y caps, modules and connectors) |
 | `jlc_cpl.csv` | Assembly CPL (Designator, Mid X, Mid Y, Layer, Rotation) for exactly those parts, made by `make_fab.sh` |
 | `hand_fit.csv` | Everything JLC does not assemble: source, JLC code where one exists, and why it is hand-fitted |
 | `make_fab.sh` | Gerbers + Excellon drills → `out/ac_psu_gerber.zip`, position file → `jlc_cpl.csv`, BOM copy (`out/` is not committed) |
 | `make_cpl.py` | KiCad position CSV → JLC CPL, with per-package rotation corrections |
 | `jlc_bom_check.py` | Checks every JLC code (BOM and hand-fit list) for stock against the number of boards: `python3 fab/jlc_bom_check.py 5` |
-| `jlc_stock_2026-10-29.json` | Result of the last stock check (all 54 BOM lines in stock for 1 board) |
+| `jlc_stock_2026-10-30.json` | Result of the last stock check (all 53 BOM lines in stock for 5 boards; 2026-10-29 file: the check before the U16/U1/U7/AD1 changes) |
 | `jlc_stock_search.py`, `jlc_stock_2026-10-22.json` | The first search (2026-10-22) that found the codes, kept for reference |
 
 Order flow: `fab/make_fab.sh`, upload `fab/out/ac_psu_gerber.zip` (4 layers, 1.6 mm, see the board
@@ -26,6 +26,9 @@ inductance is measured.
 |---|---|---|---|
 | U4, U5, U6 | ADuM7701-8BRIZ (0 stock) | TI AMC1306M25DWVR (C471874), **accepted by the user** (start-up test pattern is fine for the firmware) | Same 8 pin functions (VDD1/AVDD, VIN±/AINP/N, GND1/AGND, GND2/DGND, MDAT/DOUT, MCLKIN/CLKIN, VDD2/DVDD), same 8-lead wide SOIC (11.5 mm span), ±250 mV linear (±320 mV clip), 5–21 MHz clock, data out after the rising clock edge (tD ≤ 15 ns), reinforced 7 kVpk. Differences: 32-clock test pattern after power-up; AVDD ≥ 3.0 V. The TI land pattern has 10.9 mm rows, this board has the Proteus 9.70 mm rows that the ADuM7701 was soldered on. |
 | U13, U15 | Si8661BD-B-IS (2 in stock) | Chipanalog CA-IS3761LW (C528659) | Same 16-pin assignment (VDD 1/16, GND 8/9, 5 forward channels on pins 2–6 → 15–11, reverse channel 10 → 7), default output low (L = Si866x "B"), 5 kVrms wide body. U17 (spare, not fitted) is not in the BOM. |
+| U16 | Si8660BD-B-IS (6 in stock) | TI ISO7760FDWR (C2878538) | Same 16-pin assignment (VCC1 1 / VCC2 16, GND1 8 / GND2 9, INA–INF 2–7 → OUTA–OUTF 15–10), "F" = default output low like Si8660 "B" (PWM gate signals stay off on power loss), 2.25–5.5 V, 5 kVrms reinforced, wide SOIC-16. |
+| U1, U7 | OPA2353EA (16 in stock) | TI OPA2350EA/2K5 (C115876) | Same family and VSSOP-8 pinout, rail-to-rail in/out, 2.7–5.5 V (3.3 V here), 38 MHz vs 44 MHz GBW: plenty for the 50 Hz voltage measurements. Cheaper fallback: TLV9062IDGKR (C398356, 10 MHz). |
+| AD1 | ADS7056IRUGR | bought by the user, not in the JLC BOM (`hand_fit.csv`) | Consign the parts to JLC (X2QFN-8, 0.5 mm pitch) rather than hand-solder. |
 | R19, R32 | 420R | 422R (C67237) | v4 fix 9 changed the design value too: 1.6506 V instead of 1.6532 V. |
 | R87 | RESISTOR_ARRAY (no value in the Proteus data) | 4 × 33R convex 4D02 (C25501) | 33R confirmed by the user (SPI series termination). |
 | C67 | 100u (now drawn as a ceramic, v4 fix 7) | Murata GRM31CR61A107MEA8L 10 V X5R (C883598) | |

@@ -15,3 +15,4 @@ K7805-2000R3 (Mornsun),U8,SIP-3 P2.54,"Mornsun via a distributor (genuine part);
 PIN terminals,"ACIN1,ACIN2,ACOUT1,ACOUT2,PE1,PE2,PE3,PE4,PE5,PE6,PE7,PE8,AFE_OUT,FILTER_IN,FILTER_OUT,INU_OUT2,J5,J7,J9,J10,DAB_PRI_1,DAB_PRI_2,DAB_SEC_1,DAB_SEC_2",Terminal_*,hand wiring,wire/pin terminals
 IW1830,PWM1,DIP-8,distributor (JLC C17325147 0 stock),replaced in v5 (aux flyback redesign)
 EF20_AUX_TRANS,TR2,Transformer_EF20,custom wound,replaced in v5
+ADS7056IRUGR,AD1,X2QFN-8 1.5x1.5mm,bought by the user,"X2QFN-8 0.5 mm pitch is hard to hand-solder: send the user's parts to JLC as consigned parts, or reflow with hot air"
