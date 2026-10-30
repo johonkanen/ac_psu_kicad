@@ -61,7 +61,7 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    10 W per output. Re-balance the outputs before step 1 (for example Out2 13–14 W, Out1 6–7 W,
    or a larger total), and re-check the INN3694C's power rating, ILIM and the core.
 
-## 3. Decisions (answered 2026-10-24 except D4)
+## 3. Decisions (D1–D3, D5, D6 answered 2026-10-24; D4 2026-10-30)
 
 - **D1 Output mapping – yes:** Out1 (regulated) → `20V`, renamed `15V`, on `GND`; Out2
   (cross-regulated) → `20V_ISO_SEC`, renamed `15V_ISO`, on `ISOGND`.
@@ -69,9 +69,9 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
   VOUT = 15 V.
 - **D3 – reinforced** between {primary, Out1, bias} and Out2 (finding 1), in the transformer and
   on the board.
-- **D4 Controller:** INN3694C (0 stock, buy elsewhere and hand-fit, or JLC global sourcing), or
-  an alternative with stock (another InnoSwitch3-EP 900 V part, or a primary-side controller
-  such as the existing iW1830 with the new EE25 transformer and a 900 V+ MOSFET). **Open.**
+- **D4 Controller – TI UCC28710 with an external 950 V MOSFET** (user, 2026-10-30), instead of the
+  INN3694C (0 stock at JLC). Details in section 6. The iW1830 has 0 stock at JLC, and its 700 V
+  switch is too close to 450 V DC plus VOR plus the leakage spike.
 - **D5 – in place on the main board:** it replaces the aux supply. Delete the sheet 7 copper,
   then re-place and re-route the area in the KiCad GUI, with a slot under the transformer and IC.
 - **D6 – rename** `20V` / `20V_ISO_SEC` to `15V` / `15V_ISO`. This touches sheets 1, 2, 3, 5, 7
@@ -127,6 +127,41 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
    `tools/regen_check.sh`, renders of the area, and the JLC BOM/CPL refreshed.
 7. **Bring-up** (README): measure Lp (MKF predicts +12 %), the drain peak at 500 V, the clamp
    temperature, and Out2 at light and full load.
+
+## 6. Controller: UCC28710 + external MOSFET (D4)
+
+Why: primary-side regulation (PSR) like the present iW1830 design: the output is sensed through
+the bias winding, so there is no optocoupler across the reinforced barrier. The external MOSFET
+removes the 700–725 V switch limit of the integrated parts, and the 700 V high-voltage start-up
+switch (DC+ ≤ 450 V) replaces the R43/R34/R33 start-up chain. ±5 % CV/CC regulation, up to
+100 kHz, clamped MOSFET gate drive, SOIC-7. JLC C80866 (UCC28710DR), 381 in stock on 2026-10-30.
+The UCC28712 is pin-compatible (fixed cable compensation) and could serve as a second source.
+
+MOSFET (primary peak current ≈ 0.8–1 A at 20–25 W; RMS ≈ 0.2 A at 400 V, ≈ 0.45 A at 100 V;
+drain peak ≈ 450 V + VOR ≈ 104 V + clamp overshoot, so ≈ 700–750 V with a 180–200 V TVS clamp,
+which needs ≥ 950 V parts):
+
+| Part | Package | Rds(on) at 10 V | JLC / stock 2026-10-30 | Note |
+|---|---|---|---|---|
+| **Infineon IPN95R2K0P7** | **SOT-223** | 2.0 Ω | C3278575 / 75 | Smallest; CoolMOS P7, 330 pF Ciss, 10 nC. ≈ 0.1 W conduction at 400 V, ≈ 0.4–0.8 W at 100 V hot: needs a copper area of ≈ 1–2 cm² on the drain tab, which is the switch node (keep it small for EMI; use the source side and a thermal pad). |
+| Infineon IPN95R3K7P7 | SOT-223 | 3.7 Ω | C3278582 / 172 | More stock, twice the conduction loss. |
+| ST STD6N95K5 | DPAK (TO-252) | 1.25 Ω | C455168 / 112 254 | Large stock and lower loss, with a bigger tab (≈ 6.6 × 6.1 mm). The fallback if the SOT-223 parts run out. |
+| Infineon IPD95R1K2P7 | DPAK | 1.2 Ω | C536916 / 1528 | Same class as STD6N95K5. |
+
+Check in the datasheets before the circuit step:
+- the UCC28710 DRV drive against the MOSFET Qg (10–15 nC is fine at ≤ 100 kHz)
+- the minimum demagnetisation time for its PSR sampling against the EE25 leakage (20.6 µH)
+- the bias-winding voltage range (VDD), then pick NB to suit
+- the maximum power the TI design calculator gives at VIN 100–450 V
+
+With PSR, Out1 is no longer the regulated rail. Both 15 V outputs are cross-regulated through the
+bias winding, as 20V/20V_ISO_SEC are today, so the transformer coupling (MKF leakage) sets the
+accuracy. Keep a preload on both outputs.
+
+Step changes for this choice: step 2 follows the UCC28710 application circuit (no SR MOSFET and no
+FB divider on Out1; a VS divider from the bias winding, a CS resistor, a 950 V MOSFET, and diodes on
+both outputs). Step 3 drops the InSOP-24D footprint (SOIC-7 and SOT-223 are KiCad library
+footprints).
 
 ## 5. Not part of v5
 
