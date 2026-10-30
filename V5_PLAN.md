@@ -70,7 +70,7 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
 - **D3 – reinforced** between {primary, Out1, bias} and Out2 (finding 1), in the transformer and
   on the board.
 - **D4 Controller – TI UCC28710 with an external 950 V MOSFET** (user, 2026-10-30), instead of the
-  INN3694C (0 stock at JLC). Details in section 6. The iW1830 has 0 stock at JLC, and its 700 V
+  INN3694C (0 stock at JLC). Details in section 5. The iW1830 has 0 stock at JLC, and its 700 V
   switch is too close to 450 V DC plus VOR plus the leakage spike.
 - **D5 – in place on the main board:** it replaces the aux supply. Delete the sheet 7 copper,
   then re-place and re-route the area in the KiCad GUI, with a slot under the transformer and IC.
@@ -128,7 +128,7 @@ The sheet 7 parts take up about x 70…107, y −60…−13. TR2 (EF20, 2 × 5 p
 7. **Bring-up** (README): measure Lp (MKF predicts +12 %), the drain peak at 500 V, the clamp
    temperature, and Out2 at light and full load.
 
-## 6. Controller: UCC28710 + external MOSFET (D4)
+## 5. Controller: UCC28710 + external MOSFET (D4)
 
 Why: primary-side regulation (PSR) like the present iW1830 design: the output is sensed through
 the bias winding, so there is no optocoupler across the reinforced barrier. The external MOSFET
@@ -163,7 +163,7 @@ FB divider on Out1; a VS divider from the bias winding, a CS resistor, a 950 V M
 both outputs). Step 3 drops the InSOP-24D footprint (SOIC-7 and SOT-223 are KiCad library
 footprints).
 
-## 5. Not part of v5
+## 6. Not part of v5
 
 v4 clean-up and manufacturing items (C67, silk positions, pad decisions, JLC alternatives, CPL)
 continue separately on the v4 board. Sheet 7 parts that v5 replaces (iW1830, EF20 TR2 and so on)
