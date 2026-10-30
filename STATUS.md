@@ -1,6 +1,24 @@
 # Status
 
-Updated: 2026-10-29 (U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-10-30 (switching-noise analysis in reports/noise/, no design change); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## Switching-noise analysis (2026-10-30, report only)
+
+`reports/noise/README.md`: why every measurement showed spikes at the switching edges on the v3
+boards (AFE/VSI 30 kHz, DAB 66 kHz, free-running ADC). Top findings:
+1. The diff-amp tap nodes (91k/10k) have no capacitor and run 70–100 mm on In2, the U7/U2 pairs
+   1.5–2 mm from the J8/J6 gate and source traces. Node-injected charge reaches the output at
+   about 1×, the signal at 0.0366×.
+2. U1B's R7 is 1k, not 10k, so ADA3 has about 24× the common-mode gain of a matched amp.
+3. The output RCs are 1.6 MHz (ADA2/3), 19 kHz (ADA1, ISOADA3) or missing (ISOADA1/2).
+4. The current spikes come from L·di/dt in the shunts and are covered by v4 fix 4; still open:
+   the L tuning (DAB first) and the sinc window = PWM period.
+5. REF_1V65 and REF_1V65_ISO have no decoupling.
+6. Firmware sampling: 66.67 kHz aliases to 6.67 kHz at 30 kHz sampling.
+
+Proposed fixes by class: BOM values (R7, R18/R9, C88/C89, C42/C2), new caps by board script
+(12 × 1 nF across the 10k legs, 2 × 100 nF on the references, 2 × 4.7 nF on ISOADA1/2),
+firmware, and layout (v5). Plus measurements to do on a v3 board first. Nothing changed yet.
 
 ## v5 aux flyback – planned (2026-10-24)
 
