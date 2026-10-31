@@ -251,6 +251,69 @@ CTRL winding voltage to suit, e.g. ≈ 7–8 V into a buck.
 (primary-side regulation from the bias winding, no optocoupler), but drives an external 950 V
 MOSFET, so the power is set by the transformer and the MOSFET.
 
+### 5.3 Transformer (run 2026-10-31)
+
+Details, candidates and scripts: `reports/aux_flyback/` (README.md, params.py, inputs.py,
+transformer.py, report.txt, winding.svg). This supersedes the INN3694C/EE25 numbers above.
+
+**Electrical design** (UCC28710, 100–450 V, full power at 100 V):
+- **Design load 25 W:** Out1 15 V 0.5 A, Out2 15 V 0.4 A, CTRL ≈ 9 V 1.2 A (into a 5 V buck), bias 24.4 V 20 mA.
+- **VOR 100.5 V:** the 100 V DCM limit sets it.
+- **Lp 265 µH, Ipp(max) 1.61 A, RCS 0.47 Ω.**
+- **Full load at 80 kHz:** at 100 V, the on-time, demagnetisation and ring take 0.76 of the period.
+- **CC limit:** 28.5 W at 92 kHz, ≈ 25.5 W with both datasheet minimums.
+- **Drain peak** 450 + 240 V clamp = 690 V (73 % of 950 V).
+- **Light load at 450 V:** tDMAG(min) ≈ 1.25 µs, LEB-limited; TI's target is 1.2 µs.
+
+**Core: E30/15/7 N87.** Gap ≈ 0.265 mm (AL ≈ 259 nH): TDK B66319G0250X187 with B66319G0000X187 (confirm the AL), or Ferroxcube 3C95.
+
+**Bobbin:** 12-pin horizontal 6 + 6, e.g. Ferroxcube CSH-E30/15/7-1S-12P, about 35 × 31 mm. Confirm the drawing.
+
+| Winding (inside → out) | Turns | Wire |
+|---|---|---|
+| P1 | 16 | 0.40 mm Grade 2 |
+| CTRL | 3 | 3 × TIW 25 AWG (Rubadue TCA3) in parallel |
+| Out2 | 5 | TIW 24 AWG |
+| P2 | 16 | 0.40 mm Grade 2 |
+| Out1 | 5 | 0.50 mm Grade 2 |
+| Bias | 8 | 0.20 mm Grade 2 |
+
+**Insulation:** TIW on Out2 and CTRL carries the reinforced insulation (certified per IEC 62368-1 Annex J), so there is no margin tape. 25 µm tape between layers is mechanical only.
+
+**Pins:**
+- Primary row: DC+, drain, empty, bias, GND (bias and Out1 return), Out1.
+- Secondary row: Out2+, ISOGND, two pins removed, CTRL+, CTRL return. Out2 and CTRL are then ≈ 13.5 mm apart edge to edge.
+- Board: slots between the rows and between Out2 and CTRL.
+
+**Insulation requirements (MKF, 500 V working):**
+- IEC 62368-1 reinforced: creepage 3.1 mm, clearance 5.5 mm, 5 kV withstand.
+- IEC 60664-1 (and IEC 62477-1, which uses it) reinforced: creepage 16 mm. That applies to the bobbin and pins, and PD2 printed-wiring values are lower.
+- The PCB keeps ≥ 10 mm with slots.
+
+**Losses (MKF):** 0.65 W at 100 V, 0.74 W at 450 V (core 0.31–0.42 W, copper 0.32–0.34 W). Peak flux 231 mT. ≈ 80 °C at the assumed 60 °C chassis air (rule-of-thumb 25 K/W).
+
+**Other candidates:**
+- E25/13/7: 0.76–0.91 W, ≈ 87 °C. Only 10 pins, so CTRL would need TIW flying leads.
+- E32/16/9: 0.65–0.75 W, larger.
+
+**Board footprint:** about 35 × 31 mm plus slots, against today's EF20 at 22 × 14 mm: ≈ 3.5 × the area.
+
+**Rest of the stage:**
+- clamp TVS ≈ 200 V class + 1000 V fast diode, ≈ 1.2 W with a conservative 6.7 µH leakage
+- Out1/Out2 diodes: 200 V ultrafast 2 A
+- CTRL diode: 100 V Schottky 3–5 A (≈ 0.5 W)
+- bias diode: 300–400 V 1 A
+- output capacitor RMS currents: Out1 0.91 A, Out2 0.73 A, CTRL 2.19 A
+- preloads: Out2 ≈ 3 mA, CTRL ≈ 10 mA
+- the CTRL buck must accept ≥ 17 V input; CTRL is 8.4–9.3 V loaded and up to ≈ 12 V at no load
+
+**Open items:**
+1. measure the chassis air temperature
+2. wind a sample and measure Lp, the leakage (→ clamp loss), and the VS waveform at 450 V no load
+3. source certified TIW (not at JLC/LCSC; none of the cores or bobbins are either)
+4. confirm the core AL and the bobbin drawing
+5. confirm the 500 V working-voltage assumption between the ISO side and the primary
+
 ## 6. Not part of v5
 
 v4 clean-up and manufacturing items (C67, silk positions, pad decisions, JLC alternatives, CPL)
