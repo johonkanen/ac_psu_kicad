@@ -50,5 +50,10 @@ Voltage margins at DC+ max 450 V (user, 2026-10-29): 91k divider chains 3 × 91k
 resistor (75 %); 2220 split capacitors 225 V on 450 V (50 %); C68 450 V on 500 V (90 %); the
 snap-in DC link capacitors are 450 V parts (user: OK).
 
+M4 ring-lug terminals (v4 fix 13): Würth REDCUBE THR 74650074R on FILTER_IN, FILTER_OUT,
+INU_OUT2, J5, J7, J9, J10 (hand-soldered; Mouser/Digikey), each with an M4 × 6 screw, a lock washer
+and an insulated M4 ring lug for 2.5–6 mm² (`hand_fit.csv`). The other lead connections (DAB, ACIN,
+ACOUT, AFE_OUT, PE) are still soldered pins until they are re-laid out.
+
 Sourced and soldered by the user (no order code): the common-mode chokes CM1–CM3 and the main
 inductors (AliExpress), and the off-board parts (TR1, the inductor on J7/J9).

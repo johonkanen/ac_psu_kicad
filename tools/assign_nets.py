@@ -79,6 +79,8 @@ def kicad_pads(board):
     out = []
     for fp in board.GetFootprints():
         for pad in fp.Pads():
+            if not pad.IsOnCopperLayer():
+                continue   # paste-only pads (v4 fix 13 M4 terminals)
             out.append((pad, fp.GetReference(), kpt(pad.GetPosition())))
     return out
 

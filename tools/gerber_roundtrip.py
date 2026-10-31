@@ -408,11 +408,15 @@ def compare_drills(kdir, report):
     used = np.zeros(len(K), bool)
     pairs = Counter()
     errors = []
+    nswap_p = nswap_k = 0
     for x, y, d, fn in P:
         dist = np.hypot(kxy[:, 0] - x, kxy[:, 1] - y)
         dist[used] = np.inf
         i = int(dist.argmin())
         if dist[i] > TOL:
+            if deviations.in_terminal_area(x, y):
+                nswap_p += 1    # v4 footprint swap: the old lead pin's drill is gone
+                continue
             errors.append(f"Proteus {fn} {d} mm at ({x}, {y}) has no KiCad drill within {TOL} mm")
             continue
         used[i] = True
@@ -427,10 +431,14 @@ def compare_drills(kdir, report):
         if any(math.hypot(vx - x, vy - y) < TOL for vx, vy, _, _ in v4) and abs(d - 0.3) <= DRILL_TOL:
             nv4 += 1
             continue
+        if deviations.in_terminal_area(x, y):
+            nswap_k += 1        # drills of a v4 swapped footprint (M4 terminal: 4 x 1.85 + 4.3 mm)
+            continue
         errors.append(f"KiCad {fn} {d} mm at ({x}, {y}) has no Proteus drill")
     if nv4 != len(v4):
         errors.append(f"{len(v4)} v4 vias listed, {nv4} v4 via drills found")
     report.append(f"== drills: {nv4} KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv")
+    report.append(f"== drills: v4 footprint swaps: {nswap_p} Proteus drills removed, {nswap_k} KiCad drills added (terminal areas)")
     report.append(f"== drills: Proteus {len(P)}, KiCad {len(K)}, matched {int(used.sum())} within {TOL} mm")
     for (d, dk), n in sorted(pairs.items()):
         note = "" if abs(d - dk) <= DRILL_TOL else ("  KiCad footprint drill kept (larger)" if dk > d else "  SMALLER")

@@ -135,6 +135,8 @@ def main():
             if nums != set(added["pins"]):
                 errors.append(f"{ref}: footprint pads {sorted(nums)} != v4 pins {sorted(added['pins'])}")
             v4parts.append(ref)
+    swapped = deviations.footprint_changes()
+    v4swaps = []
     for ref in sorted(ipc):
         if ref not in sch:
             errors.append(f"{ref}: not in the schematic")
@@ -144,6 +146,18 @@ def main():
             errors.append(f"{ref}: footprint field {sorted(fps)} (need exactly one, non-empty)")
             continue
         fpid = next(iter(fps))
+        if ref in swapped:
+            # v4 footprint swap: no Proteus geometry to fit; the pad numbers must be the IPC pins
+            old, new, _, _ = swapped[ref]
+            if fpid != new or fmap.get(ref) != new:
+                errors.append(f"{ref}: footprint {fpid}, map {fmap.get(ref)}, v4 swap to {new}")
+                continue
+            path = footprint_path(fpid)
+            nums = {p["num"] for p in fpgeom.load_footprint(path) if p["num"]} if os.path.exists(path) else set()
+            if nums != {q["pin"] for q in ipc[ref]}:
+                errors.append(f"{ref}: footprint pads {sorted(nums)} != IPC pins {sorted({q['pin'] for q in ipc[ref]})}")
+            v4swaps.append(ref)
+            continue
         if fmap.get(ref) != fpid:
             errors.append(f"{ref}: schematic footprint {fpid} != lib/footprint_map.csv {fmap.get(ref)} "
                           "(re-run the sheet scripts)")
@@ -224,7 +238,8 @@ def main():
     worst = max((float(r[9]) for r in fit_rows), default=0.0)
     print(f"check_footprints: {len(fit_rows)}/{len(ipc)} parts fitted, {len(pad_rows)} pads, "
           f"{len(per_fp)} footprints, worst residual {worst:.3f} mm (limit {TOL})"
-          + (f"; v4 parts without IPC pads (footprint/pads checked): {' '.join(v4parts)}" if v4parts else ""))
+          + (f"; v4 parts without IPC pads (footprint/pads checked): {' '.join(v4parts)}" if v4parts else "")
+          + (f"; v4 footprint swaps (pad numbers checked): {' '.join(v4swaps)}" if v4swaps else ""))
     print("check_footprints: " + ("FAILED" if errors else "OK"))
     sys.exit(1 if errors else 0)
 

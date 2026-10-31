@@ -6,6 +6,8 @@
 #   part   ref is a new part (not in the IPC); to = footprint lib id
 #   add    pin of a new part on net `to` (an IPC net name, or a new net of a `pin` row)
 #   value  value of ref changes from `from` to `to` (checked against the schematic)
+#   footprint  the footprint of ref changes from `from` to `to` (pads checked against the terminal
+#          area of ref in lib/v4_copper.csv and the IPC nets, not against the Proteus pad geometry)
 kind,ref,pin,from,to,fix,note
 merge,,,RET_ISO,ISOGND,1,isolated 20 V return (TR2-6 C15-2 C36-2 R49-1 + 2 vias) joined to ISOGND
 merge,,,DGND,GND,2,U11-6 INH tied to GND (was the floating single-pin net DGND)
@@ -117,3 +119,10 @@ part,C110,,,Capacitor_SMD:C_0402_1005Metric,11,REF_1V65_ISO decoupling
 add,C110,1,,REF_1V65_ISO,11,
 add,C110,2,,ISOGND,11,
 value,C110,,,100n,11,
+footprint,FILTER_IN,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
+footprint,FILTER_OUT,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
+footprint,INU_OUT2,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (inverter half-bridge output)
+footprint,J5,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (AFE shunt R48 force lead)
+footprint,J7,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
+footprint,J9,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
+footprint,J10,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,13,M4 ring-lug terminal instead of the soldered lead pin (output filter input lead)

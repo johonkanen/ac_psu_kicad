@@ -154,6 +154,13 @@ PROJECT = {
     "R_Shunt_FKK5R0020FE": dict(ipc="R48", descr="FKK5R0020FE 4-terminal current shunt, Proteus land pattern"),
     "Relay_SLA-12VDC-SL-A": dict(ipc="R20", descr="Songle SLA-12VDC-SL-A relay, Proteus land pattern (pads 1,2,3,5,6)"),
     "Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm": dict(ipc="ACIN1", descr="Two-hole wire terminal, both holes pad 1"),
+    # v4 fix 13: M4 threaded terminal for a ring lug (Wuerth REDCUBE THR WP-THRBU 74650074R, M4 through-
+    # hole thread, 7 x 7 mm, 4 solder pins, 50 A). The KiCad footprint's 4.3 mm NPTH becomes a plated
+    # 4.3 mm hole in a 7.4 mm square pad 1 on all layers: the copper under the cube (other nets keep
+    # out) and the landing of the old pin terminal's tracks.
+    "Wuerth_REDCUBE-THR_74650074_M4_PTH": dict(
+        base="TerminalBlock_Wuerth:Wuerth_REDCUBE-THR_WP-THRBU_74650074_THR", npth_to_pad=(7.4, 7.4),
+        descr="M4 ring-lug terminal, Wuerth REDCUBE THR 74650074R (50 A), plated 4.3 mm centre hole"),
     "Terminal_D3.05mm_Drill1.52mm": dict(ipc="PE8", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill2.0mm": dict(ipc="PE2", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill2.55mm": dict(ipc="J5", descr="Single PIN terminal"),
@@ -226,6 +233,14 @@ def assign():
         if ref not in pm:
             errors.append(f"{ref}: v4 part missing from lib/part_map.csv")
         out[ref] = (p["footprint"], f"v4 fix {p['fix']}: {p['note']}")
+    # v4: footprints swapped on existing parts (lib/v4_deviations.csv kind footprint)
+    for ref, (old, new, fix, note) in deviations.footprint_changes().items():
+        if ref not in out:
+            errors.append(f"{ref}: footprint change for a part without IPC pads")
+            continue
+        if out[ref][0] != old:
+            errors.append(f"{ref}: footprint change from {old}, but the rule gives {out[ref][0]}")
+        out[ref] = (new, f"v4 fix {fix}: {note}")
     return out, errors
 
 
@@ -301,6 +316,16 @@ def derive(name, spec, ipc):
                     drill = sexpr.find(pad, "drill")
                     drill[1:] = [q["drill"]]
             at[1:] = [_r4(x), _r4(-y)] + ([_r4(rot)] if abs(rot) > 1e-9 else [])
+    if spec.get("npth_to_pad"):
+        w, h = spec["npth_to_pad"]
+        for pad in sexpr.find_all(base, "pad"):
+            if str(pad[2]) == "np_thru_hole":
+                pad[1] = "1"
+                pad[2] = Sym("thru_hole")
+                pad[3] = Sym("rect")
+                sexpr.find(pad, "size")[1:] = [w, h]
+                lay = sexpr.find(pad, "layers")
+                lay[1:] = ["*.Cu"]
     if spec.get("flip_body") is not None:
         _flip_body(base, spec["flip_body"])
     if spec.get("ipc_sizes"):

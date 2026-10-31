@@ -3628,7 +3628,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.55mm"
+		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
 			(at 172.72 48.26 0)
 			(effects
 				(font
@@ -3767,7 +3767,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.55mm"
+		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
 			(at 220.98 50.8 0)
 			(effects
 				(font
@@ -3831,7 +3831,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.55mm"
+		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
 			(at 210.82 60.96 0)
 			(effects
 				(font

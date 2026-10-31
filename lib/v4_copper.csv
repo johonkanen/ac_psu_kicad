@@ -49,3 +49,36 @@ area,B.Cu,61.037,-16.474,62.876,-12.090,,11,C99 (bottom) pads and tracks
 area,*,58.250,-15.900,61.000,-13.900,,11,C100 (bottom) pads, track and via
 area,*,81.952,35.921,83.916,39.102,,11,C106 (bottom) pads, tracks and vias
 area,*,76.074,40.295,79.606,41.737,,11,C107 (bottom) pads, tracks and via
+area,*,-19.900,-62.800,-8.900,-51.800,,13,FILTER_IN M4 terminal at (-14.40,-57.30) (lead pin was at (-14.40,-57.30))
+area,*,-38.500,-57.500,-27.500,-43.000,,13,FILTER_OUT M4 terminal at (-33.00,-52.00) (lead pin was at (-33.00,-48.50))
+area,*,41.500,54.500,54.000,67.000,,13,INU_OUT2 M4 terminal at (47.00,60.00) (lead pin was at (48.50,61.50))
+area,*,-20.200,-82.900,-9.200,-70.150,,13,J5 M4 terminal at (-14.70,-75.65) (lead pin was at (-14.70,-77.40))
+area,*,-77.300,60.100,-66.300,71.100,,13,J7 M4 terminal at (-71.80,65.60) (lead pin was at (-71.80,65.60))
+area,*,-77.400,42.900,-66.400,53.900,,13,J9 M4 terminal at (-71.90,48.40) (lead pin was at (-71.90,48.40))
+area,*,-63.700,34.900,-51.200,47.650,,13,J10 M4 terminal at (-58.20,42.15) (lead pin was at (-56.70,40.40))
+area,B.Cu,30.600,-49.080,42.400,-41.880,,14,Proteus B.Cu pour 0 (PGND) gives way: insulation gap
+area,B.Cu,-59.095,-75.610,-38.905,-49.310,,14,Proteus B.Cu pour 10 (LEMOUT) gives way: insulation gap
+area,B.Cu,-96.595,-49.575,-84.425,-35.905,,14,Proteus B.Cu pour 11 (JEE) gives way: insulation gap
+area,B.Cu,-94.850,-13.130,-85.370,-5.410,,14,Proteus B.Cu pour 13 (AC_OUT_1) gives way: insulation gap
+area,B.Cu,-54.580,-12.075,-39.440,-4.145,,14,Proteus B.Cu pour 5 (ISODC+) gives way: insulation gap
+area,F.Cu,-59.090,-75.875,-38.630,-49.025,,14,Proteus F.Cu pour 24 (FILTER_INPUT) gives way: insulation gap
+area,F.Cu,-55.170,-15.930,-34.990,-9.930,,14,Proteus F.Cu pour 24 (FILTER_INPUT) gives way: insulation gap
+area,F.Cu,-88.735,-53.075,-81.825,-43.025,,14,Proteus F.Cu pour 26 (CMFILT1) gives way: insulation gap
+area,F.Cu,-94.820,-43.315,-84.420,-35.905,,14,Proteus F.Cu pour 27 (AC_IN2) gives way: insulation gap
+area,F.Cu,-113.830,-17.725,-82.390,-10.315,,14,Proteus F.Cu pour 27 (AC_IN2) gives way: insulation gap
+area,F.Cu,-83.825,-17.730,-61.335,-10.230,,14,Proteus F.Cu pour 27 (AC_IN2) gives way: insulation gap
+area,F.Cu,-103.595,-76.000,-96.425,-58.940,,14,Proteus F.Cu pour 28 (JEE) gives way: insulation gap
+area,F.Cu,-96.595,-48.670,-89.925,-38.450,,14,Proteus F.Cu pour 28 (JEE) gives way: insulation gap
+area,F.Cu,-86.650,-12.630,-79.490,-6.610,,14,Proteus F.Cu pour 31 (AFE_RELAY) gives way: insulation gap
+area,F.Cu,30.600,-49.080,42.400,-41.880,,14,Proteus F.Cu pour 5 (DC+) gives way: insulation gap
+area,F.Cu,33.390,-3.790,41.130,7.590,,14,Proteus F.Cu pour 8 (ISOPGND) gives way: insulation gap
+area,In1.Cu,-104.200,-66.400,-94.500,-56.700,,14,In1 GND and GPIO_BYPASS_RLY diagonals moved 0.75 mm away from PE3
+area,In2.Cu,-104.000,-75.900,-62.000,-73.200,,14,In2 20V track (x -103.2..-62.6) re-drawn, dips 0.95 mm under C22 (PE3)
+area,*,26.000,-48.500,42.500,-43.000,,14,PE8: DC+ (F.Cu) and PGND (B.Cu) pour edges pulled back (Proteus pour border strokes)
+area,F.Cu,31.500,-5.500,40.500,7.500,,14,ISOPGND pour pulled back from the R2 divider via (Proteus pour border strokes)
+area,F.Cu,-88.500,-35.750,-86.500,-33.750,,14,midpoint of a Proteus draw that fix 14 changed: CMFILT1/AC_IN2 pour border stroke shortened by the AC_IN2 trim near PE4
+area,B.Cu,21.334,-47.000,23.334,-45.000,,14,midpoint of a Proteus draw that fix 14 changed: PGND pour border stroke shortened at PE8
+area,B.Cu,-14.500,-10.000,-12.500,-8.000,,14,midpoint of a Proteus draw that fix 14 changed: ISODC+ pour border stroke shortened at the FILTER_INPUT track
+area,B.Cu,-88.500,-36.133,-86.500,-34.133,,14,midpoint of a Proteus draw that fix 14 changed: JEE pour border stroke shortened near PE4
+area,B.Cu,-89.500,-6.000,-87.500,-4.000,,14,midpoint of a Proteus draw that fix 14 changed: AC_OUT_1 pour border stroke shortened by the JEE gap
+area,B.Cu,-101.500,-11.000,-99.500,-9.000,,14,midpoint of a Proteus draw that fix 14 changed: AC_OUT_1 pour border stroke shortened by the JEE gap

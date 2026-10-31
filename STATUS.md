@@ -1,6 +1,99 @@
 # Status
 
-Updated: 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v4 fix 13/14 – M4 terminals and insulation spacing (2026-10-31, branch `v4-terminals`)
+
+User decisions 2026-10-31: fix the insulation spacing on the v4 board before ordering (IEC 61010-1,
+bench-top lab supply; reinforced primary ↔ ISO, basic to PE), and replace the soldered flying-lead
+pins with **M4 threaded terminals + ring lugs** (about 4 kW: DAB leads up to 25 A RMS, mains/AC
+output and inductor leads 17–20 A, PE bond test 25 A).
+
+**Domains and the check.** `tools/v4/domains.py` sorts every net into P (primary incl. mains),
+I (isolated DC link / AC output) or E (PE terminals) by joining nets through all parts except the
+barrier parts (TR1 PRI/SEC, TR2 pins 1–5/6–10, U13/U15/U16/U17 1–8/9–16, U4/U5/U6 1–4/5–8, the
+Y capacitors pin by pin). `tools/v4/domain_gaps.py` (kipy, pcbnew polygons only, ≈ 5 s) grows each
+domain's copper per layer by the required gap and intersects it with the other domains' copper:
+**P ↔ I ≥ 5.0 mm, P/I ↔ E ≥ 2.5 mm on every layer, and no P/I copper overlapping between adjacent
+layers**. Added to `tools/check_all.sh`. (The 5.0 / 2.5 mm are the IEC 60664-1 printed-wiring PD2
+500 V-row values that IEC 61010-1 Annex K builds on; to be confirmed against the standard text.)
+
+**Gaps before → after (main board 2104b5b → this branch):**
+
+| Layer | Barrier | Spot (IPC frame) | Before | After |
+|---|---|---|---|---|
+| F.Cu | P ↔ I | via Net-(R2-Pad1) ↔ ISOPGND pour (41.5, 0.7) | 3.36 mm | ≥ 5.0 |
+| F.Cu | P ↔ I | AC_IN2 pour ↔ AFE_RELAY pour / ACOUT1 (−68…−110, −9…−14) | 3.62 / 3.81 mm | ≥ 5.0 |
+| B.Cu | P ↔ I | FILTER_INPUT track ↔ ISODC+ pour (−47.0, −8.2) | 3.17 mm | ≥ 5.0 |
+| B.Cu | P ↔ I | JEE pour ↔ AC_OUT_1 pour (−90.0, −9.3) | 4.10 mm | ≥ 5.0 |
+| F/B.Cu | P ↔ E | pours around PE1/C19/C20/C23, PE3, PE4, PE8 (12 spots) | 1.25–2.00 mm | ≥ 2.5 |
+| In1.Cu | P ↔ E | GND track ↔ PE3 (−97.0, −64.0) | 1.88 mm | ≥ 2.5 |
+| In2.Cu | P ↔ E | 20V track ↔ C22-1 (−96.2, −71.7) | 1.71 mm | ≥ 2.5 |
+
+`domain_gaps`: 18 violations → **0**. No P/I overlap between adjacent layers (before and after).
+
+**Fix 14 (`tools/v4/fix_14_insulation_gaps.py`, seed 4114): pours give way.** Every copper zone
+loses the part of its outline within gap + 0.1 mm of another domain's pads/tracks/vias, and of
+another domain's larger pour (the smaller of two facing pours gives way); two passes. 12 pours
+changed (names suffixed "(fix 14)"; list and areas in `reports/v4_board_edits.txt`). Three tracks
+re-routed: the In1 GND diagonal past PE3 runs 0.71 mm beside the GPIO_BYPASS_RLY diagonal, so
+both move 0.75 mm away from PE3 together; the In2 20V track dips 0.95 mm under C22.
+Pour areas: LEMOUT (B.Cu) 1175 → 1089 mm², FILTER_INPUT (F.Cu) 2102 → 2068 mm², AC_IN2 (F.Cu)
+993 → 939 mm², the others < 1 %. Narrowest necks (first split when eroding the fill): unchanged on
+every changed pour except FILTER_INPUT F.Cu (1.0 → 0.5 mm, a small appendage next to PE1/C19 – the
+main FILTER_INPUT path stays wide, `reports/v4/fix14_PE1_F.png`). Connectivity unchanged:
+`assign_nets --check` 247 groups, 0 opens/shorts.
+
+**Fix 13 (`tools/v4/fix_13_m4_terminals.py`, seed 4113): M4 terminals.**
+- **Part:** Würth REDCUBE THR **74650074R** (WP-THRBU, M4 through-hole thread, 7 × 7 × 3 mm brass,
+  4 solder pins Ø 1.85 mm drill / 3.2 mm pad at ± 2.935 mm, 50 A; Mouser ≈ 7300 in stock, JLC
+  C5118857 0 stock) – hand-soldered. Project footprint `Wuerth_REDCUBE-THR_74650074_M4_PTH` =
+  KiCad's `TerminalBlock_Wuerth:Wuerth_REDCUBE-THR_WP-THRBU_74650074_THR` with the 4.3 mm NPTH
+  turned into a **plated 4.3 mm hole in a 7.4 mm square pad 1 on all layers** (copper under the cube
+  that other nets keep out of, and the landing of the old pin's tracks). Courtyard 10.1 × 10.1 mm.
+  Alternatives (other footprints): Amphenol AMT0440007DB0000G (M4, 35 A, JLC C22466633), Keystone
+  7799 (M4, 30 A, JLC C5370873).
+- **Hardware per terminal:** M4 × 6 pan-head screw + lock washer (about 1.2 Nm), insulated M4 ring
+  lug (4.3 mm stud) for 2.5–6 mm² (`fab/hand_fit.csv`).
+- **Swapped (7):** FILTER_IN (in place), FILTER_OUT (−33.00, −48.50 → −52.00), INU_OUT2 (48.50, 61.50
+  → 47.00, 60.00), J5 (−14.70, −77.40 → −75.65), J7 (in place), J9 (in place), J10 (−56.70, 40.40 →
+  −58.20, 42.15). Each sits in its own pour; the moves (≤ 3.5 mm) keep the old pin position inside
+  the new square pad, so the old tracks still land on copper.
+- **Ring lugs:** no other-domain copper within 30 mm of any new terminal on the P ↔ I barrier; PE
+  copper ≥ 11.8 mm away (FILTER_OUT, J10) – with the lug 3 mm above the board that is ≥ 3.5 mm of air
+  for a 10 mm bare-metal lug radius, so **the lugs can point in any direction**.
+- **Not swapped – need re-layout (user decision):**
+  - **DAB_PRI_1/2** (7.1 mm apart, between J3 and Q10, 25 A), **DAB_SEC_1/2** (6.3 mm apart, among
+    J4, Q11/Q12, C49/C50), **ACIN1/2** (6.0 mm, between C14, R10, C25), **ACOUT1/2** (ACOUT2 under
+    C34's courtyard): two M4 lugs of different nets need ≥ 12 mm centre distance and a 10 × 10 mm
+    courtyard each; none of these pairs has room without moving parts.
+  - **AFE_OUT:** the only free spot puts the terminal across the B.Cu G1_SOURCE_HI pour and cuts it
+    in two (checked: assign_nets open).
+  - **PE1–PE8:** wedged between Y capacitors / X capacitors / the board edge (PE2, PE6, PE7 1.5–3 mm
+    from the edge); a 10 mm terminal overlaps their courtyards everywhere within 16 mm.
+  These stay soldered pins; they need GUI re-layout (or the v5 re-layout).
+- **Checks taught the swap** (`lib/v4_deviations.csv` kind `footprint` + one `area,*` row per terminal
+  in `lib/v4_copper.csv`, note starting with the refdes): gen_footprints (map override),
+  check_footprints (pad numbers = IPC pins, no fit), check_board (pads inside the terminal area on
+  the IPC net), ipc356_diff (KiCad records of the swapped refs in their area, nets checked),
+  gerber_roundtrip (old pin drill gone / new drills inside terminal areas), assign_nets (paste-only
+  pads skipped).
+
+**Replay.** pcbnew's `FootprintLoad` parses every footprint of the library directory and draws
+UUIDs for all of them, so adding the M4 footprint to `lib/ac_psu.pretty` shifted the UUIDs of every
+earlier fix in the replay (only UUIDs; geometry identical – checked). `tools/v4/v4board.load_fp` now
+loads the one file from a temporary directory, which makes the replay independent of the library
+contents (checked with a dummy footprint added); the board was therefore re-made by replaying all
+14 fixes on the tag's board, so fixes 1–12 carry new UUIDs (no other change). `tools/build_pcb.py`
+(the Proteus rebuild) is unchanged.
+
+**DRC:** 295 violations (was 293): 0 shorts, 0 unconnected, 0 parity; courtyards_overlap 52 (−1),
+pth_inside_courtyard 2, silk_overlap 38 (+2), silk_edge_clearance 1 (+1: J7's reference near the
+bottom edge), track_dangling 1, via_dangling 2, silk_over_copper 199.
+
+Renders (before = main 2104b5b): `reports/v4/fix13_<REF>[_before].png`,
+`reports/v4/fix14_{PE1,ACIN2_ACOUT,PE3_PE4,R2via_PE8}_{F,B}[_before].png`,
+`reports/v4/fix14_tracks_{In1,In2}[_before].png`.
 
 ## v4 fix 11/12 – measurement filters (2026-10-30)
 

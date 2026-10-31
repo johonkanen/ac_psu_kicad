@@ -324,3 +324,43 @@
   R51: (84.457,38.237) -> (84.471,38.218) angle 90 size 0.8
   C105: (79.137,36.397) -> (79.137,33.955) angle 0 size 1
   C99: (60.790,-14.280) -> (61.950,-12.639) angle 0 size 1
+== fix 13: M4 ring-lug terminals (REDCUBE THR 74650074R) on 7 lead connections
+  FILTER_IN /01 afe/FILTER_INPUT: lead pin at (-14.400,-57.300) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-14.400,-57.300)
+  FILTER_OUT /01 afe/LEMOUT: lead pin at (-33.000,-48.500) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-33.000,-52.000)
+  INU_OUT2 Q5_S: lead pin at (48.500,61.500) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (47.000,60.000)
+  J5 /01 afe/SHUNT1_FORCE: lead pin at (-14.700,-77.400) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-14.700,-75.650)
+  J7 Net-(J7-Pad1): lead pin at (-71.800,65.600) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-71.800,65.600)
+  J9 /05 VSI/INDUCTOR_OUTPUT: lead pin at (-71.900,48.400) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-71.900,48.400)
+  J10 /05 VSI/INU_FILTER_INPUT: lead pin at (-56.700,40.400) -> M4 terminal ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH at (-58.200,42.150)
+== fix 14: insulation spacing (pours give way: P-I 5.0 mm, P/I-PE 2.5 mm)
+  deleted track In1.Cu GPIO_BYPASS_RLY (-103.215,-63.795)-(-101.795,-63.795) w0.152
+  deleted track In1.Cu GPIO_BYPASS_RLY (-101.795,-63.795)-(-95.600,-57.600) w0.152
+  track In1.Cu GPIO_BYPASS_RLY w0.1524: (-103.215,-63.795)-(-102.855,-63.795)
+  track In1.Cu GPIO_BYPASS_RLY w0.1524: (-102.855,-63.795)-(-96.660,-57.600)
+  track In1.Cu GPIO_BYPASS_RLY w0.1524: (-96.660,-57.600)-(-95.600,-57.600)
+  deleted track In1.Cu GND (-102.471,-65.471)-(-95.400,-58.400) w0.762
+  deleted track In1.Cu GND (-103.412,-65.471)-(-102.471,-65.471) w0.762
+  track In1.Cu GND w0.762: (-103.412,-65.471)-(-103.412,-65.352)
+  track In1.Cu GND w0.762: (-103.412,-65.352)-(-96.460,-58.400)
+  track In1.Cu GND w0.762: (-96.460,-58.400)-(-95.400,-58.400)
+  deleted track In2.Cu 20V (-62.644,-74.056)-(-103.244,-74.056) w0.508
+  track In2.Cu 20V w0.508: (-103.244,-74.056)-(-102.300,-75.000)
+  track In2.Cu 20V w0.508: (-102.300,-75.000)-(-91.000,-75.000)
+  track In2.Cu 20V w0.508: (-91.000,-75.000)-(-90.056,-74.056)
+  track In2.Cu 20V w0.508: (-90.056,-74.056)-(-62.644,-74.056)
+  pour Proteus B.Cu pour 0 (B.Cu, PGND) gives way at (36.50,-45.48) 5.80 x 1.20 mm
+  pour Proteus B.Cu pour 10 (B.Cu, /01 afe/LEMOUT) gives way at (-49.00,-62.46) 14.19 x 20.30 mm
+  pour Proteus B.Cu pour 11 (B.Cu, /01 afe/JEE) gives way at (-90.51,-42.74) 6.17 x 7.67 mm
+  pour Proteus B.Cu pour 13 (B.Cu, AC_OUT_1) gives way at (-90.11,-9.27) 3.48 x 1.72 mm
+  pour Proteus B.Cu pour 5 (B.Cu, ISODC+) gives way at (-47.01,-8.11) 9.14 x 1.93 mm
+  pour Proteus F.Cu pour 24 (F.Cu, /01 afe/FILTER_INPUT) gives way at (-48.86,-62.45) 14.46 x 20.85 mm
+  pour Proteus F.Cu pour 24 (F.Cu, /01 afe/FILTER_INPUT) gives way at (-45.08,-12.93) 14.18 x 0.00 mm
+  pour Proteus F.Cu pour 26 (F.Cu, /01 afe/CMFILT1) gives way at (-85.28,-48.05) 0.91 x 4.05 mm
+  pour Proteus F.Cu pour 27 (F.Cu, AC_IN2) gives way at (-89.62,-39.61) 4.40 x 1.41 mm
+  pour Proteus F.Cu pour 27 (F.Cu, AC_IN2) gives way at (-98.11,-14.02) 25.44 x 1.41 mm
+  pour Proteus F.Cu pour 27 (F.Cu, AC_IN2) gives way at (-72.58,-13.98) 16.49 x 1.50 mm
+  pour Proteus F.Cu pour 28 (F.Cu, /01 afe/JEE) gives way at (-100.01,-67.47) 1.17 x 11.06 mm
+  pour Proteus F.Cu pour 28 (F.Cu, /01 afe/JEE) gives way at (-93.26,-43.56) 0.67 x 4.22 mm
+  pour Proteus F.Cu pour 31 (F.Cu, /05 VSI/AFE_RELAY) gives way at (-83.07,-9.62) 1.16 x 0.02 mm
+  pour Proteus F.Cu pour 5 (F.Cu, DC+) gives way at (36.50,-45.48) 5.80 x 1.20 mm
+  pour Proteus F.Cu pour 8 (F.Cu, ISOPGND) gives way at (37.26,1.90) 1.74 x 5.38 mm

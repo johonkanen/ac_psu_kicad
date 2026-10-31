@@ -133,19 +133,19 @@ DAB_PRI_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_PRI_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_SEC_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_SEC_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-FILTER_IN,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
-FILTER_OUT,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
-INU_OUT2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+FILTER_IN,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
+FILTER_OUT,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
+INU_OUT2,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (inverter half-bridge output)
 J1,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J2,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J3,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J4,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J5,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+J5,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (AFE shunt R48 force lead)
 J6,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J7,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+J7,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
 J8,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J9,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
-J10,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+J9,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
+J10,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output filter input lead)
 J11,ac_psu:HEADER_38_50MIL,ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus,2x19 1.27 mm
 J12,ac_psu:HEADER_2X3_43_48,ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48,"2x3 1.27 mm, pads 43-48"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805

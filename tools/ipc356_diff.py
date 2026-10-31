@@ -108,6 +108,12 @@ def main():
     _, prot = ipc356.parse(ipc356.DEFAULT_IPC)
     prot = deviations.apply_records(prot)   # v4 net changes (lib/v4_deviations.csv)
     v4parts, v4vias = deviations.added_parts(), deviations.vias()
+    swapped = deviations.footprint_changes()
+    swap_net = {}   # ref -> IPC (v4) net of its pins; their pads are checked by terminal area + net
+    swap_prot = [p for p in prot if p["kind"] == "pad" and p["refdes"] in swapped]
+    for p in swap_prot:
+        swap_net[p["refdes"]] = p["net"]
+    prot = [p for p in prot if not (p["kind"] == "pad" and p["refdes"] in swapped)]
     if args.kicad:
         kic = parse_kicad(args.kicad)
     else:
@@ -140,8 +146,13 @@ def main():
         worst = max(worst, d)
         pairs.append((p, r))
     v4recs = []
+    swaprecs = []
     for r in kic:
         if id(r) not in used:
+            tref = deviations.in_terminal_area(r["x_mm"], r["y_mm"]) if r["kind"] == "pad" else None
+            if tref and tref[:6] == r["refdes"]:
+                swaprecs.append((r, tref))
+                continue
             if r["kind"] == "pad" and r["refdes"] in v4parts and r["pin"] in v4parts[r["refdes"]]["pins"]:
                 v4recs.append((r, v4parts[r["refdes"]]["pins"][r["pin"]]))
                 continue
@@ -168,6 +179,13 @@ def main():
         if mapping.get(want) != r["net"]:
             errors.append(f"v4 {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): "
                           f"KiCad net {r['net']}, listed {want} -> {mapping.get(want)}")
+    for r, tref in swaprecs:   # swapped footprints: in their terminal area, on the IPC pin's net
+        if mapping.get(swap_net.get(tref)) != r["net"]:
+            errors.append(f"v4 footprint swap {tref} pad at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): KiCad net {r['net']}, "
+                          f"IPC net {swap_net.get(tref)} -> {mapping.get(swap_net.get(tref))}")
+    missing = sorted(set(swapped) - {t for _, t in swaprecs})
+    if missing:
+        errors.append(f"v4 footprint swaps without KiCad pad records: {' '.join(missing)}")
     nv4p = sum(1 for r, _ in v4recs if r["kind"] == "pad")
     if nv4p != sum(len(p["pins"]) for p in v4parts.values()) or len(v4recs) - nv4p != len(v4vias):
         errors.append(f"v4 records: {nv4p} pads, {len(v4recs) - nv4p} vias found; "
@@ -213,7 +231,8 @@ def main():
           f"{len(errors)} mismatches")
     if not deviations.proteus_mode():
         print(f"ipc356_diff: v4 deviations applied ({deviations.summary()}); "
-              f"{len(v4recs)} KiCad records of v4 parts/vias, nets checked")
+              f"{len(v4recs)} KiCad records of v4 parts/vias, {len(swaprecs)} of v4 footprint swaps "
+              f"({len(swap_prot)} Proteus pad records replaced), nets checked")
     if drill_larger:
         print("ipc356_diff: KiCad drill larger (footprint kept): " +
               ", ".join(f"{n}x {a}->{b}" for (a, b), n in sorted(drill_larger.items())))

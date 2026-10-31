@@ -16,7 +16,27 @@ TOOLS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, TOOLS)
 sys.path.insert(0, os.path.join(TOOLS, "p2k"))
 import board_common as bc  # noqa: E402
-from build_pcb import load_fp  # noqa: E402
+from build_pcb import load_fp as _load_fp_lib  # noqa: E402,F401
+from gen_footprints import footprint_path  # noqa: E402
+
+
+def load_fp(fpid):
+    """Footprint from its library file alone. pcbnew's FootprintLoad parses every footprint of the
+    library directory and draws UUIDs for all of them, so a footprint added to lib/ac_psu.pretty
+    would shift the UUIDs of every later fix (the replay in apply_all.sh would no longer reproduce
+    the board). Loading from a directory holding just the one file keeps the sequence independent
+    of the library contents (since v4 fix 13)."""
+    import shutil
+    import tempfile
+    path = footprint_path(fpid)
+    with tempfile.TemporaryDirectory(suffix=".pretty") as tmp:
+        shutil.copy(path, tmp)
+        fp = pcbnew.FootprintLoad(tmp, os.path.basename(path)[:-len(".kicad_mod")])
+    if fp is None:
+        sys.exit(f"v4board: cannot load footprint {fpid} ({path})")
+    lib, name = fpid.split(":", 1)
+    fp.SetFPID(pcbnew.LIB_ID(pcbnew.UTF8(lib), pcbnew.UTF8(name)))
+    return fp
 
 F = pcbnew.FromMM
 T = pcbnew.ToMM

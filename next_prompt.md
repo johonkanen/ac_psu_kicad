@@ -28,6 +28,11 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
+0. Branch `v4-terminals` (v4 fix 13/14): M4 terminals on 7 lead connections, insulation spacing
+   fixed (tools/v4/domain_gaps.py: 0 violations). Review with the user and merge into main. Open:
+   the terminal pairs DAB_PRI_1/2, DAB_SEC_1/2, ACIN1/2, ACOUT1/2, AFE_OUT and PE1-PE8 have no room
+   for an M4 terminal without re-layout (STATUS "v4 fix 13/14") - user decision (GUI re-layout now,
+   or in v5); confirm the 5.0 / 2.5 mm values against IEC 61010-1 Annex K.
 1. v5 aux flyback: plan in V5_PLAN.md, decisions taken except D4 (controller sourcing); act on
    it only when the user asks.
 2. Switching noise: hardware findings 1-5 applied as v4 fix 11/12 (STATUS "v4 fix 11/12"; the

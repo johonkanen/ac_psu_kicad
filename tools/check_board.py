@@ -36,16 +36,32 @@ def check_pads(board, recs, errors):
     errors.extend(problems)
     worst, npads, used = 0.0, 0, set()
     v4pads, pending = [], []
+    swapped = deviations.footprint_changes()
+    nswap = 0
     for fp in board.GetFootprints():
         ref = fp.GetReference()
         if fp.IsBoardOnly():
             continue
         for pad in fp.Pads():
+            if ref in swapped and not pad.GetNumber():
+                continue   # paste-only pads of the swapped footprint
             npads += 1
             key = (ref, pad.GetNumber())
             c = pad.GetPosition()
             x, y = mm(c.x), -mm(c.y)
             cands = ipc.get(key, [])
+            if ref in swapped:
+                # v4 footprint swap: the pad lies in the ref's terminal area, on the IPC pin's net
+                if deviations.in_terminal_area(x, y) != ref:
+                    errors.append(f"{ref}-{pad.GetNumber()} at ({x:.3f},{y:.3f}): outside its terminal area (lib/v4_copper.csv)")
+                if not cands:
+                    errors.append(f"{ref}-{pad.GetNumber()}: no IPC pin {pad.GetNumber()}")
+                else:
+                    for q in cands:
+                        used.add(id(q))
+                    pending.append((ref, pad.GetNumber(), cands[0]["net"], pad.GetNetname()))
+                nswap += 1
+                continue
             added = deviations.added_parts().get(ref)
             if added and not cands:
                 # v4 part: no Proteus position; its pads must be on the listed nets
@@ -76,6 +92,9 @@ def check_pads(board, recs, errors):
             errors.append(f"{ref}-{pin}: net {kn}, v4 list {want} -> {mapping.get(want)}")
     if v4pads:
         print(f"check_board: v4 pads without Proteus pad (nets checked): {' '.join(v4pads)}")
+    if swapped:
+        print(f"check_board: {nswap} pads of {len(swapped)} v4 footprint swaps in their terminal areas (nets checked): "
+              f"{' '.join(sorted(swapped))}")
     for key, qs in ipc.items():
         for q in qs:
             if id(q) not in used:

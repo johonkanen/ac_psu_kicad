@@ -63,6 +63,32 @@ def added_parts():
     return out
 
 
+def footprint_changes():
+    """ref -> (old footprint, new footprint, fix, note) for existing parts whose footprint is swapped.
+    Their pads are not compared with the Proteus pads; instead every pad must lie in a terminal area
+    (lib/v4_copper.csv: area on layer *, note starting with the refdes) on the net of the IPC pin."""
+    return {r["ref"]: (r["from"], r["to"], r["fix"], r["note"]) for r in rows() if r["kind"] == "footprint"}
+
+
+def terminal_area(ref):
+    """(x0, y0, x1, y1) of the copper area of a swapped footprint (area row, layer *, note 'REF ...')."""
+    for r in copper_rows():
+        if r["kind"] == "area" and r["layer"] == "*" and r["note"].split(" ", 1)[0] == ref:
+            x0, x1 = sorted((float(r["x"]), float(r["x1"])))
+            y0, y1 = sorted((float(r["y"]), float(r["y1"])))
+            return x0, y0, x1, y1
+    return None
+
+
+def in_terminal_area(x, y, margin=0.0):
+    """refdes of the swapped footprint whose terminal area holds (x, y), or None."""
+    for ref in footprint_changes():
+        a = terminal_area(ref)
+        if a and a[0] - margin <= x <= a[2] + margin and a[1] - margin <= y <= a[3] + margin:
+            return ref
+    return None
+
+
 def value_changes():
     """ref -> (old, new) for existing parts"""
     return {r["ref"]: (r["from"], r["to"]) for r in rows() if r["kind"] == "value" and r["from"]}
@@ -153,6 +179,11 @@ def validate():
                 errs.append(f"{k} {r['ref']}: refdes exists in the IPC")
         elif k == "value":
             pass
+        elif k == "footprint":
+            if r["ref"] not in refs:
+                errs.append(f"footprint {r['ref']}: refdes is not in the IPC")
+            if terminal_area(r["ref"]) is None:
+                errs.append(f"footprint {r['ref']}: no terminal area (lib/v4_copper.csv, layer *, note '{r['ref']} ...')")
         else:
             errs.append(f"unknown kind {k!r}")
     newnets = {r["to"] for r in _read(DEV_CSV) if r["kind"] == "pin"}
@@ -170,6 +201,7 @@ def summary():
         c[x["kind"]] = c.get(x["kind"], 0) + 1
     cr = copper_rows()
     return (f"v4 deviations: {c.get('merge', 0)} net merges, {c.get('pin', 0)} pin moves, "
-            f"{c.get('part', 0)} new parts ({c.get('add', 0)} pins), {c.get('value', 0)} values; "
+            f"{c.get('part', 0)} new parts ({c.get('add', 0)} pins), {c.get('value', 0)} values, "
+            f"{c.get('footprint', 0)} footprints; "
             f"copper: {sum(1 for x in cr if x['kind'] == 'via')} new vias, "
             f"{sum(1 for x in cr if x['kind'] == 'area')} changed areas")

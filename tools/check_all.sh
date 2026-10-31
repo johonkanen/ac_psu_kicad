@@ -20,6 +20,7 @@ step "Footprints vs IPC pad geometry" tools/p2k/bin/kipy tools/check_footprints.
 step "Board pads, holes, vias vs IPC (+ v4 deviations)" tools/p2k/bin/kipy tools/check_board.py
 step "Board copper connectivity after zone fill" tools/p2k/bin/kipy tools/assign_nets.py --check
 step "DRC with schematic parity" python3 tools/drc.py
+step "Insulation spacing between domains (IEC 61010-1: P-I 5.0 mm, P/I-PE 2.5 mm)" tools/p2k/bin/kipy tools/v4/domain_gaps.py
 step "IPC-D-356 from the board vs Proteus (+ v4 deviations)" python3 tools/ipc356_diff.py
 step "Gerber round trip vs Proteus (copper, drills; v4 areas)" python3 tools/gerber_roundtrip.py --check
 
