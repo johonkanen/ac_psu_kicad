@@ -60,7 +60,8 @@ LK_EFF = 5.9e-6         # effective primary leakage at full load: MKF pairwise P
 VDS_PK = VIN_MAX + V_CLAMP
 
 # ---- thermal ----------------------------------------------------------------------------------
-T_AMB = 60.0            # assumed internal air of the passively cooled chassis (not measured)
+T_AMB = 55.0            # internal air: 30 C rated ambient (user 2026-10-31) + an assumed 20-30 K rise of the passively
+                        # cooled closed chassis (no dissipation figure for the whole unit yet; must be measured)
 
 # ---- MKF modelling ----------------------------------------------------------------------------
 MATERIAL = "N87"

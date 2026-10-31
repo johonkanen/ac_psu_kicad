@@ -19,23 +19,23 @@ VDD from Out1 via diode + 47 ohm: ~14.3 V; run current 6.2 mA (IRUN max + Qg x 1
 CDD >= 12.9 uF for 20 ms to Out1 10 V (worst UVLO window 9.5 V) -> 15 uF; start delay with 15 uF: 1.3 s typ, 4.9 s worst (IHV 100 uA at 100 V)
 gate drive: VDD 14.3 V, DRV ~13 V (clamp 14-16 V only at high VDD); Qg 35 nC at 20 mA min source -> 1.8 us to full charge
 == EE25: E 25/13/7 N87, Bobbin EE 25 horizontal longer-creepage 10-pin 5.08mm (Norwe 10165-106)
-   Ae 51.8 mm2, Ve 2994 mm3; centre gap 0.217 mm for Lm 322 uH (AL 314 nH); fits: True
+   Ae 51.8 mm2, Ve 2994 mm3; centre gap 0.215 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 280 mT
-   Vin 100 V: Bpk 270 mT  core 0.355 W  winding 0.256 W  total 0.61 W  -> ~78 C at 60 C air (Rth ~29 K/W)  [Primary 0.137 Out1 0.037 Out2 0.035 CTRL 0.047]
-   Vin 300 V: Bpk 257 mT  core 0.441 W  winding 0.269 W  total 0.71 W  -> ~81 C at 60 C air (Rth ~29 K/W)  [Primary 0.134 Out1 0.043 Out2 0.033 CTRL 0.058]
-   Vin 450 V: Bpk 267 mT  core 0.568 W  winding 0.306 W  total 0.87 W  -> ~86 C at 60 C air (Rth ~29 K/W)  [Primary 0.159 Out1 0.047 Out2 0.033 CTRL 0.066]
+   Vin 100 V: Bpk 270 mT  core 0.388 W  winding 0.255 W  total 0.64 W  -> ~74 C at 55 C air (Rth ~29 K/W)  [Primary 0.137 Out1 0.037 Out2 0.035 CTRL 0.047]
+   Vin 300 V: Bpk 257 mT  core 0.481 W  winding 0.268 W  total 0.75 W  -> ~77 C at 55 C air (Rth ~29 K/W)  [Primary 0.134 Out1 0.043 Out2 0.033 CTRL 0.058]
+   Vin 450 V: Bpk 267 mT  core 0.620 W  winding 0.304 W  total 0.92 W  -> ~82 C at 55 C air (Rth ~29 K/W)  [Primary 0.159 Out1 0.047 Out2 0.033 CTRL 0.065]
 == E30: E 30/15/7 N87, Bobbin E 30/15/7 (Ferroxcube CP-E30/15/7-1S)
-   Ae 60.1 mm2, Ve 3938 mm3; centre gap 0.207 mm for Lm 322 uH (AL 314 nH); fits: True
+   Ae 60.1 mm2, Ve 3938 mm3; centre gap 0.206 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 241 mT
-   Vin 100 V: Bpk 233 mT  core 0.306 W  winding 0.217 W  total 0.52 W  -> ~73 C at 60 C air (Rth ~25 K/W)  [Primary 0.116 Out1 0.027 Out2 0.036 CTRL 0.039]
-   Vin 300 V: Bpk 222 mT  core 0.379 W  winding 0.203 W  total 0.58 W  -> ~75 C at 60 C air (Rth ~25 K/W)  [Primary 0.096 Out1 0.030 Out2 0.032 CTRL 0.045]
-   Vin 450 V: Bpk 230 mT  core 0.488 W  winding 0.221 W  total 0.71 W  -> ~78 C at 60 C air (Rth ~25 K/W)  [Primary 0.109 Out1 0.032 Out2 0.032 CTRL 0.048]
+   Vin 100 V: Bpk 233 mT  core 0.333 W  winding 0.216 W  total 0.55 W  -> ~69 C at 55 C air (Rth ~25 K/W)  [Primary 0.115 Out1 0.027 Out2 0.036 CTRL 0.038]
+   Vin 300 V: Bpk 222 mT  core 0.413 W  winding 0.202 W  total 0.62 W  -> ~71 C at 55 C air (Rth ~25 K/W)  [Primary 0.096 Out1 0.030 Out2 0.032 CTRL 0.044]
+   Vin 450 V: Bpk 230 mT  core 0.533 W  winding 0.220 W  total 0.75 W  -> ~74 C at 55 C air (Rth ~25 K/W)  [Primary 0.109 Out1 0.032 Out2 0.032 CTRL 0.048]
 == EE32: E 32/16/9 N87, Bobbin EE 32 horizontal 12-pin 5.08mm (Norwe 10750-024)
-   Ae 83.2 mm2, Ve 6180 mm3; centre gap 0.373 mm for Lm 322 uH (AL 314 nH); fits: True
+   Ae 83.2 mm2, Ve 6180 mm3; centre gap 0.372 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 174 mT
-   Vin 100 V: Bpk 168 mT  core 0.187 W  winding 0.306 W  total 0.49 W  -> ~70 C at 60 C air (Rth ~20 K/W)  [Primary 0.164 Out1 0.042 Out2 0.044 CTRL 0.057]
-   Vin 300 V: Bpk 160 mT  core 0.232 W  winding 0.317 W  total 0.55 W  -> ~71 C at 60 C air (Rth ~20 K/W)  [Primary 0.158 Out1 0.049 Out2 0.040 CTRL 0.070]
-   Vin 450 V: Bpk 166 mT  core 0.299 W  winding 0.359 W  total 0.66 W  -> ~73 C at 60 C air (Rth ~20 K/W)  [Primary 0.186 Out1 0.054 Out2 0.041 CTRL 0.078]
+   Vin 100 V: Bpk 168 mT  core 0.204 W  winding 0.304 W  total 0.51 W  -> ~65 C at 55 C air (Rth ~20 K/W)  [Primary 0.163 Out1 0.041 Out2 0.043 CTRL 0.056]
+   Vin 300 V: Bpk 160 mT  core 0.253 W  winding 0.315 W  total 0.57 W  -> ~66 C at 55 C air (Rth ~20 K/W)  [Primary 0.158 Out1 0.048 Out2 0.040 CTRL 0.069]
+   Vin 450 V: Bpk 166 mT  core 0.327 W  winding 0.357 W  total 0.68 W  -> ~69 C at 55 C air (Rth ~20 K/W)  [Primary 0.186 Out1 0.053 Out2 0.040 CTRL 0.077]
 == chosen EE25: leakage and build
    leakage ref Primary: [0.0, 6.12, 11.16, 2.92] uH
    leakage ref Out1   : [0.15, 0.0, 0.32, 0.16] uH
@@ -52,4 +52,4 @@ gate drive: VDD 14.3 V, DRV ~13 V (clamp 14-16 V only at high VDD); Qg 35 nC at 
      Insulation between Primary and Out2 section 7  insulation t 0.025 w 15.80 mm 
      Out2 section 0 layer 0                         conduction t 0.739 w  3.69 mm 5
      Insulation between Out2 and Primary section 9  insulation t 0.025 w 15.80 mm 
-   insulation requirement (MKF, IEC 60664-1 reinforced, 630 V, PD2, OVC II, IIIa; MKF applies its >30 kHz rules): {'clearance': 0.0015, 'creepageDistance': 0.025, 'distanceThroughInsulation': 0.00023, 'withstandVoltage': 2676.2365978649464}
+   insulation requirement (MKF, IEC 60664-1 reinforced, 500 V, PD2, OVC II, IIIa; MKF applies its >30 kHz rules): {'clearance': 0.0015, 'creepageDistance': 0.016, 'distanceThroughInsulation': 0.00015, 'withstandVoltage': 2676.2365978649464}

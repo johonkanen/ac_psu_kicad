@@ -49,8 +49,8 @@ if __name__ == "__main__":
     dr["insulation"] = {
         "insulationType": "Reinforced", "pollutionDegree": "P2", "overvoltageCategory": "OVC-II",
         # IEC 61010-1 (user 2026-10-31) is not in MKF: use its IEC 60664-1 basis at the worst barrier,
-        # primary/Out1 <-> Out2 (630 V row, see insulation.py and V5_PLAN.md 5.3)
-        "cti": "Group IIIA", "altitude": {"maximum": 2000}, "mainSupplyVoltage": {"nominal": 630, "maximum": 630},
+        # all barriers in the 500 V row (isolated DC link <= 410 V; see insulation.py and V5_PLAN.md 5.3)
+        "cti": "Group IIIA", "altitude": {"maximum": 2000}, "mainSupplyVoltage": {"nominal": 500, "maximum": 500},
         "standards": ["IEC 60664-1"],
     }
     dr["isolationSides"] = [s for s in ["primary"] + [o[4] for o in OUTPUTS]]

@@ -26,7 +26,8 @@ History:
 
 - **Isolation:** three groups, reinforced from each other: {primary, bias, Out1}, Out2, CTRL. Working
   voltage taken as 500 V. Pollution degree 2, OVC II, CTI IIIa, ≤ 2000 m.
-- **Cooling:** passive, closed chassis, **60 °C internal air assumed** (not measured).
+- **Cooling:** passive, closed chassis. Rated ambient **30 °C** (user 2026-10-31) + an assumed 20–30 K
+  internal rise → **55 °C internal air** used (not measured).
 
 ## Controller: UCC28710 (TI SLUSB86C)
 
@@ -59,8 +60,8 @@ Design (`params.py`; `python params.py` prints it, turn set A):
 | Bobbin | EE25 horizontal, longer creepage, 10 pins (5 + 5) at 5.08 mm: **Norwe 10165-106** (2-chamber 10166-106). Same family, standard creepage: Norwe 10220-024 / 10175-106. None are stocked at JLC/LCSC; confirm the drawing (row spacing, flange creepage) |
 | Turns | Primary 32 (16 + 16 in series), Out1 5, Out2 5, CTRL 3; no bias winding |
 | Peak flux | 280 mT at Ipp(max) and VCST 810 mV (N87 Bsat ≈ 390 mT at 100 °C) |
-| Losses (MKF) | 100 V: core 0.36 W + copper 0.26 W = **0.61 W**; 300 V: 0.71 W; 450 V: **0.87 W** |
-| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 78–86 °C** at 60 °C air |
+| Losses (MKF, 55 °C air) | 100 V: core 0.39 W + copper 0.26 W = **0.64 W**; 300 V: 0.75 W; 450 V: **0.92 W** |
+| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 74–82 °C** at 55 °C air (≈ 69–87 °C for 50–60 °C air) |
 | Leakage (MKF, pairwise from the primary) | Out1 6.1 µH, Out2 11.2 µH, CTRL 2.9 µH; clamp-effective ≈ 5.9 µH. Referred to Out2 with Out1 shorted 0.32 µH, CTRL 0.06 µH (cross-regulation against Out1) |
 
 Turn set B (38/6/4, CTRL ≈ 10 V) was run in the bias-winding version: peak flux 223 mT, about the same
@@ -163,7 +164,7 @@ Horizontal bobbin: each flange carries one 5-pin row.
 ### Insulation – IEC 61010-1 (user decision 2026-10-31)
 
 MKF sweep: `insulation.py` → `insulation.txt` (IEC 60664-1 / 62368-1 / 61558-1 at 230–800 V).
-The design input now uses IEC 60664-1 at the 630 V row (MKF has no IEC 61010-1).
+The design input now uses IEC 60664-1 at the 500 V row (MKF has no IEC 61010-1).
 
 **Standard: IEC 61010-1 (3rd ed. + A1), user decision 2026-10-31** (bench-top laboratory power
 supply). The values below use the **IEC 60664-1 basis** that IEC 61010-1 Annex K builds on
@@ -172,29 +173,35 @@ available here, so **every number must be verified against IEC 61010-1 Annex K (
 K.2 secondary circuits) before layout sign-off.** Assumptions: mains 230 V, OVC II (2.5 kV impulse),
 PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 
-**Working voltages** (CTRL is bonded to PE; both power domains move against PE):
+**Working voltages** (user 2026-10-31: the isolated DC link is ≤ 410 V, so the AC output peak is
+≤ 410 V (≈ 290 Vrms sine); the primary DC+ stays ≤ 450 V for the 100–450 V input range. CTRL is
+bonded to PE; both power domains move against PE). Whether an output terminal can be earthed is not
+known yet, so both cases are given:
 
-| Barrier | Where | Working voltage (assumed) | Insulation |
+| Barrier | Floating output (only the output Y caps C29–C32 to PE) | Output earthed (through the Y caps' leakage path, the user or the load) | IEC 60664-1 row (RMS / DC working voltage) |
 |---|---|---|---|
-| B1 mains/primary ↔ PE and accessible parts | AFE, DC link (galvanically mains-connected) | mains 230 Vrms; DC+ ≤ 450 V | reinforced to accessible parts (or basic + PE) |
-| B2 primary ↔ ISO | TR1 (off-board), aux transformer {P, Out1} ↔ Out2, any PCB gap between GND/PGND/DC+ and ISO copper | up to ≈ 900 V peak (DC+ at +450 V while ISOGND sits at −450 V against PE through the output Y caps or an earthed output terminal); **use the 630 V RMS/DC row** | reinforced (user D3). IEC 61010-1 may only need basic between two hazardous-live circuits; to confirm |
-| B3 primary ↔ CTRL | U13/U15/U16, U5 (AMC1306), aux transformer {P, Out1} ↔ CTRL, PCB islands | ≈ 450–550 V peak, **500 V row** | reinforced (decided; basic + PE bonding would satisfy class I) |
-| B4 ISO ↔ CTRL | new ISO7760F, CA-IS3742, AMC1311, U4/U6 path, aux transformer Out2 ↔ CTRL | ≤ 450 V DC + the AC output, **500 V row** | reinforced |
-| B5 CTRL ↔ user parts (Ethernet, touchscreen) | same domain, PE-bonded | SELV | functional |
+| B2 primary ↔ ISO | ISO domain centred on PE: ISOGND ≈ −205 V average, −410…0 V extremes; DC+ ≤ +450 V to PE. Peak ≈ 860 V, RMS ≈ 430–500 V | ISOGND = −(earthed pole voltage): −410…0 V. Same peak ≈ 860 V, RMS ≈ 430–500 V | **500 V row** (was 630 V); medium confidence, the RMS sits near the 500 V boundary. **If the output can run DC with one terminal earthed**, B2 is a DC voltage up to ≈ 860 V → **1000 V row** |
+| B3 primary ↔ CTRL (PE) | DC+ ≤ 450 V peak to PE, RMS < 450 V | same | **500 V row** (unchanged) |
+| B4 ISO ↔ CTRL (PE) | ≤ 410 V peak (switching common mode included), RMS ≈ 205–290 V | ≤ 410 V peak, RMS ≤ 410 V (DC output) | **500 V row** (just above the 400 V row; unchanged) |
+| B1 mains/primary ↔ accessible parts | mains 230 Vrms OVC II; DC+ ≤ 450 V | same | mains OVC II 300 V |
+| B5 CTRL ↔ user parts (Ethernet, touchscreen) | same domain, PE-bonded, SELV | same | functional |
+
+Insulation type: reinforced everywhere (user D3 for B2; for B3/B4, basic + PE bonding would satisfy
+class I). IEC 61010-1 may only require basic between two hazardous-live circuits (B2); to confirm.
 
 **Required distances** (IEC 60664-1 basis; confidence in brackets):
 
 | Barrier | Clearance, reinforced | Creepage, reinforced: PCB (printed-wiring column, CTI ≥ 175) | Creepage, reinforced: other insulating material IIIa (bobbin, connector bodies) | Solid insulation, reinforced |
 |---|---|---|---|---|
-| B2 (630 V) | ≥ 3.0 mm (2.5 kV impulse → 4 kV step; the 900 V recurring peak needs less) (medium) | 2 × 3.2 = **6.4 mm** (medium) | 2 × 6.3 = **12.6 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
-| B3, B4 (500 V) | ≥ 3.0 mm (medium-high for mains OVC II 300 V; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | same (medium) |
+| B2, B3, B4 (500 V row) | ≥ 3.0 mm (2.5 kV OVC II impulse → 4 kV step; the ≈ 860 V recurring peak needs less) (medium-high; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
+| B2 only if the output can be DC and earthed (1000 V row) | ≥ 3.0 mm | 2 × 5.0 = **10.0 mm** (medium-low) | 2 × 10.0 = **20 mm** (medium-low) | same |
 
 - **Test voltage** (dielectric strength, reinforced, 1 min AC): ≈ 3 kVrms for mains OVC II 300 V,
-  higher for the 500–630 V working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
+  higher for the 500 V row working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
   MKF's IEC 60664-1 figure is 2.7 kV; its IEC 62368-1 figure is 5 kV.
 - **If IEC 61010-1 does not accept the printed-wiring column** for these working voltages, use the
-  material-group column on the PCB too (10.0 / 12.6 mm). The board plan already keeps ≥ 10 mm with
-  slots for B3/B4; B2 on the PCB needs ≥ 12.6 mm in that case.
+  material-group column on the PCB too (10.0 mm for all three barriers). The board plan's ≥ 10 mm with
+  slots covers that (B2 needs 20 mm only in the DC-output/earthed case).
 - **Slots** count as an interruption of the creepage path when ≥ 1.0 mm wide (IEC 60664-1, PD2).
 - **MKF numbers** (reports/aux_flyback/insulation.py → insulation.txt): its IEC 60664-1 creepage is
   16 mm at 450–500 V and 25 mm at 630–800 V reinforced (IIIa, PD2). That is far above Table F.4 because
@@ -212,11 +219,11 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 **not compliant as it is; fixable** (paths ranked by risk):
 
 1. **Via the floating core** (fails as built): on a standard EE25 bobbin, pins to the core edge are
-   ≈ 2–4 mm per side. That is far below 12.6 mm (B2: P/Out1 pins ↔ core ↔ Out2 pins) or 10.0 mm (B3/B4:
-   CTRL holes ↔ core). **Fix: insulate the core:** 3 layers of polyester tape around the outer legs and
+   ≈ 2–4 mm per side. That is far below the 10.0 mm needed (B2: P/Out1 pins ↔ core ↔ Out2 pins; B3/B4: CTRL holes ↔
+   core). **Fix: insulate the core:** 3 layers of polyester tape around the outer legs and
    back, or insulating core caps/sleeves. The core then drops out of the creepage path, which is
    measured over the tape. Cheap and standard practice.
-2. **Pin row to pin row over the bobbin (P/Out1 row ↔ Out2 row, B2, ≥ 12.6 mm):** depends on the Norwe
+2. **Pin row to pin row over the bobbin (P/Out1 row ↔ Out2 row, B2, ≥ 10.0 mm; 20 mm in the DC-output/earthed case):** depends on the Norwe
    10165-106 row spacing and flange; typical EE25 horizontal bobbins have ≈ 15–20 mm between the rows
    (verify on the drawing). Cutting pins 8–10 and keeping Out2 on pins 6–7 at the far end helps.
 3. **Through the windings:** TIW (Rubadue TCA3, Furukawa TEX-E) is certified as reinforced solid
@@ -230,7 +237,7 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
    B3/B4). Already in the plan.
 
 **Fix options, ranked:**
-1. **Core insulation (tape or caps) + certified TIW + verify the row spacing ≥ 12.6 mm.** Recommended:
+1. **Core insulation (tape or caps) + certified TIW + verify the row spacing ≥ 10.0 mm.** Recommended:
    no process change.
 2. **Vacuum varnish impregnation:** IEC 60664-1 / IEC 61010-1 allow pollution degree 1 only for parts
    that are sealed, potted or coated to IEC 60664-3. Plain impregnation of an open bobbin is usually
@@ -241,11 +248,11 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 
 ## Candidates (MKF at 20 W, turn set A, winding order O2)
 
-| Core / bobbin | Ae | Bpk | Loss 100 V / 450 V | ≈ T at 60 °C | Pins | Footprint |
+| Core / bobbin | Ae | Bpk | Loss 100 V / 450 V | ≈ T at 55 °C | Pins | Footprint |
 |---|---|---|---|---|---|---|
-| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 280 mT | **0.61 / 0.87 W** | **≈ 78–86 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
-| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 241 mT | 0.52 / 0.71 W | ≈ 73–78 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
-| E32/16/9, Norwe 10750-024 (6 + 6) | 83 mm² | 167 mT | 0.49 / 0.61 W | ≈ 70–72 °C | 12 | ≈ 36 × 34 mm |
+| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 280 mT | **0.64 / 0.92 W** | **≈ 74–82 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
+| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 241 mT | 0.55 / 0.75 W | ≈ 69–74 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
+| E32/16/9, Norwe 10750-024 (6 + 6) | 83 mm² | 168 mT | 0.51 / 0.68 W | ≈ 65–69 °C | 12 | ≈ 36 × 34 mm |
 
 **Board area:**
 - today's EF20: 22 × 14 mm body (≈ 310 mm²), 2 × 5 pins at 3.81 mm, rows 10.16 mm apart
@@ -283,8 +290,28 @@ leakage to it (ΔV ≈ Llk × Ipk / tdemag):
 
 ## Open items
 
-1. **Enclosure temperature:** measure the real internal air temperature (60 °C assumed). The
-   transformer at ≈ 80 °C leaves margin up to about 75 °C air.
+1. **Enclosure temperature:** measure the real internal air temperature (55 °C assumed: 30 °C rated
+   ambient + 20–30 K). The transformer at ≈ 74–82 °C leaves margin up to about 75 °C air.
+
+**Thermal environment (user 2026-10-31: rated ambient 30 °C):**
+- **Internal air:** 30 °C ambient + the rise of the passively cooled closed chassis. No dissipation
+  figure for the whole unit exists in the repo yet (the power stages' losses are unknown), so a
+  **20–30 K rise is assumed: internal air ≈ 50–60 °C, design value 55 °C** (`params.py` T_AMB).
+  Measure it on the v3 build at full load.
+- **Transformer (EE25, MKF at 55 °C air; the rule-of-thumb rise scales with the air temperature):**
+  0.64 W at 100 V, 0.75 W at 300 V, 0.92 W at 450 V → **≈ 74–82 °C at 55 °C air (≈ 69–87 °C for
+  50–60 °C air).** N87 core loss rises slightly when cooler (its loss minimum is near 100 °C), so the
+  losses are 0.03–0.05 W higher than at 60 °C.
+- **U8 (K7805-2000R3):** Mornsun derates the 5 V version above 71 °C ambient for Vin ≤ 32 V (here
+  15–20 V), to zero at 85 °C. At 50–60 °C internal air (plus a few K local rise) it runs at full power.
+  In v5 U8 only feeds the gate-driver logic and U10 (≈ 1 A), so there is extra margin.
+- **IEC 61010-1 temperature limits (10.1, Table 19; values from memory, verify):** accessible outer
+  surfaces about 70 °C metal / 80 °C non-metal for unintentional contact; knobs and handles about
+  55 °C metal / 70 °C non-metal. The test is run at the reference ambient (10–40 °C) and the measured
+  rise is added to the rated ambient (30 °C). A metal chassis that also works as the passive heatsink
+  may therefore rise only about **40 K** above ambient where it can be touched. Windings are limited
+  by their insulation class (≈ 105–130 °C for class A–B), which the transformer meets.
+
 2. **Sample measurements:**
    - Lp, target 322 µH: set the gap for AL ≈ 314 nH
    - the leakage from the primary with all secondaries shorted (→ clamp loss)
@@ -295,10 +322,11 @@ leakage to it (ΔV ≈ Llk × Ipk / tdemag):
    - the gapped E25 half for AL ≈ 314 nH (or a ground core)
    - the Norwe 10165-106 drawing: row spacing, flange creepage from the pins to the core, where
      the CTRL leads can leave
-5. **Working voltage:** B2 (primary ↔ Out2) uses the 630 V row (up to ≈ 900 V peak), B3/B4 (↔ CTRL)
-   the 500 V row. Confirm the AC output maximum and how the output is earthed.
+5. **Working voltage:** with the isolated DC link ≤ 410 V (user), B2 (primary ↔ Out2) is in the 500 V
+   row (≈ 860 V peak), as are B3/B4. Open: can an output terminal be earthed, and can the output run
+   DC? Then B2 moves to the 1000 V row (bobbin creepage 20 mm).
 6. **Standard:** IEC 61010-1 (user 2026-10-31). Insulate the core (tape/caps), verify the Norwe
-   row spacing ≥ 12.6 mm, confirm the TIW acceptance with the test lab, verify the Annex K values.
+   row spacing ≥ 10.0 mm, confirm the TIW acceptance with the test lab, verify the Annex K values.
 7. **Gate drive:** decided – MMBT3904/3906 buffer (user, 2026-10-31). Check the light-load
    LEB-limited on-time at 450 V on the prototype.
 8. **VS divider and cable compensation:** trim RS2 / RCBC on the prototype. Check the VS ringing at

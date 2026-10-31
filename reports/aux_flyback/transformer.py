@@ -104,7 +104,7 @@ def report(mag, inputs, out=print):
         n = sum(1 for t in coil["turnsDescription"] if t["layer"] == l["name"]) if l["type"] == "conduction" else ""
         out(f'     {l["name"][:46]:46} {l["type"]:10} t {l["dimensions"][0]*1e3:.3f} w {l["dimensions"][1]*1e3:5.2f} mm {n}')
     ins = p.calculate_insulation(inputs)
-    out("   insulation requirement (MKF, IEC 60664-1 reinforced, 630 V, PD2, OVC II, IIIa; MKF applies its >30 kHz rules): "
+    out("   insulation requirement (MKF, IEC 60664-1 reinforced, 500 V, PD2, OVC II, IIIa; MKF applies its >30 kHz rules): "
         + str({k: v for k, v in ins.items() if v}))
 
 

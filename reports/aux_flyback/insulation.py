@@ -17,7 +17,7 @@ def run(std, typ, v, pd="P2", cti="Group IIIA", ovc="OVC-II"):
     except Exception as e:
         return f"ERR {e}"
 for std in ["IEC 60664-1", "IEC 62368-1", "IEC 61558-1"]:
-    for v in (230, 300, 450, 500, 630, 800):
+    for v in (230, 300, 400, 450, 500, 630, 800, 1000):
         for typ in ("Basic", "Reinforced"):
             print(std, v, typ, run(std, typ, v))
 print("--- 60664-1 PD1 (impregnated) / material groups, 500 and 800 V reinforced")

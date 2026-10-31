@@ -90,29 +90,35 @@ available here, so **every number must be verified against IEC 61010-1 Annex K (
 K.2 secondary circuits) before layout sign-off.** Assumptions: mains 230 V, OVC II (2.5 kV impulse),
 PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 
-**Working voltages** (CTRL is bonded to PE; both power domains move against PE):
+**Working voltages** (user 2026-10-31: the isolated DC link is ≤ 410 V, so the AC output peak is
+≤ 410 V (≈ 290 Vrms sine); the primary DC+ stays ≤ 450 V for the 100–450 V input range. CTRL is
+bonded to PE; both power domains move against PE). Whether an output terminal can be earthed is not
+known yet, so both cases are given:
 
-| Barrier | Where | Working voltage (assumed) | Insulation |
+| Barrier | Floating output (only the output Y caps C29–C32 to PE) | Output earthed (through the Y caps' leakage path, the user or the load) | IEC 60664-1 row (RMS / DC working voltage) |
 |---|---|---|---|
-| B1 mains/primary ↔ PE and accessible parts | AFE, DC link (galvanically mains-connected) | mains 230 Vrms; DC+ ≤ 450 V | reinforced to accessible parts (or basic + PE) |
-| B2 primary ↔ ISO | TR1 (off-board), aux transformer {P, Out1} ↔ Out2, any PCB gap between GND/PGND/DC+ and ISO copper | up to ≈ 900 V peak (DC+ at +450 V while ISOGND sits at −450 V against PE through the output Y caps or an earthed output terminal); **use the 630 V RMS/DC row** | reinforced (user D3). IEC 61010-1 may only need basic between two hazardous-live circuits; to confirm |
-| B3 primary ↔ CTRL | U13/U15/U16, U5 (AMC1306), aux transformer {P, Out1} ↔ CTRL, PCB islands | ≈ 450–550 V peak, **500 V row** | reinforced (decided; basic + PE bonding would satisfy class I) |
-| B4 ISO ↔ CTRL | new ISO7760F, CA-IS3742, AMC1311, U4/U6 path, aux transformer Out2 ↔ CTRL | ≤ 450 V DC + the AC output, **500 V row** | reinforced |
-| B5 CTRL ↔ user parts (Ethernet, touchscreen) | same domain, PE-bonded | SELV | functional |
+| B2 primary ↔ ISO | ISO domain centred on PE: ISOGND ≈ −205 V average, −410…0 V extremes; DC+ ≤ +450 V to PE. Peak ≈ 860 V, RMS ≈ 430–500 V | ISOGND = −(earthed pole voltage): −410…0 V. Same peak ≈ 860 V, RMS ≈ 430–500 V | **500 V row** (was 630 V); medium confidence, the RMS sits near the 500 V boundary. **If the output can run DC with one terminal earthed**, B2 is a DC voltage up to ≈ 860 V → **1000 V row** |
+| B3 primary ↔ CTRL (PE) | DC+ ≤ 450 V peak to PE, RMS < 450 V | same | **500 V row** (unchanged) |
+| B4 ISO ↔ CTRL (PE) | ≤ 410 V peak (switching common mode included), RMS ≈ 205–290 V | ≤ 410 V peak, RMS ≤ 410 V (DC output) | **500 V row** (just above the 400 V row; unchanged) |
+| B1 mains/primary ↔ accessible parts | mains 230 Vrms OVC II; DC+ ≤ 450 V | same | mains OVC II 300 V |
+| B5 CTRL ↔ user parts (Ethernet, touchscreen) | same domain, PE-bonded, SELV | same | functional |
+
+Insulation type: reinforced everywhere (user D3 for B2; for B3/B4, basic + PE bonding would satisfy
+class I). IEC 61010-1 may only require basic between two hazardous-live circuits (B2); to confirm.
 
 **Required distances** (IEC 60664-1 basis; confidence in brackets):
 
 | Barrier | Clearance, reinforced | Creepage, reinforced: PCB (printed-wiring column, CTI ≥ 175) | Creepage, reinforced: other insulating material IIIa (bobbin, connector bodies) | Solid insulation, reinforced |
 |---|---|---|---|---|
-| B2 (630 V) | ≥ 3.0 mm (2.5 kV impulse → 4 kV step; the 900 V recurring peak needs less) (medium) | 2 × 3.2 = **6.4 mm** (medium) | 2 × 6.3 = **12.6 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
-| B3, B4 (500 V) | ≥ 3.0 mm (medium-high for mains OVC II 300 V; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | same (medium) |
+| B2, B3, B4 (500 V row) | ≥ 3.0 mm (2.5 kV OVC II impulse → 4 kV step; the ≈ 860 V recurring peak needs less) (medium-high; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
+| B2 only if the output can be DC and earthed (1000 V row) | ≥ 3.0 mm | 2 × 5.0 = **10.0 mm** (medium-low) | 2 × 10.0 = **20 mm** (medium-low) | same |
 
 - **Test voltage** (dielectric strength, reinforced, 1 min AC): ≈ 3 kVrms for mains OVC II 300 V,
-  higher for the 500–630 V working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
+  higher for the 500 V row working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
   MKF's IEC 60664-1 figure is 2.7 kV; its IEC 62368-1 figure is 5 kV.
 - **If IEC 61010-1 does not accept the printed-wiring column** for these working voltages, use the
-  material-group column on the PCB too (10.0 / 12.6 mm). The board plan already keeps ≥ 10 mm with
-  slots for B3/B4; B2 on the PCB needs ≥ 12.6 mm in that case.
+  material-group column on the PCB too (10.0 mm for all three barriers). The board plan's ≥ 10 mm with
+  slots covers that (B2 needs 20 mm only in the DC-output/earthed case).
 - **Slots** count as an interruption of the creepage path when ≥ 1.0 mm wide (IEC 60664-1, PD2).
 - **MKF numbers** (reports/aux_flyback/insulation.py → insulation.txt): its IEC 60664-1 creepage is
   16 mm at 450–500 V and 25 mm at 630–800 V reinforced (IIIa, PD2). That is far above Table F.4 because
@@ -128,11 +134,12 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 
 **PCB verdict:**
 - **B3/B4 (CTRL islands):** the plan's ≥ 10 mm with slots meets the IEC 60664-1 basis in both cases:
-  printed-wiring column 5.0 mm, material-group column 10.0 mm. **OK.** Clearance ≥ 4 mm is met
+  printed-wiring column 5.0 mm, material-group column 10.0 mm. **OK** (unchanged by the 410 V limit). Clearance ≥ 4 mm is met
   automatically.
 - **B2 (primary ↔ ISO on the PCB):** the aux transformer's P/Out1 pads ↔ Out2 pads and the TR1
-  terminals (DAB_PRI_x ↔ DAB_SEC_x) need **6.4 mm (printed-wiring column) to 12.6 mm (material-group
-  column)**. Lay out ≥ 12.6 mm, or slot. Check today's DAB terminal spacing on the v4 board as well.
+  terminals (DAB_PRI_x ↔ DAB_SEC_x) need **5.0 mm (printed-wiring column) to 10.0 mm (material-group
+  column)** at the 500 V row; ≥ 10 mm (PCB) / 20 mm (other material) if the output can be DC and
+  earthed. Lay out ≥ 10 mm, or slot. Check today's DAB terminal spacing on the v4 board as well.
 - **Inner layers:** keep the same gap on In1/In2 unless the PCB is qualified for cemented joints. A
   domain on L1 must not overlap another domain on L2: the L1–L2 prepreg (≈ 0.2 mm) is below the
   0.4 mm reinforced solid-insulation thickness and is not two separately tested layers.
@@ -151,7 +158,8 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 - **Fire enclosure, mains switch / fuse, X/Y capacitor ratings, marking and documentation.**
 - **EMC:** IEC 61326-1.
 
-The aux transformer verdict is in V5_PLAN.md 5.3 (core insulation needed).
+The aux transformer verdict is in V5_PLAN.md 5.3 (core insulation needed). Rated ambient 30 °C (user
+2026-10-31), internal air ≈ 50–60 °C assumed; the thermal notes are in V5_PLAN.md 5.1.
 
 ## 3. Power for CTRL
 
