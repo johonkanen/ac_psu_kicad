@@ -91,6 +91,12 @@ contents (checked with a dummy footprint added); the board was therefore re-made
 pth_inside_courtyard 2, silk_overlap 38 (+2), silk_edge_clearance 1 (+1: J7's reference near the
 bottom edge), track_dangling 1, via_dangling 2, silk_over_copper 199.
 
+Verification (dd9bacb): `tools/check_all.sh` ALL CHECKS PASSED (compare 290/290, check_board 294
+footprints / 972 pads / 35 swap pads, assign_nets 247 groups 0 opens, DRC 295 / 0 shorts / 0
+unconnected / 0 parity, domain_gaps 0 violations, ipc356_diff 0 mismatches, roundtrip OK);
+`tools/regen_check.sh` OK; replaying `tools/v4/apply_all.sh` on the tag's board gives the board and
+`reports/v4_board_edits.txt` byte for byte (twice, and with an extra footprint in the library).
+
 Renders (before = main 2104b5b): `reports/v4/fix13_<REF>[_before].png`,
 `reports/v4/fix14_{PE1,ACIN2_ACOUT,PE3_PE4,R2via_PE8}_{F,B}[_before].png`,
 `reports/v4/fix14_tracks_{In1,In2}[_before].png`.
@@ -444,7 +450,7 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 User review 2026-10-23: nothing to change. Shunt inductance not measured accurately (5–10 nH,
 about 5 nH); the 12.4R placeholder (5 nH) stays.
 
-`tools/regen_check.sh` (clean clone of 5fec258, regenerate everything incl. the Proteus board
+`tools/regen_check.sh` (clean clone of dd9bacb, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
 ### Last verification (`tools/check_all.sh`, fix 12 done)
