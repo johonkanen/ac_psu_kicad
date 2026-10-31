@@ -3,7 +3,7 @@
 Status: plan only (2026-10-31), no design change yet. Based on main 2104b5b (v4 with fixes 1–12).
 User decisions 2026-10-31: **done together with v5** (this branch is the v5 branch; see V5_PLAN.md),
 **CTRL power from a dedicated winding on the v5 aux flyback** (option B). Total aux power about
-15–20 W (user estimate). Open: decisions 2 (islands) and 3 (earthing).
+15–20 W (user estimate). Decisions 2 (two islands) and 3 (CTRL bonded to PE) taken 2026-10-31; all decisions are taken.
 
 Goal (user): the control card's domain becomes its own SELV domain **CTRL**, isolated by reinforced
 barriers from the primary (GND/PGND: DC+ up to 450 V, mains) and from the isolated DC side
@@ -203,9 +203,21 @@ CTRL winding (option B) and also changes the area around U8/J12. The frozen-boar
 
 1. **CTRL power – B, the v5 winding** (user, 2026-10-31). The THM 10-2411WI stays an option for bench
    boards only.
-2. **Islands:** accept two CTRL islands joined only through the card, with a small extra supply for
-   island A? Or move the J12 power pins' function onto J11? (Not possible without a card change,
-   because J11 has no spare power pins; pin 38 is unconnected but only one pin.)
-3. **CTRL earthing:** float, or bond to PE through the chassis? Earthed SELV changes nothing in the
-   barrier requirements but helps EMC.
+2. **Islands – two CTRL islands** (user, 2026-10-31): island A around J11 with the isolators and its
+   own small 3.3 V supply, island B at J12 with the card supply. They are joined through the card's
+   ground.
+3. **CTRL earthing – bonded to protective earth** (user, 2026-10-31). Consequences for the design:
+   - **Bonding:** a PE terminal (or a PE pad bolted to the chassis) on **each** island, so neither
+     relies on the card's ground for its bond. Size the bond as a protective bonding conductor:
+     trace width and the fault current from the barrier side, per IEC 62368-1 5.6 / IEC 62477-1.
+     The existing PE terminals (PE1–PE8) are on the power side; add new ones at the islands.
+   - **Barriers stay reinforced,** as decided. Earthing adds a further safeguard. The standards
+     could accept basic insulation plus protective earthing, but the plan keeps reinforced, so the
+     card stays safe even if the PE bond is missing.
+   - **Leakage current:** the barrier capacitances (isolators, AMC1311, transformer interwinding)
+     now return the switching common-mode current of ISOGND and GND to PE. Check the touch-current
+     limit (≈ 3.5 mA for pluggable type A equipment), and keep any Y capacitors from the power
+     domains to PE within it.
+   - **EMC benefit:** the card's ground and the Ethernet shield are at earth potential, not jumping
+     with the inverter's switching.
 4. **Schedule – together with v5** (user, 2026-10-31).
