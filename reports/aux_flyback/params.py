@@ -12,27 +12,32 @@ VCST_MAX, VCST_MIN = 0.780, 0.195   # CS thresholds (typ); VCST(max) 0.738..0.81
 DMAGCC = 0.425          # demag duty at the CC limit (internal)
 T_RES_HALF = 1.0e-6     # end of demag -> first valley (TI default estimate 500 kHz ring)
 TLEB = 0.280e-6         # leading-edge blanking max = practical minimum on time
-VDD_NOM = 25.0          # TI recommendation; run 9..35 V, UVLO 21/8.1 V
+VDD_ON, VDD_OFF = 21.0, 8.1      # UVLO on/off typ (19..23 / 7.7..8.5 V); VDD runs from the 15 V Out1 rail
+IRUN_MAX = 2.65e-3      # run supply current max
+IHV_MIN = 100e-6        # HV start-up current min at VHV = 100 V (typ 250 uA; TI: "typically 300 uA available")
+IDRS = 0.020            # DRV source current min (25 typ) at VDRV 8 V
+QG = 35e-9              # IPD95R450P7 total gate charge at 10 V
 VVSR = 4.05             # VS regulation level
 
 # ---- turn set (Np, Ns, Nctrl, Nbias); TURNSET env var for the comparison run ---------------------
 import os as _os
-TURNSETS = {"A": (32, 5, 3, 8), "B": (38, 6, 4, 10)}
+TURNSETS = {"A": (32, 5, 3, 0), "B": (38, 6, 4, 0)}   # (Np, Ns, Nctrl, Nbias): no bias winding since 2026-10-31
 TURNSET = TURNSETS[_os.environ.get("TURNSET", "A")]   # A chosen: lower leakage (clamp), 9 V CTRL; B: 216 mT, more leakage
 CTRL_V = TURNSET[2] * TURNSET[0] / TURNSET[1] * 15.7 / TURNSET[0] - 0.45   # CTRL winding minus Schottky drop
 CTRL_I = 9.0 / CTRL_V                                                       # 9 W into the buck
 
 # ---- outputs (design load 20 W total, user decision 2026-10-31; was 25 W in 3b4a33d) -------------
 #          name    V     I     diode VF  isolation side (MKF)
-OUTPUTS = [("Out1", 15.0, 0.37, 0.70, "primary"),     # 15V on GND (primary group), ultrafast diode, 5.5 W
+OUTPUTS = [("Out1", 15.0, 0.39, 0.70, "primary"),     # 15V on GND (primary group): 5.5 W + VDD ~20 mA; PSR sense winding
            ("Out2", 15.0, 0.33, 0.70, "secondary"),   # 15V_ISO on ISOGND, 5 W
-           ("CTRL",  CTRL_V, CTRL_I, 0.45, "tertiary"),  # control card: winding into a 5 V buck, 9 W
-           ("Bias", 24.4, 0.020, 0.70, "primary")]    # UCC28710 VDD
+           ("CTRL",  CTRL_V, CTRL_I, 0.45, "tertiary")]  # control card: winding into a 5 V buck, 9 W
+# No separate bias winding (user, 2026-10-31): Out1 is the PSR sense winding (VS divider from the
+# Out1 winding node before its rectifier) and supplies VDD through a diode + resistor (VDD ~14.3 V).
 ETA = 0.86              # converter efficiency estimate at 100 V full load (for the input power)
 ETA_XFMR = 0.90         # TI's transformer efficiency term (leakage, losses, bias)
 
 # ---- transformer ------------------------------------------------------------------------------
-NP, NS, NC, NB = TURNSET      # primary, 15 V windings, CTRL, bias
+NP, NS, NC, NB = TURNSET      # primary, 15 V windings, CTRL, (bias: none, NB = 0)
 VOR = NP / NS * (15.0 + 0.70)  # reflected voltage (~100 V: set by DCM at 100 V input)
 P_CC = 25.5             # output power at the CC limit (typ fSW(max), typ VCST(max)); the worst case
                         # (fSW(max) 92 kHz, VCST(max) 738 mV) is 0.824 x = 21.0 W, above the 20 W design load
@@ -44,8 +49,8 @@ RCS = VCST_MAX / IPP                            # current-sense resistor
 # ---- MOSFET / clamp --------------------------------------------------------------------------
 VDS_RATING = 950.0      # IPD95R450P7
 V_CLAMP = 240.0         # TVS clamp voltage at ~1.6 A (P6SMB200A / SMBJ170A class: Vbr 190-210 V, Vc 274 V at 2.2 A)
-LK_EFF = 6.7e-6         # effective primary leakage at full load: MKF pairwise P->Out1/Out2/CTRL (12.8/5.8/3.0 uH)
-                        # weighted by each output's share of the ampere-turns (conservative; measure on the sample)
+LK_EFF = 5.9e-6         # effective primary leakage at full load: MKF pairwise P->Out1/Out2/CTRL (6.1/11.2/2.9 uH,
+                        # winding order O2) weighted by each output's power share (conservative; measure on the sample)
 VDS_PK = VIN_MAX + V_CLAMP
 
 # ---- thermal ----------------------------------------------------------------------------------
@@ -62,11 +67,11 @@ CANDIDATES = {
     "EE32": ("E 32/16/9", "Bobbin EE 32 horizontal 12-pin 5.08mm (Norwe 10750-024)"),
 }
 WIRES = {"Primary": ("Round 0.4 - Grade 2", 1),
-         "Out1": ("Round 0.5 - Grade 2", 1),
+         "Out1": ("Round 0.63 - Grade 2", 1),
          "Out2": ("Round TCA3 24 AWG", 1),
          "CTRL": ("Round TCA3 25 AWG", 3),
-         "Bias": ("Round 0.2 - Grade 2", 1)}
-TURNS = {"Primary": NP, "Out1": NS, "Out2": NS, "CTRL": NC, "Bias": NB}
+         }
+TURNS = {"Primary": NP, "Out1": NS, "Out2": NS, "CTRL": NC}
 
 
 def summary():
@@ -98,10 +103,40 @@ def summary():
                 f"(any Vin; Ipp is fixed by VCST(max) in the FM region)")
     rows.append(f"RCS {RCS:.3f} ohm (use 0.590 ohm 1 %, E96): {IPP**2*0.335/3*RCS:.2f} W at 100 V")
     for name, v, i, vf, _ in OUTPUTS:
-        n = {"Out1": NS, "Out2": NS, "CTRL": NC, "Bias": NB}[name]
+        n = {"Out1": NS, "Out2": NS, "CTRL": NC}[name]
         vrev = VIN_MAX * n / NP + v
         rows.append(f"  {name}: N {n}, winding {n*VOR/NP:.2f} V -> out {n*VOR/NP - vf:.2f} V; diode reverse {vrev:.0f} V")
+    rows += out1_sense_vdd(f_full)
     return "\n".join(rows)
+
+
+def out1_sense_vdd(f_full):
+    """Out1 as the PSR sense and VDD winding (TI SLUSB86C eq. 24-26, 28)."""
+    r = []
+    npa = NP / NS                       # primary to 'auxiliary' (= Out1) turns ratio
+    vin_run = 85.0                      # DC input at which DRV is enabled
+    rs1 = vin_run / (npa * 225e-6)      # IVSL(run) typ 225 uA (DC input: no sqrt(2))
+    rs2 = rs1 * VVSR / (1.0 * (15.0 + 0.45) - VVSR)   # NAS = 1; VF ~0.45 V near zero current (ultrafast); use 21.0 k E96
+    r.append(f"VS divider from the Out1 winding: RS1 {rs1/1e3:.1f} k (run at {vin_run:.0f} V DC, stop at "
+             f"{rs1*npa*80e-6:.0f} V), RS2 {rs2/1e3:.2f} k")
+    vocbc = 0.25                        # cable compensation at the output at full load (diode VF + winding IR)
+    rcbc = 3.2 * 3e3 * (15.0 + 0.45) / (VVSR * vocbc) - 28e3
+    r.append(f"cable compensation {vocbc:.2f} V at full load: RCBC {rcbc/1e3:.0f} k")
+    vdd = 15.0 - 0.7
+    idd = IRUN_MAX + QG * FMAX          # run current + gate charge at fSW(max)
+    vocc = 10.0                         # Out1 level at which VDD (diode from Out1) holds >= VDD_OFF + margin
+    c_out1 = 600e-6                     # Out1 capacitance incl. gate-driver boards and U9 (estimate)
+    p_cc_worst = 0.5 * LP * IPP ** 2 * FMAX_MIN * ETA_XFMR * (0.738 / VCST_MAX) ** 2
+    t_occ = 0.020                       # design start-up time to Out1 = 10 V (estimate x2.5 margin, see README)
+    cdd = idd * t_occ / (19.0 - 8.5 - 1.0)   # worst-case UVLO window 19 V on / 8.5 V off, 1 V margin
+    t_start_typ = 15e-6 * VDD_ON / 250e-6
+    t_start_max = 15e-6 * 23.0 / (IHV_MIN - 30e-6)
+    r.append(f"VDD from Out1 via diode + 47 ohm: ~{vdd:.1f} V; run current {idd*1e3:.1f} mA (IRUN max + Qg x 100 kHz)")
+    r.append(f"CDD >= {cdd*1e6:.1f} uF for {t_occ*1e3:.0f} ms to Out1 {vocc:.0f} V (worst UVLO window 9.5 V) -> 15 uF; "
+             f"start delay with 15 uF: {t_start_typ:.1f} s typ, {t_start_max:.1f} s worst (IHV 100 uA at 100 V)")
+    r.append(f"gate drive: VDD {vdd:.1f} V, DRV ~{vdd-1:.0f} V (clamp 14-16 V only at high VDD); Qg {QG*1e9:.0f} nC at "
+             f"{IDRS*1e3:.0f} mA min source -> {QG/IDRS*1e6:.1f} us to full charge")
+    return r
 
 
 if __name__ == "__main__":

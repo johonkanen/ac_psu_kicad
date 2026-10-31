@@ -1,6 +1,7 @@
 """Wind and evaluate the v5 aux flyback transformer candidates with MKF (PyOpenMagnetics 1.7.35).
 
-Interleaved P1 - CTRL - Out2 - P2 - Out1 - Bias. Out2 and CTRL are triple-insulated wire (TIW,
+Interleaved P1 - CTRL - Out1 - P2 - Out2 (no bias winding: Out1 is the PSR sense and VDD winding).
+Out2 and CTRL are triple-insulated wire (TIW,
 Rubadue TCA3), which carries the reinforced insulation to the primary group and between each other,
 so no margin tape is needed. One 25 um tape layer between sections is mechanical only.
 
@@ -15,9 +16,15 @@ from params import *
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = {"coreLosses": "IGSE", "reluctance": "ZHANG", "gapReluctance": "ZHANG"}
 CHOSEN = "EE25"
-ORDER = ["Primary", "Out1", "Out2", "CTRL", "Bias"]          # winding index order (= inputs.json)
-PATTERN = [0, 3, 2, 0, 1, 4]                                 # P1, CTRL, Out2, P2, Out1, Bias
-PROPORTION = [0.36, 0.14, 0.16, 0.24, 0.10]
+ORDER = ["Primary", "Out1", "Out2", "CTRL"]                 # winding index order (= inputs.json)
+# Winding orders (no bias winding; Out1 is the PSR sense winding and must couple well to the primary).
+# WINDING env var picks one for the comparison run.
+ORDERS = {"O1": [0, 1, 0, 3, 2],     # P1, Out1, P2, CTRL, Out2
+          "O2": [0, 3, 1, 0, 2],     # P1, CTRL, Out1, P2, Out2
+          "O3": [0, 1, 3, 0, 2],     # P1, Out1, CTRL, P2, Out2
+          "O4": [0, 3, 2, 0, 1]}     # P1, CTRL, Out2, P2, Out1 (the old order without bias)
+PATTERN = ORDERS[os.environ.get("WINDING", "O2")]   # O2 chosen (lowest clamp-relevant leakage)
+PROPORTION = [0.36, 0.14, 0.16, 0.24]
 
 
 def core_with_gap(shape, g):
@@ -39,7 +46,7 @@ def gap_for(shape, coil, op, target):
 
 
 def wind(bobbin):
-    sides = {"Primary": "primary", "Bias": "primary"}
+    sides = {"Primary": "primary"}
     sides.update({o[0]: o[4] for o in OUTPUTS})
     windings = [{"name": n, "numberTurns": TURNS[n], "numberParallels": WIRES[n][1], "wire": WIRES[n][0],
                  "isolationSide": sides[n]} for n in ORDER]
@@ -89,7 +96,7 @@ def evaluate(name, inputs, out=print):
 
 def report(mag, inputs, out=print):
     core, coil = mag["core"], mag["coil"]
-    for ref, n in enumerate(ORDER[:4]):
+    for ref, n in enumerate(ORDER):
         lk = p.calculate_leakage_inductance(mag, 80e3, ref)
         out(f"   leakage ref {n:7}:", [round(x["nominal"] * 1e6, 2) for x in lk["leakageInductancePerWinding"]], "uH")
     out("   layers (inner -> outer):")

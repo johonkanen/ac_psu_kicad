@@ -10,19 +10,19 @@ History:
 - **3b4a33d:** UCC28710, 25 W, E30/15/7 on a 12-pin bobbin, all groups on pins. Kept below as the
   alternative.
 - **This version:** 20 W on EE25 (user, 2026-10-31). CTRL leaves the bobbin as TIW flying leads,
-  because the 10-pin bobbin cannot hold Out2 and CTRL on one 5-pin row ≥ 10 mm apart.
+  because the 10-pin bobbin cannot hold Out2 and CTRL on one 5-pin row ≥ 10 mm apart. **No separate
+  bias winding** (user, 2026-10-31): Out1 is the PSR sense winding and supplies VDD.
 
 ## Requirements
 
 - **Input:** DC+ 100–450 V, full power at 100 V continuous.
-- **Outputs:** design load **20 W** (user estimate 15–20 W):
+- **Outputs:** design load **≈ 20 W** (19.8 W; user estimate 15–20 W):
 
   | Output | Domain | Voltage | Current | Power |
   |---|---|---|---|---|
-  | Out1 `15V` | GND, primary group | 15 V | 0.37 A | 5.5 W |
+  | Out1 `15V` | GND, primary group; PSR sense + VDD | 15 V | 0.39 A (0.37 A load + ≈ 20 mA VDD) | 5.85 W |
   | Out2 `15V_ISO` | ISOGND | 15 V | 0.33 A | 5 W |
   | CTRL | control card | ≈ 9 V into a 5 V buck | 1.0 A | 9 W (card ≈ 7.5 W + buck loss) |
-  | Bias | UCC28710 VDD | 24.4 V | 20 mA | 0.5 W |
 
 - **Isolation:** three groups, reinforced from each other: {primary, bias, Out1}, Out2, CTRL. Working
   voltage taken as 500 V. Pollution degree 2, OVC II, CTI IIIa, ≤ 2000 m.
@@ -45,7 +45,7 @@ Design (`params.py`; `python params.py` prints it, turn set A):
 | Lp | **322 µH** (AL ≈ 314 nH at 32 turns) |
 | Ipp(max) | 1.33 A at VCST(max); RCS = 0.588 Ω → **0.590 Ω 1 % (E96)**, 0.12 W |
 | CC limit | 25.5 W typ (100 kHz, 780 mV); 23.5 W at fSW(max) 92 kHz; **21.0 W worst case** (92 kHz and 738 mV): above the 20 W design load |
-| Full load | 20 W at **78 kHz** (FM region, peak current fixed) |
+| Full load | 19.8 W at **78 kHz** (FM region, peak current fixed) |
 | 100 V full load | ton 4.27 µs + tdemag 4.25 µs + 1 µs ring = 0.75 of the period (0.95 at the CC point) |
 | Primary RMS | 0.44 A at 100 V, 0.26 A at 300 V, 0.21 A at 450 V |
 | Light load, 450 V | tON is LEB-limited at 280 ns → **tDMAG(min) 1.25 µs**, just above TI's 1.2 µs: check VS sampling on the sample at 450 V, no load |
@@ -57,14 +57,26 @@ Design (`params.py`; `python params.py` prints it, turn set A):
 |---|---|
 | Core | E25/13/7 N87, centre-leg gap ≈ 0.22 mm for **AL ≈ 314 nH**. TDK B66317-series halves (ungapped B66317G0000X187 with a gapped B66317G…X187 half; the old design's B66317G0250X187 is ≈ 250 nH, too low: pick the gap for 314 nH or have the core ground), or Ferroxcube E25/13/7-3C95 gapped to the same AL |
 | Bobbin | EE25 horizontal, longer creepage, 10 pins (5 + 5) at 5.08 mm: **Norwe 10165-106** (2-chamber 10166-106). Same family, standard creepage: Norwe 10220-024 / 10175-106. None are stocked at JLC/LCSC; confirm the drawing (row spacing, flange creepage) |
-| Turns | Primary 32 (16 + 16 in series), Out1 5, Out2 5, CTRL 3, Bias 8 |
+| Turns | Primary 32 (16 + 16 in series), Out1 5, Out2 5, CTRL 3; no bias winding |
 | Peak flux | 267 mT at Ipp(max) and VCST 810 mV (N87 Bsat ≈ 390 mT at 100 °C) |
-| Losses (MKF) | 100 V: core 0.35 W + copper 0.25 W = **0.60 W**; 300 V: 0.72 W; 450 V: **0.76 W** |
-| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 78–82 °C** at 60 °C air |
-| Leakage (MKF, pairwise from the primary) | Out1 13.3 µH, Out2 5.8 µH, CTRL 3.0 µH, Bias 22.6 µH. Bias ↔ Out1 0.21 µH (tight coupling for PSR) |
+| Losses (MKF) | 100 V: core 0.36 W + copper 0.25 W = **0.61 W**; 300 V: 0.75 W; 450 V: **0.80 W** |
+| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 78–83 °C** at 60 °C air |
+| Leakage (MKF, pairwise from the primary) | Out1 6.1 µH, Out2 11.2 µH, CTRL 2.9 µH; clamp-effective ≈ 5.9 µH. Referred to Out2 with Out1 shorted 0.32 µH, CTRL 0.06 µH (cross-regulation against Out1) |
 
-Turn set B (38/6/4/10, CTRL ≈ 10 V) was also run: peak flux 223 mT and about the same total loss
-(0.58–0.75 W), but ≈ 33 % more leakage (Out1 17.7 µH, Out2 7.8 µH), so more clamp loss. A is chosen.
+Turn set B (38/6/4, CTRL ≈ 10 V) was run in the bias-winding version: peak flux 223 mT, about the same
+loss, but ≈ 33 % more leakage, so more clamp loss. A is kept.
+
+Winding orders compared (MKF, no bias winding; `WINDING=O1..O4 python transformer.py EE25`):
+
+| Order | P→Out1 / Out2 / CTRL leakage | Clamp-effective | Loss 100 / 450 V |
+|---|---|---|---|
+| O1 P1, Out1, P2, CTRL, Out2 | 4.5 / 15.0 / 5.7 µH | 7.6 µH | 0.86 / 1.07 W |
+| **O2 P1, CTRL, Out1, P2, Out2** | **6.1 / 11.2 / 2.9 µH** | **5.9 µH** | **0.61 / 0.80 W** |
+| O3 P1, Out1, CTRL, P2, Out2 | 6.0 / 11.2 / 2.9 µH | 5.9 µH | 0.69 / 0.92 W |
+| O4 P1, CTRL, Out2, P2, Out1 (old order) | 11.7 / 5.8 / 3.0 µH | 6.2 µH | 0.59 / 0.76 W |
+
+O2 is chosen: the lowest clamp-effective leakage, Out1 sandwiched between the primary halves for clean
+VS sensing (6.1 µH, half of O4's), CTRL tightly coupled to Out1 (0.06 µH), and about the lowest loss.
 
 Winding order, inside to outside (`winding.svg`):
 
@@ -72,23 +84,65 @@ Winding order, inside to outside (`winding.svg`):
 |---|---|---|---|
 | 1 | P1 | 0.40 mm Grade 2 | 16 |
 | 2 | CTRL | 3 × TIW 25 AWG (Rubadue TCA3) in parallel | 3 |
-| 3 | Out2 | TIW 24 AWG (TCA3) | 5 |
+| 3 | Out1 | 0.63 mm Grade 2 (heavier: the bias winding's space) | 5 |
 | 4 | P2 | 0.40 mm Grade 2 | 16 |
-| 5 | Out1 | 0.50 mm Grade 2 | 5 |
-| 6 | Bias | 0.20 mm Grade 2 | 8 |
+| 5 | Out2 | TIW 24 AWG (TCA3) | 5 |
 
 1 × 25 µm tape between layers, plus an outer wrap.
 
 **Construction: TIW on Out2 and CTRL, no margin tape.** TIW is solid reinforced insulation on the wire;
 it must be a certified type (IEC 62368-1 Annex J / IEC 61558-1), e.g. Rubadue TCA3 or Furukawa TEX-E,
-bought with its certificate. Enamelled leads (primary, Out1, bias) stay on the primary row.
+bought with its certificate. Enamelled leads (primary, Out1) stay on the primary row.
+
+### Out1 as the PSR sense and VDD winding
+
+- **VS:** the UCC28710 VS divider is taken from the Out1 winding node before its rectifier diode,
+  on GND (the controller ground). NPA = 32/5, NAS = 1.
+  - RS1 = 59.0 kΩ (eq. 25, DC input: run at ≈ 85 V, stop at ≈ 30 V).
+  - RS2 = 21.0 kΩ (eq. 26 with VVSR 4.05 V and VF ≈ 0.45 V near zero current).
+  - Cable compensation RCBC ≈ 118 kΩ (eq. 28) gives +0.25 V at full load for the diode VF rise and
+    the winding IR drop. The sample is taken near zero secondary current, so the IR drop is in the
+    output, not in the sample; trim RCBC on the prototype.
+  - **The controller now regulates Out1 directly**; Out2 and CTRL cross-regulate against Out1.
+- **VDD:** from the 15 V rail through a small-signal diode (BAS16/1N4148W) + 47 Ω: VDD ≈ 14.3 V
+  (run range 8.1–35 V). The HV start-up switch (100–500 µA, ≈ 300 µA typ) charges CDD to the 21 V
+  UVLO-on first.
+  - **CDD (eq. 24):** run current ≈ 6.2 mA (IRUN 2.65 mA max + Qg 35 nC × 100 kHz). VDD must hold
+    from 21 V (19 V worst) down to above 8.1 V (8.5 V worst) + 1 V margin until Out1 is high enough
+    to feed it (≈ 10 V).
+  - **Start-up time:** charging ≈ 0.08 J into the outputs (≈ 600 µF on Out1 incl. the gate-driver
+    boards and U9, ≈ 600 µF on Out2, ≈ 1000 µF on CTRL) at the 21 W worst-case CC limit, with half
+    of it taken by loads that start early, takes ≈ 8 ms. Design for 20 ms → CDD ≥ 12.9 µF →
+    **15 µF / 50 V**.
+  - **Start delay** with 15 µF: ≈ 1.3 s typ, ≈ 4.9 s worst case (IHV 100 µA min at 100 V input).
+- **Short circuit:** a short on Out1 collapses VDD (as does a short on Out2 or CTRL, which clamps all
+  windings). The controller drops out at 8.1 V, the HV switch recharges CDD (≈ 1–5 s), and it
+  restarts for one CDD discharge (≈ 15 µF × 12 V / 6 mA ≈ 30 ms). The result is a low-duty hiccup
+  (≈ 1–3 %), thermally safe. An open VS divider or output overvoltage (VS > 4.6 V, +15 %) is a fault
+  with UVLO reset too.
+- **Gate drive:** with VDD ≈ 14.3 V the DRV output reaches ≈ 13 V (below its 14–16 V clamp). That is
+  above the IPD95R450P7's 10 V Rds(on) rating, so the FET is fully on.
+  - **Speed:** DRV sources only 20–25 mA, so Qg 35 nC takes ≈ 1.4–1.8 µs. That is fine at 100 V full
+    load (ton 4.3 µs) and at 450 V full load (0.95 µs; the current starts at zero in DCM). At 450 V
+    light load (ton ≈ 280 ns, LEB-limited) the gate barely passes the plateau.
+  - **Recommendation:** a small NPN/PNP emitter-follower buffer (MMBT3904/MMBT3906) from VDD, or the
+    lower-Qg IPD95R750P7 (23 nC, 0.75 Ω).
+  - Turn-off: 6–12 Ω sink.
+- **VS waveform at the knee:**
+  - **Leakage reset:** with ≈ 5.9 µH clamp-effective leakage the reset pedestal is ≈ 5.9 µH × 1.33 A /
+    (240 − 100.5 V) ≈ 60 ns at Ipp(max) and ≈ 15 ns at Ipp(min). TI's limits are 2.2 µs and 600 ns.
+  - **Ringing:** the Out1-side leakage (≈ 0.15–0.32 µH) with the diode and winding capacitance
+    (≈ 100 pF) rings at ≈ 30–40 MHz and dies out in ≲ 200 ns.
+  - **Timing:** at 450 V no load, tDMAG(min) ≈ 1.25 µs, so the ringing must be below 100 mVpp at VS
+    (≈ 0.38 Vpp at the winding with RS1/RS2) by ≈ 1.05 µs.
+  - If it is not, add an RC snubber across the Out1 diode and check on the sample.
 
 ### Pins and the CTRL flying leads
 
 Horizontal bobbin: each flange carries one 5-pin row.
 - **Primary row (pins 1–5):** 1 drain (P2 end), 2 DC+ (P1 start; the P1–P2 joint is inside the
-  winding), 3 Bias, 4 GND (bias and Out1 return), 5 Out1. DC+ sits between the drain and the
-  low-voltage pins; these are functional distances inside the primary group (5.08 mm pitch).
+  winding), 3 **empty** (the freed bias pin: 10.16 mm between DC+ and the low-voltage pins),
+  4 GND (Out1 return), 5 Out1. These are functional distances inside the primary group.
 - **Secondary row (pins 6–10):** 6 Out2+, 7 ISOGND (Out2 return). Pins 8–10 are cut off.
 - **CTRL:** the two CTRL ends (each 3 parallel TIW strands, twisted and tinned only at the very end)
   leave the winding over the secondary flange at the pin-10 end, away from pins 6–7, and run as
@@ -122,13 +176,13 @@ Horizontal bobbin: each flange carries one 5-pin row.
   enough. Under IEC 60664-1 / IEC 62477-1, 16 mm over the bobbin material is not reachable on an
   EE25. Options: varnish impregnation (lower pollution degree), or a potted transformer.
 
-## Candidates (MKF at 20 W, turn set A)
+## Candidates (MKF at 20 W, turn set A, winding order O2)
 
 | Core / bobbin | Ae | Bpk | Loss 100 V / 450 V | ≈ T at 60 °C | Pins | Footprint |
 |---|---|---|---|---|---|---|
-| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 267 mT | **0.60 / 0.76 W** | **≈ 78–82 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
-| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 231 mT | 0.52 / 0.63 W | ≈ 73–76 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
-| E32/16/9, Norwe 10750-024 (6 + 6) | 83 mm² | 167 mT | 0.47 / 0.57 W | ≈ 69–71 °C | 12 | ≈ 36 × 34 mm |
+| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 267 mT | **0.61 / 0.80 W** | **≈ 78–83 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
+| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 231 mT | 0.52 / 0.64 W | ≈ 73–76 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
+| E32/16/9, Norwe 10750-024 (6 + 6) | 83 mm² | 167 mT | 0.49 / 0.61 W | ≈ 70–72 °C | 12 | ≈ 36 × 34 mm |
 
 **Board area:**
 - today's EF20: 22 × 14 mm body (≈ 310 mm²), 2 × 5 pins at 3.81 mm, rows 10.16 mm apart
@@ -143,26 +197,26 @@ like TR2 today.
 | Part | Stress | Choice (class) |
 |---|---|---|
 | MOSFET | 690 V peak, 0.44 A rms | IPD95R450P7 (DPAK). ≈ 0.2 W conduction (hot Rds ≈ 1 Ω) + ≈ 0.2 W switching ≈ **0.4 W** |
-| Clamp | ≈ **0.8 W** at full load (6.7 µH effective leakage, conservative) | TVS P6SMB200A / SMBJ170A class (≈ 240 V at 1.3 A) + 1000 V fast diode (US1M / RS1M). Give the TVS copper; measure the leakage on the sample |
+| Clamp | ≈ **0.7 W** at full load (5.9 µH effective leakage, conservative) | TVS P6SMB200A / SMBJ170A class (≈ 240 V at 1.3 A) + 1000 V fast diode (US1M / RS1M). Give the TVS copper; measure the leakage on the sample |
 | RCS | 1.33 A peak | 0.590 Ω 1 %, 0.25 W (1206) |
-| Out1 diode | 85 V reverse, 2.4 A peak, 0.37 A avg | 200 V ultrafast 1–2 A (ES2D / STTH202 class) |
+| Out1 diode | 85 V reverse, 2.5 A peak, 0.39 A avg | 200 V ultrafast 1–2 A (ES2D / STTH202 class) |
 | Out2 diode | 85 V, 2.1 A peak, 0.33 A avg | same |
 | CTRL diode | 51 V reverse, 6.5 A peak, 1.0 A avg | 100 V Schottky 3 A (SS310 / SS510 class), ≈ 0.45 W: copper |
-| Bias diode | 137 V | 300–400 V ultrafast 1 A (ES1G / US1G) |
-| Output capacitor RMS | Out1 0.69 A, Out2 0.62 A, CTRL 1.86 A | low-ESR polymer or MLCC + electrolytic; 105 °C, long life (passive chassis) |
-| VS divider | bias winding 25.1 V during demag → VS 4.05 V | RS1/RS2 per TI equation 1 (line compensation via RS1) |
+| VDD feed | Out1 → VDD, ≈ 6 mA | BAS16 / 1N4148W + 47 Ω; CDD 15 µF / 50 V (X7R 1210 or electrolytic) + 100 nF at the pin |
+| Gate buffer | Qg 35 nC from 20–25 mA DRV | MMBT3904 / MMBT3906 emitter follower from VDD (recommended) |
+| Output capacitor RMS | Out1 0.71 A, Out2 0.62 A, CTRL 1.86 A | low-ESR polymer or MLCC + electrolytic; 105 °C, long life (passive chassis) |
+| VS divider | Out1 winding 15.45 V at the knee → VS 4.05 V | RS1 59.0 k, RS2 21.0 k, RCBC ≈ 118 k (see above); RLC per TI eq. 27 |
 
-**Heat in the aux area at 100 V full load:** transformer 0.6 W + clamp 0.8 W + MOSFET 0.4 W + diodes
-≈ 0.9 W ≈ **2.7 W**.
+**Heat in the aux area at 100 V full load:** transformer 0.6 W + clamp 0.7 W + MOSFET 0.4 W + diodes
+≈ 0.9 W ≈ **2.6 W**.
 
-**Cross-regulation:** PSR regulates the bias winding (24.4 V) and sets Out1 = 15.0 V through the tight
-bias ↔ Out1 coupling.
-- **Out2:** leakage to the bias ≈ 0.58 µH (referred to Out2) gives ≈ 0.3 V droop at full load, so
-  expect 14.6–15.3 V. It rises toward 16–17 V when Out2 is light and the others are heavy. Preload
-  ≈ 3 mA (5.1 kΩ).
-- **CTRL:** ≈ 0.25 µH gives ≈ 0.35 V droop, so 8.5–9.3 V with load and up to ≈ 11–12 V at no load.
+**Cross-regulation:** PSR regulates Out1 directly (VS from the Out1 winding): ±1 % VVSR plus the
+diode tolerance, with cable compensation for the VF rise. Out2 and CTRL follow Out1 through their
+leakage to it (ΔV ≈ Llk × Ipk / tdemag):
+- **Out2:** 0.32 µH × 2.1 A / 4.25 µs ≈ 0.16 V droop, so expect 14.7–15.3 V. It rises toward ≈ 16 V
+  when Out2 is light and Out1 heavy. Preload ≈ 3 mA (5.1 kΩ).
+- **CTRL:** 0.06 µH × 6.5 A / 4.25 µs ≈ 0.1 V, so ≈ 8.9–9.3 V with load and ≈ 10.5–11.5 V at no load.
   Use a 5 V buck rated ≥ 17 V input; preload ≈ 10 mA (≈ 1 kΩ).
-- **Out1:** ≈ 0.1 V.
 
 ## Open items
 
@@ -182,7 +236,12 @@ bias ↔ Out1 coupling.
    reach more relative to the primary (450 V DC link plus the AC output).
 6. **Standard:** IEC 62368-1 (met) or IEC 62477-1 / IEC 60664-1 (16 mm over the bobbin: needs
    impregnation or potting).
-7. **CC limit tolerance:** the worst case is 21 W against the 20 W load. If the real load
+7. **Gate drive:** the MMBT3904/3906 buffer, or the IPD95R750P7 (23 nC), for the light-load
+   LEB-limited on-time at 450 V.
+8. **VS divider and cable compensation:** trim RS2 / RCBC on the prototype. Check the VS ringing at
+   450 V no load (≤ 100 mVpp at VS from ≈ 1.05 µs) and the start-up into the real output capacitance
+   (CDD 15 µF).
+9. **CC limit tolerance:** the worst case is 21 W against the 20 W load. If the real load
    approaches 20 W, lower RCS to 0.562 Ω (+5 % power; flux ≈ 280 mT) or use the E30 alternative.
 
 ## Files
