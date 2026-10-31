@@ -1,287 +1,357 @@
-<svg height="920.0" viewBox="-10.0 -460.0 470.0 920.0" width="470.0" xmlns="http://www.w3.org/2000/svg">
+<svg height="773.0" viewBox="-10.0 -386.5 395.8 773.0" width="395.8" xmlns="http://www.w3.org/2000/svg">
 	<style type="text/css">
 		<![CDATA[
-			.ActgxYWp {
+			.AcntWzGf {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.BfVjnIeP {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.BtNSxLUn {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.BveAjmCR {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.CqHBJAnI {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.CsUrGdtx {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.DuJsGTgw {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.EZmQULeb {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.EeXnVuLO {
 				fill: #696969;
 				opacity: 1.0;
 			}
-			.AdTqwnGa {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.CVgFJITY {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.CXzbNYmk {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
-			}
-			.CkeBxLKP {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.DOcZYeAl {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.DSQNAtpd {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
-			}
-			.DtBkurao {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.EqbVecIN {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.FbBRXGgq {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.FklHRJcE {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.GZWasmDh {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.HQZGUVcv {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
-			}
-			.HTsAcMwe {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.HnubUMoG {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
-			}
-			.JXnzUtrj {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.JcBPmwbx {
+			.EjLlnqBr {
 				fill: #696969;
 				opacity: 1.0;
 			}
-			.JyDopIKB {
+			.GHOmnATE {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.GIKLXRCZ {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.KNBSbRUp {
+			.GLKOScZU {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.GMBZmgAR {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.GTnDdzOp {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.GcPONayU {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.GrDBEvpc {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.HFQRmYeS {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.HPXbWuEz {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.HXTtYJSe {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.HphIOMgl {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.1;
 			}
-			.LHqlEVNv {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.MeSboWEk {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.NEgWOAmr {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.NeMVAIEb {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.NrkhXKxw {
+			.IFZmGDMK {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.ODVZtMUx {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.ONwElXRP {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.PTCcgeZq {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.PuaQEpjW {
+			.IGUQaNgk {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.QWgntBPp {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.QeEjbciz {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.RFKZjMxQ {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.RLknMUeq {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.RSsceuCG {
+			.IHplNGsA {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.1;
 			}
-			.RgyunsEO {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.SRIOqJTF {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.UeRxlXfH {
+			.INqcTtdm {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.UnHxsRpG {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.VMCcNGKB {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.VtGznBJA {
+			.IfCSOTyn {
 				fill: #696969;
 				opacity: 1.0;
 			}
-			.VyZvWDjK {
+			.IkTwiJKR {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.WEalYBvH {
+			.JtVskiKX {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.WcoFtGrg {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.WrISwDJF {
+			.KLouWCbE {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.XbMPLNdS {
+			.MNCjHIti {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.MQYcSpiT {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.YALOrZda {
+			.MVToePEy {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.YTCpHNLM {
+			.McWjZFnt {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.MeYwcoaG {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.MgGbndvA {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.MlFkNPsq {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.MoILRtjr {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.NgixnpHM {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.NklpbOLu {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.NmktIjHC {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.OLTnRNkU {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.1;
 			}
-			.YtUnuPLZ {
+			.OUBXuDpJ {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.OtPyqsVU {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.OynAXkrT {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.PfwqSHFm {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.1;
 			}
-			.ZTAXFOgx {
+			.PiNGOvla {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.ZaveIHEj {
+			.QXwykuTh {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.ZdrBkISJ {
+			.QvCJXeGN {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.aAWPZshK {
+			.QyJgqAoX {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.aHwDRieV {
+			.RBIcSgbA {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.RHTvsbfL {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.ROLoyfZF {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.aKgSTArX {
+			.RxZySYlU {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.aXCtsEGA {
+			.ShsCwIuB {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.apvKCMjW {
+			.SolkKcdX {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.azyVoIBO {
+			.VXxbtEDS {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.VsSJgTAi {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.WgykUcfb {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.bZJdqyRp {
+			.XLrIjGQg {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.YDztxksX {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.ZQmAdIzR {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.ZRaIQDsH {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.ZYciJVfy {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
+			}
+			.ZbDHpCfo {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.ZuGfdqco {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.aZHLpcBz {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.aeYQKhmp {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.afrXxTvK {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.bOVIJgUa {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.biAFdkvJ {
+				fill: #696969;
+				opacity: 1.0;
 			}
 			.bobbin {
 				fill: #539796;
@@ -290,21 +360,15 @@
 				fill: #539796;
 				opacity: 0.5;
 			}
-			.cZzsUWOD {
+			.cJZkIVqR {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.cfPiWTnY {
-				fill: #696969;
+			.cWLnpFeC {
+				fill: #c63032;
 				opacity: 1.0;
-			}
-			.cjIZDJox {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
 			}
 			.copper {
 				fill: #b87333;
@@ -316,45 +380,41 @@
 			.current_density {
 				fill: #0892D0;
 			}
-			.deRNqbOY {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.eBoFpVJh {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.eIZGFYMh {
+			.dBrkqYCV {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.esoySAiY {
+			.dcOmEaJr {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.evqlXcQf {
+			.edEJjcXI {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.fEibjWFq {
+			.eoXKxNij {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.eusVNaBC {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.fJODQdAo {
+			.ezLdjsQU {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.fELUcaVP {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
-				stroke-width: 0.1;
+				stroke-width: 0.0;
 			}
 			.ferrite {
 				fill: #7b7c7d;
@@ -366,41 +426,21 @@
 				fill: #008000;
 				opacity: 0.5;
 			}
-			.fyGFPCLc {
+			.fzRtCNgk {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.gXoOFCsT {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.gXuyPzHG {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.gqeWQNPd {
+			.gQosynCq {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.hfNEBawW {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.hgBMSGrR {
+			.igxtAJyT {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.ijTlvnZK {
-				fill: none;
+			.ilEHKdRx {
+				fill: #696969;
 				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
 			}
 			.insulation {
 				fill: #fff05b;
@@ -409,65 +449,23 @@
 				fill: #fff05b;
 				opacity: 0.5;
 			}
-			.jcekKDPr {
+			.jIqWUHmp {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.jmRXyFvn {
+			.kHKotGDz {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
-				stroke-width: 0.0;
+				stroke-width: 0.1;
 			}
-			.kBbIXyPc {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.kHGECImt {
+			.kwntLMiI {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.kvinjGFo {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.lGCnKeIU {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.lOjhfpeE {
+			.lCxqITJe {
 				fill: #696969;
 				opacity: 1.0;
-			}
-			.lRYkxJtq {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.lhLdYOEy {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.lnXkZrta {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.mMSVrdGa {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.mZMJFKjU {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.maHqsQgM {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
 			}
 			.margin {
 				fill: #fff05b;
@@ -476,1236 +474,1238 @@
 				fill: #fff05b;
 				opacity: 0.5;
 			}
-			.myXhtlEk {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.nNWKsvdz {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.nNtRaoEf {
+			.mftejZCT {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.nuEDbzAg {
+			.ngxKCiva {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.oDtTqLIp {
-				fill: #696969;
-				opacity: 1.0;
-			}
-			.ojXBaivg {
+			.nyaAEKTI {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.opwYUPdT {
-				fill: #696969;
+			.oHITBYNv {
+				fill: none;
 				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.ohYerFZc {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.okgUWntl {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.omwncfaG {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.pMBdUnGC {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
 			}
 			.point {
 				fill: #ff0000;
 			}
-			.pubmJsgK {
+			.rDxTNaVX {
+				fill: #696969;
+				opacity: 1.0;
+			}
+			.rZfsohPq {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.qZEVdWRU {
+			.roAnuOIL {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.qbjOTFIt {
-				fill: none;
+			.rvfQJlkz {
+				fill: #696969;
 				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
 			}
-			.qfSFAXsD {
+			.sGBHDzIn {
 				fill: #c63032;
 				opacity: 1.0;
-			}
-			.qfgNWYTm {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.qsAliQhj {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.qzNkgEQA {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.rCSHYOiz {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.rSWuqaLi {
-				fill: #c63032;
-				opacity: 1.0;
-			}
-			.sAnTNCKd {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.sPxHGoZI {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
 			}
 			.shunt {
 				fill: #6a5acd;
 			}
+			.snRjIbZq {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
 			.spacer {
 				fill: #3b3b3b;
+			}
+			.tUZdPkyz {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
 			}
 			.text {
 				fill: #000000;
 			}
-			.toZpCmJO {
+			.uJfMOrly {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
-				stroke-width: 0.0;
+				stroke-width: 0.1;
 			}
-			.vLwnRaWs {
-				fill: none;
+			.uZUzsgqS {
+				fill: #696969;
 				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
 			}
-			.vgjOxhQL {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.vkVTWGmq {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.wQvNsFLy {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.0;
-			}
-			.wYlchtDM {
+			.udGlfkOb {
 				fill: #c63032;
 				opacity: 1.0;
+			}
+			.ugxOCdIY {
+				fill: #c63032;
+				opacity: 1.0;
+			}
+			.vILOqFeY {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.vyZHSalt {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.1;
+			}
+			.wZqejyfI {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
 			}
 			.white {
 				fill: #ffffff;
 			}
-			.wlZTaUvI {
-				fill: #696969;
+			.wqiBxYed {
+				fill: #c63032;
 				opacity: 1.0;
 			}
-			.wnCjNkpP {
+			.xDCLMWuY {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.0;
 			}
-			.wotmvpRg {
+			.xXRNZkSj {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.xbOcZAyP {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.xWXTZYbU {
+			.xdGuTOzE {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
-				stroke-width: 0.1;
+				stroke-width: 0.0;
 			}
-			.ySvbGHxW {
-				fill: none;
-				opacity: 1.0;
-				stroke: #010000;
-				stroke-width: 0.1;
-			}
-			.zXUjPneQ {
+			.xipkrHzm {
 				fill: #c63032;
 				opacity: 1.0;
 			}
-			.zxGpvsPl {
+			.xqNbBgeS {
 				fill: none;
 				opacity: 1.0;
 				stroke: #010000;
 				stroke-width: 0.1;
+			}
+			.yCNPbrdV {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
+			}
+			.zTCdwAME {
+				fill: none;
+				opacity: 1.0;
+				stroke: #010000;
+				stroke-width: 0.0;
 			}
 		]]>
 	</style>
 	<g>
-		<polygon class="ferrite" points="0.0,-450.0 450.0,-450.0 450.0,-0.1 298.5,-0.1 298.5,-300.0 105.0,-300.0 105.0,-7.9 0.0,-7.9 " />
-		<polygon class="ferrite" points="0.0,450.0 450.0,450.0 450.0,0.1 298.5,0.1 298.5,300.0 105.0,300.0 105.0,0.0 0.0,0.0 " />
+		<polygon class="ferrite" points="0.0,-376.5 375.8,-376.5 375.8,-0.1 268.5,-0.1 268.5,-268.5 108.8,-268.5 108.8,-6.5 0.0,-6.5 " />
+		<polygon class="ferrite" points="0.0,376.5 375.8,376.5 375.8,0.1 268.5,0.1 268.5,268.5 108.8,268.5 108.8,0.0 0.0,0.0 " />
 	</g>
 	<g>
-		<polygon class="bobbin" points="113.2,-285.0 286.5,-285.0 286.5,-255.0 133.5,-255.0 133.5,255.0 286.5,255.0 286.5,285.0 113.2,285.0 " />
+		<polygon class="bobbin" points="115.5,-258.0 259.5,-258.0 259.5,-237.0 133.5,-237.0 133.5,237.0 259.5,237.0 259.5,258.0 115.5,258.0 " />
 	</g>
 	<g>
-		<polygon class="insulation" points="147.0,-255.0 147.7,-255.0 147.7,255.0 147.0,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
-		<polygon class="insulation" points="168.2,-255.0 169.0,-255.0 169.0,255.0 168.2,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
-		<polygon class="insulation" points="191.1,-255.0 191.9,-255.0 191.9,255.0 191.1,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
-		<polygon class="insulation" points="205.4,-255.0 206.1,-255.0 206.1,255.0 205.4,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
-		<polygon class="insulation" points="222.8,-255.0 223.5,-255.0 223.5,255.0 222.8,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
-		<polygon class="insulation" points="230.5,-255.0 231.3,-255.0 231.3,255.0 230.5,255.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="147.0,-237.0 147.7,-237.0 147.7,237.0 147.0,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="168.2,-237.0 169.0,-237.0 169.0,237.0 168.2,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="191.1,-237.0 191.9,-237.0 191.9,237.0 191.1,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="205.4,-237.0 206.1,-237.0 206.1,237.0 205.4,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="222.8,-237.0 223.5,-237.0 223.5,237.0 222.8,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
+		<polygon class="insulation" points="230.5,-237.0 231.3,-237.0 231.3,237.0 230.5,237.0 " transform="rotate( -0.000000 0.000000 0.000000) " />
 	</g>
 	<g>
-		<circle class="LHqlEVNv" cx="140.2" cy="101.1" r="6.7">
+		<circle class="OynAXkrT" cx="140.2" cy="101.1" r="6.7">
 			<title>Primary parallel 0 turn 0</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="101.1" r="6.0">
 			<title>Primary parallel 0 turn 0</title>
 		</circle>
-		<circle class="gXuyPzHG" cx="140.2" cy="101.1" r="6.0">
+		<circle class="HPXbWuEz" cx="140.2" cy="101.1" r="6.0">
 			<title>Primary parallel 0 turn 0</title>
 		</circle>
-		<circle class="gXuyPzHG" cx="140.2" cy="101.1" r="6.4">
+		<circle class="HPXbWuEz" cx="140.2" cy="101.1" r="6.4">
 			<title>Primary parallel 0 turn 0</title>
 		</circle>
-		<circle class="gXuyPzHG" cx="140.2" cy="101.1" r="6.7">
+		<circle class="HPXbWuEz" cx="140.2" cy="101.1" r="6.7">
 			<title>Primary parallel 0 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="lhLdYOEy" cx="140.2" cy="87.7" r="6.7">
+		<circle class="rZfsohPq" cx="140.2" cy="87.7" r="6.7">
 			<title>Primary parallel 0 turn 1</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="87.7" r="6.0">
 			<title>Primary parallel 0 turn 1</title>
 		</circle>
-		<circle class="UeRxlXfH" cx="140.2" cy="87.7" r="6.0">
+		<circle class="MgGbndvA" cx="140.2" cy="87.7" r="6.0">
 			<title>Primary parallel 0 turn 1</title>
 		</circle>
-		<circle class="UeRxlXfH" cx="140.2" cy="87.7" r="6.4">
+		<circle class="MgGbndvA" cx="140.2" cy="87.7" r="6.4">
 			<title>Primary parallel 0 turn 1</title>
 		</circle>
-		<circle class="UeRxlXfH" cx="140.2" cy="87.7" r="6.7">
+		<circle class="MgGbndvA" cx="140.2" cy="87.7" r="6.7">
 			<title>Primary parallel 0 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="rCSHYOiz" cx="140.2" cy="74.2" r="6.7">
+		<circle class="YDztxksX" cx="140.2" cy="74.2" r="6.7">
 			<title>Primary parallel 0 turn 2</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="74.2" r="6.0">
 			<title>Primary parallel 0 turn 2</title>
 		</circle>
-		<circle class="toZpCmJO" cx="140.2" cy="74.2" r="6.0">
+		<circle class="McWjZFnt" cx="140.2" cy="74.2" r="6.0">
 			<title>Primary parallel 0 turn 2</title>
 		</circle>
-		<circle class="toZpCmJO" cx="140.2" cy="74.2" r="6.4">
+		<circle class="McWjZFnt" cx="140.2" cy="74.2" r="6.4">
 			<title>Primary parallel 0 turn 2</title>
 		</circle>
-		<circle class="toZpCmJO" cx="140.2" cy="74.2" r="6.7">
+		<circle class="McWjZFnt" cx="140.2" cy="74.2" r="6.7">
 			<title>Primary parallel 0 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="WrISwDJF" cx="140.2" cy="60.7" r="6.7">
+		<circle class="fzRtCNgk" cx="140.2" cy="60.7" r="6.7">
 			<title>Primary parallel 0 turn 3</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="60.7" r="6.0">
 			<title>Primary parallel 0 turn 3</title>
 		</circle>
-		<circle class="qfgNWYTm" cx="140.2" cy="60.7" r="6.0">
+		<circle class="DuJsGTgw" cx="140.2" cy="60.7" r="6.0">
 			<title>Primary parallel 0 turn 3</title>
 		</circle>
-		<circle class="qfgNWYTm" cx="140.2" cy="60.7" r="6.4">
+		<circle class="DuJsGTgw" cx="140.2" cy="60.7" r="6.4">
 			<title>Primary parallel 0 turn 3</title>
 		</circle>
-		<circle class="qfgNWYTm" cx="140.2" cy="60.7" r="6.7">
+		<circle class="DuJsGTgw" cx="140.2" cy="60.7" r="6.7">
 			<title>Primary parallel 0 turn 3</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="EqbVecIN" cx="140.2" cy="47.2" r="6.7">
+		<circle class="kwntLMiI" cx="140.2" cy="47.2" r="6.7">
 			<title>Primary parallel 0 turn 4</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="47.2" r="6.0">
 			<title>Primary parallel 0 turn 4</title>
 		</circle>
-		<circle class="esoySAiY" cx="140.2" cy="47.2" r="6.0">
+		<circle class="RxZySYlU" cx="140.2" cy="47.2" r="6.0">
 			<title>Primary parallel 0 turn 4</title>
 		</circle>
-		<circle class="esoySAiY" cx="140.2" cy="47.2" r="6.4">
+		<circle class="RxZySYlU" cx="140.2" cy="47.2" r="6.4">
 			<title>Primary parallel 0 turn 4</title>
 		</circle>
-		<circle class="esoySAiY" cx="140.2" cy="47.2" r="6.7">
+		<circle class="RxZySYlU" cx="140.2" cy="47.2" r="6.7">
 			<title>Primary parallel 0 turn 4</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="JyDopIKB" cx="140.2" cy="33.7" r="6.7">
+		<circle class="CsUrGdtx" cx="140.2" cy="33.7" r="6.7">
 			<title>Primary parallel 0 turn 5</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="33.7" r="6.0">
 			<title>Primary parallel 0 turn 5</title>
 		</circle>
-		<circle class="deRNqbOY" cx="140.2" cy="33.7" r="6.0">
+		<circle class="QXwykuTh" cx="140.2" cy="33.7" r="6.0">
 			<title>Primary parallel 0 turn 5</title>
 		</circle>
-		<circle class="deRNqbOY" cx="140.2" cy="33.7" r="6.4">
+		<circle class="QXwykuTh" cx="140.2" cy="33.7" r="6.4">
 			<title>Primary parallel 0 turn 5</title>
 		</circle>
-		<circle class="deRNqbOY" cx="140.2" cy="33.7" r="6.7">
+		<circle class="QXwykuTh" cx="140.2" cy="33.7" r="6.7">
 			<title>Primary parallel 0 turn 5</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="GZWasmDh" cx="140.2" cy="20.2" r="6.7">
+		<circle class="XLrIjGQg" cx="140.2" cy="20.2" r="6.7">
 			<title>Primary parallel 0 turn 6</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="20.2" r="6.0">
 			<title>Primary parallel 0 turn 6</title>
 		</circle>
-		<circle class="gXoOFCsT" cx="140.2" cy="20.2" r="6.0">
+		<circle class="ZbDHpCfo" cx="140.2" cy="20.2" r="6.0">
 			<title>Primary parallel 0 turn 6</title>
 		</circle>
-		<circle class="gXoOFCsT" cx="140.2" cy="20.2" r="6.4">
+		<circle class="ZbDHpCfo" cx="140.2" cy="20.2" r="6.4">
 			<title>Primary parallel 0 turn 6</title>
 		</circle>
-		<circle class="gXoOFCsT" cx="140.2" cy="20.2" r="6.7">
+		<circle class="ZbDHpCfo" cx="140.2" cy="20.2" r="6.7">
 			<title>Primary parallel 0 turn 6</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="qfSFAXsD" cx="140.2" cy="6.7" r="6.7">
+		<circle class="WgykUcfb" cx="140.2" cy="6.7" r="6.7">
 			<title>Primary parallel 0 turn 7</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="6.7" r="6.0">
 			<title>Primary parallel 0 turn 7</title>
 		</circle>
-		<circle class="wnCjNkpP" cx="140.2" cy="6.7" r="6.0">
+		<circle class="IkTwiJKR" cx="140.2" cy="6.7" r="6.0">
 			<title>Primary parallel 0 turn 7</title>
 		</circle>
-		<circle class="wnCjNkpP" cx="140.2" cy="6.7" r="6.4">
+		<circle class="IkTwiJKR" cx="140.2" cy="6.7" r="6.4">
 			<title>Primary parallel 0 turn 7</title>
 		</circle>
-		<circle class="wnCjNkpP" cx="140.2" cy="6.7" r="6.7">
+		<circle class="IkTwiJKR" cx="140.2" cy="6.7" r="6.7">
 			<title>Primary parallel 0 turn 7</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="UnHxsRpG" cx="140.2" cy="-6.7" r="6.7">
+		<circle class="MeYwcoaG" cx="140.2" cy="-6.7" r="6.7">
 			<title>Primary parallel 0 turn 8</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-6.7" r="6.0">
 			<title>Primary parallel 0 turn 8</title>
 		</circle>
-		<circle class="VyZvWDjK" cx="140.2" cy="-6.7" r="6.0">
+		<circle class="mftejZCT" cx="140.2" cy="-6.7" r="6.0">
 			<title>Primary parallel 0 turn 8</title>
 		</circle>
-		<circle class="VyZvWDjK" cx="140.2" cy="-6.7" r="6.4">
+		<circle class="mftejZCT" cx="140.2" cy="-6.7" r="6.4">
 			<title>Primary parallel 0 turn 8</title>
 		</circle>
-		<circle class="VyZvWDjK" cx="140.2" cy="-6.7" r="6.7">
+		<circle class="mftejZCT" cx="140.2" cy="-6.7" r="6.7">
 			<title>Primary parallel 0 turn 8</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="eIZGFYMh" cx="140.2" cy="-20.2" r="6.7">
+		<circle class="GMBZmgAR" cx="140.2" cy="-20.2" r="6.7">
 			<title>Primary parallel 0 turn 9</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-20.2" r="6.0">
 			<title>Primary parallel 0 turn 9</title>
 		</circle>
-		<circle class="ODVZtMUx" cx="140.2" cy="-20.2" r="6.0">
+		<circle class="xDCLMWuY" cx="140.2" cy="-20.2" r="6.0">
 			<title>Primary parallel 0 turn 9</title>
 		</circle>
-		<circle class="ODVZtMUx" cx="140.2" cy="-20.2" r="6.4">
+		<circle class="xDCLMWuY" cx="140.2" cy="-20.2" r="6.4">
 			<title>Primary parallel 0 turn 9</title>
 		</circle>
-		<circle class="ODVZtMUx" cx="140.2" cy="-20.2" r="6.7">
+		<circle class="xDCLMWuY" cx="140.2" cy="-20.2" r="6.7">
 			<title>Primary parallel 0 turn 9</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="qzNkgEQA" cx="140.2" cy="-33.7" r="6.7">
+		<circle class="KLouWCbE" cx="140.2" cy="-33.7" r="6.7">
 			<title>Primary parallel 0 turn 10</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-33.7" r="6.0">
 			<title>Primary parallel 0 turn 10</title>
 		</circle>
-		<circle class="evqlXcQf" cx="140.2" cy="-33.7" r="6.0">
+		<circle class="xdGuTOzE" cx="140.2" cy="-33.7" r="6.0">
 			<title>Primary parallel 0 turn 10</title>
 		</circle>
-		<circle class="evqlXcQf" cx="140.2" cy="-33.7" r="6.4">
+		<circle class="xdGuTOzE" cx="140.2" cy="-33.7" r="6.4">
 			<title>Primary parallel 0 turn 10</title>
 		</circle>
-		<circle class="evqlXcQf" cx="140.2" cy="-33.7" r="6.7">
+		<circle class="xdGuTOzE" cx="140.2" cy="-33.7" r="6.7">
 			<title>Primary parallel 0 turn 10</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="VMCcNGKB" cx="140.2" cy="-47.2" r="6.7">
+		<circle class="xipkrHzm" cx="140.2" cy="-47.2" r="6.7">
 			<title>Primary parallel 0 turn 11</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-47.2" r="6.0">
 			<title>Primary parallel 0 turn 11</title>
 		</circle>
-		<circle class="wQvNsFLy" cx="140.2" cy="-47.2" r="6.0">
+		<circle class="aeYQKhmp" cx="140.2" cy="-47.2" r="6.0">
 			<title>Primary parallel 0 turn 11</title>
 		</circle>
-		<circle class="wQvNsFLy" cx="140.2" cy="-47.2" r="6.4">
+		<circle class="aeYQKhmp" cx="140.2" cy="-47.2" r="6.4">
 			<title>Primary parallel 0 turn 11</title>
 		</circle>
-		<circle class="wQvNsFLy" cx="140.2" cy="-47.2" r="6.7">
+		<circle class="aeYQKhmp" cx="140.2" cy="-47.2" r="6.7">
 			<title>Primary parallel 0 turn 11</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="kHGECImt" cx="140.2" cy="-60.7" r="6.7">
+		<circle class="okgUWntl" cx="140.2" cy="-60.7" r="6.7">
 			<title>Primary parallel 0 turn 12</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-60.7" r="6.0">
 			<title>Primary parallel 0 turn 12</title>
 		</circle>
-		<circle class="sAnTNCKd" cx="140.2" cy="-60.7" r="6.0">
+		<circle class="GLKOScZU" cx="140.2" cy="-60.7" r="6.0">
 			<title>Primary parallel 0 turn 12</title>
 		</circle>
-		<circle class="sAnTNCKd" cx="140.2" cy="-60.7" r="6.4">
+		<circle class="GLKOScZU" cx="140.2" cy="-60.7" r="6.4">
 			<title>Primary parallel 0 turn 12</title>
 		</circle>
-		<circle class="sAnTNCKd" cx="140.2" cy="-60.7" r="6.7">
+		<circle class="GLKOScZU" cx="140.2" cy="-60.7" r="6.7">
 			<title>Primary parallel 0 turn 12</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="CVgFJITY" cx="140.2" cy="-74.2" r="6.7">
+		<circle class="CqHBJAnI" cx="140.2" cy="-74.2" r="6.7">
 			<title>Primary parallel 0 turn 13</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-74.2" r="6.0">
 			<title>Primary parallel 0 turn 13</title>
 		</circle>
-		<circle class="QeEjbciz" cx="140.2" cy="-74.2" r="6.0">
+		<circle class="MQYcSpiT" cx="140.2" cy="-74.2" r="6.0">
 			<title>Primary parallel 0 turn 13</title>
 		</circle>
-		<circle class="QeEjbciz" cx="140.2" cy="-74.2" r="6.4">
+		<circle class="MQYcSpiT" cx="140.2" cy="-74.2" r="6.4">
 			<title>Primary parallel 0 turn 13</title>
 		</circle>
-		<circle class="QeEjbciz" cx="140.2" cy="-74.2" r="6.7">
+		<circle class="MQYcSpiT" cx="140.2" cy="-74.2" r="6.7">
 			<title>Primary parallel 0 turn 13</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="aHwDRieV" cx="140.2" cy="-87.7" r="6.7">
+		<circle class="ezLdjsQU" cx="140.2" cy="-87.7" r="6.7">
 			<title>Primary parallel 0 turn 14</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-87.7" r="6.0">
 			<title>Primary parallel 0 turn 14</title>
 		</circle>
-		<circle class="sPxHGoZI" cx="140.2" cy="-87.7" r="6.0">
+		<circle class="vILOqFeY" cx="140.2" cy="-87.7" r="6.0">
 			<title>Primary parallel 0 turn 14</title>
 		</circle>
-		<circle class="sPxHGoZI" cx="140.2" cy="-87.7" r="6.4">
+		<circle class="vILOqFeY" cx="140.2" cy="-87.7" r="6.4">
 			<title>Primary parallel 0 turn 14</title>
 		</circle>
-		<circle class="sPxHGoZI" cx="140.2" cy="-87.7" r="6.7">
+		<circle class="vILOqFeY" cx="140.2" cy="-87.7" r="6.7">
 			<title>Primary parallel 0 turn 14</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="rSWuqaLi" cx="140.2" cy="-101.1" r="6.7">
+		<circle class="wqiBxYed" cx="140.2" cy="-101.1" r="6.7">
 			<title>Primary parallel 0 turn 15</title>
 		</circle>
 		<circle class="copper" cx="140.2" cy="-101.1" r="6.0">
 			<title>Primary parallel 0 turn 15</title>
 		</circle>
-		<circle class="vkVTWGmq" cx="140.2" cy="-101.1" r="6.0">
+		<circle class="edEJjcXI" cx="140.2" cy="-101.1" r="6.0">
 			<title>Primary parallel 0 turn 15</title>
 		</circle>
-		<circle class="vkVTWGmq" cx="140.2" cy="-101.1" r="6.4">
+		<circle class="edEJjcXI" cx="140.2" cy="-101.1" r="6.4">
 			<title>Primary parallel 0 turn 15</title>
 		</circle>
-		<circle class="vkVTWGmq" cx="140.2" cy="-101.1" r="6.7">
+		<circle class="edEJjcXI" cx="140.2" cy="-101.1" r="6.7">
 			<title>Primary parallel 0 turn 15</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="mZMJFKjU" cx="158.0" cy="82.0" r="10.2">
+		<circle class="uZUzsgqS" cx="158.0" cy="82.0" r="10.2">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="82.0" r="6.8">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
-		<circle class="fJODQdAo" cx="158.0" cy="82.0" r="6.8">
+		<circle class="xqNbBgeS" cx="158.0" cy="82.0" r="6.8">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
-		<circle class="fJODQdAo" cx="158.0" cy="82.0" r="8.0">
+		<circle class="xqNbBgeS" cx="158.0" cy="82.0" r="8.0">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
-		<circle class="fJODQdAo" cx="158.0" cy="82.0" r="9.1">
+		<circle class="xqNbBgeS" cx="158.0" cy="82.0" r="9.1">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
-		<circle class="fJODQdAo" cx="158.0" cy="82.0" r="10.2">
+		<circle class="xqNbBgeS" cx="158.0" cy="82.0" r="10.2">
 			<title>CTRL parallel 0 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="oDtTqLIp" cx="158.0" cy="61.5" r="10.2">
+		<circle class="IfCSOTyn" cx="158.0" cy="61.5" r="10.2">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="61.5" r="6.8">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
-		<circle class="YTCpHNLM" cx="158.0" cy="61.5" r="6.8">
+		<circle class="HphIOMgl" cx="158.0" cy="61.5" r="6.8">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
-		<circle class="YTCpHNLM" cx="158.0" cy="61.5" r="8.0">
+		<circle class="HphIOMgl" cx="158.0" cy="61.5" r="8.0">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
-		<circle class="YTCpHNLM" cx="158.0" cy="61.5" r="9.1">
+		<circle class="HphIOMgl" cx="158.0" cy="61.5" r="9.1">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
-		<circle class="YTCpHNLM" cx="158.0" cy="61.5" r="10.2">
+		<circle class="HphIOMgl" cx="158.0" cy="61.5" r="10.2">
 			<title>CTRL parallel 1 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="lnXkZrta" cx="158.0" cy="41.0" r="10.2">
+		<circle class="rDxTNaVX" cx="158.0" cy="41.0" r="10.2">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="41.0" r="6.8">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
-		<circle class="HQZGUVcv" cx="158.0" cy="41.0" r="6.8">
+		<circle class="afrXxTvK" cx="158.0" cy="41.0" r="6.8">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
-		<circle class="HQZGUVcv" cx="158.0" cy="41.0" r="8.0">
+		<circle class="afrXxTvK" cx="158.0" cy="41.0" r="8.0">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
-		<circle class="HQZGUVcv" cx="158.0" cy="41.0" r="9.1">
+		<circle class="afrXxTvK" cx="158.0" cy="41.0" r="9.1">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
-		<circle class="HQZGUVcv" cx="158.0" cy="41.0" r="10.2">
+		<circle class="afrXxTvK" cx="158.0" cy="41.0" r="10.2">
 			<title>CTRL parallel 2 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="WcoFtGrg" cx="158.0" cy="20.5" r="10.2">
+		<circle class="rvfQJlkz" cx="158.0" cy="20.5" r="10.2">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="20.5" r="6.8">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
-		<circle class="ySvbGHxW" cx="158.0" cy="20.5" r="6.8">
+		<circle class="BtNSxLUn" cx="158.0" cy="20.5" r="6.8">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
-		<circle class="ySvbGHxW" cx="158.0" cy="20.5" r="8.0">
+		<circle class="BtNSxLUn" cx="158.0" cy="20.5" r="8.0">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
-		<circle class="ySvbGHxW" cx="158.0" cy="20.5" r="9.1">
+		<circle class="BtNSxLUn" cx="158.0" cy="20.5" r="9.1">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
-		<circle class="ySvbGHxW" cx="158.0" cy="20.5" r="10.2">
+		<circle class="BtNSxLUn" cx="158.0" cy="20.5" r="10.2">
 			<title>CTRL parallel 0 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="lOjhfpeE" cx="158.0" cy="-0.0" r="10.2">
+		<circle class="RBIcSgbA" cx="158.0" cy="-0.0" r="10.2">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="-0.0" r="6.8">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
-		<circle class="qbjOTFIt" cx="158.0" cy="-0.0" r="6.8">
+		<circle class="IHplNGsA" cx="158.0" cy="-0.0" r="6.8">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
-		<circle class="qbjOTFIt" cx="158.0" cy="-0.0" r="8.0">
+		<circle class="IHplNGsA" cx="158.0" cy="-0.0" r="8.0">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
-		<circle class="qbjOTFIt" cx="158.0" cy="-0.0" r="9.1">
+		<circle class="IHplNGsA" cx="158.0" cy="-0.0" r="9.1">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
-		<circle class="qbjOTFIt" cx="158.0" cy="-0.0" r="10.2">
+		<circle class="IHplNGsA" cx="158.0" cy="-0.0" r="10.2">
 			<title>CTRL parallel 1 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="PTCcgeZq" cx="158.0" cy="-20.5" r="10.2">
+		<circle class="OUBXuDpJ" cx="158.0" cy="-20.5" r="10.2">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="-20.5" r="6.8">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
-		<circle class="zxGpvsPl" cx="158.0" cy="-20.5" r="6.8">
+		<circle class="PfwqSHFm" cx="158.0" cy="-20.5" r="6.8">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
-		<circle class="zxGpvsPl" cx="158.0" cy="-20.5" r="8.0">
+		<circle class="PfwqSHFm" cx="158.0" cy="-20.5" r="8.0">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
-		<circle class="zxGpvsPl" cx="158.0" cy="-20.5" r="9.1">
+		<circle class="PfwqSHFm" cx="158.0" cy="-20.5" r="9.1">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
-		<circle class="zxGpvsPl" cx="158.0" cy="-20.5" r="10.2">
+		<circle class="PfwqSHFm" cx="158.0" cy="-20.5" r="10.2">
 			<title>CTRL parallel 2 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="ActgxYWp" cx="158.0" cy="-41.0" r="10.2">
+		<circle class="EjLlnqBr" cx="158.0" cy="-41.0" r="10.2">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="-41.0" r="6.8">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
-		<circle class="DSQNAtpd" cx="158.0" cy="-41.0" r="6.8">
+		<circle class="uJfMOrly" cx="158.0" cy="-41.0" r="6.8">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
-		<circle class="DSQNAtpd" cx="158.0" cy="-41.0" r="8.0">
+		<circle class="uJfMOrly" cx="158.0" cy="-41.0" r="8.0">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
-		<circle class="DSQNAtpd" cx="158.0" cy="-41.0" r="9.1">
+		<circle class="uJfMOrly" cx="158.0" cy="-41.0" r="9.1">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
-		<circle class="DSQNAtpd" cx="158.0" cy="-41.0" r="10.2">
+		<circle class="uJfMOrly" cx="158.0" cy="-41.0" r="10.2">
 			<title>CTRL parallel 0 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="JcBPmwbx" cx="158.0" cy="-61.5" r="10.2">
+		<circle class="ilEHKdRx" cx="158.0" cy="-61.5" r="10.2">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="-61.5" r="6.8">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
-		<circle class="ijTlvnZK" cx="158.0" cy="-61.5" r="6.8">
+		<circle class="oHITBYNv" cx="158.0" cy="-61.5" r="6.8">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
-		<circle class="ijTlvnZK" cx="158.0" cy="-61.5" r="8.0">
+		<circle class="oHITBYNv" cx="158.0" cy="-61.5" r="8.0">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
-		<circle class="ijTlvnZK" cx="158.0" cy="-61.5" r="9.1">
+		<circle class="oHITBYNv" cx="158.0" cy="-61.5" r="9.1">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
-		<circle class="ijTlvnZK" cx="158.0" cy="-61.5" r="10.2">
+		<circle class="oHITBYNv" cx="158.0" cy="-61.5" r="10.2">
 			<title>CTRL parallel 1 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="NeMVAIEb" cx="158.0" cy="-82.0" r="10.2">
+		<circle class="GHOmnATE" cx="158.0" cy="-82.0" r="10.2">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
 		<circle class="copper" cx="158.0" cy="-82.0" r="6.8">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
-		<circle class="RSsceuCG" cx="158.0" cy="-82.0" r="6.8">
+		<circle class="vyZHSalt" cx="158.0" cy="-82.0" r="6.8">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
-		<circle class="RSsceuCG" cx="158.0" cy="-82.0" r="8.0">
+		<circle class="vyZHSalt" cx="158.0" cy="-82.0" r="8.0">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
-		<circle class="RSsceuCG" cx="158.0" cy="-82.0" r="9.1">
+		<circle class="vyZHSalt" cx="158.0" cy="-82.0" r="9.1">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
-		<circle class="RSsceuCG" cx="158.0" cy="-82.0" r="10.2">
+		<circle class="vyZHSalt" cx="158.0" cy="-82.0" r="10.2">
 			<title>CTRL parallel 2 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="RLknMUeq" cx="180.1" cy="44.3" r="11.1">
+		<circle class="EeXnVuLO" cx="180.1" cy="44.3" r="11.1">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
 		<circle class="copper" cx="180.1" cy="44.3" r="7.7">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
-		<circle class="xWXTZYbU" cx="180.1" cy="44.3" r="7.7">
+		<circle class="BveAjmCR" cx="180.1" cy="44.3" r="7.7">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
-		<circle class="xWXTZYbU" cx="180.1" cy="44.3" r="8.8">
+		<circle class="BveAjmCR" cx="180.1" cy="44.3" r="8.8">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
-		<circle class="xWXTZYbU" cx="180.1" cy="44.3" r="9.9">
+		<circle class="BveAjmCR" cx="180.1" cy="44.3" r="9.9">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
-		<circle class="xWXTZYbU" cx="180.1" cy="44.3" r="11.1">
+		<circle class="BveAjmCR" cx="180.1" cy="44.3" r="11.1">
 			<title>Out2 parallel 0 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="wlZTaUvI" cx="180.1" cy="22.2" r="11.1">
+		<circle class="GcPONayU" cx="180.1" cy="22.2" r="11.1">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
 		<circle class="copper" cx="180.1" cy="22.2" r="7.7">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
-		<circle class="HnubUMoG" cx="180.1" cy="22.2" r="7.7">
+		<circle class="tUZdPkyz" cx="180.1" cy="22.2" r="7.7">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
-		<circle class="HnubUMoG" cx="180.1" cy="22.2" r="8.8">
+		<circle class="tUZdPkyz" cx="180.1" cy="22.2" r="8.8">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
-		<circle class="HnubUMoG" cx="180.1" cy="22.2" r="9.9">
+		<circle class="tUZdPkyz" cx="180.1" cy="22.2" r="9.9">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
-		<circle class="HnubUMoG" cx="180.1" cy="22.2" r="11.1">
+		<circle class="tUZdPkyz" cx="180.1" cy="22.2" r="11.1">
 			<title>Out2 parallel 0 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="opwYUPdT" cx="180.1" cy="-0.0" r="11.1">
+		<circle class="biAFdkvJ" cx="180.1" cy="-0.0" r="11.1">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
 		<circle class="copper" cx="180.1" cy="-0.0" r="7.7">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
-		<circle class="YtUnuPLZ" cx="180.1" cy="-0.0" r="7.7">
+		<circle class="OLTnRNkU" cx="180.1" cy="-0.0" r="7.7">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
-		<circle class="YtUnuPLZ" cx="180.1" cy="-0.0" r="8.8">
+		<circle class="OLTnRNkU" cx="180.1" cy="-0.0" r="8.8">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
-		<circle class="YtUnuPLZ" cx="180.1" cy="-0.0" r="9.9">
+		<circle class="OLTnRNkU" cx="180.1" cy="-0.0" r="9.9">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
-		<circle class="YtUnuPLZ" cx="180.1" cy="-0.0" r="11.1">
+		<circle class="OLTnRNkU" cx="180.1" cy="-0.0" r="11.1">
 			<title>Out2 parallel 0 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="cfPiWTnY" cx="180.1" cy="-22.2" r="11.1">
+		<circle class="lCxqITJe" cx="180.1" cy="-22.2" r="11.1">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
 		<circle class="copper" cx="180.1" cy="-22.2" r="7.7">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
-		<circle class="KNBSbRUp" cx="180.1" cy="-22.2" r="7.7">
+		<circle class="kHKotGDz" cx="180.1" cy="-22.2" r="7.7">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
-		<circle class="KNBSbRUp" cx="180.1" cy="-22.2" r="8.8">
+		<circle class="kHKotGDz" cx="180.1" cy="-22.2" r="8.8">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
-		<circle class="KNBSbRUp" cx="180.1" cy="-22.2" r="9.9">
+		<circle class="kHKotGDz" cx="180.1" cy="-22.2" r="9.9">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
-		<circle class="KNBSbRUp" cx="180.1" cy="-22.2" r="11.1">
+		<circle class="kHKotGDz" cx="180.1" cy="-22.2" r="11.1">
 			<title>Out2 parallel 0 turn 3</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="VtGznBJA" cx="180.1" cy="-44.3" r="11.1">
+		<circle class="OtPyqsVU" cx="180.1" cy="-44.3" r="11.1">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
 		<circle class="copper" cx="180.1" cy="-44.3" r="7.7">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
-		<circle class="CXzbNYmk" cx="180.1" cy="-44.3" r="7.7">
+		<circle class="ZRaIQDsH" cx="180.1" cy="-44.3" r="7.7">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
-		<circle class="CXzbNYmk" cx="180.1" cy="-44.3" r="8.8">
+		<circle class="ZRaIQDsH" cx="180.1" cy="-44.3" r="8.8">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
-		<circle class="CXzbNYmk" cx="180.1" cy="-44.3" r="9.9">
+		<circle class="ZRaIQDsH" cx="180.1" cy="-44.3" r="9.9">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
-		<circle class="CXzbNYmk" cx="180.1" cy="-44.3" r="11.1">
+		<circle class="ZRaIQDsH" cx="180.1" cy="-44.3" r="11.1">
 			<title>Out2 parallel 0 turn 4</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="ZdrBkISJ" cx="198.6" cy="101.1" r="6.7">
+		<circle class="GIKLXRCZ" cx="198.6" cy="101.1" r="6.7">
 			<title>Primary parallel 0 turn 16</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="101.1" r="6.0">
 			<title>Primary parallel 0 turn 16</title>
 		</circle>
-		<circle class="XbMPLNdS" cx="198.6" cy="101.1" r="6.0">
+		<circle class="xXRNZkSj" cx="198.6" cy="101.1" r="6.0">
 			<title>Primary parallel 0 turn 16</title>
 		</circle>
-		<circle class="XbMPLNdS" cx="198.6" cy="101.1" r="6.4">
+		<circle class="xXRNZkSj" cx="198.6" cy="101.1" r="6.4">
 			<title>Primary parallel 0 turn 16</title>
 		</circle>
-		<circle class="XbMPLNdS" cx="198.6" cy="101.1" r="6.7">
+		<circle class="xXRNZkSj" cx="198.6" cy="101.1" r="6.7">
 			<title>Primary parallel 0 turn 16</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="lGCnKeIU" cx="198.6" cy="87.7" r="6.7">
+		<circle class="cWLnpFeC" cx="198.6" cy="87.7" r="6.7">
 			<title>Primary parallel 0 turn 17</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="87.7" r="6.0">
 			<title>Primary parallel 0 turn 17</title>
 		</circle>
-		<circle class="vLwnRaWs" cx="198.6" cy="87.7" r="6.0">
+		<circle class="INqcTtdm" cx="198.6" cy="87.7" r="6.0">
 			<title>Primary parallel 0 turn 17</title>
 		</circle>
-		<circle class="vLwnRaWs" cx="198.6" cy="87.7" r="6.4">
+		<circle class="INqcTtdm" cx="198.6" cy="87.7" r="6.4">
 			<title>Primary parallel 0 turn 17</title>
 		</circle>
-		<circle class="vLwnRaWs" cx="198.6" cy="87.7" r="6.7">
+		<circle class="INqcTtdm" cx="198.6" cy="87.7" r="6.7">
 			<title>Primary parallel 0 turn 17</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="YALOrZda" cx="198.6" cy="74.2" r="6.7">
+		<circle class="nyaAEKTI" cx="198.6" cy="74.2" r="6.7">
 			<title>Primary parallel 0 turn 18</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="74.2" r="6.0">
 			<title>Primary parallel 0 turn 18</title>
 		</circle>
-		<circle class="ZaveIHEj" cx="198.6" cy="74.2" r="6.0">
+		<circle class="ngxKCiva" cx="198.6" cy="74.2" r="6.0">
 			<title>Primary parallel 0 turn 18</title>
 		</circle>
-		<circle class="ZaveIHEj" cx="198.6" cy="74.2" r="6.4">
+		<circle class="ngxKCiva" cx="198.6" cy="74.2" r="6.4">
 			<title>Primary parallel 0 turn 18</title>
 		</circle>
-		<circle class="ZaveIHEj" cx="198.6" cy="74.2" r="6.7">
+		<circle class="ngxKCiva" cx="198.6" cy="74.2" r="6.7">
 			<title>Primary parallel 0 turn 18</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="MeSboWEk" cx="198.6" cy="60.7" r="6.7">
+		<circle class="udGlfkOb" cx="198.6" cy="60.7" r="6.7">
 			<title>Primary parallel 0 turn 19</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="60.7" r="6.0">
 			<title>Primary parallel 0 turn 19</title>
 		</circle>
-		<circle class="qsAliQhj" cx="198.6" cy="60.7" r="6.0">
+		<circle class="SolkKcdX" cx="198.6" cy="60.7" r="6.0">
 			<title>Primary parallel 0 turn 19</title>
 		</circle>
-		<circle class="qsAliQhj" cx="198.6" cy="60.7" r="6.4">
+		<circle class="SolkKcdX" cx="198.6" cy="60.7" r="6.4">
 			<title>Primary parallel 0 turn 19</title>
 		</circle>
-		<circle class="qsAliQhj" cx="198.6" cy="60.7" r="6.7">
+		<circle class="SolkKcdX" cx="198.6" cy="60.7" r="6.7">
 			<title>Primary parallel 0 turn 19</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="DtBkurao" cx="198.6" cy="47.2" r="6.7">
+		<circle class="MlFkNPsq" cx="198.6" cy="47.2" r="6.7">
 			<title>Primary parallel 0 turn 20</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="47.2" r="6.0">
 			<title>Primary parallel 0 turn 20</title>
 		</circle>
-		<circle class="cZzsUWOD" cx="198.6" cy="47.2" r="6.0">
+		<circle class="cJZkIVqR" cx="198.6" cy="47.2" r="6.0">
 			<title>Primary parallel 0 turn 20</title>
 		</circle>
-		<circle class="cZzsUWOD" cx="198.6" cy="47.2" r="6.4">
+		<circle class="cJZkIVqR" cx="198.6" cy="47.2" r="6.4">
 			<title>Primary parallel 0 turn 20</title>
 		</circle>
-		<circle class="cZzsUWOD" cx="198.6" cy="47.2" r="6.7">
+		<circle class="cJZkIVqR" cx="198.6" cy="47.2" r="6.7">
 			<title>Primary parallel 0 turn 20</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="ojXBaivg" cx="198.6" cy="33.7" r="6.7">
+		<circle class="NgixnpHM" cx="198.6" cy="33.7" r="6.7">
 			<title>Primary parallel 0 turn 21</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="33.7" r="6.0">
 			<title>Primary parallel 0 turn 21</title>
 		</circle>
-		<circle class="aKgSTArX" cx="198.6" cy="33.7" r="6.0">
+		<circle class="ZYciJVfy" cx="198.6" cy="33.7" r="6.0">
 			<title>Primary parallel 0 turn 21</title>
 		</circle>
-		<circle class="aKgSTArX" cx="198.6" cy="33.7" r="6.4">
+		<circle class="ZYciJVfy" cx="198.6" cy="33.7" r="6.4">
 			<title>Primary parallel 0 turn 21</title>
 		</circle>
-		<circle class="aKgSTArX" cx="198.6" cy="33.7" r="6.7">
+		<circle class="ZYciJVfy" cx="198.6" cy="33.7" r="6.7">
 			<title>Primary parallel 0 turn 21</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="jcekKDPr" cx="198.6" cy="20.2" r="6.7">
+		<circle class="MoILRtjr" cx="198.6" cy="20.2" r="6.7">
 			<title>Primary parallel 0 turn 22</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="20.2" r="6.0">
 			<title>Primary parallel 0 turn 22</title>
 		</circle>
-		<circle class="nNtRaoEf" cx="198.6" cy="20.2" r="6.0">
+		<circle class="dcOmEaJr" cx="198.6" cy="20.2" r="6.0">
 			<title>Primary parallel 0 turn 22</title>
 		</circle>
-		<circle class="nNtRaoEf" cx="198.6" cy="20.2" r="6.4">
+		<circle class="dcOmEaJr" cx="198.6" cy="20.2" r="6.4">
 			<title>Primary parallel 0 turn 22</title>
 		</circle>
-		<circle class="nNtRaoEf" cx="198.6" cy="20.2" r="6.7">
+		<circle class="dcOmEaJr" cx="198.6" cy="20.2" r="6.7">
 			<title>Primary parallel 0 turn 22</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="wYlchtDM" cx="198.6" cy="6.7" r="6.7">
+		<circle class="EZmQULeb" cx="198.6" cy="6.7" r="6.7">
 			<title>Primary parallel 0 turn 23</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="6.7" r="6.0">
 			<title>Primary parallel 0 turn 23</title>
 		</circle>
-		<circle class="JXnzUtrj" cx="198.6" cy="6.7" r="6.0">
+		<circle class="VsSJgTAi" cx="198.6" cy="6.7" r="6.0">
 			<title>Primary parallel 0 turn 23</title>
 		</circle>
-		<circle class="JXnzUtrj" cx="198.6" cy="6.7" r="6.4">
+		<circle class="VsSJgTAi" cx="198.6" cy="6.7" r="6.4">
 			<title>Primary parallel 0 turn 23</title>
 		</circle>
-		<circle class="JXnzUtrj" cx="198.6" cy="6.7" r="6.7">
+		<circle class="VsSJgTAi" cx="198.6" cy="6.7" r="6.7">
 			<title>Primary parallel 0 turn 23</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="SRIOqJTF" cx="198.6" cy="-6.7" r="6.7">
+		<circle class="aZHLpcBz" cx="198.6" cy="-6.7" r="6.7">
 			<title>Primary parallel 0 turn 24</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-6.7" r="6.0">
 			<title>Primary parallel 0 turn 24</title>
 		</circle>
-		<circle class="eBoFpVJh" cx="198.6" cy="-6.7" r="6.0">
+		<circle class="HXTtYJSe" cx="198.6" cy="-6.7" r="6.0">
 			<title>Primary parallel 0 turn 24</title>
 		</circle>
-		<circle class="eBoFpVJh" cx="198.6" cy="-6.7" r="6.4">
+		<circle class="HXTtYJSe" cx="198.6" cy="-6.7" r="6.4">
 			<title>Primary parallel 0 turn 24</title>
 		</circle>
-		<circle class="eBoFpVJh" cx="198.6" cy="-6.7" r="6.7">
+		<circle class="HXTtYJSe" cx="198.6" cy="-6.7" r="6.7">
 			<title>Primary parallel 0 turn 24</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="myXhtlEk" cx="198.6" cy="-20.2" r="6.7">
+		<circle class="ugxOCdIY" cx="198.6" cy="-20.2" r="6.7">
 			<title>Primary parallel 0 turn 25</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-20.2" r="6.0">
 			<title>Primary parallel 0 turn 25</title>
 		</circle>
-		<circle class="FklHRJcE" cx="198.6" cy="-20.2" r="6.0">
+		<circle class="snRjIbZq" cx="198.6" cy="-20.2" r="6.0">
 			<title>Primary parallel 0 turn 25</title>
 		</circle>
-		<circle class="FklHRJcE" cx="198.6" cy="-20.2" r="6.4">
+		<circle class="snRjIbZq" cx="198.6" cy="-20.2" r="6.4">
 			<title>Primary parallel 0 turn 25</title>
 		</circle>
-		<circle class="FklHRJcE" cx="198.6" cy="-20.2" r="6.7">
+		<circle class="snRjIbZq" cx="198.6" cy="-20.2" r="6.7">
 			<title>Primary parallel 0 turn 25</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="RgyunsEO" cx="198.6" cy="-33.7" r="6.7">
+		<circle class="gQosynCq" cx="198.6" cy="-33.7" r="6.7">
 			<title>Primary parallel 0 turn 26</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-33.7" r="6.0">
 			<title>Primary parallel 0 turn 26</title>
 		</circle>
-		<circle class="vgjOxhQL" cx="198.6" cy="-33.7" r="6.0">
+		<circle class="ZuGfdqco" cx="198.6" cy="-33.7" r="6.0">
 			<title>Primary parallel 0 turn 26</title>
 		</circle>
-		<circle class="vgjOxhQL" cx="198.6" cy="-33.7" r="6.4">
+		<circle class="ZuGfdqco" cx="198.6" cy="-33.7" r="6.4">
 			<title>Primary parallel 0 turn 26</title>
 		</circle>
-		<circle class="vgjOxhQL" cx="198.6" cy="-33.7" r="6.7">
+		<circle class="ZuGfdqco" cx="198.6" cy="-33.7" r="6.7">
 			<title>Primary parallel 0 turn 26</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="HTsAcMwe" cx="198.6" cy="-47.2" r="6.7">
+		<circle class="eoXKxNij" cx="198.6" cy="-47.2" r="6.7">
 			<title>Primary parallel 0 turn 27</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-47.2" r="6.0">
 			<title>Primary parallel 0 turn 27</title>
 		</circle>
-		<circle class="AdTqwnGa" cx="198.6" cy="-47.2" r="6.0">
+		<circle class="yCNPbrdV" cx="198.6" cy="-47.2" r="6.0">
 			<title>Primary parallel 0 turn 27</title>
 		</circle>
-		<circle class="AdTqwnGa" cx="198.6" cy="-47.2" r="6.4">
+		<circle class="yCNPbrdV" cx="198.6" cy="-47.2" r="6.4">
 			<title>Primary parallel 0 turn 27</title>
 		</circle>
-		<circle class="AdTqwnGa" cx="198.6" cy="-47.2" r="6.7">
+		<circle class="yCNPbrdV" cx="198.6" cy="-47.2" r="6.7">
 			<title>Primary parallel 0 turn 27</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="kvinjGFo" cx="198.6" cy="-60.7" r="6.7">
+		<circle class="QvCJXeGN" cx="198.6" cy="-60.7" r="6.7">
 			<title>Primary parallel 0 turn 28</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-60.7" r="6.0">
 			<title>Primary parallel 0 turn 28</title>
 		</circle>
-		<circle class="jmRXyFvn" cx="198.6" cy="-60.7" r="6.0">
+		<circle class="pMBdUnGC" cx="198.6" cy="-60.7" r="6.0">
 			<title>Primary parallel 0 turn 28</title>
 		</circle>
-		<circle class="jmRXyFvn" cx="198.6" cy="-60.7" r="6.4">
+		<circle class="pMBdUnGC" cx="198.6" cy="-60.7" r="6.4">
 			<title>Primary parallel 0 turn 28</title>
 		</circle>
-		<circle class="jmRXyFvn" cx="198.6" cy="-60.7" r="6.7">
+		<circle class="pMBdUnGC" cx="198.6" cy="-60.7" r="6.7">
 			<title>Primary parallel 0 turn 28</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="PuaQEpjW" cx="198.6" cy="-74.2" r="6.7">
+		<circle class="NmktIjHC" cx="198.6" cy="-74.2" r="6.7">
 			<title>Primary parallel 0 turn 29</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-74.2" r="6.0">
 			<title>Primary parallel 0 turn 29</title>
 		</circle>
-		<circle class="kBbIXyPc" cx="198.6" cy="-74.2" r="6.0">
+		<circle class="IFZmGDMK" cx="198.6" cy="-74.2" r="6.0">
 			<title>Primary parallel 0 turn 29</title>
 		</circle>
-		<circle class="kBbIXyPc" cx="198.6" cy="-74.2" r="6.4">
+		<circle class="IFZmGDMK" cx="198.6" cy="-74.2" r="6.4">
 			<title>Primary parallel 0 turn 29</title>
 		</circle>
-		<circle class="kBbIXyPc" cx="198.6" cy="-74.2" r="6.7">
+		<circle class="IFZmGDMK" cx="198.6" cy="-74.2" r="6.7">
 			<title>Primary parallel 0 turn 29</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="hgBMSGrR" cx="198.6" cy="-87.7" r="6.7">
+		<circle class="igxtAJyT" cx="198.6" cy="-87.7" r="6.7">
 			<title>Primary parallel 0 turn 30</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-87.7" r="6.0">
 			<title>Primary parallel 0 turn 30</title>
 		</circle>
-		<circle class="NrkhXKxw" cx="198.6" cy="-87.7" r="6.0">
+		<circle class="fELUcaVP" cx="198.6" cy="-87.7" r="6.0">
 			<title>Primary parallel 0 turn 30</title>
 		</circle>
-		<circle class="NrkhXKxw" cx="198.6" cy="-87.7" r="6.4">
+		<circle class="fELUcaVP" cx="198.6" cy="-87.7" r="6.4">
 			<title>Primary parallel 0 turn 30</title>
 		</circle>
-		<circle class="NrkhXKxw" cx="198.6" cy="-87.7" r="6.7">
+		<circle class="fELUcaVP" cx="198.6" cy="-87.7" r="6.7">
 			<title>Primary parallel 0 turn 30</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="zXUjPneQ" cx="198.6" cy="-101.1" r="6.7">
+		<circle class="dBrkqYCV" cx="198.6" cy="-101.1" r="6.7">
 			<title>Primary parallel 0 turn 31</title>
 		</circle>
 		<circle class="copper" cx="198.6" cy="-101.1" r="6.0">
 			<title>Primary parallel 0 turn 31</title>
 		</circle>
-		<circle class="aAWPZshK" cx="198.6" cy="-101.1" r="6.0">
+		<circle class="omwncfaG" cx="198.6" cy="-101.1" r="6.0">
 			<title>Primary parallel 0 turn 31</title>
 		</circle>
-		<circle class="aAWPZshK" cx="198.6" cy="-101.1" r="6.4">
+		<circle class="omwncfaG" cx="198.6" cy="-101.1" r="6.4">
 			<title>Primary parallel 0 turn 31</title>
 		</circle>
-		<circle class="aAWPZshK" cx="198.6" cy="-101.1" r="6.7">
+		<circle class="omwncfaG" cx="198.6" cy="-101.1" r="6.7">
 			<title>Primary parallel 0 turn 31</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="gqeWQNPd" cx="214.5" cy="33.3" r="8.3">
+		<circle class="ShsCwIuB" cx="214.5" cy="33.3" r="8.3">
 			<title>Out1 parallel 0 turn 0</title>
 		</circle>
 		<circle class="copper" cx="214.5" cy="33.3" r="7.5">
 			<title>Out1 parallel 0 turn 0</title>
 		</circle>
-		<circle class="lRYkxJtq" cx="214.5" cy="33.3" r="7.5">
+		<circle class="PiNGOvla" cx="214.5" cy="33.3" r="7.5">
 			<title>Out1 parallel 0 turn 0</title>
 		</circle>
-		<circle class="lRYkxJtq" cx="214.5" cy="33.3" r="7.9">
+		<circle class="PiNGOvla" cx="214.5" cy="33.3" r="7.9">
 			<title>Out1 parallel 0 turn 0</title>
 		</circle>
-		<circle class="lRYkxJtq" cx="214.5" cy="33.3" r="8.3">
+		<circle class="PiNGOvla" cx="214.5" cy="33.3" r="8.3">
 			<title>Out1 parallel 0 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="wotmvpRg" cx="214.5" cy="16.7" r="8.3">
+		<circle class="JtVskiKX" cx="214.5" cy="16.7" r="8.3">
 			<title>Out1 parallel 0 turn 1</title>
 		</circle>
 		<circle class="copper" cx="214.5" cy="16.7" r="7.5">
 			<title>Out1 parallel 0 turn 1</title>
 		</circle>
-		<circle class="maHqsQgM" cx="214.5" cy="16.7" r="7.5">
+		<circle class="zTCdwAME" cx="214.5" cy="16.7" r="7.5">
 			<title>Out1 parallel 0 turn 1</title>
 		</circle>
-		<circle class="maHqsQgM" cx="214.5" cy="16.7" r="7.9">
+		<circle class="zTCdwAME" cx="214.5" cy="16.7" r="7.9">
 			<title>Out1 parallel 0 turn 1</title>
 		</circle>
-		<circle class="maHqsQgM" cx="214.5" cy="16.7" r="8.3">
+		<circle class="zTCdwAME" cx="214.5" cy="16.7" r="8.3">
 			<title>Out1 parallel 0 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="RFKZjMxQ" cx="214.5" cy="-0.0" r="8.3">
+		<circle class="ZQmAdIzR" cx="214.5" cy="-0.0" r="8.3">
 			<title>Out1 parallel 0 turn 2</title>
 		</circle>
 		<circle class="copper" cx="214.5" cy="-0.0" r="7.5">
 			<title>Out1 parallel 0 turn 2</title>
 		</circle>
-		<circle class="DOcZYeAl" cx="214.5" cy="-0.0" r="7.5">
+		<circle class="wZqejyfI" cx="214.5" cy="-0.0" r="7.5">
 			<title>Out1 parallel 0 turn 2</title>
 		</circle>
-		<circle class="DOcZYeAl" cx="214.5" cy="-0.0" r="7.9">
+		<circle class="wZqejyfI" cx="214.5" cy="-0.0" r="7.9">
 			<title>Out1 parallel 0 turn 2</title>
 		</circle>
-		<circle class="DOcZYeAl" cx="214.5" cy="-0.0" r="8.3">
+		<circle class="wZqejyfI" cx="214.5" cy="-0.0" r="8.3">
 			<title>Out1 parallel 0 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="WEalYBvH" cx="214.5" cy="-16.7" r="8.3">
+		<circle class="MNCjHIti" cx="214.5" cy="-16.7" r="8.3">
 			<title>Out1 parallel 0 turn 3</title>
 		</circle>
 		<circle class="copper" cx="214.5" cy="-16.7" r="7.5">
 			<title>Out1 parallel 0 turn 3</title>
 		</circle>
-		<circle class="fEibjWFq" cx="214.5" cy="-16.7" r="7.5">
+		<circle class="VXxbtEDS" cx="214.5" cy="-16.7" r="7.5">
 			<title>Out1 parallel 0 turn 3</title>
 		</circle>
-		<circle class="fEibjWFq" cx="214.5" cy="-16.7" r="7.9">
+		<circle class="VXxbtEDS" cx="214.5" cy="-16.7" r="7.9">
 			<title>Out1 parallel 0 turn 3</title>
 		</circle>
-		<circle class="fEibjWFq" cx="214.5" cy="-16.7" r="8.3">
+		<circle class="VXxbtEDS" cx="214.5" cy="-16.7" r="8.3">
 			<title>Out1 parallel 0 turn 3</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="fyGFPCLc" cx="214.5" cy="-33.3" r="8.3">
+		<circle class="AcntWzGf" cx="214.5" cy="-33.3" r="8.3">
 			<title>Out1 parallel 0 turn 4</title>
 		</circle>
 		<circle class="copper" cx="214.5" cy="-33.3" r="7.5">
 			<title>Out1 parallel 0 turn 4</title>
 		</circle>
-		<circle class="hfNEBawW" cx="214.5" cy="-33.3" r="7.5">
+		<circle class="GTnDdzOp" cx="214.5" cy="-33.3" r="7.5">
 			<title>Out1 parallel 0 turn 4</title>
 		</circle>
-		<circle class="hfNEBawW" cx="214.5" cy="-33.3" r="7.9">
+		<circle class="GTnDdzOp" cx="214.5" cy="-33.3" r="7.9">
 			<title>Out1 parallel 0 turn 4</title>
 		</circle>
-		<circle class="hfNEBawW" cx="214.5" cy="-33.3" r="8.3">
+		<circle class="GTnDdzOp" cx="214.5" cy="-33.3" r="8.3">
 			<title>Out1 parallel 0 turn 4</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="pubmJsgK" cx="227.0" cy="24.5" r="3.5">
+		<circle class="ohYerFZc" cx="227.0" cy="24.5" r="3.5">
 			<title>Bias parallel 0 turn 0</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="24.5" r="3.0">
 			<title>Bias parallel 0 turn 0</title>
 		</circle>
-		<circle class="ZTAXFOgx" cx="227.0" cy="24.5" r="3.0">
+		<circle class="GrDBEvpc" cx="227.0" cy="24.5" r="3.0">
 			<title>Bias parallel 0 turn 0</title>
 		</circle>
-		<circle class="ZTAXFOgx" cx="227.0" cy="24.5" r="3.2">
+		<circle class="GrDBEvpc" cx="227.0" cy="24.5" r="3.2">
 			<title>Bias parallel 0 turn 0</title>
 		</circle>
-		<circle class="ZTAXFOgx" cx="227.0" cy="24.5" r="3.5">
+		<circle class="GrDBEvpc" cx="227.0" cy="24.5" r="3.5">
 			<title>Bias parallel 0 turn 0</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="mMSVrdGa" cx="227.0" cy="17.5" r="3.5">
+		<circle class="roAnuOIL" cx="227.0" cy="17.5" r="3.5">
 			<title>Bias parallel 0 turn 1</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="17.5" r="3.0">
 			<title>Bias parallel 0 turn 1</title>
 		</circle>
-		<circle class="CkeBxLKP" cx="227.0" cy="17.5" r="3.0">
+		<circle class="eusVNaBC" cx="227.0" cy="17.5" r="3.0">
 			<title>Bias parallel 0 turn 1</title>
 		</circle>
-		<circle class="CkeBxLKP" cx="227.0" cy="17.5" r="3.2">
+		<circle class="eusVNaBC" cx="227.0" cy="17.5" r="3.2">
 			<title>Bias parallel 0 turn 1</title>
 		</circle>
-		<circle class="CkeBxLKP" cx="227.0" cy="17.5" r="3.5">
+		<circle class="eusVNaBC" cx="227.0" cy="17.5" r="3.5">
 			<title>Bias parallel 0 turn 1</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="nNWKsvdz" cx="227.0" cy="10.5" r="3.5">
+		<circle class="MVToePEy" cx="227.0" cy="10.5" r="3.5">
 			<title>Bias parallel 0 turn 2</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="10.5" r="3.0">
 			<title>Bias parallel 0 turn 2</title>
 		</circle>
-		<circle class="cjIZDJox" cx="227.0" cy="10.5" r="3.0">
+		<circle class="bOVIJgUa" cx="227.0" cy="10.5" r="3.0">
 			<title>Bias parallel 0 turn 2</title>
 		</circle>
-		<circle class="cjIZDJox" cx="227.0" cy="10.5" r="3.2">
+		<circle class="bOVIJgUa" cx="227.0" cy="10.5" r="3.2">
 			<title>Bias parallel 0 turn 2</title>
 		</circle>
-		<circle class="cjIZDJox" cx="227.0" cy="10.5" r="3.5">
+		<circle class="bOVIJgUa" cx="227.0" cy="10.5" r="3.5">
 			<title>Bias parallel 0 turn 2</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="NEgWOAmr" cx="227.0" cy="3.5" r="3.5">
+		<circle class="xbOcZAyP" cx="227.0" cy="3.5" r="3.5">
 			<title>Bias parallel 0 turn 3</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="3.5" r="3.0">
 			<title>Bias parallel 0 turn 3</title>
 		</circle>
-		<circle class="ONwElXRP" cx="227.0" cy="3.5" r="3.0">
+		<circle class="BfVjnIeP" cx="227.0" cy="3.5" r="3.0">
 			<title>Bias parallel 0 turn 3</title>
 		</circle>
-		<circle class="ONwElXRP" cx="227.0" cy="3.5" r="3.2">
+		<circle class="BfVjnIeP" cx="227.0" cy="3.5" r="3.2">
 			<title>Bias parallel 0 turn 3</title>
 		</circle>
-		<circle class="ONwElXRP" cx="227.0" cy="3.5" r="3.5">
+		<circle class="BfVjnIeP" cx="227.0" cy="3.5" r="3.5">
 			<title>Bias parallel 0 turn 3</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="azyVoIBO" cx="227.0" cy="-3.5" r="3.5">
+		<circle class="sGBHDzIn" cx="227.0" cy="-3.5" r="3.5">
 			<title>Bias parallel 0 turn 4</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="-3.5" r="3.0">
 			<title>Bias parallel 0 turn 4</title>
 		</circle>
-		<circle class="FbBRXGgq" cx="227.0" cy="-3.5" r="3.0">
+		<circle class="QyJgqAoX" cx="227.0" cy="-3.5" r="3.0">
 			<title>Bias parallel 0 turn 4</title>
 		</circle>
-		<circle class="FbBRXGgq" cx="227.0" cy="-3.5" r="3.2">
+		<circle class="QyJgqAoX" cx="227.0" cy="-3.5" r="3.2">
 			<title>Bias parallel 0 turn 4</title>
 		</circle>
-		<circle class="FbBRXGgq" cx="227.0" cy="-3.5" r="3.5">
+		<circle class="QyJgqAoX" cx="227.0" cy="-3.5" r="3.5">
 			<title>Bias parallel 0 turn 4</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="aXCtsEGA" cx="227.0" cy="-10.5" r="3.5">
+		<circle class="jIqWUHmp" cx="227.0" cy="-10.5" r="3.5">
 			<title>Bias parallel 0 turn 5</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="-10.5" r="3.0">
 			<title>Bias parallel 0 turn 5</title>
 		</circle>
-		<circle class="apvKCMjW" cx="227.0" cy="-10.5" r="3.0">
+		<circle class="RHTvsbfL" cx="227.0" cy="-10.5" r="3.0">
 			<title>Bias parallel 0 turn 5</title>
 		</circle>
-		<circle class="apvKCMjW" cx="227.0" cy="-10.5" r="3.2">
+		<circle class="RHTvsbfL" cx="227.0" cy="-10.5" r="3.2">
 			<title>Bias parallel 0 turn 5</title>
 		</circle>
-		<circle class="apvKCMjW" cx="227.0" cy="-10.5" r="3.5">
+		<circle class="RHTvsbfL" cx="227.0" cy="-10.5" r="3.5">
 			<title>Bias parallel 0 turn 5</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="qZEVdWRU" cx="227.0" cy="-17.5" r="3.5">
+		<circle class="IGUQaNgk" cx="227.0" cy="-17.5" r="3.5">
 			<title>Bias parallel 0 turn 6</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="-17.5" r="3.0">
 			<title>Bias parallel 0 turn 6</title>
 		</circle>
-		<circle class="bZJdqyRp" cx="227.0" cy="-17.5" r="3.0">
+		<circle class="NklpbOLu" cx="227.0" cy="-17.5" r="3.0">
 			<title>Bias parallel 0 turn 6</title>
 		</circle>
-		<circle class="bZJdqyRp" cx="227.0" cy="-17.5" r="3.2">
+		<circle class="NklpbOLu" cx="227.0" cy="-17.5" r="3.2">
 			<title>Bias parallel 0 turn 6</title>
 		</circle>
-		<circle class="bZJdqyRp" cx="227.0" cy="-17.5" r="3.5">
+		<circle class="NklpbOLu" cx="227.0" cy="-17.5" r="3.5">
 			<title>Bias parallel 0 turn 6</title>
 		</circle>
 	</g>
 	<g>
-		<circle class="QWgntBPp" cx="227.0" cy="-24.5" r="3.5">
+		<circle class="ROLoyfZF" cx="227.0" cy="-24.5" r="3.5">
 			<title>Bias parallel 0 turn 7</title>
 		</circle>
 		<circle class="copper" cx="227.0" cy="-24.5" r="3.0">
 			<title>Bias parallel 0 turn 7</title>
 		</circle>
-		<circle class="nuEDbzAg" cx="227.0" cy="-24.5" r="3.0">
+		<circle class="HFQRmYeS" cx="227.0" cy="-24.5" r="3.0">
 			<title>Bias parallel 0 turn 7</title>
 		</circle>
-		<circle class="nuEDbzAg" cx="227.0" cy="-24.5" r="3.2">
+		<circle class="HFQRmYeS" cx="227.0" cy="-24.5" r="3.2">
 			<title>Bias parallel 0 turn 7</title>
 		</circle>
-		<circle class="nuEDbzAg" cx="227.0" cy="-24.5" r="3.5">
+		<circle class="HFQRmYeS" cx="227.0" cy="-24.5" r="3.5">
 			<title>Bias parallel 0 turn 7</title>
 		</circle>
 	</g>

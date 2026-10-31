@@ -1,53 +1,53 @@
 params:
-VOR 100.5 V, Lp*Ipp 427 uVs, Ipp(max) 1.613 A, Lp 265 uH, RCS 0.484 ohm
-design load 24.8 W -> full-load fsw 80.0 kHz at Ipp(max) (FM region)
-  Vin 100 V: ton 4.27 us, tdemag 4.25 us, D 0.341, demag duty 0.340, period use 0.76, Ipri rms 0.544 A
-  Vin 300 V: ton 1.42 us, tdemag 4.25 us, D 0.114, demag duty 0.340, period use 0.53, Ipri rms 0.314 A
-  Vin 450 V: ton 0.95 us, tdemag 4.25 us, D 0.076, demag duty 0.340, period use 0.50, Ipri rms 0.257 A
-CC limit: 31.0 W at 100 kHz, 28.5 W at fSW(max) min 92 kHz
+VOR 100.5 V, Lp*Ipp 427 uVs, Ipp(max) 1.327 A, Lp 322 uH, RCS 0.588 ohm
+design load 20.0 W -> full-load fsw 78.4 kHz at Ipp(max) (FM region)
+  Vin 100 V: ton 4.27 us, tdemag 4.25 us, D 0.335, demag duty 0.333, period use 0.75, Ipri rms 0.443 A
+  Vin 300 V: ton 1.42 us, tdemag 4.25 us, D 0.112, demag duty 0.333, period use 0.52, Ipri rms 0.256 A
+  Vin 450 V: ton 0.95 us, tdemag 4.25 us, D 0.074, demag duty 0.333, period use 0.49, Ipri rms 0.209 A
+CC limit: 25.5 W at 100 kHz, 23.5 W at fSW(max) min 92 kHz, 21.0 W with VCST(max) 738 mV too (worst case)
 DCM at the CC point, 100 V: ton 4.27 + tdemag 4.25 + 1.0 us = 0.95 of the 10 us period
 min on time at 450 V, VCST(min): 237 ns (LEB max 280 ns -> effective 280 ns); tDMAG(min) 1.25 us (TI target >= 1.2 us)
 drain peak at 450 V: 450 + clamp 240 = 690 V (73 % of 950 V)
-clamp loss (leakage 6.7 uH, Vclamp 240 V): 1.20 W at full load (any Vin; Ipp is fixed by VCST(max) in the FM region)
-RCS 0.484 ohm (use 0.47 ohm 1 %): 0.14 W at 100 V
+clamp loss (leakage 6.7 uH, Vclamp 240 V): 0.80 W at full load (any Vin; Ipp is fixed by VCST(max) in the FM region)
+RCS 0.588 ohm (use 0.590 ohm 1 %, E96): 0.12 W at 100 V
   Out1: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
   Out2: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
   CTRL: N 3, winding 9.42 V -> out 8.97 V; diode reverse 51 V
   Bias: N 8, winding 25.12 V -> out 24.42 V; diode reverse 137 V
 == EE25: E 25/13/7 N87, Bobbin EE 25 horizontal longer-creepage 10-pin 5.08mm (Norwe 10165-106)
-   Ae 51.8 mm2, Ve 2994 mm3; centre gap 0.277 mm for Lm 265 uH (AL 259 nH); fits: True
+   Ae 51.8 mm2, Ve 2994 mm3; centre gap 0.217 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 267 mT
-   Vin 100 V: Bpk 257 mT  core 0.365 W  winding 0.399 W  total 0.76 W  -> ~82 C at 60 C air (Rth ~29 K/W)  [Primary 0.221 Out1 0.046 Out2 0.060 CTRL 0.067 Bias 0.005]
-   Vin 300 V: Bpk 245 mT  core 0.451 W  winding 0.411 W  total 0.86 W  -> ~85 C at 60 C air (Rth ~29 K/W)  [Primary 0.218 Out1 0.047 Out2 0.056 CTRL 0.084 Bias 0.005]
-   Vin 450 V: Bpk 237 mT  core 0.483 W  winding 0.431 W  total 0.91 W  -> ~87 C at 60 C air (Rth ~29 K/W)  [Primary 0.233 Out1 0.048 Out2 0.052 CTRL 0.092 Bias 0.005]
+   Vin 100 V: Bpk 256 mT  core 0.353 W  winding 0.249 W  total 0.60 W  -> ~78 C at 60 C air (Rth ~29 K/W)  [Primary 0.138 Out1 0.026 Out2 0.039 CTRL 0.044 Bias 0.003]
+   Vin 300 V: Bpk 250 mT  core 0.463 W  winding 0.254 W  total 0.72 W  -> ~81 C at 60 C air (Rth ~29 K/W)  [Primary 0.135 Out1 0.026 Out2 0.036 CTRL 0.054 Bias 0.003]
+   Vin 450 V: Bpk 241 mT  core 0.496 W  winding 0.266 W  total 0.76 W  -> ~82 C at 60 C air (Rth ~29 K/W)  [Primary 0.143 Out1 0.027 Out2 0.034 CTRL 0.059 Bias 0.003]
 == E30: E 30/15/7 N87, Bobbin E 30/15/7 (Ferroxcube CP-E30/15/7-1S)
-   Ae 60.1 mm2, Ve 3938 mm3; centre gap 0.265 mm for Lm 265 uH (AL 259 nH); fits: True
+   Ae 60.1 mm2, Ve 3938 mm3; centre gap 0.207 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 231 mT
-   Vin 100 V: Bpk 222 mT  core 0.314 W  winding 0.338 W  total 0.65 W  -> ~76 C at 60 C air (Rth ~25 K/W)  [Primary 0.181 Out1 0.046 Out2 0.052 CTRL 0.053 Bias 0.006]
-   Vin 300 V: Bpk 212 mT  core 0.388 W  winding 0.319 W  total 0.71 W  -> ~78 C at 60 C air (Rth ~25 K/W)  [Primary 0.156 Out1 0.047 Out2 0.048 CTRL 0.062 Bias 0.006]
-   Vin 450 V: Bpk 204 mT  core 0.415 W  winding 0.325 W  total 0.74 W  -> ~79 C at 60 C air (Rth ~25 K/W)  [Primary 0.161 Out1 0.048 Out2 0.045 CTRL 0.066 Bias 0.006]
+   Vin 100 V: Bpk 221 mT  core 0.303 W  winding 0.215 W  total 0.52 W  -> ~73 C at 60 C air (Rth ~25 K/W)  [Primary 0.114 Out1 0.026 Out2 0.034 CTRL 0.036 Bias 0.004]
+   Vin 300 V: Bpk 216 mT  core 0.399 W  winding 0.200 W  total 0.60 W  -> ~75 C at 60 C air (Rth ~25 K/W)  [Primary 0.098 Out1 0.027 Out2 0.031 CTRL 0.041 Bias 0.004]
+   Vin 450 V: Bpk 208 mT  core 0.427 W  winding 0.203 W  total 0.63 W  -> ~76 C at 60 C air (Rth ~25 K/W)  [Primary 0.100 Out1 0.027 Out2 0.029 CTRL 0.043 Bias 0.003]
 == EE32: E 32/16/9 N87, Bobbin EE 32 horizontal 12-pin 5.08mm (Norwe 10750-024)
-   Ae 83.2 mm2, Ve 6180 mm3; centre gap 0.478 mm for Lm 265 uH (AL 259 nH); fits: True
+   Ae 83.2 mm2, Ve 6180 mm3; centre gap 0.373 mm for Lm 322 uH (AL 314 nH); fits: True
    peak flux at Ipp(max) (VCST max 810 mV): 167 mT
-   Vin 100 V: Bpk 160 mT  core 0.192 W  winding 0.460 W  total 0.65 W  -> ~73 C at 60 C air (Rth ~20 K/W)  [Primary 0.252 Out1 0.054 Out2 0.065 CTRL 0.080 Bias 0.008]
-   Vin 300 V: Bpk 153 mT  core 0.238 W  winding 0.472 W  total 0.71 W  -> ~74 C at 60 C air (Rth ~20 K/W)  [Primary 0.247 Out1 0.055 Out2 0.062 CTRL 0.101 Bias 0.007]
-   Vin 450 V: Bpk 148 mT  core 0.254 W  winding 0.496 W  total 0.75 W  -> ~75 C at 60 C air (Rth ~20 K/W)  [Primary 0.265 Out1 0.056 Out2 0.058 CTRL 0.110 Bias 0.007]
-== chosen E30: leakage and build
-   leakage ref Primary: [0.0, 12.84, 5.75, 2.98, 21.58] uH
-   leakage ref Out1   : [0.31, 0.0, 0.33, 0.46, 0.2] uH
-   leakage ref Out2   : [0.14, 0.33, 0.0, 0.15, 0.57] uH
-   leakage ref CTRL   : [0.03, 0.16, 0.06, 0.0, 0.24] uH
+   Vin 100 V: Bpk 160 mT  core 0.186 W  winding 0.288 W  total 0.47 W  -> ~69 C at 60 C air (Rth ~20 K/W)  [Primary 0.158 Out1 0.030 Out2 0.043 CTRL 0.053 Bias 0.005]
+   Vin 300 V: Bpk 156 mT  core 0.244 W  winding 0.292 W  total 0.54 W  -> ~71 C at 60 C air (Rth ~20 K/W)  [Primary 0.153 Out1 0.031 Out2 0.039 CTRL 0.065 Bias 0.004]
+   Vin 450 V: Bpk 151 mT  core 0.261 W  winding 0.307 W  total 0.57 W  -> ~71 C at 60 C air (Rth ~20 K/W)  [Primary 0.163 Out1 0.031 Out2 0.037 CTRL 0.071 Bias 0.004]
+== chosen EE25: leakage and build
+   leakage ref Primary: [0.0, 13.31, 5.8, 2.99, 22.63] uH
+   leakage ref Out1   : [0.32, 0.0, 0.34, 0.47, 0.21] uH
+   leakage ref Out2   : [0.14, 0.34, 0.0, 0.16, 0.58] uH
+   leakage ref CTRL   : [0.03, 0.17, 0.06, 0.0, 0.25] uH
    layers (inner -> outer):
      Primary section 0 layer 0                      conduction t 0.450 w  7.19 mm 16
-     Insulation between Primary and CTRL section 1  insulation t 0.025 w 17.00 mm 
+     Insulation between Primary and CTRL section 1  insulation t 0.025 w 15.80 mm 
      CTRL section 0 layer 0                         conduction t 0.683 w  6.15 mm 9
-     Insulation between CTRL and Out2 section 3 ins insulation t 0.025 w 17.00 mm 
+     Insulation between CTRL and Out2 section 3 ins insulation t 0.025 w 15.80 mm 
      Out2 section 0 layer 0                         conduction t 0.739 w  3.69 mm 5
-     Insulation between Out2 and Primary section 5  insulation t 0.025 w 17.00 mm 
+     Insulation between Out2 and Primary section 5  insulation t 0.025 w 15.80 mm 
      Primary section 1 layer 0                      conduction t 0.450 w  7.19 mm 16
-     Insulation between Primary and Out1 section 7  insulation t 0.025 w 17.00 mm 
+     Insulation between Primary and Out1 section 7  insulation t 0.025 w 15.80 mm 
      Out1 section 0 layer 0                         conduction t 0.555 w  2.78 mm 5
-     Insulation between Out1 and Bias section 9 ins insulation t 0.025 w 17.00 mm 
+     Insulation between Out1 and Bias section 9 ins insulation t 0.025 w 15.80 mm 
      Bias section 0 layer 0                         conduction t 0.233 w  1.86 mm 8
-     Insulation between Bias and Primary section 11 insulation t 0.025 w 17.00 mm 
+     Insulation between Bias and Primary section 11 insulation t 0.025 w 15.80 mm 
    insulation requirement (MKF, IEC 62368-1 reinforced, 500 V, PD2, OVC II, IIIa): {'clearance': 0.0055, 'creepageDistance': 0.0031, 'distanceThroughInsulation': 0.0004, 'withstandVoltage': 5000.0}

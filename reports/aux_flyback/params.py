@@ -1,4 +1,4 @@
-"""Design parameters of the v5 aux flyback: UCC28710 (PSR) + IPD95R450P7, 100-450 V DC in,
+"""Design parameters of the v5 aux flyback (20 W, EE25, CTRL on TIW flying leads): UCC28710 (PSR) + IPD95R450P7, 100-450 V DC in,
 Out1 15 V (GND), Out2 15 V (ISOGND), CTRL ~9 V (control card, buck to 5 V), bias for VDD.
 Three reinforced-separated groups: {primary, bias, Out1}, Out2, CTRL. See README.md and
 V5_PLAN.md 5.3. All values SI."""
@@ -15,19 +15,27 @@ TLEB = 0.280e-6         # leading-edge blanking max = practical minimum on time
 VDD_NOM = 25.0          # TI recommendation; run 9..35 V, UVLO 21/8.1 V
 VVSR = 4.05             # VS regulation level
 
-# ---- outputs (design load = user's 15-20 W estimate + margin, 25 W total) -----------------------
+# ---- turn set (Np, Ns, Nctrl, Nbias); TURNSET env var for the comparison run ---------------------
+import os as _os
+TURNSETS = {"A": (32, 5, 3, 8), "B": (38, 6, 4, 10)}
+TURNSET = TURNSETS[_os.environ.get("TURNSET", "A")]   # A chosen: lower leakage (clamp), 9 V CTRL; B: 216 mT, more leakage
+CTRL_V = TURNSET[2] * TURNSET[0] / TURNSET[1] * 15.7 / TURNSET[0] - 0.45   # CTRL winding minus Schottky drop
+CTRL_I = 9.0 / CTRL_V                                                       # 9 W into the buck
+
+# ---- outputs (design load 20 W total, user decision 2026-10-31; was 25 W in 3b4a33d) -------------
 #          name    V     I     diode VF  isolation side (MKF)
-OUTPUTS = [("Out1", 15.0, 0.50, 0.70, "primary"),     # 15V on GND (primary group), ultrafast diode
-           ("Out2", 15.0, 0.40, 0.70, "secondary"),   # 15V_ISO on ISOGND
-           ("CTRL",  9.0, 1.20, 0.45, "tertiary"),    # control card: ~9 V into a 5 V buck (8 W card + buck loss + margin)
+OUTPUTS = [("Out1", 15.0, 0.37, 0.70, "primary"),     # 15V on GND (primary group), ultrafast diode, 5.5 W
+           ("Out2", 15.0, 0.33, 0.70, "secondary"),   # 15V_ISO on ISOGND, 5 W
+           ("CTRL",  CTRL_V, CTRL_I, 0.45, "tertiary"),  # control card: winding into a 5 V buck, 9 W
            ("Bias", 24.4, 0.020, 0.70, "primary")]    # UCC28710 VDD
 ETA = 0.86              # converter efficiency estimate at 100 V full load (for the input power)
 ETA_XFMR = 0.90         # TI's transformer efficiency term (leakage, losses, bias)
 
 # ---- transformer ------------------------------------------------------------------------------
-NP, NS, NC, NB = 32, 5, 3, 8   # primary, 15 V windings, CTRL, bias
-VOR = NP / NS * (15.0 + 0.70)  # reflected voltage = 100.5 V
-P_CC = 31.0             # output power at the CC limit (typ fSW(max)); full load 25 W stays below
+NP, NS, NC, NB = TURNSET      # primary, 15 V windings, CTRL, bias
+VOR = NP / NS * (15.0 + 0.70)  # reflected voltage (~100 V: set by DCM at 100 V input)
+P_CC = 25.5             # output power at the CC limit (typ fSW(max), typ VCST(max)); the worst case
+                        # (fSW(max) 92 kHz, VCST(max) 738 mV) is 0.824 x = 21.0 W, above the 20 W design load
 LP_IPP = DMAGCC * VOR / FMAX                    # V*s at the CC point (demag duty 0.425 at fmax)
 IPP = P_CC / (0.5 * LP_IPP * FMAX * ETA_XFMR)  # primary peak current at VCST(max)
 LP = LP_IPP / IPP                               # primary inductance
@@ -49,7 +57,7 @@ TAPE = 25e-6            # one layer of polyester tape between sections (mechanic
 
 CANDIDATES = {
     # name: (core shape, bobbin, catalogue gap or None, primary wire, Out1 wire, Out2 TIW, CTRL TIW (n parallel), bias wire)
-    "EE25": ("E 25/13/7", "Bobbin EE 25 horizontal longer-creepage 10-pin 5.08mm (Norwe 10165-106)"),
+    "EE25": ("E 25/13/7", "Bobbin EE 25 horizontal longer-creepage 10-pin 5.08mm (Norwe 10165-106)"),  # chosen
     "E30":  ("E 30/15/7", "Bobbin E 30/15/7 (Ferroxcube CP-E30/15/7-1S)"),
     "EE32": ("E 32/16/9", "Bobbin EE 32 horizontal 12-pin 5.08mm (Norwe 10750-024)"),
 }
@@ -74,7 +82,8 @@ def summary():
                     f"period use {(ton+tdm+T_RES_HALF)*f_full:.2f}, Ipri rms {IPP*math.sqrt(d/3):.3f} A")
     # CC limit with the minimum fSW(max)
     p_cc_min = 0.5 * LP * IPP ** 2 * FMAX_MIN * ETA_XFMR
-    rows.append(f"CC limit: {P_CC:.1f} W at 100 kHz, {p_cc_min:.1f} W at fSW(max) min 92 kHz")
+    rows.append(f"CC limit: {P_CC:.1f} W at 100 kHz, {p_cc_min:.1f} W at fSW(max) min 92 kHz, "
+                f"{p_cc_min*(0.738/VCST_MAX)**2:.1f} W with VCST(max) 738 mV too (worst case)")
     # DCM check at the CC point, 100 V
     ton_cc = LP_IPP / VIN_MIN
     rows.append(f"DCM at the CC point, 100 V: ton {ton_cc*1e6:.2f} + tdemag {LP_IPP/VOR*1e6:.2f} + {T_RES_HALF*1e6:.1f} us "
@@ -87,7 +96,7 @@ def summary():
     p_clamp = 0.5 * LK_EFF * IPP ** 2 * f_full * V_CLAMP / (V_CLAMP - VOR)
     rows.append(f"clamp loss (leakage {LK_EFF*1e6:.1f} uH, Vclamp {V_CLAMP:.0f} V): {p_clamp:.2f} W at full load "
                 f"(any Vin; Ipp is fixed by VCST(max) in the FM region)")
-    rows.append(f"RCS {RCS:.3f} ohm (use 0.47 ohm 1 %): {IPP**2*0.341/3*RCS:.2f} W at 100 V")
+    rows.append(f"RCS {RCS:.3f} ohm (use 0.590 ohm 1 %, E96): {IPP**2*0.335/3*RCS:.2f} W at 100 V")
     for name, v, i, vf, _ in OUTPUTS:
         n = {"Out1": NS, "Out2": NS, "CTRL": NC, "Bias": NB}[name]
         vrev = VIN_MAX * n / NP + v

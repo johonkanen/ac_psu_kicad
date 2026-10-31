@@ -5,7 +5,8 @@ Rubadue TCA3), which carries the reinforced insulation to the primary group and 
 so no margin tape is needed. One 25 um tape layer between sections is mechanical only.
 
 Reads inputs.json (run inputs.py first). `python transformer.py` evaluates all CANDIDATES and writes
-magnetic.json / winding.svg for CHOSEN.
+magnetic.json / winding.svg for CHOSEN (EE25, 20 W; CTRL leaves the bobbin as TIW flying leads).
+TURNSET=B in the environment evaluates the alternative turn set (params.TURNSETS).
 """
 import json, math, os, sys
 import PyOpenMagnetics as p
@@ -13,7 +14,7 @@ from params import *
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MODELS = {"coreLosses": "IGSE", "reluctance": "ZHANG", "gapReluctance": "ZHANG"}
-CHOSEN = "E30"
+CHOSEN = "EE25"
 ORDER = ["Primary", "Out1", "Out2", "CTRL", "Bias"]          # winding index order (= inputs.json)
 PATTERN = [0, 3, 2, 0, 1, 4]                                 # P1, CTRL, Out2, P2, Out1, Bias
 PROPORTION = [0.36, 0.14, 0.16, 0.24, 0.10]
