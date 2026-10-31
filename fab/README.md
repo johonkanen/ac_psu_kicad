@@ -8,7 +8,7 @@
 | `make_fab.sh` | Gerbers + Excellon drills → `out/ac_psu_gerber.zip`, position file → `jlc_cpl.csv`, BOM copy (`out/` is not committed) |
 | `make_cpl.py` | KiCad position CSV → JLC CPL, with per-package rotation corrections |
 | `jlc_bom_check.py` | Checks every JLC code (BOM and hand-fit list) for stock against the number of boards: `python3 fab/jlc_bom_check.py 5` |
-| `jlc_stock_2026-10-30.json` | Result of the last stock check (all 53 BOM lines in stock for 5 boards; 2026-10-29 file: the check before the U16/U1/U7/AD1 changes) |
+| `jlc_stock_2026-10-31.json` | Result of the last stock check for 5 boards: every BOM line in stock except AMC1306M05 (5 for 15; the user buys the rest from Mouser/Digikey); hand-fit codes incl. the snap-in and X2 capacitors. Older files: the checks before later BOM changes |
 | `jlc_stock_search.py`, `jlc_stock_2026-10-22.json` | The first search (2026-10-22) that found the codes, kept for reference |
 
 Order flow: `fab/make_fab.sh`, upload `fab/out/ac_psu_gerber.zip` (4 layers, 1.6 mm, see the board

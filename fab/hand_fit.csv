@@ -2,8 +2,8 @@ Comment,Designator,Footprint,Source,Note
 SLA-12VDC-SL-A,"R20,R79",Relay_SLA,JLC C55194 or distributor,THT relays placed by the user
 2.2nF X1/Y2 disc (TDK CS45-E2GA222M-NKA),"C7,C10,C13,C14,C19,C20,C22,C23,C29,C30,C31,C32,C59,C60",C_Disc P7.5,JLC C96522 or distributor,Y2 is enough (user confirmed); placed by the user
 C3M0065090D,"Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12",TO-247-3,JLC C5713513 (23 in stock 2026-10-24),heatsink-mounted SiC MOSFETs: fit by hand with the heatsink
-B43504A5477M (470uF 450V snap-in),"C8,C11,C12,C61,C72,C79",CP_Radial_D35 P10 snap-in,distributor (JLC 0 stock),value/MPN from the built board (photo); DC link rating 450 V: see question on DC+ max
-7uF 250VAC film capacitor (MKS4 P27.5),"C21,C24,C25,C33,C34",C_Rect 33x20 P27.5,distributor,250 VAC film capacitors (user confirmed 2026-10-29)
+"470uF 450V snap-in, 35 mm, P10 (design: TDK B43504A5477M, 35x50)","C8,C11,C12,C61,C72,C79",CP_Radial_D35 P10 snap-in,"JLC C439920 Rubycon 450VXH470MEFCSN35X40 (301 in stock 2026-10-31; 5000 h at 105 C, preferred for the passively cooled chassis); alt. C1581700 Rubycon 450MXG470MEFCSN35X40 (1983, 3000 h)",35 x 40 mm (10 mm lower than the B43504); check that the snap-in pins match the 2-pin P10 footprint; DC link rating 450 V (user: OK)
+"6.8uF X2 305VAC film, P27.5 (design: 7u 250VAC film)","C21,C24,C25,C33,C34",C_Rect 33x20 P27.5,JLC C17700119 Faratronic C42Q2685MBSC450 (181 in stock 2026-10-31),"all five are line-to-line X capacitors (C21/C24/C25 mains EMI filter, C33/C34 inverter output filter), so X2 safety rated; 6.8u vs 7u = -3 %; check the body against the 33 x 20 mm footprint outline before ordering (size not verified)"
 WE-CMBNC,"CM1,CM2,CM3",L_CommonMode_WE-CMBNC,sourced by the user (AliExpress),"hand-soldered by the user, no order code needed"
 TWW10J15RE,R10,R_Radial_Power P5,distributor (JLC 0 stock),inrush resistor 15R 10W
 FKK5R0020FE-TR,"R48,R64,R91",R_Shunt_FKK5R0020FE (4-terminal),distributor (Ohmite; JLC C2482698 0 stock),no JLC part fits the 4-terminal land pattern
