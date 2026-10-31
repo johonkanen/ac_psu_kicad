@@ -261,10 +261,10 @@ transformer.py, report.txt, winding.svg). This supersedes the INN3694C/EE25 numb
 - **Design load ≈ 20 W:** Out1 15 V 0.39 A (load + ≈ 20 mA VDD), Out2 15 V 0.33 A, CTRL ≈ 9 V 1.0 A
   (into a 5 V buck). **No separate bias winding** (user, 2026-10-31).
 - **VOR 100.5 V:** the 100 V DCM limit sets it.
-- **Lp 322 µH, Ipp(max) 1.33 A, RCS 0.590 Ω.**
-- **Full load (19.8 W) at 78 kHz:** at 100 V, the on-time, demagnetisation and ring take 0.74 of the
+- **Lp 322 µH, Ipp(max) 1.39 A, RCS 0.562 Ω** (user 2026-10-31: lowered from 0.590 Ω for CC margin).
+- **Full load (19.8 W) at 71 kHz:** at 100 V, the on-time, demagnetisation and ring take 0.70 of the
   period.
-- **CC limit:** 25.5 W typ; **21.0 W worst case** (fSW(max) 92 kHz and VCST 738 mV).
+- **CC limit:** 27.9 W typ; **23.0 W worst case** (fSW(max) 92 kHz and VCST 738 mV).
 - **Drain peak:** 450 + 240 V clamp = 690 V (73 % of 950 V).
 - **Light load at 450 V:** tDMAG(min) ≈ 1.25 µs (TI target 1.2 µs).
 
@@ -309,7 +309,7 @@ primary halves (P→Out1 6.1 µH), and CTRL tightly coupled to Out1 (0.06 µH).
   without impregnation or potting.
 - PCB: ≥ 10 mm with slots, per the board plan.
 
-**Losses (MKF):** 0.61 W at 100 V, 0.80 W at 450 V. Peak flux 267 mT. ≈ 78–83 °C at the assumed
+**Losses (MKF):** 0.61 W at 100 V, 0.87 W at 450 V. Peak flux 280 mT. ≈ 78–86 °C at the assumed
 60 °C chassis air. Aux area total at 100 V full load ≈ 2.6 W (clamp 0.7 W, MOSFET 0.4 W, diodes
 ≈ 0.9 W).
 
@@ -333,10 +333,8 @@ today's EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 4. confirm the E25 gap (AL 314 nH) and the Norwe 10165-106 drawing (flange creepage, CTRL lead exit)
 5. confirm the 500 V working voltage
 6. decide the standard (IEC 62368-1 vs IEC 62477-1)
-7. the gate buffer (or the IPD95R750P7); trim RS2 / RCBC and check the VS ringing and the start-up on
-   the prototype
-8. the CC worst case is 21 W against the 20 W load: if the real load approaches 20 W, use RCS 0.562 Ω
-   or the E30 alternative
+7. trim RS2 / RCBC and check the VS ringing, the start-up and the gate buffer on the prototype
+   (decided 2026-10-31: MMBT3904/3906 buffer, RCS 0.562 Ω → CC worst case 23.0 W)
 
 ## 6. Not part of v5
 

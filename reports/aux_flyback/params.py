@@ -45,6 +45,12 @@ LP_IPP = DMAGCC * VOR / FMAX                    # V*s at the CC point (demag dut
 IPP = P_CC / (0.5 * LP_IPP * FMAX * ETA_XFMR)  # primary peak current at VCST(max)
 LP = LP_IPP / IPP                               # primary inductance
 RCS = VCST_MAX / IPP                            # current-sense resistor
+# user decision 2026-10-31: RCS 0.562 ohm (E96) instead of 0.590 for more CC-limit margin over the
+# 20 W load; Lp stays as designed above, the peak current and CC power rise by 5 %
+RCS = 0.562
+IPP = VCST_MAX / RCS
+LP_IPP = LP * IPP
+P_CC = 0.5 * LP * IPP ** 2 * FMAX * ETA_XFMR
 
 # ---- MOSFET / clamp --------------------------------------------------------------------------
 VDS_RATING = 950.0      # IPD95R450P7
@@ -101,7 +107,7 @@ def summary():
     p_clamp = 0.5 * LK_EFF * IPP ** 2 * f_full * V_CLAMP / (V_CLAMP - VOR)
     rows.append(f"clamp loss (leakage {LK_EFF*1e6:.1f} uH, Vclamp {V_CLAMP:.0f} V): {p_clamp:.2f} W at full load "
                 f"(any Vin; Ipp is fixed by VCST(max) in the FM region)")
-    rows.append(f"RCS {RCS:.3f} ohm (use 0.590 ohm 1 %, E96): {IPP**2*0.335/3*RCS:.2f} W at 100 V")
+    rows.append(f"RCS {RCS:.3f} ohm 1 % (E96): {IPP**2*0.335/3*RCS:.2f} W at 100 V")
     for name, v, i, vf, _ in OUTPUTS:
         n = {"Out1": NS, "Out2": NS, "CTRL": NC}[name]
         vrev = VIN_MAX * n / NP + v

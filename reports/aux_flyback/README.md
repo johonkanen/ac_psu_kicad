@@ -43,9 +43,9 @@ Design (`params.py`; `python params.py` prints it, turn set A):
 |---|---|
 | VOR | 100.5 V (Np/Ns = 32/5). The 100 V input sets it: DCM at the CC point needs ton + tdemag + ½ ring ≤ T |
 | Lp | **322 µH** (AL ≈ 314 nH at 32 turns) |
-| Ipp(max) | 1.33 A at VCST(max); RCS = 0.588 Ω → **0.590 Ω 1 % (E96)**, 0.12 W |
-| CC limit | 25.5 W typ (100 kHz, 780 mV); 23.5 W at fSW(max) 92 kHz; **21.0 W worst case** (92 kHz and 738 mV): above the 20 W design load |
-| Full load | 19.8 W at **78 kHz** (FM region, peak current fixed) |
+| Ipp(max) | 1.39 A at VCST(max); **RCS 0.562 Ω 1 % (E96)**, 0.12 W (user 2026-10-31; the 20 W design gives 0.588 Ω, lowered for CC-limit margin) |
+| CC limit | 27.9 W typ (100 kHz, 780 mV); 25.7 W at fSW(max) 92 kHz; **23.0 W worst case** (92 kHz and 738 mV): 15 % above the 20 W design load. DCM at the CC point at 100 V uses 0.99 of the period (overload only) |
+| Full load | 19.8 W at **71 kHz** (FM region, peak current fixed); 0.70 of the period at 100 V |
 | 100 V full load | ton 4.27 µs + tdemag 4.25 µs + 1 µs ring = 0.75 of the period (0.95 at the CC point) |
 | Primary RMS | 0.44 A at 100 V, 0.26 A at 300 V, 0.21 A at 450 V |
 | Light load, 450 V | tON is LEB-limited at 280 ns → **tDMAG(min) 1.25 µs**, just above TI's 1.2 µs: check VS sampling on the sample at 450 V, no load |
@@ -58,9 +58,9 @@ Design (`params.py`; `python params.py` prints it, turn set A):
 | Core | E25/13/7 N87, centre-leg gap ≈ 0.22 mm for **AL ≈ 314 nH**. TDK B66317-series halves (ungapped B66317G0000X187 with a gapped B66317G…X187 half; the old design's B66317G0250X187 is ≈ 250 nH, too low: pick the gap for 314 nH or have the core ground), or Ferroxcube E25/13/7-3C95 gapped to the same AL |
 | Bobbin | EE25 horizontal, longer creepage, 10 pins (5 + 5) at 5.08 mm: **Norwe 10165-106** (2-chamber 10166-106). Same family, standard creepage: Norwe 10220-024 / 10175-106. None are stocked at JLC/LCSC; confirm the drawing (row spacing, flange creepage) |
 | Turns | Primary 32 (16 + 16 in series), Out1 5, Out2 5, CTRL 3; no bias winding |
-| Peak flux | 267 mT at Ipp(max) and VCST 810 mV (N87 Bsat ≈ 390 mT at 100 °C) |
-| Losses (MKF) | 100 V: core 0.36 W + copper 0.25 W = **0.61 W**; 300 V: 0.75 W; 450 V: **0.80 W** |
-| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 78–83 °C** at 60 °C air |
+| Peak flux | 280 mT at Ipp(max) and VCST 810 mV (N87 Bsat ≈ 390 mT at 100 °C) |
+| Losses (MKF) | 100 V: core 0.36 W + copper 0.26 W = **0.61 W**; 300 V: 0.71 W; 450 V: **0.87 W** |
+| Temperature | ≈ 29 K/W free convection (rule of thumb) → **≈ 78–86 °C** at 60 °C air |
 | Leakage (MKF, pairwise from the primary) | Out1 6.1 µH, Out2 11.2 µH, CTRL 2.9 µH; clamp-effective ≈ 5.9 µH. Referred to Out2 with Out1 shorted 0.32 µH, CTRL 0.06 µH (cross-regulation against Out1) |
 
 Turn set B (38/6/4, CTRL ≈ 10 V) was run in the bias-winding version: peak flux 223 mT, about the same
@@ -125,8 +125,8 @@ bought with its certificate. Enamelled leads (primary, Out1) stay on the primary
   - **Speed:** DRV sources only 20–25 mA, so Qg 35 nC takes ≈ 1.4–1.8 µs. That is fine at 100 V full
     load (ton 4.3 µs) and at 450 V full load (0.95 µs; the current starts at zero in DCM). At 450 V
     light load (ton ≈ 280 ns, LEB-limited) the gate barely passes the plateau.
-  - **Recommendation:** a small NPN/PNP emitter-follower buffer (MMBT3904/MMBT3906) from VDD, or the
-    lower-Qg IPD95R750P7 (23 nC, 0.75 Ω).
+  - **Decision (user, 2026-10-31):** a small NPN/PNP emitter-follower buffer (MMBT3904/MMBT3906) from
+    VDD; the IPD95R450P7 stays (the IPD95R750P7 would add ≈ 0.2 W).
   - Turn-off: 6–12 Ω sink.
 - **VS waveform at the knee:**
   - **Leakage reset:** with ≈ 5.9 µH clamp-effective leakage the reset pedestal is ≈ 5.9 µH × 1.33 A /
@@ -180,8 +180,8 @@ Horizontal bobbin: each flange carries one 5-pin row.
 
 | Core / bobbin | Ae | Bpk | Loss 100 V / 450 V | ≈ T at 60 °C | Pins | Footprint |
 |---|---|---|---|---|---|---|
-| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 267 mT | **0.61 / 0.80 W** | **≈ 78–83 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
-| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 231 mT | 0.52 / 0.64 W | ≈ 73–76 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
+| **E25/13/7, Norwe 10165-106 (5 + 5)** | 52 mm² | 280 mT | **0.61 / 0.87 W** | **≈ 78–86 °C** | 10 + CTRL on TIW flying leads | ≈ 28 × 26 mm + CTRL hole pair (≈ 6 × 13 mm zone) |
+| E30/15/7, Ferroxcube CSH-E30/15/7-1S-12P (alternative, design 3b4a33d) | 60 mm² | 241 mT | 0.52 / 0.71 W | ≈ 73–78 °C | 12 (6 + 6): all on pins | ≈ 35 × 31 mm |
 | E32/16/9, Norwe 10750-024 (6 + 6) | 83 mm² | 167 mT | 0.49 / 0.61 W | ≈ 70–72 °C | 12 | ≈ 36 × 34 mm |
 
 **Board area:**
@@ -198,12 +198,12 @@ like TR2 today.
 |---|---|---|
 | MOSFET | 690 V peak, 0.44 A rms | IPD95R450P7 (DPAK). ≈ 0.2 W conduction (hot Rds ≈ 1 Ω) + ≈ 0.2 W switching ≈ **0.4 W** |
 | Clamp | ≈ **0.7 W** at full load (5.9 µH effective leakage, conservative) | TVS P6SMB200A / SMBJ170A class (≈ 240 V at 1.3 A) + 1000 V fast diode (US1M / RS1M). Give the TVS copper; measure the leakage on the sample |
-| RCS | 1.33 A peak | 0.590 Ω 1 %, 0.25 W (1206) |
+| RCS | 1.39 A peak | 0.562 Ω 1 %, 0.25 W (1206) |
 | Out1 diode | 85 V reverse, 2.5 A peak, 0.39 A avg | 200 V ultrafast 1–2 A (ES2D / STTH202 class) |
 | Out2 diode | 85 V, 2.1 A peak, 0.33 A avg | same |
 | CTRL diode | 51 V reverse, 6.5 A peak, 1.0 A avg | 100 V Schottky 3 A (SS310 / SS510 class), ≈ 0.45 W: copper |
 | VDD feed | Out1 → VDD, ≈ 6 mA | BAS16 / 1N4148W + 47 Ω; CDD 15 µF / 50 V (X7R 1210 or electrolytic) + 100 nF at the pin |
-| Gate buffer | Qg 35 nC from 20–25 mA DRV | MMBT3904 / MMBT3906 emitter follower from VDD (recommended) |
+| Gate buffer | Qg 35 nC from 20–25 mA DRV | **MMBT3904 / MMBT3906 emitter follower from VDD** (user 2026-10-31) |
 | Output capacitor RMS | Out1 0.71 A, Out2 0.62 A, CTRL 1.86 A | low-ESR polymer or MLCC + electrolytic; 105 °C, long life (passive chassis) |
 | VS divider | Out1 winding 15.45 V at the knee → VS 4.05 V | RS1 59.0 k, RS2 21.0 k, RCBC ≈ 118 k (see above); RLC per TI eq. 27 |
 
@@ -236,13 +236,13 @@ leakage to it (ΔV ≈ Llk × Ipk / tdemag):
    reach more relative to the primary (450 V DC link plus the AC output).
 6. **Standard:** IEC 62368-1 (met) or IEC 62477-1 / IEC 60664-1 (16 mm over the bobbin: needs
    impregnation or potting).
-7. **Gate drive:** the MMBT3904/3906 buffer, or the IPD95R750P7 (23 nC), for the light-load
-   LEB-limited on-time at 450 V.
+7. **Gate drive:** decided – MMBT3904/3906 buffer (user, 2026-10-31). Check the light-load
+   LEB-limited on-time at 450 V on the prototype.
 8. **VS divider and cable compensation:** trim RS2 / RCBC on the prototype. Check the VS ringing at
    450 V no load (≤ 100 mVpp at VS from ≈ 1.05 µs) and the start-up into the real output capacitance
    (CDD 15 µF).
-9. **CC limit tolerance:** the worst case is 21 W against the 20 W load. If the real load
-   approaches 20 W, lower RCS to 0.562 Ω (+5 % power; flux ≈ 280 mT) or use the E30 alternative.
+9. **CC limit tolerance:** decided – RCS 0.562 Ω (user, 2026-10-31): worst case 23.0 W against the
+   20 W load (was 21.0 W with 0.590 Ω); flux 280 mT at Ipp(max).
 
 ## Files
 

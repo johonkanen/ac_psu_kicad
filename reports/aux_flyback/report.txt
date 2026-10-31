@@ -1,15 +1,15 @@
 params:
-VOR 100.5 V, Lp*Ipp 427 uVs, Ipp(max) 1.327 A, Lp 322 uH, RCS 0.588 ohm
-design load 19.8 W -> full-load fsw 77.6 kHz at Ipp(max) (FM region)
-  Vin 100 V: ton 4.27 us, tdemag 4.25 us, D 0.332, demag duty 0.330, period use 0.74, Ipri rms 0.441 A
-  Vin 300 V: ton 1.42 us, tdemag 4.25 us, D 0.111, demag duty 0.330, period use 0.52, Ipri rms 0.255 A
-  Vin 450 V: ton 0.95 us, tdemag 4.25 us, D 0.074, demag duty 0.330, period use 0.48, Ipri rms 0.208 A
-CC limit: 25.5 W at 100 kHz, 23.5 W at fSW(max) min 92 kHz, 21.0 W with VCST(max) 738 mV too (worst case)
-DCM at the CC point, 100 V: ton 4.27 + tdemag 4.25 + 1.0 us = 0.95 of the 10 us period
-min on time at 450 V, VCST(min): 237 ns (LEB max 280 ns -> effective 280 ns); tDMAG(min) 1.25 us (TI target >= 1.2 us)
+VOR 100.5 V, Lp*Ipp 447 uVs, Ipp(max) 1.388 A, Lp 322 uH, RCS 0.562 ohm
+design load 19.8 W -> full-load fsw 71.0 kHz at Ipp(max) (FM region)
+  Vin 100 V: ton 4.47 us, tdemag 4.45 us, D 0.317, demag duty 0.316, period use 0.70, Ipri rms 0.451 A
+  Vin 300 V: ton 1.49 us, tdemag 4.45 us, D 0.106, demag duty 0.316, period use 0.49, Ipri rms 0.260 A
+  Vin 450 V: ton 0.99 us, tdemag 4.45 us, D 0.070, demag duty 0.316, period use 0.46, Ipri rms 0.213 A
+CC limit: 27.9 W at 100 kHz, 25.7 W at fSW(max) min 92 kHz, 23.0 W with VCST(max) 738 mV too (worst case)
+DCM at the CC point, 100 V: ton 4.47 + tdemag 4.45 + 1.0 us = 0.99 of the 10 us period
+min on time at 450 V, VCST(min): 248 ns (LEB max 280 ns -> effective 280 ns); tDMAG(min) 1.25 us (TI target >= 1.2 us)
 drain peak at 450 V: 450 + clamp 240 = 690 V (73 % of 950 V)
 clamp loss (leakage 5.9 uH, Vclamp 240 V): 0.69 W at full load (any Vin; Ipp is fixed by VCST(max) in the FM region)
-RCS 0.588 ohm (use 0.590 ohm 1 %, E96): 0.12 W at 100 V
+RCS 0.562 ohm 1 % (E96): 0.12 W at 100 V
   Out1: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
   Out2: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
   CTRL: N 3, winding 9.42 V -> out 8.97 V; diode reverse 51 V
@@ -20,22 +20,22 @@ CDD >= 12.9 uF for 20 ms to Out1 10 V (worst UVLO window 9.5 V) -> 15 uF; start 
 gate drive: VDD 14.3 V, DRV ~13 V (clamp 14-16 V only at high VDD); Qg 35 nC at 20 mA min source -> 1.8 us to full charge
 == EE25: E 25/13/7 N87, Bobbin EE 25 horizontal longer-creepage 10-pin 5.08mm (Norwe 10165-106)
    Ae 51.8 mm2, Ve 2994 mm3; centre gap 0.217 mm for Lm 322 uH (AL 314 nH); fits: True
-   peak flux at Ipp(max) (VCST max 810 mV): 267 mT
-   Vin 100 V: Bpk 259 mT  core 0.357 W  winding 0.254 W  total 0.61 W  -> ~78 C at 60 C air (Rth ~29 K/W)  [Primary 0.137 Out1 0.036 Out2 0.034 CTRL 0.046]
-   Vin 300 V: Bpk 253 mT  core 0.470 W  winding 0.277 W  total 0.75 W  -> ~82 C at 60 C air (Rth ~29 K/W)  [Primary 0.142 Out1 0.044 Out2 0.033 CTRL 0.059]
-   Vin 450 V: Bpk 244 mT  core 0.502 W  winding 0.295 W  total 0.80 W  -> ~83 C at 60 C air (Rth ~29 K/W)  [Primary 0.154 Out1 0.046 Out2 0.032 CTRL 0.064]
+   peak flux at Ipp(max) (VCST max 810 mV): 280 mT
+   Vin 100 V: Bpk 270 mT  core 0.355 W  winding 0.256 W  total 0.61 W  -> ~78 C at 60 C air (Rth ~29 K/W)  [Primary 0.137 Out1 0.037 Out2 0.035 CTRL 0.047]
+   Vin 300 V: Bpk 257 mT  core 0.441 W  winding 0.269 W  total 0.71 W  -> ~81 C at 60 C air (Rth ~29 K/W)  [Primary 0.134 Out1 0.043 Out2 0.033 CTRL 0.058]
+   Vin 450 V: Bpk 267 mT  core 0.568 W  winding 0.306 W  total 0.87 W  -> ~86 C at 60 C air (Rth ~29 K/W)  [Primary 0.159 Out1 0.047 Out2 0.033 CTRL 0.066]
 == E30: E 30/15/7 N87, Bobbin E 30/15/7 (Ferroxcube CP-E30/15/7-1S)
    Ae 60.1 mm2, Ve 3938 mm3; centre gap 0.207 mm for Lm 322 uH (AL 314 nH); fits: True
-   peak flux at Ipp(max) (VCST max 810 mV): 231 mT
-   Vin 100 V: Bpk 223 mT  core 0.307 W  winding 0.215 W  total 0.52 W  -> ~73 C at 60 C air (Rth ~25 K/W)  [Primary 0.115 Out1 0.026 Out2 0.035 CTRL 0.038]
-   Vin 300 V: Bpk 218 mT  core 0.404 W  winding 0.208 W  total 0.61 W  -> ~75 C at 60 C air (Rth ~25 K/W)  [Primary 0.101 Out1 0.030 Out2 0.032 CTRL 0.044]
-   Vin 450 V: Bpk 210 mT  core 0.432 W  winding 0.213 W  total 0.64 W  -> ~76 C at 60 C air (Rth ~25 K/W)  [Primary 0.104 Out1 0.031 Out2 0.030 CTRL 0.047]
+   peak flux at Ipp(max) (VCST max 810 mV): 241 mT
+   Vin 100 V: Bpk 233 mT  core 0.306 W  winding 0.217 W  total 0.52 W  -> ~73 C at 60 C air (Rth ~25 K/W)  [Primary 0.116 Out1 0.027 Out2 0.036 CTRL 0.039]
+   Vin 300 V: Bpk 222 mT  core 0.379 W  winding 0.203 W  total 0.58 W  -> ~75 C at 60 C air (Rth ~25 K/W)  [Primary 0.096 Out1 0.030 Out2 0.032 CTRL 0.045]
+   Vin 450 V: Bpk 230 mT  core 0.488 W  winding 0.221 W  total 0.71 W  -> ~78 C at 60 C air (Rth ~25 K/W)  [Primary 0.109 Out1 0.032 Out2 0.032 CTRL 0.048]
 == EE32: E 32/16/9 N87, Bobbin EE 32 horizontal 12-pin 5.08mm (Norwe 10750-024)
    Ae 83.2 mm2, Ve 6180 mm3; centre gap 0.373 mm for Lm 322 uH (AL 314 nH); fits: True
-   peak flux at Ipp(max) (VCST max 810 mV): 167 mT
-   Vin 100 V: Bpk 161 mT  core 0.188 W  winding 0.303 W  total 0.49 W  -> ~70 C at 60 C air (Rth ~20 K/W)  [Primary 0.164 Out1 0.041 Out2 0.043 CTRL 0.055]
-   Vin 300 V: Bpk 158 mT  core 0.247 W  winding 0.326 W  total 0.57 W  -> ~71 C at 60 C air (Rth ~20 K/W)  [Primary 0.166 Out1 0.049 Out2 0.041 CTRL 0.070]
-   Vin 450 V: Bpk 152 mT  core 0.265 W  winding 0.346 W  total 0.61 W  -> ~72 C at 60 C air (Rth ~20 K/W)  [Primary 0.180 Out1 0.052 Out2 0.039 CTRL 0.076]
+   peak flux at Ipp(max) (VCST max 810 mV): 174 mT
+   Vin 100 V: Bpk 168 mT  core 0.187 W  winding 0.306 W  total 0.49 W  -> ~70 C at 60 C air (Rth ~20 K/W)  [Primary 0.164 Out1 0.042 Out2 0.044 CTRL 0.057]
+   Vin 300 V: Bpk 160 mT  core 0.232 W  winding 0.317 W  total 0.55 W  -> ~71 C at 60 C air (Rth ~20 K/W)  [Primary 0.158 Out1 0.049 Out2 0.040 CTRL 0.070]
+   Vin 450 V: Bpk 166 mT  core 0.299 W  winding 0.359 W  total 0.66 W  -> ~73 C at 60 C air (Rth ~20 K/W)  [Primary 0.186 Out1 0.054 Out2 0.041 CTRL 0.078]
 == chosen EE25: leakage and build
    leakage ref Primary: [0.0, 6.12, 11.16, 2.92] uH
    leakage ref Out1   : [0.15, 0.0, 0.32, 0.16] uH
