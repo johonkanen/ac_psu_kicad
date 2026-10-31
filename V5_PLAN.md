@@ -228,7 +228,7 @@ v5 includes the control-card isolation in `CTRL_ISOLATION_PLAN.md`. The card dom
 becomes CTRL, isolated by reinforced barriers from both power sides, so the card's Ethernet and
 touchscreen are SELV. The card's 5 V comes from a **dedicated CTRL winding** on this flyback. The
 transformer now has **three reinforced-separated groups**:
-- {primary, bias, Out1 (`15V`, GND)}
+- {primary, Out1 (`15V`, GND; also the PSR sense and VDD winding since 5.3)}
 - Out2 (`15V_ISO`, ISOGND)
 - CTRL (5 V, card ≈ 6–7 W)
 
@@ -241,7 +241,7 @@ CTRL taking the card, Out2 drops back to the gate-driver supplies, U8 (now only 
 logic and U10) and the R79 coil, ≈ 4–5 W. Rebalance the outputs: Out1 ≈ 5–6 W, Out2 ≈ 4–5 W, CTRL
 ≈ 7 W, with margin.
 
-**Regulation:** PSR regulates the bias winding. CTRL is cross-regulated like the others, so put a
+**Regulation:** PSR regulates the bias winding (since 5.3: Out1 itself, no separate bias winding). CTRL is cross-regulated like the others, so put a
 local regulator (buck or LDO) after the CTRL winding if the card needs a tight 5 V. Choose the
 CTRL winding voltage to suit, e.g. ≈ 7–8 V into a buck.
 
@@ -251,17 +251,19 @@ CTRL winding voltage to suit, e.g. ≈ 7–8 V into a buck.
 (primary-side regulation from the bias winding, no optocoupler), but drives an external 950 V
 MOSFET, so the power is set by the transformer and the MOSFET.
 
-### 5.3 Transformer (run 2026-10-31, revised to 20 W on EE25)
+### 5.3 Transformer (run 2026-10-31, revised to 20 W on EE25, no bias winding)
 
 Details, candidates and scripts: `reports/aux_flyback/` (README.md, params.py, inputs.py,
 transformer.py, report.txt, winding.svg). This supersedes the INN3694C/EE25 numbers above. The
 25 W / E30/15/7 design (commit 3b4a33d) is kept in the README as the alternative.
 
 **Electrical design** (UCC28710, 100–450 V, full power at 100 V; user: 20 W):
-- **Design load 20 W:** Out1 15 V 0.37 A, Out2 15 V 0.33 A, CTRL ≈ 9 V 1.0 A (into a 5 V buck), bias 24.4 V 20 mA.
+- **Design load ≈ 20 W:** Out1 15 V 0.39 A (load + ≈ 20 mA VDD), Out2 15 V 0.33 A, CTRL ≈ 9 V 1.0 A
+  (into a 5 V buck). **No separate bias winding** (user, 2026-10-31).
 - **VOR 100.5 V:** the 100 V DCM limit sets it.
 - **Lp 322 µH, Ipp(max) 1.33 A, RCS 0.590 Ω.**
-- **Full load at 78 kHz:** at 100 V, the on-time, demagnetisation and ring take 0.75 of the period.
+- **Full load (19.8 W) at 78 kHz:** at 100 V, the on-time, demagnetisation and ring take 0.74 of the
+  period.
 - **CC limit:** 25.5 W typ; **21.0 W worst case** (fSW(max) 92 kHz and VCST 738 mV).
 - **Drain peak:** 450 + 240 V clamp = 690 V (73 % of 950 V).
 - **Light load at 450 V:** tDMAG(min) ≈ 1.25 µs (TI target 1.2 µs).
@@ -274,14 +276,28 @@ Norwe 10220-024 / 10175-106. Confirm the drawing.
 |---|---|---|
 | P1 | 16 | 0.40 mm Grade 2 |
 | CTRL | 3 | 3 × TIW 25 AWG (Rubadue TCA3) in parallel, **flying leads** |
-| Out2 | 5 | TIW 24 AWG |
+| Out1 | 5 | 0.63 mm Grade 2 (PSR sense + VDD) |
 | P2 | 16 | 0.40 mm Grade 2 |
-| Out1 | 5 | 0.50 mm Grade 2 |
-| Bias | 8 | 0.20 mm Grade 2 |
+| Out2 | 5 | TIW 24 AWG |
+
+Order O2 out of four compared: the lowest clamp-effective leakage (5.9 µH), Out1 between the
+primary halves (P→Out1 6.1 µH), and CTRL tightly coupled to Out1 (0.06 µH).
+
+**Out1 as the PSR sense and VDD winding** (user, 2026-10-31; details in the README):
+- **VS divider** from the Out1 winding node before its diode: RS1 59.0 k, RS2 21.0 k, cable
+  compensation RCBC ≈ 118 k (+0.25 V at full load). The controller regulates Out1 directly; Out2 and
+  CTRL cross-regulate against it.
+- **VDD** from the 15 V rail via BAS16 + 47 Ω, ≈ 14.3 V. CDD 15 µF (TI eq. 24: ≥ 12.9 µF for a 20 ms
+  start into ≈ 2200 µF total output capacitance). Start delay ≈ 1.3 s typ, 4.9 s worst at 100 V.
+- **An output short** collapses VDD: hiccup (≈ 30 ms on per 1–5 s), thermally safe.
+- **Gate drive:** DRV ≈ 13 V, so the FET is fully on (its Rds(on) is rated at 10 V). DRV sources only
+  20–25 mA, so add an MMBT3904/3906 buffer for the 35 nC gate (or use the IPD95R750P7, 23 nC).
+- **VS knee:** the leakage reset is ≈ 60 ns (TI limit 2.2 µs). The ringing must be < 100 mVpp at VS by
+  ≈ 1.05 µs at 450 V no load (tDMAG(min) 1.25 µs); add an RC snubber on the Out1 diode if needed.
 
 **Pins:**
-- Primary row: drain, DC+, bias, GND, Out1.
-- Secondary row: Out2+, ISOGND; pins 8–10 cut.
+- **Primary row:** drain, DC+, empty (the freed bias pin), GND, Out1.
+- **Secondary row:** Out2+, ISOGND; pins 8–10 cut.
 - **CTRL:** TIW flying leads from the pin-10 end of the secondary flange to two Ø 1.6 mm holes
   (pads Ø 3.0 mm, 5.08 mm apart) in the CTRL island, ≥ 10 mm from the Out2 pins, the primary row and
   the core.
@@ -293,20 +309,22 @@ Norwe 10220-024 / 10175-106. Confirm the drawing.
   without impregnation or potting.
 - PCB: ≥ 10 mm with slots, per the board plan.
 
-**Losses (MKF):** 0.60 W at 100 V, 0.76 W at 450 V. Peak flux 267 mT. ≈ 78–82 °C at the assumed
-60 °C chassis air. Aux area total at 100 V full load ≈ 2.7 W (clamp 0.8 W, MOSFET 0.4 W, diodes ≈ 0.9 W).
+**Losses (MKF):** 0.61 W at 100 V, 0.80 W at 450 V. Peak flux 267 mT. ≈ 78–83 °C at the assumed
+60 °C chassis air. Aux area total at 100 V full load ≈ 2.6 W (clamp 0.7 W, MOSFET 0.4 W, diodes
+≈ 0.9 W).
 
-**Board footprint:** ≈ 28 × 26 mm plus the CTRL hole zone (≈ 800 mm² in total). That is ≈ 2.6 × today's
-EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
+**Board footprint:** ≈ 28 × 26 mm plus the CTRL hole zone (≈ 800 mm² in total). That is ≈ 2.6 ×
+today's EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 
 **Rest of the stage:**
 - clamp TVS ≈ 200 V class + 1000 V fast diode
 - Out1/Out2: 200 V ultrafast 1–2 A
 - CTRL: 100 V Schottky 3 A
-- bias: 300–400 V 1 A
-- output capacitor RMS: Out1 0.69 A, Out2 0.62 A, CTRL 1.86 A
+- VDD feed: BAS16 + 47 Ω, CDD 15 µF / 50 V; gate buffer MMBT3904/3906
+- output capacitor RMS: Out1 0.71 A, Out2 0.62 A, CTRL 1.86 A
 - preloads: Out2 ≈ 3 mA, CTRL ≈ 10 mA
-- CTRL buck ≥ 17 V input (8.5–9.3 V loaded, ≈ 11–12 V at no load)
+- cross-regulation against Out1: Out2 14.7–15.3 V; CTRL ≈ 8.9–9.3 V loaded, ≈ 10.5–11.5 V at no load;
+  CTRL buck ≥ 17 V input
 
 **Open items:**
 1. measure the chassis air temperature
@@ -315,7 +333,10 @@ EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 4. confirm the E25 gap (AL 314 nH) and the Norwe 10165-106 drawing (flange creepage, CTRL lead exit)
 5. confirm the 500 V working voltage
 6. decide the standard (IEC 62368-1 vs IEC 62477-1)
-7. the CC worst case is 21 W against the 20 W load: if the real load approaches 20 W, use RCS 0.562 Ω or the E30 alternative
+7. the gate buffer (or the IPD95R750P7); trim RS2 / RCBC and check the VS ringing and the start-up on
+   the prototype
+8. the CC worst case is 21 W against the 20 W load: if the real load approaches 20 W, use RCS 0.562 Ω
+   or the E30 alternative
 
 ## 6. Not part of v5
 
