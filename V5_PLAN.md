@@ -335,12 +335,12 @@ PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
 
 **Working voltages** (user 2026-10-31: the isolated DC link is ≤ 410 V, so the AC output peak is
 ≤ 410 V (≈ 290 Vrms sine); the primary DC+ stays ≤ 450 V for the 100–450 V input range. CTRL is
-bonded to PE; both power domains move against PE). Whether an output terminal can be earthed is not
+bonded to PE; both power domains move against PE). **User 2026-10-31: the output is always floating AC**, so the DC/earthed case below does not apply and B2 stays in the 500 V row. Whether an output terminal can be earthed was not
 known yet, so both cases are given:
 
 | Barrier | Floating output (only the output Y caps C29–C32 to PE) | Output earthed (through the Y caps' leakage path, the user or the load) | IEC 60664-1 row (RMS / DC working voltage) |
 |---|---|---|---|
-| B2 primary ↔ ISO | ISO domain centred on PE: ISOGND ≈ −205 V average, −410…0 V extremes; DC+ ≤ +450 V to PE. Peak ≈ 860 V, RMS ≈ 430–500 V | ISOGND = −(earthed pole voltage): −410…0 V. Same peak ≈ 860 V, RMS ≈ 430–500 V | **500 V row** (was 630 V); medium confidence, the RMS sits near the 500 V boundary. **If the output can run DC with one terminal earthed**, B2 is a DC voltage up to ≈ 860 V → **1000 V row** |
+| B2 primary ↔ ISO | ISO domain centred on PE: ISOGND ≈ −205 V average, −410…0 V extremes; DC+ ≤ +450 V to PE. Peak ≈ 860 V, RMS ≈ 430–500 V | ISOGND = −(earthed pole voltage): −410…0 V. Same peak ≈ 860 V, RMS ≈ 430–500 V | **500 V row** (was 630 V); medium confidence, the RMS sits near the 500 V boundary. (The DC-output/earthed case, 1000 V row, does not apply: the output is always floating AC, user 2026-10-31.) |
 | B3 primary ↔ CTRL (PE) | DC+ ≤ 450 V peak to PE, RMS < 450 V | same | **500 V row** (unchanged) |
 | B4 ISO ↔ CTRL (PE) | ≤ 410 V peak (switching common mode included), RMS ≈ 205–290 V | ≤ 410 V peak, RMS ≤ 410 V (DC output) | **500 V row** (just above the 400 V row; unchanged) |
 | B1 mains/primary ↔ accessible parts | mains 230 Vrms OVC II; DC+ ≤ 450 V | same | mains OVC II 300 V |
@@ -354,14 +354,14 @@ class I). IEC 61010-1 may only require basic between two hazardous-live circuits
 | Barrier | Clearance, reinforced | Creepage, reinforced: PCB (printed-wiring column, CTI ≥ 175) | Creepage, reinforced: other insulating material IIIa (bobbin, connector bodies) | Solid insulation, reinforced |
 |---|---|---|---|---|
 | B2, B3, B4 (500 V row) | ≥ 3.0 mm (2.5 kV OVC II impulse → 4 kV step; the ≈ 860 V recurring peak needs less) (medium-high; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
-| B2 only if the output can be DC and earthed (1000 V row) | ≥ 3.0 mm | 2 × 5.0 = **10.0 mm** (medium-low) | 2 × 10.0 = **20 mm** (medium-low) | same |
+| ~~B2 if the output could be DC and earthed (1000 V row)~~ not applicable (floating AC output) | ≥ 3.0 mm | 2 × 5.0 = **10.0 mm** (medium-low) | 2 × 10.0 = **20 mm** (medium-low) | same |
 
 - **Test voltage** (dielectric strength, reinforced, 1 min AC): ≈ 3 kVrms for mains OVC II 300 V,
   higher for the 500 V row working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
   MKF's IEC 60664-1 figure is 2.7 kV; its IEC 62368-1 figure is 5 kV.
 - **If IEC 61010-1 does not accept the printed-wiring column** for these working voltages, use the
   material-group column on the PCB too (10.0 mm for all three barriers). The board plan's ≥ 10 mm with
-  slots covers that (B2 needs 20 mm only in the DC-output/earthed case).
+  slots covers that (the 20 mm DC-output/earthed case does not apply: floating AC output).
 - **Slots** count as an interruption of the creepage path when ≥ 1.0 mm wide (IEC 60664-1, PD2).
 - **MKF numbers** (reports/aux_flyback/insulation.py → insulation.txt): its IEC 60664-1 creepage is
   16 mm at 450–500 V and 25 mm at 630–800 V reinforced (IIIa, PD2). That is far above Table F.4 because
@@ -383,7 +383,7 @@ class I). IEC 61010-1 may only require basic between two hazardous-live circuits
    core). **Fix: insulate the core:** 3 layers of polyester tape around the outer legs and
    back, or insulating core caps/sleeves. The core then drops out of the creepage path, which is
    measured over the tape. Cheap and standard practice.
-2. **Pin row to pin row over the bobbin (P/Out1 row ↔ Out2 row, B2, ≥ 10.0 mm; 20 mm in the DC-output/earthed case):** depends on the Norwe
+2. **Pin row to pin row over the bobbin (P/Out1 row ↔ Out2 row, B2, ≥ 10.0 mm):** depends on the Norwe
    10165-106 row spacing and flange; typical EE25 horizontal bobbins have ≈ 15–20 mm between the rows
    (verify on the drawing). Cutting pins 8–10 and keeping Out2 on pins 6–7 at the far end helps.
 3. **Through the windings:** TIW (Rubadue TCA3, Furukawa TEX-E) is certified as reinforced solid
@@ -454,7 +454,7 @@ today's EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 2. wind a sample and measure Lp, the leakage, and the VS waveform at 450 V no load
 3. source certified TIW
 4. confirm the E25 gap (AL 314 nH) and the Norwe 10165-106 drawing (flange creepage, CTRL lead exit)
-5. working voltages: all barriers in the 500 V row (isolated DC link ≤ 410 V, user 2026-10-31); open: output earthing and DC output (B2 → 1000 V row)
+5. working voltages: all barriers in the 500 V row (isolated DC link ≤ 410 V, user 2026-10-31); the output is always floating AC (user 2026-10-31), so the 1000 V case is closed
 6. standard decided: IEC 61010-1 (user 2026-10-31); buy the standard text and verify the Annex K values; core insulation tape/caps
 7. trim RS2 / RCBC and check the VS ringing, the start-up and the gate buffer on the prototype
    (decided 2026-10-31: MMBT3904/3906 buffer, RCS 0.562 Ω → CC worst case 23.0 W)
