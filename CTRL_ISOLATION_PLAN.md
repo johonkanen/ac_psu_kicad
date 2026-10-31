@@ -1,6 +1,9 @@
 # Control-card isolation on the baseboard (branch `ctrl-isolation`)
 
 Status: plan only (2026-10-31), no design change yet. Based on main 2104b5b (v4 with fixes 1–12).
+User decisions 2026-10-31: **done together with v5** (this branch is the v5 branch; see V5_PLAN.md),
+**CTRL power from a dedicated winding on the v5 aux flyback** (option B). Total aux power about
+15–20 W (user estimate). Open: decisions 2 (islands) and 3 (earthing).
 
 Goal (user): the control card's domain becomes its own SELV domain **CTRL**, isolated by reinforced
 barriers from the primary (GND/PGND: DC+ up to 450 V, mains) and from the isolated DC side
@@ -198,12 +201,11 @@ CTRL winding (option B) and also changes the area around U8/J12. The frozen-boar
 
 ## 7. Decisions for the user
 
-1. **CTRL power:** B (v5 winding) for the product with A (THM 10-2411WI) for bench boards, or look
-   for a ≥ 500 V-working reinforced module (option C)?
+1. **CTRL power – B, the v5 winding** (user, 2026-10-31). The THM 10-2411WI stays an option for bench
+   boards only.
 2. **Islands:** accept two CTRL islands joined only through the card, with a small extra supply for
    island A? Or move the J12 power pins' function onto J11? (Not possible without a card change,
    because J11 has no spare power pins; pin 38 is unconnected but only one pin.)
 3. **CTRL earthing:** float, or bond to PE through the chassis? Earthed SELV changes nothing in the
    barrier requirements but helps EMC.
-4. **Schedule:** do this together with v5 (recommended: both re-lay the same area), or as its own
-   revision first?
+4. **Schedule – together with v5** (user, 2026-10-31).

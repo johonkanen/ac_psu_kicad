@@ -222,6 +222,35 @@ vias, not a large drain pour. Check the 35 nC Qg against the UCC28710 DRV curren
   electrolytic capacitor life and the U8 K7805-2000R3 derating (the 5 V version derates from
   ≈ 55–71 °C ambient).
 
+### 5.2 CTRL winding and control-card isolation (user, 2026-10-31)
+
+v5 includes the control-card isolation in `CTRL_ISOLATION_PLAN.md`. The card domain (J11/J12)
+becomes CTRL, isolated by reinforced barriers from both power sides, so the card's Ethernet and
+touchscreen are SELV. The card's 5 V comes from a **dedicated CTRL winding** on this flyback. The
+transformer now has **three reinforced-separated groups**:
+- {primary, bias, Out1 (`15V`, GND)}
+- Out2 (`15V_ISO`, ISOGND)
+- CTRL (5 V, card ≈ 6–7 W)
+
+Margins or TIW are needed on both of the last two. Re-run MKF with isolation sides
+[primary, primary, secondary, tertiary, primary], and expect the EE25 to become too small: check
+E30 / EF25 / EFD30 with the 100 V full-power design point of 5.1.
+
+**Power (user estimate):** about 15–20 W in total; the 25 W design point of 5.1 covers it. With
+CTRL taking the card, Out2 drops back to the gate-driver supplies, U8 (now only the gate-driver
+logic and U10) and the R79 coil, ≈ 4–5 W. Rebalance the outputs: Out1 ≈ 5–6 W, Out2 ≈ 4–5 W, CTRL
+≈ 7 W, with margin.
+
+**Regulation:** PSR regulates the bias winding. CTRL is cross-regulated like the others, so put a
+local regulator (buck or LDO) after the CTRL winding if the card needs a tight 5 V. Choose the
+CTRL winding voltage to suit, e.g. ≈ 7–8 V into a buck.
+
+**Why not the iW1830** (user question 2026-10-31): Renesas rates it at 12–15 W maximum, for AC input
+(85–264 VAC, ≈ 120–375 V DC). Its integrated MOSFET is 700 V, but here the drain peak at 450 V DC is
+≈ 700–780 V. And JLC has 0 in stock. The UCC28710 (section 5) is the same kind of controller
+(primary-side regulation from the bias winding, no optocoupler), but drives an external 950 V
+MOSFET, so the power is set by the transformer and the MOSFET.
+
 ## 6. Not part of v5
 
 v4 clean-up and manufacturing items (C67, silk positions, pad decisions, JLC alternatives, CPL)
