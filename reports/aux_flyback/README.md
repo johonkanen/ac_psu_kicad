@@ -155,26 +155,89 @@ Horizontal bobbin: each flange carries one 5-pin row.
   - **Lead dress:** TIW is reinforced insulation along its whole length, so the free lead may cross
     above other groups' copper. Only the bare, soldered ends count for creepage. Fix the leads with
     adhesive or a lead clip so they cannot move toward pins 6–7 and the core.
-- **The core is floating** and counts as a conductive part between the groups (IEC 62368-1 5.4).
+- **The core is floating** and counts as a conductive part between the groups; insulate it (IEC 61010-1 check below).
   Inside the winding the TIW covers it. Outside, the path Out2 pin → core → primary pin, and the
   CTRL holes → core, must each meet the reinforced creepage over the bobbin flange and the PCB. Check
   the flange distances on the Norwe drawing (the longer-creepage version exists for this).
 
-### Insulation figures (MKF `calculate_insulation`, 500 V working)
+### Insulation – IEC 61010-1 (user decision 2026-10-31)
 
-| Standard | Basic | Reinforced |
-|---|---|---|
-| IEC 62368-1 | creepage 1.6 mm, clearance 3.0 mm | **creepage 3.1 mm, clearance 5.5 mm**, DTI 0.4 mm, 5 kV withstand |
-| IEC 60664-1 (insulating material IIIa, e.g. bobbin) | creepage 8.0 mm | **creepage 16 mm**, 2.7 kV |
-| IEC 61558-1 | creepage 1.6 mm | creepage 2.8 mm |
+MKF sweep: `insulation.py` → `insulation.txt` (IEC 60664-1 / 62368-1 / 61558-1 at 230–800 V).
+The design input now uses IEC 60664-1 at the 630 V row (MKF has no IEC 61010-1).
 
-- **IEC 62477-1** is not in MKF. It refers to IEC 60664-1, so take that column for the bobbin and pins.
-- **On the PCB,** IEC 60664-1 printed-wiring values at PD2 are much lower: Table F.4 gives about
-  2.5 mm basic at 500 V, so about 5 mm reinforced (verify against the table). The board plan keeps
-  ≥ 10 mm with slots.
-- **The standard is still to be decided.** Under IEC 62368-1 the EE25 flange and pin distances are
-  enough. Under IEC 60664-1 / IEC 62477-1, 16 mm over the bobbin material is not reachable on an
-  EE25. Options: varnish impregnation (lower pollution degree), or a potted transformer.
+**Standard: IEC 61010-1 (3rd ed. + A1), user decision 2026-10-31** (bench-top laboratory power
+supply). The values below use the **IEC 60664-1 basis** that IEC 61010-1 Annex K builds on
+(Table F.2 clearance, Table F.4 creepage, reinforced = 2 × basic). The standard text was not
+available here, so **every number must be verified against IEC 61010-1 Annex K (K.1 mains circuits,
+K.2 secondary circuits) before layout sign-off.** Assumptions: mains 230 V, OVC II (2.5 kV impulse),
+PD2, ≤ 2000 m; bobbin plastic material group IIIa; FR4 CTI ≥ 175 (IIIa).
+
+**Working voltages** (CTRL is bonded to PE; both power domains move against PE):
+
+| Barrier | Where | Working voltage (assumed) | Insulation |
+|---|---|---|---|
+| B1 mains/primary ↔ PE and accessible parts | AFE, DC link (galvanically mains-connected) | mains 230 Vrms; DC+ ≤ 450 V | reinforced to accessible parts (or basic + PE) |
+| B2 primary ↔ ISO | TR1 (off-board), aux transformer {P, Out1} ↔ Out2, any PCB gap between GND/PGND/DC+ and ISO copper | up to ≈ 900 V peak (DC+ at +450 V while ISOGND sits at −450 V against PE through the output Y caps or an earthed output terminal); **use the 630 V RMS/DC row** | reinforced (user D3). IEC 61010-1 may only need basic between two hazardous-live circuits; to confirm |
+| B3 primary ↔ CTRL | U13/U15/U16, U5 (AMC1306), aux transformer {P, Out1} ↔ CTRL, PCB islands | ≈ 450–550 V peak, **500 V row** | reinforced (decided; basic + PE bonding would satisfy class I) |
+| B4 ISO ↔ CTRL | new ISO7760F, CA-IS3742, AMC1311, U4/U6 path, aux transformer Out2 ↔ CTRL | ≤ 450 V DC + the AC output, **500 V row** | reinforced |
+| B5 CTRL ↔ user parts (Ethernet, touchscreen) | same domain, PE-bonded | SELV | functional |
+
+**Required distances** (IEC 60664-1 basis; confidence in brackets):
+
+| Barrier | Clearance, reinforced | Creepage, reinforced: PCB (printed-wiring column, CTI ≥ 175) | Creepage, reinforced: other insulating material IIIa (bobbin, connector bodies) | Solid insulation, reinforced |
+|---|---|---|---|---|
+| B2 (630 V) | ≥ 3.0 mm (2.5 kV impulse → 4 kV step; the 900 V recurring peak needs less) (medium) | 2 × 3.2 = **6.4 mm** (medium) | 2 × 6.3 = **12.6 mm** (medium) | ≥ 0.4 mm single layer, or ≥ 2 thin layers each passing the full test voltage (3 layers: any 2) (medium) |
+| B3, B4 (500 V) | ≥ 3.0 mm (medium-high for mains OVC II 300 V; K.1.2 may add for working voltages above mains, so lay out ≥ 4 mm) | 2 × 2.5 = **5.0 mm** (medium) | 2 × 5.0 = **10.0 mm** (medium) | same (medium) |
+
+- **Test voltage** (dielectric strength, reinforced, 1 min AC): ≈ 3 kVrms for mains OVC II 300 V,
+  higher for the 500–630 V working voltages (≈ 3.5–4 kVrms). Low confidence: verify in IEC 61010-1 6.8 and Annex K
+  MKF's IEC 60664-1 figure is 2.7 kV; its IEC 62368-1 figure is 5 kV.
+- **If IEC 61010-1 does not accept the printed-wiring column** for these working voltages, use the
+  material-group column on the PCB too (10.0 / 12.6 mm). The board plan already keeps ≥ 10 mm with
+  slots for B3/B4; B2 on the PCB needs ≥ 12.6 mm in that case.
+- **Slots** count as an interruption of the creepage path when ≥ 1.0 mm wide (IEC 60664-1, PD2).
+- **MKF numbers** (reports/aux_flyback/insulation.py → insulation.txt): its IEC 60664-1 creepage is
+  16 mm at 450–500 V and 25 mm at 630–800 V reinforced (IIIa, PD2). That is far above Table F.4 because
+  MKF applies the high-frequency (> 30 kHz) creepage rules to the converter's 71 kHz waveform. Between
+  the groups the voltage is mostly DC/50 Hz plus a ≈ 100 V switching swing, so Table F.4 governs.
+  The HF rule must be checked for the swing amplitude only (small). Keep the MKF figure as an upper
+  bound.
+- **Digital isolators and AMC1306/AMC1311:** IEC 61010-1 ed. 3 asks for ≥ 0.4 mm internal distance
+  through insulation, with relief for components certified to IEC 60747-17 / VDE 0884-11 (ADI note).
+  Use parts with that certification (ISO7760F, CA-IS3742, AMC1311, AMC1306 are listed as reinforced
+  per DIN EN IEC 60747-17; confirm each datasheet). Their 8 mm package creepage on CTI ≥ 600 mold
+  compound covers 5.0 mm (group I at 500 V); the slot under each package is still needed for the FR4.
+
+**Transformer verdict (EE25, Norwe 10165-106, TIW on Out2 and CTRL, CTRL on flying leads):**
+**not compliant as it is; fixable** (paths ranked by risk):
+
+1. **Via the floating core** (fails as built): on a standard EE25 bobbin, pins to the core edge are
+   ≈ 2–4 mm per side. That is far below 12.6 mm (B2: P/Out1 pins ↔ core ↔ Out2 pins) or 10.0 mm (B3/B4:
+   CTRL holes ↔ core). **Fix: insulate the core:** 3 layers of polyester tape around the outer legs and
+   back, or insulating core caps/sleeves. The core then drops out of the creepage path, which is
+   measured over the tape. Cheap and standard practice.
+2. **Pin row to pin row over the bobbin (P/Out1 row ↔ Out2 row, B2, ≥ 12.6 mm):** depends on the Norwe
+   10165-106 row spacing and flange; typical EE25 horizontal bobbins have ≈ 15–20 mm between the rows
+   (verify on the drawing). Cutting pins 8–10 and keeping Out2 on pins 6–7 at the far end helps.
+3. **Through the windings:** TIW (Rubadue TCA3, Furukawa TEX-E) is certified as reinforced solid
+   insulation (IEC 61558-2-16 / IEC 62368-1 Annex J, UL/VDE), typically 3 kVrms+ per wire. IEC 61010-1
+   has no TIW-specific clause. Certification bodies accept certified TIW in wound components when the
+   finished transformer passes the reinforced test voltage (to confirm with the test lab; medium-low
+   confidence). Sleeve the TIW leads where they leave the bobbin, so the lead cannot be pinched
+   against the core edge.
+4. **CTRL flying leads:** TIW is solid insulation along its length, so only the soldered ends count:
+   PCB rules at the CTRL holes (≥ 10.0 mm to other-domain copper and to the core outline,
+   B3/B4). Already in the plan.
+
+**Fix options, ranked:**
+1. **Core insulation (tape or caps) + certified TIW + verify the row spacing ≥ 12.6 mm.** Recommended:
+   no process change.
+2. **Vacuum varnish impregnation:** IEC 60664-1 / IEC 61010-1 allow pollution degree 1 only for parts
+   that are sealed, potted or coated to IEC 60664-3. Plain impregnation of an open bobbin is usually
+   **not** accepted as PD1 for the pin and flange surfaces, so it does not replace fix 1.
+3. **Potting the transformer:** solid insulation everywhere; heavy and a process step. Only if the
+   lab rejects fix 1.
+4. **Larger core / 12-pin E30 bobbin:** more room but the same core issue; fix 1 is still needed.
 
 ## Candidates (MKF at 20 W, turn set A, winding order O2)
 
@@ -232,10 +295,10 @@ leakage to it (ΔV ≈ Llk × Ipk / tdemag):
    - the gapped E25 half for AL ≈ 314 nH (or a ground core)
    - the Norwe 10165-106 drawing: row spacing, flange creepage from the pins to the core, where
      the CTRL leads can leave
-5. **Working voltage:** 500 V is assumed between all three groups. Recompute if the ISO side can
-   reach more relative to the primary (450 V DC link plus the AC output).
-6. **Standard:** IEC 62368-1 (met) or IEC 62477-1 / IEC 60664-1 (16 mm over the bobbin: needs
-   impregnation or potting).
+5. **Working voltage:** B2 (primary ↔ Out2) uses the 630 V row (up to ≈ 900 V peak), B3/B4 (↔ CTRL)
+   the 500 V row. Confirm the AC output maximum and how the output is earthed.
+6. **Standard:** IEC 61010-1 (user 2026-10-31). Insulate the core (tape/caps), verify the Norwe
+   row spacing ≥ 12.6 mm, confirm the TIW acceptance with the test lab, verify the Annex K values.
 7. **Gate drive:** decided – MMBT3904/3906 buffer (user, 2026-10-31). Check the light-load
    LEB-limited on-time at 450 V on the prototype.
 8. **VS divider and cable compensation:** trim RS2 / RCBC on the prototype. Check the VS ringing at

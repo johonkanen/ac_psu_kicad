@@ -52,4 +52,4 @@ gate drive: VDD 14.3 V, DRV ~13 V (clamp 14-16 V only at high VDD); Qg 35 nC at 
      Insulation between Primary and Out2 section 7  insulation t 0.025 w 15.80 mm 
      Out2 section 0 layer 0                         conduction t 0.739 w  3.69 mm 5
      Insulation between Out2 and Primary section 9  insulation t 0.025 w 15.80 mm 
-   insulation requirement (MKF, IEC 62368-1 reinforced, 500 V, PD2, OVC II, IIIa): {'clearance': 0.0055, 'creepageDistance': 0.0031, 'distanceThroughInsulation': 0.0004, 'withstandVoltage': 5000.0}
+   insulation requirement (MKF, IEC 60664-1 reinforced, 630 V, PD2, OVC II, IIIa; MKF applies its >30 kHz rules): {'clearance': 0.0015, 'creepageDistance': 0.025, 'distanceThroughInsulation': 0.00023, 'withstandVoltage': 2676.2365978649464}

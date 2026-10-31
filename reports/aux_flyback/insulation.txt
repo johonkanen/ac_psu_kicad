@@ -1,0 +1,49 @@
+IEC 60664-1 230 Basic {'clearance': 0.5, 'creepageDistance': 4.0, 'distanceThroughInsulation': 0.03, 'withstandVoltage': 1500.0}
+IEC 60664-1 230 Reinforced {'clearance': 1.5, 'creepageDistance': 8.0, 'distanceThroughInsulation': 0.03, 'withstandVoltage': 2676.2365978649464}
+IEC 60664-1 300 Basic {'clearance': 0.5, 'creepageDistance': 8.0, 'distanceThroughInsulation': 0.04, 'withstandVoltage': 1500.0}
+IEC 60664-1 300 Reinforced {'clearance': 1.5, 'creepageDistance': 16.0, 'distanceThroughInsulation': 0.04, 'withstandVoltage': 2676.2365978649464}
+IEC 60664-1 450 Basic {'clearance': 0.5, 'creepageDistance': 8.0, 'distanceThroughInsulation': 0.12, 'withstandVoltage': 1500.0}
+IEC 60664-1 450 Reinforced {'clearance': 1.5, 'creepageDistance': 16.0, 'distanceThroughInsulation': 0.12, 'withstandVoltage': 2676.2365978649464}
+IEC 60664-1 500 Basic {'clearance': 0.5, 'creepageDistance': 8.0, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 1500.0}
+IEC 60664-1 500 Reinforced {'clearance': 1.5, 'creepageDistance': 16.0, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+IEC 60664-1 630 Basic {'clearance': 0.5, 'creepageDistance': 12.5, 'distanceThroughInsulation': 0.23, 'withstandVoltage': 1500.0}
+IEC 60664-1 630 Reinforced {'clearance': 1.5, 'creepageDistance': 25.0, 'distanceThroughInsulation': 0.23, 'withstandVoltage': 2676.2365978649464}
+IEC 60664-1 800 Basic {'clearance': 0.5, 'creepageDistance': 12.5, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 1500.0}
+IEC 60664-1 800 Reinforced {'clearance': 1.5, 'creepageDistance': 25.0, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+IEC 62368-1 230 Basic {'clearance': 0.5, 'creepageDistance': 1.6, 'distanceThroughInsulation': 0.0, 'withstandVoltage': 2000.0}
+IEC 62368-1 230 Reinforced {'clearance': 1.0, 'creepageDistance': 3.1, 'distanceThroughInsulation': 0.4, 'withstandVoltage': 4000.0}
+IEC 62368-1 300 Basic {'clearance': 1.5, 'creepageDistance': 1.6, 'distanceThroughInsulation': 0.0, 'withstandVoltage': 2500.0}
+IEC 62368-1 300 Reinforced {'clearance': 3.0, 'creepageDistance': 3.1, 'distanceThroughInsulation': 0.4, 'withstandVoltage': 5000.0}
+IEC 62368-1 450 Basic {'clearance': 1.5, 'creepageDistance': 1.6, 'distanceThroughInsulation': 0.0, 'withstandVoltage': 2500.0}
+IEC 62368-1 450 Reinforced {'clearance': 3.0, 'creepageDistance': 3.1, 'distanceThroughInsulation': 0.4, 'withstandVoltage': 5000.0}
+IEC 62368-1 500 Basic {'clearance': 3.0, 'creepageDistance': 1.6, 'distanceThroughInsulation': 0.0, 'withstandVoltage': 2500.0}
+IEC 62368-1 500 Reinforced {'clearance': 5.5, 'creepageDistance': 3.1, 'distanceThroughInsulation': 0.4, 'withstandVoltage': 5000.0}
+IEC 62368-1 630 Basic ERR Too much voltage for IEC 62368-1 in table 27: 630.000000
+IEC 62368-1 630 Reinforced ERR Too much voltage for IEC 62368-1 in table 27: 630.000000
+IEC 62368-1 800 Basic ERR Too much voltage for IEC 62368-1 in table 12: 800.000000
+IEC 62368-1 800 Reinforced ERR Too much voltage for IEC 62368-1 in table 12: 800.000000
+IEC 61558-1 230 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.03, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 230 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.23, 'withstandVoltage': 2143.5489679741963}
+IEC 61558-1 300 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.04, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 300 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.3, 'withstandVoltage': 2143.5489679741963}
+IEC 61558-1 450 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.12, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 450 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.35, 'withstandVoltage': 2143.5489679741963}
+IEC 61558-1 500 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 500 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.37, 'withstandVoltage': 2143.5489679741963}
+IEC 61558-1 630 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.23, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 630 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.41, 'withstandVoltage': 2143.5489679741963}
+IEC 61558-1 800 Basic {'clearance': 0.5, 'creepageDistance': 1.56, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 1071.7744839870982}
+IEC 61558-1 800 Reinforced {'clearance': 1.5, 'creepageDistance': 2.77, 'distanceThroughInsulation': 0.45, 'withstandVoltage': 2143.5489679741963}
+--- 60664-1 PD1 (impregnated) / material groups, 500 and 800 V reinforced
+60664-1 P1 Group I 500 {'clearance': 1.5, 'creepageDistance': 4.8, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P1 Group I 800 {'clearance': 1.5, 'creepageDistance': 8.4, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+60664-1 P1 Group II 500 {'clearance': 1.5, 'creepageDistance': 4.8, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P1 Group II 800 {'clearance': 1.5, 'creepageDistance': 8.4, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+60664-1 P1 Group IIIA 500 {'clearance': 1.5, 'creepageDistance': 4.8, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P1 Group IIIA 800 {'clearance': 1.5, 'creepageDistance': 8.4, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group I 500 {'clearance': 1.5, 'creepageDistance': 8.0, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group I 800 {'clearance': 1.5, 'creepageDistance': 12.6, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group II 500 {'clearance': 1.5, 'creepageDistance': 11.2, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group II 800 {'clearance': 1.5, 'creepageDistance': 18.0, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group IIIA 500 {'clearance': 1.5, 'creepageDistance': 16.0, 'distanceThroughInsulation': 0.15, 'withstandVoltage': 2676.2365978649464}
+60664-1 P2 Group IIIA 800 {'clearance': 1.5, 'creepageDistance': 25.0, 'distanceThroughInsulation': 0.34, 'withstandVoltage': 2676.2365978649464}
