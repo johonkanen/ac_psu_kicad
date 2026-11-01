@@ -102,9 +102,28 @@ def check_pads(board, recs, errors):
     return worst, npads, mapping
 
 
+def check_ties(board, errors):
+    """v4 fix 15: board-only cable-tie anchors TIE_<lead ref>, every hole inside its listed area."""
+    ties = deviations.tie_anchors()
+    fps = [fp for fp in board.GetFootprints() if fp.IsBoardOnly() and fp.GetReference().startswith("TIE_")]
+    for fp in fps:
+        lead = fp.GetReference()[4:]
+        a = ties.get(lead)
+        for pad in fp.Pads():
+            c = pad.GetPosition()
+            x, y = mm(c.x), -mm(c.y)
+            if a is None or not (a[0] <= x <= a[2] and a[1] <= y <= a[3]):
+                errors.append(f"{fp.GetReference()}: hole at ({x:.3f},{y:.3f}) outside its area (lib/v4_copper.csv 'TIE {lead}')")
+            if pad.GetAttribute() != pcbnew.PAD_ATTRIB_NPTH or pad.GetNetname():
+                errors.append(f"{fp.GetReference()}: hole must be NPTH without net")
+    if len(fps) != len(ties):
+        errors.append(f"{len(fps)} cable-tie anchors on the board, {len(ties)} listed")
+    return len(fps)
+
+
 def check_holes(board, recs, errors):
     holes = [p for p in recs if p["kind"] == "hole"]
-    fps = [fp for fp in board.GetFootprints() if fp.IsBoardOnly()]
+    fps = [fp for fp in board.GetFootprints() if fp.IsBoardOnly() and not fp.GetReference().startswith("TIE_")]
     for h in holes:
         hit = []
         for fp in fps:
@@ -184,8 +203,9 @@ def main():
     errors = []
     worst, npads, mapping = check_pads(board, recs, errors)
     nholes = check_holes(board, recs, errors)
+    nties = check_ties(board, errors)
     print(f"check_board: {len(board.GetFootprints())} footprints, {npads} pads, worst pad offset {worst:.3f} mm "
-          f"(limit {bc.TOL}), {len(mapping)} IPC nets mapped 1:1, {nholes} mounting holes")
+          f"(limit {bc.TOL}), {len(mapping)} IPC nets mapped 1:1, {nholes} mounting holes, {nties} cable-tie anchors")
     if "--pads-only" not in sys.argv:
         nt, nv, nz = check_copper(board, recs, mapping, errors)
         print(f"check_board: {nt} tracks, {nv} vias, {nz} zones")

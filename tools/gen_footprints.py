@@ -158,6 +158,10 @@ PROJECT = {
     # hole thread, 7 x 7 mm, 4 solder pins, 50 A). The KiCad footprint's 4.3 mm NPTH becomes a plated
     # 4.3 mm hole in a 7.4 mm square pad 1 on all layers: the copper under the cube (other nets keep
     # out) and the landing of the old pin terminal's tracks.
+    # v4 fix 15: board-only cable-tie anchor next to a soldered lead pin (second mechanical fixing of
+    # the wire, IEC 61010-1): two 3.0 mm NPTH holes 5.5 mm apart for a 2.5-3.6 mm cable tie; no copper.
+    "CableTie_NPTH_2x3.0mm_P5.5mm": dict(tie=(3.0, 5.5), board_only=True,
+                                         descr="Cable-tie anchor, 2 x 3.0 mm NPTH, 5.5 mm apart"),
     "Wuerth_REDCUBE-THR_74650074_M4_PTH": dict(
         base="TerminalBlock_Wuerth:Wuerth_REDCUBE-THR_WP-THRBU_74650074_THR", npth_to_pad=(7.4, 7.4),
         descr="M4 ring-lug terminal, Wuerth REDCUBE THR 74650074R (50 A), plated 4.3 mm centre hole"),
@@ -441,11 +445,37 @@ def from_ipc(name, spec, ipc):
     return node
 
 
+def tie_anchor(name, spec):
+    """Board-only cable-tie anchor: two NPTH holes on x (no copper, mask openings), courtyard and
+    fab circles on the holes, a fab line between them (the tie's strap underneath)."""
+    d, p = spec["tie"]
+    node = [Sym("footprint"), name, [Sym("version"), 20260206], [Sym("generator"), "ac_psu_gen_footprints"],
+            [Sym("layer"), "F.Cu"], [Sym("descr"), f"{spec['descr']} (ac_psu)"],
+            [Sym("property"), "Reference", "REF**", [Sym("at"), 0, -2.5, 0], [Sym("layer"), "F.Fab"], [Sym("hide"), Sym("yes")], _eff()],
+            [Sym("property"), "Value", name, [Sym("at"), 0, 2.5, 0], [Sym("layer"), "F.Fab"], [Sym("hide"), Sym("yes")], _eff()],
+            [Sym("attr"), Sym("board_only"), Sym("exclude_from_pos_files"), Sym("exclude_from_bom")],
+            [Sym("fp_line"), [Sym("start"), -p / 2, 0], [Sym("end"), p / 2, 0],
+             [Sym("stroke"), [Sym("width"), 0.1], [Sym("type"), Sym("solid")]], [Sym("layer"), "F.Fab"]]]
+    for x in (-p / 2, p / 2):
+        for layer, r, w in (("F.Fab", d / 2, 0.1), ("F.CrtYd", d / 2, 0.05)):
+            node.append([Sym("fp_circle"), [Sym("center"), _r4(x), 0], [Sym("end"), _r4(x + r), 0],
+                         [Sym("stroke"), [Sym("width"), w], [Sym("type"), Sym("solid")]], [Sym("fill"), Sym("no")],
+                         [Sym("layer"), layer]])
+    for x in (-p / 2, p / 2):
+        node.append([Sym("pad"), "", Sym("np_thru_hole"), Sym("circle"), [Sym("at"), _r4(x), 0],
+                     [Sym("size"), d, d], [Sym("drill"), d], [Sym("layers"), "F.Mask", "B.Mask"]])
+    node.append([Sym("embedded_fonts"), Sym("no")])
+    return node
+
+
 def build_library():
     ipc = fpgeom.ipc_pads_by_refdes()
     out = {}
     for name, spec in PROJECT.items():
-        node = derive(name, spec, ipc) if spec.get("base") else from_ipc(name, spec, ipc)
+        if spec.get("tie"):
+            node = tie_anchor(name, spec)
+        else:
+            node = derive(name, spec, ipc) if spec.get("base") else from_ipc(name, spec, ipc)
         out[name + ".kicad_mod"] = sexpr.dump(node) + "\n"
     return out
 
@@ -466,7 +496,7 @@ def main():
     check = "--check" in sys.argv
     assignment, errors = assign()
     used = {fp.split(":", 1)[1] for fp, _ in assignment.values() if fp.startswith("ac_psu:")}
-    unused = sorted(set(PROJECT) - used)
+    unused = sorted(set(PROJECT) - used - {n for n, s in PROJECT.items() if s.get("board_only")})
     undefined = sorted(used - set(PROJECT))
     for n in unused:
         errors.append(f"project footprint {n} is not used")

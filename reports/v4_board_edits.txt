@@ -364,3 +364,12 @@
   pour Proteus F.Cu pour 31 (F.Cu, /05 VSI/AFE_RELAY) gives way at (-83.07,-9.62) 1.16 x 0.02 mm
   pour Proteus F.Cu pour 5 (F.Cu, DC+) gives way at (36.50,-45.48) 5.80 x 1.20 mm
   pour Proteus F.Cu pour 8 (F.Cu, ISOPGND) gives way at (37.26,1.90) 1.74 x 5.38 mm
+== fix 15: cable-tie anchors next to 8 soldered lead pins
+  TIE_ACIN1: cable-tie anchor, NPTH 2 x 3.0 mm at (-116.811,-49.562) and (-112.922,-53.451)
+  TIE_ACOUT1: cable-tie anchor, NPTH 2 x 3.0 mm at (-97.300,-9.250) and (-97.300,-3.750)
+  TIE_ACOUT2: cable-tie anchor, NPTH 2 x 3.0 mm at (-117.533,36.097) and (-118.956,30.785)
+  TIE_PE1: cable-tie anchor, NPTH 2 x 3.0 mm at (-60.750,-60.250) and (-60.750,-65.750)
+  TIE_PE2: cable-tie anchor, NPTH 2 x 3.0 mm at (-124.456,-55.422) and (-119.144,-53.999)
+  TIE_PE3: cable-tie anchor, NPTH 2 x 3.0 mm at (-91.746,-70.632) and (-88.996,-65.868)
+  TIE_PE5: cable-tie anchor, NPTH 2 x 3.0 mm at (-61.400,31.350) and (-61.400,25.850)
+  TIE_AFE_OUT: cable-tie anchor, NPTH 2 x 3.0 mm at (54.071,-72.982) and (51.321,-68.218)

@@ -1,6 +1,50 @@
 # Status
 
-Updated: 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v4 fix 15 – cable-tie anchors at the soldered lead pins (2026-11-01, branch `v4-terminals`)
+
+User decision 2026-11-01 ("option 2"): the 17 lead connections without an M4 terminal keep their
+soldered pins in v4 (ACIN1/2, ACOUT1/2, PE1–PE8, AFE_OUT, DAB_PRI_1/2, DAB_SEC_1/2 – verified against
+`fab/hand_fit.csv`), and every wire gets a second, independent mechanical fixing: a cable tie through
+the board next to the pin (IEC 61010-1 internal wiring: solder + tie). Full M4 terminals for these 17
+move to v5.
+
+**Anchor:** board-only footprint `ac_psu:CableTie_NPTH_2x3.0mm_P5.5mm` (gen_footprints, `board_only`):
+two 3.0 mm NPTH holes 5.5 mm apart, no copper (mask openings only), courtyard = the holes; reference
+`TIE_<lead>` (hidden). `tools/v4/fix_15_cable_ties.py` (seed 4115) places 8:
+
+| Lead | Holes (IPC frame) | Pair centre from the pin centre | Direction |
+|---|---|---|---|
+| ACIN1 | (−116.81, −49.56), (−112.92, −53.45) | 7.25 mm | 225° |
+| ACOUT1 | (−97.30, −9.25), (−97.30, −3.75) | 7.5 mm | 0° |
+| ACOUT2 | (−117.53, 36.10), (−118.96, 30.79) | 7.5 mm | 165° |
+| PE1 | (−60.75, −60.25), (−60.75, −65.75) | 9.25 mm | 180° |
+| PE2 | (−124.46, −55.42), (−119.14, −54.00) | 8.5 mm | 285° |
+| PE3 | (−91.75, −70.63), (−89.00, −65.87) | 6.5 mm | 330° |
+| PE5 | (−61.40, 31.35), (−61.40, 25.85) | 6.0 mm | 180° |
+| AFE_OUT | (54.07, −72.98), (51.32, −68.22) | 6.0 mm | 30° |
+
+Rules of the search (`/tmp/claude-1000/v4term/ties.py`, positions fixed in the script): each hole edge
+3–8 mm from its pin's copper (the tie clamps insulation, not bare conductor) and nearer to its own pin
+than to any other terminal; ≥ 0.5 mm from every pad/track/via of any net; outside every courtyard;
+≥ 1 mm from the board edge; not within 5 mm of both primary and ISO copper; the strap under the board
+between the holes clear of bottom-side parts; then the nearest spot, preferring the direction of the
+nearest board edge (the likely wire exit) and little pour cut. Pours refill around the holes:
+assign_nets 247 groups, 0 opens; domain_gaps 0 violations; DRC unchanged (295, 0 shorts / unconnected /
+parity). Records: `lib/v4_copper.csv` area rows `TIE <lead>` (checked by check_board: every TIE_ hole
+NPTH, no net, inside its area) and 4 small areas at pour border strokes the holes cut (round trip).
+
+**No room (9):** ACIN2, PE4, PE6, PE7, PE8, DAB_PRI_1, DAB_PRI_2, DAB_SEC_1, DAB_SEC_2 – every spot
+3–8 mm from the pin is inside a neighbour's courtyard (Y/X capacitors around PE4/PE6/PE7/PE8 with
+PE6/PE7 also 2.8–3 mm from the board edge; J3/Q10/C35 around DAB_PRI; Q11/Q12/C47/C49/C50/J4 around
+DAB_SEC; C14/R10/C25 and ACIN1 around ACIN2), or nearer to another terminal than to its own. Smaller
+holes (2.7 mm, 4.5 mm apart) do not change that. These wires need another fixing (e.g. tie them to the
+neighbouring wire or anchor, or adhesive at the pin) or the v5 re-layout – user decision.
+
+Hand-fit (`fab/hand_fit.csv`): UV-resistant nylon PA66 cable ties, UL94 V-2 or better, 2.5 × 100 mm;
+tie each wire within 10 mm of its pin, around the insulation. Renders: `reports/v4/fix15_{ACIN1,PE1,
+AFE_OUT,ACOUT2}.png`.
 
 ## v4 fix 13/14 – M4 terminals and insulation spacing (2026-10-31, branch `v4-terminals`)
 
@@ -16,7 +60,9 @@ Y capacitors pin by pin). `tools/v4/domain_gaps.py` (kipy, pcbnew polygons only,
 domain's copper per layer by the required gap and intersects it with the other domains' copper:
 **P ↔ I ≥ 5.0 mm, P/I ↔ E ≥ 2.5 mm on every layer, and no P/I copper overlapping between adjacent
 layers**. Added to `tools/check_all.sh`. (The 5.0 / 2.5 mm are the IEC 60664-1 printed-wiring PD2
-500 V-row values that IEC 61010-1 Annex K builds on; to be confirmed against the standard text.)
+500 V-row values that IEC 61010-1 Annex K builds on.) **User confirmed (2026-11-01): IEC 61010-1 is the
+standard, and the PCB spacing targets are 5.0 mm primary ↔ ISO (reinforced) and 2.5 mm primary/ISO ↔
+PE (basic).**
 
 **Gaps before → after (main board 2104b5b → this branch):**
 
@@ -181,6 +227,9 @@ Proposed fixes by class: BOM values (R7, R18/R9, C88/C89, C42/C2), new caps by b
 firmware, and layout (v5). Plus measurements to do on a v3 board first. Nothing changed yet.
 
 ## v5 aux flyback – planned (2026-10-24)
+
+v5 open item (2026-11-01): full M4 ring-lug terminals for the 17 lead connections that keep
+soldered pins in v4 (ACIN1/2, ACOUT1/2, PE1–PE8, AFE_OUT, DAB_PRI_1/2, DAB_SEC_1/2; v4 fix 13/15).
 
 Plan in `V5_PLAN.md` (no design change yet): replace the sheet 7 IW1830/EF20 supply with the
 INN3694C/EE25 design of `reports/aux_flyback/`. User decisions (2026-10-24): D1 Out1 → `20V`

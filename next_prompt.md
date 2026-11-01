@@ -28,13 +28,15 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
-0. Branch `v4-terminals` (v4 fix 13/14): M4 terminals on 7 lead connections, insulation spacing
-   fixed (tools/v4/domain_gaps.py: 0 violations). Review with the user and merge into main. Open:
-   the terminal pairs DAB_PRI_1/2, DAB_SEC_1/2, ACIN1/2, ACOUT1/2, AFE_OUT and PE1-PE8 have no room
-   for an M4 terminal without re-layout (STATUS "v4 fix 13/14") - user decision (GUI re-layout now,
-   or in v5); confirm the 5.0 / 2.5 mm values against IEC 61010-1 Annex K.
+0. Branch `v4-terminals` (v4 fix 13/14/15): M4 terminals on 7 lead connections, insulation spacing
+   fixed (tools/v4/domain_gaps.py: 0 violations; IEC 61010-1 and 5.0 / 2.5 mm confirmed by the user
+   2026-11-01), cable-tie anchors at 8 of the 17 soldered lead pins (fix 15). Review with the user
+   and merge into main. Open: ACIN2, PE4, PE6, PE7, PE8, DAB_PRI_1/2, DAB_SEC_1/2 have no room for a
+   tie anchor clear of courtyards (STATUS "v4 fix 15") - user decision on their second fixing.
 1. v5 aux flyback: plan in V5_PLAN.md, decisions taken except D4 (controller sourcing); act on
-   it only when the user asks.
+   it only when the user asks. v5 also takes over full M4 terminals (ring lugs) for the 17 lead
+   connections that keep soldered pins in v4 (ACIN1/2, ACOUT1/2, PE1-PE8, AFE_OUT, DAB_PRI_1/2,
+   DAB_SEC_1/2; STATUS "v4 fix 13/14", "v4 fix 15").
 2. Switching noise: hardware findings 1-5 applied as v4 fix 11/12 (STATUS "v4 fix 11/12"; the
    defaults are reversible). Open for the user: firmware items (ADA3 and AMC1306M05 scale,
    sinc window = PWM period, synchronised/averaged sampling, DAB at 60/90 kHz), R73/R74 for the

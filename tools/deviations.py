@@ -89,6 +89,18 @@ def in_terminal_area(x, y, margin=0.0):
     return None
 
 
+def tie_anchors():
+    """{lead ref: (x0, y0, x1, y1)} of the cable-tie anchors (area rows, layer *, note 'TIE <REF> ...').
+    The board-only footprints TIE_<REF> (two NPTH holes) must lie inside; v4 fix 15."""
+    out = {}
+    for r in copper_rows():
+        if r["kind"] == "area" and r["layer"] == "*" and r["note"].startswith("TIE "):
+            x0, x1 = sorted((float(r["x"]), float(r["x1"])))
+            y0, y1 = sorted((float(r["y"]), float(r["y1"])))
+            out[r["note"].split()[1]] = (x0, y0, x1, y1)
+    return out
+
+
 def value_changes():
     """ref -> (old, new) for existing parts"""
     return {r["ref"]: (r["from"], r["to"]) for r in rows() if r["kind"] == "value" and r["from"]}

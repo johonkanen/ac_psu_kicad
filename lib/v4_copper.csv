@@ -82,3 +82,16 @@ area,B.Cu,-14.500,-10.000,-12.500,-8.000,,14,midpoint of a Proteus draw that fix
 area,B.Cu,-88.500,-36.133,-86.500,-34.133,,14,midpoint of a Proteus draw that fix 14 changed: JEE pour border stroke shortened near PE4
 area,B.Cu,-89.500,-6.000,-87.500,-4.000,,14,midpoint of a Proteus draw that fix 14 changed: AC_OUT_1 pour border stroke shortened by the JEE gap
 area,B.Cu,-101.500,-11.000,-99.500,-9.000,,14,midpoint of a Proteus draw that fix 14 changed: AC_OUT_1 pour border stroke shortened by the JEE gap
+
+area,*,-119.811,-56.451,-109.922,-46.562,,15,TIE ACIN1 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-100.300,-12.250,-94.300,-0.750,,15,TIE ACOUT1 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-121.956,27.785,-114.533,39.097,,15,TIE ACOUT2 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-63.750,-68.750,-57.750,-57.250,,15,TIE PE1 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-127.456,-58.422,-116.144,-50.999,,15,TIE PE2 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-94.746,-73.632,-85.996,-62.868,,15,TIE PE3 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,-64.400,22.850,-58.400,34.350,,15,TIE PE5 cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,*,48.321,-75.982,57.071,-65.218,,15,TIE AFE_OUT cable-tie anchor (2 x 3.0 mm NPTH; pours refill around the holes)
+area,F.Cu,46.196,-70.848,48.196,-68.848,,15,midpoint of a Proteus pour border stroke cut by the TIE_AFE_OUT holes
+area,F.Cu,-114.236,36.500,-112.236,38.500,,15,midpoint of a Proteus pour border stroke cut by the TIE_ACOUT2 holes
+area,In2.Cu,52.000,-77.000,54.000,-75.000,,15,midpoint of a Proteus pour border stroke cut by the TIE_AFE_OUT holes
+area,B.Cu,59.194,-69.413,61.194,-67.413,,15,midpoint of a Proteus pour border stroke cut by the TIE_AFE_OUT holes
