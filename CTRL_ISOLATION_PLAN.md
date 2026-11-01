@@ -83,6 +83,8 @@ for MDATA_ISO.
 
 ## 2. Working voltages and creepage (IEC 61010-1, 2026-10-31)
 
+User 2026-11-01: IEC 61010-1 and the PCB targets 5.0 mm reinforced / 2.5 mm basic (to PE) are confirmed.
+
 **Standard: IEC 61010-1 (3rd ed. + A1), user decision 2026-10-31** (bench-top laboratory power
 supply). The values below use the **IEC 60664-1 basis** that IEC 61010-1 Annex K builds on
 (Table F.2 clearance, Table F.4 creepage, reinforced = 2 × basic). The standard text was not

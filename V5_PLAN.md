@@ -455,7 +455,7 @@ today's EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 3. source certified TIW
 4. confirm the E25 gap (AL 314 nH) and the Norwe 10165-106 drawing (flange creepage, CTRL lead exit)
 5. working voltages: all barriers in the 500 V row (isolated DC link ≤ 410 V, user 2026-10-31); the output is always floating AC (user 2026-10-31), so the 1000 V case is closed
-6. standard decided: IEC 61010-1 (user 2026-10-31); buy the standard text and verify the Annex K values; core insulation tape/caps
+6. standard decided: IEC 61010-1 (user 2026-10-31); PCB targets confirmed by the user 2026-11-01: 5.0 mm reinforced (primary ↔ ISO, primary/ISO ↔ CTRL), 2.5 mm basic (to PE); still to verify: the bobbin (10 mm) and test-voltage values; core insulation tape/caps
 7. trim RS2 / RCBC and check the VS ringing, the start-up and the gate buffer on the prototype
    (decided 2026-10-31: MMBT3904/3906 buffer, RCS 0.562 Ω → CC worst case 23.0 W)
 
