@@ -42,6 +42,11 @@ DAB_SEC; C14/R10/C25 and ACIN1 around ACIN2), or nearer to another terminal than
 holes (2.7 mm, 4.5 mm apart) do not change that. These wires need another fixing (e.g. tie them to the
 neighbouring wire or anchor, or adhesive at the pin) or the v5 re-layout – user decision.
 
+Verification (68d0e5f): `tools/check_all.sh` ALL CHECKS PASSED (check_board 302 footprints, 8 cable-tie
+anchors; assign_nets 247 groups 0 opens; DRC 295, 0 shorts/unconnected/parity; domain_gaps 0;
+ipc356_diff 0 mismatches; roundtrip OK); `tools/regen_check.sh` OK; the replay of fixes 1–15 on the
+tag's board gives the board and `reports/v4_board_edits.txt` byte for byte.
+
 Hand-fit (`fab/hand_fit.csv`): UV-resistant nylon PA66 cable ties, UL94 V-2 or better, 2.5 × 100 mm;
 tie each wire within 10 mm of its pin, around the insulation. Renders: `reports/v4/fix15_{ACIN1,PE1,
 AFE_OUT,ACOUT2}.png`.
@@ -499,7 +504,7 @@ track_dangling 1). No new error type; `tools/drc.py` unchanged. ERC: 0 errors, t
 User review 2026-10-23: nothing to change. Shunt inductance not measured accurately (5–10 nH,
 about 5 nH); the 12.4R placeholder (5 nH) stays.
 
-`tools/regen_check.sh` (clean clone of dd9bacb, regenerate everything incl. the Proteus board
+`tools/regen_check.sh` (clean clone of 68d0e5f, regenerate everything incl. the Proteus board
 from the tag): `regen_check: OK (every generated file byte-identical)`.
 
 ### Last verification (`tools/check_all.sh`, fix 12 done)
