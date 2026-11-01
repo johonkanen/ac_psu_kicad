@@ -16,6 +16,11 @@ and coordinates. Every check in this repo compares against that file.
 - `next_prompt.md`: the prompt for the next work session, replaced at the end of every
   phase.
 
+## Board
+
+<!-- board-plots:start -->
+<!-- board-plots:end -->
+
 ## Layout
 
 ```

@@ -1,0 +1,14 @@
+name: Board plots
+on:
+  push:
+    branches: [main]
+    paths: ['**.kicad_pcb', '.github/workflows/board-plots.yml']
+  workflow_dispatch:
+jobs:
+  plots:
+    uses: johonkanen/kicad-board-plots/.github/workflows/plots.yml@v1.1
+    with:
+      boards: kicad/ac_psu.kicad_pcb
+      render-3d: true
+    permissions:
+      contents: write
