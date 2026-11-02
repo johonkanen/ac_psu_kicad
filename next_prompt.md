@@ -28,6 +28,18 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
+N. NEXT TIME (user, 2026-11-02): convert the gate-driver board to KiCad, with a JLC parts list for
+   everything except the gate-supply toroid transformer (hand-wound/hand-fitted). Source (Windows
+   path): C:\Users\jaarh\Sync\proteus_projektit\Projects\gate_drive_power_asym_fb\V3_ee10\
+   (WSL: /mnt/c/Users/jaarh/Sync/...): gate_drive_power_asym_fb_v3_ee10.pdsprj, its PDF (2 pages)
+   and "... - CADCAM.ZIP" (2-layer, 22.4 x 34.9 mm, gerbers WITH X2 attributes + IPC-D-356A
+   netlist, Proteus 8.12). A variant gate_drive_power_dcm_fb_v3_ee10 is in the dcm/ subfolder;
+   ask which one. Parts: 2 x Si8271 (DRV1/DRV2), IXDD609D2TR, ZLLS400TA, MMSZ5228BS, 22R/3R/10k,
+   4.7u/100n, HB GT connector J9 (mates with the baseboard's J1-J4/J6/J8 face to face: pins
+   43/44, 45/46, 47/48 swap), toroid 10/6/4 (8t : 12t+4t, 12t+4t). Use the shared tools
+   (tools/p2k, CONVERSION_PLAYBOOK.md) in a new repo like tube_psu_kicad. Consider the noise-report
+   finding 9 fixes (local CM return cap, CM choke, low-capacitance transformer) as a later
+   design step, after the 1:1 conversion.
 0. v4 fix 13/14/15 (M4 terminals, insulation spacing, cable-tie anchors) are on main. Open: ACIN2, PE4, PE6,
    PE7, PE8, DAB_PRI_1/2, DAB_SEC_1/2 have no room for a tie anchor clear of courtyards (STATUS
    "v4 fix 15") - user decision on their second fixing.
