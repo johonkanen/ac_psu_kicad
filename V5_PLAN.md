@@ -227,3 +227,15 @@ vias, not a large drain pour. Check the 35 nC Qg against the UCC28710 DRV curren
 v4 clean-up and manufacturing items (C67, silk positions, pad decisions, JLC alternatives, CPL)
 continue separately on the v4 board. Sheet 7 parts that v5 replaces (iW1830, EF20 TR2 and so on)
 get no JLC alternatives.
+
+## 6. Magnetics sourcing (checked 2026-11-02, stock figures change)
+
+| Part | Distributor | Notes |
+|---|---|---|
+| Core TDK B66317G0250X187 (E25/13/7 N87, 0.25 mm gap, AL ≈ 250 nH) | Mouser, DigiKey (495-77132-ND), Farnell/Newark | TDK's table (May 2026): Mouser ≈ 500, DigiKey ≈ 1300, but one DigiKey page showed 3 and a 26-week lead time. Order 2 halves per transformer: the gap is in one half; check whether the part number is one gapped half or a set. |
+| Coil former TDK B66208B1110T001 (E25/13/7, horizontal) | DigiKey (495-5372-ND) | Pin count and creepage still to confirm in the TDK datasheet; 29-week lead time listed. Yoke/clip B66208A2010X000 (2 per transformer). |
+| Coil former Ferroxcube CPH-E25/13/7-1S-10P (horizontal, 10 pins) | DigiKey (1779-1317-ND) | 0 stock in one snapshot, about 10 weeks. Clip CLI-E25/13/7. |
+| Norwe 10165-106 (longer-creepage horizontal 10-pin, used by the README design) | not found at Mouser/DigiKey | Specialist magnetics suppliers only. |
+| AliExpress / eBay "EE25 5+5 pin" sets | many sellers | PC40 (≈ N87), mostly ungapped, unknown AL and bobbin insulation rating. Fine for a first wind-up if gapped with spacer foil and Lp measured, but not a basis for reinforced isolation. |
+
+The board footprint (step 3) is drawn from whichever coil former is chosen. Its pin pitch, row spacing and creepage set the reinforced-isolation layout.
