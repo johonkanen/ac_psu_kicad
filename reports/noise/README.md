@@ -204,9 +204,44 @@ ISOGND and ISOPGND. The measurement ground is a star, which is good.
   right at the R96 star point, next to U14 (61.3, −12.6).
   - It is there all the time, not only when the power stages run, so it is not the main symptom.
   - The v5 aux redesign should return the primary to PGND.
-- **Question:** do the gate-driver boards on J1–J3 connect their logic GND (pin 46) to the power
-  source/PGND (pins 15–20/29–34) anywhere? If yes, each is a second GND–PGND path, a ground loop
-  carrying switching current through the GND plane.
+- **Answered (finding 9):** the gate-driver boards do not connect their logic GND to the source
+  pins, so there is no second galvanic GND–PGND path. They do couple capacitively, see finding 9.
+
+### 9. Gate-driver boards inject switch-node common-mode current into GND / ISOGND (medium-high confidence)
+
+Source: the gate-driver board `gate_drive_power_asym_fb_v3_ee10` (Proteus, CADCAM 2021-03-22,
+user's project folder `gate_drive_power_asym_fb/V3_ee10`; schematic PDF read 2026-11-02). It plugs into J1–J4/J6/J8
+face to face (pins 43↔44, 45↔46, 47↔48 swap, which matches the baseboard pinout).
+
+- **Circuit:** two Si8271 isolated drivers (DRV1 high side, DRV2 low side). Their logic sides (VDD1/GND1) run
+  from the connector's 5 V and GND. The gate supplies come from a 10/6/4 toroid (8-turn primary,
+  two secondaries of 12 + 4 turns, rectified by ZLLS400 and 3.9 V zeners into +/− rails around SOURCE_HI and SOURCE_LO),
+  driven by an IXDD609 from the connector's 15/20 V rail through a 100 nF series capacitor.
+- **No galvanic path:** the gate board's logic GND does not connect to SOURCE_HI/LO.
+- **Capacitive path:** the toroid's primary-to-secondary capacitance (single-layer windings on a
+  10 mm toroid, estimated 5–20 pF per secondary) connects each secondary to the primary. Each secondary moves with its switch node (high side) or
+  its source (low side), and the primary is referenced to the baseboard GND (or ISOGND for J4/J6/J8). The Si8271 barrier
+  adds ≈ 0.5–1 pF.
+- **Magnitude:** i = C · dv/dt = 10 pF × 30–50 V/ns ≈ 0.3–0.5 A for the 10–20 ns of each edge, per
+  switching leg. The return path runs through the connector's GND pins (45/46) and the IXDD609 and 15 V decoupling into
+  the baseboard GND plane, then through R96 to PGND (J1–J3), or through ISOGND and R97 to ISOPGND
+  (J4/J6/J8). That passes the measurement star points and the analog references exactly at the
+  edges, on all channels whenever any stage switches. This matches the symptom.
+- **Fixes (gate-driver board, cheapest first):**
+  1. A Y-rated or 1 kV C0G capacitor (≈ 1–4.7 nF) from the gate board's GND to the PGND/ISOPGND
+     of its own leg, close to the connector. The CM current then loops locally instead of crossing
+     the measurement ground. On the baseboard this needs a PGND pin next to the GND pins on each
+     HB GT connector (v5 layout); on the gate board it needs a power-ground connection.
+  2. A common-mode choke in the gate board's 15 V/GND feed (IXDD609 side), so the CM current
+     sees a high impedance toward the baseboard.
+  3. A low-capacitance gate-supply transformer: primary and secondaries on opposite sides of the
+     toroid, or a split bobbin, or a commercial isolated DC/DC module rated < 3 pF (e.g. 1–2 W
+     gate-drive modules).
+  4. The Si8271's own barrier capacitance is small. Keep it, and keep its GND1 short to the
+     connector.
+- **Measurement:** with one stage switching, measure the current in the gate board's GND lead
+  (a current probe on a wire link inserted between the connector and the gate board) or the voltage across a small resistor in
+  that lead. Then add a 2.2 nF from the gate board GND to the leg's source and compare ADA2/ISOADA1.
 
 ### What v4 already fixes
 
@@ -218,7 +253,8 @@ ISOGND and ISOPGND. The measurement ground is a star, which is good.
 | 4 RC on the ΣΔ inputs | The current-measurement edge spikes (finding 4). |
 | 5 R48 Kelvin | The AFE current no longer includes the force-path copper drop. |
 
-Still open: findings 1, 2, 3, 5, 7, the firmware part of 4 and 6, and the R64 L tuning.
+Still open: findings 1, 2, 3, 5, 7 (1, 2, 3 and 5 are now fixed by v4 fix 11/12), the firmware part of 4 and 6, the R64 L tuning,
+and finding 9 (gate-driver boards, not on this board).
 
 ## Proposed changes, by cost
 
@@ -227,6 +263,7 @@ Still open: findings 1, 2, 3, 5, 7, the firmware part of 4 and 6, and the R64 L 
 | BOM value (existing footprints) | R7 1k → 10k; R18, R9 100 Ω → 8.2k; C88, C89 → 4.7 nF C0G; C42, C2 → 10 nF (or 4.7 nF for a fast DC loop) | 2, 3 |
 | New parts, board script (v4 pattern) | 12 × 1 nF C0G 0402 across the 10k legs; 2 × 100 nF on REF_1V65/REF_1V65_ISO; 2 × 4.7 nF on ISOADA1/2 (or on the card). U1's area (R7/R8/R21 at x 50–54) is dense, so check the room first; the bottom side under the resistors may be needed. | 1, 3, 5 |
 | Firmware | Sinc window = PWM period; synchronised or oversampled-and-averaged ADC sampling; DAB at a multiple of 30 kHz if possible; compensate the 48 µs AC filter delay | 4, 6 |
+| Gate-driver board | Local CM return (Y cap from gate-board GND to the leg's power ground), CM choke in its 15 V feed, low-capacitance gate-supply transformer or an isolated DC/DC module | 9 |
 | Layout (v5) | Short low-impedance tap routing away from the J1–J8 gate/source rows, over planes; more ground pins and analog/clock separation on J11; aux primary return on PGND | 1, 7, 8 |
 
 ## Measurements to do on the v3 board
@@ -244,6 +281,8 @@ Still open: findings 1, 2, 3, 5, 7, the firmware part of 4 and 6, and the R64 L 
 6. **Currents:** solder 100 nF across the U4/U5/U6 inputs on the v3 board (fix 4 as a bodge) and
    compare the decimated current words. Then tune R73/R74 for the DAB shunt by minimising the
    overshoot at the DAB current reversal.
+7. **Finding 9:** measure the CM current in one gate board's GND lead with that leg switching,
+   then add 2.2 nF from the gate board's GND to the leg's source and compare ADA2/ISOADA1.
 
 ## Files
 
