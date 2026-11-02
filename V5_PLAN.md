@@ -240,3 +240,12 @@ get no JLC alternatives.
 | AliExpress / eBay "EE25 5+5 pin" sets | many sellers | PC40 (≈ N87), mostly ungapped: the user grinds the gap, so the cores are usable (check the core size is really E25/13/7, and measure Lp). The bobbins have an unknown insulation rating and pin creepage, so they are no basis for reinforced isolation: use a TDK/Ferroxcube coil former. |
 
 The board footprint (step 3) is drawn from whichever coil former is chosen. Its pin pitch, row spacing and creepage set the reinforced-isolation layout.
+
+**Decision 2026-11-02 (user): vertical coil former.** Candidate: Ferroxcube CPV-E25/13/7-1S-10P-Z
+(10 pins, vertical; DigiKey 1779-1359-ND, 0 stock with 250 expected 2027-03-30, 10-week lead
+time, about €0.46; datasheet https://www.ferroxcube.com/upload/media/product/file/Pr_ds/E25_13_7.pdf)
+with clip CLI-E25/13/7. The winding design is unchanged. Before drawing the footprint (step 3), read the
+pin pitch, row spacing and the pin-to-core distances from the datasheet; the reinforced barrier runs
+between the two pin rows (primary/bias/Out1 on one row, Out2 on the other) with a slot between them.
+The transformer is about 25–30 mm tall. Put it in the lower part of the aux area (y below −18.8),
+outside the control card's outline, and glue or clip it to the board.
