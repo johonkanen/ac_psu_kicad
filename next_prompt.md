@@ -28,15 +28,15 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
-0. Branch `v4-terminals` (v4 fix 13/14/15): M4 terminals on 7 lead connections, insulation spacing
-   fixed (tools/v4/domain_gaps.py: 0 violations; IEC 61010-1 and 5.0 / 2.5 mm confirmed by the user
-   2026-11-01), cable-tie anchors at 8 of the 17 soldered lead pins (fix 15). Review with the user
-   and merge into main. Open: ACIN2, PE4, PE6, PE7, PE8, DAB_PRI_1/2, DAB_SEC_1/2 have no room for a
-   tie anchor clear of courtyards (STATUS "v4 fix 15") - user decision on their second fixing.
-1. v5 aux flyback: plan in V5_PLAN.md, decisions taken except D4 (controller sourcing); act on
-   it only when the user asks. v5 also takes over full M4 terminals (ring lugs) for the 17 lead
-   connections that keep soldered pins in v4 (ACIN1/2, ACOUT1/2, PE1-PE8, AFE_OUT, DAB_PRI_1/2,
-   DAB_SEC_1/2; STATUS "v4 fix 13/14", "v4 fix 15").
+0. v4 fix 13/14/15 (M4 terminals, insulation spacing, cable-tie anchors) are on main. Open: ACIN2, PE4, PE6,
+   PE7, PE8, DAB_PRI_1/2, DAB_SEC_1/2 have no room for a tie anchor clear of courtyards (STATUS
+   "v4 fix 15") - user decision on their second fixing.
+1. v5 aux flyback: V5_PLAN.md (ctrl-isolation merged into main 2026-11-02: UCC28710 PSR + 950 V
+   MOSFET, 20 W on EE25, no bias winding, CTRL on TIW flying leads, IEC 61010-1 with 5.0 mm
+   reinforced / 2.5 mm to PE; CTRL_ISOLATION_PLAN.md). Bobbin: vertical Ferroxcube
+   CPV-E25/13/7-1S-10P-Z (user 2026-11-02) - redo the creepage checks on its drawing. Act on v5
+   only when the user asks. v5 also takes over full M4 terminals (ring lugs) for the 17 lead
+   connections that keep soldered pins in v4.
 2. Switching noise: hardware findings 1-5 applied as v4 fix 11/12 (STATUS "v4 fix 11/12"; the
    defaults are reversible). Open for the user: firmware items (ADA3 and AMC1306M05 scale,
    sinc window = PWM period, synchronised/averaged sampling, DAB at 60/90 kHz), R73/R74 for the
