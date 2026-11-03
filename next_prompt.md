@@ -2,6 +2,46 @@
 
 Ready-to-paste prompt for the next agent session.
 
+## Next phase (user, 2026-11-03): gate-driver board conversion
+
+```
+Convert the Proteus gate-driver board gate_drive_power_asym_fb_v3_ee10 to KiCad 10.0.7, with a
+JLCPCB parts list for every part except the gate-supply toroid transformer (the user winds and
+hand-fits it). Never run the KiCad AppImage with --version.
+
+Source (read only): /mnt/c/Users/jaarh/Sync/proteus_projektit/Projects/gate_drive_power_asym_fb/V3_ee10/
+- gate_drive_power_asym_fb_v3_ee10.pdsprj (Proteus 8.12), .PDF (2 schematic pages)
+- "gate_drive_power_asym_fb_v3_ee10 - CADCAM.ZIP": 2-layer board 22.4 x 34.9 mm, gerbers WITH X2
+  attributes, IPC-D-356A netlist, plated drill, top assembly, read-me
+- variant dcm/gate_drive_power_dcm_fb_v3_ee10 (own .pdsprj and CADCAM zip): ask the user which
+  board(s) to convert before starting.
+
+Method: the shared proteus2kicad tools and playbook, as in ~/dev/ac_psu_kicad and
+~/dev/tube_psu_kicad: tools/p2k (submodule github johonkanen/proteus2kicad),
+tools/p2k/CONVERSION_PLAYBOOK.md (phases 0-4, shared tools, pitfalls). Create a new repo
+~/dev/gate_drive_kicad (git init; ask the user to create the GitHub repo before any push), copy
+the sources into source/, write PLAN.md / STATUS.md / next_prompt.md as in tube_psu_kicad, then
+phases 0-4 (inventory, schematic pin-for-pin vs the IPC netlist, footprints fitted to the IPC
+pads, board from the gerbers, independent verification: gerber round trip + IPC-356 diff).
+
+Board facts (from the PDF): 2 x Si8271 isolated gate drivers (DRV1 high side, DRV2 low side),
+IXDD609D2TR driving the 8-turn primary of a 10/6/4 toroid through C12 100n, secondaries 12t+4t
+(x2) rectified by ZLLS400TA with MMSZ5228BS zeners into +/- rails around SOURCE_HI/SOURCE_LO;
+22R/3R gate resistors, 10k pull-downs, 4.7u/100n caps; HB GT connector J9 (2 x 24, 1.27 mm), which
+mates face to face with the ac_psu baseboard's J1-J4/J6/J8 (pins 43/44, 45/46, 47/48 swap; check
+against ~/dev/ac_psu_kicad tools/sheets/sheet02.py). Toroid pads J1-J8 (single pins).
+
+JLC: parts list in JLC's BOM/CPL format with stock checks (pattern: ac_psu fab/, the JLC search
+API in fab/jlc_stock_search.py); the toroid and anything not stocked go to a hand-fit list.
+Ask the user which header/socket gender J9 needs (the baseboard uses female sockets).
+
+Later, not in this phase: the noise fixes of ac_psu reports/noise/README.md finding 9 (local CM
+return capacitor, CM choke in the 15 V feed, low-capacitance gate-supply transformer).
+Commit at each phase; push only when the user asks.
+```
+
+## ac_psu_kicad (continuing work on the inverter PSU)
+
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
 converted from Proteus, tag proteus-conversion-complete; v4 design fixes, clean-up and JLC files
@@ -28,18 +68,6 @@ Verify first: tools/check_all.sh (~1 min) must end with ALL CHECKS PASSED; at ha
 Also tools/regen_check.sh must print "regen_check: OK".
 
 Open points (ask the user which to do):
-N. NEXT TIME (user, 2026-11-02): convert the gate-driver board to KiCad, with a JLC parts list for
-   everything except the gate-supply toroid transformer (hand-wound/hand-fitted). Source (Windows
-   path): C:\Users\jaarh\Sync\proteus_projektit\Projects\gate_drive_power_asym_fb\V3_ee10\
-   (WSL: /mnt/c/Users/jaarh/Sync/...): gate_drive_power_asym_fb_v3_ee10.pdsprj, its PDF (2 pages)
-   and "... - CADCAM.ZIP" (2-layer, 22.4 x 34.9 mm, gerbers WITH X2 attributes + IPC-D-356A
-   netlist, Proteus 8.12). A variant gate_drive_power_dcm_fb_v3_ee10 is in the dcm/ subfolder;
-   ask which one. Parts: 2 x Si8271 (DRV1/DRV2), IXDD609D2TR, ZLLS400TA, MMSZ5228BS, 22R/3R/10k,
-   4.7u/100n, HB GT connector J9 (mates with the baseboard's J1-J4/J6/J8 face to face: pins
-   43/44, 45/46, 47/48 swap), toroid 10/6/4 (8t : 12t+4t, 12t+4t). Use the shared tools
-   (tools/p2k, CONVERSION_PLAYBOOK.md) in a new repo like tube_psu_kicad. Consider the noise-report
-   finding 9 fixes (local CM return cap, CM choke, low-capacitance transformer) as a later
-   design step, after the 1:1 conversion.
 0. v4 fix 13/14/15 (M4 terminals, insulation spacing, cable-tie anchors) are on main. Open: ACIN2, PE4, PE6,
    PE7, PE8, DAB_PRI_1/2, DAB_SEC_1/2 have no room for a tie anchor clear of courtyards (STATUS
    "v4 fix 15") - user decision on their second fixing.
