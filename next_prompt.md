@@ -2,43 +2,12 @@
 
 Ready-to-paste prompt for the next agent session.
 
-## Next phase (user, 2026-11-03): gate-driver board conversion
+## Gate-driver board – own repo
 
-```
-Convert the Proteus gate-driver board gate_drive_power_asym_fb_v3_ee10 to KiCad 10.0.7, with a
-JLCPCB parts list for every part except the gate-supply toroid transformer (the user winds and
-hand-fits it). Never run the KiCad AppImage with --version.
-
-Source (read only): /mnt/c/Users/jaarh/Sync/proteus_projektit/Projects/gate_drive_power_asym_fb/V3_ee10/
-- gate_drive_power_asym_fb_v3_ee10.pdsprj (Proteus 8.12), .PDF (2 schematic pages)
-- "gate_drive_power_asym_fb_v3_ee10 - CADCAM.ZIP": 2-layer board 22.4 x 34.9 mm, gerbers WITH X2
-  attributes, IPC-D-356A netlist, plated drill, top assembly, read-me
-- variant dcm/gate_drive_power_dcm_fb_v3_ee10 (own .pdsprj and CADCAM zip): ask the user which
-  board(s) to convert before starting.
-
-Method: the shared proteus2kicad tools and playbook, as in ~/dev/ac_psu_kicad and
-~/dev/tube_psu_kicad: tools/p2k (submodule github johonkanen/proteus2kicad),
-tools/p2k/CONVERSION_PLAYBOOK.md (phases 0-4, shared tools, pitfalls). Create a new repo
-~/dev/gate_drive_kicad (git init; ask the user to create the GitHub repo before any push), copy
-the sources into source/, write PLAN.md / STATUS.md / next_prompt.md as in tube_psu_kicad, then
-phases 0-4 (inventory, schematic pin-for-pin vs the IPC netlist, footprints fitted to the IPC
-pads, board from the gerbers, independent verification: gerber round trip + IPC-356 diff).
-
-Board facts (from the PDF): 2 x Si8271 isolated gate drivers (DRV1 high side, DRV2 low side),
-IXDD609D2TR driving the 8-turn primary of a 10/6/4 toroid through C12 100n, secondaries 12t+4t
-(x2) rectified by ZLLS400TA with MMSZ5228BS zeners into +/- rails around SOURCE_HI/SOURCE_LO;
-22R/3R gate resistors, 10k pull-downs, 4.7u/100n caps; HB GT connector J9 (2 x 24, 1.27 mm), which
-mates face to face with the ac_psu baseboard's J1-J4/J6/J8 (pins 43/44, 45/46, 47/48 swap; check
-against ~/dev/ac_psu_kicad tools/sheets/sheet02.py). Toroid pads J1-J8 (single pins).
-
-JLC: parts list in JLC's BOM/CPL format with stock checks (pattern: ac_psu fab/, the JLC search
-API in fab/jlc_stock_search.py); the toroid and anything not stocked go to a hand-fit list.
-Ask the user which header/socket gender J9 needs (the baseboard uses female sockets).
-
-Later, not in this phase: the noise fixes of ac_psu reports/noise/README.md finding 9 (local CM
-return capacitor, CM choke in the 15 V feed, low-capacitance gate-supply transformer).
-Commit at each phase; push only when the user asks.
-```
+Converted 2026-11-03 (phases 0-4 + JLC files, ALL CHECKS PASSED) in
+https://github.com/johonkanen/ac_psu_gate_drive (local ~/dev/ac_psu_gate_drive). Its ready-to-paste
+prompt is that repo's `next_prompt.md` (open: Si8271 variant, IXDD609D2TR not stocked at JLC,
+baseboard pins 25/39 = SDM_RAW_VOLTAGE on J2/J8/J4 meeting the gate board's DRV1/2_VCC).
 
 ## ac_psu_kicad (continuing work on the inverter PSU)
 
