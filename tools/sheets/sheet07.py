@@ -1,143 +1,136 @@
 #!/usr/bin/env python3
-"""Sheet 7 - Auxiliary supply (PDF page 7): IW1830 flyback PWM1 from DC+ through TR2 (EF20),
-20 V primary output (D2 from the aux winding, C28/C41), 5 V rail caps (C67/C58/C57), startup
-resistors R43/R34/R33 + D7 into Vcc, RCD snubber R24/C62/R23/D6, feedback divider R44||R25 /
-R26||R29 with C63 into Vsense via R31, sense resistors R45||R47, isolated 20V_ISO_SEC output
-(D1, C36, C15, R49) referenced to ISOGND (v4; RET_ISO in v3)."""
+"""Sheet 7 - Auxiliary supply, v5 (V5_PLAN.md; the v4 IW1830/EF20 flyback of PDF page 7 is in git
+history before v5): UCC28710 primary-side-regulated flyback with the external 950 V MOSFET Q17,
+EE25 transformer T1 (vertical Ferroxcube former), outputs Out1 = 15V on GND (also the PSR sense and
+VDD winding), Out2 = 15V_ISO on ISOGND (reinforced, TIW), and the CTRL winding W1 (TIW flying
+leads) -> CTRL_RAW -> TPS54202 buck -> 5V_CTRL for the control card at J12 (CTRL island B, bonded
+to PE by PEC2, linked to island A by J13). Kept from v4: C28/C41 (15V), C36/C15 (15V_ISO),
+C67/C58/C57 (5V), C68 (DC+)."""
+import os
+import sys
+
 from _common import *  # noqa: F401,F403
+
+sys.path.insert(0, os.path.join(TOOLS, "v5"))
+from v5_parts import VALUE as V  # noqa: E402
 
 sh = sheet("07_auxiliary_supply.kicad_sch")
 
-# ---- 20 V / 5 V rail capacitors (top left) -------------------------------------------------
-R20V, RGND, R5V = g(20), g(34), g(48)
-for x, ref, val, sym in ((g(20), "C28", "220u", "C_Polarized"), (g(28), "C41", "4.7u", "C")):
-    _, t, b = vert2(sh, sym, ref, x, g(27), val, top=1)          # pin 1 = 20V
-    sh.wire(t, (x, R20V)); sh.wire(b, (x, RGND))
-for x, ref, val, sym in ((g(20), "C67", "100u", "C"), (g(28), "C58", "22u", "C"), (g(36), "C57", "22u", "C")):
-    _, t, b = vert2(sh, sym, ref, x, g(41), val, top=1)          # pin 1 = GND, pin 2 = 5V
-    sh.wire(t, (x, RGND)); sh.wire(b, (x, R5V))
-sh.wire((g(20), R20V), (g(40), R20V)); sh.junction(g(28), R20V)
-flagged_power(sh, "20V", g(40), R20V)
-sh.wire((g(20), RGND), (g(44), RGND)); sh.junction(g(28), RGND); sh.junction(g(36), RGND)
-flagged_power(sh, "GND", g(44), RGND)
-sh.wire((g(20), R5V), (g(40), R5V)); sh.junction(g(28), R5V); sh.junction(g(36), R5V)
-power_at(sh, "5V", (g(40), R5V), "right")
-sh.text("C67: 100 uF ceramic (X5R 1206, non-polar land pattern like C57/C58; v4 clean-up, was drawn polarized).", g(20), g(116))
 
-# ---- DC+ rail, startup chain, snubber, C68 ---------------------------------------------------
-RDC = g(12)
-sh.wire((g(64), RDC), (g(98), RDC))
-power_at(sh, "DC+", (g(76), RDC), "up"); sh.junction(g(76), RDC)
-_, t, b = vert2(sh, "C", "C68", g(70), g(19), "100n", top=2)      # 2 = DC+, 1 = GND
-sh.wire(t, (g(70), RDC)); sh.junction(g(70), RDC)
-sh.wire(b, down(b, 2)); power_at(sh, "GND", down(b, 2), "down")
-prev = (g(64), RDC)
-for ref, y in (("R43", g(20)), ("R34", g(28)), ("R33", g(36))):
-    _, t, b = vert2(sh, "R", ref, g(64), y, "1M", top=1, text="left")
-    sh.wire(prev, t); prev = b
-RVCC = g(55)
-sh.wire(prev, (g(64), RVCC))
+def flag_net(net, x, y):
+    """PWR_FLAG on a global-label net (a power input fed only through passives)."""
+    sh.glabel(net, x, y, 180)
+    sh.wire((x, y), right((x, y), 2))
+    sh.pwr_flag(*right((x, y), 2), 270)
 
-# ---- PWM1 IW1830 ------------------------------------------------------------------------------
-pwm = sh.place("IW1830", "PWM1", g(80), g(60), value="IW1830")
-vcc, vsense, gnd, isense, src, d7p, d8p = (pwm.pin(n) for n in (1, 2, 3, 4, 5, 7, 8))
-# Vcc node: D7 from 20V, C65/C66, startup chain, power flag
-_, d7a, d7c = horiz2(sh, "D_Schottky", "D7", g(46), RVCC, "ZLLS400TA", left="A")
-sh.wire(d7a, left(d7a, 2)); power_at(sh, "20V", left(d7a, 2), "left")
-sh.wire(d7c, vcc)
-for x, ref in ((g(52), "C66"), (g(58), "C65")):
-    _, t, b = vert2(sh, "C", ref, x, g(61), "4.7u", top=1)       # 1 = Vcc node
-    sh.wire(t, (x, RVCC)); sh.junction(x, RVCC)
-    sh.wire(b, (x, g(70)))
-sh.wire((g(52), g(70)), (g(58), g(70)))
-sh.junction(g(55), g(70)); power_at(sh, "GND", (g(55), g(70)), "down")
-sh.junction(g(64), RVCC)
-sh.pwr_flag(g(61), RVCC, 0); sh.junction(g(61), RVCC)
-sh.wire(gnd, left(gnd, 2)); power_at(sh, "GND", left(gnd, 2), "down")
-# switch node: D pins 7/8 joined, up to TR2 pin 2
-SW = d8p[1]
-sh.wire(d7p, right(d7p, 2), (right(d7p, 2)[0], SW)); sh.junction(right(d7p, 2)[0], SW)
-sh.wire(d8p, (g(100), SW))
-sh.label("AUX_SWITCH_NODE", g(94), SW, 0)
-# RCD snubber: DC+ -> R24 || C62 -> R23 -> D6 -> switch node
-NODE = g(26)
-_, t, b = vert2(sh, "R", "R24", g(90), g(19), "1M", top=1, text="left")   # 1 = DC+
-sh.wire(t, (g(90), RDC)); sh.junction(g(90), RDC); sh.wire(b, (g(90), NODE))
-_, t, b = vert2(sh, "C", "C62", g(98), g(19), "470p", top=1)              # 1 = DC+
-sh.wire(t, (g(98), RDC)); sh.wire(b, (g(98), NODE))
-sh.wire((g(90), NODE), (g(98), NODE)); sh.junction(g(94), NODE)
-_, t, b = vert2(sh, "R", "R23", g(94), g(33), "100R", top=1)              # 1 = R24/C62 node
-sh.wire(t, (g(94), NODE))
-_, dt, db = vert2(sh, "D", "D6", g(94), g(43), "S1M", top="C")
-sh.wire(b, dt)
-sh.wire(db, (g(94), SW)); sh.junction(g(94), SW)
-# current sense: S and I_sense joined, R45 || R47 to GND
-RIS = isense[1]
-sh.wire(src, right(src, 2), (right(src, 2)[0], RIS)); sh.junction(right(src, 2)[0], RIS)
-sh.wire(isense, (g(110), RIS))
-sh.label("AUX_ISENSE", g(103), RIS, 0)
-for x, ref in ((g(104), "R45"), (g(110), "R47")):
-    _, t, b = vert2(sh, "R", ref, x, g(68), "2.49R", top=1)      # 1 = AUX_ISENSE
-    sh.wire(t, (x, RIS))
-    sh.wire(b, (x, g(74)))
-sh.junction(g(104), RIS)
-sh.wire((g(104), g(74)), (g(110), g(74)))
-sh.junction(g(107), g(74)); power_at(sh, "GND", (g(107), g(74)), "down")
 
-# ---- feedback: AUX_FB -> R44 || R25 -> AUX_FEEDBACK (C63, R26, R29 to GND) -> R31 -> Vsense ---
-FB, FB2 = g(84), g(90)
-node = (g(20), FB)
-sh.glabel("AUX_FB", g(18), FB, 180); sh.wire((g(18), FB), node)
-_, dt, db = vert2(sh, "D", "D2", g(20), g(76), "ES1A", top="C")   # A = AUX_FB, C = 20V
-sh.wire(db, node); sh.junction(*node)
-sh.wire(dt, up(dt, 2)); power_at(sh, "20V", up(dt, 2), "up")
-_, l, r = horiz2(sh, "R", "R44", g(28), FB, "39k", left=1)
-sh.wire(node, l)
-_, l2, r2 = horiz2(sh, "R", "R25", g(28), FB2, "15k", left=1)
-sh.wire(node, (g(20), FB2), l2)
-fbn = (g(36), FB)
-sh.wire(r, fbn); sh.wire(r2, (g(36), FB2), fbn); sh.junction(*fbn)
-sh.label("AUX_FEEDBACK", g(37), FB, 0)
-RG2 = g(104)
-for x, ref, val, sym, top in ((g(40), "C63", "22pF", "C", 2), (g(46), "R26", "NA", "R", 1), (g(52), "R29", "1.2k", "R", 1)):
-    _, t, b = vert2(sh, sym, ref, x, g(97), val, top=top)       # upper pin = AUX_FEEDBACK
-    sh.wire(t, (x, FB)); sh.junction(x, FB)
-    sh.wire(b, (x, RG2))
-sh.wire((g(40), RG2), (g(52), RG2)); sh.junction(g(46), RG2)
-power_at(sh, "GND", (g(46), RG2), "down")
-_, l, r = horiz2(sh, "R", "R31", g(60), FB, "1k", left=2)         # 2 = AUX_FEEDBACK, 1 = Vsense
-sh.wire(fbn, l)
-sh.wire(r, (g(66), FB), (g(66), vsense[1]), vsense)
-sh.text("R26: NA (not fitted) in the PDF.", g(40), g(110))
+def row(y, x0, parts, step=10):
+    """Vertical two-pin parts side by side: (sym, ref, value, top net, bottom net, top pin)."""
+    for i, (sym, ref, val, na, nb, a) in enumerate(parts):
+        part2(sh, sym, ref, x0 + g(step * i), y, val, na, nb, a=a)
 
-# ---- TR2 EF20 and the isolated 20 V output -------------------------------------------------
-tr2 = sh.place("EF20_AUX_TRANS", "TR2", g(132), g(30), value="EF20_AUX_TRANS")
-p = tr2.pin
-sh.wire(p(1), left(p(1), 2), up(left(p(1), 2), 2)); power_at(sh, "DC+", up(left(p(1), 2), 2), "up")
-sh.wire(p(2), (g(100), p(2)[1]), (g(100), SW))
-sh.wire(p(3), left(p(3), 2)); sh.glabel("AUX_FB", *left(p(3), 2), 180)
-sh.wire(p(4), left(p(4), 2)); power_at(sh, "GND", left(p(4), 2), "left")
-for n in (5, 8, 9, 10):
-    sh.no_connect(*p(n))
-RISO, RRET = p(7)[1], g(44)
-_, d1a, d1c = horiz2(sh, "D", "D1", g(144), RISO, "ES1A", left="A")
-sh.wire(p(7), d1a)
-sh.wire(d1c, (g(180), RISO))
-sh.wire(p(6), right(p(6), 2), (right(p(6), 2)[0], RRET), (g(180), RRET))
-for x, ref, val, sym, top in ((g(152), "C36", "4.7u", "C", 1), (g(160), "C15", "220u", "C_Polarized", 1),
-                              (g(168), "R49", "12.1K", "R", 2)):
-    _, t, b = vert2(sh, sym, ref, x, g(38), val, top=top)       # upper pin = 20V_ISO_SEC
-    sh.wire(t, (x, RISO)); sh.junction(x, RISO)
-    sh.wire(b, (x, RRET)); sh.junction(x, RRET)
-flagged_power(sh, "20V_ISO_SEC", g(180), RISO)
-power_at(sh, "ISOGND", (g(180), RRET), "down")   # v4: was RET_ISO
-sh.text("v4: the isolated 20 V return is ISOGND (v3: the PDF's ISO_GND terminal was wired to RET_iso, net RET_ISO,", g(126), g(56))
-sh.text("not connected to ISOGND although U8 and the gate drivers J4/J6/J8 return 20V_ISO_SEC on ISOGND).", g(126), g(59))
 
-# PDF notes
-for i, t in enumerate(("PDF notes: vsense nominal = 1.536 V, vsense OVP threshold = 1.838 V, Isense pk = 1 V, Vpeak = 520 V",
-                       "Vsense @ 1.536 V = 5.8368 Vaux; Isense ocp = 1.15 V; V5.1; 'R64 = 39k / v2 trans' (refers to R44 here)",
-                       "TR1 : core 227 nH, 52/8/3 || 7/3/3/42 (note printed on this page, TR1 is on sheet 6)")):
-    sh.text(t, g(20), g(122 + 3 * i))
+# ---- kept rail capacitors (v4 refdes) ------------------------------------------------------
+sh.text("Rails kept from v4: 15V (was 20V) C28/C41, 5V C67/C58/C57, 15V_ISO (was 20V_ISO_SEC) C36/C15, DC+ C68.",
+        g(16), g(12))
+row(g(22), g(20), [
+    ("C_Polarized", "C28", "220u", "15V", "GND", 1),
+    ("C", "C41", "4.7u", "15V", "GND", 1),
+    ("C", "C67", "100u", "GND", "5V", 1),
+    ("C", "C58", "22u", "GND", "5V", 1),
+    ("C", "C57", "22u", "GND", "5V", 1),
+    ("C", "C68", "100n", "DC+", "GND", 2),
+    ("C", "C36", "4.7u", "15V_ISO", "ISOGND", 1),
+    ("C_Polarized", "C15", "220u", "15V_ISO", "ISOGND", 1),
+])
+sh.text("C67: 100 uF ceramic (X5R 1206; v4 clean-up, was drawn polarized).", g(20), g(34))
+for i, net in enumerate(("15V", "15V_ISO", "GND")):
+    flagged_power(sh, net, g(110 + 8 * i), g(22))
+
+# ---- input, controller, MOSFET, clamp --------------------------------------------------------
+sh.text("Primary: DC+ (100-450 V) -> R98 -> AUX_VIN (C111/C112) -> T1 pin 2; UCC28710 HV start-up from AUX_VIN.",
+        g(16), g(44))
+row(g(54), g(20), [
+    ("R", "R98", V["R98"], "DC+", "AUX_VIN", 1),
+    ("C", "C111", V["C111"], "AUX_VIN", "GND", 1),
+    ("C", "C112", V["C112"], "AUX_VIN", "GND", 1),
+    ("D", "D12", V["D12"], "AUX_DRAIN", "AUX_CLAMP", "A"),
+    ("D_TVS", "D13", V["D13"], "AUX_CLAMP", "AUX_VIN", "C"),
+])
+sh.text("Clamp: drain -> D12 (1000 V) -> AUX_CLAMP -> D13 TVS -> AUX_VIN (drain peak ~450 + 240 V < 950 V).",
+        g(16), g(71))
+ic(sh, "UCC28710", "U18", g(90), g(84), {7: "AUX_VIN", 1: "AUX_VDD", 2: "AUX_VS", 3: "AUX_CBC",
+                                         6: "AUX_DRV", 5: "AUX_CSP", 4: "GND"}, value=V["U18"])
+flag_net("AUX_VDD", g(40), g(84))
+row(g(110), g(20), [
+    ("C", "C113", V["C113"], "AUX_VDD", "GND", 1),
+    ("C", "C114", V["C114"], "AUX_VDD", "GND", 1),
+    ("R", "R100", V["R100"], "15V", "AUX_VDDR", 1),
+    ("D", "D11", V["D11"], "AUX_VDDR", "AUX_VDD", "A"),
+    ("R", "R101", V["R101"], "AUX_W1", "AUX_VS", 1),
+    ("R", "R102", V["R102"], "AUX_VS", "GND", 1),
+    ("R", "R103", V["R103"], "AUX_CBC", "GND", 1),
+    ("R", "R104", V["R104"], "AUX_CS", "AUX_CSP", 1),
+    ("R", "R105", V["R105"], "AUX_CS", "GND", 1),
+    ("R", "R106", V["R106"], "AUX_GATED", "AUX_GATE", 1),
+    ("R", "R107", V["R107"], "AUX_GATE", "AUX_CS", 1),
+])
+sh.text("VDD from 15V (Out1) via R100 + D11; CDD 15 uF. VS divider RS1/RS2 from the Out1 winding node AUX_W1, "
+        "RCBC 118k, RLC 1k, RCS 0.562R (V5_PLAN.md 5.3).", g(16), g(127))
+ic(sh, "MMBT3904", "Q15", g(150), g(82), {1: "AUX_DRV", 3: "AUX_VDD", 2: "AUX_GATED"}, value=V["Q15"])
+ic(sh, "MMBT3906", "Q16", g(180), g(82), {1: "AUX_DRV", 3: "GND", 2: "AUX_GATED"}, value=V["Q16"])
+ic(sh, "IPD95R450P7", "Q17", g(210), g(82), {1: "AUX_GATE", 2: "AUX_DRAIN", 3: "AUX_CS"}, value=V["Q17"])
+sh.text("Gate buffer Q15/Q16 (DRV sources only 20-25 mA; Q17 Qg 35 nC).", g(140), g(96))
+
+# ---- transformer and outputs ---------------------------------------------------------------------
+ic(sh, "EE25_AUX_TRANS", "T1", g(270), g(40), {1: "AUX_DRAIN", 2: "AUX_VIN", 3: None, 4: "GND", 5: "AUX_W1",
+                                               6: "AUX_W2", 7: "ISOGND", 8: None, 9: None, 10: None},
+   value=V["T1"], n=4)
+for i, t in enumerate(("T1: E25/13/7 N87 on Ferroxcube CPV-E25/13/7-1S-10P-Z (vertical), Lp 322 uH, gap ~0.22 mm.",
+                       "Primary row: 1 drain, 2 DC+ (AUX_VIN), 3 P1/P2 joint (no net), 4 GND, 5 Out1.",
+                       "Secondary row: 6 Out2+, 7 ISOGND, 8-10 cut. CTRL winding = W1 (TIW flying leads).",
+                       "Reinforced: {primary, Out1} | Out2 | CTRL. Core floating: insulate it (tape/caps).")):
+    sh.text(t, g(240), g(56 + 3 * i))
+row(g(84), g(240), [
+    ("D", "D14", V["D14"], "AUX_W1", "15V", "A"),
+    ("C_Polarized", "C115", V["C115"], "15V", "GND", 1),
+    ("R", "R108", V["R108"], "15V", "GND", 1),
+    ("D", "D15", V["D15"], "AUX_W2", "15V_ISO", "A"),
+    ("C_Polarized", "C116", V["C116"], "15V_ISO", "ISOGND", 1),
+    ("R", "R109", V["R109"], "15V_ISO", "ISOGND", 1),
+])
+
+# ---- CTRL winding -> 5V_CTRL (island B) ----------------------------------------------------------
+sh.text("CTRL island B (at J12): W1 -> D16 -> CTRL_RAW (~9 V, 11.5 V at no load) -> U28 buck -> 5V_CTRL; "
+        "PEC2 bonds CTRLGND to PE; J13 feeds island A.", g(16), g(134))
+part2(sh, "CTRL_WINDING", "W1", g(34), g(148), V["W1"], "CTRL_W", "CTRLGND", horizontal=True)
+row(g(160), g(50), [
+    ("D_Schottky", "D16", V["D16"], "CTRL_W", "CTRL_RAW", "A"),
+    ("C_Polarized", "C137", V["C137"], "CTRL_RAW", "CTRLGND", 1),
+    ("C_Polarized", "C138", V["C138"], "CTRL_RAW", "CTRLGND", 1),
+    ("R", "R131", V["R131"], "CTRL_RAW", "CTRLGND", 1),
+    ("C", "C139", V["C139"], "CTRL_RAW", "CTRLGND", 1),
+    ("C", "C140", V["C140"], "CTRL_RAW", "CTRLGND", 1),
+    ("R", "R132", V["R132"], "CTRL_RAW", "CTRL_EN", 1),
+    ("R", "R133", V["R133"], "CTRL_EN", "CTRLGND", 1),
+])
+ic(sh, "TPS54202", "U28", g(170), g(160), {3: "CTRL_RAW", 5: "CTRL_EN", 1: "CTRLGND", 6: "CTRL_BOOT",
+                                           2: "CTRL_SW", 4: "CTRL_FB"}, value=V["U28"])
+flag_net("CTRL_RAW", g(150), g(176))
+row(g(160), g(210), [
+    ("C", "C141", V["C141"], "CTRL_BOOT", "CTRL_SW", 1),
+    ("L", "L2", V["L2"], "CTRL_SW", "5V_CTRL", 1),
+    ("C", "C142", V["C142"], "5V_CTRL", "CTRLGND", 1),
+    ("C", "C143", V["C143"], "5V_CTRL", "CTRLGND", 1),
+    ("R", "R134", V["R134"], "5V_CTRL", "CTRL_FB", 1),
+    ("C", "C144", V["C144"], "5V_CTRL", "CTRL_FB", 1),
+    ("R", "R135", V["R135"], "CTRL_FB", "CTRLGND", 1),
+])
+j = ic(sh, "CONN_2", "J13", g(300), g(160), {1: "5V_CTRL", 2: "CTRLGND"}, value=V["J13"])
+terminal(sh, "PEC2", g(316), g(156), "up")
+net_at(sh, (g(316), g(156)), "CTRLGND", "down")
+flagged_power(sh, "5V_CTRL", g(290), g(180))
+flagged_power(sh, "CTRLGND", g(300), g(180))
+sh.text("J13 -> J14 (sheet 11): double-insulated two-wire link 5V_CTRL/CTRLGND to CTRL island A.", g(240), g(192))
 sh.save()
 print("sheet07: written")

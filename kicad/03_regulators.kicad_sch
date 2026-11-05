@@ -841,7 +841,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:20V"
+		(symbol "ac_psu:15V"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -866,7 +866,7 @@
 					)
 				)
 			)
-			(property "Value" "20V"
+			(property "Value" "15V"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -898,7 +898,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -920,7 +920,7 @@
 					)
 				)
 			)
-			(symbol "20V_0_1"
+			(symbol "15V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -958,7 +958,7 @@
 					)
 				)
 			)
-			(symbol "20V_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1759,7 +1759,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:20V_ISO_SEC"
+		(symbol "ac_psu:15V_ISO"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -1784,7 +1784,7 @@
 					)
 				)
 			)
-			(property "Value" "20V_ISO_SEC"
+			(property "Value" "15V_ISO"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1816,7 +1816,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1838,7 +1838,7 @@
 					)
 				)
 			)
-			(symbol "20V_ISO_SEC_0_1"
+			(symbol "15V_ISO_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1876,7 +1876,7 @@
 					)
 				)
 			)
-			(symbol "20V_ISO_SEC_1_1"
+			(symbol "15V_ISO_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -2543,7 +2543,7 @@
 		(uuid "a8046d4f-06ea-50b2-a58e-0456b5e5bce1")
 	)
 	(symbol
-		(lib_id "ac_psu:20V")
+		(lib_id "ac_psu:15V")
 		(at 76.2 83.82 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2560,7 +2560,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 76.2 80.264 0)
 			(effects
 				(font
@@ -2586,7 +2586,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 76.2 83.82 0)
 			(effects
 				(font
@@ -4153,7 +4153,7 @@
 		(uuid "57482368-3b55-59cc-bca5-be96aeaa1ab8")
 	)
 	(symbol
-		(lib_id "ac_psu:20V_ISO_SEC")
+		(lib_id "ac_psu:15V_ISO")
 		(at 78.74 172.72 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4170,7 +4170,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO"
 			(at 78.74 169.164 0)
 			(effects
 				(font
@@ -4196,7 +4196,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 			(at 78.74 172.72 0)
 			(effects
 				(font
@@ -4456,7 +4456,7 @@
 		(uuid "7762033c-779e-5079-811b-925f63d8479e")
 	)
 	(symbol
-		(lib_id "ac_psu:20V_ISO_SEC")
+		(lib_id "ac_psu:15V_ISO")
 		(at 139.7 171.45 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4473,7 +4473,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO"
 			(at 139.7 167.894 0)
 			(effects
 				(font
@@ -4499,7 +4499,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 			(at 139.7 171.45 0)
 			(effects
 				(font

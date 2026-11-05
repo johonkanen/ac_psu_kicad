@@ -119,7 +119,7 @@ com1 = rl.pin(1)
 sh.wire(com1, right(com1, 2), (right(com1, 2)[0], TOP))          # COM_1 -> JEE
 sh.junction(right(com1, 2)[0], TOP)
 glabel_right(sh, "RELAY_DRIVE", rl.pin(2), 4)                    # COIL_1
-sh.wire(rl.pin(6), left(rl.pin(6), 4)); power_at(sh, "20V", left(rl.pin(6), 4), "up")   # COIL_2
+sh.wire(rl.pin(6), left(rl.pin(6), 4)); power_at(sh, "15V", left(rl.pin(6), 4), "up")   # COIL_2 (v5: was 20V)
 sh.no_connect(*rl.pin(5))
 # mains terminals
 sh.wire((E, RT), (E + g(8), RT)); sh.glabel("AC_IN_1", E + g(4), RT, 90)

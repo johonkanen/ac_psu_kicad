@@ -177,3 +177,59 @@ def diff_amp(sh, xb, top, unit, plus, minus, r_ref, ref_label, r_fb, r_out, out_
         power_at(sh, top_power[0], pa, "up")
         power_at(sh, top_power[1], pm, "left")
     return {"plus_top": pa, "minus_top": pm, "u": u, "xu": xu, "yu": yu}
+
+
+# ---- v5 helpers: parts drawn with a net name on every pin (power symbol or global label) ----
+
+def _is_power(net):
+    from p2k.sch_builder import lib
+    from p2k.sexpr import find
+    sym = lib().get(net)
+    return sym is not None and find(sym, "power") is not None
+
+
+def net_at(sh, p, net, direction, n=2):
+    """Wire n grid units from pin point p in `direction` ('left', 'right', 'up', 'down') and end it
+    in a power symbol (project power nets) or a global label named `net`; None = no-connect flag."""
+    if net is None:
+        sh.no_connect(*p)
+        return p
+    q = {"left": left, "right": right, "up": up, "down": down}[direction](p, n)
+    sh.wire(p, q)
+    if _is_power(net):
+        power_at(sh, net, q, direction)
+    else:
+        sh.glabel(net, *q, {"right": 0, "up": 90, "left": 180, "down": 270}[direction])
+    return q
+
+
+def part2(sh, sym, ref, x, y, value, net_a, net_b, a=1, horizontal=False):
+    """Two-pin part with pin `a` on top (left if horizontal) on net_a, the other pin on net_b."""
+    if horizontal:
+        _, pa, pb = horiz2(sh, sym, ref, x, y, value, left=a, text="above")
+        net_at(sh, pa, net_a, "left")
+        net_at(sh, pb, net_b, "right")
+    else:
+        _, pa, pb = vert2(sh, sym, ref, x, y, value, top=a, text="right")
+        net_at(sh, pa, net_a, "up")
+        net_at(sh, pb, net_b, "down")
+
+
+def ic(sh, sym, ref, x, y, nets, value=None, unit=1, n=2):
+    """Multi-pin part: every pin listed in `nets` ({pin: net or None}) gets its net outward
+    (left/right pins sideways, top/bottom pins up/down). Pins not listed get a no-connect flag."""
+    u = sh.place(sym, ref, x, y, unit=unit, value=value)
+    xs = [q[0] for q in u.pins.values()]
+    ys = [q[1] for q in u.pins.values()]
+    for pin, q in u.pins.items():
+        net = nets.get(int(pin) if pin.isdigit() else pin, nets.get(pin))
+        if q[0] <= min(xs) + 1e-6 and min(xs) < max(xs):
+            d = "left"
+        elif q[0] >= max(xs) - 1e-6 and min(xs) < max(xs):
+            d = "right"
+        elif q[1] <= min(ys) + 1e-6:
+            d = "up"
+        else:
+            d = "down"
+        net_at(sh, q, net, d, n)
+    return u

@@ -103,14 +103,14 @@ sh = sheet("03_regulators.kicad_sch")
 
 # primary side
 ldo(sh, "U3", g(80), g(40), "5V", "GND", "VCC", ("C70", "100n"), ("C69", "100n"))
-vxo(sh, "U9", "VXO7805-500", g(84), g(68), "20V", "GND", "5V")
+vxo(sh, "U9", "VXO7805-500", g(84), g(68), "15V", "GND", "5V")
 vref(sh, "REF1", g(160), g(40), "VCC", "GND", "REF_1V65", ("C16", "1u"), ("C40", "1u"),
      ("R19", "422R"), ("R30", "820R"), rcap=("C109", "100n"))
 # isolated side
 ldo(sh, "U10", g(80), g(110), "5V_ISOL", "ISOGND", "3V3_ISO", ("C4", "100n"), ("C3", "100n"))
-vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "20V_ISO_SEC", "ISOGND", "5V_ISOL", value="K7805-2000R3")
+vxo(sh, "U8", "VXO7805-1000", g(84), g(138), "15V_ISO", "ISOGND", "5V_ISOL", value="K7805-2000R3")
 # v4: K7805-2000R3 input / output capacitors (Mornsun datasheet Fig. 2), pin 1 = rail, pin 2 = ISOGND
-for x, ref, val, rail in ((g(110), "C93", "10u 50V", "20V_ISO_SEC"), (g(120), "C94", "22u 10V", "5V_ISOL")):
+for x, ref, val, rail in ((g(110), "C93", "10u 50V", "15V_ISO"), (g(120), "C94", "22u 10V", "5V_ISOL")):
     _, t, b = vert2(sh, "C", ref, x, g(140), val, top=1)
     sh.wire(t, up(t, 2)); power_at(sh, rail, up(t, 2), "up")
     sh.wire(b, down(b, 2)); power_at(sh, "ISOGND", down(b, 2), "down")

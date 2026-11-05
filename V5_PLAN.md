@@ -1,6 +1,9 @@
 # v5 plan – aux flyback redesign (INN3694C, EE25, 2 x 15 V)
 
-Status: plan only (2026-10-24), no design change yet; to be acted on later. User decisions taken
+Status 2026-11-05: **schematic done, board staged** (section 8): sheet 7 is the UCC28710 flyback,
+the CTRL isolation is on sheets 2/11, the board carries the v5 netlist with the new parts unplaced
+below the outline; placement, routing, plane re-cuts and slots are GUI work (D5). Was: plan only
+(2026-10-24). User decisions taken
 2026-10-24: D1 yes, D2 15 V is fine, D3 reinforced, D5 in place on the main board, D6 rename. D4
 (controller sourcing) is still open. The converter and transformer design are
 in `reports/aux_flyback/README.md` (commit 965a78b). This file says how to bring that design
@@ -492,3 +495,47 @@ pin pitch, row spacing and the pin-to-core distances from the datasheet; the rei
 between the two pin rows (primary/bias/Out1 on one row, Out2 on the other) with a slot between them.
 The transformer is about 25–30 mm tall. Put it in the lower part of the aux area (y below −18.8),
 outside the control card's outline, and glue or clip it to the board.
+
+## 8. Implementation (2026-11-05)
+
+User request 2026-11-05: "do 1, the v5 aux flyback", scope "Flyback + CTRL isolation" (schematic,
+board placement only; the logic-area re-layout stays GUI work).
+
+**Bobbin creepage re-check (Ferroxcube CPV-E25/13/7-1S-10P-Z, open item 4).** The CPV drawing is not
+on Ferroxcube's site any more (the current E25/13/7 sheet has the core only and lists the CPV as an
+accessory); the 2008 data sheet (web archive of ferroxcube.home.pl/prod/assets/e25137.pdf) draws the
+horizontal 10-pin CPH (pins 0.7 mm square, 5 mm pitch) and the vertical 6-pin CSV (2 x 3 pins, 5.0 mm
+pitch, **rows 12.7 mm apart**, flange 17 x 17.2 mm). The footprint
+`ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical` therefore assumes 2 x 5 pins on the
+CSV grid (5.0 x 12.7 mm, 1.2 mm drills, 2.0 mm pads), body 28 x 20 mm, core 25.8 x 7.5 mm between the
+rows. **Verify the pin grid on a CPV sample or drawing before the PCB order.** With that grid:
+
+| Path (B2, 500 V row, reinforced) | Required | Found | Verdict |
+|---|---|---|---|
+| PCB copper, primary row ↔ Out2 row (pad edge to pad edge) | 5.0 mm printed wiring (10.0 mm material group) | 12.7 − 2.0 = **10.7 mm** | OK in both columns, no slot needed |
+| Over the former between the rows (pin edge to pin edge, IIIa) | 10.0 mm | ≥ 12.7 − 0.7 = **12.0 mm** (more along the flange contour) | OK |
+| Pins ↔ floating core (each row) | 10.0 mm via the core (sum of both sides) | 6.35 − 3.75 − 0.35 ≈ **2.25 mm** per side | **fails: insulate the core** (3 layers of tape or caps), as in 5.3 |
+| Out2 pins 6/7 ↔ cut pins 8-10 | – | pins 8-10 cut, pads unconnected (no domain) | OK |
+| CTRL leads (W1 holes) ↔ other domains | 5.0 mm on the PCB (DRC rule), 10 mm to the core outline | placement in the GUI | DRC enforces the PCB part |
+
+The DRC rules of `kicad/ac_psu.kicad_dru` (tools/v4/domain_rules.py: P-I, P-C, I-C 5.0 mm; P/I-E 2.5 mm)
+now hold the PCB distances for T1, W1 and all CTRL parts automatically, also for zone fills.
+
+**What was done** (details in STATUS.md "v5 step 1"):
+- `tools/v5/v5_parts.py`: the part list (98 parts: 46 on sheet 7, 52 on sheet 11), removed parts,
+  renames. `tools/v5/make_v5_lists.py` writes part_map and `lib/v5_deviations.csv`.
+- Symbols (gen_symbols.py): UCC28710, IPD95R450P7, MMBT3904/3906, D_TVS, CONN_2, OPA2350EA,
+  EE25_AUX_TRANS, CTRL_WINDING, ISO7760F, CA-IS3742, AMC1311, TPS54202; power 15V, 15V_ISO, CTRLGND,
+  CTRLGND_A, 3V3_CTRL, 5V_CTRL, 5V_CTRL_A. Pinouts from the TI / Chipanalog data sheets (UCC28710
+  SLUSB86C: D package 1 VDD 2 VS 3 CBC 4 GND 5 CS 6 DRV 7 HV; ISO7760 SLLSER1H; AMC1311 SBAS786C;
+  TPS54202 SLVSD26C; CA-IS374x Table 6-1).
+- Footprints: SOIC-7 (UCC28710, pad 7 at the pin-8 position), D_SMB_AC, the EE25 vertical former,
+  the CTRL flying-lead holes (1.6 mm drill, 3.0 mm pads, 5.08 mm).
+- Circuit values: as 5.3 (RS1 59.0k, RS2 21.0k, RCBC 118k, RCS 0.562R, RLC 1k to tune, CDD 15u, BAS16
+  + 47R from 15V, MMBT3904/3906 buffer, 10R gate, US1M + SMBJ170A clamp, ES2D on Out1/Out2 with
+  470u + 4.7k preloads, SS310 + 2 x 470u + 910R on CTRL_RAW, TPS54202 5 V with 15 uH, 100k/13.3k).
+  The TI reference design values were used for the TPS54202 (EN divider 511k/105k: start ≈ 7 V).
+
+**Not done in this step:** placement and routing (GUI, D5); the slot under the isolators; the M4
+ring-lug terminals for the 17 soldered leads (point 1 of the v4 prompt: still open for v5); fab files
+(BOM/CPL after the layout); transformer re-run with MKF (5.3 is still the design).

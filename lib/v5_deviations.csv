@@ -1,0 +1,554 @@
+# Intended deviations of the v5 design (aux flyback + control-card isolation) from the Proteus v3
+# original, on top of lib/v4_deviations.csv (same kinds, read by tools/deviations.py), plus:
+#   remove  ref is a Proteus part deleted in v5 (its pins leave the reference)
+#   rename  from = IPC net, to = new net name (every pad, via and track of `from`)
+# Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename) and,
+# with --nets, from the schematic netlist (add, pin). Plans: V5_PLAN.md, CTRL_ISOLATION_PLAN.md.
+kind,ref,pin,from,to,fix,note
+remove,PWM1,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,TR2,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R43,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R34,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R33,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,D7,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,C65,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,C66,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R24,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,C62,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R23,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,D6,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R44,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R25,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,C63,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R26,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R29,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R31,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R45,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R47,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,D2,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,D1,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,R49,,,,v5,v5: IW1830/EF20 aux supply replaced
+rename,,,20V,15V,v5,v5 D6: 15 V aux outputs
+rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
+part,R98,,,Resistor_SMD:R_2512_6332Metric,v5,aux input damping resistor DC+ -> AUX_VIN
+value,R98,,,10R 2512,v5,
+part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
+value,C111,,,47n 1kV,v5,
+part,C112,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
+value,C112,,,47n 1kV,v5,
+part,U18,,,ac_psu:SOIC-7_3.9x4.9mm_P1.27mm_UCC28710,v5,PSR flyback controller (JLC C80866)
+value,U18,,,UCC28710DR,v5,
+part,C113,,,Capacitor_SMD:C_1210_3225Metric,v5,UCC28710 VDD capacitor CDD
+value,C113,,,15u 50V,v5,
+part,C114,,,Capacitor_SMD:C_0603_1608Metric,v5,UCC28710 VDD decoupling
+value,C114,,,100n,v5,
+part,R100,,,Resistor_SMD:R_0603_1608Metric,v5,VDD feed from 15V
+value,R100,,,47R,v5,
+part,D11,,,ac_psu:D_SOD-323_AC,v5,VDD feed diode
+value,D11,,,BAS16WS,v5,
+part,R101,,,Resistor_SMD:R_0603_1608Metric,v5,VS divider RS1 (Out1 winding node)
+value,R101,,,59.0k,v5,
+part,R102,,,Resistor_SMD:R_0603_1608Metric,v5,VS divider RS2
+value,R102,,,21.0k,v5,
+part,R103,,,Resistor_SMD:R_0603_1608Metric,v5,cable compensation RCBC
+value,R103,,,118k,v5,
+part,R104,,,Resistor_SMD:R_0603_1608Metric,v5,CS line-compensation resistor RLC (tune on the prototype)
+value,R104,,,1k,v5,
+part,R105,,,Resistor_SMD:R_1206_3216Metric,v5,current-sense resistor RCS
+value,R105,,,0.562R,v5,
+part,Q15,,,Package_TO_SOT_SMD:SOT-23,v5,"gate buffer, source"
+value,Q15,,,MMBT3904,v5,
+part,Q16,,,Package_TO_SOT_SMD:SOT-23,v5,"gate buffer, sink"
+value,Q16,,,MMBT3906,v5,
+part,R106,,,Resistor_SMD:R_0603_1608Metric,v5,gate resistor
+value,R106,,,10R,v5,
+part,R107,,,Resistor_SMD:R_0603_1608Metric,v5,gate-source pull-down
+value,R107,,,10k,v5,
+part,Q17,,,Package_TO_SOT_SMD:TO-252-2,v5,950 V MOSFET (JLC C3289115)
+value,Q17,,,IPD95R450P7,v5,
+part,D12,,,ac_psu:D_SMA_AC,v5,clamp diode 1000 V
+value,D12,,,US1M,v5,
+part,D13,,,ac_psu:D_SMB_AC,v5,clamp TVS (~230 V at 1.4 A): drain peak ~450 + 240 V
+value,D13,,,SMBJ170A,v5,
+part,T1,,,ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical,v5,"E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"
+value,T1,,,EE25 aux flyback,v5,
+part,D14,,,ac_psu:D_SMA_AC,v5,Out1 rectifier 200 V 2 A
+value,D14,,,ES2D,v5,
+part,C115,,,Capacitor_SMD:CP_Elec_8x10,v5,Out1 (15V) output capacitor
+value,C115,,,470u 25V,v5,
+part,R108,,,Resistor_SMD:R_0805_2012Metric,v5,Out1 preload
+value,R108,,,4.7k,v5,
+part,D15,,,ac_psu:D_SMA_AC,v5,Out2 rectifier 200 V 2 A
+value,D15,,,ES2D,v5,
+part,C116,,,Capacitor_SMD:CP_Elec_8x10,v5,Out2 (15V_ISO) output capacitor
+value,C116,,,470u 25V,v5,
+part,R109,,,Resistor_SMD:R_0805_2012Metric,v5,Out2 preload
+value,R109,,,4.7k,v5,
+part,W1,,,ac_psu:CTRL_Winding_Leads_2x1.6mm_P5.08mm,v5,CTRL winding flying leads of T1 (3 x TIW 25 AWG)
+value,W1,,,"CTRL winding (T1, TIW)",v5,
+part,D16,,,ac_psu:D_SMA_AC,v5,CTRL rectifier 100 V 3 A
+value,D16,,,SS310,v5,
+part,C137,,,Capacitor_SMD:CP_Elec_8x10,v5,CTRL_RAW capacitor
+value,C137,,,470u 16V,v5,
+part,C138,,,Capacitor_SMD:CP_Elec_8x10,v5,CTRL_RAW capacitor
+value,C138,,,470u 16V,v5,
+part,R131,,,Resistor_SMD:R_1206_3216Metric,v5,CTRL preload ~10 mA
+value,R131,,,910R,v5,
+part,U28,,,Package_TO_SOT_SMD:SOT-23-6,v5,5V_CTRL buck for the control card
+value,U28,,,TPS54202DDCR,v5,
+part,C139,,,Capacitor_SMD:C_1206_3216Metric,v5,buck input
+value,C139,,,10u 25V,v5,
+part,C140,,,Capacitor_SMD:C_0603_1608Metric,v5,buck input HF
+value,C140,,,100n,v5,
+part,R132,,,Resistor_SMD:R_0603_1608Metric,v5,EN divider (start ~7 V)
+value,R132,,,511k,v5,
+part,R133,,,Resistor_SMD:R_0603_1608Metric,v5,EN divider
+value,R133,,,105k,v5,
+part,C141,,,Capacitor_SMD:C_0603_1608Metric,v5,bootstrap
+value,C141,,,100n,v5,
+part,L2,,,Inductor_SMD:L_Sunlord_SWPA6045S,v5,buck inductor 15 uH (SWPA6045S150MT)
+value,L2,,,15u,v5,
+part,C142,,,Capacitor_SMD:C_1206_3216Metric,v5,buck output
+value,C142,,,22u 10V,v5,
+part,C143,,,Capacitor_SMD:C_1206_3216Metric,v5,buck output
+value,C143,,,22u 10V,v5,
+part,R134,,,Resistor_SMD:R_0603_1608Metric,v5,FB divider top
+value,R134,,,100k,v5,
+part,R135,,,Resistor_SMD:R_0603_1608Metric,v5,FB divider bottom (5.0 V)
+value,R135,,,13.3k,v5,
+part,C144,,,Capacitor_SMD:C_0603_1608Metric,v5,FB feed-forward
+value,C144,,,75p,v5,
+part,J13,,,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,v5,5V_CTRL/CTRLGND to island A (double-insulated wire to J14)
+value,J13,,,CTRL 5V link B,v5,
+part,PEC2,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,PE bond of CTRL island B (CTRLGND)
+value,PEC2,,,PIN,v5,
+part,J14,,,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,v5,5V_CTRL_A/CTRLGND_A from island B (J13)
+value,J14,,,CTRL 5V link A,v5,
+part,PEC1,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,PE bond of CTRL island A (CTRLGND_A)
+value,PEC1,,,PIN,v5,
+part,U27,,,Package_TO_SOT_SMD:SOT-23-5,v5,3V3_CTRL LDO
+value,U27,,,TPS73033DBVT,v5,
+part,C134,,,Capacitor_SMD:C_0402_1005Metric,v5,LDO NR
+value,C134,,,10n,v5,
+part,C135,,,Capacitor_SMD:C_0603_1608Metric,v5,LDO output
+value,C135,,,2.2u,v5,
+part,C136,,,Capacitor_SMD:C_0603_1608Metric,v5,LDO input
+value,C136,,,1u,v5,
+part,U19,,,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5,"ISO-side PWMs Q5-Q8, TRANS4/5 (JLC C2878538)"
+value,U19,,,ISO7760FDWR,v5,
+part,U20,,,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5,"ISO-side PWMs TRANS6, DAB_SEC, relay (JLC C2878538)"
+value,U20,,,ISO7760FDWR,v5,
+part,C117,,,Capacitor_SMD:C_0402_1005Metric,v5,U19 CTRL side
+value,C117,,,100n,v5,
+part,C118,,,Capacitor_SMD:C_0402_1005Metric,v5,U19 ISO side
+value,C118,,,100n,v5,
+part,C119,,,Capacitor_SMD:C_0402_1005Metric,v5,U20 CTRL side
+value,C119,,,100n,v5,
+part,C120,,,Capacitor_SMD:C_0402_1005Metric,v5,U20 ISO side
+value,C120,,,100n,v5,
+part,U21,,,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5,U4/U6 sigma-delta clock and data (JLC C4944981)
+value,U21,,,CA-IS3742LW,v5,
+part,C121,,,Capacitor_SMD:C_0402_1005Metric,v5,U21 CTRL side
+value,C121,,,100n,v5,
+part,C122,,,Capacitor_SMD:C_0402_1005Metric,v5,U21 ISO side
+value,C122,,,100n,v5,
+part,U22,,,Package_SO:SOIC-8_7.5x5.85mm_P1.27mm,v5,ISOADA1 isolated amplifier (JLC C783598)
+value,U22,,,AMC1311BDWVR,v5,
+part,C123,,,Capacitor_SMD:C_0402_1005Metric,v5,U22 VDD1 (ISO)
+value,C123,,,100n,v5,
+part,C124,,,Capacitor_SMD:C_0402_1005Metric,v5,U22 VDD2 (CTRL)
+value,C124,,,100n,v5,
+part,R110,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA1 divider top (x0.4 with the 8.2k source)
+value,R110,,,6.8k 0.1%,v5,
+part,R111,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA1 divider bottom
+value,R111,,,10k 0.1%,v5,
+part,R116,,,Resistor_SMD:R_0603_1608Metric,v5,ch1 diff amp input (OUTN)
+value,R116,,,10k 0.1%,v5,
+part,R117,,,Resistor_SMD:R_0603_1608Metric,v5,ch1 diff amp feedback (gain 2.49)
+value,R117,,,24.9k 0.1%,v5,
+part,R118,,,Resistor_SMD:R_0603_1608Metric,v5,ch1 diff amp input (OUTP)
+value,R118,,,10k 0.1%,v5,
+part,R119,,,Resistor_SMD:R_0603_1608Metric,v5,ch1 diff amp reference leg
+value,R119,,,24.9k 0.1%,v5,
+part,R128,,,Resistor_SMD:R_0402_1005Metric,v5,ISOADA1_CTRL output filter R (as before at J11)
+value,R128,,,8.2k,v5,
+part,C129,,,Capacitor_SMD:C_0402_1005Metric,v5,ISOADA1_CTRL output filter C
+value,C129,,,4.7n C0G,v5,
+part,U23,,,Package_SO:SOIC-8_7.5x5.85mm_P1.27mm,v5,ISOADA2 isolated amplifier (JLC C783598)
+value,U23,,,AMC1311BDWVR,v5,
+part,C125,,,Capacitor_SMD:C_0402_1005Metric,v5,U23 VDD1 (ISO)
+value,C125,,,100n,v5,
+part,C126,,,Capacitor_SMD:C_0402_1005Metric,v5,U23 VDD2 (CTRL)
+value,C126,,,100n,v5,
+part,R112,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA2 divider top (x0.4 with the 8.2k source)
+value,R112,,,6.8k 0.1%,v5,
+part,R113,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA2 divider bottom
+value,R113,,,10k 0.1%,v5,
+part,R120,,,Resistor_SMD:R_0603_1608Metric,v5,ch2 diff amp input (OUTN)
+value,R120,,,10k 0.1%,v5,
+part,R121,,,Resistor_SMD:R_0603_1608Metric,v5,ch2 diff amp feedback (gain 2.49)
+value,R121,,,24.9k 0.1%,v5,
+part,R122,,,Resistor_SMD:R_0603_1608Metric,v5,ch2 diff amp input (OUTP)
+value,R122,,,10k 0.1%,v5,
+part,R123,,,Resistor_SMD:R_0603_1608Metric,v5,ch2 diff amp reference leg
+value,R123,,,24.9k 0.1%,v5,
+part,R129,,,Resistor_SMD:R_0402_1005Metric,v5,ISOADA2_CTRL output filter R (as before at J11)
+value,R129,,,8.2k,v5,
+part,C130,,,Capacitor_SMD:C_0402_1005Metric,v5,ISOADA2_CTRL output filter C
+value,C130,,,4.7n C0G,v5,
+part,U24,,,Package_SO:SOIC-8_7.5x5.85mm_P1.27mm,v5,ISOADA3 isolated amplifier (JLC C783598)
+value,U24,,,AMC1311BDWVR,v5,
+part,C127,,,Capacitor_SMD:C_0402_1005Metric,v5,U24 VDD1 (ISO)
+value,C127,,,100n,v5,
+part,C128,,,Capacitor_SMD:C_0402_1005Metric,v5,U24 VDD2 (CTRL)
+value,C128,,,100n,v5,
+part,R114,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA3 divider top (x0.4 with the 8.2k source)
+value,R114,,,6.8k 0.1%,v5,
+part,R115,,,Resistor_SMD:R_0603_1608Metric,v5,ISOADA3 divider bottom
+value,R115,,,10k 0.1%,v5,
+part,R124,,,Resistor_SMD:R_0603_1608Metric,v5,ch3 diff amp input (OUTN)
+value,R124,,,10k 0.1%,v5,
+part,R125,,,Resistor_SMD:R_0603_1608Metric,v5,ch3 diff amp feedback (gain 2.49)
+value,R125,,,24.9k 0.1%,v5,
+part,R126,,,Resistor_SMD:R_0603_1608Metric,v5,ch3 diff amp input (OUTP)
+value,R126,,,10k 0.1%,v5,
+part,R127,,,Resistor_SMD:R_0603_1608Metric,v5,ch3 diff amp reference leg
+value,R127,,,24.9k 0.1%,v5,
+part,R130,,,Resistor_SMD:R_0402_1005Metric,v5,ISOADA3_CTRL output filter R (as before at J11)
+value,R130,,,8.2k,v5,
+part,C131,,,Capacitor_SMD:C_0402_1005Metric,v5,ISOADA3_CTRL output filter C
+value,C131,,,10n C0G,v5,
+part,U25,,,Package_SO:VSSOP-8_3x3mm_P0.65mm,v5,CTRL diff amps ch1/ch2
+value,U25,,,OPA2350EA,v5,
+part,U26,,,Package_SO:VSSOP-8_3x3mm_P0.65mm,v5,CTRL diff amp ch3 (B spare)
+value,U26,,,OPA2350EA,v5,
+part,C132,,,Capacitor_SMD:C_0402_1005Metric,v5,U25 decoupling
+value,C132,,,100n,v5,
+part,C133,,,Capacitor_SMD:C_0402_1005Metric,v5,U26 decoupling
+value,C133,,,100n,v5,
+add,R98,1,,DC+,v5,
+add,R98,2,,AUX_VIN,v5,
+add,C111,1,,AUX_VIN,v5,
+add,C111,2,,GND,v5,
+add,C112,1,,AUX_VIN,v5,
+add,C112,2,,GND,v5,
+add,U18,1,,AUX_VDD,v5,
+add,U18,2,,AUX_VS,v5,
+add,U18,3,,AUX_CBC,v5,
+add,U18,4,,GND,v5,
+add,U18,5,,AUX_CSP,v5,
+add,U18,6,,AUX_DRV,v5,
+add,U18,7,,AUX_VIN,v5,
+add,C113,1,,AUX_VDD,v5,
+add,C113,2,,GND,v5,
+add,C114,1,,AUX_VDD,v5,
+add,C114,2,,GND,v5,
+add,R100,1,,15V,v5,
+add,R100,2,,AUX_VDDR,v5,
+add,D11,A,,AUX_VDDR,v5,
+add,D11,C,,AUX_VDD,v5,
+add,R101,1,,AUX_W1,v5,
+add,R101,2,,AUX_VS,v5,
+add,R102,1,,AUX_VS,v5,
+add,R102,2,,GND,v5,
+add,R103,1,,AUX_CBC,v5,
+add,R103,2,,GND,v5,
+add,R104,1,,AUX_CS,v5,
+add,R104,2,,AUX_CSP,v5,
+add,R105,1,,AUX_CS,v5,
+add,R105,2,,GND,v5,
+add,Q15,1,,AUX_DRV,v5,
+add,Q15,2,,AUX_GATED,v5,
+add,Q15,3,,AUX_VDD,v5,
+add,Q16,1,,AUX_DRV,v5,
+add,Q16,2,,AUX_GATED,v5,
+add,Q16,3,,GND,v5,
+add,R106,1,,AUX_GATED,v5,
+add,R106,2,,AUX_GATE,v5,
+add,R107,1,,AUX_GATE,v5,
+add,R107,2,,AUX_CS,v5,
+add,Q17,1,,AUX_GATE,v5,
+add,Q17,2,,AUX_DRAIN,v5,
+add,Q17,3,,AUX_CS,v5,
+add,D12,A,,AUX_DRAIN,v5,
+add,D12,C,,AUX_CLAMP,v5,
+add,D13,A,,AUX_VIN,v5,
+add,D13,C,,AUX_CLAMP,v5,
+add,T1,1,,AUX_DRAIN,v5,
+add,T1,2,,AUX_VIN,v5,
+add,T1,3,,N/C,v5,
+add,T1,4,,GND,v5,
+add,T1,5,,AUX_W1,v5,
+add,T1,6,,AUX_W2,v5,
+add,T1,7,,ISOGND,v5,
+add,T1,8,,N/C,v5,
+add,T1,9,,N/C,v5,
+add,T1,10,,N/C,v5,
+add,D14,A,,AUX_W1,v5,
+add,D14,C,,15V,v5,
+add,C115,1,,15V,v5,
+add,C115,2,,GND,v5,
+add,R108,1,,15V,v5,
+add,R108,2,,GND,v5,
+add,D15,A,,AUX_W2,v5,
+add,D15,C,,15V_ISO,v5,
+add,C116,1,,15V_ISO,v5,
+add,C116,2,,ISOGND,v5,
+add,R109,1,,15V_ISO,v5,
+add,R109,2,,ISOGND,v5,
+add,W1,1,,CTRL_W,v5,
+add,W1,2,,CTRLGND,v5,
+add,D16,A,,CTRL_W,v5,
+add,D16,C,,CTRL_RAW,v5,
+add,C137,1,,CTRL_RAW,v5,
+add,C137,2,,CTRLGND,v5,
+add,C138,1,,CTRL_RAW,v5,
+add,C138,2,,CTRLGND,v5,
+add,R131,1,,CTRL_RAW,v5,
+add,R131,2,,CTRLGND,v5,
+add,U28,1,,CTRLGND,v5,
+add,U28,2,,CTRL_SW,v5,
+add,U28,3,,CTRL_RAW,v5,
+add,U28,4,,CTRL_FB,v5,
+add,U28,5,,CTRL_EN,v5,
+add,U28,6,,CTRL_BOOT,v5,
+add,C139,1,,CTRL_RAW,v5,
+add,C139,2,,CTRLGND,v5,
+add,C140,1,,CTRL_RAW,v5,
+add,C140,2,,CTRLGND,v5,
+add,R132,1,,CTRL_RAW,v5,
+add,R132,2,,CTRL_EN,v5,
+add,R133,1,,CTRL_EN,v5,
+add,R133,2,,CTRLGND,v5,
+add,C141,1,,CTRL_BOOT,v5,
+add,C141,2,,CTRL_SW,v5,
+add,L2,1,,CTRL_SW,v5,
+add,L2,2,,5V_CTRL,v5,
+add,C142,1,,5V_CTRL,v5,
+add,C142,2,,CTRLGND,v5,
+add,C143,1,,5V_CTRL,v5,
+add,C143,2,,CTRLGND,v5,
+add,R134,1,,5V_CTRL,v5,
+add,R134,2,,CTRL_FB,v5,
+add,R135,1,,CTRL_FB,v5,
+add,R135,2,,CTRLGND,v5,
+add,C144,1,,5V_CTRL,v5,
+add,C144,2,,CTRL_FB,v5,
+add,J13,1,,5V_CTRL,v5,
+add,J13,2,,CTRLGND,v5,
+add,PEC2,1,,CTRLGND,v5,
+add,J14,1,,5V_CTRL_A,v5,
+add,J14,2,,CTRLGND_A,v5,
+add,PEC1,1,,CTRLGND_A,v5,
+add,U27,1,,5V_CTRL_A,v5,
+add,U27,2,,CTRLGND_A,v5,
+add,U27,3,,5V_CTRL_A,v5,
+add,U27,4,,CTRL_NR,v5,
+add,U27,5,,3V3_CTRL,v5,
+add,C134,1,,CTRL_NR,v5,
+add,C134,2,,CTRLGND_A,v5,
+add,C135,1,,3V3_CTRL,v5,
+add,C135,2,,CTRLGND_A,v5,
+add,C136,1,,5V_CTRL_A,v5,
+add,C136,2,,CTRLGND_A,v5,
+add,U19,1,,3V3_CTRL,v5,
+add,U19,2,,PWM_Q5_CTRL,v5,
+add,U19,3,,PWM_Q6_CTRL,v5,
+add,U19,4,,PWM_Q7_CTRL,v5,
+add,U19,5,,PWM_Q8_CTRL,v5,
+add,U19,6,,PWM_TRANS4_CTRL,v5,
+add,U19,7,,PWM_TRANS5_CTRL,v5,
+add,U19,8,,CTRLGND_A,v5,
+add,U19,9,,ISOGND,v5,
+add,U19,10,,PWM_TRANS5,v5,
+add,U19,11,,PWM_TRANS4,v5,
+add,U19,12,,PWM_Q8,v5,
+add,U19,13,,PWM_Q7,v5,
+add,U19,14,,PWM_Q6,v5,
+add,U19,15,,PWM_Q5,v5,
+add,U19,16,,3V3_ISO,v5,
+add,U20,1,,3V3_CTRL,v5,
+add,U20,2,,PWM_TRANS6_CTRL,v5,
+add,U20,3,,DAB_PWM_HI_SEC_CTRL,v5,
+add,U20,4,,DAB_PWM_LO_SEC_CTRL,v5,
+add,U20,5,,GPIO_BYPASS_RLY_ISO_CTRL,v5,
+add,U20,6,,CTRLGND_A,v5,
+add,U20,7,,CTRLGND_A,v5,
+add,U20,8,,CTRLGND_A,v5,
+add,U20,9,,ISOGND,v5,
+add,U20,10,,N/C,v5,
+add,U20,11,,N/C,v5,
+add,U20,12,,GPIO_BYPASS_RLY_ISO,v5,
+add,U20,13,,DAB_PWM_LO_SEC,v5,
+add,U20,14,,DAB_PWM_HI_SEC,v5,
+add,U20,15,,PWM_TRANS6,v5,
+add,U20,16,,3V3_ISO,v5,
+add,C117,1,,3V3_CTRL,v5,
+add,C117,2,,CTRLGND_A,v5,
+add,C118,1,,3V3_ISO,v5,
+add,C118,2,,ISOGND,v5,
+add,C119,1,,3V3_CTRL,v5,
+add,C119,2,,CTRLGND_A,v5,
+add,C120,1,,3V3_ISO,v5,
+add,C120,2,,ISOGND,v5,
+add,U21,1,,3V3_CTRL,v5,
+add,U21,2,,CTRLGND_A,v5,
+add,U21,3,,INU_ADCLK_CTRL,v5,
+add,U21,4,,ADCLK_DAB_CTRL,v5,
+add,U21,5,,MDATA_INU_CTRL,v5,
+add,U21,6,,MDATA_DAB_CTRL,v5,
+add,U21,7,,3V3_CTRL,v5,
+add,U21,8,,CTRLGND_A,v5,
+add,U21,9,,ISOGND,v5,
+add,U21,10,,3V3_ISO,v5,
+add,U21,11,,MDATA_DAB,v5,
+add,U21,12,,MDATA_INU,v5,
+add,U21,13,,ADCLK_DAB,v5,
+add,U21,14,,INU_ADCLK,v5,
+add,U21,15,,ISOGND,v5,
+add,U21,16,,3V3_ISO,v5,
+add,C121,1,,3V3_CTRL,v5,
+add,C121,2,,CTRLGND_A,v5,
+add,C122,1,,3V3_ISO,v5,
+add,C122,2,,ISOGND,v5,
+add,U22,1,,3V3_ISO,v5,
+add,U22,2,,ISOADA1_AIN,v5,
+add,U22,3,,ISOGND,v5,
+add,U22,4,,ISOGND,v5,
+add,U22,5,,CTRLGND_A,v5,
+add,U22,6,,ISOADA1_N,v5,
+add,U22,7,,ISOADA1_P,v5,
+add,U22,8,,3V3_CTRL,v5,
+add,C123,1,,3V3_ISO,v5,
+add,C123,2,,ISOGND,v5,
+add,C124,1,,3V3_CTRL,v5,
+add,C124,2,,CTRLGND_A,v5,
+add,R110,1,,ISOADA1,v5,
+add,R110,2,,ISOADA1_AIN,v5,
+add,R111,1,,ISOADA1_AIN,v5,
+add,R111,2,,ISOGND,v5,
+add,R116,1,,ISOADA1_N,v5,
+add,R116,2,,ISOADA1_M,v5,
+add,R117,1,,ISOADA1_M,v5,
+add,R117,2,,ISOADA1_OUT,v5,
+add,R118,1,,ISOADA1_P,v5,
+add,R118,2,,ISOADA1_PL,v5,
+add,R119,1,,ISOADA1_PL,v5,
+add,R119,2,,CTRLGND_A,v5,
+add,R128,1,,ISOADA1_OUT,v5,
+add,R128,2,,ISOADA1_CTRL,v5,
+add,C129,1,,ISOADA1_CTRL,v5,
+add,C129,2,,CTRLGND_A,v5,
+add,U23,1,,3V3_ISO,v5,
+add,U23,2,,ISOADA2_AIN,v5,
+add,U23,3,,ISOGND,v5,
+add,U23,4,,ISOGND,v5,
+add,U23,5,,CTRLGND_A,v5,
+add,U23,6,,ISOADA2_N,v5,
+add,U23,7,,ISOADA2_P,v5,
+add,U23,8,,3V3_CTRL,v5,
+add,C125,1,,3V3_ISO,v5,
+add,C125,2,,ISOGND,v5,
+add,C126,1,,3V3_CTRL,v5,
+add,C126,2,,CTRLGND_A,v5,
+add,R112,1,,ISOADA2,v5,
+add,R112,2,,ISOADA2_AIN,v5,
+add,R113,1,,ISOADA2_AIN,v5,
+add,R113,2,,ISOGND,v5,
+add,R120,1,,ISOADA2_N,v5,
+add,R120,2,,ISOADA2_M,v5,
+add,R121,1,,ISOADA2_M,v5,
+add,R121,2,,ISOADA2_OUT,v5,
+add,R122,1,,ISOADA2_P,v5,
+add,R122,2,,ISOADA2_PL,v5,
+add,R123,1,,ISOADA2_PL,v5,
+add,R123,2,,CTRLGND_A,v5,
+add,R129,1,,ISOADA2_OUT,v5,
+add,R129,2,,ISOADA2_CTRL,v5,
+add,C130,1,,ISOADA2_CTRL,v5,
+add,C130,2,,CTRLGND_A,v5,
+add,U24,1,,3V3_ISO,v5,
+add,U24,2,,ISOADA3_AIN,v5,
+add,U24,3,,ISOGND,v5,
+add,U24,4,,ISOGND,v5,
+add,U24,5,,CTRLGND_A,v5,
+add,U24,6,,ISOADA3_N,v5,
+add,U24,7,,ISOADA3_P,v5,
+add,U24,8,,3V3_CTRL,v5,
+add,C127,1,,3V3_ISO,v5,
+add,C127,2,,ISOGND,v5,
+add,C128,1,,3V3_CTRL,v5,
+add,C128,2,,CTRLGND_A,v5,
+add,R114,1,,ISOADA3,v5,
+add,R114,2,,ISOADA3_AIN,v5,
+add,R115,1,,ISOADA3_AIN,v5,
+add,R115,2,,ISOGND,v5,
+add,R124,1,,ISOADA3_N,v5,
+add,R124,2,,ISOADA3_M,v5,
+add,R125,1,,ISOADA3_M,v5,
+add,R125,2,,ISOADA3_OUT,v5,
+add,R126,1,,ISOADA3_P,v5,
+add,R126,2,,ISOADA3_PL,v5,
+add,R127,1,,ISOADA3_PL,v5,
+add,R127,2,,CTRLGND_A,v5,
+add,R130,1,,ISOADA3_OUT,v5,
+add,R130,2,,ISOADA3_CTRL,v5,
+add,C131,1,,ISOADA3_CTRL,v5,
+add,C131,2,,CTRLGND_A,v5,
+add,U25,1,,ISOADA1_OUT,v5,
+add,U25,2,,ISOADA1_M,v5,
+add,U25,3,,ISOADA1_PL,v5,
+add,U25,4,,CTRLGND_A,v5,
+add,U25,5,,ISOADA2_PL,v5,
+add,U25,6,,ISOADA2_M,v5,
+add,U25,7,,ISOADA2_OUT,v5,
+add,U25,8,,3V3_CTRL,v5,
+add,U26,1,,ISOADA3_OUT,v5,
+add,U26,2,,ISOADA3_M,v5,
+add,U26,3,,ISOADA3_PL,v5,
+add,U26,4,,CTRLGND_A,v5,
+add,U26,5,,CTRLGND_A,v5,
+add,U26,6,,OPA_SPARE,v5,
+add,U26,7,,OPA_SPARE,v5,
+add,U26,8,,3V3_CTRL,v5,
+add,C132,1,,3V3_CTRL,v5,
+add,C132,2,,CTRLGND_A,v5,
+add,C133,1,,3V3_CTRL,v5,
+add,C133,2,,CTRLGND_A,v5,
+pin,C82,1,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,C82,2,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,C83,1,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,C83,2,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,C86,1,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,C86,2,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,J11,1,ISOADA3,ISOADA3_CTRL,v5,v5 (was ISOADA3)
+pin,J11,2,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,J11,24,ADCLK_DAB,ADCLK_DAB_CTRL,v5,v5 (was ADCLK_DAB)
+pin,J11,25,PWM_TRANS4,PWM_TRANS4_CTRL,v5,v5 (was PWM_TRANS4)
+pin,J11,26,MDATA_DAB,MDATA_DAB_CTRL,v5,v5 (was MDATA_DAB)
+pin,J11,27,DAB_PWM_HI_SEC,DAB_PWM_HI_SEC_CTRL,v5,v5 (was DAB_PWM_HI_SEC)
+pin,J11,28,PWM_TRANS6,PWM_TRANS6_CTRL,v5,v5 (was PWM_TRANS6)
+pin,J11,29,DAB_PWM_LO_SEC,DAB_PWM_LO_SEC_CTRL,v5,v5 (was DAB_PWM_LO_SEC)
+pin,J11,3,ISOADA2,ISOADA2_CTRL,v5,v5 (was ISOADA2)
+pin,J11,30,PWM_Q5,PWM_Q5_CTRL,v5,v5 (was PWM_Q5)
+pin,J11,31,PWM_Q6,PWM_Q6_CTRL,v5,v5 (was PWM_Q6)
+pin,J11,32,INU_ADCLK,INU_ADCLK_CTRL,v5,v5 (was INU_ADCLK)
+pin,J11,33,PWM_Q8,PWM_Q8_CTRL,v5,v5 (was PWM_Q8)
+pin,J11,34,MDATA_INU,MDATA_INU_CTRL,v5,v5 (was MDATA_INU)
+pin,J11,35,PWM_TRANS5,PWM_TRANS5_CTRL,v5,v5 (was PWM_TRANS5)
+pin,J11,36,GPIO_BYPASS_RLY_ISO,GPIO_BYPASS_RLY_ISO_CTRL,v5,v5 (was GPIO_BYPASS_RLY_ISO)
+pin,J11,37,PWM_Q7,PWM_Q7_CTRL,v5,v5 (was PWM_Q7)
+pin,J11,4,ISOADA1,ISOADA1_CTRL,v5,v5 (was ISOADA1)
+pin,J11,5,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,J12,43,ISOGND,CTRLGND,v5,v5 (was ISOGND)
+pin,J12,44,5V_ISOL,5V_CTRL,v5,v5 (was 5V_ISOL)
+pin,J12,45,ISOGND,CTRLGND,v5,v5 (was ISOGND)
+pin,J12,46,5V_ISOL,5V_CTRL,v5,v5 (was 5V_ISOL)
+pin,J12,47,ISOGND,CTRLGND,v5,v5 (was ISOGND)
+pin,J12,48,5V_ISOL,5V_CTRL,v5,v5 (was 5V_ISOL)
+pin,U13,1,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,U13,8,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,U15,1,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,U15,8,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
+pin,U16,1,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
+pin,U16,8,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)

@@ -4,8 +4,8 @@ fix 16, 2026-11-05).
 
 The pours have no cut-outs any more (fix 16): KiCad's zone filler keeps every pour clear of other
 copper by the clearance rules. The IEC 61010-1 gaps between the domains of tools/v4/domains.py
-(P <-> I reinforced 5.0 mm, P/I <-> E basic 2.5 mm, STATUS.md "v4 fix 13/14") become:
-  - net classes DOM_P / DOM_I / DOM_E (copies of Default) in kicad/ac_psu.kicad_pro, assigned by
+(P <-> I and P/I <-> C reinforced 5.0 mm, P/I <-> E basic 2.5 mm, STATUS.md "v4 fix 13/14") become:
+  - net classes DOM_P / DOM_I / DOM_E / DOM_C (copies of Default) in kicad/ac_psu.kicad_pro, assigned by
     netclass_patterns, one exact net name per pattern (nets of no domain stay Default);
   - kicad/ac_psu.kicad_dru: clearance rules between the classes (zone fill and DRC).
 The patterns are regenerated from the schematic netlist, so a schematic change that moves a net to
@@ -25,7 +25,7 @@ import domains  # noqa: E402
 
 PRO = os.path.join(bc.ROOT, "kicad", "ac_psu.kicad_pro")
 DRU = os.path.join(bc.ROOT, "kicad", "ac_psu.kicad_dru")
-CLASS = {"P": "DOM_P", "I": "DOM_I", "E": "DOM_E"}
+CLASS = {"P": "DOM_P", "I": "DOM_I", "E": "DOM_E", "C": "DOM_C"}
 
 
 def dru_text():
@@ -74,7 +74,7 @@ def main():
                 with open(path, "w") as f:
                     f.write(text)
     count = {d: sum(1 for v in dom.values() if v == d) for d in CLASS}
-    print(f"domain_rules: {count['P']} nets DOM_P, {count['I']} DOM_I, {count['E']} DOM_E, "
+    print(f"domain_rules: {count['P']} nets DOM_P, {count['I']} DOM_I, {count['E']} DOM_E, {count['C']} DOM_C, "
           f"{sum(1 for v in dom.values() if not v)} without domain")
     if "--check" in sys.argv:
         # the board must resolve every net to its class (pattern matching is KiCad's)

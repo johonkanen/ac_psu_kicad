@@ -1,21 +1,28 @@
 """Insulation domains of the nets (stdlib only): P = primary (mains, DC link, GND/PGND side),
-I = isolated DC/AC output side (ISOGND/ISOPGND), E = protective earth (PE terminals).
+I = isolated DC/AC output side (ISOGND/ISOPGND), E = protective earth (PE terminals),
+C = control-card domain (v5: CTRLGND / CTRLGND_A, SELV, bonded to PE through PEC1/PEC2).
 
 Nets are joined through every part except the barrier parts, which are split into their sides:
 TR1 (DAB transformer, off-board: PRI/SEC nets), TR2 (aux transformer: pins 1-5 / 6-10),
 U13/U15/U16/U17 (digital isolators: 1-8 / 9-16), U4/U5/U6 (isolated modulators: 1-4 / 5-8) and
-the Y capacitors (each pin on its own). A group is P if it holds GND, PGND or DC+, I if it holds
-ISOGND, ISOPGND or ISODC+, and E if it holds a pin of a PE terminal; anything else is None
-(unconnected pins of the spare U17).
+the Y capacitors (each pin on its own); v5: T1 (aux flyback: pins 1-5 / 6-10; its CTRL winding is
+the separate part W1), U19/U20/U21 (CTRL isolators: 1-8 / 9-16) and U22/U23/U24 (AMC1311: 1-4 /
+5-8). A group is P if it holds GND, PGND or DC+, I if it holds ISOGND, ISOPGND or ISODC+, C if it
+holds CTRLGND or CTRLGND_A, and E if it holds a pin of a PE terminal (PE<n>; the CTRL bonding
+terminals PEC1/PEC2 are C); anything else is None (unconnected pins of the spare U17).
 
 Used by tools/v4/fix_14_insulation_gaps.py and tools/v4/domain_gaps.py (IEC 61010-1 spacing:
-P <-> I reinforced, P/I <-> E basic; see STATUS.md "v4 fix 13/14").
+P <-> I reinforced, P/I <-> E basic; see STATUS.md "v4 fix 13/14"; v5: P/I <-> C reinforced, C <-> E
+none - CTRL is bonded to PE).
 """
 YCAPS = set("C7 C10 C13 C14 C19 C20 C22 C23 C29 C30 C31 C32 C59 C60".split())
 P_SEEDS = {"GND", "PGND", "DC+"}
 I_SEEDS = {"ISOGND", "ISOPGND", "ISODC+"}
-# required copper gap (mm) between domains on one layer: reinforced P-I, basic to PE
-GAP = {frozenset("PI"): 5.0, frozenset("PE"): 2.5, frozenset("IE"): 2.5}
+C_SEEDS = {"CTRLGND", "CTRLGND_A"}
+# required copper gap (mm) between domains on one layer: reinforced P-I and P/I-C, basic to PE
+# (C-E: none, CTRL is bonded to PE)
+GAP = {frozenset("PI"): 5.0, frozenset("PE"): 2.5, frozenset("IE"): 2.5,
+       frozenset("PC"): 5.0, frozenset("IC"): 5.0}
 
 
 def short(net):
@@ -25,11 +32,11 @@ def short(net):
 def _side(ref, pin, net):
     if ref == "TR1":
         return "PRI" in net
-    if ref == "TR2":
+    if ref in ("TR2", "T1"):
         return int(pin) <= 5
-    if ref in ("U13", "U15", "U16", "U17"):
+    if ref in ("U13", "U15", "U16", "U17", "U19", "U20", "U21"):
         return int(pin) <= 8
-    if ref in ("U4", "U5", "U6"):
+    if ref in ("U4", "U5", "U6", "U22", "U23", "U24"):
         return int(pin) <= 4
     if ref in YCAPS:
         return pin
@@ -60,6 +67,8 @@ def classify(nets):
             s.add("P")
         if short(net) in I_SEEDS:
             s.add("I")
+        if short(net) in C_SEEDS:
+            s.add("C")
         if any(ref.startswith("PE") and ref[2:].isdigit() for ref, _ in nodes):
             s.add("E")
     out = {}
@@ -75,4 +84,4 @@ def gap(a, b):
     """Required gap between two domains (None = same domain or unclassified)."""
     if not a or not b or a == b:
         return None
-    return GAP[frozenset((a, b))]
+    return GAP.get(frozenset((a, b)))

@@ -59,9 +59,9 @@ def relay_drive(sh, x, y, q, d_near, d_far, vsup, gnd, r_gate, c_gate, r_pull, l
     return t
 
 
-relay_drive(sh, g(70), g(104), ("Q14", "2N7000"), ("D5", "ZLLS400TA"), ("D10", "ZLLS400TA"), "20V", "GND",
+relay_drive(sh, g(70), g(104), ("Q14", "2N7000"), ("D5", "ZLLS400TA"), ("D10", "ZLLS400TA"), "15V", "GND",
             ("R89", "2.2k"), ("C44", "100n"), ("R90", "2.2k"), "RELAY_DRIVE", "GPIO_BYPASS_RLY")
-relay_drive(sh, g(190), g(104), ("Q13", "2N7000"), ("D3", "ZLLS400TA"), ("D4", "ZLLS400TA"), "20V_ISO_SEC", "ISOGND",
+relay_drive(sh, g(190), g(104), ("Q13", "2N7000"), ("D3", "ZLLS400TA"), ("D4", "ZLLS400TA"), "15V_ISO", "ISOGND",
             ("R78", "2.2k"), ("C43", "100n"), ("R88", "2.2k"), "RELAY_DRIVE_ISO", "GPIO_BYPASS_RLY_ISO")
 sh.text("Relay drivers: RELAY_DRIVE -> R20 coil (sheet 1), RELAY_DRIVE_ISO -> R79 coil (sheet 5).", g(40), g(128))
 sh.save()

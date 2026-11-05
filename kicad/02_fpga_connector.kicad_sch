@@ -990,7 +990,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:20V"
+		(symbol "ac_psu:15V"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -1015,7 +1015,7 @@
 					)
 				)
 			)
-			(property "Value" "20V"
+			(property "Value" "15V"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1047,7 +1047,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1069,7 +1069,7 @@
 					)
 				)
 			)
-			(symbol "20V_0_1"
+			(symbol "15V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1107,7 +1107,7 @@
 					)
 				)
 			)
-			(symbol "20V_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1498,7 +1498,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:20V_ISO_SEC"
+		(symbol "ac_psu:15V_ISO"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -1523,7 +1523,7 @@
 					)
 				)
 			)
-			(property "Value" "20V_ISO_SEC"
+			(property "Value" "15V_ISO"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1555,7 +1555,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1577,7 +1577,7 @@
 					)
 				)
 			)
-			(symbol "20V_ISO_SEC_0_1"
+			(symbol "15V_ISO_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1615,7 +1615,7 @@
 					)
 				)
 			)
-			(symbol "20V_ISO_SEC_1_1"
+			(symbol "15V_ISO_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -2506,6 +2506,121 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "ac_psu:CTRLGND_A"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "CTRLGND_A"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "CTRLGND_A_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CTRLGND_A_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "ac_psu:HEADER_2X3_43_48"
 			(pin_names
 				(offset 1.016)
@@ -2674,6 +2789,260 @@
 						)
 					)
 					(number "48"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "ac_psu:CTRLGND"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "CTRLGND"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol for net \"CTRLGND\" (IPC net name)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "CTRLGND_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "CTRLGND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "ac_psu:5V_CTRL"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "5V_CTRL"
+				(at 0 3.556 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Power symbol for net \"5V_CTRL\" (IPC net name)"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "5V_CTRL_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "5V_CTRL_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4012,7 +4381,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V")
+		(lib_id "ac_psu:15V")
 		(at 78.74 73.66 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4029,7 +4398,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 82.04 73.66 270)
 			(effects
 				(font
@@ -4056,7 +4425,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 78.74 73.66 0)
 			(effects
 				(font
@@ -5129,7 +5498,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V")
+		(lib_id "ac_psu:15V")
 		(at 195.58 73.66 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5146,7 +5515,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 198.88 73.66 270)
 			(effects
 				(font
@@ -5173,7 +5542,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 195.58 73.66 0)
 			(effects
 				(font
@@ -6317,7 +6686,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V")
+		(lib_id "ac_psu:15V")
 		(at 312.42 73.66 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6334,7 +6703,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 315.72 73.66 270)
 			(effects
 				(font
@@ -6361,7 +6730,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 312.42 73.66 0)
 			(effects
 				(font
@@ -7604,7 +7973,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V_ISO_SEC")
+		(lib_id "ac_psu:15V_ISO")
 		(at 78.74 142.24 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7621,7 +7990,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO"
 			(at 82.04 142.24 270)
 			(effects
 				(font
@@ -7648,7 +8017,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 			(at 78.74 142.24 0)
 			(effects
 				(font
@@ -8721,7 +9090,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V_ISO_SEC")
+		(lib_id "ac_psu:15V_ISO")
 		(at 195.58 142.24 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -8738,7 +9107,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO"
 			(at 198.88 142.24 270)
 			(effects
 				(font
@@ -8765,7 +9134,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 			(at 195.58 142.24 0)
 			(effects
 				(font
@@ -9937,7 +10306,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ac_psu:20V_ISO_SEC")
+		(lib_id "ac_psu:15V_ISO")
 		(at 312.42 142.24 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9954,7 +10323,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V_ISO_SEC"
+		(property "Value" "15V_ISO"
 			(at 315.72 142.24 270)
 			(effects
 				(font
@@ -9981,7 +10350,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V_ISO_SEC\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V_ISO\" (IPC net name)"
 			(at 312.42 142.24 0)
 			(effects
 				(font
@@ -10221,7 +10590,7 @@
 		)
 		(uuid "a55c24bc-20e5-5416-966c-8f1ad4b8088a")
 	)
-	(global_label "ISOADA3"
+	(global_label "ISOADA3_CTRL"
 		(shape passive)
 		(at 91.44 180.34 180)
 		(fields_autoplaced yes)
@@ -10254,7 +10623,7 @@
 		(uuid "e984575b-69c9-5548-b59a-4c65df333d97")
 	)
 	(symbol
-		(lib_id "ac_psu:ISOGND")
+		(lib_id "ac_psu:CTRLGND_A")
 		(at 111.76 180.34 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10271,7 +10640,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "ISOGND"
+		(property "Value" "CTRLGND_A"
 			(at 115.06 180.34 90)
 			(effects
 				(font
@@ -10298,7 +10667,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
+		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
 			(at 111.76 180.34 0)
 			(effects
 				(font
@@ -10329,7 +10698,7 @@
 		)
 		(uuid "2cf41268-4f89-50dd-86d8-b4050f9b84bc")
 	)
-	(global_label "ISOADA2"
+	(global_label "ISOADA2_CTRL"
 		(shape passive)
 		(at 91.44 182.88 180)
 		(fields_autoplaced yes)
@@ -10361,7 +10730,7 @@
 		)
 		(uuid "5778fd54-14bf-5e1d-94f0-0be0b61e09f6")
 	)
-	(global_label "ISOADA1"
+	(global_label "ISOADA1_CTRL"
 		(shape passive)
 		(at 111.76 182.88 0)
 		(fields_autoplaced yes)
@@ -10394,7 +10763,7 @@
 		(uuid "afc2d575-8126-51a2-84df-ca4122d1f5c0")
 	)
 	(symbol
-		(lib_id "ac_psu:ISOGND")
+		(lib_id "ac_psu:CTRLGND_A")
 		(at 91.44 185.42 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10411,7 +10780,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "ISOGND"
+		(property "Value" "CTRLGND_A"
 			(at 88.14 185.42 270)
 			(effects
 				(font
@@ -10438,7 +10807,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
+		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
 			(at 91.44 185.42 0)
 			(effects
 				(font
@@ -11045,7 +11414,7 @@
 		)
 		(uuid "08e8960b-c994-586e-867d-b9cd777d64df")
 	)
-	(global_label "ADCLK_DAB"
+	(global_label "ADCLK_DAB_CTRL"
 		(shape passive)
 		(at 111.76 208.28 0)
 		(fields_autoplaced yes)
@@ -11077,7 +11446,7 @@
 		)
 		(uuid "04c79431-3afb-5746-8e24-66a2b8069024")
 	)
-	(global_label "PWM_TRANS4"
+	(global_label "PWM_TRANS4_CTRL"
 		(shape passive)
 		(at 91.44 210.82 180)
 		(fields_autoplaced yes)
@@ -11109,7 +11478,7 @@
 		)
 		(uuid "7ff8f749-1f5c-5310-90ba-ca65adf6aac9")
 	)
-	(global_label "MDATA_DAB"
+	(global_label "MDATA_DAB_CTRL"
 		(shape passive)
 		(at 111.76 210.82 0)
 		(fields_autoplaced yes)
@@ -11141,7 +11510,7 @@
 		)
 		(uuid "6f1528a8-6136-5fb7-a3a8-32637f7aa9a5")
 	)
-	(global_label "DAB_PWM_HI_SEC"
+	(global_label "DAB_PWM_HI_SEC_CTRL"
 		(shape passive)
 		(at 91.44 213.36 180)
 		(fields_autoplaced yes)
@@ -11173,7 +11542,7 @@
 		)
 		(uuid "089ba5c2-5099-522a-b164-4be61357c678")
 	)
-	(global_label "PWM_TRANS6"
+	(global_label "PWM_TRANS6_CTRL"
 		(shape passive)
 		(at 111.76 213.36 0)
 		(fields_autoplaced yes)
@@ -11205,7 +11574,7 @@
 		)
 		(uuid "8b314c38-6678-564c-a335-60c96940f2ca")
 	)
-	(global_label "DAB_PWM_LO_SEC"
+	(global_label "DAB_PWM_LO_SEC_CTRL"
 		(shape passive)
 		(at 91.44 215.9 180)
 		(fields_autoplaced yes)
@@ -11237,7 +11606,7 @@
 		)
 		(uuid "37422ff4-23f0-5c0b-8c4a-47119bf8f7a7")
 	)
-	(global_label "PWM_Q5"
+	(global_label "PWM_Q5_CTRL"
 		(shape passive)
 		(at 111.76 215.9 0)
 		(fields_autoplaced yes)
@@ -11269,7 +11638,7 @@
 		)
 		(uuid "6949fe9d-5ba3-5a8b-9272-03d864bb22ed")
 	)
-	(global_label "PWM_Q6"
+	(global_label "PWM_Q6_CTRL"
 		(shape passive)
 		(at 91.44 218.44 180)
 		(fields_autoplaced yes)
@@ -11301,7 +11670,7 @@
 		)
 		(uuid "c19d04e2-fd23-5d19-b8d6-154aa0da8971")
 	)
-	(global_label "INU_ADCLK"
+	(global_label "INU_ADCLK_CTRL"
 		(shape passive)
 		(at 111.76 218.44 0)
 		(fields_autoplaced yes)
@@ -11333,7 +11702,7 @@
 		)
 		(uuid "dedb0779-7fac-57b1-94bc-cdc24c233ff2")
 	)
-	(global_label "PWM_Q8"
+	(global_label "PWM_Q8_CTRL"
 		(shape passive)
 		(at 91.44 220.98 180)
 		(fields_autoplaced yes)
@@ -11365,7 +11734,7 @@
 		)
 		(uuid "71a6ef42-0edd-5fd3-9334-213e38f558e9")
 	)
-	(global_label "MDATA_INU"
+	(global_label "MDATA_INU_CTRL"
 		(shape passive)
 		(at 111.76 220.98 0)
 		(fields_autoplaced yes)
@@ -11397,7 +11766,7 @@
 		)
 		(uuid "c1a8655e-4459-521a-b5ba-01081ec9b03d")
 	)
-	(global_label "PWM_TRANS5"
+	(global_label "PWM_TRANS5_CTRL"
 		(shape passive)
 		(at 91.44 223.52 180)
 		(fields_autoplaced yes)
@@ -11429,7 +11798,7 @@
 		)
 		(uuid "31eaf3f5-b332-52c0-8356-155ca1e10c2f")
 	)
-	(global_label "GPIO_BYPASS_RLY_ISO"
+	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
 		(shape passive)
 		(at 111.76 223.52 0)
 		(fields_autoplaced yes)
@@ -11461,7 +11830,7 @@
 		)
 		(uuid "2ad8e20d-6b53-5efb-8459-50a079a3a92f")
 	)
-	(global_label "PWM_Q7"
+	(global_label "PWM_Q7_CTRL"
 		(shape passive)
 		(at 91.44 226.06 180)
 		(fields_autoplaced yes)
@@ -11625,7 +11994,7 @@
 		(uuid "90d49321-756c-56a5-93d0-7c4a70e99fc6")
 	)
 	(symbol
-		(lib_id "ac_psu:ISOGND")
+		(lib_id "ac_psu:CTRLGND")
 		(at 287.02 198.12 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11642,7 +12011,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "ISOGND"
+		(property "Value" "CTRLGND"
 			(at 283.72 198.12 270)
 			(effects
 				(font
@@ -11669,7 +12038,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"ISOGND\" (IPC net name)"
+		(property "Description" "Power symbol for net \"CTRLGND\" (IPC net name)"
 			(at 287.02 198.12 0)
 			(effects
 				(font
@@ -11747,7 +12116,7 @@
 		(uuid "a5f5e4f5-05b6-5f71-803b-8c03a2b16ac5")
 	)
 	(symbol
-		(lib_id "ac_psu:5V_ISOL")
+		(lib_id "ac_psu:5V_CTRL")
 		(at 312.42 198.12 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11764,7 +12133,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "5V_ISOL"
+		(property "Value" "5V_CTRL"
 			(at 315.72 198.12 270)
 			(effects
 				(font
@@ -11791,7 +12160,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"5V_ISOL\" (IPC net name)"
+		(property "Description" "Power symbol for net \"5V_CTRL\" (IPC net name)"
 			(at 312.42 198.12 0)
 			(effects
 				(font
@@ -11812,7 +12181,18 @@
 			)
 		)
 	)
-	(text "ISOGND enters the board through J12 / J4 / J6 / J8 (PWR_FLAG here); GND, 20V, 20V_ISO_SEC are flagged on sheet 7."
+	(text "v5: J11 = CTRL island A (CTRLGND_A), J12 = CTRL island B (CTRLGND, 5V_CTRL); the islands meet on the card and through the J13/J14 link."
+		(exclude_from_sim no)
+		(at 190.5 214.63 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "59951d4b-9fe1-5023-8b48-f79265618281")
+	)
+	(text "ISOGND: PWR_FLAG here; GND, 15V, 15V_ISO, CTRLGND, 5V_CTRL are flagged on sheet 7."
 		(exclude_from_sim no)
 		(at 190.5 218.44 0)
 		(effects
@@ -11821,7 +12201,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "59951d4b-9fe1-5023-8b48-f79265618281")
+		(uuid "14bbe747-1081-536e-8bbf-c3c9b78a865a")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -11896,7 +12276,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "14bbe747-1081-536e-8bbf-c3c9b78a865a")
+		(uuid "df2d7b69-c1a3-5f51-b5fe-b34c09675d87")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")

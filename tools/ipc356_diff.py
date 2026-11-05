@@ -131,9 +131,16 @@ def main():
     used = set()
     pairs = []
     worst = 0.0
+    cut_nets = deviations.v5_cut_nets()
+    v5gone = []
     for p in prot:
         key = (p["kind"], p["refdes_raw"] if p["kind"] == "pad" else "", p["pin"] if p["kind"] == "pad" else "")
         cands = [r for r in by_key.get(key, []) if id(r) not in used]
+        if p["kind"] == "via" and (deviations.in_pending(p["x_mm"], p["y_mm"]) or p["net"] in cut_nets):
+            near = [r for r in cands if math.hypot(r["x_mm"] - p["x_mm"], r["y_mm"] - p["y_mm"]) <= TOL]
+            if not near:
+                v5gone.append(p)   # v5: deleted with the old copper (pending GUI layout / cut chain)
+                continue
         if not cands:
             errors.append(f"Proteus {p['kind']} {p['refdes']}-{p['pin']} at ({p['x_mm']}, {p['y_mm']}): no KiCad record")
             continue
@@ -175,7 +182,15 @@ def main():
         if len(ns) > 1:
             errors.append(f"KiCad net {k} spans Proteus nets {sorted(ns)}")
     mapping = {n: next(iter(ks)) for n, ks in fwd.items() if len(ks) == 1}
-    for r, want in v4recs:   # v4 pads / vias: on the listed net
+    pnets = {p["net"] for p in prot if p.get("net")}
+    for r, want in v4recs:   # v4 pads / vias: on the listed net (v5: renamed / new nets)
+        want = deviations.new_net(want)
+        if want == "N/C":
+            if not kicad_unconnected(r["net"]):
+                errors.append(f"v5 pad {r['refdes']}-{r['pin']}: N/C in the list, KiCad net {r['net']}")
+            continue
+        if want not in pnets and (r["net"] == want or (len(r["net"]) >= 12 and want.startswith(r["net"]))):
+            continue   # a new v5 net (no Proteus image; the IPC export truncates long names)
         if mapping.get(want) != r["net"]:
             errors.append(f"v4 {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): "
                           f"KiCad net {r['net']}, listed {want} -> {mapping.get(want)}")
@@ -227,6 +242,8 @@ def main():
     print(f"ipc356_diff: Proteus {len(prot)} records, KiCad {len(kic)}; matched {len(pairs)} "
           f"({stats['pad']} pads incl. {stats['N/C pads']} N/C, {stats['via']} vias, {stats['hole']} holes), "
           f"worst position offset {worst:.3f} mm (limit {TOL})")
+    if v5gone:
+        print(f"ipc356_diff: {len(v5gone)} Proteus vias deleted by v5 (pending-layout areas / cut v5 chains)")
     print(f"ipc356_diff: {len(mapping)} Proteus nets mapped 1:1 onto KiCad nets, "
           f"{len(errors)} mismatches")
     if not deviations.proteus_mode():

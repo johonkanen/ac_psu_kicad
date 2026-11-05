@@ -1,6 +1,56 @@
 # Status
 
-Updated: 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 1 – aux flyback and CTRL isolation: schematic done, board staged (2026-11-05)
+
+User 2026-11-05: "do 1, the v5 aux flyback", scope "Flyback + CTRL isolation" (schematic and board
+placement; the logic-area re-layout is GUI work). Design record: V5_PLAN.md section 8 (bobbin creepage
+re-check: pin grid assumed 5.0 x 12.7 mm from the vertical CSV former, **verify on a CPV sample**;
+row-to-row 10.7 mm on the PCB, 12.0 mm over the former; pins to core 2.25 mm per side -> core
+insulation, as before), CTRL_ISOLATION_PLAN.md section 8 (decisions taken: CTRLGND / CTRLGND_A, J13/J14
+5 V link to island A, ISOADA x0.4 / x2.49 scaling, PEC1/PEC2 PE bonds).
+
+**Schematic** (all generated): sheet 7 rewritten (UCC28710 U18, IPD95R450P7 Q17, MMBT3904/3906
+buffer, US1M + SMBJ170A clamp, T1 EE25, Out1 15V / Out2 15V_ISO, W1 CTRL winding -> TPS54202 U28 ->
+5V_CTRL, J13, PEC2; kept C28/C41/C36/C15/C67/C58/C57/C68), sheet 11 to A2 with CTRL island A (U19/U20
+ISO7760F, U21 CA-IS3742, U22-U24 AMC1311, U25/U26 OPA2350, U27 TPS73033, J14, PEC1; U13/U15/U16 A
+sides on 3V3_CTRL/CTRLGND_A), sheet 2 J11/J12 on the CTRL nets, sheets 1/3/5/10 20V -> 15V and
+20V_ISO_SEC -> 15V_ISO. Part list in `tools/v5/v5_parts.py` (98 new, 23 removed). ERC 0 errors (the 8
+old warnings).
+
+**Deviation framework:** `lib/v5_deviations.csv` (from `tools/v5/make_v5_lists.py`: 23 remove,
+2 rename, 37 pin moves - exactly J11 x19, J12 x6, U13/U15/U16 pins 1/8, C82/C83/C86 - 98 part/value,
+335 add rows incl. N/C pins) and `lib/v5_copper.csv` (4 **pending** areas: aux area, card area, signal
+bundle J11 -> J4/J6/J8/U4, staging area). `tools/deviations.py` knows `remove`, `rename` and the
+pending areas; check_board / ipc356_diff / gerber_roundtrip / check_footprints / gen_footprints skip
+removed parts; DRC unconnected and clearance items, copper opens and domain gaps of the v5 change
+(v5 parts, moved pads, cut chains, pending areas) are listed as **pending** instead of failing.
+Negative test: dropping the J12-48 pin row fails compare and check_board.
+
+**Domains:** C (CTRLGND, CTRLGND_A) added to tools/v4/domains.py (barriers T1, U19-U21, U22-U24);
+net class DOM_C, rules P-C and I-C 5.0 mm in kicad/ac_psu.kicad_dru (C-E none: CTRL is bonded to PE).
+
+**Board** (`tools/v5/v5_1_aux_ctrl.py`, seed 5001, refuses to run twice): deleted the 23 footprints,
+126 tracks/vias and 4 zones of the 15 nets left without pads; 20V/20V_ISO_SEC copper renamed; the 37
+moved pads took their CTRL nets and 240 tracks/vias hanging off them were cut (to the first pad or
+branch; whole chains for the ISO-side PWMs, which now come from U19/U20); the 98 new parts are
+**unplaced in a staging area below the outline** (IPC y -92 .. -152: aux flyback / island B /
+island A rows). The CTRL rules make the ISO pours retreat 5 mm from the J11/J12 area.
+
+**Left for the KiCad GUI** (the pending lists in the check output are the to-do list): place T1, U18,
+Q17 and the flyback in the aux area (vertical former below y -18.8, outside the card outline; core
+insulated), the island B parts at J12 and the island A parts at J11; re-cut In1/In2 under the islands;
+route; slots >= 1 mm under every isolator; then delete each pending row of lib/v5_copper.csv whose area
+is done, so the checks become strict there again. Also open: M4 ring-lug terminals for the 17 soldered
+leads (v5), fab BOM/CPL after the layout, the CPV pin grid.
+
+Last verification: `tools/check_all.sh` ALL CHECKS PASSED - compare 365/365 parts, 1170 pins, 0
+wrong-net; check_footprints OK; check_board 377 footprints, 1202 pads, 217 IPC nets 1:1, 20 v4 vias,
+24 Proteus vias deleted by v5; assign_nets 562 groups, 0 shorts/orphans/opens, 87 v5 opens pending;
+domain_rules 113 P / 95 I / 8 E / 64 C nets; drc 291 (44 courtyards, 2 pth_inside_courtyard + warnings),
+0 shorts, 0 unconnected, 0 parity, 262 unconnected + 427 clearance pending; domain_gaps 0, 208 pending;
+ipc356_diff 0 mismatches; roundtrip OK, 0 drill mismatches.
 
 ## v4 fix 16 – pours without holes (2026-11-05)
 

@@ -1835,7 +1835,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "ac_psu:20V"
+		(symbol "ac_psu:15V"
 			(power global)
 			(pin_numbers
 				(hide yes)
@@ -1860,7 +1860,7 @@
 					)
 				)
 			)
-			(property "Value" "20V"
+			(property "Value" "15V"
 				(at 0 3.556 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1892,7 +1892,7 @@
 					)
 				)
 			)
-			(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+			(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -1914,7 +1914,7 @@
 					)
 				)
 			)
-			(symbol "20V_0_1"
+			(symbol "15V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1952,7 +1952,7 @@
 					)
 				)
 			)
-			(symbol "20V_1_1"
+			(symbol "15V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -5513,7 +5513,7 @@
 		(uuid "a6f3fca9-172c-5600-8308-d16f1e5cd51f")
 	)
 	(symbol
-		(lib_id "ac_psu:20V")
+		(lib_id "ac_psu:15V")
 		(at 256.54 20.32 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -5530,7 +5530,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "20V"
+		(property "Value" "15V"
 			(at 256.54 16.764 0)
 			(effects
 				(font
@@ -5556,7 +5556,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol for net \"20V\" (IPC net name)"
+		(property "Description" "Power symbol for net \"15V\" (IPC net name)"
 			(at 256.54 20.32 0)
 			(effects
 				(font

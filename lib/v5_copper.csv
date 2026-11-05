@@ -1,0 +1,10 @@
+# v5 board copper (IPC frame, mm, Y up), on top of lib/v4_copper.csv; read by tools/deviations.py.
+#   pending  rectangle where the v5 layout is left to the KiCad GUI (V5_PLAN.md D5, CTRL_ISOLATION_PLAN.md
+#            section 4): copper may differ from Proteus (gerber_roundtrip), and DRC clearance /
+#            unconnected items, copper opens (assign_nets) and domain gaps (domain_gaps) that lie
+#            here are listed as pending instead of failing. Remove a row when its area is laid out.
+kind,layer,x,y,x1,y1,net,note
+pending,*,65.0,-62.0,110.0,-10.0,,aux flyback area (sheet 7: removed IW1830/EF20 copper; T1/U18/Q17 to place)
+pending,*,40.0,-22.0,118.65,47.0,,control-card area: CTRL islands A (J11) and B (J12), plane re-cut, isolators
+pending,*,-130.0,-160.0,120.0,-84.0,,staging area below the board (new v5 parts, unplaced)
+pending,*,18.0,36.0,95.0,54.0,,ISO-side signal bundle J11 -> J4/J6/J8 and U4 (chains cut off J11; re-route from U19/U20/U21)

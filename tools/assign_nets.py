@@ -326,7 +326,37 @@ def run_check(board, layers, vianets):
                     wrong.append(f"{it.label}: net {own!r}, connected to {net}")
                 elif not net and own:
                     wrong.append(f"{it.label}: net {own!r}, group has no pad")
+    # v5: opens of nets touched by the v5 change are pending GUI layout (lib/v5_copper.csv)
+    import deviations
+    v5refs = deviations.v5_parts()
+    moved = {(r["ref"], r["pin"]) for r in deviations.rows() if r["kind"] == "pin" and r.get("fix") == "v5"}
+    cut = deviations.v5_cut_nets()
+    pending = []
+
+    def v5_open(net, gs):
+        if net in cut:
+            return True
+        for g in gs:
+            pads = [items[i] for i in res["groups"][g] if items[i].kind == "pad"]
+            if any(p.obj.GetParentFootprint().GetReference() in v5refs
+                   or (p.obj.GetParentFootprint().GetReference(), p.obj.GetNumber()) in moved for p in pads):
+                return True
+            if pads and all(deviations.in_pending(pcbnew.ToMM(p.obj.GetPosition().x), -pcbnew.ToMM(p.obj.GetPosition().y))
+                            for p in pads):
+                return True
+        # a pour split by the v5 domain rules inside a pending area: every group reaches into one
+        return all(any(touches_pending(items[i].obj) for i in res["groups"][g]) for g in gs)
+
+    def touches_pending(obj):
+        bb = obj.GetBoundingBox()
+        x0, x1 = pcbnew.ToMM(bb.GetLeft()), pcbnew.ToMM(bb.GetRight())
+        y0, y1 = -pcbnew.ToMM(bb.GetBottom()), -pcbnew.ToMM(bb.GetTop())
+        return any(x0 <= a[2] and a[0] <= x1 and y0 <= a[3] and a[1] <= y1 for a in deviations.pending_areas())
+    if not deviations.proteus_mode():
+        pending = [o for o in res["opens"] if v5_open(*o)]
+        res["opens"] = [o for o in res["opens"] if o not in pending]
     describe("after zone fill (KiCad pads, tracks, vias, filled zones)", items, res, out)
+    out.append(f"v5 opens pending GUI layout: {len(pending)}: " + " ".join(sorted(n for n, _ in pending)))
     for g, _ in res["shorts"]:
         for a, b, layer in conflicts(items, res["groups"][g], layers):
             out.append(f"  touching on {layer}: {a.label} [{a.obj.GetNetname()}] - {b.label} [{b.obj.GetNetname()}]")
@@ -338,7 +368,8 @@ def run_check(board, layers, vianets):
             head = f.read().split(out[0] + "\n")[0]  # keep the stage A/B sections, replace this one
     with open(REPORT, "w") as f:
         f.write(head + "\n".join(out) + "\n")
-    print(summary("after zone fill", res) + f", {len(wrong)} items with a foreign net")
+    print(summary("after zone fill", res) + f", {len(wrong)} items with a foreign net"
+          + (f"; {len(pending)} v5 opens pending GUI layout" if pending else ""))
     for line in out[1:40]:
         if line.startswith("  "):
             print("assign_nets:" + line)

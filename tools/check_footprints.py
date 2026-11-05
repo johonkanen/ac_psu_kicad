@@ -131,13 +131,16 @@ def main():
                 errors.append(f"{ref}: footprint {sorted(fps)}, map {fmap.get(ref)}, v4 list {added['footprint']}")
                 continue
             path = footprint_path(fpid)
-            nums = {p["num"] for p in fpgeom.load_footprint(path)} if os.path.exists(path) else set()
+            nums = {p["num"] for p in fpgeom.load_footprint(path) if p["num"]} if os.path.exists(path) else set()
             if nums != set(added["pins"]):
                 errors.append(f"{ref}: footprint pads {sorted(nums)} != v4 pins {sorted(added['pins'])}")
             v4parts.append(ref)
     swapped = deviations.footprint_changes()
     v4swaps = []
+    gone = deviations.removed()
     for ref in sorted(ipc):
+        if ref in gone:
+            continue   # v5: part deleted (lib/v5_deviations.csv kind remove)
         if ref not in sch:
             errors.append(f"{ref}: not in the schematic")
             continue

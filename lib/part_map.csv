@@ -67,11 +67,7 @@ C58,7,ac_psu:C,
 C59,4,ac_psu:C,
 C60,4,ac_psu:C,
 C61,4,ac_psu:C_Polarized,SNAP_IN_35MM
-C62,7,ac_psu:C,
-C63,7,ac_psu:C,
 C64,8,ac_psu:C,
-C65,7,ac_psu:C,
-C66,7,ac_psu:C,
 C67,7,ac_psu:C,
 C68,7,ac_psu:C,
 C69,3,ac_psu:C,
@@ -116,19 +112,55 @@ C107,5,ac_psu:C,
 C108,5,ac_psu:C,
 C109,3,ac_psu:C,
 C110,3,ac_psu:C,
+C111,7,ac_psu:C,47n 1kV
+C112,7,ac_psu:C,47n 1kV
+C113,7,ac_psu:C,15u 50V
+C114,7,ac_psu:C,100n
+C115,7,ac_psu:C_Polarized,470u 25V
+C116,7,ac_psu:C_Polarized,470u 25V
+C117,11,ac_psu:C,100n
+C118,11,ac_psu:C,100n
+C119,11,ac_psu:C,100n
+C120,11,ac_psu:C,100n
+C121,11,ac_psu:C,100n
+C122,11,ac_psu:C,100n
+C123,11,ac_psu:C,100n
+C124,11,ac_psu:C,100n
+C125,11,ac_psu:C,100n
+C126,11,ac_psu:C,100n
+C127,11,ac_psu:C,100n
+C128,11,ac_psu:C,100n
+C129,11,ac_psu:C,4.7n C0G
+C130,11,ac_psu:C,4.7n C0G
+C131,11,ac_psu:C,10n C0G
+C132,11,ac_psu:C,100n
+C133,11,ac_psu:C,100n
+C134,11,ac_psu:C,10n
+C135,11,ac_psu:C,2.2u
+C136,11,ac_psu:C,1u
+C137,7,ac_psu:C_Polarized,470u 16V
+C138,7,ac_psu:C_Polarized,470u 16V
+C139,7,ac_psu:C,10u 25V
+C140,7,ac_psu:C,100n
+C141,7,ac_psu:C,100n
+C142,7,ac_psu:C,22u 10V
+C143,7,ac_psu:C,22u 10V
+C144,7,ac_psu:C,75p
 CM1,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM2,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM3,5,ac_psu:WE-CMBNC,WE-CMBNC
-D1,7,ac_psu:D,ES1A
-D2,7,ac_psu:D,ES1A
 D3,10,ac_psu:D_Schottky,ZLLS400TA
 D4,10,ac_psu:D_Schottky,ZLLS400TA
 D5,10,ac_psu:D_Schottky,ZLLS400TA
-D6,7,ac_psu:D,S1M
-D7,7,ac_psu:D_Schottky,ZLLS400TA
 D8,8,ac_psu:D_Zener,MM3Z5V1T1
 D9,10,ac_psu:D_Zener,MM3Z5V1T1
 D10,10,ac_psu:D_Schottky,ZLLS400TA
+D11,7,ac_psu:D,BAS16WS
+D12,7,ac_psu:D,US1M
+D13,7,ac_psu:D_TVS,SMBJ170A
+D14,7,ac_psu:D,ES2D
+D15,7,ac_psu:D,ES2D
+D16,7,ac_psu:D_Schottky,SS310
 DAB_PRI_1,6,ac_psu:PIN,PIN
 DAB_PRI_2,6,ac_psu:PIN,PIN
 DAB_SEC_1,6,ac_psu:PIN,PIN
@@ -148,7 +180,10 @@ J9,5,ac_psu:PIN,PIN
 J10,5,ac_psu:PIN,PIN
 J11,2,ac_psu:HEADER_38_50MIL,38 PIN HEADER 50TH
 J12,2,ac_psu:HEADER_2X3_43_48,2X3 PIN 50TH CONNECTOR
+J13,7,ac_psu:CONN_2,CTRL 5V link B
+J14,11,ac_psu:CONN_2,CTRL 5V link A
 L1,9,ac_psu:L,L
+L2,7,ac_psu:L,15u
 PE1,1,ac_psu:PIN,PIN
 PE2,1,ac_psu:PIN,PIN
 PE3,1,ac_psu:PIN,PIN
@@ -157,7 +192,8 @@ PE5,5,ac_psu:PIN,PIN
 PE6,5,ac_psu:PIN,PIN
 PE7,5,ac_psu:PIN,PIN
 PE8,4,ac_psu:PIN,PIN
-PWM1,7,ac_psu:IW1830,IW1830
+PEC1,11,ac_psu:PIN,PIN
+PEC2,7,ac_psu:PIN,PIN
 Q1,1,ac_psu:C3M0065090D,C3M0065090D
 Q2,1,ac_psu:C3M0065090D,C3M0065090D
 Q3,1,ac_psu:C3M0065090D,C3M0065090D
@@ -172,6 +208,9 @@ Q11,6,ac_psu:C3M0065090D,C3M0065090D
 Q12,6,ac_psu:C3M0065090D,C3M0065090D
 Q13,10,ac_psu:2N7000,2N7000
 Q14,10,ac_psu:2N7000,2N7000
+Q15,7,ac_psu:MMBT3904,MMBT3904
+Q16,7,ac_psu:MMBT3906,MMBT3906
+Q17,7,ac_psu:IPD95R450P7,IPD95R450P7
 R1,4,ac_psu:R,
 R2,1,ac_psu:R,
 R3,1,ac_psu:R,
@@ -194,18 +233,10 @@ R19,3,ac_psu:R,
 R20,1,ac_psu:SLA-12VDC-SL-A,SLA-12VDC-SL-A
 R21,1,ac_psu:R,
 R22,11,ac_psu:R,
-R23,7,ac_psu:R,
-R24,7,ac_psu:R,
-R25,7,ac_psu:R,
-R26,7,ac_psu:R,
 R27,4,ac_psu:R,
 R28,4,ac_psu:R,
-R29,7,ac_psu:R,
 R30,3,ac_psu:R,
-R31,7,ac_psu:R,
 R32,3,ac_psu:R,
-R33,7,ac_psu:R,
-R34,7,ac_psu:R,
 R35,4,ac_psu:R,
 R36,4,ac_psu:R,
 R37,4,ac_psu:R,
@@ -214,13 +245,8 @@ R39,4,ac_psu:R,
 R40,3,ac_psu:R,
 R41,4,ac_psu:R,
 R42,4,ac_psu:R,
-R43,7,ac_psu:R,
-R44,7,ac_psu:R,
-R45,7,ac_psu:R,
 R46,5,ac_psu:R,
-R47,7,ac_psu:R,
 R48,1,ac_psu:FKK5R0020FE-TR,FKK5R0020FE-TR
-R49,7,ac_psu:R,
 R50,10,ac_psu:R,
 R51,5,ac_psu:R,
 R52,5,ac_psu:R,
@@ -269,11 +295,48 @@ R94,10,ac_psu:R,
 R95,1,ac_psu:R,
 R96,4,ac_psu:R,
 R97,4,ac_psu:R,
+R98,7,ac_psu:R,10R 2512
+R100,7,ac_psu:R,47R
+R101,7,ac_psu:R,59.0k
+R102,7,ac_psu:R,21.0k
+R103,7,ac_psu:R,118k
+R104,7,ac_psu:R,1k
+R105,7,ac_psu:R,0.562R
+R106,7,ac_psu:R,10R
+R107,7,ac_psu:R,10k
+R108,7,ac_psu:R,4.7k
+R109,7,ac_psu:R,4.7k
+R110,11,ac_psu:R,6.8k 0.1%
+R111,11,ac_psu:R,10k 0.1%
+R112,11,ac_psu:R,6.8k 0.1%
+R113,11,ac_psu:R,10k 0.1%
+R114,11,ac_psu:R,6.8k 0.1%
+R115,11,ac_psu:R,10k 0.1%
+R116,11,ac_psu:R,10k 0.1%
+R117,11,ac_psu:R,24.9k 0.1%
+R118,11,ac_psu:R,10k 0.1%
+R119,11,ac_psu:R,24.9k 0.1%
+R120,11,ac_psu:R,10k 0.1%
+R121,11,ac_psu:R,24.9k 0.1%
+R122,11,ac_psu:R,10k 0.1%
+R123,11,ac_psu:R,24.9k 0.1%
+R124,11,ac_psu:R,10k 0.1%
+R125,11,ac_psu:R,24.9k 0.1%
+R126,11,ac_psu:R,10k 0.1%
+R127,11,ac_psu:R,24.9k 0.1%
+R128,11,ac_psu:R,8.2k
+R129,11,ac_psu:R,8.2k
+R130,11,ac_psu:R,8.2k
+R131,7,ac_psu:R,910R
+R132,7,ac_psu:R,511k
+R133,7,ac_psu:R,105k
+R134,7,ac_psu:R,100k
+R135,7,ac_psu:R,13.3k
 R256,5,ac_psu:R,
 REF1,3,ac_psu:REF3025,REF3025
 REF2,3,ac_psu:REF3025,REF3025
+T1,7,ac_psu:EE25_AUX_TRANS,EE25 aux flyback
 TR1,6,ac_psu:ETD34_TRAN_1P1S,ETD34 TRAN 1P1S
-TR2,7,ac_psu:EF20_AUX_TRANS,EF20_AUX_TRANS
 U1,1,ac_psu:OPA2353UA,OPA2353UA
 U2,4,ac_psu:TLV316IDBVR,TLV316IDBVR
 U3,3,ac_psu:TPS73033DBVT,TPS73033DBVT
@@ -291,3 +354,15 @@ U14,4,ac_psu:TLV316IDBVR,TLV316IDBVR
 U15,11,ac_psu:Si8661BD-B-IS,Si8661BD-B-IS
 U16,11,ac_psu:Si8660BD-B-IS,Si8660BD-B-IS
 U17,11,ac_psu:Si8661BD-B-IS,Si8661BD-B-IS
+U18,7,ac_psu:UCC28710,UCC28710DR
+U19,11,ac_psu:ISO7760F,ISO7760FDWR
+U20,11,ac_psu:ISO7760F,ISO7760FDWR
+U21,11,ac_psu:CA-IS3742,CA-IS3742LW
+U22,11,ac_psu:AMC1311,AMC1311BDWVR
+U23,11,ac_psu:AMC1311,AMC1311BDWVR
+U24,11,ac_psu:AMC1311,AMC1311BDWVR
+U25,11,ac_psu:OPA2350EA,OPA2350EA
+U26,11,ac_psu:OPA2350EA,OPA2350EA
+U27,11,ac_psu:TPS73033DBVT,TPS73033DBVT
+U28,7,ac_psu:TPS54202,TPS54202DDCR
+W1,7,ac_psu:CTRL_WINDING,"CTRL winding (T1, TIW)"

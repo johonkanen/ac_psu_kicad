@@ -1,6 +1,6 @@
 # Control-card isolation on the baseboard (branch `ctrl-isolation`)
 
-Status: plan only (2026-10-31), no design change yet. Based on main 2104b5b (v4 with fixes 1–12).
+Status 2026-11-05: **schematic done, board staged** (section 8; layout in the GUI). Was: plan only (2026-10-31). Based on main 2104b5b (v4 with fixes 1–12).
 User decisions 2026-10-31: **done together with v5** (this branch is the v5 branch; see V5_PLAN.md),
 **CTRL power from a dedicated winding on the v5 aux flyback** (option B). Total aux power about
 15–20 W (user estimate). Decisions 2 (two islands) and 3 (CTRL bonded to PE) taken 2026-10-31; all decisions are taken.
@@ -276,3 +276,28 @@ CTRL winding (option B) and also changes the area around U8/J12. The frozen-boar
    - **EMC benefit:** the card's ground and the Ethernet shield are at earth potential, not jumping
      with the inverter's switching.
 4. **Schedule – together with v5** (user, 2026-10-31).
+
+## 8. Implementation (2026-11-05, with V5_PLAN.md section 8)
+
+Schematic: sheet 2 (J11 → CTRL island A, J12 → island B), sheet 11 (U13/U15/U16 A sides on
+3V3_CTRL/CTRLGND_A, new U19/U20 ISO7760F, U21 CA-IS3742, U22-U24 AMC1311, U25/U26 OPA2350, U27
+TPS73033, J14, PEC1), sheet 7 (CTRL winding W1 → D16 → CTRL_RAW → U28 TPS54202 → 5V_CTRL, J13, PEC2).
+Decisions taken in the implementation (review them):
+- **Two CTRL ground nets:** CTRLGND (island B, J12) and CTRLGND_A (island A, J11). They are one domain
+  but meet only off the board (card, J13/J14 link), so one net name would ask for a copper
+  connection across the ISO area. Both seed domain C (tools/v4/domains.py).
+- **Island A supply:** a two-wire link J13 (island B) → J14 (island A) carrying 5V_CTRL / CTRLGND
+  (double-insulated wire), then U27 TPS73033 → 3V3_CTRL. Chosen over a second reinforced DC/DC
+  (not available for the 500 V working voltage) and over a second set of TIW leads.
+- **ISOADA scaling:** ISOADAn (8.2k source + filter C, unchanged) → 6.8k/10k (×0.4, ≤ 1.32 V) →
+  AMC1311 (×1) → difference amp 24.9k/10k (×2.49) → 8.2k + 4.7n/4.7n/10n → J11: overall ×0.996,
+  0-3.3 V as before (reference CTRLGND_A, so the 1.65 V mid-scale stays mid-scale). The ISO-side
+  filter corners move to ≈ 6.1 / 6.1 / 2.9 kHz (8.2k ‖ 16.8k); the CTRL-side 8.2k + C restores
+  4.1 / 4.1 / 1.9 kHz at J11.
+- **PE bonding:** PEC1 (CTRLGND_A) and PEC2 (CTRLGND), Ø 4.0 mm pads / 3.0 mm holes like PE1.
+- U20 INE/INF tied to CTRLGND_A (two spare channels, outputs open); U26B spare as a grounded follower.
+
+Board: `tools/v5/v5_1_aux_ctrl.py` (see STATUS.md "v5 step 1"). The DRC rules (net class DOM_C,
+P-C and I-C 5.0 mm) make every existing ISO pour retreat 5 mm from the CTRL pads; the 208 adjacent-
+layer overlaps and 427 clearance violations domain_gaps / DRC list as pending are the re-layout
+to-do list for the GUI.

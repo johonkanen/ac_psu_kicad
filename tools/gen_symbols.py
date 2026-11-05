@@ -18,8 +18,11 @@ from p2k.symgen import *  # noqa: E402,F401,F403
 from p2k.symgen import run  # noqa: E402
 
 
-GROUNDS = ["GND", "PGND", "ISOGND", "ISOPGND", "DAB_GROUND"]  # v4: DGND, RET_ISO merged into GND / ISOGND
-SUPPLIES = ["VCC", "3V3_ISO", "5V", "5V_ISOL", "20V", "20V_ISO_SEC", "DC+", "ISODC+"]
+GROUNDS = ["GND", "PGND", "ISOGND", "ISOPGND", "DAB_GROUND",  # v4: DGND, RET_ISO merged into GND / ISOGND
+           "CTRLGND", "CTRLGND_A"]  # v5: control-card domain, islands B (J12) and A (J11)
+# v5: 20V / 20V_ISO_SEC renamed 15V / 15V_ISO (aux flyback outputs), CTRL rails added
+SUPPLIES = ["VCC", "3V3_ISO", "5V", "5V_ISOL", "15V", "15V_ISO", "DC+", "ISODC+",
+            "3V3_CTRL", "5V_CTRL", "5V_CTRL_A"]
 
 
 def build():
@@ -76,18 +79,46 @@ def build():
              (9, "C", IN), (6, "INH", IN)],
             [(3, "X", PAS)], top=[(16, "VDD", PI)], bottom=[(7, "VEE", PI), (8, "VSS", PI)],
             desc="8:1 analog mux (Proteus hides VDD/VEE/VSS; shown here)"),
-        box("IW1830", "PWM",
-            [(1, "Vcc", PI), (2, "Vsense", IN), (3, "GND", PI)],
-            [(8, "D", PAS), (7, "D", PAS), (5, "S", PAS), (4, "I_sense", IN)],
-            desc="Flyback controller with integrated switch, SOIC-8 (no pin 6)"),
         box("SLA-12VDC-SL-A", "K",
             [(6, "COIL_2", PAS), (5, "COM_2", PAS)],
             [(3, "NO", PAS), (2, "COIL_1", PAS), (1, "COM_1", PAS)],
             desc="Power relay (Proteus refdes R20/R79; no pin 4)"),
-        box("EF20_AUX_TRANS", "TR",
-            [(i, str(i), PAS) for i in (1, 2, 3, 4, 5)],
+    ]
+    # v5: aux flyback (UCC28710 + 950 V MOSFET, EE25) and control-card isolation (CTRL domain)
+    syms += [
+        from_std("Device", "Q_NMOS", "IPD95R450P7", "Q", desc="950 V N-MOSFET, DPAK (TO-252-2), 1=G 2=D (tab) 3=S",
+                 pins={"G": "1", "D": "2", "S": "3"}, names={"1": "G", "2": "D", "3": "S"}),
+        from_std("Device", "Q_NPN", "MMBT3904", "Q", desc="NPN, SOT-23, 1=B 2=E 3=C",
+                 pins={"B": "1", "E": "2", "C": "3"}, names={"1": "B", "2": "E", "3": "C"}),
+        from_std("Device", "Q_PNP", "MMBT3906", "Q", desc="PNP, SOT-23, 1=B 2=E 3=C",
+                 pins={"B": "1", "E": "2", "C": "3"}, names={"1": "B", "2": "E", "3": "C"}),
+        from_std("Device", "D_Zener", "D_TVS", "D", desc="Unidirectional TVS diode, pins A/C", pins=D_PINS),
+        from_std("Connector_Generic", "Conn_01x02", "CONN_2", "J", desc="2-pin connector"),
+        from_std("Amplifier_Operational", "LM2904", "OPA2350EA", "U", desc="Dual rail-to-rail op-amp, VSSOP-8"),
+        box("UCC28710", "U", [(7, "HV", PAS), (1, "VDD", PI), (2, "VS", IN), (3, "CBC", PAS)],
+            [(6, "DRV", OUT), (5, "CS", IN), None, (4, "GND", PI)],
+            desc="PSR flyback controller, SOIC-7 (D): pin 7 = HV at the pin-8 position"),
+        box("EE25_AUX_TRANS", "T", [(i, str(i), PAS) for i in (1, 2, 3, 4, 5)],
             [(i, str(i), PAS) for i in (10, 9, 8, 7, 6)],
-            desc="EF20 auxiliary flyback transformer, 10 pins"),
+            desc="EE25 aux flyback transformer, Ferroxcube CPV-E25/13/7-1S-10P-Z (1 drain, 2 DC+, 3 P1/P2 joint, "
+                 "4 GND, 5 Out1, 6 Out2, 7 ISOGND, 8-10 cut)"),
+        box("CTRL_WINDING", "W", [(1, "CTRL+", PAS)], [(2, "CTRL-", PAS)],
+            desc="CTRL winding of the aux transformer T1: TIW flying leads soldered into two holes (no pins on T1)"),
+        box("ISO7760F", "U", [(1, "VCC1", PI)] + [(i + 2, f"IN{c}", IN) for i, c in enumerate("ABCDEF")] + [(8, "GND1", PI)],
+            [(16, "VCC2", PI)] + [(15 - i, f"OUT{c}", OUT) for i, c in enumerate("ABCDEF")] + [(9, "GND2", PI)],
+            desc="6-channel reinforced digital isolator (6 forward, default low), SOIC-16 wide"),
+        box("CA-IS3742", "U",
+            [(1, "VDDA", PI), (3, "A1", IN), (4, "A2", IN), (5, "A3", OUT), (6, "A4", OUT), (7, "ENA", IN),
+             (2, "GNDA", PI), (8, "GNDA", PI)],
+            [(16, "VDDB", PI), (14, "B1", OUT), (13, "B2", OUT), (12, "B3", IN), (11, "B4", IN), (10, "ENB", IN),
+             (9, "GNDB", PI), (15, "GNDB", PI)],
+            desc="4-channel reinforced digital isolator (2 forward, 2 reverse), SOIC-16 wide"),
+        box("AMC1311", "U", [(1, "VDD1", PI), (2, "IN", IN), (3, "SHTDN", IN), (4, "GND1", PI)],
+            [(8, "VDD2", PI), (7, "OUTP", OUT), (6, "OUTN", OUT), (5, "GND2", PI)],
+            desc="Reinforced isolated amplifier, 0-2 V input, gain 1, SOIC-8 wide (DWV)"),
+        box("TPS54202", "U", [(3, "VIN", PI), (5, "EN", IN), None, (1, "GND", PI)],
+            [(6, "BOOT", PAS), (2, "SW", PAS), None, (4, "FB", IN)],
+            desc="28 V 2 A synchronous buck, 500 kHz, SOT-23-6"),
     ]
     for name, rev in (("Si8660BD-B-IS", False), ("Si8661BD-B-IS", True)):
         a = [(1, "VDD1", PI)] + [(i + 1, f"A{i}", OUT if rev and i == 6 else IN) for i in range(1, 7)] + [(8, "GND1", PI)]

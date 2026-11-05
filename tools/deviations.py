@@ -3,6 +3,13 @@
 lib/v4_deviations.csv  netlist / parts / values (kinds merge, pin, part, add, value)
 lib/v4_copper.csv      board copper (kinds via = via not in Proteus, area = rectangle where the
                        board copper may differ from the Proteus copper)
+lib/v5_deviations.csv  v5 (aux flyback, CTRL isolation): the same kinds plus
+                       remove = Proteus part deleted (its pins/pads leave the reference),
+                       rename = whole IPC net renamed to a new net name
+lib/v5_copper.csv      v5 board copper: area rows as above, and pending = rectangle where the
+                       layout is left to the KiCad GUI (unrouted new parts, re-cut planes): DRC
+                       clearance/unconnected items, opens and domain gaps there are reported as
+                       pending, not as failures
 Coordinates in mm, IPC frame (Y up).
 
 Every check that compares the design with the Proteus CADCAM files applies exactly these
@@ -18,6 +25,8 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEV_CSV = os.path.join(ROOT, "lib", "v4_deviations.csv")
 COPPER_CSV = os.path.join(ROOT, "lib", "v4_copper.csv")
+DEV_CSVS = [DEV_CSV, os.path.join(ROOT, "lib", "v5_deviations.csv")]
+COPPER_CSVS = [COPPER_CSV, os.path.join(ROOT, "lib", "v5_copper.csv")]
 IPC_JSON = os.path.join(ROOT, "reference", "ipc356_pads.json")
 
 
@@ -32,12 +41,54 @@ def _read(path):
         return list(csv.DictReader(l for l in f if not l.startswith("#")))
 
 
+def _read_all(paths):
+    return [r for p in paths for r in _read(p)]
+
+
 def rows():
-    return [] if proteus_mode() else _read(DEV_CSV)
+    return [] if proteus_mode() else _read_all(DEV_CSVS)
 
 
 def copper_rows():
-    return [] if proteus_mode() else _read(COPPER_CSV)
+    return [] if proteus_mode() else _read_all(COPPER_CSVS)
+
+
+def removed():
+    """refdes of Proteus parts deleted in v5 (kind remove)."""
+    return {r["ref"] for r in rows() if r["kind"] == "remove"}
+
+
+def renames():
+    """IPC net -> new net name (kind rename, v5)."""
+    return {r["from"]: r["to"] for r in rows() if r["kind"] == "rename"}
+
+
+def pending_areas():
+    """[(x0, y0, x1, y1, note)] where the v5 layout is left to the KiCad GUI."""
+    out = []
+    for r in copper_rows():
+        if r["kind"] == "pending":
+            x0, x1 = sorted((float(r["x"]), float(r["x1"])))
+            y0, y1 = sorted((float(r["y"]), float(r["y1"])))
+            out.append((x0, y0, x1, y1, r["note"]))
+    return out
+
+
+def in_pending(x, y, margin=0.0):
+    return any(x0 - margin <= x <= x1 + margin and y0 - margin <= y <= y1 + margin
+               for x0, y0, x1, y1, _ in pending_areas())
+
+
+def v5_cut_nets():
+    """IPC nets (after merges/renames) whose copper chain was cut off a v5-moved pad
+    (tools/v5/v5_1_aux_ctrl.py step 3): their Proteus vias/copper may be gone outside the
+    pending areas too (the ISO-side PWM bundle J11 -> J4/J6/J8 is re-routed in the GUI)."""
+    return {new_net(r["from"]) for r in rows() if r["kind"] == "pin" and r.get("fix") == "v5"}
+
+
+def v5_parts():
+    """refdes of parts added in v5 (part rows of lib/v5_deviations.csv)."""
+    return {r["ref"] for r in _read(DEV_CSVS[1]) if r["kind"] == "part"} if not proteus_mode() else set()
 
 
 def merges():
@@ -107,8 +158,9 @@ def value_changes():
 
 
 def new_net(net):
-    """IPC net -> v4 net for whole-net merges."""
-    return merges().get(net, net)
+    """IPC net -> v4/v5 net for whole-net merges and renames."""
+    net = merges().get(net, net)
+    return renames().get(net, net)
 
 
 def v4_net(ref, pin, net):
@@ -123,7 +175,10 @@ def apply_records(recs):
     if proteus_mode():
         return recs
     out = []
+    gone = removed()
     for p in recs:
+        if p["kind"] == "pad" and p.get("refdes") in gone:
+            continue
         q = copy.copy(p)
         if q.get("net") and q.get("net_raw") != "N/C":
             n = v4_net(q.get("refdes", ""), q.get("pin", ""), q["net"]) if q["kind"] == "pad" else new_net(q["net"])
@@ -139,10 +194,12 @@ def apply_pin_nets(pin_net):
     """{(ref, pin): net} of the IPC -> v4 (net moves and added parts' pins)."""
     if proteus_mode():
         return pin_net
-    out = {rp: (v4_net(rp[0], rp[1], n) if n not in ("N/C", "(no net)") else n) for rp, n in pin_net.items()}
+    gone = removed()
+    out = {rp: (v4_net(rp[0], rp[1], n) if n not in ("N/C", "(no net)") else n) for rp, n in pin_net.items()
+           if rp[0] not in gone}
     for ref, p in added_parts().items():
         for pin, net in p["pins"].items():
-            out[(ref, pin)] = net
+            out[(ref, pin)] = new_net(net)   # v5 renames apply to the v4 parts' rows too
     return out
 
 
@@ -166,7 +223,7 @@ def in_area(layer, x, y, margin=0.0):
     for l, x0, y0, x1, y1, _ in areas():
         if (l in ("*", layer)) and x0 - margin <= x <= x1 + margin and y0 - margin <= y <= y1 + margin:
             return True
-    return False
+    return in_pending(x, y, margin)   # v5: pending-layout areas are changed copper too
 
 
 def validate():
@@ -177,7 +234,8 @@ def validate():
     pins = {(p["refdes"], p["pin"]): p["net"] for p in recs if p["kind"] == "pad"}
     refs = {p["refdes"] for p in recs if p["kind"] == "pad"}
     errs = []
-    for r in _read(DEV_CSV):
+    allrows = _read_all(DEV_CSVS)
+    for r in allrows:
         k = r["kind"]
         if k == "merge":
             for n in (r["from"], r["to"]):
@@ -191,6 +249,14 @@ def validate():
                 errs.append(f"{k} {r['ref']}: refdes exists in the IPC")
         elif k == "value":
             pass
+        elif k == "remove":
+            if r["ref"] not in refs:
+                errs.append(f"remove {r['ref']}: refdes is not in the IPC")
+        elif k == "rename":
+            if r["from"] not in nets:
+                errs.append(f"rename {r['from']}->{r['to']}: {r['from']} is not an IPC net")
+            if r["to"] in nets:
+                errs.append(f"rename {r['from']}->{r['to']}: {r['to']} is already an IPC net (use merge)")
         elif k == "footprint":
             if r["ref"] not in refs:
                 errs.append(f"footprint {r['ref']}: refdes is not in the IPC")
@@ -198,9 +264,16 @@ def validate():
                 errs.append(f"footprint {r['ref']}: no terminal area (lib/v4_copper.csv, layer *, note '{r['ref']} ...')")
         else:
             errs.append(f"unknown kind {k!r}")
-    newnets = {r["to"] for r in _read(DEV_CSV) if r["kind"] == "pin"}
+    newnets = {r["to"] for r in allrows if r["kind"] in ("pin", "rename")}
+    gone = removed()
+    for r in allrows:
+        if r["kind"] in ("pin", "value", "footprint") and r["ref"] in gone:
+            errs.append(f"{r['kind']} {r['ref']}: the part is removed (kind remove)")
+    v5new = v5_parts()
     for ref, p in added_parts().items():
         for pin, net in p["pins"].items():
+            if ref in v5new:
+                continue  # v5 parts bring their own new nets (checked against the schematic by compare)
             if net not in nets and net not in newnets:
                 errs.append(f"add {ref}-{pin}: net {net} is neither an IPC net nor a new v4 net")
     return errs
@@ -212,8 +285,10 @@ def summary():
     for x in r:
         c[x["kind"]] = c.get(x["kind"], 0) + 1
     cr = copper_rows()
-    return (f"v4 deviations: {c.get('merge', 0)} net merges, {c.get('pin', 0)} pin moves, "
+    return (f"v4/v5 deviations: {c.get('merge', 0)} net merges, {c.get('rename', 0)} net renames, "
+            f"{c.get('pin', 0)} pin moves, {c.get('remove', 0)} removed parts, "
             f"{c.get('part', 0)} new parts ({c.get('add', 0)} pins), {c.get('value', 0)} values, "
             f"{c.get('footprint', 0)} footprints; "
             f"copper: {sum(1 for x in cr if x['kind'] == 'via')} new vias, "
-            f"{sum(1 for x in cr if x['kind'] == 'area')} changed areas")
+            f"{sum(1 for x in cr if x['kind'] == 'area')} changed areas, "
+            f"{sum(1 for x in cr if x['kind'] == 'pending')} pending-layout areas")

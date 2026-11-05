@@ -101,7 +101,7 @@ def check(board, dom, verbose=False):
         parts = item_polys(board, lid, dom)
         uni = {d: union(p) for d, p in parts.items()}
         per_layer[lname] = uni
-        for a, b in (("P", "I"), ("P", "E"), ("I", "E")):
+        for a, b in (("P", "I"), ("P", "E"), ("I", "E"), ("P", "C"), ("I", "C")):
             if a not in uni or b not in uni:
                 continue
             req = domains.gap(a, b)
@@ -121,7 +121,7 @@ def check(board, dom, verbose=False):
                              near(parts[a], x, y, req + 0.5)[:3], near(parts[b], x, y, req + 0.5)[:3]))
     stack = [n for n, _ in LAYERS]
     for la, lb in zip(stack, stack[1:]):
-        for a, b in (("P", "I"), ("I", "P")):
+        for a, b in (("P", "I"), ("I", "P"), ("P", "C"), ("C", "P"), ("I", "C"), ("C", "I")):
             A, B = per_layer[la].get(a), per_layer[lb].get(b)
             if A is None or B is None:
                 continue
@@ -140,10 +140,15 @@ def main():
     _, nets = bc.export_netlist()
     dom = domains.classify(nets)
     viol = check(board, dom, "-v" in sys.argv)
+    import deviations   # v5: gaps inside the pending-layout areas wait for the GUI layout
+    pend = [v for v in viol if deviations.in_pending(v[5], v[6])]
+    viol = [v for v in viol if v not in pend]
+    for lname, a, b, req, g, x, y, na, nb in (pend if "-v" in sys.argv else pend[:10]):
+        print(f"domain_gaps: pending {lname:7} {a}<->{b} gap {g:4.2f} mm at ({x:8.2f}, {y:8.2f})  {', '.join(na)} | {', '.join(nb)}")
     for lname, a, b, req, g, x, y, na, nb in viol:
         print(f"domain_gaps: {lname:7} {a}<->{b} gap {g:4.2f} mm < {req} mm at ({x:8.2f}, {y:8.2f})  {', '.join(na)} | {', '.join(nb)}")
-    print(f"domain_gaps: {len(viol)} violations (P<->I >= 5.0 mm, P/I<->E >= 2.5 mm on every layer, no P/I overlap "
-          f"between adjacent layers)")
+    print(f"domain_gaps: {len(viol)} violations (P<->I, P/I<->C >= 5.0 mm, P/I<->E >= 2.5 mm on every layer, no "
+          f"P/I/C overlap between adjacent layers)" + (f"; {len(pend)} in v5 pending-layout areas" if pend else ""))
     print("domain_gaps: " + ("OK" if not viol else "FAILED"))
     sys.exit(1 if viol else 0)
 

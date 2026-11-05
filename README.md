@@ -111,6 +111,9 @@ It runs:
 | Board pads/holes/vias vs IPC (position and net) | `tools/check_board.py` |
 | Copper connectivity after zone fill: 0 shorts, 0 opens, every item on its group's net | `tools/assign_nets.py --check` |
 | DRC with schematic parity: 0 shorts, 0 unconnected | `tools/drc.py` (report in `reports/drc.json`) |
+| Domain net classes / DRC rules match the schematic (IEC 61010-1 gaps P, I, C, E) | `tools/v4/domain_rules.py --check` |
+| Insulation spacing between the domains on every layer | `tools/v4/domain_gaps.py` |
+| IPC-D-356 export vs Proteus, gerber round trip | `tools/ipc356_diff.py`, `tools/gerber_roundtrip.py --check` |
 
 `p2k compare_netlists` exports the KiCad netlist and compares nets as sets of
 (refdes, pin), so net names do not have to match. It reports pins on the wrong net, merged
@@ -121,6 +124,11 @@ Other tools: `gen_symbols.py` builds `lib/ac_psu.kicad_sym` from KiCad standard 
 and box symbols (helpers in `p2k.symgen`); `p2k.sch_builder` is a small library for writing schematic sheets from
 Python; `p2k.sexpr` reads and writes KiCad s-expression files; `p2k make_skeleton` created
 the project skeleton once; `tools/sheets/sheetNN.py` generate the 11 sheets.
+
+**v5** (aux flyback, control-card isolation; V5_PLAN.md, CTRL_ISOLATION_PLAN.md): parts in
+`tools/v5/v5_parts.py`, deviations in `lib/v5_deviations.csv` / `lib/v5_copper.csv` (kinds remove,
+rename, and pending-layout areas where the checks list items as pending), board step
+`tools/v5/v5_1_aux_ctrl.py`; the layout itself is done in the KiCad GUI.
 
 **Since v4 the design board `kicad/ac_psu.kicad_pcb` is frozen**: it is edited directly by small
 committed pcbnew scripts (`tools/v4/fix_*.py`, see STATUS.md "v4 design fixes"), and the Proteus

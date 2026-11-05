@@ -149,7 +149,7 @@ PROJECT = {
     "PinHeader_2x03_P1.27mm_Vertical_Pins43-48": dict(
         base="Connector_PinHeader_1.27mm:PinHeader_2x03_P1.27mm_Vertical",
         renumber={str(i): str(42 + i) for i in range(1, 7)}, descr="2x3 1.27 mm header, pads numbered 43-48"),
-    "Transformer_EF20_2x5_P3.81mm": dict(ipc="TR2", body=(22.0, 14.0), descr="EF20 auxiliary transformer, Proteus land pattern"),
+    # v5: TR2 (EF20) removed; its footprint stays in the tag's library for the Proteus rebuild
     "L_CommonMode_WE-CMBNC": dict(ipc="CM1", descr="Wurth WE-CMBNC common mode choke, Proteus land pattern"),
     "R_Shunt_FKK5R0020FE": dict(ipc="R48", descr="FKK5R0020FE 4-terminal current shunt, Proteus land pattern"),
     "Relay_SLA-12VDC-SL-A": dict(ipc="R20", descr="Songle SLA-12VDC-SL-A relay, Proteus land pattern (pads 1,2,3,5,6)"),
@@ -165,6 +165,27 @@ PROJECT = {
     "Wuerth_REDCUBE-THR_74650074_M4_PTH": dict(
         base="TerminalBlock_Wuerth:Wuerth_REDCUBE-THR_WP-THRBU_74650074_THR", npth_to_pad=(7.4, 7.4),
         descr="M4 ring-lug terminal, Wuerth REDCUBE THR 74650074R (50 A), plated 4.3 mm centre hole"),
+    # v5 (aux flyback, CTRL isolation)
+    "SOIC-7_3.9x4.9mm_P1.27mm_UCC28710": dict(base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", drop_pads={"7"},
+                                              renumber={"8": "7"},
+                                              descr="TI SOIC-7 (D): SOIC-8 land pattern without pin 7, HV = pad 7 at the "
+                                                    "pin-8 position (UCC28710)"),
+    "D_SMB_AC": dict(base="Diode_SMD:D_SMB", renumber={"1": "C", "2": "A"}, descr="SMB diode, pads C/A"),
+    # Ferroxcube CPV-E25/13/7-1S-10P-Z vertical coil former (user 2026-11-02). Its own drawing was not
+    # available (2026-11-05): pin grid 5.0 mm x 12.7 mm between the rows as on the Ferroxcube vertical
+    # E25 former CSV-E25/13/7-1S-6P-C (datasheet E25/13/7, 2008, Fig. 2), pins 0.7 mm square
+    # (CPH 10-pin, Fig. 3). VERIFY ON THE CPV DRAWING BEFORE ORDERING THE PCB. Row A pins 1-5,
+    # row B pins 6-10 (6 opposite 5). Core E25/13/7: 25.8 x 7.5 mm between the rows (fab).
+    "Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical": dict(
+        pins=[(str(i + 1), -10.0 + 5.0 * i, -6.35) for i in range(5)] + [(str(10 - i), -10.0 + 5.0 * i, 6.35) for i in range(5)],
+        pad=2.0, drill=1.2, body=(28.0, 20.0), core=(25.8, 7.5),
+        descr="EE25 vertical coil former Ferroxcube CPV-E25/13/7-1S-10P-Z, 2 x 5 pins P5.0 mm, rows 12.7 mm apart "
+              "(assumed from CSV-E25/13/7-1S-6P-C; verify), core 25.8 x 7.5 mm"),
+    # v5: the CTRL winding of T1 leaves the former as TIW flying leads, soldered into two holes
+    # (V5_PLAN.md 5.3: 1.6 mm holes, 3.0 mm pads, 5.08 mm apart)
+    "CTRL_Winding_Leads_2x1.6mm_P5.08mm": dict(
+        pins=[("1", -2.54, 0.0), ("2", 2.54, 0.0)], pad=3.0, drill=1.6, body=(8.6, 3.6),
+        descr="Solder holes for the CTRL winding's TIW flying leads, 1.6 mm drill, 3.0 mm pads, 5.08 mm apart"),
     "Terminal_D3.05mm_Drill1.52mm": dict(ipc="PE8", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill2.0mm": dict(ipc="PE2", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill2.55mm": dict(ipc="J5", descr="Single PIN terminal"),
@@ -224,7 +245,10 @@ def assign():
     pm = part_map()
     ipc = fpgeom.ipc_pads_by_refdes()
     out, errors = {}, []
+    gone = deviations.removed()
     for ref in sorted(ipc):
+        if ref in gone:
+            continue  # v5: part deleted (lib/v5_deviations.csv kind remove)
         sym = pm[ref]["lib_id"].split(":", 1)[1]
         f = features(ipc[ref])
         hits = [(fp, note) for s, cond, fp, note in RULES if s == sym and match(sym, cond, f)]
@@ -236,7 +260,7 @@ def assign():
     for ref, p in deviations.added_parts().items():
         if ref not in pm:
             errors.append(f"{ref}: v4 part missing from lib/part_map.csv")
-        out[ref] = (p["footprint"], f"v4 fix {p['fix']}: {p['note']}")
+        out[ref] = (p["footprint"], (f"v4 fix {p['fix']}: " if p["fix"] != "v5" else "v5: ") + p["note"])
     # v4: footprints swapped on existing parts (lib/v4_deviations.csv kind footprint)
     for ref, (old, new, fix, note) in deviations.footprint_changes().items():
         if ref not in out:
@@ -284,6 +308,9 @@ def derive(name, spec, ipc):
     base = sexpr.load(footprint_path(spec["base"]))
     base[1] = name
     ren = spec.get("renumber", {})
+    if spec.get("drop_pads"):
+        base[:] = [c for c in base if not (isinstance(c, list) and c and c[0] == "pad"
+                                           and str(c[1]) in spec["drop_pads"])]
     for pad in sexpr.find_all(base, "pad"):
         pad[1] = ren.get(str(pad[1]), str(pad[1]))
     keep_ref = spec.get("drop")
@@ -468,11 +495,43 @@ def tie_anchor(name, spec):
     return node
 
 
+def from_pins(name, spec):
+    """THT footprint from an explicit pad list (v5 parts without IPC pads): spec pins = [(num, x, y)]
+    (mm, Y down as in the file), round pads `pad` mm with `drill` mm holes, pad 1 square; body rect
+    (fab, silk 0.12 mm outside), courtyard 0.25 mm around body and pads; optional core rect (fab)."""
+    pins, d, dr = spec["pins"], spec["pad"], spec["drill"]
+    w, h = spec["body"]
+    px = [x for _, x, _ in pins]
+    py = [y for _, _, y in pins]
+    bx0, bx1 = min(min(px) - d / 2, -w / 2), max(max(px) + d / 2, w / 2)
+    by0, by1 = min(min(py) - d / 2, -h / 2), max(max(py) + d / 2, h / 2)
+    node = [Sym("footprint"), name, [Sym("version"), 20260206], [Sym("generator"), "ac_psu_gen_footprints"],
+            [Sym("layer"), "F.Cu"], [Sym("descr"), f"{spec['descr']} (ac_psu)"],
+            [Sym("property"), "Reference", "REF**", [Sym("at"), 0, _r4(-h / 2 - 1.5), 0], [Sym("layer"), "F.SilkS"], _eff()],
+            [Sym("property"), "Value", name, [Sym("at"), 0, _r4(h / 2 + 1.5), 0], [Sym("layer"), "F.Fab"], _eff()],
+            [Sym("attr"), Sym("through_hole")],
+            _rect(-w / 2, -h / 2, w / 2, h / 2, "Fab", 0.1),
+            _rect(-w / 2 - 0.12, -h / 2 - 0.12, w / 2 + 0.12, h / 2 + 0.12, "SilkS", 0.12),
+            _rect(bx0 - 0.25, by0 - 0.25, bx1 + 0.25, by1 + 0.25, "CrtYd", 0.05),
+            [Sym("fp_text"), Sym("user"), "${REFERENCE}", [Sym("at"), 0, 0, 0], [Sym("layer"), "F.Fab"], _eff()]]
+    if spec.get("core"):
+        cw, ch = spec["core"]
+        node.append(_rect(-cw / 2, -ch / 2, cw / 2, ch / 2, "Fab", 0.1))
+    for num, x, y in pins:
+        node.append([Sym("pad"), num, Sym("thru_hole"), Sym("rect" if num == "1" else "circle"),
+                     [Sym("at"), _r4(x), _r4(y)], [Sym("size"), d, d], [Sym("drill"), dr],
+                     [Sym("layers"), "*.Cu", "*.Mask"]])
+    node.append([Sym("embedded_fonts"), Sym("no")])
+    return node
+
+
 def build_library():
     ipc = fpgeom.ipc_pads_by_refdes()
     out = {}
     for name, spec in PROJECT.items():
-        if spec.get("tie"):
+        if spec.get("pins"):
+            node = from_pins(name, spec)
+        elif spec.get("tie"):
             node = tie_anchor(name, spec)
         else:
             node = derive(name, spec, ipc) if spec.get("base") else from_ipc(name, spec, ipc)

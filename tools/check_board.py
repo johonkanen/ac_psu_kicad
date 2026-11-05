@@ -63,6 +63,9 @@ def check_pads(board, recs, errors):
                 nswap += 1
                 continue
             added = deviations.added_parts().get(ref)
+            if added and not cands and not pad.GetNumber():
+                npads -= 1
+                continue   # paste-only pads (TO-252 tab segments)
             if added and not cands:
                 # v4 part: no Proteus position; its pads must be on the listed nets
                 want = added["pins"].get(pad.GetNumber())
@@ -88,6 +91,11 @@ def check_pads(board, recs, errors):
             elif mapping.get(q["net"]) != kn:
                 errors.append(f"{ref}-{pad.GetNumber()}: net {kn}, IPC net {q['net']} -> {mapping.get(q['net'])}")
     for ref, pin, want, kn in pending:
+        want = deviations.new_net(want)   # v5 renames apply to the v4 rows
+        if want == "N/C":
+            if kn and not bc.is_unconnected_net(kn):
+                errors.append(f"{ref}-{pin}: N/C in the deviation list but on net {kn}")
+            continue
         if mapping.get(want, want) != kn:
             errors.append(f"{ref}-{pin}: net {kn}, v4 list {want} -> {mapping.get(want)}")
     if v4pads:
@@ -148,6 +156,8 @@ def check_copper(board, recs, mapping, errors):
     vias = [t for t in board.GetTracks() if t.GetClass() == "PCB_VIA"]
     tracks = [t for t in board.GetTracks() if t.GetClass() != "PCB_VIA"]
     ipc_vias = [p for p in recs if p["kind"] == "via"]
+    cut_nets = deviations.v5_cut_nets()
+    pend_vias = []
     grid = {}
     for v in vias:
         c = v.GetPosition()
@@ -162,7 +172,10 @@ def check_copper(board, recs, mapping, errors):
                     if math.hypot(mm(c.x) - q["x_mm"], -mm(c.y) - q["y_mm"]) < 0.01:
                         hit = v
         if hit is None:
-            errors.append(f"IPC via ({q['x_mm']}, {q['y_mm']}) {q['net']}: no board via")
+            if deviations.in_pending(q["x_mm"], q["y_mm"]) or q["net"] in cut_nets:
+                pend_vias.append(q)   # v5: deleted with the old copper; the area is laid out in the GUI
+            else:
+                errors.append(f"IPC via ({q['x_mm']}, {q['y_mm']}) {q['net']}: no board via")
             continue
         matched.add(hit.m_Uuid.AsString())
         want = mapping.get(q["net"])
@@ -187,6 +200,9 @@ def check_copper(board, recs, mapping, errors):
         errors.append(f"{len(v4vias)} v4 vias listed, {nv4} found on the board")
     if v4vias:
         print(f"check_board: {nv4} v4 vias (lib/v4_copper.csv) at their positions and nets")
+    if pend_vias:
+        print(f"check_board: {len(pend_vias)} Proteus vias deleted by v5 (pending-layout areas or cut v5 chains: "
+              f"{', '.join(sorted({q['net'] for q in pend_vias}))})")
     nonet = [t for t in tracks if t.GetNetCode() <= 0]
     if nonet:
         errors.append(f"{len(nonet)} tracks without net")
