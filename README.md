@@ -29,12 +29,12 @@ and coordinates. Every check in this repo compares against that file.
 <td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/3d_bottom.png" width="400"><br><b>3D, bottom (seen from below)</b></td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/F_Cu.svg" width="400"><br><b>F.Cu: signal, FILTER_INPUT, DC+, Net-(D1-PadA), DAB_CAP_PRI, 5V_ISOL and 24 more pours (top)</b></td>
+<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/F_Cu.svg" width="400"><br><b>F.Cu: signal, FILTER_INPUT, DC+, DAB_CAP_PRI, 5V_ISOL, ISOPGND and 20 more pours (top)</b></td>
 <td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In1_Cu.svg" width="400"><br><b>In1.Cu: signal, DAB_SOURCE_HI_PRI, ISOGND, PGND, Q7_G, GND and 8 more pours</b></td>
 </tr>
 <tr>
 <td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In2_Cu.svg" width="400"><br><b>In2.Cu: signal, G3_SOURCE_HI, DAB_SOURCE_HI_SEC, PGND, Q7_S, DAB_GATE_HI_PRI and 8 more pours</b></td>
-<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/B_Cu.svg" width="400"><br><b>B.Cu: signal, 20V_ISO_SEC, DAB_SOURCE_HI_SEC, SHUNT1_FORCE, ISODC+, INDUCTOR_OUTPUT and 12 more pours (bottom, seen from the top)</b></td>
+<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/B_Cu.svg" width="400"><br><b>B.Cu: signal, 15V_ISO, DAB_SOURCE_HI_SEC, SHUNT1_FORCE, ISODC+, INDUCTOR_OUTPUT and 12 more pours (bottom, seen from the top)</b></td>
 </tr>
 </table>
 
