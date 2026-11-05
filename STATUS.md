@@ -1,6 +1,41 @@
 # Status
 
-Updated: 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v4 fix 16 – pours without holes (2026-11-05)
+
+User request 2026-11-05: "remove the holes from copper pours so the kicad automatically draws the
+clearances to the inner parts". The Proteus pours came over with Proteus' own cut-outs as zone
+holes (406 holes in 80 zones: 132 around other-net copper, 274 thermal / same-net cut-outs).
+
+- `tools/v4/fix_16_pour_holes.py` (seed 4116, refuses to run twice): every copper zone keeps only
+  its outer outline. Per-zone clearance = the smallest gap Proteus left to other-net copper of the
+  same domain inside the zone's holes, rounded down to 0.05 mm (minimum 0.15 mm): In1 GND / In2 VCC
+  0.30, ISOPGND/PGND/JEE 0.55, DC+ 1.50, LEMOUT 1.25, JEE (B.Cu) 1.45, INU_FILTER_INPUT / AFE_RELAY /
+  ISODC+ 1.95, PGND (F.Cu) / INDUCTOR_OUTPUT 2.00, 20V 0.25; all others 0.15. So KiCad keeps at
+  least the Proteus gap everywhere inside a pour. Nesting check: no zone lay inside an other-net
+  zone's hole, so no priority changed; no adjacent-layer P/I overlap appeared, so no keep-out was
+  needed. Same-net cut-outs are gone: those pads/vias now connect solid (the zones were solid already;
+  the Proteus spoke tracks stay).
+- The IEC 61010-1 domain gaps are now KiCad rules, so the zone filler and DRC keep them by
+  themselves: `tools/v4/domain_rules.py` writes net classes DOM_P / DOM_I / DOM_E (copies of
+  Default) with one exact-name pattern per net into `kicad/ac_psu.kicad_pro`, and
+  `kicad/ac_psu.kicad_dru` with clearance rules P-I 5.0 mm, P-E / I-E 2.5 mm. `--check` (in
+  check_all) fails when a schematic change moves or renames a net without regenerating them.
+  The rules were proven to act by a test with I-P set to 30 mm (499 DRC clearance violations).
+- Copper: +238 / −35 mm² on F.Cu, +74 / −3 on In1, +49 / −4 on In2, +159 / −28 on B.Cu. The losses
+  are the larger per-zone clearances next to J7, J9, INU_OUT2 and the two U5 HV vias (conservative
+  side). Connectivity unchanged: assign_nets 247 groups, 0 shorts, 0 opens; DRC 295 (as before).
+- `tools/gerber_roundtrip.py`: new category **pour refill**: a difference inside a KiCad copper
+  zone outline (+0.1 mm for the Proteus edge stroke) is no longer compared with Proteus (also the
+  Proteus pour-stroke draws inside zones); tracks, pads and drills outside pours are still strict.
+- `tools/v4/apply_all.sh` runs fixes 1–15 with the project file of 8c4b5ac (fix 14's fills depend on
+  the rules) and then fix 16; replayed on the tag's board it gives the committed board byte for byte.
+
+Last verification: `tools/check_all.sh` ALL CHECKS PASSED (compare 290/290 parts, 0 wrong-net pins;
+check_board 302 footprints, 972 pads, 207 nets 1:1, 20 v4 vias, 84 zones; assign_nets 247 groups,
+0 shorts, 0 opens; domain_rules OK; drc 295, 0 shorts, 0 unconnected, 0 parity; domain_gaps 0;
+ipc356_diff 0 mismatches; roundtrip OK with 54/37/30/19 pour-refill clusters on F/In1/In2/B).
 
 ## v4 fix 15 – cable-tie anchors at the soldered lead pins (2026-11-01, branch `v4-terminals`)
 

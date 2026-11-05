@@ -290,6 +290,63 @@
         "via_diameter": 0.4572,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "DOM_E",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.254,
+        "tuning_profile": "",
+        "via_diameter": 0.4572,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "DOM_I",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.254,
+        "tuning_profile": "",
+        "via_diameter": 0.4572,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "DOM_P",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.254,
+        "tuning_profile": "",
+        "via_diameter": 0.4572,
+        "via_drill": 0.3,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -297,7 +354,916 @@
     },
     "net_colors": {},
     "netclass_assignments": {},
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/CMFILT1"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/CMFILT2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/FILTER_INPUT"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/JEE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/LEMOUT"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/01 afe/SHUNT1_FORCE"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "/05 VSI/AFE_RELAY"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "/05 VSI/INDUCTOR_OUTPUT"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "/05 VSI/INU_FILTER_INPUT"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/07 Auxiliary supply/AUX_FEEDBACK"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/07 Auxiliary supply/AUX_ISENSE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "/07 Auxiliary supply/AUX_SWITCH_NODE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "20V"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "20V_ISO_SEC"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "3V3_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "5V"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "5V_ISOL"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "AC_IN2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "AC_IN_1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "AC_OUT_1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "AC_OUT_2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA0"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA1"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA3"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA4"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA5"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADA6"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADASEL0"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ADASEL0_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADASEL1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ADASEL1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADASEL2"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ADASEL2_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "ADCLK"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ADCLK_DAB"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ADCLK_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "AUX_FB"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "CLK1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "CLK1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "CS1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "CS1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_CAP_PRI"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_CAP_SEC"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_GATE_HI_PRI"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_GATE_HI_SEC"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_GATE_LO_PRI"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_GATE_LO_SEC"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_GROUND"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_PWM_HI_SEC"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_PWM_LO_SEC"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_PWM_PRI_HI"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_PWM_PRI_HI_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_PWM_PRI_LO"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_PWM_PRI_LO_ISO"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_SHUNT1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_SHUNT2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DAB_SOURCE_HI_PRI"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "DAB_SOURCE_HI_SEC"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "DC+"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G1_GATE_HI"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G1_SOURCE_HI"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G2_GATE_LO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G3_GATE_HI"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G3_SOURCE_HI"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "G4_GATE_LO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "GPIO_BYPASS_RLY"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "GPIO_BYPASS_RLY_ISO"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "GPIO_BYPASS_RLY_ISOLATED"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "INU_ADCLK"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "INU_SHUNT1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "INU_SHUNT2"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISOADA1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISOADA2"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISOADA3"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISODC+"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISOGND"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISOPGND"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISO_AFE_SDM_RAW_VOLTAGE"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "ISO_DAB_SDM_RAW_VOLTAGE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "MDATA"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "MDATA_DAB"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "MDATA_INU"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "MDATA_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(AD1-AINP)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(AD1-AVDD)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(AD1-SCLK)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(AD1-SDO)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(AD1-~{CS})"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "Net-(C10-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(C100-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(C102-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(C104-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(C106-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(C62-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(C96-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(C98-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(D1-PadA)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(D3-K)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(D5-K)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(D6-K)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(D7-K)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(D8-K)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(D9-K)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(J7-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(PWM1-Vsense)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(Q13-G)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(Q14-G)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R11-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R12-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R12-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R14-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R15-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R2-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R256-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R27-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R27-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R28-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R28-Pad2)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R33-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R34-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R4-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(R5-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R60-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R61-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R62-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R65-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R66-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R68-Pad2)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R69-Pad2)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R80-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R80-Pad2)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R83-Pad1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(R84-Pad1)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(REF1-VOUT)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(REF2-VOUT)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U11-X)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U12--)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U14-+)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U14--)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U15-B5)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U1A-+)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U1A--)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U1B-+)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U1B--)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U2-+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U2--)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-MDAT)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-VIN+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-VIN-)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-MDAT)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-VIN+)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-VIN-)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U6-MDAT)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U6-VDD1)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U6-VIN+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U6-VIN-)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U7A-+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U7A--)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U7B-+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U7B--)"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE1"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE2"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE3"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE4"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE5"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE6"
+      },
+      {
+        "netclass": "DOM_E",
+        "pattern": "PE7"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PGND"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_G1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_G1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_G2"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_G2_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_G3"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_G3_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_G4"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_G4_ISO"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_Q5"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_Q6"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_Q7"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_Q8"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_TRANS1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_TRANS2"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS2_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "PWM_TRANS3"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS3_ISO"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS4"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS5"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "PWM_TRANS6"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q5_G"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q5_S"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q6_G"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q7_G"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q7_S"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Q8_G"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "REF_1V65"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "REF_1V65_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "RELAY_DRIVE"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "RELAY_DRIVE_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SDATA1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "SDATA1_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SDM_RAW_VOLTAGE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SHUNT1"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SHUNT2"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "VCC"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J1-Pad25)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J1-Pad39)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J11-Pad38)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J2-Pad25)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J3-Pad25)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J3-Pad39)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J4-Pad39)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J6-Pad25)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J6-Pad39)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J8-Pad25)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(R20-COM_2-Pad5)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(R79-COM_2-Pad5)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(R87D-R4.1-Pad4)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(R87D-R4.2-Pad5)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(TR2-Pad10)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(TR2-Pad5)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(TR2-Pad8)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(TR2-Pad9)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(U10-NR-Pad4)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(U3-NR-Pad4)"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {

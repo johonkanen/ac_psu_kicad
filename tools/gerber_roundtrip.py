@@ -19,6 +19,11 @@ Per layer:
                 Proteus pad: KiCad's 0.15 mm zone clearance around the bigger pad;
     zone fill   Proteus copper thinner than the zone minimum width (slivers KiCad does not
                 fill);
+    pour refill (since v4 fix 16) the cluster lies inside the outline of a KiCad copper zone on
+                that layer: the pours have no Proteus cut-outs any more and KiCad fills them by
+                its own clearances (zone clearance, DRC domain rules), so pour copper is no
+                longer compared with Proteus; its connectivity is checked by assign_nets.py and
+                DRC. Draws/flashes of Proteus pour strokes inside zone outlines count the same;
     other       everything else - a finding, listed in full.
   An overlay PNG per layer (reports/roundtrip/<layer>.png, OVERLAY_RES mm per pixel): common
   copper grey, only-Proteus red, only-KiCad cyan, differences absorbed by the tolerance dim.
@@ -52,6 +57,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "p2k"))  # proteus2kicad
 import deviations  # noqa: E402  (v4: lib/v4_copper.csv areas and vias)
 from p2k import gerber  # noqa: E402
+from p2k import sexpr  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOARD = os.path.join(ROOT, "kicad", "ac_psu.kicad_pcb")
@@ -278,6 +284,34 @@ def nearest(recs, x, y):
     return recs[i], float(d[i])
 
 
+def load_zone_outlines():
+    """{layer: [outline points (IPC frame)]} of the board's copper zones (rule areas skipped)."""
+    out = {}
+    for z in sexpr.walk(sexpr.load(BOARD), "zone"):
+        if sexpr.find(z, "keepout") is not None:
+            continue
+        layer = sexpr.find(z, "layer")
+        layers = [str(layer[1])] if layer else [str(a) for a in (sexpr.find(z, "layers") or [None])[1:]]
+        for poly in sexpr.find_all(z, "polygon"):
+            pts = [(float(xy[1]), -float(xy[2])) for xy in sexpr.find(poly, "pts")[1:] if xy[0] == "xy"]
+            for la in layers:
+                out.setdefault(la, []).append(pts)
+    return out
+
+
+ZONE_OUTLINES = None
+
+
+def zone_mask(layer, bbox):
+    global ZONE_OUTLINES
+    if ZONE_OUTLINES is None:
+        ZONE_OUTLINES = load_zone_outlines()
+    c = Canvas(bbox)
+    for pts in ZONE_OUTLINES.get(layer, []):
+        c.poly(pts, 255)
+    return c.array()
+
+
 def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     """Rasterise, XOR, cluster and classify one layer. Returns (summary dict, overlay arrays)."""
     P, Ppads, canvas = render(gp, bbox)
@@ -295,7 +329,15 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     miss_P = coverage(gp, K, canvas, clearance | pad_xor)   # Proteus items without KiCad copper under them
     miss_K = coverage(gk, P, canvas, pad_xor)               # KiCad items without Proteus copper under them
     v4miss = [m for m in miss_P + miss_K if m[6] and deviations.in_area(layer, m[1], m[2])]
-    unexpl_P = [m for m in miss_P if m[6] and m not in v4miss]
+    zmask = zone_mask(layer, bbox)
+    zgrown = grow(zmask, 2 * TOL)  # Proteus pour strokes reach half a stroke past the outline
+
+    def in_pour(x, y):
+        c, r = canvas.px(x, y)
+        return 0 <= int(r) < zmask.shape[0] and 0 <= int(c) < zmask.shape[1] and zmask[int(r), int(c)]
+
+    pourmiss = [m for m in miss_P if m[6] and m not in v4miss and in_pour(m[1], m[2])]
+    unexpl_P = [m for m in miss_P if m[6] and m not in v4miss and m not in pourmiss]
     unexpl_K = [m for m in miss_K if m[6] and m not in v4miss]
     # Proteus copper too thin for the zone fill: copper that an opening of ZONE_MIN_WIDTH removes
     thin = P & ~ndimage.binary_opening(P, structure=disk(ZONE_MIN_WIDTH / 2 / RES))
@@ -321,7 +363,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
             x0, y0 = canvas.mm(sl[1].start, sl[0].stop)
             x1, y1 = canvas.mm(sl[1].stop, sl[0].start)
             inside = all(deviations.in_area(layer, a, b) for a in (x0, x1) for b in (y0, y1))
-            cat = "v4 deviation" if inside else "other"
+            cat = "v4 deviation" if inside else ("pour refill" if zgrown[sl][m].all() else "other")
         pad, dp = nearest(ipc_pads, x, y)
         via, dv = nearest(ipc_vias, x, y)
         clusters.append(dict(cat=cat, side=side, area=area, x=x, y=y, w=wid, h=hgt,
@@ -334,7 +376,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
         if c["area"] >= MIN_AREA:
             by_cat[c["cat"]] += 1
             area_cat[c["cat"]] += c["area"]
-    summ = dict(layer=layer, miss_P=unexpl_P, miss_K=unexpl_K, v4miss=v4miss,
+    summ = dict(layer=layer, miss_P=unexpl_P, miss_K=unexpl_K, v4miss=v4miss, pourmiss=pourmiss,
                 copper_P=int(P.sum()) * px_area, copper_K=int(K.sum()) * px_area,
                 xor=int(xor.sum()) * px_area, onlyP=int(onlyP.sum()) * px_area, onlyK=int(onlyK.sum()) * px_area,
                 clusters=len(clusters), small=sum(1 for c in clusters if c["area"] < MIN_AREA),
@@ -342,7 +384,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     report.append(f"== {layer}: Proteus copper {summ['copper_P']:.1f} mm^2, KiCad copper {summ['copper_K']:.1f} mm^2")
     report.append(f"   raw XOR {summ['xor']:.2f} mm^2; after {TOL} mm tolerance: only Proteus {summ['onlyP']:.2f} mm^2, "
                   f"only KiCad {summ['onlyK']:.2f} mm^2, {len(clusters)} clusters ({summ['small']} below {MIN_AREA} mm^2)")
-    for cat in ("pad shape", "clearance", "zone fill", "v4 deviation", "other"):
+    for cat in ("pad shape", "clearance", "zone fill", "pour refill", "v4 deviation", "other"):
         if by_cat[cat]:
             report.append(f"   {cat:10s} {by_cat[cat]:4d} clusters, {area_cat[cat]:.2f} mm^2")
     nd_p, nf_p = sum(isinstance(o, gerber.Draw) for o in gp.objects), sum(isinstance(o, gerber.Flash) for o in gp.objects)
@@ -370,7 +412,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     for fp, (n, ak, ap_, refs) in sorted(per_fp.items(), key=lambda kv: -(kv[1][1] + kv[1][2])):
         report.append(f"   pad shape  {n:4d} clusters, only KiCad {ak:6.2f} mm^2, only Proteus {ap_:6.2f} mm^2  {fp}  "
                       f"({len(refs)} parts: {' '.join(sorted(refs)[:6])}{' ...' if len(refs) > 6 else ''})")
-    order = {"other": 0, "v4 deviation": 1, "clearance": 2, "zone fill": 3, "pad shape": 4}
+    order = {"other": 0, "v4 deviation": 1, "clearance": 2, "zone fill": 3, "pour refill": 4, "pad shape": 5}
     for c in sorted(clusters, key=lambda c: (order[c["cat"]], -c["area"])):
         if c["area"] < MIN_AREA:
             continue
@@ -491,11 +533,12 @@ def main():
     other = sum(len(s["other"]) for s in summaries)
     missing = sum(len(s["miss_P"]) + len(s["miss_K"]) for s in summaries)
     for s in summaries:
-        cats = ", ".join(f"{s['by_cat'][c]} {c}" for c in ("pad shape", "clearance", "zone fill", "v4 deviation", "other") if s["by_cat"][c])
+        cats = ", ".join(f"{s['by_cat'][c]} {c}" for c in ("pad shape", "clearance", "zone fill", "pour refill", "v4 deviation", "other") if s["by_cat"][c])
         print(f"roundtrip: {s['layer']:6s} XOR {s['xor']:7.2f} mm^2, beyond {TOL} mm: only Proteus {s['onlyP']:6.2f}, "
               f"only KiCad {s['onlyK']:6.2f} mm^2; clusters >= {MIN_AREA} mm^2: {cats or 'none'}; "
               f"draws/flashes off the other copper: {len(s['miss_P'])} Proteus, {len(s['miss_K'])} KiCad"
-              + (f" (+{len(s['v4miss'])} inside v4 areas)" if s["v4miss"] else ""))
+              + (f" (+{len(s['v4miss'])} inside v4 areas)" if s["v4miss"] else "")
+              + (f" (+{len(s['pourmiss'])} Proteus pour strokes inside zones)" if s["pourmiss"] else ""))
     for s in summaries:
         for c in s["other"]:
             print(f"roundtrip: {s['layer']} OTHER only {c['side']} {c['area']:.3f} mm^2 at ({c['x']:.3f}, {c['y']:.3f}) near {c['pad']}, {c['via']}")
