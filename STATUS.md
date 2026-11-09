@@ -1,6 +1,25 @@
 # Status
 
-Updated: 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 2 – refdes with a trailing number, "Update PCB from Schematic" works (2026-11-09)
+
+User 2026-11-09: "Update PCB from Schematic" stopped with "the schematic needs to be fully annotated".
+Cause: three Proteus terminals had references without a number (AFE_OUT, FILTER_IN, FILTER_OUT); KiCad
+takes a reference that does not end in a digit as unannotated. kicad-cli ERC does not run this
+annotation check (only the GUI does), so the checks never saw it.
+- New deviation kind `refdes` (lib/v5_deviations.csv, from tools/v5/v5_parts.py REFDES): AFE_OUT ->
+  AFE_OUT1, FILTER_IN -> FILTER_IN1, FILTER_OUT -> FILTER_OUT1. tools/deviations.py maps the Proteus
+  refdes of the IPC records, of pin/net lists and of the deviation rows to the KiCad names; the CSV rows
+  of the other kinds and the copper-area notes keep the Proteus names. `validate()` checks that `from`
+  is an IPC refdes and `to` is not. The Proteus rebuild (AC_PSU_PROTEUS=1) is unaffected.
+- Schematic: sheet01.py, lib/part_map.csv and lib/footprint_map.csv (gen_footprints.py) use the new names.
+- Board: `tools/v5/v5_2_refdes.py` (seed 5002, refuses to run twice) renames the three footprints and
+  TIE_AFE_OUT -> TIE_AFE_OUT1 and re-links the footprints to the renamed symbols (the symbol UUIDs follow
+  the refdes). Tracks, vias and zones unchanged (zones refilled).
+- Checked: every board footprint links to its schematic symbol (0 path mismatches); the 12 board-only
+  footprints (H1-H4, TIE_*) are marked board-only, so Update PCB keeps them. No other reference lacks a
+  trailing number.
 
 ## v5 step 1 – aux flyback and CTRL isolation: schematic done, board staged (2026-11-05)
 

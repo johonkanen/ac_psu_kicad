@@ -12,6 +12,9 @@ REMOVED = ("PWM1 TR2 R43 R34 R33 D7 C65 C66 R24 C62 R23 D6 R44 R25 C63 R26 R29 R
 
 # whole-net renames (V5_PLAN.md D6)
 RENAMES = {"20V": "15V", "20V_ISO_SEC": "15V_ISO"}
+# Proteus refdes without a trailing number: KiCad counts such a reference as unannotated and refuses
+# "Update PCB from Schematic", so the KiCad design uses these names (kind refdes).
+REFDES = {"AFE_OUT": "AFE_OUT1", "FILTER_IN": "FILTER_IN1", "FILTER_OUT": "FILTER_OUT1"}
 
 R0402, R0603, R0805, R1206, R2512 = ("Resistor_SMD:R_0402_1005Metric", "Resistor_SMD:R_0603_1608Metric",
                                      "Resistor_SMD:R_0805_2012Metric", "Resistor_SMD:R_1206_3216Metric",

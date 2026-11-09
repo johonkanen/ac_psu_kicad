@@ -5,7 +5,7 @@ ACIN2,ac_psu:PIN,ac_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"two holes, both 
 ACOUT1,ac_psu:PIN,ac_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"two holes, both pad 1"
 ACOUT2,ac_psu:PIN,ac_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"two holes, both pad 1"
 AD1,ac_psu:ADS7056,ac_psu:X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056,X2QFN-8 (RUG)
-AFE_OUT,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+AFE_OUT1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
 C1,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C2,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C3,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -165,8 +165,8 @@ DAB_PRI_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_PRI_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_SEC_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 DAB_SEC_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-FILTER_IN,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
-FILTER_OUT,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
+FILTER_IN1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
+FILTER_OUT1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
 INU_OUT2,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (inverter half-bridge output)
 J1,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J2,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"

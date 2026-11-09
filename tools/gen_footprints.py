@@ -249,13 +249,14 @@ def assign():
     for ref in sorted(ipc):
         if ref in gone:
             continue  # v5: part deleted (lib/v5_deviations.csv kind remove)
-        sym = pm[ref]["lib_id"].split(":", 1)[1]
+        kref = deviations.kref(ref)   # v5: KiCad refdes (kind refdes)
+        sym = pm[kref]["lib_id"].split(":", 1)[1]
         f = features(ipc[ref])
         hits = [(fp, note) for s, cond, fp, note in RULES if s == sym and match(sym, cond, f)]
         if not hits:
             errors.append(f"{ref}: no footprint rule for {sym} (n={f['n']} span={f['span']:.2f} pads={f['pads']})")
             continue
-        out[ref] = hits[0]
+        out[kref] = hits[0]
     # v4: parts added to the Proteus design (lib/v4_deviations.csv, no IPC pads)
     for ref, p in deviations.added_parts().items():
         if ref not in pm:

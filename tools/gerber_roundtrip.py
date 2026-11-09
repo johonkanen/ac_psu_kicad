@@ -405,7 +405,7 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
     for c in clusters:
         if c["cat"] == "pad shape" and c["area"] >= MIN_AREA:
             ref = c["pad"].split("-")[0]
-            e = per_fp.setdefault(FOOTPRINTS.get(ref, ref), [0, 0.0, 0.0, set()])
+            e = per_fp.setdefault(FOOTPRINTS.get(deviations.kref(ref), ref), [0, 0.0, 0.0, set()])
             e[0] += 1
             e[1 if c["side"] == "KiCad" else 2] += c["area"]
             e[3].add(ref)

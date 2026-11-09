@@ -2,7 +2,8 @@
 # original, on top of lib/v4_deviations.csv (same kinds, read by tools/deviations.py), plus:
 #   remove  ref is a Proteus part deleted in v5 (its pins leave the reference)
 #   rename  from = IPC net, to = new net name (every pad, via and track of `from`)
-# Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename) and,
+#   refdes  from = Proteus refdes, to = KiCad refdes (rows of other kinds keep the Proteus name)
+# Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename, refdes) and,
 # with --nets, from the schematic netlist (add, pin). Plans: V5_PLAN.md, CTRL_ISOLATION_PLAN.md.
 kind,ref,pin,from,to,fix,note
 remove,PWM1,,,,v5,v5: IW1830/EF20 aux supply replaced
@@ -30,6 +31,9 @@ remove,D1,,,,v5,v5: IW1830/EF20 aux supply replaced
 remove,R49,,,,v5,v5: IW1830/EF20 aux supply replaced
 rename,,,20V,15V,v5,v5 D6: 15 V aux outputs
 rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
+refdes,,,AFE_OUT,AFE_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
+refdes,,,FILTER_IN,FILTER_IN1,v5,KiCad needs a trailing number (annotation check of Update PCB)
+refdes,,,FILTER_OUT,FILTER_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 part,R98,,,Resistor_SMD:R_2512_6332Metric,v5,aux input damping resistor DC+ -> AUX_VIN
 value,R98,,,10R 2512,v5,
 part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter

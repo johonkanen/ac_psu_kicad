@@ -29,7 +29,8 @@ HEADER = """# Intended deviations of the v5 design (aux flyback + control-card i
 # original, on top of lib/v4_deviations.csv (same kinds, read by tools/deviations.py), plus:
 #   remove  ref is a Proteus part deleted in v5 (its pins leave the reference)
 #   rename  from = IPC net, to = new net name (every pad, via and track of `from`)
-# Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename) and,
+#   refdes  from = Proteus refdes, to = KiCad refdes (rows of other kinds keep the Proteus name)
+# Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename, refdes) and,
 # with --nets, from the schematic netlist (add, pin). Plans: V5_PLAN.md, CTRL_ISOLATION_PLAN.md.
 """
 FIX = "v5"
@@ -42,6 +43,8 @@ def write_part_map():
     rows = [r for r in csv.reader(l for l in lines if not (l.startswith("#") or l.startswith("refdes,")))]
     new = {p[0] for p in V.PARTS}
     rows = [r for r in rows if r[0] not in V.REMOVED and r[0] not in new]
+    inv = {b: a for a, b in V.REFDES.items()}
+    rows = [[V.REFDES.get(inv.get(r[0], r[0]), inv.get(r[0], r[0]))] + r[1:] for r in rows]
     rows += [[ref, str(sheet), f"ac_psu:{sym}", value] for ref, sheet, sym, value, fp, note in V.PARTS]
 
     def key(r):
@@ -63,6 +66,9 @@ def base_rows():
         out.append(dict(kind="remove", ref=ref, pin="", **{"from": ""}, to="", fix=FIX, note="v5: IW1830/EF20 aux supply replaced"))
     for a, b in V.RENAMES.items():
         out.append(dict(kind="rename", ref="", pin="", **{"from": a}, to=b, fix=FIX, note="v5 D6: 15 V aux outputs"))
+    for a, b in V.REFDES.items():
+        out.append(dict(kind="refdes", ref="", pin="", **{"from": a}, to=b, fix=FIX,
+                        note="KiCad needs a trailing number (annotation check of Update PCB)"))
     for ref, sheet, sym, value, fp, note in V.PARTS:
         out.append(dict(kind="part", ref=ref, pin="", **{"from": ""}, to=fp, fix=FIX, note=note))
         out.append(dict(kind="value", ref=ref, pin="", **{"from": ""}, to=value, fix=FIX, note=""))
@@ -84,6 +90,7 @@ def net_rows():
     new = {p[0] for p in V.PARTS}
     with open(os.path.join(ROOT, "reference", "ipc356_pads.json")) as f:
         ipc = {(p["refdes"], p["pin"]): p["net"] for p in json.load(f)["pads"] if p["kind"] == "pad"}
+    ipc = {(V.REFDES.get(r, r), p): n for (r, p), n in ipc.items()}
     v5 = _read(DEV)
     try:
         _write([r for r in v5 if r["kind"] not in ("pin", "add")])

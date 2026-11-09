@@ -3071,8 +3071,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2565a6ea-2e09-5bde-871e-5ef3a18f9596")
-		(property "Reference" "AFE_OUT"
+		(uuid "a957503b-0a98-57ed-8a5f-1813e3bb22b3")
+		(property "Reference" "AFE_OUT1"
 			(at 124.46 68.58 90)
 			(effects
 				(font
@@ -3118,12 +3118,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "57da8ebc-45f4-5d8c-a26f-dc33a7f45a20")
+			(uuid "fc0e54ff-90de-521a-85dc-860389aa2c0a")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/8fad8a90-f089-4a80-9451-7edc5da2b133"
-					(reference "AFE_OUT")
+					(reference "AFE_OUT1")
 					(unit 1)
 				)
 			)
@@ -3750,8 +3750,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2b003623-8383-5d79-a7d0-98b0c8cd3839")
-		(property "Reference" "FILTER_OUT"
+		(uuid "b90becb0-bf9f-5ff8-988b-825639fc0bf8")
+		(property "Reference" "FILTER_OUT1"
 			(at 215.9 43.942 0)
 			(effects
 				(font
@@ -3795,12 +3795,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "92bb461c-ee14-57bf-918d-b764125f0bb4")
+			(uuid "605e8646-b685-57a5-b5c6-608e92f44789")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/8fad8a90-f089-4a80-9451-7edc5da2b133"
-					(reference "FILTER_OUT")
+					(reference "FILTER_OUT1")
 					(unit 1)
 				)
 			)
@@ -3814,8 +3814,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3445d3aa-5e71-564e-8e15-cbaff59b9d15")
-		(property "Reference" "FILTER_IN"
+		(uuid "44dd4942-ba0f-5309-8f03-f019f9a49b87")
+		(property "Reference" "FILTER_IN1"
 			(at 215.9 67.818 0)
 			(effects
 				(font
@@ -3859,12 +3859,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "0f912e95-e5f6-5488-a058-6e0758332d1d")
+			(uuid "299f5f85-7be3-5dc0-9b98-849f818d1366")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/8fad8a90-f089-4a80-9451-7edc5da2b133"
-					(reference "FILTER_IN")
+					(reference "FILTER_IN1")
 					(unit 1)
 				)
 			)

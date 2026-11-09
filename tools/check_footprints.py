@@ -105,7 +105,7 @@ def pcbnew_check(fit_rows, ipc):
 
 def main():
     verbose = "-v" in sys.argv
-    ipc = fpgeom.ipc_pads_by_refdes()
+    ipc = {deviations.kref(r): v for r, v in fpgeom.ipc_pads_by_refdes().items()}   # v5: KiCad refdes (kind refdes)
     sch = schematic_footprints()
     with open(MAP_CSV) as f:
         fmap = {r["refdes"]: r["footprint"] for r in csv.DictReader(l for l in f if not l.startswith("# "))}

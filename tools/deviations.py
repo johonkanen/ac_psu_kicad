@@ -5,7 +5,9 @@ lib/v4_copper.csv      board copper (kinds via = via not in Proteus, area = rect
                        board copper may differ from the Proteus copper)
 lib/v5_deviations.csv  v5 (aux flyback, CTRL isolation): the same kinds plus
                        remove = Proteus part deleted (its pins/pads leave the reference),
-                       rename = whole IPC net renamed to a new net name
+                       rename = whole IPC net renamed to a new net name,
+                       refdes = Proteus refdes -> KiCad refdes (KiCad wants a trailing number);
+                       the rows of the other kinds keep the Proteus refdes, rows() maps them
 lib/v5_copper.csv      v5 board copper: area rows as above, and pending = rectangle where the
                        layout is left to the KiCad GUI (unrouted new parts, re-cut planes): DRC
                        clearance/unconnected items, opens and domain gaps there are reported as
@@ -45,8 +47,29 @@ def _read_all(paths):
     return [r for p in paths for r in _read(p)]
 
 
+def refdes_map():
+    """Proteus refdes -> KiCad refdes (kind refdes, v5)."""
+    if proteus_mode():
+        return {}
+    return {r["from"]: r["to"] for r in _read_all(DEV_CSVS) if r["kind"] == "refdes"}
+
+
+def kref(ref):
+    """KiCad refdes of a Proteus refdes."""
+    return refdes_map().get(ref, ref)
+
+
 def rows():
-    return [] if proteus_mode() else _read_all(DEV_CSVS)
+    """Deviation rows, refdes in the KiCad naming."""
+    if proteus_mode():
+        return []
+    m = refdes_map()
+    out = []
+    for r in _read_all(DEV_CSVS):
+        if r.get("ref") in m:
+            r = dict(r, ref=m[r["ref"]])
+        out.append(r)
+    return out
 
 
 def copper_rows():
@@ -124,7 +147,7 @@ def footprint_changes():
 def terminal_area(ref):
     """(x0, y0, x1, y1) of the copper area of a swapped footprint (area row, layer *, note 'REF ...')."""
     for r in copper_rows():
-        if r["kind"] == "area" and r["layer"] == "*" and r["note"].split(" ", 1)[0] == ref:
+        if r["kind"] == "area" and r["layer"] == "*" and kref(r["note"].split(" ", 1)[0]) == kref(ref):
             x0, x1 = sorted((float(r["x"]), float(r["x1"])))
             y0, y1 = sorted((float(r["y"]), float(r["y1"])))
             return x0, y0, x1, y1
@@ -148,7 +171,7 @@ def tie_anchors():
         if r["kind"] == "area" and r["layer"] == "*" and r["note"].startswith("TIE "):
             x0, x1 = sorted((float(r["x"]), float(r["x1"])))
             y0, y1 = sorted((float(r["y"]), float(r["y1"])))
-            out[r["note"].split()[1]] = (x0, y0, x1, y1)
+            out[kref(r["note"].split()[1])] = (x0, y0, x1, y1)
     return out
 
 
@@ -176,10 +199,13 @@ def apply_records(recs):
         return recs
     out = []
     gone = removed()
+    m = refdes_map()
     for p in recs:
         if p["kind"] == "pad" and p.get("refdes") in gone:
             continue
         q = copy.copy(p)
+        if q.get("refdes") in m:
+            q["refdes"] = m[q["refdes"]]
         if q.get("net") and q.get("net_raw") != "N/C":
             n = v4_net(q.get("refdes", ""), q.get("pin", ""), q["net"]) if q["kind"] == "pad" else new_net(q["net"])
             if n != q["net"]:
@@ -195,8 +221,9 @@ def apply_pin_nets(pin_net):
     if proteus_mode():
         return pin_net
     gone = removed()
-    out = {rp: (v4_net(rp[0], rp[1], n) if n not in ("N/C", "(no net)") else n) for rp, n in pin_net.items()
-           if rp[0] not in gone}
+    m = refdes_map()
+    out = {(m.get(rp[0], rp[0]), rp[1]): (v4_net(m.get(rp[0], rp[0]), rp[1], n) if n not in ("N/C", "(no net)") else n)
+           for rp, n in pin_net.items() if rp[0] not in gone}
     for ref, p in added_parts().items():
         for pin, net in p["pins"].items():
             out[(ref, pin)] = new_net(net)   # v5 renames apply to the v4 parts' rows too
@@ -257,6 +284,11 @@ def validate():
                 errs.append(f"rename {r['from']}->{r['to']}: {r['from']} is not an IPC net")
             if r["to"] in nets:
                 errs.append(f"rename {r['from']}->{r['to']}: {r['to']} is already an IPC net (use merge)")
+        elif k == "refdes":
+            if r["from"] not in refs:
+                errs.append(f"refdes {r['from']}->{r['to']}: {r['from']} is not an IPC refdes")
+            if r["to"] in refs:
+                errs.append(f"refdes {r['from']}->{r['to']}: {r['to']} is already an IPC refdes")
         elif k == "footprint":
             if r["ref"] not in refs:
                 errs.append(f"footprint {r['ref']}: refdes is not in the IPC")
@@ -266,7 +298,7 @@ def validate():
             errs.append(f"unknown kind {k!r}")
     newnets = {r["to"] for r in allrows if r["kind"] in ("pin", "rename")}
     gone = removed()
-    for r in allrows:
+    for r in rows():
         if r["kind"] in ("pin", "value", "footprint") and r["ref"] in gone:
             errs.append(f"{r['kind']} {r['ref']}: the part is removed (kind remove)")
     v5new = v5_parts()
@@ -286,6 +318,7 @@ def summary():
         c[x["kind"]] = c.get(x["kind"], 0) + 1
     cr = copper_rows()
     return (f"v4/v5 deviations: {c.get('merge', 0)} net merges, {c.get('rename', 0)} net renames, "
+            f"{c.get('refdes', 0)} refdes renames, "
             f"{c.get('pin', 0)} pin moves, {c.get('remove', 0)} removed parts, "
             f"{c.get('part', 0)} new parts ({c.get('add', 0)} pins), {c.get('value', 0)} values, "
             f"{c.get('footprint', 0)} footprints; "

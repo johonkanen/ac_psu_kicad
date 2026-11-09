@@ -27,7 +27,7 @@ for qx, qhi, qlo, g_hi, g_lo, src_hi, src_lo in (
     else:
         sh.glabel(src_hi, col + g(6), MID, 90)
         sh.wire((col + g(6), MID), (col + g(12), MID))
-        terminal(sh, "AFE_OUT", col + g(12), MID, "right")
+        terminal(sh, "AFE_OUT1", col + g(12), MID, "right")
         pass
 sh.wire((g(40) + 2.54, DCP), (g(80) + 2.54, DCP))
 sh.junction(g(60), DCP); flagged_power(sh, "DC+", g(60), DCP)
@@ -53,8 +53,8 @@ sh.text("v4: pins 1 and 3 are no longer tied (v3: both on SHUNT1, Kelvin sense d
 # ---- EMI filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)
 Y = (TOP + BOT) / 2
-terminal(sh, "FILTER_OUT", X0, TOP, "up")
-terminal(sh, "FILTER_IN", X0, BOT, "down")
+terminal(sh, "FILTER_OUT1", X0, TOP, "up")
+terminal(sh, "FILTER_IN1", X0, BOT, "down")
 XA, XB = X0 - g(6), X0 - g(12)                      # divider columns for U1:B
 sh.wire((XA, TOP), (X0, TOP)); sh.wire((XB, BOT), (X0, BOT))
 sh.label("LEMOUT", X0 - g(4), TOP, 0); sh.label("FILTER_INPUT", X0 - g(10), BOT, 0)
