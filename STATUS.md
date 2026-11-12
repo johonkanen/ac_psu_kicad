@@ -1,6 +1,18 @@
 # Status
 
-Updated: 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 passives – JLC codes picked (2026-11-12)
+
+User 2026-11-12: "pick the JLC codes for the passives". fab/jlc_bom.csv: the 23 parts deleted in v5
+are out (sheet-7 IW1830 supply), the 71 v5 resistors, capacitors and L2 are in (70 lines, 257 parts);
+fab/hand_fit.csv: PWM1/TR2 removed, the step-2 refdes (AFE_OUT1, FILTER_IN1/OUT1, TIE_AFE_OUT1) applied.
+Every BOM refdes is in the schematic, none twice, values match (one-off check). Stock check for 5
+boards (fab/jlc_stock_2026-11-12.json): all v5 passives in stock; short are AMC1306M05 (known) and
+REF3025AIDBZR (0, new). Substitutions and the reasons are in fab/README.md "v5 passives": R105 0.56R
+(no 0.562R stocked), C113 22u 35V X5R (no 15u / 22u 50V 1210; effective CDD near TI's 12.9 µF:
+verify start-up on the prototype), R98 2 W, polymer output capacitors (ripple), TORCH 47n 1 kV.
+The schematic values are unchanged. Still to pick: the v5 ICs/discretes; the CPL after the layout.
 
 ## v5 step 2 – refdes with a trailing number, "Update PCB from Schematic" works (2026-11-09)
 

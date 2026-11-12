@@ -41,9 +41,11 @@ Open points (ask the user which to do):
    verify on a sample/drawing and fix gen_footprints.py if needed. Core insulation is mandatory.
 3. v5 M4 ring-lug terminals for the 17 lead connections that keep soldered pins in v4 (as fix 13),
    which also settles the open cable-tie anchors (ACIN2, PE4, PE6-8, DAB_PRI/SEC_1/2, STATUS "v4 fix 15").
-4. fab: BOM/CPL for the v5 parts after the layout (JLC codes in tools/v5/v5_parts.py notes where known:
+4. fab: the v5 passives are in fab/jlc_bom.csv (fab/README.md "v5 passives"; check C113's effective
+   capacitance on the prototype). Still to add: the v5 ICs/discretes (codes in fab/README.md where known:
    UCC28710 C80866, IPD95R450P7 C3289115, ISO7760FDWR C2878538, CA-IS3742LW C4944981, AMC1311BDWVR
-   C783598; passives still to pick), then fab/make_fab.sh and fab/jlc_bom_check.py.
+   C783598; Q15/Q16, D11-D16, U28 to pick), T1/W1/J13/J14/PEC1/PEC2 in hand_fit.csv, REF3025AIDBZR now
+   0 stock (find a replacement), then the CPL after the layout (fab/make_fab.sh, fab/jlc_bom_check.py).
 5. Still open from before: switching-noise firmware items (reports/noise/README.md), R73/R74 when the
    shunt inductance is measured, silk outlines vs the 199 silk_over_copper warnings.
 
