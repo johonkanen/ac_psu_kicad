@@ -88,7 +88,8 @@ Repo rules that apply throughout:
   them).
 - **Card-to-baseboard gap ≈ 5.3 mm**, from MECHANICAL.md. Height limits:
   - **top-side parts under the card ≤ 2.65 mm** (SOIC-16W height; the card's underside parts are up to 2.0 mm);
-  - L2 (4.5 mm) and the polymer capacitors C115/C116/C137/C138 (10 mm) never go on top under the card.
+  - L2 (4.5 mm) and the polymer capacitors C115/C116/C137/C138 (10 mm) never go on top under the card; on
+    the bottom they may.
 - **No top-side parts under the card's through-hole tails.** Card frame → baseboard IPC: x + 11.068,
   y − 1.946 (checked on J11 pin 1).
 
@@ -98,8 +99,13 @@ Repo rules that apply throughout:
   | J101 bench input | x 114.8 … 117.4, y −12.8 … −7.6 |
   | RJ45 jack (pins, LED pins, pegs) | x 101.7 … 118.6, y 28.4 … 44.4: no parts under its hole positions (pins y ≈ 30.7, pegs (112.06, 30.68) / (112.06, 42.11), LED pins x ≈ 116.96) with 1 mm margin; low parts between them are allowed |
 
-- **Bottom-side parts:** SMD only, height ≤ 3 mm until the user gives the chassis clearance under the board
-  (open item). JLC assembles both sides; the BOM already has bottom parts (U4).
+- **Bottom-side parts:** the board stands on **15 mm standoffs** (user 2026-11-12).
+  - **Height:** bottom parts may be up to **10 mm** tall. That leaves ≥ 5 mm of air to the chassis (assumed
+    metal and PE-bonded), above the 2.5 mm basic and the ≥ 4 mm clearance used for hazardous-live parts.
+  - L2 and the polymer capacitors (10 mm) may go on the bottom, also under the card.
+  - **Mounting holes:** keep a 4 mm radius around each mounting hole (H1–H4) free on the bottom, for the
+    standoff and the screw head.
+  - SMD preferred; JLC assembles both sides, and the BOM already has bottom parts (U4).
 - **Fixed v4 parts:** the sigma-delta modulators U4/U5/U6 and their shunts (R48, R64, R91) stay next to the
   shunts. Do not move the power stage, J4/J6/J8, terminals, the PE pads, or any part outside the card area that
   section 4 does not list.
@@ -112,7 +118,7 @@ trust this list alone. Fable produces the full table in phase 1.
 - **v5 parts (98, staged below the board):**
   - sheet 11, all → J11 CTRL piece / ISO area;
   - sheet 7 island B parts (W1, D16, C137–C144, R131–R135, U28, L2, J13, PEC2) → J12 CTRL piece. L2 and the polymer
-    capacitors go outside the card outline (y < −18.77) or on the bottom.
+    capacitors go on the bottom (or on top outside the card outline, y < −18.77).
   - **Out of scope:** the sheet-7 flyback parts (U18, Q15–Q17, T1, D11–D15, …) stay in the aux area
     (x 65 … 110, y −62 … −10). T1's pin grid is not verified yet (next_prompt point 2).
 - **v4 parts inside the card outline (movable):**
@@ -171,7 +177,7 @@ trust this list alone. Fable produces the full table in phase 1.
    - no courtyard overlaps among parts in the card area;
    - top-side parts under the card ≤ 2.65 mm, from a height table in tools/v5 per footprint;
    - nothing on top in the keep-outs of section 3;
-   - bottom parts are SMD and ≤ the height limit;
+   - bottom parts ≤ 10 mm tall, none within 4 mm of a mounting hole;
    - every slot sits inside a barrier strip.
 
 **Phase 3 – placement and planes.** `tools/v5/v5_4_card_area.py`:
@@ -196,7 +202,6 @@ Done when check_all passes with **domain_gaps and DRC clearance strict in the ca
 
 ## 6. Open items for the user
 
-- Clearance under the board (chassis/standoffs). This sets the bottom-side height limit (3 mm until then).
 - 6-layer stack-up and inner copper weight (phase 1, item 4); JLC price for 6 layers with both-side assembly.
 - T1 pin grid (next_prompt point 2) before the aux area and W1's final position.
 - Whether the routing in phase 4 may be tried with Freerouting for the low-voltage nets (not part of this plan).
