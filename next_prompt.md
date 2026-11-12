@@ -35,6 +35,9 @@ areas of lib/v5_copper.csv make the checks list layout items as pending; remove 
 is finished so the checks become strict there again.
 
 Open points (ask the user which to do):
+0. **Next (user 2026-11-12): V5_LAYOUT_PLAN.md** – place the control and measurement parts under the
+   control card in three domains (CTRL / primary / ISO), 6 copper layers, parts on both sides, planes
+   reshaped; for a Claude Fable 5.2 session; stop points after the proposal (phase 1) and before routing.
 1. After the user's GUI layout: review it (DRC, domain_gaps with the pending rows removed, renders of
    the aux area and both CTRL islands, slots under the isolators, In1/In2 re-cut), record it in STATUS.md.
 2. CPV-E25/13/7-1S-10P-Z pin grid: the footprint assumes 5.0 x 12.7 mm (from the CSV 6-pin former);
