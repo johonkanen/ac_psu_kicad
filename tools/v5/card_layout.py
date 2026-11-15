@@ -63,10 +63,15 @@ CARD_HOLES = (
     + [("J9", 116.94, y, 1.02) for y in (29.8, 32.34, 40.51, 43.05)]
     + [("J9", 108.99, 44.17, 1.63), ("J9", 108.99, 28.68, 1.63), ("J9", 112.04, 42.14, 3.25), ("J9", 112.04, 30.71, 3.25)])
 KEEP_MARGIN = 1.5      # mm beyond the drill radius (pad ring + 1 mm)
-# The old Ti60F225 card's headers (MECHANICAL.md "Other Ti60 positions", + (11.068, -1.946)); open question
-TI60_HOLES = ([("Ti60 J1 JTAG", 69.40, 27.68 + 2.54 * i, 1.0) for i in range(5)]
-              + [("Ti60 J8 UART", 63.50, 32.86 + 2.54 * i, 1.0) for i in range(3)]
-              + [("Ti60 J3 5V", 108.96 + 2.54 * i, -13.0, 1.0) for i in range(3)])
+# The Ti60F225 card must fit too (user 2026-11-15). Its plated holes, from the IPC-D-356 netlist of
+# "ti60f225_psu_control_card - CADCAM.ZIP" (Ti60 frame + (11.068, -1.946)): JTAG, UART, 5 V header, LCD, RJ45.
+TI60_HOLES = ([("Ti60 J1 JTAG", 69.40, 27.68 + 2.54 * i, 1.016) for i in range(5)]
+              + [("Ti60 J8 UART", 63.50, 32.86 + 2.54 * i, 1.016) for i in range(3)]
+              + [("Ti60 J3 5V", 108.96 + 2.54 * i, -13.0, 1.016) for i in range(3)]
+              + [("Ti60 J4 LCD", 63.98 + 2.54 * i, -16.4, 0.8) for i in range(13)]
+              + [("Ti60 J2 RJ45", 107.40 if i % 2 == 0 else 104.86, 31.95 + 1.27 * i, 0.75) for i in range(8)]
+              + [("Ti60 J2 RJ45", 116.8, 28.6, 1.6), ("Ti60 J2 RJ45", 116.8, 44.2, 1.6),
+                 ("Ti60 J2 RJ45", 113.75, 30.68, 3.25), ("Ti60 J2 RJ45", 113.75, 42.11, 3.25)])
 H_TOP_UNDER_CARD, H_BOTTOM = 2.65, 10.0
 MOUNT_HOLE_R = 4.0     # bottom side: nothing within 4 mm of H1-H4 (H4 at (81.0, -14.5))
 
@@ -79,17 +84,16 @@ PLACE = {}
 # -- barrier parts --------------------------------------------------------------------------
 PLACE.update({
     "U16": ("CA|P", "F", 80.0, 18.3, "in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"),
-    "U21": ("CA|I", "F", 57.3, 41.5, "C pins south, ISO pins north; U4 path leaves west above J11"),
-    "U19": ("CA|I", "F", 68.5, 41.5, "PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"),
-    "U20": ("CA|I", "F", 79.7, 41.5, "DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"),
+    "U21": ("CA|I", "B", 57.3, 41.5, "bottom (Ti60 JTAG/UART tails above); C pins south, ISO pins north; U4 path leaves west above J11"),
+    "U19": ("CA|I", "B", 68.5, 41.5, "bottom (Ti60 JTAG/UART tails above); PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"),
+    "U20": ("CA|I", "B", 79.7, 41.5, "bottom (Ti60 JTAG/UART tails above); DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"),
     "U22": ("I|CA", "F", 92.5, 36.7, "ISOADA1: VIN side east, output side west"),
     "U23": ("I|CA", "F", 92.5, 29.9, "ISOADA2"),
     "U24": ("I|CA", "F", 92.5, 23.1, "ISOADA3"),
 })
 # -- CTRL piece at J11 ----------------------------------------------------------------------
-PLACE.update(_blk("C117 C119 C121", "CA", "B", 68.5, 36.9, "bottom, under pin 1 of U19/U20/U21 (two vias each)"))
-PLACE.update({"C121": ("CA", "B", 52.9, 36.9, "under U21 pin 1"), "C117": ("CA", "B", 64.1, 36.9, "under U19 pin 1"),
-              "C119": ("CA", "B", 75.3, 36.9, "under U20 pin 1"),
+PLACE.update({"C121": ("CA", "B", 61.75, 34.7, "bottom, south of U21 pin 1"), "C117": ("CA", "B", 72.95, 34.7, "bottom, south of U19 pin 1"),
+              "C119": ("CA", "B", 84.15, 34.7, "bottom, south of U20 pin 1"),
               "C82": ("CA", "B", 84.4, 23.0, "under U16 pin 1 (U16 moved)"),
               "C124": ("CA", "B", 87.2, 34.8, "under U22 pin 8"), "C126": ("CA", "B", 87.2, 28.0, "under U23 pin 8"),
               "C128": ("CA", "B", 87.2, 21.2, "under U24 pin 8")})
@@ -103,8 +107,8 @@ PLACE.update(_blk("U27 C134 C135 C136", "CA", "B", 62.5, 30.0, "3V3_CTRL LDO blo
 PLACE.update({"J14": ("CA", "B", 55.5, 30.0, "5 V link header, THT from the bottom (see open items: height)"),
               "PEC1": ("CA", "THT", 50.3, 33.0, "PE bond terminal; lug and screw on the bottom")})
 # -- ISO --------------------------------------------------------------------------------------
-PLACE.update({"C122": ("I", "B", 52.9, 46.1, "under U21 pin 16"), "C118": ("I", "B", 64.1, 46.1, "under U19 pin 16"),
-              "C120": ("I", "B", 75.3, 46.1, "under U20 pin 16"),
+PLACE.update({"C122": ("I", "B", 61.75, 48.3, "bottom, north of U21 pin 16"), "C118": ("I", "B", 72.95, 48.3, "bottom, north of U19 pin 16"),
+              "C120": ("I", "B", 84.15, 48.3, "bottom, north of U20 pin 16"),
               "C123": ("I", "B", 97.8, 34.8, "under U22 pin 1"), "C125": ("I", "B", 97.8, 28.0, "under U23 pin 1"),
               "C127": ("I", "B", 97.8, 21.2, "under U24 pin 1")})
 PLACE.update(_blk("R110 R111", "I", "F", 100.0, 36.7, "x0.4 divider at U22 VIN, column x 99.2..100.8"))

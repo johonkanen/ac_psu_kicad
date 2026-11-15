@@ -58,6 +58,7 @@
   J5             fixed C36 H4 R37 U14
   J5             move  U8
   J9             fixed C74 C75 C76 C77 R64 R75 U6
-  Ti60 J1 JTAG   place U19
+  Ti60 J2 RJ45   fixed C74 C75 C76 C77 R64 R74 U6
   Ti60 J3 5V     fixed J12
-  Ti60 J8 UART   place U19 U21
+  Ti60 J4 LCD    fixed C36 H4 R37
+  Ti60 J4 LCD    move  U8

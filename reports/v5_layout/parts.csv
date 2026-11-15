@@ -117,12 +117,12 @@ R86,10R,R_0402_1005Metric,P,fixed,F,62.899,4.419,P,F,62.899,4.419,
 R87,RESISTOR_ARRAY,R_Array_Convex_4x0402_Proteus,P,fixed,F,62.449,9.489,P,F,62.449,9.489,
 U11,SN74LV4051,TSSOP-16_4.4x5mm_P0.65mm_Proteus,P,fixed,F,60.924,-3.83,P,F,60.924,-3.83,
 U12,TLV316IDBVR,SOT-23-5_TLV316,P,fixed,F,62.344,1.966,P,F,62.344,1.966,
-C117,100n,C_0402_1005Metric,C,place,,,,CA,B,64.1,36.9,under U19 pin 1
-C118,100n,C_0402_1005Metric,I,place,,,,I,B,64.1,46.1,under U19 pin 16
-C119,100n,C_0402_1005Metric,C,place,,,,CA,B,75.3,36.9,under U20 pin 1
-C120,100n,C_0402_1005Metric,I,place,,,,I,B,75.3,46.1,under U20 pin 16
-C121,100n,C_0402_1005Metric,C,place,,,,CA,B,52.9,36.9,under U21 pin 1
-C122,100n,C_0402_1005Metric,I,place,,,,I,B,52.9,46.1,under U21 pin 16
+C117,100n,C_0402_1005Metric,C,place,,,,CA,B,72.95,34.7,"bottom, south of U19 pin 1"
+C118,100n,C_0402_1005Metric,I,place,,,,I,B,72.95,48.3,"bottom, north of U19 pin 16"
+C119,100n,C_0402_1005Metric,C,place,,,,CA,B,84.15,34.7,"bottom, south of U20 pin 1"
+C120,100n,C_0402_1005Metric,I,place,,,,I,B,84.15,48.3,"bottom, north of U20 pin 16"
+C121,100n,C_0402_1005Metric,C,place,,,,CA,B,61.75,34.7,"bottom, south of U21 pin 1"
+C122,100n,C_0402_1005Metric,I,place,,,,I,B,61.75,48.3,"bottom, north of U21 pin 16"
 C123,100n,C_0402_1005Metric,I,place,,,,I,B,97.8,34.8,under U22 pin 1
 C124,100n,C_0402_1005Metric,C,place,,,,CA,B,87.2,34.8,under U22 pin 8
 C125,100n,C_0402_1005Metric,I,place,,,,I,B,97.8,28.0,under U23 pin 1
@@ -171,9 +171,9 @@ U13,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,fixed,F,67.999,18.284,
 U15,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,fixed,F,56.0,18.3,CA|P,F,56.0,18.3,
 U16,Si8660BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,move,F,81.752,13.966,CA|P,F,80.0,18.3,"in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"
 U17,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,,fixed,F,88.0,0.525,I|P,F,88.0,0.525,
-U19,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,68.5,41.5,"PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"
-U20,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,79.7,41.5,"DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"
-U21,CA-IS3742LW,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,57.3,41.5,"C pins south, ISO pins north; U4 path leaves west above J11"
+U19,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,B,68.5,41.5,"bottom (Ti60 JTAG/UART tails above); PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"
+U20,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,B,79.7,41.5,"bottom (Ti60 JTAG/UART tails above); DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"
+U21,CA-IS3742LW,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,B,57.3,41.5,"bottom (Ti60 JTAG/UART tails above); C pins south, ISO pins north; U4 path leaves west above J11"
 U22,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,36.7,"ISOADA1: VIN side east, output side west"
 U23,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,29.9,ISOADA2
 U24,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,23.1,ISOADA3

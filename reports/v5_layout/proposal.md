@@ -6,6 +6,7 @@
 - Geometry: `tools/v5/card_layout.py` (areas, barrier lines, slots, keep-outs, rough positions).
 - Check and renders: `python3 tools/v5/layout_proposal.py` → `check.txt`, `parts.csv`, `proposal_*.png` here.
   It ends with `layout_proposal: OK`.
+- Updated 2026-11-15 after the user's answer: the Ti60 card must fit (finding 9).
 
 ## 1. Findings that change the plan
 
@@ -21,7 +22,7 @@ Decide these before phase 2. My recommendation is first in each row.
 | 6 | **Layer order.** The plan suggests In3 = ground, In4 = routing. In JLC's stack In4 is 0.10 mm from B.Cu and 0.55 mm from In3, so B.Cu would have no ground next to it. | In3 = routing, In4 = ground (section 4). Both outer layers then have a ground plane 0.10 mm away. |
 | 7 | **Heights of the hand-fit parts.** J14 is a vertical 2.54 mm header (8.5 mm, more with a plug): it cannot sit on top under the card (5.3 mm gap). PEC1's screw and lug do not fit there either. | J13 and J14 on the bottom, as right-angle headers or soldered wires (a plugged vertical header exceeds the 10 mm bottom limit). PEC1/PEC2 lugs on the bottom; on top only the trimmed pin. |
 | 8 | **Slots and strength.** Slots on every free run would leave the J11 piece hanging on narrow webs, and J11 takes the card's insertion force. | Slots under the nine isolators and U17, plus five runs (section 3). No slot on the west and north side of J11; ≥ 2 mm webs. The 5.0 mm copper gap alone meets the printed-wiring creepage there. |
-| 9 | **Old Ti60 card.** Its JTAG tails (x 69.4, y 27.7…37.8) and UART tails (x 63.5, y 32.9…37.9) land on the CTRL pads of U19 and U21. | Needs your answer: must the Ti60 card still fit? If yes, trim those tails flush, or I look for a row position that clears them. |
+| 9 | **The Ti60 card must fit too (user, 2026-11-15).** Its JTAG tails (x 69.4, y 27.7…37.8) and UART tails (x 63.5, y 32.9…37.9) would land on the CTRL pads of U19 and U21 if those sat on top. | **Decided: U19, U20 and U21 go on the bottom side**, at the same positions, with their decoupling next to them on the bottom. All Ti60 holes (JTAG, UART, 5 V header, LCD, RJ45, from its IPC netlist) are keep-outs now, next to the Ti135 card's. No placed or moved part lies under a tail of either card (`check.txt`). The Ti60 card's own bottom-side parts are small passives where new top-side parts go; nothing tall meets anything tall. |
 | 10 | Card J5 pin 8 at (81.76, −16.4) is 2.0 mm from the centre of mounting hole H4 (screw head). C36, R37 and U14 also sit under J5 tails. All are v4 parts and stay. | Trim the J5 tails (the card's STATUS already says so). No baseboard change. |
 
 ## 2. Parts
@@ -45,12 +46,13 @@ Where the groups go:
 | Group | Area | Side | Rough position |
 |---|---|---|---|
 | U15, U13 (fixed), U16 | CTRL (J11) \| primary | top | y 18.3, x 56.0 / 68.0 / 80.0; U16 turns from −135° to −90° |
-| U21, U19, U20 | CTRL (J11) \| ISO | top | y 41.5, x 57.3 / 68.5 / 79.7; CTRL pins south, ISO pins north |
+| U21, U19, U20 | CTRL (J11) \| ISO | **bottom** | y 41.5, x 57.3 / 68.5 / 79.7; CTRL pins south, ISO pins north |
 | U22, U23, U24 (AMC1311) | ISO \| CTRL (J11) | top | x 92.5, y 36.7 / 29.9 / 23.1; VIN side east |
 | U25, U26 and R116–R127, C132, C133 | CTRL (J11) | top | x 74.5…85.4, y 24.5…35.0, next to the AMC1311 outputs |
 | R128–R130, C129–C131 (output filters) | CTRL (J11) | top | x 48.0…50.4, y 24.6…30.5, at J11 pins 1/3/4 |
 | U27, C134–C136; J14; PEC1 | CTRL (J11) | bottom; THT | (62.5, 30.0); (55.5, 30.0); (50.3, 33.0) |
-| Isolator and AMC1311 decoupling (C82, C117–C128) | each side's area | bottom | under pin 1 / 16 / 8 of its IC, two vias each |
+| U16 and AMC1311 decoupling (C82, C123–C128) | each side's area | bottom | under pin 1 / 8 of its IC, two vias each |
+| U19–U21 decoupling (C117–C122) | each side's area | bottom | beside pin 1 (y 34.7) and pin 16 (y 48.3), same side as the IC |
 | R110–R115 (×0.4 dividers) | ISO | top | column x 99.2…100.8 at each AMC1311 VIN |
 | U7 block, U2 block | ISO | top | x 95.5…106.0, y 14.5…20.3; x 95.5…104.0, y 8.5…13.8 (next to REF2) |
 | U10, C3, C4; R97; U8, C93, C94 | ISO | as now | (97.5, 0.8); (99.6, 43.0); (91.0, −20.1) |
@@ -60,7 +62,7 @@ Where the groups go:
 | D16; W1; PEC2 | CTRL (J12) | top; THT | (109.5, −24.5); (107.2, −31.2); (115.3, −31.6) |
 
 Quality rules of the plan and how the proposal meets them:
-- U19/U20 ISO pins face J4/J6/J8 (3 mm below the J6 pads). PWM_Q5–Q8 and TRANS4–6 leave straight north.
+- U19/U20 ISO pins face J4/J6/J8 (3 mm below the J6 pads), on the bottom side. PWM_Q5–Q8 and TRANS4–6 leave straight north on B.Cu.
 - U21 is the west-most isolator: about 50 mm to U4 and 65 mm to U6.
 - U13/U15/U16 primary sides stay next to the primary logic.
 - The six divider taps of U7/U2 come from x −15…−2 (R67, R68, R71, R82, R85, R256). They now cross the top band
@@ -163,8 +165,8 @@ Total 1.54 mm plus solder mask. The board file holds 2.267 mm today (the Proteus
 Domain areas (green CTRL, red primary, blue ISO), barrier centre lines (dashed), slots (orange) and the proposed
 positions (black) over today's board:
 
-- [`proposal_F.png`](proposal_F.png): top side. Purple circles = the card's through-hole keep-outs; brown circles
-  = the old Ti60 card's headers (finding 9).
+- [`proposal_F.png`](proposal_F.png): top side. Purple circles = the Ti135 card's through-hole keep-outs; brown
+  circles = the Ti60 card's (finding 9).
 - [`proposal_B.png`](proposal_B.png): bottom copper (seen from the top) with the bottom-side parts.
 - [`proposal_In1.png`](proposal_In1.png), [`proposal_In2.png`](proposal_In2.png): today's planes under the new areas.
 
@@ -213,6 +215,6 @@ I would use KRT, because it is already proven on your boards. Your choice.
 2. Finding 6: In3 routing / In4 ground instead of the plan's order?
 3. Finding 7: J13/J14 as right-angle headers or soldered wires on the bottom?
 4. Finding 8: the slot list of section 3, with no slot around J11's west and north side?
-5. Finding 9: must the old Ti60 card still fit on this baseboard?
+5. ~~Must the Ti60 card still fit?~~ Yes (user, 2026-11-15): U19–U21 on the bottom.
 6. Stack-up JLC06161H-3313 with 0.5 oz inner copper?
 7. Section 8: routing in the GUI as planned, or a routing agent for the low-voltage card-area nets first?
