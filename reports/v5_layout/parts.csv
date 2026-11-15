@@ -1,0 +1,182 @@
+ref,value,footprint,domain,action,side_now,x_now,y_now,area,side,x,y,note
+H4,MountingHole_3.0mm,Terminal_D4.0mm_Drill3.0mm,,fixed,F,81.0,-14.5,-,F,81.0,-14.5,
+C26,100n,C_0402_1005Metric,P,fixed,F,52.8,-3.389,P,F,52.8,-3.389,
+C95,1n C0G,C_0402_1005Metric,P,fixed,F,53.75,-6.439,P,F,53.75,-6.439,
+C96,1n C0G,C_0402_1005Metric,P,fixed,B,50.68,-6.9,P,B,50.68,-6.9,
+C97,1n C0G,C_0402_1005Metric,P,fixed,F,53.75,-0.139,P,F,53.75,-0.139,
+C98,1n C0G,C_0402_1005Metric,P,fixed,B,51.2,1.1,P,B,51.2,1.1,
+R17,10k,R_0402_1005Metric,P,fixed,F,50.2,-7.039,P,F,50.2,-7.039,
+R18,8.2k,R_0402_1005Metric,P,fixed,F,50.2,-8.239,P,F,50.2,-8.239,
+R21,10k,R_0402_1005Metric,P,fixed,F,53.5,-5.439,P,F,53.5,-5.439,
+R3,91K,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,P,fixed,B,44.525,1.5,P,B,44.525,1.5,
+R6,91K,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,P,fixed,B,44.525,-2.499,P,B,44.525,-2.499,
+R7,10k,R_0402_1005Metric,P,fixed,F,53.5,-1.139,P,F,53.5,-1.139,
+R8,10k,R_0402_1005Metric,P,fixed,F,50.8,0.361,P,F,50.8,0.361,
+R9,8.2k,R_0402_1005Metric,P,fixed,F,50.8,1.561,P,F,50.8,1.561,
+U1,OPA2353UA,TSSOP-8_3x3mm_P0.65mm_Proteus,P,fixed,F,50.875,-3.289,P,F,50.875,-3.289,
+J11,38 PIN HEADER 50TH,PinHeader_2x19_P1.27mm_Vertical_Proteus,C,fixed,F,46.17,22.61,CA,F,46.17,22.61,
+J12,2X3 PIN 50TH CONNECTOR,PinHeader_2x03_P1.27mm_Vertical_Pins43-48,C,fixed,F,114.14,-15.7,CB,F,114.14,-15.7,
+C109,100n,C_0402_1005Metric,P,fixed,F,53.89,4.4,P,F,53.89,4.4,
+C110,100n,C_0402_1005Metric,I,fixed,F,113.963,12.395,I,F,113.963,12.395,
+C16,1u,C_0402_1005Metric,P,fixed,F,49.7,4.559,P,F,49.7,4.559,
+C3,100n,C_0402_1005Metric,I,move,F,111.95,-1.623,I,F,97.5,0.8,"3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12 piece)"
+C4,100n,C_0402_1005Metric,I,move,F,112.55,-7.423,I,F,97.5,0.8,"3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12 piece)"
+C40,1u,C_0402_1005Metric,P,fixed,F,51.34,5.1,P,F,51.34,5.1,
+C5,1u,C_0402_1005Metric,I,fixed,F,109.013,9.845,I,F,109.013,9.845,
+C6,1u,C_0402_1005Metric,I,fixed,F,113.513,9.845,I,F,113.513,9.845,
+C69,100n,C_0402_1005Metric,P,fixed,F,50.95,-18.96,P,F,50.95,-18.96,
+C70,100n,C_0402_1005Metric,P,fixed,F,50.35,-13.16,P,F,50.35,-13.16,
+C93,10u 50V,C_1210_3225Metric,I,move,B,105.4,-22.9,I,B,92.04,-22.9,moves with U8
+C94,22u 10V,C_0805_2012Metric,I,move,B,109.44,-23.3,I,B,96.08,-23.3,moves with U8
+R19,422R,R_0402_1005Metric,P,fixed,F,51.39,3.8,P,F,51.39,3.8,
+R30,820R,R_0402_1005Metric,P,fixed,F,52.89,4.4,P,F,52.89,4.4,
+R32,422R,R_0402_1005Metric,I,fixed,F,114.813,9.895,I,F,114.813,9.895,
+R40,820R,R_0402_1005Metric,I,fixed,F,114.213,11.395,I,F,114.213,11.395,
+REF1,REF3025,SOT-23_Proteus,P,fixed,F,47.5,4.061,P,F,47.5,4.061,
+REF2,REF3025,SOT-23_Proteus,I,fixed,F,111.213,10.342,I,F,111.213,10.342,
+U10,TPS73033DBVT,SOT-23-5_TPS73033,I,move,F,112.05,-4.396,I,F,97.5,0.8,"3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12 piece)"
+U3,TPS73033DBVT,SOT-23-5_TPS73033,P,fixed,F,50.85,-16.188,P,F,50.85,-16.188,
+U8,K7805-2000R3,Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus,I,move,F,104.36,-20.1,I,F,91.0,-20.1,moved 13.36 mm west along its 15V_ISO / ISOGND pours (was 1.9 mm from J12)
+C100,1n C0G,C_0402_1005Metric,P,fixed,B,59.33,-15.3,P,B,59.33,-15.3,
+C101,1n C0G,C_0402_1005Metric,I,move,F,88.787,38.15,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+C102,1n C0G,C_0402_1005Metric,I,move,F,94.987,35.9,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+C2,10n C0G,C_0402_1005Metric,I,move,F,91.587,39.35,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+C27,100n,C_0402_1005Metric,P,fixed,F,59.199,-12.691,P,F,59.199,-12.691,
+C42,10n C0G,C_0402_1005Metric,P,fixed,F,57.849,-13.141,P,F,57.849,-13.141,
+C87,100n,C_0402_1005Metric,I,move,F,89.7,35.95,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+C99,1n C0G,C_0402_1005Metric,P,fixed,B,61.95,-14.28,P,B,61.95,-14.28,
+R1,10k,R_0402_1005Metric,I,move,F,89.787,38.4,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+R35,91K,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,P,fixed,B,59.5,-19.174,P,B,59.5,-19.174,
+R36,91K,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,P,fixed,B,55.2,-19.174,P,B,55.2,-19.174,
+R37,10k,R_0402_1005Metric,P,fixed,F,61.799,-15.141,P,F,61.799,-15.141,
+R38,10k,R_0402_1005Metric,P,fixed,F,59.299,-15.141,P,F,59.299,-15.141,
+R39,8.2k,R_0402_1005Metric,P,fixed,F,57.399,-15.141,P,F,57.399,-15.141,
+R76,10k,R_0402_1005Metric,I,move,F,93.987,35.9,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+R77,8.2k,R_0402_1005Metric,I,move,F,92.787,39.3,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+R96,0R,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,P,fixed,F,54.5,-11.975,P,F,54.5,-11.975,
+R97,0R,R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,I,move,F,96.85,40.9,I,F,99.6,43.0,"ISOGND-ISOPGND link, moved 2.8 mm east (U22 courtyard)"
+U14,TLV316IDBVR,SOT-23-5_TLV316,P,fixed,F,61.345,-12.617,P,F,61.345,-12.617,
+U2,TLV316IDBVR,SOT-23-5_TLV316,I,move,F,91.776,35.917,I,F,99.7,11.2,"ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"
+C103,1n C0G,C_0402_1005Metric,I,move,F,74.487,36.937,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C104,1n C0G,C_0402_1005Metric,I,move,F,74.487,38.837,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C105,1n C0G,C_0402_1005Metric,I,move,F,79.137,35.237,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C106,1n C0G,C_0402_1005Metric,I,move,B,82.93,37.52,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C107,4.7n C0G,C_0402_1005Metric,I,move,B,77.84,41.02,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C108,4.7n C0G,C_0402_1005Metric,I,move,F,84.787,40.237,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C38,100n,C_0402_1005Metric,I,move,F,79.45,40.3,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C56,100n,C_0402_1005Metric,I,move,F,63.4,25.35,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R46,10k,R_0402_1005Metric,I,move,F,79.387,36.237,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R51,10k,R_0402_1005Metric,I,move,F,83.287,38.237,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R52,10k,R_0402_1005Metric,I,move,F,75.487,36.937,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R53,10k,R_0402_1005Metric,I,move,F,75.487,38.837,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R54,8.2k,R_0402_1005Metric,I,move,F,77.387,40.637,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+R56,8.2k,R_0402_1005Metric,I,move,F,83.287,40.737,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+U7,OPA2353UA,TSSOP-8_3x3mm_P0.65mm_Proteus,I,move,F,79.537,38.162,I,F,100.7,17.4,"VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"
+C137,470u 16V,CP_Elec_8x10,C,place,,,,CB,B,112.6,-1.6,"polymer 8x10, bottom, under the card"
+C138,470u 16V,CP_Elec_8x10,C,place,,,,CB,B,112.6,-10.6,"polymer 8x10, bottom, under the card"
+C139,10u 25V,C_1206_3216Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+C140,100n,C_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+C141,100n,C_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+C142,22u 10V,C_1206_3216Metric,C,place,,,,CB,B,115.0,-27.7,buck output capacitors next to L2 / J13
+C143,22u 10V,C_1206_3216Metric,C,place,,,,CB,B,115.0,-27.7,buck output capacitors next to L2 / J13
+C144,75p,C_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+C15,220u,CP_Elec_6.3x7.7_EEEFTE221XAP,I,fixed,B,98.434,-13.575,-,B,98.434,-13.575,
+C36,4.7u,C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,I,fixed,F,92.7,-15.175,-,F,92.7,-15.175,
+D16,SS310,D_SMA_AC,C,place,,,,CB,F,109.5,-24.5,"top, south of the card edge, vertical"
+J13,CTRL 5V link B,PinHeader_1x02_P2.54mm_Vertical,C,place,,,,CB,B,116.0,-23.0,"5 V link header, same side as J14"
+L2,15u,L_Sunlord_SWPA6045S,C,place,,,,CB,B,111.0,-23.5,"4.5 mm high, bottom"
+PEC2,PIN,Terminal_D4.0mm_Drill3.0mm,C,place,,,,CB,THT,115.3,-31.6,PE bond terminal
+R131,910R,R_1206_3216Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+R132,511k,R_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+R133,105k,R_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+R134,100k,R_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+R135,13.3k,R_0603_1608Metric,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+U28,TPS54202DDCR,SOT-23-6,C,place,,,,CB,B,109.0,-17.5,"TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "
+W1,"CTRL winding (T1, TIW)",CTRL_Winding_Leads_2x1.6mm_P5.08mm,C,place,,,,CB,THT,107.2,-31.2,"CTRL winding leads, at the aux-area side (final position with T1)"
+C74,220p,C_0603_1608Metric,I,fixed,F,106.328,34.532,I,F,106.328,34.532,
+C75,220p,C_0603_1608Metric,I,fixed,F,106.328,31.235,I,F,106.328,31.235,
+C76,100n,C_0603_1608Metric,I,fixed,F,103.782,34.815,I,F,103.782,34.815,
+C77,100n,C_0603_1608Metric,I,fixed,F,102.227,34.815,I,F,102.227,34.815,
+C80,100n,C_0402_1005Metric,I,fixed,F,106.7,22.95,I,F,106.7,22.95,
+C92,100n C0G,C_1206_3216Metric,I,fixed,B,108.6,33.0,I,B,108.6,33.0,
+R64,FKK5R0020FE-TR,R_Shunt_FKK5R0020FE,I,fixed,F,109.65,42.55,I,F,109.65,42.55,
+R72,33R,R_0402_1005Metric,I,fixed,F,107.5,20.0,I,F,107.5,20.0,
+R73,12.4R,R_0402_1005Metric,I,fixed,F,110.56,34.786,I,F,110.56,34.786,
+R74,12.4R,R_0402_1005Metric,I,fixed,F,109.303,34.786,I,F,109.303,34.786,
+R75,470R,R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,I,fixed,F,101.59,30.964,I,F,101.59,30.964,
+U6,ADUM7701-8BRIZ-RL7,SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,I,fixed,F,109.931,27.371,I,F,109.931,27.371,
+AD1,ADS7056,X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056,P,fixed,F,62.643,7.219,P,F,62.643,7.219,
+C17,100n,C_0402_1005Metric,P,fixed,F,60.046,4.274,P,F,60.046,4.274,
+C18,100n,C_0402_1005Metric,P,fixed,F,60.046,0.591,P,F,60.046,0.591,
+C39,1u,C_0402_1005Metric,P,fixed,F,64.4,-4.75,P,F,64.4,-4.75,
+C88,4.7n C0G,C_0402_1005Metric,P,fixed,B,60.08,-9.35,P,B,60.08,-9.35,
+C89,4.7n C0G,C_0402_1005Metric,P,fixed,B,57.6,-8.03,P,B,57.6,-8.03,
+C9,1n,C_0402_1005Metric,P,fixed,F,61.549,5.384,P,F,61.549,5.384,
+L1,22uH,L_0805_2012Metric,P,fixed,F,58.598,1.757,P,F,58.598,1.757,
+R86,10R,R_0402_1005Metric,P,fixed,F,62.899,4.419,P,F,62.899,4.419,
+R87,RESISTOR_ARRAY,R_Array_Convex_4x0402_Proteus,P,fixed,F,62.449,9.489,P,F,62.449,9.489,
+U11,SN74LV4051,TSSOP-16_4.4x5mm_P0.65mm_Proteus,P,fixed,F,60.924,-3.83,P,F,60.924,-3.83,
+U12,TLV316IDBVR,SOT-23-5_TLV316,P,fixed,F,62.344,1.966,P,F,62.344,1.966,
+C117,100n,C_0402_1005Metric,C,place,,,,CA,B,64.1,36.9,under U19 pin 1
+C118,100n,C_0402_1005Metric,I,place,,,,I,B,64.1,46.1,under U19 pin 16
+C119,100n,C_0402_1005Metric,C,place,,,,CA,B,75.3,36.9,under U20 pin 1
+C120,100n,C_0402_1005Metric,I,place,,,,I,B,75.3,46.1,under U20 pin 16
+C121,100n,C_0402_1005Metric,C,place,,,,CA,B,52.9,36.9,under U21 pin 1
+C122,100n,C_0402_1005Metric,I,place,,,,I,B,52.9,46.1,under U21 pin 16
+C123,100n,C_0402_1005Metric,I,place,,,,I,B,97.8,34.8,under U22 pin 1
+C124,100n,C_0402_1005Metric,C,place,,,,CA,B,87.2,34.8,under U22 pin 8
+C125,100n,C_0402_1005Metric,I,place,,,,I,B,97.8,28.0,under U23 pin 1
+C126,100n,C_0402_1005Metric,C,place,,,,CA,B,87.2,28.0,under U23 pin 8
+C127,100n,C_0402_1005Metric,I,place,,,,I,B,97.8,21.2,under U24 pin 1
+C128,100n,C_0402_1005Metric,C,place,,,,CA,B,87.2,21.2,under U24 pin 8
+C129,4.7n C0G,C_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+C130,4.7n C0G,C_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+C131,10n C0G,C_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+C132,100n,C_0402_1005Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+C133,100n,C_0402_1005Metric,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+C134,10n,C_0402_1005Metric,C,place,,,,CA,B,62.5,30.0,"3V3_CTRL LDO block, bottom, x 59..66, y 27..33"
+C135,2.2u,C_0603_1608Metric,C,place,,,,CA,B,62.5,30.0,"3V3_CTRL LDO block, bottom, x 59..66, y 27..33"
+C136,1u,C_0603_1608Metric,C,place,,,,CA,B,62.5,30.0,"3V3_CTRL LDO block, bottom, x 59..66, y 27..33"
+C81,100n,C_0402_1005Metric,P,move,F,80.018,5.918,P,F,84.4,11.3,south of U16 pin 16 (U16 moved)
+C82,100n,C_0402_1005Metric,C,move,F,89.693,15.593,CA,B,84.4,23.0,under U16 pin 1 (U16 moved)
+C83,100n,C_0402_1005Metric,C,fixed,F,74.0,23.45,CA,F,74.0,23.45,
+C84,100n,C_0402_1005Metric,P,fixed,F,60.5,10.85,P,F,60.5,10.85,
+C85,100n,C_0402_1005Metric,P,fixed,F,72.475,11.575,P,F,72.475,11.575,
+C86,100n,C_0402_1005Metric,C,fixed,F,61.7,23.45,CA,F,61.7,23.45,
+J14,CTRL 5V link A,PinHeader_1x02_P2.54mm_Vertical,C,place,,,,CA,B,55.5,30.0,"5 V link header, THT from the bottom (see open items: height)"
+PEC1,PIN,Terminal_D4.0mm_Drill3.0mm,C,place,,,,CA,THT,50.3,33.0,PE bond terminal; lug and screw on the bottom
+R110,6.8k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,36.7,"x0.4 divider at U22 VIN, column x 99.2..100.8"
+R111,10k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,36.7,"x0.4 divider at U22 VIN, column x 99.2..100.8"
+R112,6.8k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,29.9,x0.4 divider at U23 VIN
+R113,10k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,29.9,x0.4 divider at U23 VIN
+R114,6.8k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,23.1,x0.4 divider at U24 VIN
+R115,10k 0.1%,R_0603_1608Metric,I,place,,,,I,F,100.0,23.1,x0.4 divider at U24 VIN
+R116,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R117,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R118,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R119,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R120,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R121,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R122,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R123,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+R124,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+R125,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+R126,10k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+R127,24.9k 0.1%,R_0603_1608Metric,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+R128,8.2k,R_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+R129,8.2k,R_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+R130,8.2k,R_0402_1005Metric,C,place,,,,CA,F,49.3,27.5,"8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"
+R22,39R,R_0402_1005Metric,P,fixed,F,52.832,9.3,P,F,52.832,9.3,
+U13,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,fixed,F,67.999,18.284,CA|P,F,67.999,18.284,
+U15,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,fixed,F,56.0,18.3,CA|P,F,56.0,18.3,
+U16,Si8660BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,C/P,move,F,81.752,13.966,CA|P,F,80.0,18.3,"in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"
+U17,Si8661BD-B-IS,SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,,fixed,F,88.0,0.525,I|P,F,88.0,0.525,
+U19,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,68.5,41.5,"PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"
+U20,ISO7760FDWR,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,79.7,41.5,"DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"
+U21,CA-IS3742LW,SOIC-16W_7.5x10.3mm_P1.27mm,C/I,place,,,,CA|I,F,57.3,41.5,"C pins south, ISO pins north; U4 path leaves west above J11"
+U22,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,36.7,"ISOADA1: VIN side east, output side west"
+U23,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,29.9,ISOADA2
+U24,AMC1311BDWVR,SOIC-8_7.5x5.85mm_P1.27mm,C/I,place,,,,I|CA,F,92.5,23.1,ISOADA3
+U25,OPA2350EA,VSSOP-8_3x3mm_P0.65mm,C,place,,,,CA,F,80.0,32.4,"ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"
+U26,OPA2350EA,VSSOP-8_3x3mm_P0.65mm,C,place,,,,CA,F,80.0,26.9,"ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"
+U27,TPS73033DBVT,SOT-23-5,C,place,,,,CA,B,62.5,30.0,"3V3_CTRL LDO block, bottom, x 59..66, y 27..33"
