@@ -22,6 +22,7 @@ step "Board copper connectivity after zone fill" tools/p2k/bin/kipy tools/assign
 step "Domain net classes and DRC rules up to date" tools/p2k/bin/kipy tools/v4/domain_rules.py --check
 step "DRC with schematic parity" python3 tools/drc.py
 step "Insulation spacing between domains (IEC 61010-1: P-I 5.0 mm, P/I-PE 2.5 mm)" tools/p2k/bin/kipy tools/v4/domain_gaps.py
+step "Card-area layout (domain areas, heights, card keep-outs, slots; V5_LAYOUT_PLAN.md)" tools/p2k/bin/kipy tools/v5/check_layout.py
 step "IPC-D-356 from the board vs Proteus (+ v4 deviations)" python3 tools/ipc356_diff.py
 step "Gerber round trip vs Proteus (copper, drills; v4 areas)" python3 tools/gerber_roundtrip.py --check
 

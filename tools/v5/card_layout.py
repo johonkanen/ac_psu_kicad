@@ -24,6 +24,8 @@ AREAS = {
     "I": ("I", [(52.3, 44.0), (52.3, 46.38), (118.1, 46.38), (118.1, 8.0), (102.2, 8.0), (102.2, -9.4),
                 (90.5, -9.4), (90.5, 15.7), (93.0, 16.2), (95.0, 18.0), (95.0, 44.0)]),
 }
+# ISO copper south of the card part: U8 (moved), C15, C36 and the 15V_ISO / ISOGND pours, trimmed to this
+AREAS["IS"] = ("I", [(87.9, -9.4), (102.2, -9.4), (102.2, -21.6), (97.5, -21.6), (97.5, -25.5), (87.9, -25.5)])
 # ISO copper outside the card that bounds CA (for the gap check and the pour pull-back):
 # west of J11 the ISODC+ pours end at x 39.4; north of J11 ISO copper starts at y 51.1.
 I_AROUND_CA = [[(30.0, 10.0), (39.4, 10.0), (39.4, 48.0), (40.2, 49.5), (41.7, 50.45), (42.7, 51.1), (49.0, 51.1),
@@ -87,16 +89,16 @@ PLACE.update({
     "U21": ("CA|I", "B", 57.3, 41.5, "bottom (Ti60 JTAG/UART tails above); C pins south, ISO pins north; U4 path leaves west above J11"),
     "U19": ("CA|I", "B", 68.5, 41.5, "bottom (Ti60 JTAG/UART tails above); PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"),
     "U20": ("CA|I", "B", 79.7, 41.5, "bottom (Ti60 JTAG/UART tails above); DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"),
-    "U22": ("I|CA", "F", 92.5, 36.7, "ISOADA1: VIN side east, output side west"),
-    "U23": ("I|CA", "F", 92.5, 29.9, "ISOADA2"),
-    "U24": ("I|CA", "F", 92.5, 23.1, "ISOADA3"),
+    "U22": ("I|CA", "B", 92.5, 36.7, "bottom (DWV package up to 2.8 mm); ISOADA1: VIN side east, output side west"),
+    "U23": ("I|CA", "B", 92.5, 29.9, "bottom; ISOADA2"),
+    "U24": ("I|CA", "B", 92.5, 23.1, "bottom; ISOADA3"),
 })
 # -- CTRL piece at J11 ----------------------------------------------------------------------
 PLACE.update({"C121": ("CA", "B", 61.75, 34.7, "bottom, south of U21 pin 1"), "C117": ("CA", "B", 72.95, 34.7, "bottom, south of U19 pin 1"),
               "C119": ("CA", "B", 84.15, 34.7, "bottom, south of U20 pin 1"),
               "C82": ("CA", "B", 84.4, 23.0, "under U16 pin 1 (U16 moved)"),
-              "C124": ("CA", "B", 87.2, 34.8, "under U22 pin 8"), "C126": ("CA", "B", 87.2, 28.0, "under U23 pin 8"),
-              "C128": ("CA", "B", 87.2, 21.2, "under U24 pin 8")})
+              "C124": ("CA", "F", 87.2, 34.8, "top, opposite U22 pin 8"), "C126": ("CA", "F", 87.2, 28.0, "top, opposite U23 pin 8"),
+              "C128": ("CA", "F", 87.2, 21.2, "top, opposite U24 pin 8")})
 PLACE.update(_blk("U25 R116 R117 R118 R119 R120 R121 R122 R123 C132", "CA", "F", 80.0, 32.4,
                   "ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"))
 PLACE.update(_blk("U26 R124 R125 R126 R127 C133", "CA", "F", 80.0, 26.9,
@@ -109,8 +111,8 @@ PLACE.update({"J14": ("CA", "THT", 55.5, 30.0, "5 V link: two wires soldered int
 # -- ISO --------------------------------------------------------------------------------------
 PLACE.update({"C122": ("I", "B", 61.75, 48.3, "bottom, north of U21 pin 16"), "C118": ("I", "B", 72.95, 48.3, "bottom, north of U19 pin 16"),
               "C120": ("I", "B", 84.15, 48.3, "bottom, north of U20 pin 16"),
-              "C123": ("I", "B", 97.8, 34.8, "under U22 pin 1"), "C125": ("I", "B", 97.8, 28.0, "under U23 pin 1"),
-              "C127": ("I", "B", 97.8, 21.2, "under U24 pin 1")})
+              "C123": ("I", "F", 97.8, 34.8, "top, opposite U22 pin 1"), "C125": ("I", "F", 97.8, 28.0, "top, opposite U23 pin 1"),
+              "C127": ("I", "F", 97.8, 21.2, "top, opposite U24 pin 1")})
 PLACE.update(_blk("R110 R111", "I", "F", 100.0, 36.7, "x0.4 divider at U22 VIN, column x 99.2..100.8"))
 PLACE.update(_blk("R112 R113", "I", "F", 100.0, 29.9, "x0.4 divider at U23 VIN"))
 PLACE.update(_blk("R114 R115", "I", "F", 100.0, 23.1, "x0.4 divider at U24 VIN"))
@@ -141,3 +143,26 @@ PLACE.update(_blk("C142 C143", "CB", "B", 115.0, -27.7, "buck output capacitors 
 # v4 tracks to delete in phase 3: every track/via in the card area on a net of these parts' moved
 # pads, plus all CTRL-domain tracks of the J11 fan-out (they cross the new U19-U21 pads).
 HEIGHT_NOTE = "SOIC-16W / SOIC-8W 2.65 mm; VSSOP 1.1; SOT-23 1.45; 0402 0.55; 0603 0.9; 1206 1.8; SMA 2.3 (not under the card)"
+
+# Height (mm) per footprint, for the limits above (tools/v5/check_layout.py). Maximum body heights from the
+# data sheets or the JEDEC outline; SOIC-8 wide (DWV) is 2.8 mm, above the 2.65 mm top-side limit.
+HEIGHT = {
+    "C_0402_1005Metric": 0.55, "C_0603_1608Metric": 0.9, "C_0805_2012Metric": 1.35, "C_1206_3216Metric": 1.8,
+    "C_1206_3216Metric_Pad1.33x1.80mm_HandSolder": 1.8, "C_1210_3225Metric": 2.7,
+    "R_0402_1005Metric": 0.4, "R_0603_1608Metric": 0.55, "R_0805_2012Metric_Pad1.20x1.40mm_HandSolder": 0.65,
+    "R_1206_3216Metric": 0.65, "R_1206_3216Metric_Pad1.30x1.75mm_HandSolder": 0.65, "R_Array_Convex_4x0402_Proteus": 0.45,
+    "R_Shunt_FKK5R0020FE": 1.0, "L_0805_2012Metric": 1.35, "L_Sunlord_SWPA6045S": 4.5, "D_SMA_AC": 2.3,
+    "CP_Elec_8x10": 10.0, "CP_Elec_6.3x7.7_EEEFTE221XAP": 7.7,
+    "SOIC-16W_7.5x10.3mm_P1.27mm": 2.65, "SOIC-16W_7.5x10.3mm_P1.27mm_Proteus": 2.65,
+    "SOIC-8_7.5x5.85mm_P1.27mm": 2.8, "SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701": 2.8,
+    "SOT-23-5": 1.45, "SOT-23-5_TLV316": 1.45, "SOT-23-5_TPS73033": 1.45, "SOT-23-6": 1.1, "SOT-23_Proteus": 1.12,
+    "TSSOP-16_4.4x5mm_P0.65mm_Proteus": 1.2, "TSSOP-8_3x3mm_P0.65mm_Proteus": 1.1, "VSSOP-8_3x3mm_P0.65mm": 1.1,
+    "X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056": 0.4,
+}
+# Through-hole / hand-fit parts without a height check, and why
+NO_HEIGHT = {
+    "J11": "mates with the card", "J12": "mates with the card", "H4": "mounting hole",
+    "J13": "wires soldered from the bottom, no header", "J14": "wires soldered from the bottom, no header",
+    "PEC1": "lug and screw on the bottom, pin trimmed on top", "PEC2": "lug and screw on the bottom",
+    "W1": "flying leads of T1, soldered", "U8": "outside the card outline (pins at y -20.1)",
+}

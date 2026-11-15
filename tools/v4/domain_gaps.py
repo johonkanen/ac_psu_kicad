@@ -23,6 +23,7 @@ import board_common as bc  # noqa: E402
 import domains  # noqa: E402
 
 LAYERS = [("F.Cu", pcbnew.F_Cu), ("In1.Cu", pcbnew.In1_Cu), ("In2.Cu", pcbnew.In2_Cu), ("B.Cu", pcbnew.B_Cu)]
+LAYERS6 = LAYERS[:3] + [("In3.Cu", pcbnew.In3_Cu), ("In4.Cu", pcbnew.In4_Cu)] + LAYERS[3:]   # v5: stack order
 F = pcbnew.FromMM
 T = pcbnew.ToMM
 ERR = F(0.005)
@@ -97,7 +98,8 @@ def near(parts, x, y, r):
 def check(board, dom, verbose=False):
     viol = []
     per_layer = {}
-    for lname, lid in LAYERS:
+    layers = LAYERS6 if board.GetCopperLayerCount() == 6 else LAYERS
+    for lname, lid in layers:
         parts = item_polys(board, lid, dom)
         uni = {d: union(p) for d, p in parts.items()}
         per_layer[lname] = uni
@@ -119,7 +121,7 @@ def check(board, dom, verbose=False):
                     lo, hi = (lo, mid) if hit else (mid, hi)
                 viol.append((lname, a, b, req, hi, x, y,
                              near(parts[a], x, y, req + 0.5)[:3], near(parts[b], x, y, req + 0.5)[:3]))
-    stack = [n for n, _ in LAYERS]
+    stack = [n for n, _ in layers]
     for la, lb in zip(stack, stack[1:]):
         for a, b in (("P", "I"), ("I", "P"), ("P", "C"), ("C", "P"), ("I", "C"), ("C", "I")):
             A, B = per_layer[la].get(a), per_layer[lb].get(b)

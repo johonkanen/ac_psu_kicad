@@ -37,7 +37,8 @@ def check_pads(board, recs, errors):
     worst, npads, used = 0.0, 0, set()
     v4pads, pending = [], []
     swapped = deviations.footprint_changes()
-    nswap = 0
+    movedset = deviations.moved_parts()
+    nswap = nmoved = 0
     for fp in board.GetFootprints():
         ref = fp.GetReference()
         if fp.IsBoardOnly():
@@ -61,6 +62,18 @@ def check_pads(board, recs, errors):
                         used.add(id(q))
                     pending.append((ref, pad.GetNumber(), cands[0]["net"], pad.GetNetname()))
                 nswap += 1
+                continue
+            if ref in movedset:
+                # v5 moved part: no Proteus position to compare; the pad number is an IPC pin, on its net
+                if not cands:
+                    errors.append(f"{ref}-{pad.GetNumber()}: moved part pad without IPC pin")
+                else:
+                    for q in cands:
+                        used.add(id(q))
+                    q = cands[0]
+                    pending.append((ref, pad.GetNumber(), "N/C" if q["net_raw"] == "N/C" or not q["net"] else q["net"],
+                                    pad.GetNetname()))
+                nmoved += 1
                 continue
             added = deviations.added_parts().get(ref)
             if added and not cands and not pad.GetNumber():
@@ -101,6 +114,8 @@ def check_pads(board, recs, errors):
     if v4pads:
         print(f"check_board: v4 pads without Proteus pad (nets checked): {' '.join(v4pads)}")
     if swapped:
+        if nmoved:
+            print(f"check_board: {nmoved} pads of {len(movedset)} v5 moved parts (pad numbers and nets checked, not positions)")
         print(f"check_board: {nswap} pads of {len(swapped)} v4 footprint swaps in their terminal areas (nets checked): "
               f"{' '.join(sorted(swapped))}")
     for key, qs in ipc.items():
@@ -172,7 +187,8 @@ def check_copper(board, recs, mapping, errors):
                     if math.hypot(mm(c.x) - q["x_mm"], -mm(c.y) - q["y_mm"]) < 0.01:
                         hit = v
         if hit is None:
-            if deviations.in_pending(q["x_mm"], q["y_mm"]) or q["net"] in cut_nets:
+            if (deviations.in_pending(q["x_mm"], q["y_mm"]) or deviations.in_unrouted(q["x_mm"], q["y_mm"])
+                    or q["net"] in cut_nets):
                 pend_vias.append(q)   # v5: deleted with the old copper; the area is laid out in the GUI
             else:
                 errors.append(f"IPC via ({q['x_mm']}, {q['y_mm']}) {q['net']}: no board via")
@@ -184,13 +200,18 @@ def check_copper(board, recs, mapping, errors):
         elif hit.GetNetname() != want:
             errors.append(f"via ({q['x_mm']}, {q['y_mm']}): net {hit.GetNetname()!r}, IPC {q['net']} -> {want}")
     v4vias = deviations.vias()
-    nv4 = 0
+    nv4 = nnew = 0
+    v4gone = [d for d in v4vias if deviations.in_unrouted(d[0], d[1]) and not any(
+        math.hypot(d[0] - mm(v.GetPosition().x), d[1] + mm(v.GetPosition().y)) < 0.01 for v in vias)]
+    v4vias = [d for d in v4vias if d not in v4gone]   # v4 vias deleted with the card-area re-layout
     for v in vias:
         if v.m_Uuid.AsString() not in matched:
             c = v.GetPosition()
             x, y = mm(c.x), -mm(c.y)
             hit = [d for d in v4vias if math.hypot(d[0] - x, d[1] - y) < 0.01]
-            if not hit:
+            if not hit and deviations.in_unrouted(x, y):
+                nnew += 1     # v5: a via of the new card-area layout
+            elif not hit:
                 errors.append(f"board via ({x:.3f}, {y:.3f}) is neither an IPC via nor a v4 via (lib/v4_copper.csv)")
             elif mapping.get(hit[0][2], hit[0][2]) != v.GetNetname():
                 errors.append(f"v4 via ({x:.3f}, {y:.3f}): net {v.GetNetname()}, list {hit[0][2]}")
@@ -200,6 +221,8 @@ def check_copper(board, recs, mapping, errors):
         errors.append(f"{len(v4vias)} v4 vias listed, {nv4} found on the board")
     if v4vias:
         print(f"check_board: {nv4} v4 vias (lib/v4_copper.csv) at their positions and nets")
+    if nnew or v4gone:
+        print(f"check_board: {nnew} new vias and {len(v4gone)} deleted v4 vias in the unrouted areas (lib/v5_copper.csv)")
     if pend_vias:
         print(f"check_board: {len(pend_vias)} Proteus vias deleted by v5 (pending-layout areas or cut v5 chains: "
               f"{', '.join(sorted({q['net'] for q in pend_vias}))})")

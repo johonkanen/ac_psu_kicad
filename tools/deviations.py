@@ -8,10 +8,15 @@ lib/v5_deviations.csv  v5 (aux flyback, CTRL isolation): the same kinds plus
                        rename = whole IPC net renamed to a new net name,
                        refdes = Proteus refdes -> KiCad refdes (KiCad wants a trailing number);
                        the rows of the other kinds keep the Proteus refdes, rows() maps them
+                       moved  = Proteus part placed elsewhere (v5 card-area layout): its pads are
+                       not compared with the Proteus positions, pad numbers and nets still are
 lib/v5_copper.csv      v5 board copper: area rows as above, and pending = rectangle where the
                        layout is left to the KiCad GUI (unrouted new parts, re-cut planes): DRC
                        clearance/unconnected items, opens and domain gaps there are reported as
-                       pending, not as failures
+                       pending, not as failures;
+                       unrouted = rectangle that is placed but not routed yet: the copper may differ
+                       from Proteus, and only DRC unconnected items, opens and missing Proteus vias
+                       are excused there. Clearance and domain gaps are strict.
 Coordinates in mm, IPC frame (Y up).
 
 Every check that compares the design with the Proteus CADCAM files applies exactly these
@@ -100,6 +105,27 @@ def pending_areas():
 def in_pending(x, y, margin=0.0):
     return any(x0 - margin <= x <= x1 + margin and y0 - margin <= y <= y1 + margin
                for x0, y0, x1, y1, _ in pending_areas())
+
+
+def unrouted_areas():
+    """[(x0, y0, x1, y1, note)] placed, not yet routed (kind unrouted)."""
+    out = []
+    for r in copper_rows():
+        if r["kind"] == "unrouted":
+            x0, x1 = sorted((float(r["x"]), float(r["x1"])))
+            y0, y1 = sorted((float(r["y"]), float(r["y1"])))
+            out.append((x0, y0, x1, y1, r["note"]))
+    return out
+
+
+def in_unrouted(x, y, margin=0.0):
+    return any(x0 - margin <= x <= x1 + margin and y0 - margin <= y <= y1 + margin
+               for x0, y0, x1, y1, _ in unrouted_areas())
+
+
+def moved_parts():
+    """refdes of Proteus parts placed elsewhere in v5 (kind moved)."""
+    return {r["ref"] for r in rows() if r["kind"] == "moved"}
 
 
 def v5_cut_nets():
@@ -250,7 +276,7 @@ def in_area(layer, x, y, margin=0.0):
     for l, x0, y0, x1, y1, _ in areas():
         if (l in ("*", layer)) and x0 - margin <= x <= x1 + margin and y0 - margin <= y <= y1 + margin:
             return True
-    return in_pending(x, y, margin)   # v5: pending-layout areas are changed copper too
+    return in_pending(x, y, margin) or in_unrouted(x, y, margin)   # v5: changed copper too
 
 
 def validate():
@@ -289,6 +315,9 @@ def validate():
                 errs.append(f"refdes {r['from']}->{r['to']}: {r['from']} is not an IPC refdes")
             if r["to"] in refs:
                 errs.append(f"refdes {r['from']}->{r['to']}: {r['to']} is already an IPC refdes")
+        elif k == "moved":
+            if r["ref"] not in refs:
+                errs.append(f"moved {r['ref']}: refdes is not in the IPC")
         elif k == "footprint":
             if r["ref"] not in refs:
                 errs.append(f"footprint {r['ref']}: refdes is not in the IPC")
@@ -299,7 +328,7 @@ def validate():
     newnets = {r["to"] for r in allrows if r["kind"] in ("pin", "rename")}
     gone = removed()
     for r in rows():
-        if r["kind"] in ("pin", "value", "footprint") and r["ref"] in gone:
+        if r["kind"] in ("pin", "value", "footprint", "moved") and r["ref"] in gone:
             errs.append(f"{r['kind']} {r['ref']}: the part is removed (kind remove)")
     v5new = v5_parts()
     for ref, p in added_parts().items():
@@ -321,7 +350,8 @@ def summary():
             f"{c.get('refdes', 0)} refdes renames, "
             f"{c.get('pin', 0)} pin moves, {c.get('remove', 0)} removed parts, "
             f"{c.get('part', 0)} new parts ({c.get('add', 0)} pins), {c.get('value', 0)} values, "
-            f"{c.get('footprint', 0)} footprints; "
+            f"{c.get('footprint', 0)} footprints, {c.get('moved', 0)} moved parts; "
             f"copper: {sum(1 for x in cr if x['kind'] == 'via')} new vias, "
             f"{sum(1 for x in cr if x['kind'] == 'area')} changed areas, "
-            f"{sum(1 for x in cr if x['kind'] == 'pending')} pending-layout areas")
+            f"{sum(1 for x in cr if x['kind'] == 'pending')} pending-layout areas, "
+            f"{sum(1 for x in cr if x['kind'] == 'unrouted')} unrouted areas")

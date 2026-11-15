@@ -3,6 +3,7 @@
 #   remove  ref is a Proteus part deleted in v5 (its pins leave the reference)
 #   rename  from = IPC net, to = new net name (every pad, via and track of `from`)
 #   refdes  from = Proteus refdes, to = KiCad refdes (rows of other kinds keep the Proteus name)
+#   moved   ref is a Proteus part placed elsewhere (card-area layout, tools/v5/card_layout.py PLACE)
 # Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename, refdes) and,
 # with --nets, from the schematic netlist (add, pin). Plans: V5_PLAN.md, CTRL_ISOLATION_PLAN.md.
 kind,ref,pin,from,to,fix,note
@@ -34,6 +35,29 @@ rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
 refdes,,,AFE_OUT,AFE_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_IN,FILTER_IN1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_OUT,FILTER_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
+moved,C2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,C3,,,,v5,"card-area layout: 3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12"
+moved,C4,,,,v5,"card-area layout: 3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12"
+moved,C38,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,C56,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,C81,,,,v5,card-area layout: south of U16 pin 16 (U16 moved)
+moved,C82,,,,v5,card-area layout: under U16 pin 1 (U16 moved)
+moved,C87,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,R1,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,R46,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R51,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R52,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R53,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R54,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R56,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,R76,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,R77,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,R97,,,,v5,"card-area layout: ISOGND-ISOPGND link, moved 2.8 mm east (U22 courtyard)"
+moved,U2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8"
+moved,U7,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3"
+moved,U8,,,,v5,card-area layout: moved 13.36 mm west along its 15V_ISO / ISOGND pours (was 1.
+moved,U10,,,,v5,"card-area layout: 3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12"
+moved,U16,,,,v5,"card-area layout: in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"
 part,R98,,,Resistor_SMD:R_2512_6332Metric,v5,aux input damping resistor DC+ -> AUX_VIN
 value,R98,,,10R 2512,v5,
 part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter

@@ -39,7 +39,7 @@ BOARD = ROOT / "kicad" / "ac_psu.kicad_pcb"
 CLI = ROOT / "tools" / "p2k" / "bin" / "kicad-cli"
 TOL = 0.05        # mm, position
 DRILL_TOL = 0.005  # mm (KiCad writes 0.0001 inch = 0.00254 mm)
-COPPER_LAYERS = 4
+COPPER_LAYERS = (4, 6)   # KiCad numbers the bottom as the copper layer count: 4 until v5 step 3, then 6
 
 # KiCad leaves the 'M' (mid-point) column blank and pads with spaces, Proteus writes M + D/blanks
 DATA_RE = re.compile(
@@ -82,7 +82,7 @@ def parse_kicad(path):
             raise ValueError(f"{path}: line {lineno}: cannot parse {line!r}")
         net = names.get("NNAME" + net_field, net_field)
         acc = m["access"]
-        side = "both" if acc == "00" else "top" if acc == "01" else "bottom" if int(acc) == COPPER_LAYERS else acc
+        side = "both" if acc == "00" else "top" if acc == "01" else "bottom" if int(acc) in COPPER_LAYERS else acc
         w = int(m["w"]) * scale
         h = int(m["h"]) * scale if m["h"] else 0.0
         recs.append(dict(
@@ -114,6 +114,12 @@ def main():
     for p in swap_prot:
         swap_net[p["refdes"]] = p["net"]
     prot = [p for p in prot if not (p["kind"] == "pad" and p["refdes"] in swapped)]
+    # v5 moved parts: their Proteus pad records leave the position comparison; pin -> net is kept
+    movedset = deviations.moved_parts()
+    moved_net = {(p["refdes_raw"], p["pin"]): ("N/C" if p["net_raw"] == "N/C" or not p["net"] else p["net"])
+                 for p in prot if p["kind"] == "pad" and p["refdes"] in movedset}
+    prot = [p for p in prot if not (p["kind"] == "pad" and p["refdes"] in movedset)]
+    movedrecs = []
     if args.kicad:
         kic = parse_kicad(args.kicad)
     else:
@@ -136,7 +142,8 @@ def main():
     for p in prot:
         key = (p["kind"], p["refdes_raw"] if p["kind"] == "pad" else "", p["pin"] if p["kind"] == "pad" else "")
         cands = [r for r in by_key.get(key, []) if id(r) not in used]
-        if p["kind"] == "via" and (deviations.in_pending(p["x_mm"], p["y_mm"]) or p["net"] in cut_nets):
+        if p["kind"] == "via" and (deviations.in_pending(p["x_mm"], p["y_mm"]) or p["net"] in cut_nets
+                                   or deviations.in_unrouted(p["x_mm"], p["y_mm"])):
             near = [r for r in cands if math.hypot(r["x_mm"] - p["x_mm"], r["y_mm"] - p["y_mm"]) <= TOL]
             if not near:
                 v5gone.append(p)   # v5: deleted with the old copper (pending GUI layout / cut chain)
@@ -154,8 +161,19 @@ def main():
         pairs.append((p, r))
     v4recs = []
     swaprecs = []
+    newvias = []
+    v4gone = [v for v in v4vias if deviations.in_unrouted(v[0], v[1]) and not any(
+        r["kind"] == "via" and math.hypot(v[0] - r["x_mm"], v[1] - r["y_mm"]) < TOL for r in kic)]
+    v4vias = [v for v in v4vias if v not in v4gone]   # v4 vias deleted with the card-area re-layout
     for r in kic:
         if id(r) not in used:
+            if r["kind"] == "pad" and (r["refdes"], r["pin"]) in moved_net:
+                movedrecs.append((r, moved_net[(r["refdes"], r["pin"])]))
+                continue
+            if r["kind"] == "via" and deviations.in_unrouted(r["x_mm"], r["y_mm"]) and not any(
+                    math.hypot(v[0] - r["x_mm"], v[1] - r["y_mm"]) < TOL for v in v4vias):
+                newvias.append(r)     # v5: a via of the new card-area layout
+                continue
             tref = deviations.in_terminal_area(r["x_mm"], r["y_mm"]) if r["kind"] == "pad" else None
             if tref and tref[:6] == r["refdes"]:
                 swaprecs.append((r, tref))
@@ -175,6 +193,10 @@ def main():
         if p["kind"] == "pad" and p["net"] and p["net_raw"] != "N/C" and not kicad_unconnected(r["net"]):
             fwd.setdefault(p["net"], set()).add(r["net"])
             back.setdefault(r["net"], set()).add(p["net"])
+    for r, want in movedrecs:   # v5 moved pads map nets too (a net may have only moved pads left)
+        if want != "N/C" and not kicad_unconnected(r["net"]):
+            fwd.setdefault(want, set()).add(r["net"])
+            back.setdefault(r["net"], set()).add(want)
     for n, ks in sorted(fwd.items()):
         if len(ks) > 1:
             errors.append(f"Proteus net {n} spans KiCad nets {sorted(ks)}")
@@ -194,6 +216,17 @@ def main():
         if mapping.get(want) != r["net"]:
             errors.append(f"v4 {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): "
                           f"KiCad net {r['net']}, listed {want} -> {mapping.get(want)}")
+    for r, want in movedrecs:   # v5 moved parts: on the IPC pin's net, wherever they are
+        if want == "N/C":
+            if not kicad_unconnected(r["net"]):
+                errors.append(f"moved {r['refdes']}-{r['pin']}: N/C in IPC, KiCad net {r['net']}")
+        elif mapping.get(want) != r["net"] and not (want not in pnets and (r["net"] == want or (len(r["net"]) >= 12 and want.startswith(r["net"])))):
+            errors.append(f"moved {r['refdes']}-{r['pin']}: KiCad net {r['net']}, IPC net {want} -> {mapping.get(want)}")
+    if len(movedrecs) != len(moved_net):
+        errors.append(f"moved parts: {len(moved_net)} IPC pads, {len(movedrecs)} KiCad records")
+    if movedrecs or newvias or v4gone:
+        print(f"ipc356_diff: {len(movedrecs)} pads of {len(movedset)} v5 moved parts (nets checked, not positions); "
+              f"{len(newvias)} new vias and {len(v4gone)} deleted v4 vias in the unrouted areas")
     for r, tref in swaprecs:   # swapped footprints: in their terminal area, on the IPC pin's net
         if mapping.get(swap_net.get(tref)) != r["net"]:
             errors.append(f"v4 footprint swap {tref} pad at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): KiCad net {r['net']}, "

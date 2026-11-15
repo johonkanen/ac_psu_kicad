@@ -47,11 +47,11 @@ Where the groups go:
 |---|---|---|---|
 | U15, U13 (fixed), U16 | CTRL (J11) \| primary | top | y 18.3, x 56.0 / 68.0 / 80.0; U16 turns from −135° to −90° |
 | U21, U19, U20 | CTRL (J11) \| ISO | **bottom** | y 41.5, x 57.3 / 68.5 / 79.7; CTRL pins south, ISO pins north |
-| U22, U23, U24 (AMC1311) | ISO \| CTRL (J11) | top | x 92.5, y 36.7 / 29.9 / 23.1; VIN side east |
+| U22, U23, U24 (AMC1311) | ISO \| CTRL (J11) | **bottom** (phase 2: the DWV package can be 2.8 mm, above the 2.65 mm top limit) | x 92.5, y 36.7 / 29.9 / 23.1; VIN side east |
 | U25, U26 and R116–R127, C132, C133 | CTRL (J11) | top | x 74.5…85.4, y 24.5…35.0, next to the AMC1311 outputs |
 | R128–R130, C129–C131 (output filters) | CTRL (J11) | top | x 48.0…50.4, y 24.6…30.5, at J11 pins 1/3/4 |
 | U27, C134–C136; J14; PEC1 | CTRL (J11) | bottom; THT | (62.5, 30.0); (55.5, 30.0); (50.3, 33.0) |
-| U16 and AMC1311 decoupling (C82, C123–C128) | each side's area | bottom | under pin 1 / 8 of its IC, two vias each |
+| U16 and AMC1311 decoupling (C82, C123–C128) | each side's area | C82 bottom, C123–C128 top | opposite pin 1 / 8 of its IC, two vias each |
 | U19–U21 decoupling (C117–C122) | each side's area | bottom | beside pin 1 (y 34.7) and pin 16 (y 48.3), same side as the IC |
 | R110–R115 (×0.4 dividers) | ISO | top | column x 99.2…100.8 at each AMC1311 VIN |
 | U7 block, U2 block | ISO | top | x 95.5…106.0, y 14.5…20.3; x 95.5…104.0, y 8.5…13.8 (next to REF2) |

@@ -459,7 +459,7 @@ def compare_drills(kdir, report):
             if deviations.in_terminal_area(x, y):
                 nswap_p += 1    # v4 footprint swap: the old lead pin's drill is gone
                 continue
-            if deviations.in_pending(x, y):
+            if deviations.in_pending(x, y) or deviations.in_unrouted(x, y):
                 npend_p += 1    # v5: removed part / deleted via in a pending-layout area
                 continue
             errors.append(f"Proteus {fn} {d} mm at ({x}, {y}) has no KiCad drill within {TOL} mm")
@@ -470,6 +470,9 @@ def compare_drills(kdir, report):
         if dk < d - DRILL_TOL:
             errors.append(f"drill at ({x}, {y}): Proteus {d} mm, KiCad {dk} mm is smaller")
     v4 = deviations.vias()
+    # v4 vias deleted with the card-area re-layout (unrouted areas) are not expected any more
+    v4 = [v for v in v4 if not (deviations.in_unrouted(v[0], v[1]) and
+                                not any(math.hypot(v[0] - kx, v[1] - ky) < TOL for kx, ky, _, _ in K))]
     nv4 = 0
     for i in np.nonzero(~used)[0]:
         x, y, d, fn = K[i]
@@ -479,7 +482,7 @@ def compare_drills(kdir, report):
         if deviations.in_terminal_area(x, y):
             nswap_k += 1        # drills of a v4 swapped footprint (M4 terminal: 4 x 1.85 + 4.3 mm)
             continue
-        if deviations.in_pending(x, y):
+        if deviations.in_pending(x, y) or deviations.in_unrouted(x, y):
             npend_k += 1        # v5: new THT parts (staging / pending-layout areas)
             continue
         errors.append(f"KiCad {fn} {d} mm at ({x}, {y}) has no Proteus drill")

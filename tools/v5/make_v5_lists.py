@@ -30,6 +30,7 @@ HEADER = """# Intended deviations of the v5 design (aux flyback + control-card i
 #   remove  ref is a Proteus part deleted in v5 (its pins leave the reference)
 #   rename  from = IPC net, to = new net name (every pad, via and track of `from`)
 #   refdes  from = Proteus refdes, to = KiCad refdes (rows of other kinds keep the Proteus name)
+#   moved   ref is a Proteus part placed elsewhere (card-area layout, tools/v5/card_layout.py PLACE)
 # Written by tools/v5/make_v5_lists.py from tools/v5/v5_parts.py (part, value, remove, rename, refdes) and,
 # with --nets, from the schematic netlist (add, pin). Plans: V5_PLAN.md, CTRL_ISOLATION_PLAN.md.
 """
@@ -69,6 +70,15 @@ def base_rows():
     for a, b in V.REFDES.items():
         out.append(dict(kind="refdes", ref="", pin="", **{"from": a}, to=b, fix=FIX,
                         note="KiCad needs a trailing number (annotation check of Update PCB)"))
+    import card_layout
+    import json
+    new = {p[0] for p in V.PARTS}
+    with open(os.path.join(ROOT, "reference", "ipc356_pads.json")) as f:
+        ipc_refs = {p["refdes"] for p in json.load(f)["pads"] if p["kind"] == "pad"}
+    for ref in sorted(card_layout.PLACE, key=lambda r: (r.rstrip("0123456789"), int(r[len(r.rstrip("0123456789")):] or 0))):
+        if ref not in new and ref in ipc_refs:   # parts added in v4 have no Proteus position anyway
+            out.append(dict(kind="moved", ref=ref, pin="", **{"from": ""}, to="", fix=FIX,
+                            note="card-area layout: " + card_layout.PLACE[ref][4].split(";")[0][:60]))
     for ref, sheet, sym, value, fp, note in V.PARTS:
         out.append(dict(kind="part", ref=ref, pin="", **{"from": ""}, to=fp, fix=FIX, note=note))
         out.append(dict(kind="value", ref=ref, pin="", **{"from": ""}, to=value, fix=FIX, note=""))

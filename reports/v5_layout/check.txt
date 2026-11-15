@@ -1,11 +1,14 @@
 == gaps between the proposed copper areas (need >= 5.0 mm)
   CA <-> I     5.00 mm
+  CA <-> IS   30.20 mm
   CA <-> P     5.00 mm
   CB <-> I     5.00 mm
+  CB <-> IS    5.00 mm
   CB <-> P    21.70 mm
   I  <-> P     5.00 mm
+  IS <-> P     6.50 mm
   CA <-> ISO copper west/north of J11 (pours pulled back)    5.00 mm
-  areas: CA 851 mm2, CB 444 mm2, I 1230 mm2, P 1292 mm2
+  areas: CA 851 mm2, CB 444 mm2, I 1230 mm2, IS 212 mm2, P 1292 mm2
 == parts: 71 v5 parts placed, 33 v4 parts moved, 77 fixed in the card outline; 27 v5 parts stay staged (aux flyback, out of scope)
 == fixed pads that break the proposal: 0
 == v4 tracks and vias to delete in phase 3 (become ratsnest): 539

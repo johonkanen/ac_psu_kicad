@@ -341,6 +341,9 @@ def run_check(board, layers, vianets):
             if any(p.obj.GetParentFootprint().GetReference() in v5refs
                    or (p.obj.GetParentFootprint().GetReference(), p.obj.GetNumber()) in moved for p in pads):
                 return True
+            if any(deviations.in_unrouted(pcbnew.ToMM(p.obj.GetPosition().x), -pcbnew.ToMM(p.obj.GetPosition().y))
+                   for p in pads):
+                return True     # placed, not routed yet (lib/v5_copper.csv unrouted)
             if pads and all(deviations.in_pending(pcbnew.ToMM(p.obj.GetPosition().x), -pcbnew.ToMM(p.obj.GetPosition().y))
                             for p in pads):
                 return True

@@ -76,11 +76,15 @@ def main():
                                       max(x for x, _ in pts), max(y for _, y in pts)))
         return any(zn == name and znet == net and x0 <= a[2] and a[0] <= x1 and y0 <= a[3] and a[1] <= y1
                    for zn, znet, x0, y0, x1, y1 in zones for a in deviations.pending_areas())
-    pending = [u for u in unconnected if any(v5_item(i) for i in u["items"])]
-    unconnected = [u for u in unconnected if not any(v5_item(i) for i in u["items"])]
+    def unrouted(i):
+        return deviations.in_unrouted(i["pos"]["x"], -i["pos"]["y"])
+    pending = [u for u in unconnected if any(v5_item(i) or unrouted(i) for i in u["items"])]
+    unconnected = [u for u in unconnected if u not in pending]
     parity = d.get("schematic_parity", [])
     # v5: clearance violations of the v5 change (CTRL domain rules on the v4 layout, staged parts)
-    pend_viol = [v for v in viol if v["type"] == "clearance" and any(v5_item(i) for i in v["items"])]
+    # (not in the unrouted areas: placed parts and planes there keep every clearance)
+    pend_viol = [v for v in viol if v["type"] == "clearance" and any(v5_item(i) for i in v["items"])
+                 and not any(unrouted(i) for i in v["items"])]
     viol = [v for v in viol if v not in pend_viol]
     by_type = Counter((v["type"], v["severity"]) for v in viol)
     errors = []
