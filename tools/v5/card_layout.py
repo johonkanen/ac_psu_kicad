@@ -14,16 +14,21 @@ GAP = 5.0                                      # reinforced, P-I / P-C / I-C, ev
 # two areas is the barrier; its centre line is 2.5 mm from both.
 AREAS = {
     # CTRL piece at J11 (CTRLGND_A / 3V3_CTRL / 5V_CTRL_A)
-    "CA": ("C", [(44.4, 20.8), (90.0, 20.8), (90.0, 39.0), (47.3, 39.0), (47.3, 46.1), (44.4, 46.1)]),
+    "CA": ("C", [(44.4, 20.8), (95.1, 20.8), (95.1, 33.0), (47.3, 33.0), (47.3, 46.1), (44.4, 46.1)]),
     # CTRL piece at J12 (CTRLGND / 5V_CTRL / CTRL_RAW); open to nothing: board edge on the east
     "CB": ("C", [(107.2, 3.0), (118.1, 3.0), (118.1, -34.5), (102.5, -34.5), (102.5, -27.0), (107.2, -27.0)]),
     # primary logic (GND / VCC): the card-area part; west and south it joins the primary power stage
     "P": ("P", [(42.55, -20.66), (69.65, -20.66), (69.65, -3.36), (85.5, -3.36), (85.5, 15.8), (42.55, 15.8)]),
     # ISO (ISOGND / 3V3_ISO): the card-area part; north it joins J4/J6/J8 and the ISO power stage,
     # south (x 87.9 .. 102.2, below y -9.4) the 15V_ISO / U8 copper of the aux area
-    "I": ("I", [(52.3, 44.0), (52.3, 46.38), (118.1, 46.38), (118.1, 8.0), (102.2, 8.0), (102.2, -9.4),
-                (90.5, -9.4), (90.5, 15.7), (93.0, 16.2), (95.0, 18.0), (95.0, 44.0)]),
+    # The band y 43.2 .. 48.8 stays free of parts: it carries the DC bus between the ISO DC link and the
+    # DAB secondary (ISOPGND pour on F.Cu, ISODC+ pour on B.Cu). The isolator ISO pins sit south of it
+    # (y 38 .. 43), and their signals reach J4/J6/J8 on In3 under the bus.
+    "I": ("I", [(52.3, 38.0), (52.3, 48.8), (118.1, 48.8), (118.1, 8.0), (102.2, 8.0), (102.2, -9.4), (90.5, -9.4),
+                (90.5, 15.7), (95.1, 15.7), (97.0, 15.9), (98.8, 17.0), (100.1, 19.0), (100.1, 38.0)]),
 }
+# Plane zones (In1 ground, In2 supply, In4 ground): CA without the J11 pin column above y 33
+PLANE_POLY = {"CA": [(44.4, 20.8), (95.1, 20.8), (95.1, 33.0), (44.4, 33.0)]}
 # ISO copper south of the card part: U8 (moved), C15, C36 and the 15V_ISO / ISOGND pours, trimmed to this
 AREAS["IS"] = ("I", [(87.9, -9.4), (102.2, -9.4), (102.2, -21.6), (97.5, -21.6), (97.5, -25.5), (87.9, -25.5)])
 # ISO copper outside the card that bounds CA (for the gap check and the pour pull-back):
@@ -32,26 +37,27 @@ I_AROUND_CA = [[(30.0, 10.0), (39.4, 10.0), (39.4, 48.0), (40.2, 49.5), (41.7, 5
                 (50.6, 50.4), (52.3, 48.0), (52.3, 60.0), (30.0, 60.0)]]
 
 # Barrier centre lines (name, domains, polyline)
+BUS_BAND = (52.3, 43.2, 118.1, 48.8)   # no parts here, on either side (DC bus F.Cu ISOPGND / B.Cu ISODC+)
 LINES = [
-    ("B-CP", "C|P", [(41.9, 18.3), (87.75, 18.3)]),
-    ("B-CI north", "C|I", [(41.9, 18.3), (41.9, 46.8), (43.3, 48.5), (47.2, 48.6), (49.3, 47.6), (49.8, 46.1),
-                           (49.8, 41.5), (92.5, 41.5)]),
-    ("B-CI east", "C|I", [(92.5, 41.5), (92.5, 19.4), (90.8, 18.3), (87.75, 18.3)]),
-    ("B-PI", "P|I", [(87.75, 18.3), (88.0, 15.8), (88.0, -3.36)]),
+    ("B-CP", "C|P", [(41.9, 18.3), (88.0, 18.3)]),
+    ("B-CI north", "C|I", [(41.9, 18.3), (41.9, 46.1), (41.95, 47.0), (42.3, 47.8), (43.05, 48.3), (43.6, 48.6), (47.9, 48.6),
+                           (48.95, 48.25), (49.6, 47.3), (49.8, 46.6), (49.8, 35.5), (97.6, 35.5)]),
+    ("B-CI east", "C|I", [(97.6, 35.5), (97.6, 19.9), (96.95, 18.9), (96.05, 18.35), (95.1, 18.25), (88.0, 18.3)]),
+    ("B-PI", "P|I", [(88.0, 18.3), (88.0, -3.36)]),
     ("B-IC J12 north", "I|C", [(104.7, 5.5), (118.6, 5.5)]),
-    ("B-IC J12 west", "I|C", [(104.7, 5.5), (104.7, -27.0), (100.0, -27.0), (100.0, -34.5)]),
+    ("B-IC J12 west", "I|C", [(104.7, 5.5), (104.7, -24.4), (100.0, -24.4), (100.0, -34.5)]),
 ]
 
 # Slots (Edge.Cuts, 1.2 mm wide, rounded ends): (name, (x0, y0), (x1, y1)). >= 2 mm FR4 web between slots.
 SLOT_W = 1.2
 SLOTS = [
     ("U15", (51.5, 18.3), (60.5, 18.3)), ("U13", (63.5, 18.3), (72.5, 18.3)), ("U16", (75.5, 18.3), (84.5, 18.3)),
-    ("U21", (52.8, 41.5), (61.8, 41.5)), ("U19", (64.0, 41.5), (73.0, 41.5)), ("U20", (75.2, 41.5), (84.2, 41.5)),
-    ("U22", (92.5, 34.4), (92.5, 39.0)), ("U23", (92.5, 27.6), (92.5, 32.2)), ("U24", (92.5, 20.8), (92.5, 25.4)),
+    ("U21", (52.55, 35.5), (61.55, 35.5)), ("U19", (63.5, 35.5), (72.5, 35.5)), ("U20", (74.45, 35.5), (83.45, 35.5)),
+    ("U22", (85.45, 35.5), (90.05, 35.5)), ("U23", (97.6, 27.4), (97.6, 32.0)), ("U24", (97.6, 20.8), (97.6, 25.4)),
     ("U17 (spare)", (88.0, -4.0), (88.0, 5.0)), ("P|I run", (88.0, 7.0), (88.0, 13.5)),
     ("C|P west run", (44.5, 18.3), (49.5, 18.3)),
     ("J12 north", (107.0, 5.5), (116.0, 5.5)), ("J12 west a", (104.7, -11.0), (104.7, 2.5)),
-    ("J12 west b", (104.7, -25.0), (104.7, -13.0)),
+    ("J12 west b", (104.7, -23.0), (104.7, -13.0)),
 ]
 
 # Through-hole tails of the control card (baseboard IPC frame), read from the card board
@@ -83,62 +89,69 @@ def _blk(refs, area, side, x, y, note):
     return {r: (area, side, x, y, note) for r in refs.split()}
 
 PLACE = {}
-# -- barrier parts --------------------------------------------------------------------------
+# -- barrier parts (all new ones on the bottom: Ti60 tails above U19/U21, AMC1311 DWV up to 2.8 mm) ----------
 PLACE.update({
     "U16": ("CA|P", "F", 80.0, 18.3, "in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"),
-    "U21": ("CA|I", "B", 57.3, 41.5, "bottom (Ti60 JTAG/UART tails above); C pins south, ISO pins north; U4 path leaves west above J11"),
-    "U19": ("CA|I", "B", 68.5, 41.5, "bottom (Ti60 JTAG/UART tails above); PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 straight north"),
-    "U20": ("CA|I", "B", 79.7, 41.5, "bottom (Ti60 JTAG/UART tails above); DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"),
-    "U22": ("I|CA", "B", 92.5, 36.7, "bottom (DWV package up to 2.8 mm); ISOADA1: VIN side east, output side west"),
-    "U23": ("I|CA", "B", 92.5, 29.9, "bottom; ISOADA2"),
-    "U24": ("I|CA", "B", 92.5, 23.1, "bottom; ISOADA3"),
+    "U21": ("CA|I", "B", 57.05, 35.5, "bottom; U4/U6 sigma-delta clock and data; ISO pins north, south of the DC bus band"),
+    "U19": ("CA|I", "B", 68.0, 35.5, "bottom; PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 on In3 under the DC bus"),
+    "U20": ("CA|I", "B", 78.95, 35.5, "bottom; DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay"),
+    "U22": ("I|CA", "B", 87.75, 35.5, "bottom, in the isolator row (VIN side north); ISOADA1"),
+    "U23": ("I|CA", "B", 97.6, 29.7, "bottom; ISOADA2: VIN side east"),
+    "U24": ("I|CA", "B", 97.6, 23.1, "bottom; ISOADA3: VIN side east"),
 })
 # -- CTRL piece at J11 ----------------------------------------------------------------------
-PLACE.update({"C121": ("CA", "B", 61.75, 34.7, "bottom, south of U21 pin 1"), "C117": ("CA", "B", 72.95, 34.7, "bottom, south of U19 pin 1"),
-              "C119": ("CA", "B", 84.15, 34.7, "bottom, south of U20 pin 1"),
-              "C82": ("CA", "B", 84.4, 23.0, "under U16 pin 1 (U16 moved)"),
-              "C124": ("CA", "F", 87.2, 34.8, "top, opposite U22 pin 8"), "C126": ("CA", "F", 87.2, 28.0, "top, opposite U23 pin 8"),
-              "C128": ("CA", "F", 87.2, 21.2, "top, opposite U24 pin 8")})
-PLACE.update(_blk("U25 R116 R117 R118 R119 R120 R121 R122 R123 C132", "CA", "F", 80.0, 32.4,
-                  "ISOADA1/2 difference amplifier block x 74.5..85.4, y 29.8..35.0, next to U22/U23 outputs"))
-PLACE.update(_blk("U26 R124 R125 R126 R127 C133", "CA", "F", 80.0, 26.9,
-                  "ISOADA3 difference amplifier block x 74.5..85.4, y 24.5..29.4, next to U24 outputs"))
-PLACE.update(_blk("R128 R129 R130 C129 C130 C131", "CA", "F", 49.3, 27.5,
-                  "8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"))
-PLACE.update(_blk("U27 C134 C135 C136", "CA", "B", 62.5, 30.0, "3V3_CTRL LDO block, bottom, x 59..66, y 27..33"))
-PLACE.update({"J14": ("CA", "THT", 55.5, 30.0, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
-              "PEC1": ("CA", "THT", 50.3, 33.0, "PE bond terminal; lug and screw on the bottom")})
+PLACE.update(_blk("C117 C119 C121", "CA", "B", 68.0, 28.95, "bottom, just south of pin 1 of U19 / U20 / U21"))
+PLACE.update({"C82": ("CA", "F", 86.2, 23.0, "east of U16 pin 1 (U16 moved)"),
+              "C124": ("CA", "F", 88.0, 30.2, "top, opposite U22 pin 8"), "C126": ("CA", "F", 91.5, 29.7, "top, opposite U23 pin 8"),
+              "C128": ("CA", "F", 91.5, 23.1, "top, opposite U24 pin 8")})
+PLACE.update(_blk("U25 R116 R117 R118 R119 R120 R121 R122 R123 C132", "CA", "B", 82.0, 25.5,
+                  "ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below the AMC1311 outputs"))
+PLACE.update(_blk("U26 R124 R125 R126 R127 C133", "CA", "B", 82.0, 24.0,
+                  "ISOADA3 difference amplifier, bottom, same block"))
+PLACE.update(_blk("R128 R129 R130 C129 C130 C131", "CA", "F", 54.4, 26.6,
+                  "8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..28.6"))
+PLACE.update(_blk("U27 C134 C135 C136", "CA", "B", 67.0, 26.0, "3V3_CTRL LDO block, bottom, x 64..70.2, y 22.4..29.3"))
+PLACE.update({"J14": ("CA", "THT", 59.3, 27.0, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
+              "PEC1": ("CA", "THT", 50.1, 26.6, "PE bond terminal; lug and screw on the bottom")})
 # -- ISO --------------------------------------------------------------------------------------
-PLACE.update({"C122": ("I", "B", 61.75, 48.3, "bottom, north of U21 pin 16"), "C118": ("I", "B", 72.95, 48.3, "bottom, north of U19 pin 16"),
-              "C120": ("I", "B", 84.15, 48.3, "bottom, north of U20 pin 16"),
-              "C123": ("I", "F", 97.8, 34.8, "top, opposite U22 pin 1"), "C125": ("I", "F", 97.8, 28.0, "top, opposite U23 pin 1"),
-              "C127": ("I", "F", 97.8, 21.2, "top, opposite U24 pin 1")})
-PLACE.update(_blk("R110 R111", "I", "F", 100.0, 36.7, "x0.4 divider at U22 VIN, column x 99.2..100.8"))
-PLACE.update(_blk("R112 R113", "I", "F", 100.0, 29.9, "x0.4 divider at U23 VIN"))
-PLACE.update(_blk("R114 R115", "I", "F", 100.0, 23.1, "x0.4 divider at U24 VIN"))
-PLACE.update(_blk("U7 C103 C104 C105 C106 C107 C108 C38 C56 R46 R51 R52 R53 R54 R56", "I", "F", 100.7, 17.4,
-                  "VSI voltage block (ISOADA1/2), x 95.5..106.0, y 14.5..20.3; the 1n caps may go to the bottom"))
-PLACE.update(_blk("U2 C101 C102 C2 C87 R1 R76 R77", "I", "F", 99.7, 11.2,
-                  "ISO DC-link block (ISOADA3), x 95.5..104.0, y 8.5..13.8; next to REF2 (fixed)"))
-PLACE.update(_blk("U10 C3 C4", "I", "F", 97.5, 0.8, "3V3_ISO LDO block x 94.5..100.5, y -2.5..4.0 (leaves the J12 piece)"))
-PLACE.update({"R97": ("I", "F", 99.6, 43.0, "ISOGND-ISOPGND link, moved 2.8 mm east (U22 courtyard)"),
-              "U8": ("I", "F", 91.0, -20.1, "moved 13.36 mm west along its 15V_ISO / ISOGND pours (was 1.9 mm from J12)"),
+PLACE.update(_blk("C118 C120 C122", "I", "F", 68.0, 40.15, "top, opposite pin 16 of U19 / U20 / U21 (two vias each)"))
+PLACE.update({"C123": ("I", "F", 88.0, 40.8, "top, opposite U22 pin 1"),
+              "C125": ("I", "B", 104.3, 29.7, "bottom, beside U23 pin 1"), "C127": ("I", "B", 104.3, 23.1, "bottom, beside U24 pin 1")})
+PLACE.update(_blk("R110 R111", "I", "B", 93.3, 40.15, "x0.4 divider at U22 VIN, bottom"))
+PLACE.update(_blk("R112 R113", "I", "B", 107.0, 29.65, "x0.4 divider at U23 VIN, bottom"))
+PLACE.update(_blk("R114 R115", "I", "B", 107.0, 23.05, "x0.4 divider at U24 VIN, bottom"))
+PLACE.update(_blk("U7 C103 C104 C105 C108 C38 R46 R51 R52 R53 R54 R56", "I", "F", 100.8, 12.0,
+                  "VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106.5, y 8.5..15.5"))
+PLACE.update({"C106": ("I", "B", 104.1, 11.3, "VSI voltage block, bottom as before"),
+              "C107": ("I", "B", 99.0, 14.8, "VSI voltage block, bottom as before"),
+              "C56": ("I", "F", 107.6, 14.5, "U7 supply capacitor (was alone at (63.4, 25.4), now CTRL area)")})
+PLACE.update(_blk("U2 C101 C102 C2 C87 R1 R76 R77", "I", "F", 97.9, 5.0,
+                  "ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5, y 1.7..8.2"))
+PLACE.update(_blk("U10 C3 C4", "I", "F", 97.1, -2.3, "3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leaves the J12 piece)"))
+PLACE.update({"U8": ("I", "F", 91.0, -20.1, "moved 13.36 mm west along its 15V_ISO / ISOGND pours (was 1.9 mm from J12)"),
               "C93": ("I", "B", 92.04, -22.9, "moves with U8"), "C94": ("I", "B", 96.08, -23.3, "moves with U8")})
 # -- primary ----------------------------------------------------------------------------------
 PLACE.update({"C81": ("P", "F", 84.4, 11.3, "south of U16 pin 16 (U16 moved)")})
 # -- CTRL piece at J12 --------------------------------------------------------------------------
 PLACE.update({
-    "C137": ("CB", "B", 112.6, -1.6, "polymer 8x10, bottom, under the card"),
-    "C138": ("CB", "B", 112.6, -10.6, "polymer 8x10, bottom, under the card"),
-    "L2": ("CB", "B", 111.0, -23.5, "4.5 mm high, bottom"),
-    "D16": ("CB", "F", 109.5, -24.5, "top, south of the card edge, vertical"),
-    "W1": ("CB", "THT", 107.2, -31.2, "CTRL winding leads, at the aux-area side (final position with T1)"),
-    "PEC2": ("CB", "THT", 115.3, -31.6, "PE bond terminal"),
-    "J13": ("CB", "THT", 116.0, -23.0, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
+    "C137": ("CB", "B", 112.65, -1.6, "polymer 8x10, bottom, under the card"),
+    "C138": ("CB", "B", 112.65, -23.3, "polymer 8x10, bottom, right under D16 (rectifier loop)"),
+    "L2": ("CB", "B", 110.8, -10.6, "4.5 mm high, bottom, between J12 and C137"),
+    "D16": ("CB", "F", 111.0, -25.8, "top, south of the card edge, above C138"),
+    "W1": ("CB", "THT", 112.6, -31.6, "CTRL winding leads (final position with T1)"),
+    "PEC2": ("CB", "THT", 105.6, -30.75, "PE bond terminal"),
+    "J13": ("CB", "THT", 116.8, -9.6, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
 })
-PLACE.update(_blk("U28 C139 C140 C141 C144 R131 R132 R133 R134 R135", "CB", "B", 109.0, -17.5,
-                  "TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "))
-PLACE.update(_blk("C142 C143", "CB", "B", 115.0, -27.7, "buck output capacitors next to L2 / J13"))
+PLACE.update(_blk("U28 C140 C141 R134 R135", "CB", "F", 112.6, 0.85, "TPS54202 with its capacitors and FB divider, top, north of the J1 tail row"))
+PLACE.update(_blk("C139 C144", "CB", "F", 113.0, -8.15, "buck input capacitor and FB capacitor, top, between the J1 and J101 tail rows"))
+PLACE.update(_blk("R131 R132 R133", "CB", "F", 114.8, -20.8, "CTRL_RAW preload and EN divider, top, south of J12"))
+PLACE.update(_blk("C142 C143", "CB", "F", 110.0, -21.4, "buck output capacitors, top, south of J12"))
+
+# Parts moved as rigid groups (their mutual courtyard overlaps are the accepted v4 ones)
+GROUPS = ["U7 C103 C104 C105 C106 C107 C108 C38 R46 R51 R52 R53 R54 R56", "U2 C101 C102 C2 C87 R1 R76 R77", "U10 C3 C4", "U8 C93 C94"]
+# Placed parts without the card-tail check, and why
+TAIL_EXEMPT = {"U8": "same y as before (pins 1.33 mm south of the card edge); its body stands beside the card, not under it",
+               "J13": "wires soldered from the bottom", "J14": "wires soldered from the bottom"}
 
 # v4 tracks to delete in phase 3: every track/via in the card area on a net of these parts' moved
 # pads, plus all CTRL-domain tracks of the J11 fan-out (they cross the new U19-U21 pads).

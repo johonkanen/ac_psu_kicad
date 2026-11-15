@@ -8,60 +8,60 @@
   I  <-> P     5.00 mm
   IS <-> P     6.50 mm
   CA <-> ISO copper west/north of J11 (pours pulled back)    5.00 mm
-  areas: CA 851 mm2, CB 444 mm2, I 1230 mm2, IS 212 mm2, P 1292 mm2
-== parts: 71 v5 parts placed, 33 v4 parts moved, 77 fixed in the card outline; 27 v5 parts stay staged (aux flyback, out of scope)
+  areas: CA 657 mm2, CB 444 mm2, I 1533 mm2, IS 212 mm2, P 1292 mm2
+== parts: 0 v5 parts placed, 103 v4 parts moved, 78 fixed in the card outline; 27 v5 parts stay staged (aux flyback, out of scope)
 == fixed pads that break the proposal: 0
-== v4 tracks and vias to delete in phase 3 (become ratsnest): 539
-     7 track C copper in / near area I
-     8 track C copper in / near area P
-   237 track I copper in / near area CA
-    24 via   I copper in / near area CA
-    97 track I copper in / near area CB
-     8 via   I copper in / near area CB
-    81 track J11 fan-out in CA (re-routed)
-    65 track net of a moved part
-    12 via   net of a moved part
+== v4 tracks and vias to delete in phase 3 (become ratsnest): 119
+   104 track net of a moved part
+    15 via   net of a moved part
 == zones that touch the card area today (replaced / pulled back in phase 3)
-  F.Cu   5V_ISOL    I  Proteus F.Cu pour 3  -> pull back from CB
-  F.Cu   ISOPGND    I  Proteus F.Cu pour 8 (fix 14)  -> pull back from CA, P
-  F.Cu   ISOGND     I  Proteus F.Cu pour 22  -> pull back from CB
+  F.Cu   ISOPGND    I  Proteus F.Cu pour 8 (fix 14) (part 2)  -> pull back from CA
+  F.Cu   ISOGND     I  Proteus F.Cu pour 22
   F.Cu   GND        P  Proteus F.Cu pour 0
-  F.Cu   ISOGND     I  Proteus F.Cu pour 2  -> pull back from CB
   F.Cu   DAB_GROUND I  Proteus F.Cu pour 12
-  F.Cu   15V_ISO    I  Proteus F.Cu pour 23  -> pull back from CB
-  F.Cu   3V3_ISO    I  Proteus F.Cu pour 4  -> pull back from CB
+  F.Cu   15V_ISO    I  Proteus F.Cu pour 23
   F.Cu   ISODC+     I  Proteus F.Cu pour 11
   F.Cu   5V         P  Proteus F.Cu pour 1
-  B.Cu   15V_ISO    I  Proteus B.Cu pour 16  -> pull back from CB
-  B.Cu   ISODC+     I  Proteus B.Cu pour 5 (fix 14)  -> pull back from CA, P
-  B.Cu   ISOGND     I  Proteus B.Cu pour 15  -> pull back from CB
-  In1.Cu ISOGND     I  v4 fix 1 ISOGND under the 20 V iso return  -> pull back from CB
-  In1.Cu GND        P  Proteus In1.Cu pour 1  -> pull back from I
-  In1.Cu ISOGND     I  Proteus In1.Cu pour 2  -> pull back from CA, CB, P
-  In2.Cu 3V3_ISO    I  Proteus In2.Cu pour 2  -> pull back from CA, CB, P
+  B.Cu   15V_ISO    I  Proteus B.Cu pour 16
+  B.Cu   ISODC+     I  Proteus B.Cu pour 5 (fix 14) (part 2)  -> pull back from CA
+  B.Cu   ISOGND     I  Proteus B.Cu pour 15
+  In1.Cu ISOGND     I  v4 fix 1 ISOGND under the 20 V iso return
+  In1.Cu GND        P  Proteus In1.Cu pour 1
+  In1.Cu CTRLGND_A  C  v5 card CA In1.Cu CTRLGND_A
+  In1.Cu CTRLGND    C  v5 card CB In1.Cu CTRLGND
+  In1.Cu ISOGND     I  v5 card I In1.Cu ISOGND
+  In2.Cu 5V_CTRL    C  v5 card CB In2.Cu 5V_CTRL
+  In2.Cu 3V3_CTRL   C  v5 card CA In2.Cu 3V3_CTRL
   In2.Cu VCC        P  Proteus In2.Cu pour 1
+  In2.Cu 3V3_ISO    I  v5 card I In2.Cu 3V3_ISO
+  In4.Cu CTRLGND_A  C  v5 card CA In4.Cu CTRLGND_A
+  In4.Cu ISOGND     I  v5 card I In4.Cu ISOGND
+  In4.Cu CTRLGND    C  v5 card CB In4.Cu CTRLGND
+  In4.Cu GND        P  v5 card P In4.Cu GND
 == slots: 15, 1.2 mm wide
   U15            (51.5, 18.3) - (60.5, 18.3)    9.0 mm long, 1.90 mm from the nearest copper area
   U13            (63.5, 18.3) - (72.5, 18.3)    9.0 mm long, 1.90 mm from the nearest copper area
   U16            (75.5, 18.3) - (84.5, 18.3)    9.0 mm long, 1.90 mm from the nearest copper area
-  U21            (52.8, 41.5) - (61.8, 41.5)    9.0 mm long, 1.90 mm from the nearest copper area
-  U19            (64.0, 41.5) - (73.0, 41.5)    9.0 mm long, 1.90 mm from the nearest copper area
-  U20            (75.2, 41.5) - (84.2, 41.5)    9.0 mm long, 1.90 mm from the nearest copper area
-  U22            (92.5, 34.4) - (92.5, 39.0)    4.6 mm long, 1.90 mm from the nearest copper area
-  U23            (92.5, 27.6) - (92.5, 32.2)    4.6 mm long, 1.90 mm from the nearest copper area
-  U24            (92.5, 20.8) - (92.5, 25.4)    4.6 mm long, 1.90 mm from the nearest copper area
+  U21            (52.55, 35.5) - (61.55, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U19            (63.5, 35.5) - (72.5, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U20            (74.45, 35.5) - (83.45, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U22            (85.45, 35.5) - (90.05, 35.5)    4.6 mm long, 1.90 mm from the nearest copper area
+  U23            (97.6, 27.4) - (97.6, 32.0)    4.6 mm long, 1.90 mm from the nearest copper area
+  U24            (97.6, 20.8) - (97.6, 25.4)    4.6 mm long, 1.90 mm from the nearest copper area
   U17 (spare)    (88.0, -4.0) - (88.0, 5.0)    9.0 mm long, 1.90 mm from the nearest copper area
   P|I run        (88.0, 7.0) - (88.0, 13.5)    6.5 mm long, 1.90 mm from the nearest copper area
   C|P west run   (44.5, 18.3) - (49.5, 18.3)    5.0 mm long, 1.90 mm from the nearest copper area
   J12 north      (107.0, 5.5) - (116.0, 5.5)    9.0 mm long, 1.90 mm from the nearest copper area
   J12 west a     (104.7, -11.0) - (104.7, 2.5)   13.5 mm long, 1.90 mm from the nearest copper area
-  J12 west b     (104.7, -25.0) - (104.7, -13.0)   12.0 mm long, 1.40 mm from the nearest copper area
+  J12 west b     (104.7, -23.0) - (104.7, -13.0)   10.0 mm long, 1.90 mm from the nearest copper area
 == top-side parts under the card's through-hole tails (keep-out = drill/2 + 1.5 mm)
   J101           fixed J12
+  J101           move  J13
   J5             fixed C36 H4 R37 U14
   J5             move  U8
   J9             fixed C74 C75 C76 C77 R64 R75 U6
   Ti60 J2 RJ45   fixed C74 C75 C76 C77 R64 R74 U6
   Ti60 J3 5V     fixed J12
+  Ti60 J3 5V     move  J13
   Ti60 J4 LCD    fixed C36 H4 R37
   Ti60 J4 LCD    move  U8

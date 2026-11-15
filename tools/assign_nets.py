@@ -313,6 +313,7 @@ def run_check(board, layers, vianets):
     res = analyse(items, uf)
     # every copper item must carry its group's net
     wrong = []
+    planes = set()
     shorted = {g for g, _ in res["shorts"]}
     for g, members in res["groups"].items():
         net = res["net_of"].get(g)
@@ -324,6 +325,8 @@ def run_check(board, layers, vianets):
                 own = it.obj.GetNetname()
                 if net and own != net:
                     wrong.append(f"{it.label}: net {own!r}, connected to {net}")
+                elif not net and own and it.kind == "zone" and it.obj.GetZoneName().startswith("v5 card"):
+                    planes.add(it.obj.GetZoneName())     # a plane of the unrouted card area without a via yet
                 elif not net and own:
                     wrong.append(f"{it.label}: net {own!r}, group has no pad")
     # v5: opens of nets touched by the v5 change are pending GUI layout (lib/v5_copper.csv)
@@ -354,7 +357,8 @@ def run_check(board, layers, vianets):
         bb = obj.GetBoundingBox()
         x0, x1 = pcbnew.ToMM(bb.GetLeft()), pcbnew.ToMM(bb.GetRight())
         y0, y1 = -pcbnew.ToMM(bb.GetBottom()), -pcbnew.ToMM(bb.GetTop())
-        return any(x0 <= a[2] and a[0] <= x1 and y0 <= a[3] and a[1] <= y1 for a in deviations.pending_areas())
+        return any(x0 <= a[2] and a[0] <= x1 and y0 <= a[3] and a[1] <= y1
+                   for a in deviations.pending_areas() + deviations.unrouted_areas())
     if not deviations.proteus_mode():
         pending = [o for o in res["opens"] if v5_open(*o)]
         res["opens"] = [o for o in res["opens"] if o not in pending]
@@ -363,6 +367,8 @@ def run_check(board, layers, vianets):
     for g, _ in res["shorts"]:
         for a, b, layer in conflicts(items, res["groups"][g], layers):
             out.append(f"  touching on {layer}: {a.label} [{a.obj.GetNetname()}] - {b.label} [{b.obj.GetNetname()}]")
+    if planes:
+        out.append("card-area planes without a pad yet (unrouted): " + "; ".join(sorted(planes)))
     out.append(f"items carrying another net than their group: {len(wrong)}")
     out.extend("  " + w for w in wrong[:100])
     head = ""

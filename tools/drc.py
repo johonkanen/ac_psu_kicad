@@ -75,10 +75,13 @@ def main():
                                       min(x for x, _ in pts), min(y for _, y in pts),
                                       max(x for x, _ in pts), max(y for _, y in pts)))
         return any(zn == name and znet == net and x0 <= a[2] and a[0] <= x1 and y0 <= a[3] and a[1] <= y1
-                   for zn, znet, x0, y0, x1, y1 in zones for a in deviations.pending_areas())
+                   for zn, znet, x0, y0, x1, y1 in zones for a in deviations.pending_areas() + (deviations.unrouted_areas() if unrouted_too else []))
+    unrouted_too = False
     def unrouted(i):
         return deviations.in_unrouted(i["pos"]["x"], -i["pos"]["y"])
+    unrouted_too = True     # a pour split where it reaches into an unrouted area is an open, not a clearance matter
     pending = [u for u in unconnected if any(v5_item(i) or unrouted(i) for i in u["items"])]
+    unrouted_too = False
     unconnected = [u for u in unconnected if u not in pending]
     parity = d.get("schematic_parity", [])
     # v5: clearance violations of the v5 change (CTRL domain rules on the v4 layout, staged parts)

@@ -1,0 +1,135 @@
+== v5 step 4: card area in three domains (placement, barrier strips, slots, planes)
+  U16   F (  80.000,   18.300) rot 270.0  in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))
+  C82   F (  86.200,   23.000) rot  90.0  east of U16 pin 1 (U16 moved)
+  C81   F (  84.445,   11.500) rot   0.0  south of U16 pin 16 (U16 moved)
+  U21   B (  57.050,   35.500) rot  90.0  bottom; U4/U6 sigma-delta clock and data; ISO pins north, south of the
+  C121  B (  61.495,   28.950) rot   0.0  bottom, just south of pin 1 of U19 / U20 / U21
+  C122  F (  61.495,   40.150) rot   0.0  top, opposite pin 16 of U19 / U20 / U21 (two vias each)
+  U19   B (  68.000,   35.500) rot  90.0  bottom; PWM_Q5-Q8, TRANS4/5 -> J8/J6/J4 on In3 under the DC bus
+  C117  B (  72.445,   28.950) rot   0.0  bottom, just south of pin 1 of U19 / U20 / U21
+  C118  F (  72.445,   40.150) rot   0.0  top, opposite pin 16 of U19 / U20 / U21 (two vias each)
+  U20   B (  78.950,   35.500) rot  90.0  bottom; DAB_PWM_HI/LO_SEC -> J4, TRANS6, relay
+  C119  B (  83.395,   28.950) rot   0.0  bottom, just south of pin 1 of U19 / U20 / U21
+  C120  F (  83.395,   40.150) rot   0.0  top, opposite pin 16 of U19 / U20 / U21 (two vias each)
+  U22   B (  87.750,   35.500) rot 270.0  bottom, in the isolator row (VIN side north); ISOADA1
+  C123  F (  85.845,   40.825) rot   0.0  top, opposite U22 pin 1
+  C124  F (  85.845,   30.175) rot   0.0  top, opposite U22 pin 8
+  R110  B (  93.300,   41.000) rot   0.0  x0.4 divider at U22 VIN, bottom
+  R111  B (  93.300,   39.300) rot   0.0  x0.4 divider at U22 VIN, bottom
+  U23   B (  97.600,   29.700) rot 180.0  bottom; ISOADA2: VIN side east
+  C125  B ( 105.100,   31.605) rot   0.0  bottom, beside U23 pin 1
+  C126  F (  92.275,   31.605) rot   0.0  top, opposite U23 pin 8
+  R112  B ( 107.800,   30.500) rot   0.0  x0.4 divider at U23 VIN, bottom
+  R113  B ( 107.800,   28.800) rot   0.0  x0.4 divider at U23 VIN, bottom
+  U24   B (  97.600,   23.100) rot 180.0  bottom; ISOADA3: VIN side east
+  C127  B ( 105.100,   25.005) rot   0.0  bottom, beside U24 pin 1
+  C128  F (  92.275,   25.005) rot   0.0  top, opposite U24 pin 8
+  R114  B ( 107.800,   23.900) rot   0.0  x0.4 divider at U24 VIN, bottom
+  R115  B ( 107.800,   22.200) rot   0.0  x0.4 divider at U24 VIN, bottom
+  R116  B (  81.900,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R117  B (  78.700,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R118  B (  81.900,   25.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R119  B (  78.700,   25.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R120  B (  88.300,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R121  B (  85.100,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R122  B (  88.300,   25.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R123  B (  85.100,   25.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  R124  B (  88.300,   24.000) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  R125  B (  85.100,   24.000) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  R126  B (  88.300,   22.300) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  R127  B (  85.100,   22.300) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  U25   B (  79.500,   22.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  U26   B (  73.900,   26.600) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  C132  B (  75.300,   22.900) rot  90.0  ISOADA1/2 difference amplifier, bottom, x 75..90, y 21..28.4, below th
+  C133  B (  73.900,   24.100) rot   0.0  ISOADA3 difference amplifier, bottom, same block
+  R128  F (  53.300,   25.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  C129  F (  53.300,   27.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  R129  F (  54.400,   25.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  C130  F (  54.400,   27.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  R130  F (  55.500,   25.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  C131  F (  55.500,   27.600) rot  90.0  8.2k + C output filters towards J11 pins 1/3/4: x 52.8..56.0, y 24.7..
+  PEC1  F (  50.100,   26.600) rot   0.0  PE bond terminal; lug and screw on the bottom
+  J14   F (  58.030,   27.000) rot  90.0  5 V link: two wires soldered into the holes from the bottom, no header
+  U27   B (  66.000,   25.900) rot   0.0  3V3_CTRL LDO block, bottom, x 64..70.2, y 22.4..29.3
+  C136  B (  66.300,   28.500) rot   0.0  3V3_CTRL LDO block, bottom, x 64..70.2, y 22.4..29.3
+  C135  B (  69.400,   25.900) rot  90.0  3V3_CTRL LDO block, bottom, x 64..70.2, y 22.4..29.3
+  C134  B (  66.000,   22.900) rot   0.0  3V3_CTRL LDO block, bottom, x 64..70.2, y 22.4..29.3
+  group U7 (14 parts, 73 tracks/vias) moved by (21.2, -26.2): U7 C103 C104 C105 C106 C107 C108 C38 R46 R51 R52 R53 R54 R56
+  group U2 (8 parts, 41 tracks/vias) moved by (6.0, -32.1): U2 C101 C102 C2 C87 R1 R76 R77
+  group U10 (3 parts, 62 tracks/vias) moved by (-15.0, 2.2): U10 C3 C4
+  group U8 (3 parts, 0 tracks/vias) moved by (-13.36, 0.0): U8 C93 C94
+  C56   F ( 107.600,   14.500) rot  90.0  U7 supply capacitor (was alone at (63.4, 25.4), now CTRL area)
+  C137  B ( 112.650,   -1.600) rot   0.0  polymer 8x10, bottom, under the card
+  C138  B ( 112.650,  -23.300) rot   0.0  polymer 8x10, bottom, right under D16 (rectifier loop)
+  L2    B ( 110.800,  -10.600) rot   0.0  4.5 mm high, bottom, between J12 and C137
+  D16   F ( 111.000,  -25.800) rot   0.0  top, south of the card edge, above C138
+  W1    F ( 112.600,  -31.600) rot   0.0  CTRL winding leads (final position with T1)
+  PEC2  F ( 105.600,  -30.750) rot   0.0  PE bond terminal
+  J13   F ( 117.000,   -8.300) rot   0.0  5 V link: two wires soldered into the holes from the bottom, no header
+  U28   F ( 112.600,    0.850) rot  90.0  TPS54202 with its capacitors and FB divider, top, north of the J1 tail
+  C141  F ( 116.300,    1.700) rot   0.0  TPS54202 with its capacitors and FB divider, top, north of the J1 tail
+  C140  F ( 116.300,   -0.100) rot   0.0  TPS54202 with its capacitors and FB divider, top, north of the J1 tail
+  R134  F ( 108.000,    0.850) rot  90.0  TPS54202 with its capacitors and FB divider, top, north of the J1 tail
+  R135  F ( 109.600,    0.850) rot  90.0  TPS54202 with its capacitors and FB divider, top, north of the J1 tail
+  C144  F ( 114.150,   -8.150) rot  90.0  buck input capacitor and FB capacitor, top, between the J1 and J101 ta
+  C139  F ( 112.100,   -8.150) rot  90.0  buck input capacitor and FB capacitor, top, between the J1 and J101 ta
+  R131  F ( 116.600,  -21.100) rot  90.0  CTRL_RAW preload and EN divider, top, south of J12
+  R132  F ( 113.050,  -20.500) rot  90.0  CTRL_RAW preload and EN divider, top, south of J12
+  R133  F ( 114.600,  -20.500) rot  90.0  CTRL_RAW preload and EN divider, top, south of J12
+  C142  F ( 109.900,  -20.200) rot   0.0  buck output capacitors, top, south of J12
+  C143  F ( 109.900,  -22.700) rot   0.0  buck output capacitors, top, south of J12
+  deleted   30 track I copper in or within 5 mm of another domain's area
+  deleted    5 via   I copper in or within 5 mm of another domain's area
+  deleted   69 track J11 fan-out (CTRL piece re-routed)
+  deleted    2 track P copper in or within 5 mm of another domain's area
+  deleted  135 track inside a barrier strip
+  deleted    9 via   inside a barrier strip
+  deleted   83 track net of a moved part
+  deleted   12 via   net of a moved part
+  deleted    6 track stub at the old place of a moved part
+  deleted    1 via   stub at the old place of a moved part
+  deleted   41 track track on a plane layer of the new areas (In1, In2, In4)
+  deleted    4 track under a pad of a placed part
+  deleted    1 via   under a pad of a placed part
+  2 barrier rule areas (no tracks, vias, pours; all copper layers) along: B-CP, B-CI north, B-CI east, B-PI, B-IC J12 north, B-IC J12 west
+  slot U15: (51.5, 18.3) - (60.5, 18.3), 1.2 mm wide
+  slot U13: (63.5, 18.3) - (72.5, 18.3), 1.2 mm wide
+  slot U16: (75.5, 18.3) - (84.5, 18.3), 1.2 mm wide
+  slot U21: (52.55, 35.5) - (61.55, 35.5), 1.2 mm wide
+  slot U19: (63.5, 35.5) - (72.5, 35.5), 1.2 mm wide
+  slot U20: (74.45, 35.5) - (83.45, 35.5), 1.2 mm wide
+  slot U22: (85.45, 35.5) - (90.05, 35.5), 1.2 mm wide
+  slot U23: (97.6, 27.4) - (97.6, 32.0), 1.2 mm wide
+  slot U24: (97.6, 20.8) - (97.6, 25.4), 1.2 mm wide
+  slot U17 (spare): (88.0, -4.0) - (88.0, 5.0), 1.2 mm wide
+  slot P|I run: (88.0, 7.0) - (88.0, 13.5), 1.2 mm wide
+  slot C|P west run: (44.5, 18.3) - (49.5, 18.3), 1.2 mm wide
+  slot J12 north: (107.0, 5.5) - (116.0, 5.5), 1.2 mm wide
+  slot J12 west a: (104.7, -11.0) - (104.7, 2.5), 1.2 mm wide
+  slot J12 west b: (104.7, -23.0) - (104.7, -13.0), 1.2 mm wide
+  deleted zone Proteus In1.Cu pour 2 [ISOGND] (replaced by the ISO plane zones)
+  deleted zone Proteus In2.Cu pour 2 [3V3_ISO] (replaced by the ISO plane zones)
+  zone v5 card CA In1.Cu CTRLGND_A In1.Cu CTRLGND_A prio 120: (44.4,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CA In2.Cu 3V3_CTRL In2.Cu 3V3_CTRL prio 121: (44.4,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CA In4.Cu CTRLGND_A In4.Cu CTRLGND_A prio 122: (44.4,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CB In1.Cu CTRLGND In1.Cu CTRLGND prio 123: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card CB In2.Cu 5V_CTRL In2.Cu 5V_CTRL prio 124: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card CB In4.Cu CTRLGND In4.Cu CTRLGND prio 125: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card I In1.Cu ISOGND In1.Cu ISOGND prio 126: (52.3,38.0) (52.3,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card I In2.Cu 3V3_ISO In2.Cu 3V3_ISO prio 127: (52.3,38.0) (52.3,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card I In4.Cu ISOGND In4.Cu ISOGND prio 128: (52.3,38.0) (52.3,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card P In4.Cu GND In4.Cu GND prio 129: (42.55,-20.66) (69.65,-20.66) (69.65,-3.36) (85.5,-3.36) (85.5,15.8) (42.55,15.8)
+  deleted zone Proteus F.Cu pour 3 [5V_ISOL] F.Cu: inside another domain's area
+  zone Proteus F.Cu pour 8 (fix 14) [ISOPGND] F.Cu: cut back, 2 piece(s), the largest 3072 mm2 (was 3989)
+  zone Proteus F.Cu pour 22 [ISOGND] F.Cu: cut back, 1 piece(s), the largest 47 mm2 (was 49)
+  deleted zone Proteus F.Cu pour 2 [ISOGND] F.Cu: inside another domain's area
+  zone Proteus F.Cu pour 19 [GND] F.Cu: cut back, 2 piece(s), the largest 125 mm2 (was 165)
+  zone Proteus F.Cu pour 23 [15V_ISO] F.Cu: cut back, 1 piece(s), the largest 93 mm2 (was 131)
+  deleted zone Proteus F.Cu pour 4 [3V3_ISO] F.Cu: inside another domain's area
+  zone Proteus B.Cu pour 16 [15V_ISO] B.Cu: cut back, 1 piece(s), the largest 92 mm2 (was 130)
+  zone Proteus B.Cu pour 5 (fix 14) [ISODC+] B.Cu: cut back, 2 piece(s), the largest 2728 mm2 (was 3231)
+  zone Proteus B.Cu pour 15 [ISOGND] B.Cu: cut back, 1 piece(s), the largest 47 mm2 (was 49)
+  zone v4 fix 1 ISOGND under the 20 V iso return [ISOGND] In1.Cu: cut back, 1 piece(s), the largest 115 mm2 (was 194)
+  zone Proteus In1.Cu pour 1 [GND] In1.Cu: cut back, 1 piece(s), the largest 1208 mm2 (was 1208)
+  zone Proteus In2.Cu pour 11 [Q5_S] In2.Cu: cut back, 1 piece(s), the largest 82 mm2 (was 82)
+  deleted    4 tracks / vias left without a pad or a pour of their net

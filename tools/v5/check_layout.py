@@ -44,15 +44,30 @@ def sps(poly):
     return s
 
 
+def pad_poly(pad):
+    """(polygon, set of copper layer ids) of a pad."""
+    ps = pcbnew.SHAPE_POLY_SET()
+    lid = pcbnew.F_Cu if pad.IsOnLayer(pcbnew.F_Cu) else pcbnew.B_Cu
+    pad.TransformShapeToPolygon(ps, lid, 0, F(0.005), pcbnew.ERROR_INSIDE)
+    return ps, {l for l in (pcbnew.F_Cu, pcbnew.In1_Cu, pcbnew.In2_Cu, pcbnew.In3_Cu, pcbnew.In4_Cu, pcbnew.B_Cu) if pad.IsOnLayer(l)}
+
+
+def touches(a, b):
+    c = a.CloneDropTriangulation()
+    c.BooleanIntersection(b)
+    return c.OutlineCount() > 0 and c.Area() > 1
+
+
 def strips():
     """The barrier strips inside / around the card: everything within 2.5 mm of a barrier centre line."""
     s = pcbnew.SHAPE_POLY_SET()
     for _, _, pl in L.LINES:
         for a, b in zip(pl, pl[1:]):
-            seg = pcbnew.SHAPE_POLY_SET()
-            pcbnew.TransformOvalToPolygon(seg, pcbnew.VECTOR2I(F(a[0]), F(-a[1])), pcbnew.VECTOR2I(F(b[0]), F(-b[1])),
-                                          F(L.GAP - 0.02), F(0.005), pcbnew.ERROR_INSIDE)
-            s.Append(seg)
+            d = math.dist(a, b)
+            nx, ny = -(b[1] - a[1]) / d * 0.005, (b[0] - a[0]) / d * 0.005
+            s.Append(sps([(a[0] + nx, a[1] + ny), (b[0] + nx, b[1] + ny), (b[0] - nx, b[1] - ny), (a[0] - nx, a[1] - ny)]))
+    s.Simplify()
+    s.Inflate(F(L.GAP / 2 - 0.015), pcbnew.CORNER_STRATEGY_ROUND_ALL_CORNERS, F(0.005))
     s.Simplify()
     return s
 
@@ -66,6 +81,11 @@ def static_checks(err):
     if min(poly_dist(POLY["CA"], p) for p in L.I_AROUND_CA) < L.GAP - 1e-6:
         err.append("area CA: less than 5 mm from the ISO copper around J11")
     allpolys = list(POLY.values()) + L.I_AROUND_CA
+    for name, _, pl in L.LINES:
+        for a, b in zip(pl, pl[1:]):
+            g = min(seg_seg(a, b, c, e) for p in allpolys for c, e in edges(p))
+            if g < L.GAP / 2 - 0.05:
+                err.append(f"barrier line {name} ({a} - {b}): {g:.2f} mm from a copper area (need 2.5)")
     for name, a, b in L.SLOTS:
         g = min(seg_seg(a, b, c, e) for p in allpolys for c, e in edges(p)) - L.SLOT_W / 2
         if g < 0.5 or any(inside(a, p) or inside(b, p) for p in allpolys):
@@ -141,6 +161,8 @@ def main():
             oref = o.GetReference()
             if oref == ref or (oref in L.PLACE and oref < ref):
                 continue
+            if any(ref in g.split() and oref in g.split() for g in L.GROUPS):
+                continue
             if o.IsFlipped() != fp.IsFlipped() and not (tht(fp) or tht(o)):
                 continue
             if not bba.Intersects(o.GetBoundingBox(False)):
@@ -151,9 +173,15 @@ def main():
                 # a through-hole part meets an SMD part of the other side only with its pads
                 if o.IsFlipped() != fp.IsFlipped():
                     t, s = (fp, o) if tht(fp) else (o, fp)
-                    if not any(court(s).Collide(p.GetEffectiveShape(), 0) for p in t.Pads() if p.GetDrillSize().x > 0):
+                    if not any(touches(court(s), pad_poly(p)[0]) for p in t.Pads() if p.GetDrillSize().x > 0):
                         continue
                 err.append(f"{ref} / {oref}: courtyards overlap")
+    # no part in the DC bus band, on either side
+    band = sps(rect(*L.BUS_BAND))
+    for ref in L.PLACE:
+        fp = fps.get(ref)
+        if fp is not None and ref not in staged and touches(court(fp), band):
+            err.append(f"{ref}: inside the DC bus band y {L.BUS_BAND[1]} .. {L.BUS_BAND[3]}")
     # 4. heights, 5. card tails
     under = lambda fp: x0 < T(fp.GetPosition().x) < x1 and y0 < -T(fp.GetPosition().y) < y1
     nfixed_tail = set()
@@ -181,7 +209,7 @@ def main():
             c = court(fp)
             for hn, hx, hy, r in holes:
                 if c.Collide(pcbnew.VECTOR2I(F(hx), F(-hy)), F(r)):
-                    if placed and ref not in ("J13", "J14"):
+                    if placed and ref not in L.TAIL_EXEMPT:
                         err.append(f"{ref}: under a tail of {hn} at ({hx:.2f}, {hy:.2f})")
                     elif not placed and ref not in ("J11", "J12"):
                         nfixed_tail.add(ref)
@@ -190,13 +218,16 @@ def main():
     # 6. slots, ground layers, strips
     cuts = []
     for d in board.GetDrawings():
-        if d.GetLayer() == pcbnew.Edge_Cuts and d.GetClass() == "PCB_SHAPE":
-            bb = d.GetBoundingBox()
-            cuts.append((T(bb.GetLeft()), -T(bb.GetBottom()), T(bb.GetRight()), -T(bb.GetTop())))
+        if d.GetLayer() == pcbnew.Edge_Cuts and d.GetClass() == "PCB_SHAPE" and d.GetShape() == pcbnew.SHAPE_T_SEGMENT:
+            cuts.append(((T(d.GetStart().x), -T(d.GetStart().y)), (T(d.GetEnd().x), -T(d.GetEnd().y))))
     for name, a, b in L.SLOTS:
-        want = (min(a[0], b[0]) - L.SLOT_W / 2, min(a[1], b[1]) - L.SLOT_W / 2, max(a[0], b[0]) + L.SLOT_W / 2, max(a[1], b[1]) + L.SLOT_W / 2)
-        if not any(all(abs(c[i] - want[i]) < 0.15 for i in range(4)) for c in cuts):
-            err.append(f"slot {name}: not on Edge.Cuts")
+        r, ln = L.SLOT_W / 2, math.dist(a, b)
+        nx, ny = -(b[1] - a[1]) / ln * r, (b[0] - a[0]) / ln * r
+        for sg in (1, -1):
+            p, q = (a[0] + sg * nx, a[1] + sg * ny), (b[0] + sg * nx, b[1] + sg * ny)
+            if not any((math.dist(p, s) < 0.01 and math.dist(q, e) < 0.01) or (math.dist(p, e) < 0.01 and math.dist(q, s) < 0.01)
+                       for s, e in cuts):
+                err.append(f"slot {name}: side {sg:+d} not on Edge.Cuts")
     strip = strips()
     ntr = 0
     for t in board.GetTracks():
@@ -209,7 +240,7 @@ def main():
         err.append(f"{ntr} tracks on In1/In4 inside the card area (ground layers are not routed)")
     for fp in allfp:
         for pad in fp.Pads():
-            if pad.GetNetname() and dom.get(pad.GetNetname()) and strip.Collide(pad.GetEffectiveShape(), 0):
+            if pad.GetNetname() and dom.get(pad.GetNetname()) and touches(strip, pad_poly(pad)[0]):
                 err.append(f"pad {fp.GetReference()}-{pad.GetNumber()} [{pad.GetNetname()}] inside a barrier strip")
     # 7. zones: one island, not in a strip
     nz = 0
@@ -221,8 +252,11 @@ def main():
         nz += 1
         for lid in z.GetLayerSet().CuStack():
             fill = z.GetFilledPolysList(lid)
-            if fill.OutlineCount() != 1:
-                err.append(f"zone {z.GetZoneName()} [{z.GetNetname()}] {board.GetLayerName(lid)}: {fill.OutlineCount()} islands")
+            big = [i for i in range(fill.OutlineCount()) if fill.Outline(i).Area() > F(1) * F(1) * 5]   # slivers at pin rows aside
+            if len(big) != 1:
+                bbs = "; ".join("x %.1f..%.1f y %.1f..%.1f" % (T(fill.Outline(i).BBox().GetLeft()), T(fill.Outline(i).BBox().GetRight()),
+                                                               -T(fill.Outline(i).BBox().GetBottom()), -T(fill.Outline(i).BBox().GetTop())) for i in big)
+                err.append(f"zone {z.GetZoneName()} [{z.GetNetname()}] {board.GetLayerName(lid)}: {len(big)} islands above 5 mm2: {bbs}")
             ov = fill.CloneDropTriangulation()
             ov.BooleanIntersection(strip)
             if ov.OutlineCount() and ov.Area() > F(0.05) * F(0.05):

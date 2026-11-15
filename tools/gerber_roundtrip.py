@@ -366,7 +366,9 @@ def compare_layer(layer, gp, gk, bbox, ipc_pads, ipc_vias, report):
             cat = "v4 deviation" if inside else ("pour refill" if zgrown[sl][m].all() else "other")
         pad, dp = nearest(ipc_pads, x, y)
         via, dv = nearest(ipc_vias, x, y)
-        clusters.append(dict(cat=cat, side=side, area=area, x=x, y=y, w=wid, h=hgt,
+        bx0, by0 = canvas.mm(sl[1].start, sl[0].stop)
+        bx1, by1 = canvas.mm(sl[1].stop, sl[0].start)
+        clusters.append(dict(cat=cat, side=side, area=area, x=x, y=y, w=wid, h=hgt, box=(bx0, by0, bx1, by1),
                              pad=f"{pad['refdes']}-{pad['pin']} ({pad['net'] or pad['net_raw']}) {dp:.2f} mm" if pad else "-",
                              via=f"via ({via['net']}) {dv:.2f} mm" if via else "-"))
     clusters.sort(key=lambda c: -c["area"])
@@ -551,7 +553,8 @@ def main():
               + (f" (+{len(s['pourmiss'])} Proteus pour strokes inside zones)" if s["pourmiss"] else ""))
     for s in summaries:
         for c in s["other"]:
-            print(f"roundtrip: {s['layer']} OTHER only {c['side']} {c['area']:.3f} mm^2 at ({c['x']:.3f}, {c['y']:.3f}) near {c['pad']}, {c['via']}")
+            print(f"roundtrip: {s['layer']} OTHER only {c['side']} {c['area']:.3f} mm^2 at ({c['x']:.3f}, {c['y']:.3f}), "
+                  f"box x {c['box'][0]:.2f}..{c['box'][2]:.2f} y {c['box'][1]:.2f}..{c['box'][3]:.2f}, near {c['pad']}, {c['via']}")
     print(f"roundtrip: drills {len(drill_errors)} mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png")
     for e in drill_errors[:10]:
         print("roundtrip: ERROR " + e)
