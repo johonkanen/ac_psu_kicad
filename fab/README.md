@@ -1,14 +1,14 @@
-# fab – JLCPCB manufacturing files (v4 board, v5 BOM in progress)
+# fab – JLCPCB manufacturing files (v5 BOM complete, layout pending)
 
 | File | |
 |---|---|
-| `jlc_bom.csv` | Assembly BOM in JLC's format (Comment, Designator, Footprint, JLCPCB Part #): 70 lines, 257 SMD parts that JLC places (no THT: the user fits relays, Y caps, modules and connectors). v5 (2026-11-12): the 23 deleted sheet-7 parts are out and the 71 v5 passives are in; the v5 ICs, diodes, transistors and T1 are not yet |
+| `jlc_bom.csv` | Assembly BOM in JLC's format (Comment, Designator, Footprint, JLCPCB Part #): 82 lines, 277 SMD parts that JLC places (no THT: the user fits relays, Y caps, modules and connectors). v5 complete (2026-11-15): every schematic part is in this BOM or in `hand_fit.csv`, except TR1 (off-board) and U17 (spare, not fitted) |
 | `jlc_cpl.csv` | Assembly CPL (Designator, Mid X, Mid Y, Layer, Rotation) for exactly those parts, made by `make_fab.sh` |
 | `hand_fit.csv` | Everything JLC does not assemble: source, JLC code where one exists, and why it is hand-fitted |
 | `make_fab.sh` | Gerbers + Excellon drills → `out/ac_psu_gerber.zip`, position file → `jlc_cpl.csv`, BOM copy (`out/` is not committed) |
 | `make_cpl.py` | KiCad position CSV → JLC CPL, with per-package rotation corrections |
 | `jlc_bom_check.py` | Checks every JLC code (BOM and hand-fit list) for stock against the number of boards: `python3 fab/jlc_bom_check.py 5` |
-| `jlc_stock_2026-11-12.json` | Result of the last stock check for 5 boards: every BOM line in stock except AMC1306M05 (2 for 15; the user buys the rest from Mouser/Digikey) and REF3025AIDBZR (0, was in stock on 10-31); hand-fit codes incl. the snap-in and X2 capacitors. Older files: the checks before later BOM changes |
+| `jlc_stock_2026-11-15.json` | Result of the last stock check for 5 boards: every BOM line in stock except AMC1306M05 (2 for 15; the user buys the rest from Mouser/Digikey). Tight: IPD95R450P7 (18). Hand-fit codes incl. the snap-in and X2 capacitors. Older files: the checks before later BOM changes |
 | `jlc_stock_search.py`, `jlc_stock_2026-10-22.json` | The first search (2026-10-22) that found the codes, kept for reference |
 
 Order flow: `fab/make_fab.sh`, upload `fab/out/ac_psu_gerber.zip` (4 layers, 1.6 mm, see the board
@@ -28,6 +28,7 @@ inductance is measured.
 | U13, U15 | Si8661BD-B-IS (2 in stock) | Chipanalog CA-IS3761LW (C528659) | Same 16-pin assignment (VDD 1/16, GND 8/9, 5 forward channels on pins 2–6 → 15–11, reverse channel 10 → 7), default output low (L = Si866x "B"), 5 kVrms wide body. U17 (spare, not fitted) is not in the BOM. |
 | U16 | Si8660BD-B-IS (6 in stock) | TI ISO7760FDWR (C2878538) | Same 16-pin assignment (VCC1 1 / VCC2 16, GND1 8 / GND2 9, INA–INF 2–7 → OUTA–OUTF 15–10), "F" = default output low like Si8660 "B" (PWM gate signals stay off on power loss), 2.25–5.5 V, 5 kVrms reinforced, wide SOIC-16. |
 | U1, U7 | OPA2353EA (16 in stock) | TI OPA2350EA/2K5 (C115876) | Same family and VSSOP-8 pinout, rail-to-rail in/out, 2.7–5.5 V (3.3 V here), 38 MHz vs 44 MHz GBW: plenty for the 50 Hz voltage measurements. Cheaper fallback: TLV9062IDGKR (C398356, 10 MHz). |
+| REF1, REF2 | REF3025AIDBZR (0 stock 2026-11-12) | **TI REF3125AIDBZR (C33297)**, 2026-11-15 | Same SOT-23-3 (DBZ) pinout: 1 IN, 2 OUT, 3 GND (REF30 and REF31 data sheets, Table 5-1). Stable with any capacitive load (C40/C6 1 µF stay), sources 10 mA (the 422R + 820R divider draws 2 mA), dropout 5–50 mV from 3.3 V, 0.2 % initial, 20 ppm/°C (better drift than the REF3025). Iq 115 µA max instead of 50 µA. |
 | AD1 | ADS7056IRUGR | bought by the user, not in the JLC BOM (`hand_fit.csv`) | Consign the parts to JLC (X2QFN-8, 0.5 mm pitch) rather than hand-solder. |
 | R7 | 1k | **10k** (C25744), v4 fix 11 | U1B's + leg is now matched to its 10k feedback. With 1k, ADA3 measured about 0.0366·V(FILTER_INPUT) − 0.0038·V(LEMOUT) against GND: a common-mode gain of ≈ 0.033. Now it measures 0.0366 × (LEMOUT − FILTER_INPUT) around 1.65 V, so **the firmware scaling of ADA3 changes**. |
 | R18, R9 | 100R | 8.2k (C25924), v4 fix 11 | With C88/C89 4.7 nF C0G (C1518204): 4.1 kHz output filter on ADA2/ADA3. |
@@ -59,10 +60,17 @@ are not just "value + package":
 | R110–R127 | 0.1 % | Yageo RT0603BRD (thin film, 25 ppm/K): 6.8k C861539, 10k C95204, 24.9k C136967 | Diff-amp matching; the same series for all three values. |
 | L2 | 15u SWPA6045S150MT | Sunlord SWPA6045S150MT (C83374) | As designed. |
 
-Not yet in the BOM (not passives): U18 UCC28710 (C80866), Q17 IPD95R450P7 (C3289115), U19/U20
-ISO7760FDWR (C2878538), U21 CA-IS3742LW (C4944981), U22–U24 AMC1311BDWVR (C783598), U25/U26
-OPA2350EA (C115876), U27 TPS73033 (the BOM's TPS73033DBVR C57424 fits), U28 TPS54202, Q15/Q16,
-D11–D16 still to pick. T1, W1, J13/J14 and PEC1/PEC2 will be hand-fit (not yet in `hand_fit.csv`).
+## v5 ICs and discretes (2026-11-15)
+
+Known codes from the plans: U18 UCC28710DR (C80866), Q17 IPD95R450P7 (C3289115, **18 in stock**: buy
+spares from Mouser/DigiKey if more than 5 boards), U19/U20 ISO7760FDWR (C2878538, with U16), U21
+CA-IS3742LW (C4944981), U22–U24 AMC1311BDWVR (C783598), U25/U26 OPA2350EA (C115876, with U1/U7), U27
+TPS73033DBVR (C57424, with U3/U10; the schematic names the DBVT reel, the same part). Picked: U28
+TPS54202DDCR (TI, C191884); D11 BAS16WSQ (Yangjie, C2942457); D12 US1M (MDD, basic, C412437); D13
+SMBJ170A (LGE, C713706); D14/D15 ES2DA (Yangjie, C698723); D16 SS310 (MDD, C15874); Q15 MMBT3904 (CJ,
+basic, C20526); Q16 MMBT3906LT1G (onsemi, C53444). Hand-fit (`hand_fit.csv`): T1 (wound by the user;
+W1 = its CTRL flying-lead holes), J13/J14 (1x2 header C32713268 + a double-insulated 2-wire cable),
+PEC1/PEC2 (PIN terminals, like PE1).
 
 Voltage margins at DC+ max 450 V (user, 2026-10-29): 91k divider chains 3 × 91k → 150 V per 200 V
 resistor (75 %); 2220 split capacitors 225 V on 450 V (50 %); C68 450 V on 500 V (90 %); the

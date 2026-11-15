@@ -1,6 +1,20 @@
 # Status
 
-Updated: 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## BOM complete, REF3125 replaces REF3025 (2026-11-15)
+
+User 2026-11-15: "do the BOM completion and the REF3025 replacement".
+- **BOM:** fab/jlc_bom.csv now holds every v5 IC and discrete (U18, Q17, U19–U28, D11–D16, Q15/Q16).
+  fab/hand_fit.csv holds T1/W1, J13/J14 and PEC1/PEC2.
+- **Coverage:** every schematic part is in one of the two lists, except TR1 (off-board) and U17
+  (spare). One-off check: no reference outside the schematic; U4–U6 appear in both on purpose
+  (the Mouser backup row).
+- **REF1/REF2:** REF3025AIDBZR (0 stock) → **TI REF3125AIDBZR (C33297)**. Same DBZ pinout (1 IN,
+  2 OUT, 3 GND, per both TI data sheets), stable with any capacitive load, 10 mA, 20 ppm/°C. BOM
+  substitution only; the schematic keeps REF3025 (fab/README.md substitutions).
+- **Stock** for 5 boards (fab/jlc_stock_2026-11-15.json): every BOM line in stock except AMC1306M05
+  (known). IPD95R450P7 has only 18.
 
 ## v5 passives – JLC codes picked (2026-11-12)
 
