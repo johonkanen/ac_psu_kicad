@@ -209,12 +209,12 @@ The plan keeps routing with you in the GUI. The brief would also let a routing a
 the Ti60 card) do the low-voltage nets inside the card area. That answers the plan's open item on Freerouting:
 I would use KRT, because it is already proven on your boards. Your choice.
 
-## 9. Questions
+## 9. Decisions (user, 2026-11-15)
 
-1. Findings 2 and 3: may U8 (with C93/C94) and U10 (with C3/C4) move as proposed?
-2. Finding 6: In3 routing / In4 ground instead of the plan's order?
-3. Finding 7: J13/J14 as right-angle headers or soldered wires on the bottom?
-4. Finding 8: the slot list of section 3, with no slot around J11's west and north side?
-5. ~~Must the Ti60 card still fit?~~ Yes (user, 2026-11-15): U19–U21 on the bottom.
-6. Stack-up JLC06161H-3313 with 0.5 oz inner copper?
-7. Section 8: routing in the GUI as planned, or a routing agent for the low-voltage card-area nets first?
+1. U8 (with C93/C94) and U10 (with C3/C4) move as proposed.
+2. In3 = routing, In4 = ground.
+3. J13/J14: wires soldered into the holes, no headers.
+4. Slots as in section 3, none around J11's west and north side.
+5. The Ti60 card must fit: U19–U21 on the bottom.
+6. Stack-up JLC06161H-3313, 0.5 oz inner copper.
+7. Routing by a routing agent (method: `~/dev/efinix_soc_board/AGENTIC_PCB_ROUTING.md`).

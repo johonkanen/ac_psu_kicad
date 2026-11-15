@@ -104,7 +104,7 @@ PLACE.update(_blk("U26 R124 R125 R126 R127 C133", "CA", "F", 80.0, 26.9,
 PLACE.update(_blk("R128 R129 R130 C129 C130 C131", "CA", "F", 49.3, 27.5,
                   "8.2k + C output filters at J11 pins 1/3/4: block x 48.0..50.4, y 24.6..30.5"))
 PLACE.update(_blk("U27 C134 C135 C136", "CA", "B", 62.5, 30.0, "3V3_CTRL LDO block, bottom, x 59..66, y 27..33"))
-PLACE.update({"J14": ("CA", "B", 55.5, 30.0, "5 V link header, THT from the bottom (see open items: height)"),
+PLACE.update({"J14": ("CA", "THT", 55.5, 30.0, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
               "PEC1": ("CA", "THT", 50.3, 33.0, "PE bond terminal; lug and screw on the bottom")})
 # -- ISO --------------------------------------------------------------------------------------
 PLACE.update({"C122": ("I", "B", 61.75, 48.3, "bottom, north of U21 pin 16"), "C118": ("I", "B", 72.95, 48.3, "bottom, north of U19 pin 16"),
@@ -132,7 +132,7 @@ PLACE.update({
     "D16": ("CB", "F", 109.5, -24.5, "top, south of the card edge, vertical"),
     "W1": ("CB", "THT", 107.2, -31.2, "CTRL winding leads, at the aux-area side (final position with T1)"),
     "PEC2": ("CB", "THT", 115.3, -31.6, "PE bond terminal"),
-    "J13": ("CB", "B", 116.0, -23.0, "5 V link header, same side as J14"),
+    "J13": ("CB", "THT", 116.0, -23.0, "5 V link: two wires soldered into the holes from the bottom, no header (user 2026-11-15)"),
 })
 PLACE.update(_blk("U28 C139 C140 C141 C144 R131 R132 R133 R134 R135", "CB", "B", 109.0, -17.5,
                   "TPS54202 block, bottom, x 107.4..110.8, y -21..-13.5 and x 107.4..117.9, y -28.5..-27 "))
