@@ -1,4 +1,4 @@
-# fab – JLCPCB manufacturing files (v5 BOM complete, layout pending)
+# fab – JLCPCB manufacturing files (v5 BOM complete, card area placed, routing pending)
 
 | File | |
 |---|---|
@@ -11,10 +11,15 @@
 | `jlc_stock_2026-11-15.json` | Result of the last stock check for 5 boards: every BOM line in stock except AMC1306M05 (2 for 15; the user buys the rest from Mouser/Digikey). Tight: IPD95R450P7 (18). Hand-fit codes incl. the snap-in and X2 capacitors. Older files: the checks before later BOM changes |
 | `jlc_stock_search.py`, `jlc_stock_2026-10-22.json` | The first search (2026-10-22) that found the codes, kept for reference |
 
-Order flow: `fab/make_fab.sh`, upload `fab/out/ac_psu_gerber.zip` (4 layers, 1.6 mm, see the board
-stack-up), then `fab/jlc_bom.csv` and `fab/jlc_cpl.csv` for assembly. **Check every rotation in
+Order flow: `fab/make_fab.sh`, upload `fab/out/ac_psu_gerber.zip` (**6 layers, 1.6 mm, stack-up
+JLC06161H-3313**: 1 oz outer, 0.5 oz inner, as set in the board file since v5 step 3), then `fab/jlc_bom.csv` and `fab/jlc_cpl.csv` for assembly. **Check every rotation in
 JLC's placement preview**, both sides. The corrections in `make_cpl.py` are the usual KiCad →
 JLC values, and the bottom-side sign is not verified against a real order.
+
+Since v5 step 4 the board has **milled slots** (15, 1.2 mm wide, on Edge.Cuts) and **many bottom-side parts**
+in the card area (U19–U24, the difference amplifiers, U27, C137/C138, L2): order assembly for both sides.
+Hand-fit there: PEC1/PEC2 (lug and screw on the bottom), J13/J14 (no headers: a two-wire cable soldered from the
+bottom), W1 (transformer leads). The CPL is regenerated after routing.
 
 Values: the series resistors on the sigma-delta inputs are 12.4R (C477607) for a 5 nH shunt
 inductance (2.5 Ω per nH with the 100 nF C0G capacitors C90–C92). Re-pick them if the

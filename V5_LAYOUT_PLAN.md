@@ -3,6 +3,10 @@
 Written 2026-11-12 for a Claude Fable 5.2 session in `/home/jari/dev/ac_psu_kicad`. Coordinates are mm in the
 IPC frame (Y up, KiCad y = −IPC y) unless a line says otherwise.
 
+**Status 2026-11-15: phases 0–4 done** (STATUS.md "v5 steps 3–4"; record in `reports/v5_layout/`). The card
+keep-outs of section 3 are out of date: the valid ones are in `tools/v5/card_layout.py`. Routing goes to a routing
+agent (`reports/v5_layout/routing_brief.md`), not the GUI.
+
 ## 1. Goal and user decisions (2026-11-12)
 
 Place the control and measurement parts under the control card. Reshape the planes there so the area holds

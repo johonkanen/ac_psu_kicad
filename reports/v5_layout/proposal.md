@@ -218,3 +218,25 @@ I would use KRT, because it is already proven on your boards. Your choice.
 5. The Ti60 card must fit: U19–U21 on the bottom.
 6. Stack-up JLC06161H-3313, 0.5 oz inner copper.
 7. Routing by a routing agent (method: `~/dev/efinix_soc_board/AGENTIC_PCB_ROUTING.md`).
+
+## 10. What changed after the proposal (phases 2 and 3)
+
+The sections above are the proposal as approved. The board as placed (`tools/v5/v5_4_card_area.py`, geometry in
+`tools/v5/card_layout.py`, renders `card_*.png`) differs in these points:
+
+| Point | Proposal | As placed | Why |
+|---|---|---|---|
+| Isolator row U21, U19, U20 | y 41.5, top, then bottom | **y 35.5, bottom**, x 57.05 / 68.0 / 78.95 | The band y 43.2…48.8 carries the DC bus between the ISO DC link and the DAB secondary (F.Cu ISOPGND, B.Cu ISODC+). The proposal put the ISO pins into it. Now the band has no parts, and the signals reach J4/J6/J8 on In3 under it. |
+| U22 (AMC1311) | east line | in the isolator row at (87.75, 35.5) | The shorter east line holds two AMC1311, not three. |
+| U22–U24 | top | bottom | The DWV package can be 2.8 mm; the top limit is 2.65 mm. |
+| East barrier line | x 92.5 | x 97.6 | Room for the four parts in the row. |
+| CTRL area at J11 | x 44.4…90.0, y 20.8…39.0, 851 mm² | x 44.4…95.1, y 20.8…33.0 (+ the J11 column), 657 mm² | Follows from the two rows above. |
+| Difference amplifiers, U27 | top | bottom, below the isolator row | Same side as the AMC1311 outputs; the top side stays free under the Ti60 headers. |
+| U7 and U2 blocks | new arrangement | moved as they are, with their tracks, to x 95.2…106.5, y 8.5…15.5 and x 94.3…101.5, y 1.7…8.2 | Keeps the proven v4 routing of the op-amp circuits. |
+| R97 | moved | stays | No conflict left. |
+| J12 piece | PEC2, W1, D16 south | C138 under D16 (rectifier loop), C137 and L2 under the card, U28 on top between the card's tail rows | Exact placement against the Ti135 and Ti60 tails. |
+| Slots | 15 | 15, at the new part positions (`card_layout.SLOTS`) | |
+
+**Found during placement, open:** the DC bus itself has been cut at J11 since v5 step 1. ISODC+ (B.Cu) and ISOPGND
+(F.Cu) are each in two pieces, west and east of J11, because the pours must keep 5 mm from J11 and J8 / INU_OUT2
+close the corridor north of it. STATUS.md lists the options.

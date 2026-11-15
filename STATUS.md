@@ -1,6 +1,69 @@
 # Status
 
-Updated: 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 steps 3–4 – six layers, card area in three isolated domains (2026-11-15, branch `v5-layout`)
+
+User 2026-11-15: "Follow V5_LAYOUT_PLAN.md from phase 0". Phases 0–4 are done; routing is next (a routing agent,
+user decision). Record: `reports/v5_layout/proposal.md` (proposal, decisions, section 10 = what changed while
+placing), geometry in `tools/v5/card_layout.py`, renders `reports/v5_layout/card_{F,In1,In2,In3,In4,B}.png`.
+
+**User decisions:** U8 and U10 may move; In3 = routing, In4 = ground; J13/J14 = wires soldered into the holes, no
+headers; slots as proposed, none around J11's west and north side; the Ti60 card must still fit; JLC06161H-3313
+with 0.5 oz inner copper; routing by a routing agent.
+
+**Step 3** (`tools/v5/v5_3_six_layers.py`, seed 5003): In3.Cu / In4.Cu added, stack-up JLC06161H-3313 (prepreg
+0.0994 / core 0.55 / prepreg 0.1088 / core 0.55 / prepreg 0.0994, 1 oz outer, 0.5 oz inner), board thickness 1.6 mm
+(was 2.267, the Proteus stack). Existing copper unchanged.
+
+**Step 4** (`tools/v5/v5_4_card_area.py`, seed 5004; log `reports/v5_layout/v5_4_card_area.log`):
+- **Areas** (copper allowed on all six layers, ≥ 5.0 mm apart): CTRL at J11 x 44.4…95.1, y 20.8…33.0 plus the
+  J11 column; CTRL at J12 x 107.2…118.1, y −34.5…3.0 with a leg to x 102.5; primary = the v4 GND plane area up
+  to y 15.8; ISO = the right side, the top band from y 38.0, and the U8 / 15V_ISO copper south of the card.
+- **Placed:** 71 v5 parts (sheet 11 and the J12 buck). **Moved:** 32 v4 parts: U16 in line with U13/U15; the U7,
+  U2 and U10 blocks as they are, with their tracks; U8 with C93/C94 13.36 mm west (it was 1.89 mm from J12);
+  C56, C81, C82. Everything else in the card outline stays, with the primary routing.
+- **Bottom side:** U19–U21 (the Ti60 card's JTAG and UART tails end above them), U22–U24 (DWV package up to
+  2.8 mm), the difference amplifiers, U27, C137/C138, L2.
+- **DC bus band** x 52.3…118.1, y 43.2…48.8: no parts. It carries the bus between the ISO DC link and the DAB
+  secondary (F.Cu ISOPGND, B.Cu ISODC+). The isolator ISO pins sit south of it; their signals go to J4/J6/J8 on
+  In3 under the bus.
+- **Barriers:** rule areas 5 mm wide on all copper layers (no tracks, vias, pours), 15 slots 1.2 mm wide on
+  Edge.Cuts under U13/U15/U16, U19–U24, U17 and five free runs.
+- **Planes:** In1 ground, In2 supply, In4 ground per area (zones named `v5 card …`); the old In1 ISOGND / In2
+  3V3_ISO planes are gone; every other pour is cut back 5 mm from the other domains' areas (pieces that fell
+  apart are zones of their own, `(part 2)`).
+- **Deleted copper:** 402 v4 tracks and vias (J11 fan-out, ISO copper in the CTRL areas, everything in a
+  barrier strip, nets of moved parts). They are ratsnest now.
+
+**Checks** (new or changed):
+- `tools/v5/check_layout.py` (in check_all): areas ≥ 5 mm apart, pads in their domain area, courtyards, heights
+  (top under the card ≤ 2.65 mm, bottom ≤ 10 mm), no part under a through-hole tail of the Ti135 or the Ti60
+  card, bus band free, slots, nothing in a barrier strip, no tracks on In1/In4, each plane one island.
+- Deviation kinds `moved` (22 Proteus parts: pad numbers and nets checked, not positions) and `unrouted`
+  (rectangles where only unconnected items, opens and vias are excused). **domain_gaps and DRC clearance are
+  strict in the card area.** domain_gaps checks six layers.
+- The card keep-outs of V5_LAYOUT_PLAN.md section 3 were out of date (MECHANICAL.md of the card repo is older
+  than the card's placement). `card_layout.CARD_HOLES` holds the card's real holes, `TI60_HOLES` the Ti60's.
+
+**Open, in this order:**
+1. **The DC bus is cut at J11** (since v5 step 1, now visible): ISODC+ (B.Cu) and ISOPGND (F.Cu) are each in two
+   pieces. The pours must keep 5 mm from J11, and J8's pins and the INU_OUT2 terminal close the corridor north of
+   J11 (y 51.1…53.5). West piece: C8 and the inverter bridge. East piece: the band under J6, C47/C48, Q11, R64.
+   Options: (a) a link on In3/In4 through that corridor (0.5 oz, about 2 mm wide: thin for the DAB current);
+   (b) move INU_OUT2 2–3 mm north to open the corridor on F.Cu/B.Cu; (c) a wire or bus bar. Needs the user.
+2. **Routing** of the card area: `reports/v5_layout/routing_brief.md` and `routing_list.md` (276 open connections
+   on 104 nets).
+3. PEC1 / PEC2: lug and screw on the bottom; J13 → J14: a double-insulated two-wire cable soldered from the bottom.
+4. Slots weaken the board around J11 (card insertion force): check on the first board.
+5. The aux flyback (27 parts staged), T1 pin grid, M4 terminals: as before.
+6. `~/dev/efinix_soc_board/MECHANICAL.md` still describes the card's old header positions.
+
+Last verification: `tools/check_all.sh` ALL CHECKS PASSED – compare 365/365 parts, 0 wrong-net; check_board 377
+footprints, 1202 pads, 71 pads of 22 moved parts, 3389 tracks, 140 vias, 90 zones; assign_nets 0 shorts, 0 opens,
+121 v5 opens pending; drc 0 shorts, 0 unconnected, 311 unconnected + 2 clearance pending (the 2 are in the staging
+area); domain_gaps 0 violations, 1 pending (staging); check_layout 103 parts, 15 slots, 10 plane zones, 0 errors;
+ipc356_diff 0 mismatches; roundtrip OK. `tools/regen_check.sh` OK.
 
 ## BOM complete, REF3125 replaces REF3025 (2026-11-15)
 
