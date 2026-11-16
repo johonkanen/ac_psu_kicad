@@ -7148,7 +7148,7 @@
 		)
 		(uuid "9187f3ec-5f9c-5420-b4f3-a63a3bd4617e")
 	)
-	(global_label "PWM_Q5_CTRL"
+	(global_label "PWM_TRANS5_CTRL"
 		(shape passive)
 		(at 320.04 38.1 180)
 		(fields_autoplaced yes)
@@ -7180,7 +7180,7 @@
 		)
 		(uuid "8176f84a-8ba2-5cc1-beff-ac3060139639")
 	)
-	(global_label "PWM_Q6_CTRL"
+	(global_label "PWM_Q8_CTRL"
 		(shape passive)
 		(at 320.04 40.64 180)
 		(fields_autoplaced yes)
@@ -7212,7 +7212,7 @@
 		)
 		(uuid "9ea73de7-59d3-54e9-b4f6-dc5ad0fcd605")
 	)
-	(global_label "PWM_Q7_CTRL"
+	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
 		(shape passive)
 		(at 320.04 43.18 180)
 		(fields_autoplaced yes)
@@ -7244,7 +7244,7 @@
 		)
 		(uuid "bf1cc63c-d9d1-53bc-8466-cbb4c9a983ef")
 	)
-	(global_label "PWM_Q8_CTRL"
+	(global_label "PWM_TRANS6_CTRL"
 		(shape passive)
 		(at 320.04 45.72 180)
 		(fields_autoplaced yes)
@@ -7276,7 +7276,7 @@
 		)
 		(uuid "f94fcdcf-b883-5761-a00f-04c147f16d74")
 	)
-	(global_label "PWM_TRANS4_CTRL"
+	(global_label "PWM_Q7_CTRL"
 		(shape passive)
 		(at 320.04 48.26 180)
 		(fields_autoplaced yes)
@@ -7308,7 +7308,7 @@
 		)
 		(uuid "e14e23cb-7cbc-50ee-8912-929db197b7f8")
 	)
-	(global_label "PWM_TRANS5_CTRL"
+	(global_label "PWM_Q5_CTRL"
 		(shape passive)
 		(at 320.04 50.8 180)
 		(fields_autoplaced yes)
@@ -7492,7 +7492,7 @@
 		)
 		(uuid "65d9c924-66d1-5047-9970-1543ed3ff59a")
 	)
-	(global_label "PWM_Q5"
+	(global_label "PWM_TRANS5"
 		(shape passive)
 		(at 345.44 38.1 0)
 		(fields_autoplaced yes)
@@ -7524,7 +7524,7 @@
 		)
 		(uuid "de615951-dc63-517c-88e0-a05fea1400bf")
 	)
-	(global_label "PWM_Q6"
+	(global_label "PWM_Q8"
 		(shape passive)
 		(at 345.44 40.64 0)
 		(fields_autoplaced yes)
@@ -7556,7 +7556,7 @@
 		)
 		(uuid "5955e4dc-961a-54aa-9913-9bfed161e05d")
 	)
-	(global_label "PWM_Q7"
+	(global_label "GPIO_BYPASS_RLY_ISO"
 		(shape passive)
 		(at 345.44 43.18 0)
 		(fields_autoplaced yes)
@@ -7588,7 +7588,7 @@
 		)
 		(uuid "a99550e0-5320-5b80-83c1-4ed69f6ca1e4")
 	)
-	(global_label "PWM_Q8"
+	(global_label "PWM_TRANS6"
 		(shape passive)
 		(at 345.44 45.72 0)
 		(fields_autoplaced yes)
@@ -7620,7 +7620,7 @@
 		)
 		(uuid "00216702-664d-5164-a655-2e24216cd593")
 	)
-	(global_label "PWM_TRANS4"
+	(global_label "PWM_Q7"
 		(shape passive)
 		(at 345.44 48.26 0)
 		(fields_autoplaced yes)
@@ -7652,7 +7652,7 @@
 		)
 		(uuid "339aeae8-d224-589b-9066-f6bea0a0ace1")
 	)
-	(global_label "PWM_TRANS5"
+	(global_label "PWM_Q5"
 		(shape passive)
 		(at 345.44 50.8 0)
 		(fields_autoplaced yes)
@@ -7947,7 +7947,7 @@
 		)
 		(uuid "f403bda7-aa15-5381-a735-add48ff863b8")
 	)
-	(global_label "PWM_TRANS6_CTRL"
+	(global_label "DAB_PWM_HI_SEC_CTRL"
 		(shape passive)
 		(at 320.04 88.9 180)
 		(fields_autoplaced yes)
@@ -7979,7 +7979,7 @@
 		)
 		(uuid "eec140ea-50f6-56c2-ad25-2e7de7328fce")
 	)
-	(global_label "DAB_PWM_HI_SEC_CTRL"
+	(global_label "DAB_PWM_LO_SEC_CTRL"
 		(shape passive)
 		(at 320.04 91.44 180)
 		(fields_autoplaced yes)
@@ -8011,7 +8011,7 @@
 		)
 		(uuid "40993d9e-9b75-5901-8fa2-f7486329395e")
 	)
-	(global_label "DAB_PWM_LO_SEC_CTRL"
+	(global_label "PWM_TRANS4_CTRL"
 		(shape passive)
 		(at 320.04 93.98 180)
 		(fields_autoplaced yes)
@@ -8043,7 +8043,7 @@
 		)
 		(uuid "6849e6bb-f0bf-5db2-bda8-a79802bfffd7")
 	)
-	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
+	(global_label "PWM_Q6_CTRL"
 		(shape passive)
 		(at 320.04 96.52 180)
 		(fields_autoplaced yes)
@@ -8379,7 +8379,7 @@
 		)
 		(uuid "8479db4e-eb92-5ae2-8bf8-f809210688de")
 	)
-	(global_label "PWM_TRANS6"
+	(global_label "DAB_PWM_HI_SEC"
 		(shape passive)
 		(at 345.44 88.9 0)
 		(fields_autoplaced yes)
@@ -8411,7 +8411,7 @@
 		)
 		(uuid "9876d8dd-c071-5650-be56-d717caf3b370")
 	)
-	(global_label "DAB_PWM_HI_SEC"
+	(global_label "DAB_PWM_LO_SEC"
 		(shape passive)
 		(at 345.44 91.44 0)
 		(fields_autoplaced yes)
@@ -8443,7 +8443,7 @@
 		)
 		(uuid "d15eb99f-fe3b-5a09-a7f5-97f5b7f70afe")
 	)
-	(global_label "DAB_PWM_LO_SEC"
+	(global_label "PWM_TRANS4"
 		(shape passive)
 		(at 345.44 93.98 0)
 		(fields_autoplaced yes)
@@ -8475,7 +8475,7 @@
 		)
 		(uuid "32dff75e-c97d-58d0-b1fc-9c546d93c708")
 	)
-	(global_label "GPIO_BYPASS_RLY_ISO"
+	(global_label "PWM_Q6"
 		(shape passive)
 		(at 345.44 96.52 0)
 		(fields_autoplaced yes)

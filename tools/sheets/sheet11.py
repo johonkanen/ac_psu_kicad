@@ -92,8 +92,11 @@ def row(y, x0, parts, step=10):
 
 sh.text("v5 CTRL island A: ISO-side PWMs / relay (U19, U20), U4/U6 sigma-delta lines (U21), ISOADA1-3 (U22-U26). "
         "Side 1 = CTRL (J11), side 2 = ISO.", g(220), g(14))
-PW = [("PWM_Q5", "PWM_Q6", "PWM_Q7", "PWM_Q8", "PWM_TRANS4", "PWM_TRANS5"),
-      ("PWM_TRANS6", "DAB_PWM_HI_SEC", "DAB_PWM_LO_SEC", "GPIO_BYPASS_RLY_ISO", None, None)]
+# Channel order = the order of the destinations on the board, west to east (routing 2026-11-15: no crossing
+# on In3 under the DC bus band): J8 (Q5, Q7, TRANS6, relay), J6 (Q8, TRANS5, Q6), J4 (TRANS4, LO, HI).
+# Channel A is the east-most pin pair (2 / 15), F the west-most (7 / 10).
+PW = [("PWM_TRANS5", "PWM_Q8", "GPIO_BYPASS_RLY_ISO", "PWM_TRANS6", "PWM_Q7", "PWM_Q5"),
+      ("DAB_PWM_HI_SEC", "DAB_PWM_LO_SEC", "PWM_TRANS4", "PWM_Q6", None, None)]
 for ref, y, sig in (("U19", g(36), PW[0]), ("U20", g(76), PW[1])):
     nets = {1: "3V3_CTRL", 8: "CTRLGND_A", 16: "3V3_ISO", 9: "ISOGND"}
     for k, s_ in enumerate(sig):
