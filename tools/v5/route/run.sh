@@ -16,7 +16,7 @@ B=build/route
 KIPY=tools/p2k/bin/kipy
 R=tools/v5/route
 FROM=${1:-0}
-STAGES="s1_iso_signals s2_iso_analog s3_ctrl_j11 s4_ctrl_analog s5_buck s6_primary s7_planes"
+STAGES="s1_iso_signals s2_iso_analog s3_ctrl_j11 s4_ctrl_analog s5_buck s6_primary s7_planes s8_iso_supplies"
 
 prep() { mkdir -p "$B/$1"; cp kicad/ac_psu.kicad_pro kicad/ac_psu.kicad_dru "$B/$1/"; }
 
@@ -32,6 +32,8 @@ if [ "$FROM" -le 0 ] || [ ! -f "$B/s0.json" ]; then
     $KIPY $R/s0_swap.py "$B/base/ac_psu.kicad_pcb" "$B/s0/ac_psu.kicad_pcb"
     prep s0
     $KIPY $R/extract.py "$B/s0/ac_psu.kicad_pcb" "$B/s0.json"
+    python3 $R/quick_drc.py "$B/base/ac_psu.kicad_pcb" > /dev/null      # the open connections before routing
+    cp "$B/base/ac_psu.kicad_pcb.drc.json" "$B/base.drc.json"
 fi
 
 n=0
@@ -47,10 +49,18 @@ for s in $STAGES; do
     prev="$prev $B/r$n.json"
 done
 
-prep out
-# shellcheck disable=SC2086
-$KIPY $R/apply.py "$B/s0/ac_psu.kicad_pcb" "$B/out/ac_psu.kicad_pcb" $prev
-prep out
-python3 $R/quick_drc.py "$B/out/ac_psu.kicad_pcb"
+# apply, DRC, drop the stubs that DRC calls dangling, until none is left (the drop list starts empty)
+python3 $R/verify_routes.py $prev
+rm -f "$B/drop.json"
+for pass in 1 2 3 4 5; do
+    prep out
+    # shellcheck disable=SC2086
+    $KIPY $R/apply.py "$B/s0/ac_psu.kicad_pcb" "$B/out/ac_psu.kicad_pcb" $prev "--drop=$B/drop.json"
+    prep out
+    python3 $R/quick_drc.py "$B/out/ac_psu.kicad_pcb" > "$B/quick_drc.txt"
+    python3 $R/cleanup.py "$B/out/ac_psu.kicad_pcb" "$B/drop.json" && break
+done
+cat "$B/quick_drc.txt"
+python3 $R/group_report.py "$B/base.drc.json" "$B/out/ac_psu.kicad_pcb.drc.json" || true
 $KIPY tools/v5/check_layout.py --board "$B/out/ac_psu.kicad_pcb" | tail -4
 $KIPY tools/v4/domain_gaps.py --board "$B/out/ac_psu.kicad_pcb" | tail -3

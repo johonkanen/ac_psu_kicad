@@ -200,6 +200,7 @@ class Router:
         for x0, y0, x1, y1 in UNROUTED:
             self.allowed[self.iy(y0):self.iy(y1) + 1, self.ix(x0):self.ix(x1) + 1] = True
         self.allowed = ndimage.binary_erosion(self.allowed, iterations=2)
+        self.edge_in = ndimage.distance_transform_edt(self.allowed).astype(np.float32) * G     # depth inside the rectangles
 
     def _add_track_raster(self, t):
         li = LI[t["layer"]]
@@ -289,6 +290,7 @@ class Router:
         b = self._fdist(LI[layer], nid, win) < CLR + w / 2 + eps
         b |= self._static_block(layer, win)
         b |= self.ruledist[gy0:gy1, gx0:gx1] < w / 2 + 0.03
+        b |= self.edge_in[gy0:gy1, gx0:gx1] < w / 2 - 0.05          # the whole track width stays inside the rectangles
         dm = self.dom.get(net)
         if dm in self.slack:
             b |= self.slack[dm][gy0:gy1, gx0:gx1] < w / 2 + 0.02        # areas and pads are painted generously
@@ -426,7 +428,7 @@ class Router:
 
     # -- routing ----------------------------------------------------------------------------
     def connect(self, net, a, b=None, w=0.2, layers=("F.Cu", "In3.Cu", "B.Cu"), via=3.0, turn=0.4, margin=5.0, lcost=None,
-                cost=(), close=(), novia=(), box=None, eps=EPS, quiet=False):
+                cost=(), close=(), novia=(), box=None, eps=EPS, quiet=False, plane=None, avoid=()):
         """Route net from the copper connected to `a` to the copper connected to `b` (pad 'REF-PIN' or
         point (x, y[, layer])); b None: to any other copper of the net inside the window.
         via: cost of a via in mm of track; lcost {layer: factor}; cost [(layers, rect, extra factor)];
@@ -465,7 +467,15 @@ class Router:
             for k, ln in enumerate(layers):
                 if isinstance(a, str) or len(a) < 3 or a[2] == ln:
                     srcm[k, self.iy(ay) - gy0, self.ix(ax) - gx0] = True
-        if b is None:
+        if plane is not None:       # to a new via that lands in the planes of the net (the via is added at the end)
+            if not self._pf:
+                self.prepare_planes()
+            site = self.via_ok(net, win, eps) & self.plane_ok(net, plane, win)
+            for x0, y0, x1, y1 in avoid:
+                site[max(0, self.iy(y0) - gy0):max(0, self.iy(y1) - gy0 + 1), max(0, self.ix(x0) - gx0):max(0, self.ix(x1) - gx0 + 1)] = False
+            for k in range(len(layers)):
+                tgtm[k] = site
+        elif b is None:
             for k, ln in enumerate(layers):
                 tgtm[k] = cells[k] & (lab[LI[ln]] != la) & (lab[LI[ln]] != 0)
         else:
@@ -493,7 +503,7 @@ class Router:
         for lys, (x0, y0, x1, y1), c in cost:
             for k, ln in enumerate(layers):
                 if ln in lys:
-                    xc[k, max(0, self.iy(y0) - gy0):max(0, self.iy(y1) - gy0 + 1), max(0, self.ix(x0) - gx0):max(0, self.ix(x1) - gx0 + 1)] = int(c * 100)
+                    xc[k, max(0, self.iy(y0) - gy0):max(0, self.iy(y1) - gy0 + 1), max(0, self.ix(x0) - gx0):max(0, self.ix(x1) - gx0 + 1)] = min(255, int(c * 100))
         if len(layers) > 1 and via is not None:
             vok = self.via_ok(net, win, eps).astype(np.uint8)
             for x0, y0, x1, y1 in novia:
@@ -528,6 +538,9 @@ class Router:
             return False
         path = [(layers[out[3 * i]], out[3 * i + 1] + gx0, out[3 * i + 2] + gy0) for i in range(n)][::-1]
         length, nv = self._commit(net, path, w)
+        if plane is not None:
+            self.add_via(net, *self.xy(path[-1][1], path[-1][2]), check=False)
+            nv += 1
         if not quiet:
             self.log(f"  {net}: {a} -> {b}: {length:.1f} mm, {nv} vias, w {w}")
         return True
@@ -586,7 +599,32 @@ class Router:
             self._paint(m, rings, True)
             self._pf[(net, ln)] = ndimage.distance_transform_edt(m) * G >= inset
 
-    def plane_via(self, pad, plane_layers, w=0.4, maxlen=2.0, prefer=None, eps=EPS, at=None, w_min=0.25, reuse=0.0):
+    def on_plane(self, pad, plane_layers, own=None):
+        """True if the copper of the pad already holds a via (or through-hole pad) of its net that lands in the
+        plane(s); own (mm): only a via within that distance of the pad centre counts."""
+        p = self.pads[pad]
+        net = p["net"]
+        win = self._win(p["x"], p["y"], p["x"], p["y"], 8.0)
+        gx0, gy0, gx1, gy1 = win
+        if not self._pf:
+            self.prepare_planes()
+        lab = self._labels(net, win)
+        ok = self.plane_ok(net, plane_layers, win)
+        la = 0
+        for ln in p["layers"]:
+            la = la or lab[LI[ln], self.iy(p["y"]) - gy0, self.ix(p["x"]) - gx0]
+        if not la:
+            return False
+        pts = [(v["x"], v["y"]) for v in self.vias if v["net"] == net]
+        pts += [(q["x"], q["y"]) for q in self.d["pads"] if q["net"] == net and q["drill"][0] > 0 and len(q["layers"]) == 6]
+        for x, y in pts:
+            i, j = self.ix(x) - gx0, self.iy(y) - gy0
+            if 0 <= i < gx1 - gx0 and 0 <= j < gy1 - gy0 and lab[0, j, i] == la and ok[j, i]:
+                if own is None or math.hypot(x - p["x"], y - p["y"]) <= own:
+                    return True
+        return False
+
+    def plane_via(self, pad, plane_layers, w=0.4, maxlen=2.0, prefer=None, eps=EPS, at=None, w_min=0.25, avoid=()):
         """Stub from pad 'REF-PIN' to a new via that lands in the planes of the pad's net.
         prefer (dx, dy): direction in which the via is wanted; at (x, y): exact via position."""
         p = self.pads[pad]
@@ -601,6 +639,8 @@ class Router:
         if not self._pf:
             self.prepare_planes()
         vok = self.via_ok(net, win, eps) & self.plane_ok(net, plane_layers, win)
+        for x0, y0, x1, y1 in avoid:
+            vok[max(0, self.iy(y0) - gy0):max(0, self.iy(y1) - gy0 + 1), max(0, self.ix(x0) - gx0):max(0, self.ix(x1) - gx0 + 1)] = False
         if at is not None:
             cand = [(0.0, self.iy(at[1]) - gy0, self.ix(at[0]) - gx0)]
         else:
@@ -653,6 +693,19 @@ class Router:
                 if not (0 <= j < blk.shape[0] and 0 <= i < blk.shape[1]) or blk[j, i]:
                     return False
         return True
+
+    # -- trying things ------------------------------------------------------------------------
+    def snapshot(self):
+        return (self.own.copy(), self.holes.copy(), {k: v.copy() for k, v in self.dommask.items()}, len(self.tracks), len(self.vias),
+                len(self.new_tracks), len(self.new_vias), len(self.failed))
+
+    def restore(self, snap):
+        own, holes, dm, nt, nv, nnt, nnv, nf = snap
+        self.own[:] = own
+        self.holes[:] = holes
+        for k in dm:
+            self.dommask[k][:] = dm[k]
+        del self.tracks[nt:], self.vias[nv:], self.new_tracks[nnt:], self.new_vias[nnv:], self.failed[nf:]
 
     # -- output -----------------------------------------------------------------------------
     def save(self, path):

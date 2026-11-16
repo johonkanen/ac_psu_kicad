@@ -99,9 +99,9 @@ r.add_track(P["J11-17"]["net"], "In3.Cu", [(XE, y17), (XE + (y17 - gap(17)), gap
 end[17] = (XO, gap(17), "In3.Cu")
 for pin in (6, 12, 13, 14, 15, 16):
     end[pin] = leave("F.Cu", pin)
-for pin in (7, 8, 10):
+for pin in (7, 8, 10, 11):
     end[pin] = leave("In3.Cu", pin)
-for pin in (1, 3, 4, 9, 11):
+for pin in (1, 3, 4, 9):
     end[pin] = leave("B.Cu", pin)
 
 r.log("== B.Cu: three tracks above the CTRL pads of U21 / U19, no via")
@@ -131,25 +131,42 @@ for pin, a, b, via in ((4, "R128-2", "C129-1", (52.6, 26.11)), (3, "R129-2", "C1
         r.add_track(net, "F.Cu", [(P[a]["x"], P[a]["y"]), via], 0.2)
     AV[pin] = via
 
+r.log("== ISOADA1..3_OUT: vias below R128..R130 pin 1, touching the pad (the only way out of the 0402 block; used by stage 4)")
+for ref in ("R128", "R129", "R130"):
+    p1 = P[f"{ref}-1"]
+    r.add_via(p1["net"], p1["x"], 24.5, in_pad=True)
+    r.add_track(p1["net"], "F.Cu", [(p1["x"], p1["y"]), (p1["x"], 24.5)], 0.25, check=False)
+
+r.log("== pin 17 (In3, between M and E1 of that layer) to U13 pin 2")
+pad_via("U13-2", VF)
+r.connect("PWM_TRANS3_ISO", end[17], (P["U13-2"]["x"], VF), layers=("In3.Cu",), w=W, box=CA) or \
+    r.connect("PWM_TRANS3_ISO", end[17], "U13-2", layers=ALL, w=W, box=CA, via=1.5)
+
+r.log("== pin 28 (F.Cu, below E1 of that layer): around the south of the via of pin 30, up to U19 pin 5")
+x5 = P["U19-5"]["x"]
+r.add_track("PWM_TRANS6_CTRL", "F.Cu", [end[28][:2], (61.2, end[28][1]), (61.2 + (end[28][1] - 28.935), 28.935),
+                                        (x5 - (VB - 28.935), 28.935), (x5, VB)], W)
+
+r.log("== U13: F.Cu north of PEC1 and J14")
+for pin, pad in ((12, "U13-7"), (14, "U13-5"), (13, "U13-6"), (16, "U13-3"), (15, "U13-4")):
+    r.connect(P[pad]["net"], end[pin], pad, layers=("F.Cu",), w=W, box=CA) or \
+        r.connect(P[pad]["net"], end[pin], pad, layers=ALL, w=W, box=CA)
+
+r.log("== ISOADA1..3_OUT: In3 from these vias east to the amplifiers, before the U15 fan-out closes them in")
+for net, a, b in (("ISOADA3_OUT", "R130-1", "U26-1"), ("ISOADA2_OUT", "R129-1", "U25-7"), ("ISOADA1_OUT", "R128-1", "U25-1")):
+    r.connect(net, a, b, w=W, layers=("In3.Cu", "B.Cu", "F.Cu"), lcost={"B.Cu": 2.0, "F.Cu": 2.0}, via=1.5, box=CA)
+
+r.log("== ISOADA1..3_CTRL: J11 pins 4, 3, 1 on B.Cu to the vias")
+for pin in (4, 3, 1):
+    net = P[f"J11-{pin}"]["net"]
+    r.connect(net, end[pin], AV[pin], layers=("B.Cu",), w=W, box=CA) or r.connect(net, end[pin], AV[pin], layers=ALL, w=W, box=CA)
+
 r.log("== U15: pin 6 on F.Cu (the one track between PEC1 and the pads), pins 7, 8, 10 on In3 and 9, 11 on B.Cu south of PEC1")
 r.connect("MDATA_ISO", end[6], "U15-7", layers=("F.Cu",), w=W, box=CA) or r.connect("MDATA_ISO", end[6], "U15-7", layers=ALL, w=W, box=CA)
 for pin, pad in ((8, "U15-5"), (7, "U15-6"), (10, "U15-3"), (9, "U15-4"), (11, "U15-2")):
     ly = (end[pin][2],)
     r.connect(P[pad]["net"], end[pin], (P[pad]["x"], VF), layers=ly, w=W, box=CA) or \
         r.connect(P[pad]["net"], end[pin], pad, layers=ALL, w=W, box=CA)
-
-r.log("== U13: F.Cu north of PEC1 and J14, then pin 28 (F.Cu) and pin 17")
-for pin, pad in ((12, "U13-7"), (14, "U13-5"), (13, "U13-6"), (16, "U13-3"), (15, "U13-4")):
-    r.connect(P[pad]["net"], end[pin], pad, layers=("F.Cu",), w=W, box=CA) or \
-        r.connect(P[pad]["net"], end[pin], pad, layers=ALL, w=W, box=CA)
-r.connect("PWM_TRANS6_CTRL", end[28], (P["U19-5"]["x"], VB), layers=("F.Cu",), w=W, box=CA) or \
-    r.connect("PWM_TRANS6_CTRL", end[28], "U19-5", layers=ALL, w=W, box=CA)
-r.connect("PWM_TRANS3_ISO", end[17], "U13-2", layers=ALL, w=W, box=CA, via=1.5)
-
-r.log("== ISOADA1..3_CTRL: J11 pins 4, 3, 1 on B.Cu to the vias")
-for pin in (4, 3, 1):
-    net = P[f"J11-{pin}"]["net"]
-    r.connect(net, end[pin], AV[pin], layers=("B.Cu",), w=W, box=CA) or r.connect(net, end[pin], AV[pin], layers=ALL, w=W, box=CA)
 
 r.save(sys.argv[2])
 r.log(f"stage 3: {len(r.failed)} failed: {r.failed}")
