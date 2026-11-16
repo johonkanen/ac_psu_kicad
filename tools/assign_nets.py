@@ -306,8 +306,18 @@ def conflicts(items, members, layers):
     return out
 
 
+class _ExtraLayer:
+    """A copper layer without Proteus data (v5 step 3: In3.Cu, In4.Cu)."""
+    pours = ()
+
+    def __init__(self, layer):
+        self.layer = layer
+
+
 def run_check(board, layers, vianets):
     out = []
+    if board.GetCopperLayerCount() == 6:     # stack order: F, In1, In2, In3, In4, B
+        layers = list(layers[:3]) + [_ExtraLayer("In3.Cu"), _ExtraLayer("In4.Cu")] + list(layers[3:])
     items = build_items(board, layers, "C", vianets)
     uf = connect(items, layers)
     res = analyse(items, uf)
