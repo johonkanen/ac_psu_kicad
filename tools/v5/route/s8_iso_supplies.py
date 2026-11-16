@@ -8,7 +8,9 @@ The ISO planes cover only the card-area polygon (y -9.4 .. 48.8). Outside it:
     in the planes; 5V_ISOL from U8 pin 3 on In3 to U10; C93 / C94 to the pins of U8;
   * the supply pins of J4 and J6 (15V_ISO pin 48, 5V_ISOL pin 45, ISOGND pin 46) lie north of the DC bus band:
     In3 under the band (no via in the band, none between the isolator pads and the band).
-NOT routed: the same three pins of J8 and the supply of U4 / C37 west of J11 (no In3 track left north of J11).
+NOT routed: the same three pins of J8 and the supply of U4 / C37 west of J11 (no In3 track left north of J11);
+15V_ISO to J4 pin 48 and J6 pin 48 and ISOGND to J4 pin 46 (closed in on In3 by the signal bundle of stage 1; a
+hop on F.Cu / B.Cu next to J4 / J6 would push the bus pours back); C94 pin 1 (inside the ISOGND pour on B.Cu).
 """
 import sys
 
@@ -43,9 +45,12 @@ r.log("== J4 / J6 supply pins, In3 under the bus band")
 for pad in ("J4-46", "J6-46"):
     wide("ISOGND", pad, None, (0.5, 0.3), layers=IN3, margin=14.0, plane=GP, avoid=DENT)
 LONG = dict(layers=IN3, box=ISO, cost=[(IN3, (52.0, 38.0, 100.5, 41.3), 2.0)])
-wide("5V_ISOL", "J4-45", "U10-1", (0.8, 0.5, 0.3), layers=("In3.Cu", "F.Cu"), lcost={"F.Cu": 3.0}, via=3.0, box=ISO)
+# F.Cu / B.Cu only south of the isolator row: a track next to J4 would push the ISODC+ pour back (clearance 1.95 mm)
+wide("15V_ISO", "J4-48", "U8-1", (0.5, 0.3), layers=("In3.Cu", "F.Cu", "B.Cu"), lcost={"F.Cu": 3.0, "B.Cu": 3.0}, via=3.0, box=ISO,
+     close=[(("F.Cu", "B.Cu"), (52.0, 38.0, 118.6, 54.0))])
+wide("5V_ISOL", "J4-45", "U10-1", (0.8, 0.5, 0.3), layers=("In3.Cu", "F.Cu"), lcost={"F.Cu": 3.0}, via=3.0, box=ISO,
+     close=[(("F.Cu",), (52.0, 38.0, 118.6, 54.0))])
 wide("5V_ISOL", "J6-45", "J4-45", (0.8, 0.5, 0.3), **LONG)
-wide("15V_ISO", "J4-48", "U8-1", (0.5, 0.3), layers=("In3.Cu", "F.Cu", "B.Cu"), lcost={"F.Cu": 3.0, "B.Cu": 3.0}, via=3.0, box=ISO)
 wide("15V_ISO", "J6-48", "J4-48", (0.5, 0.3), **LONG)
 
 r.save(sys.argv[2])
