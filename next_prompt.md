@@ -39,7 +39,10 @@ Open points (ask the user which to do):
 0. **The DC bus is cut at J11** (STATUS "v5 steps 3-4", open 1): ISODC+ and ISOPGND are each in two pieces.
    INU_OUT2 cannot move north (STATUS "v5 step 5"), so the options left are inner layers or a wire / bus bar;
    the user decides.
-1. **Routing of the card area** by a routing agent: reports/v5_layout/routing_brief.md. Afterwards: review the
+1. **Routing of the card area** by a routing agent: reports/v5_layout/routing_brief.md. Not started on
+   revision 2 (a run was stopped by the user on 2026-11-17 before it routed anything). The first run's router chain
+   (tools/v5/route/) and its U19/U20 channel swap are on branch worktree-agent-a37d57d89bb23f236 (revision 1
+   placement, not merged). A new agent's worktree must be cut from v5-layout, not main. Afterwards: review the
    renders, turn the unrouted rows of lib/v5_copper.csv into area rows, regenerate the CPL (fab/make_fab.sh),
    STATUS.md.
 2. Aux flyback: place T1, U18, Q17 and the rest in the aux area (pending rows of lib/v5_copper.csv); CPV-E25
