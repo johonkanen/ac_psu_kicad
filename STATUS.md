@@ -1,6 +1,34 @@
 # Status
 
-Updated: 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 5 – card-area placement, revision 2 (2026-11-17, branch `v5-layout`)
+
+**Why:** the routing agent's first run on the step 4 placement stopped at 87 of 311 open connections (branch
+`worktree-agent-a37d57d89bb23f236`, not merged): the CTRL column beside J11 was 2.9 mm wide, the CTRL area 12.2 mm
+high. User 2026-11-17: tighten the primary logic block, move the primary isolators south, move one output-side
+isolator east, use the bottom side. Record: `reports/v5_layout/proposal_r2.md`.
+
+**Step 5** (`tools/v5/v5_5_card_area_r2.py`, seed 5005; log `reports/v5_layout/v5_5_card_area_r2.log`; geometry
+`tools/v5/card_layout.py`, revision 1 kept as `card_layout_r1.py`):
+- U15/U13/U16 and the C|P line 10 mm south (y 8.3) and 3.6 mm west; primary area up to y 5.8; CTRL area at J11
+  y 10.8…33.0 (22.2 mm high).
+- North isolator row U21/U19/U20 6.6 mm east; CTRL column beside J11 8.6 mm wide (x 44.4…53.0; J6 pin 48 limits
+  it); DC bus band from x 58.9.
+- U22 on the bottom at (88.0, 13.25), on the east edge of the southern CTRL part.
+- Primary ADC group (AD1, U12, L1, …) mirrored to the bottom under U11; 1.65 V reference group 24.75 mm east on
+  the top side; both with their tracks. 143 tracks and vias deleted.
+- Barrier rule areas, 15 slots and the 10 plane zones rebuilt; pours cut back again.
+- The script fills the zones a second time on the reloaded board: the fill made in the same session did not see
+  a via that had moved (it stayed inside the GND pours).
+
+**Not done: INU_OUT2 2–3 mm north** (the user had agreed). The terminal's body touches Q5/Q6 and its pads are
+2.06 mm from Q6's gate pad. The passage north of J11 is unchanged; the DC bus is still cut (open 1 below).
+
+**Checks:** `tools/check_all.sh` ALL CHECKS PASSED; 306 open connections on 120 card-area nets
+(`reports/v5_layout/routing_list.md`). `tools/assign_nets.py --check` handles In3/In4 tracks (commit 37c6ac2).
+Tool changes: `layout_proposal.py` and `check_layout.py` read revision 2; `routing_list.py` group 7 covers the
+whole primary side.
 
 ## v5 steps 3–4 – six layers, card area in three isolated domains (2026-11-15, branch `v5-layout`)
 

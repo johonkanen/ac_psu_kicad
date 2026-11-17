@@ -1,0 +1,96 @@
+== v5 step 5: card-area placement revision 2 (primary isolators south, U22 east, wider J11 column)
+  removed 12 rule areas / plane zones of step 4
+  removed the 15 slots of step 4 (60 outline items)
+  U15   F (  52.400,    8.300) rot -90.0  10 mm south, 3.6 mm west (was (56.0, 18.3))
+  U13   F (  64.399,    8.300) rot -90.0  10 mm south, 3.6 mm west (was (68.0, 18.28))
+  U16   F (  76.400,    8.300) rot -90.0  10 mm south, 3.6 mm west (was (80.0, 18.3))
+  C86   F (  58.100,   13.450) rot -90.0  with U15
+  C83   F (  70.400,   13.450) rot -90.0  with U13
+  C84   F (  56.900,    0.850) rot  90.0  with U15
+  C81   F (  80.845,    1.500) rot   0.0  with U16
+  C85   F (  68.870,    1.200) rot  90.0  with U13
+  C82   F (  83.200,   12.200) rot  90.0  with U16
+  group AD1 (8 parts, 82 tracks/vias) mirrored to the bottom about x 60.90, moved by (0.0, -5.0): AD1 R87 C9 R86 C17 U12 L1 C18
+  group REF1 (6 parts, 38 tracks/vias) moved by (24.75, -5.0): REF1 C40 C16 R19 R30 C109
+  R22   F (  55.600,    1.000) rot -90.0  ADCLK series resistor, at U15 B5
+  U21   B (  63.650,   35.500) rot  90.0  bottom; 6.6 mm east (was x 57.05): the CTRL column beside J11 widens t
+  C121  B (  68.095,   28.950) rot   0.0  with U21
+  C122  F (  67.200,   40.150) rot   0.0  with U21, between the Ti60 UART and JTAG tails
+  U19   B (  74.600,   35.500) rot  90.0  bottom; 6.6 mm east (was x 68.0)
+  C117  B (  79.045,   28.950) rot   0.0  with U19
+  C118  F (  79.045,   40.150) rot   0.0  with U19
+  U20   B (  85.550,   35.500) rot  90.0  bottom; 6.6 mm east (was x 78.95), takes U22's place at the east end o
+  C119  B (  89.995,   28.950) rot   0.0  with U20
+  C120  F (  89.995,   40.150) rot   0.0  with U20
+  U22   B (  88.000,   13.250) rot 180.0  bottom, on the new east edge of the southern CTRL part; VIN side east,
+  C124  B (  80.275,   15.155) rot   0.0  bottom, beside U22 pin 8
+  C123  B (  95.725,   15.155) rot   0.0  bottom, beside U22 pin 1
+  R110  B (  98.000,   12.600) rot   0.0  x0.4 divider at U22 VIN, bottom, under the U7 block
+  R111  B (  98.000,   10.900) rot   0.0  x0.4 divider at U22 VIN, bottom, under the U7 block
+  R116  B (  77.200,   16.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R117  B (  74.000,   16.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R118  B (  77.200,   14.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R119  B (  74.000,   14.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R120  B (  88.300,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R121  B (  85.100,   27.600) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R122  B (  88.300,   25.300) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R123  B (  85.100,   25.300) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  R124  B (  88.300,   23.000) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  R125  B (  85.100,   23.000) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  R126  B (  81.900,   23.000) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  R127  B (  81.900,   25.300) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  U25   B (  78.000,   19.900) rot   0.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  C132  B (  73.400,   19.900) rot  90.0  ISOADA1/2 difference amplifier, bottom, x 72..88, y 20..27, between U2
+  U26   B (  76.500,   26.000) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  C133  B (  76.500,   23.600) rot   0.0  ISOADA3 difference amplifier, bottom, west of U24
+  R128  F (  48.600,   23.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  C129  F (  48.600,   25.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  R129  F (  50.200,   23.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  C130  F (  50.200,   25.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  R130  F (  51.800,   23.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  C131  F (  51.800,   25.600) rot  90.0  8.2k + C output filters, 1.6 mm pitch, south-east of J11 pins 1/3/4
+  PEC1  F (  51.000,   17.600) rot   0.0  PE bond terminal; south of the J11 fan-out, 6.6 mm from the area's wes
+  J14   F (  65.330,   17.500) rot  90.0  5 V link wires; out of the J11 fan-out
+  U27   B (  62.000,   21.500) rot   0.0  3V3_CTRL LDO block, bottom, x 58..66, y 18..24
+  C136  B (  62.300,   24.100) rot   0.0  3V3_CTRL LDO block, bottom, x 58..66, y 18..24
+  C135  B (  65.400,   21.500) rot  90.0  3V3_CTRL LDO block, bottom, x 58..66, y 18..24
+  C134  B (  62.000,   18.500) rot   0.0  3V3_CTRL LDO block, bottom, x 58..66, y 18..24
+  deleted   39 track P copper in or within 5 mm of another domain's area
+  deleted   10 via   P copper in or within 5 mm of another domain's area
+  deleted   35 track inside a barrier strip
+  deleted   50 track net of a moved part
+  deleted    6 via   net of a moved part
+  deleted    2 track under a pad of a placed part
+  deleted    1 via   under a pad of a placed part
+  2 barrier rule areas (no tracks, vias, pours; all copper layers) along: B-CP, B-CI north, B-CI east, B-PI, B-IC J12 north, B-IC J12 west
+  slot U15: (47.9, 8.3) - (56.9, 8.3), 1.2 mm wide
+  slot U13: (59.9, 8.3) - (68.9, 8.3), 1.2 mm wide
+  slot U16: (71.9, 8.3) - (80.9, 8.3), 1.2 mm wide
+  slot C|P east run: (82.9, 8.3) - (85.4, 8.3), 1.2 mm wide
+  slot U21: (59.15, 35.5) - (68.15, 35.5), 1.2 mm wide
+  slot U19: (70.1, 35.5) - (79.1, 35.5), 1.2 mm wide
+  slot U20: (81.05, 35.5) - (90.05, 35.5), 1.2 mm wide
+  slot U22: (88.0, 10.95) - (88.0, 15.55), 1.2 mm wide
+  slot U23: (97.6, 27.4) - (97.6, 32.0), 1.2 mm wide
+  slot U24: (97.6, 20.8) - (97.6, 25.4), 1.2 mm wide
+  slot U17 (spare): (88.0, -4.0) - (88.0, 5.0), 1.2 mm wide
+  slot P|I run: (88.0, 7.0) - (88.0, 8.95), 1.2 mm wide
+  slot J12 north: (107.0, 5.5) - (116.0, 5.5), 1.2 mm wide
+  slot J12 west a: (104.7, -11.0) - (104.7, 2.5), 1.2 mm wide
+  slot J12 west b: (104.7, -23.0) - (104.7, -13.0), 1.2 mm wide
+  zone v5 card CA In1.Cu CTRLGND_A In1.Cu CTRLGND_A prio 120: (44.4,10.8) (85.5,10.8) (85.5,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CA In2.Cu 3V3_CTRL In2.Cu 3V3_CTRL prio 121: (44.4,10.8) (85.5,10.8) (85.5,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CA In4.Cu CTRLGND_A In4.Cu CTRLGND_A prio 122: (44.4,10.8) (85.5,10.8) (85.5,20.8) (95.1,20.8) (95.1,33.0) (44.4,33.0)
+  zone v5 card CB In1.Cu CTRLGND In1.Cu CTRLGND prio 123: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card CB In2.Cu 5V_CTRL In2.Cu 5V_CTRL prio 124: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card CB In4.Cu CTRLGND In4.Cu CTRLGND prio 125: (107.2,3.0) (118.1,3.0) (118.1,-34.5) (102.5,-34.5) (102.5,-27.0) (107.2,-27.0)
+  zone v5 card I In1.Cu ISOGND In1.Cu ISOGND prio 126: (58.9,38.0) (58.9,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card I In2.Cu 3V3_ISO In2.Cu 3V3_ISO prio 127: (58.9,38.0) (58.9,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card I In4.Cu ISOGND In4.Cu ISOGND prio 128: (58.9,38.0) (58.9,48.8) (118.1,48.8) (118.1,8.0) (102.2,8.0) (102.2,-9.4) (90.5,-9.4) (90.5,15.7) (95.1,15.7) (97.0,15.9) (98.8,17.0) (100.1,19.0) (100.1,38.0)
+  zone v5 card P In4.Cu GND In4.Cu GND prio 129: (42.55,-20.66) (69.65,-20.66) (69.65,-3.36) (85.5,-3.36) (85.5,5.8) (42.55,5.8)
+  zone Proteus F.Cu pour 8 (fix 14) (part 2) [ISOPGND] F.Cu: cut back, 2 piece(s), the largest 423 mm2 (was 759)
+  zone Proteus B.Cu pour 5 (fix 14) (part 2) [ISODC+] B.Cu: cut back, 1 piece(s), the largest 348 mm2 (was 378)
+  zone Proteus In1.Cu pour 1 [GND] In1.Cu: cut back, 1 piece(s), the largest 859 mm2 (was 1208)
+  zone Proteus In2.Cu pour 1 [VCC] In2.Cu: cut back, 1 piece(s), the largest 859 mm2 (was 1207)
+  deleted    0 tracks / vias left without a pad or a pour of their net
+  zones filled again on the reloaded board

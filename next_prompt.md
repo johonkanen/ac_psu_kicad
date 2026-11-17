@@ -3,9 +3,9 @@
 
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
-converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-4 done), branch v5-layout.
-Read README.md, STATUS.md (first "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
-reports/v5_layout/proposal.md (section 10 = the board as placed), reports/v5_layout/routing_brief.md,
+converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-5 done), branch v5-layout.
+Read README.md, STATUS.md (first "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
+reports/v5_layout/proposal_r2.md (the board as placed; proposal.md is revision 1), reports/v5_layout/routing_brief.md,
 CTRL_ISOLATION_PLAN.md section 8, fab/README.md and tools/check_all.sh.
 Never run the KiCad AppImage with --version.
 
@@ -22,22 +22,23 @@ never loosen a check or a gap.
 
 Verify first: tools/check_all.sh (~3 min) must end with ALL CHECKS PASSED; at handoff:
   compare: parts 365/365 present ... wrong-net pins 0 ... compare: OK
-  check_board: 377 footprints, 1202 pads ... 71 pads of 22 v5 moved parts ... 3389 tracks, 140 vias, 90 zones; OK
-  assign_nets: 0 shorts, 8 orphans (card planes without a via yet), 0 opens; 121 v5 opens pending
-  drc: 415 violations, 0 shorts, 0 unconnected, 0 parity; 311 unconnected + 2 clearance pending
+  check_board: 377 footprints, 1202 pads ... 42 v5 moved parts ... 3263 tracks, 123 vias, 91 zones; OK
+  assign_nets: 0 shorts, 8 orphans (card planes without a via yet), 0 opens; 137 v5 opens pending
+  drc: 412 violations, 0 shorts, 0 unconnected, 0 parity; 341 unconnected + 2 clearance pending
   domain_gaps: 0 violations; 1 in v5 pending-layout areas (staging)
-  check_layout: 103 placed / moved parts in their domain areas, 15 slots, 10 plane zones; 0 errors
+  check_layout: 124 placed / moved parts in their domain areas, 15 slots, 10 plane zones; 0 errors
   ipc356_diff: 217 nets 1:1, 0 mismatches; roundtrip: OK, drills 0 mismatches
 Also tools/regen_check.sh must print "regen_check: OK".
 
 State: six copper layers (JLC06161H-3313). The area under the control card holds three isolated domains
-(CTRL at J11 and at J12, primary, ISO) with 5 mm barrier strips, slots and planes; 103 parts are placed or
-moved there; domain_gaps and DRC clearance are strict there. It is not routed: 276 open connections on 104 nets
+(CTRL at J11 and at J12, primary, ISO) with 5 mm barrier strips, slots and planes (placement revision 2, v5
+step 5); domain_gaps and DRC clearance are strict there. It is not routed: 306 open connections on 120 nets
 (reports/v5_layout/routing_list.md). The 27 aux-flyback parts are still staged below the board.
 
 Open points (ask the user which to do):
 0. **The DC bus is cut at J11** (STATUS "v5 steps 3-4", open 1): ISODC+ and ISOPGND are each in two pieces.
-   Options there; the user decides.
+   INU_OUT2 cannot move north (STATUS "v5 step 5"), so the options left are inner layers or a wire / bus bar;
+   the user decides.
 1. **Routing of the card area** by a routing agent: reports/v5_layout/routing_brief.md. Afterwards: review the
    renders, turn the unrouted rows of lib/v5_copper.csv into area rows, regenerate the CPL (fab/make_fab.sh),
    STATUS.md.

@@ -20,7 +20,7 @@ import pcbnew
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path[:0] = [HERE, os.path.join(os.path.dirname(HERE), "v4"), os.path.dirname(HERE)]
 from v4board import Board, F, T, P  # noqa: E402
-import card_layout as L  # noqa: E402
+import card_layout_r1 as L  # noqa: E402  (revision 1: what this script placed)
 import check_layout as CL  # noqa: E402
 import domains  # noqa: E402
 from layout_proposal import inside  # noqa: E402

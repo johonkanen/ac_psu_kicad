@@ -10,7 +10,7 @@ with `--version`. KiCad's Python is `tools/p2k/bin/kipy`; `kicad-cli` is `tools/
 
 ## Goal
 
-Connect the 276 open connections on 104 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
+Connect the 306 open connections on 120 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
 final board with zones refilled:
 
 - `tools/check_all.sh` ends with ALL CHECKS PASSED;
@@ -53,10 +53,13 @@ Stack-up JLC06161H-3313: F.Cu–In1 and In4–B.Cu 0.10 mm, In1–In2 and In3–
    six layers (no tracks, vias, pours); the DRC rules of `kicad/ac_psu.kicad_dru` demand 5.0 mm between the net
    classes `DOM_C`, `DOM_P` and `DOM_I`. Only the barrier parts cross: U13/U15/U16 (CTRL | primary), U19–U21 and
    U22–U24 (CTRL | ISO). If a net seems to need to cross a strip, the netlist reading is wrong: stop and report.
-2. **The DC bus band** x 52.3…118.1, y 43.2…48.8 carries the ISO DC bus as pours (F.Cu ISOPGND, B.Cu ISODC+). No
+2. **The DC bus band** x 58.9…118.1, y 43.2…48.8 carries the ISO DC bus as pours (F.Cu ISOPGND, B.Cu ISODC+). No
    via and no F.Cu/B.Cu track there. Signals cross under it on In3 and end on the through-hole pins of J4/J6/J8.
-3. **North of J11** (x 40…56, y 51.1…55) is the only way west for the U4 pair and the J8 signals. Use In3 there and
-   leave F.Cu, B.Cu and In4 free: the DC bus link will need them (group 10, the owner's decision).
+3. **North of J11** (x 40…59, y 51.1…55) is the only way west for the U4 pair, the divider taps, the relay line and
+   the J8 signals. INU_OUT2 cannot move north (its body touches Q5/Q6), so the passage stays 2.9 mm high between the
+   J8 pads and the INU_OUT2 pads (net Q5_S, the switch node: keep the clearance the DRC asks). Use In3 and In4 there and
+   leave F.Cu and B.Cu free: the DC bus link may need them (group 10, the owner's decision). If the tracks do not
+   all fit, report how many fit and which nets are left; do not squeeze the clearance.
 4. **Do not move or rotate parts, and do not touch slots, rule areas, plane zones or the power-stage pours.** If a
    placement makes a route impossible or clearly bad, report it with a proposed position; do not move it yourself.
 5. Do not edit `tools/v5/card_layout.py`, `lib/*.csv`, `kicad/ac_psu.kicad_dru` or any check to make something pass.
@@ -70,6 +73,13 @@ Stack-up JLC06161H-3313: F.Cu–In1 and In4–B.Cu 0.10 mm, In1–In2 and In3–
 
 ## Order of work
 
+This is the second routing run. The first one (placement revision 1, branch `worktree-agent-a37d57d89bb23f236`,
+commits 9533c6b…c2050f2) left a rerunnable chain in `tools/v5/route/` and one schematic swap (U19/U20 channels in
+`tools/sheets/sheet11.py`): take both from that branch and adapt them to the revision 2 placement (v5 step 5: the
+primary isolators 10 mm south, U22 at (88.0, 13.25), the north row 6.6 mm east, the CTRL column beside J11 8.6 mm
+wide, the primary ADC group on the bottom). The nets north of J11 and the supply pins of J4/J6/J8 were what it
+could not finish: route those first.
+
 Route in the order of the groups in the routing list, lock each finished group, check, look at the renders, then go on:
 
 1. Sigma-delta pairs (U21 → U4, U21 → U6).
@@ -78,7 +88,7 @@ Route in the order of the groups in the routing list, lock each finished group, 
 4. J11 fan-out.
 5. CTRL analog chain, then the plane vias of the J11 piece.
 6. The J12 buck.
-7. Primary side of U16.
+7. Primary side of U13/U15/U16, the ADC group and the reference group.
 8. ISO supply vias and 5V_ISOL.
 
 ## Swaps that are allowed

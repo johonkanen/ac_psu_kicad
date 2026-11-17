@@ -35,15 +35,29 @@ rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
 refdes,,,AFE_OUT,AFE_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_IN,FILTER_IN1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_OUT,FILTER_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
+moved,AD1,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
 moved,C2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
 moved,C3,,,,v5,"card-area layout: 3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leave"
 moved,C4,,,,v5,"card-area layout: 3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leave"
+moved,C9,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
+moved,C16,,,,v5,"card-area layout: 1.65 V reference group as it is, 24.75 mm east and 5 mm sout"
+moved,C17,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
+moved,C18,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
 moved,C38,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
+moved,C40,,,,v5,"card-area layout: 1.65 V reference group as it is, 24.75 mm east and 5 mm sout"
 moved,C56,,,,v5,"card-area layout: U7 supply capacitor (was alone at (63.4, 25.4), now CTRL are"
-moved,C81,,,,v5,card-area layout: south of U16 pin 16 (U16 moved)
-moved,C82,,,,v5,card-area layout: east of U16 pin 1 (U16 moved)
+moved,C81,,,,v5,card-area layout: with U16
+moved,C82,,,,v5,card-area layout: with U16
+moved,C83,,,,v5,card-area layout: with U13
+moved,C84,,,,v5,card-area layout: with U15
+moved,C85,,,,v5,card-area layout: with U13
+moved,C86,,,,v5,card-area layout: with U15
 moved,C87,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
+moved,L1,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
 moved,R1,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
+moved,R19,,,,v5,"card-area layout: 1.65 V reference group as it is, 24.75 mm east and 5 mm sout"
+moved,R22,,,,v5,"card-area layout: ADCLK series resistor, at U15 B5"
+moved,R30,,,,v5,"card-area layout: 1.65 V reference group as it is, 24.75 mm east and 5 mm sout"
 moved,R46,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
 moved,R51,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
 moved,R52,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
@@ -52,11 +66,17 @@ moved,R54,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is
 moved,R56,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
 moved,R76,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
 moved,R77,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
+moved,R86,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
+moved,R87,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
+moved,REF1,,,,v5,"card-area layout: 1.65 V reference group as it is, 24.75 mm east and 5 mm sout"
 moved,U2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
 moved,U7,,,,v5,"card-area layout: VSI voltage block (ISOADA1/2), moved as it is to x 95.2..106"
 moved,U8,,,,v5,card-area layout: moved 13.36 mm west along its 15V_ISO / ISOGND pours (was 1.
 moved,U10,,,,v5,"card-area layout: 3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leave"
-moved,U16,,,,v5,"card-area layout: in line with U15/U13, rot -90 (was -135 at (81.8, 14.0))"
+moved,U12,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
+moved,U13,,,,v5,"card-area layout: 10 mm south, 3.6 mm west (was (68.0, 18.28))"
+moved,U15,,,,v5,"card-area layout: 10 mm south, 3.6 mm west (was (56.0, 18.3))"
+moved,U16,,,,v5,"card-area layout: 10 mm south, 3.6 mm west (was (80.0, 18.3))"
 part,R98,,,Resistor_SMD:R_2512_6332Metric,v5,aux input damping resistor DC+ -> AUX_VIN
 value,R98,,,10R 2512,v5,
 part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
