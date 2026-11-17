@@ -16,9 +16,14 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(ROOT, "tools", "v5"))
-import card_layout as L  # noqa: E402
+REV2 = "--rev2" in sys.argv        # revision 2 of the placement (card_layout_r2.py), proposal only
+if REV2:
+    sys.argv.remove("--rev2")
+    import card_layout_r2 as L  # noqa: E402
+else:
+    import card_layout as L  # noqa: E402
 
-OUT = os.path.join(ROOT, "reports", "v5_layout")
+OUT = os.path.join(ROOT, "reports", "v5_layout", "rev2") if REV2 else os.path.join(ROOT, "reports", "v5_layout")
 TMP = os.path.join(ROOT, "build", "v5_layout")
 
 
@@ -262,6 +267,8 @@ SIZE = {**{u: (10.9, 12.0) for u in ("U16", "U19", "U20", "U21")}, "U22": (6.5, 
         "W1": (9.2, 4.2), "U8": (12.2, 9.1), "D16": (3.6, 7.1), "J13": (3.6, 6.2), "J14": (3.6, 6.2), "C137": (10.6, 8.9),
         "C138": (10.6, 8.9), "L2": (6.8, 6.6), "U25": (6.5, 3.6), "U26": (6.5, 3.6), "U7": (6.0, 3.7), "U27": (3.5, 4.2),
         "U28": (3.5, 4.2), "U2": (3.5, 4.2), "U10": (3.5, 4.2), "R97": (2.4, 5.0)}
+if REV2:
+    SIZE.update({"U15": (10.9, 12.0), "U13": (10.9, 12.0), "U22": (13.1, 6.5), "PEC1": (4.5, 4.5)})
 
 
 # ---- renders -------------------------------------------------------------------------------------

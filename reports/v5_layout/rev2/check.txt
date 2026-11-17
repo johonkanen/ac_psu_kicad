@@ -1,0 +1,70 @@
+== gaps between the proposed copper areas (need >= 5.0 mm)
+  CA <-> I     5.00 mm
+  CA <-> IS   20.34 mm
+  CA <-> P     5.00 mm
+  CB <-> I     5.00 mm
+  CB <-> IS    5.00 mm
+  CB <-> P    21.70 mm
+  I  <-> P     5.00 mm
+  IS <-> P     6.50 mm
+  CA <-> ISO copper west/north of J11 (pours pulled back)    5.00 mm
+  areas: CA 1154 mm2, CB 444 mm2, I 1461 mm2, IS 212 mm2, P 862 mm2
+== parts: 0 v5 parts placed, 124 v4 parts moved, 57 fixed in the card outline; 27 v5 parts stay staged (aux flyback, out of scope)
+== fixed pads that break the proposal: 0
+== v4 tracks and vias to delete in phase 3 (become ratsnest): 312
+     5 track I copper in / near area CA
+   101 track P copper in / near area CA
+    13 via   P copper in / near area CA
+   176 track net of a moved part
+    17 via   net of a moved part
+== zones that touch the card area today (replaced / pulled back in phase 3)
+  F.Cu   ISOPGND    I  Proteus F.Cu pour 8 (fix 14) (part 2)  -> pull back from CA
+  F.Cu   ISOGND     I  Proteus F.Cu pour 22
+  F.Cu   GND        P  Proteus F.Cu pour 0
+  F.Cu   DAB_GROUND I  Proteus F.Cu pour 12
+  F.Cu   15V_ISO    I  Proteus F.Cu pour 23
+  F.Cu   ISODC+     I  Proteus F.Cu pour 11
+  F.Cu   5V         P  Proteus F.Cu pour 1
+  B.Cu   15V_ISO    I  Proteus B.Cu pour 16
+  B.Cu   ISODC+     I  Proteus B.Cu pour 5 (fix 14) (part 2)  -> pull back from CA
+  B.Cu   ISOGND     I  Proteus B.Cu pour 15
+  In1.Cu ISOGND     I  v4 fix 1 ISOGND under the 20 V iso return
+  In1.Cu GND        P  Proteus In1.Cu pour 1  -> pull back from CA
+  In1.Cu CTRLGND_A  C  v5 card CA In1.Cu CTRLGND_A
+  In1.Cu CTRLGND    C  v5 card CB In1.Cu CTRLGND
+  In1.Cu ISOGND     I  v5 card I In1.Cu ISOGND  -> pull back from CA
+  In2.Cu 5V_CTRL    C  v5 card CB In2.Cu 5V_CTRL
+  In2.Cu 3V3_CTRL   C  v5 card CA In2.Cu 3V3_CTRL
+  In2.Cu VCC        P  Proteus In2.Cu pour 1  -> pull back from CA
+  In2.Cu 3V3_ISO    I  v5 card I In2.Cu 3V3_ISO  -> pull back from CA
+  In4.Cu CTRLGND_A  C  v5 card CA In4.Cu CTRLGND_A
+  In4.Cu ISOGND     I  v5 card I In4.Cu ISOGND  -> pull back from CA
+  In4.Cu CTRLGND    C  v5 card CB In4.Cu CTRLGND
+  In4.Cu GND        P  v5 card P In4.Cu GND  -> pull back from CA
+== slots: 15, 1.2 mm wide
+  U15            (48.5, 8.3) - (57.5, 8.3)    9.0 mm long, 1.90 mm from the nearest copper area
+  U13            (60.5, 8.3) - (69.5, 8.3)    9.0 mm long, 1.90 mm from the nearest copper area
+  U16            (72.5, 8.3) - (81.5, 8.3)    9.0 mm long, 1.90 mm from the nearest copper area
+  C|P east run   (83.5, 8.3) - (85.4, 8.3)    1.9 mm long, 1.90 mm from the nearest copper area
+  U21            (59.15, 35.5) - (68.15, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U19            (70.1, 35.5) - (79.1, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U20            (81.05, 35.5) - (90.05, 35.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  U22            (88.0, 10.95) - (88.0, 15.55)    4.6 mm long, 1.90 mm from the nearest copper area
+  U23            (97.6, 27.4) - (97.6, 32.0)    4.6 mm long, 1.90 mm from the nearest copper area
+  U24            (97.6, 20.8) - (97.6, 25.4)    4.6 mm long, 1.90 mm from the nearest copper area
+  U17 (spare)    (88.0, -4.0) - (88.0, 5.0)    9.0 mm long, 1.90 mm from the nearest copper area
+  P|I run        (88.0, 7.0) - (88.0, 8.95)    1.9 mm long, 1.90 mm from the nearest copper area
+  J12 north      (107.0, 5.5) - (116.0, 5.5)    9.0 mm long, 1.90 mm from the nearest copper area
+  J12 west a     (104.7, -11.0) - (104.7, 2.5)   13.5 mm long, 1.90 mm from the nearest copper area
+  J12 west b     (104.7, -23.0) - (104.7, -13.0)   10.0 mm long, 1.90 mm from the nearest copper area
+== top-side parts under the card's through-hole tails (keep-out = drill/2 + 1.5 mm)
+  J101           fixed J12
+  J101           move  J13
+  J5             fixed C36 H4 R37 U14
+  J5             move  U8
+  J9             fixed C74 C75 C76 C77 R64 R75 U6
+  Ti60 J2 RJ45   fixed C74 C75 C76 C77 R64 R74 U6
+  Ti60 J3 5V     fixed J12
+  Ti60 J3 5V     move  J13
+  Ti60 J4 LCD    fixed C36 H4 R37
+  Ti60 J4 LCD    move  U8
