@@ -118,8 +118,8 @@ C109,3,ac_psu:C,
 C110,3,ac_psu:C,
 C111,7,ac_psu:C,47n 1kV
 C112,7,ac_psu:C,47n 1kV
-C113,7,ac_psu:C,15u 50V
-C114,7,ac_psu:C,100n
+C113,7,ac_psu:C_Polarized,47u 35V
+C114,7,ac_psu:C,1u 50V
 C115,7,ac_psu:C_Polarized,470u 25V
 C116,7,ac_psu:C_Polarized,470u 25V
 C117,11,ac_psu:C,100n
@@ -150,6 +150,8 @@ C141,7,ac_psu:C,100n
 C142,7,ac_psu:C,22u 10V
 C143,7,ac_psu:C,22u 10V
 C144,7,ac_psu:C,75p
+C145,7,ac_psu:C,10n
+C146,7,ac_psu:C,2.2n
 CM1,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM2,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM3,5,ac_psu:WE-CMBNC,WE-CMBNC
@@ -161,7 +163,7 @@ D9,10,ac_psu:D_Zener,MM3Z5V1T1
 D10,10,ac_psu:D_Schottky,ZLLS400TA
 D11,7,ac_psu:D,BAS16WS
 D12,7,ac_psu:D,US1M
-D13,7,ac_psu:D_TVS,SMBJ170A
+D13,7,ac_psu:D_TVS,SMBJ150A
 D14,7,ac_psu:D,ES2D
 D15,7,ac_psu:D,ES2D
 D16,7,ac_psu:D_Schottky,SS310
@@ -212,9 +214,6 @@ Q11,6,ac_psu:C3M0065090D,C3M0065090D
 Q12,6,ac_psu:C3M0065090D,C3M0065090D
 Q13,10,ac_psu:2N7000,2N7000
 Q14,10,ac_psu:2N7000,2N7000
-Q15,7,ac_psu:MMBT3904,MMBT3904
-Q16,7,ac_psu:MMBT3906,MMBT3906
-Q17,7,ac_psu:IPD95R450P7,IPD95R450P7
 R1,4,ac_psu:R,
 R2,1,ac_psu:R,
 R3,1,ac_psu:R,
@@ -300,14 +299,10 @@ R95,1,ac_psu:R,
 R96,4,ac_psu:R,
 R97,4,ac_psu:R,
 R98,7,ac_psu:R,10R 2512
-R100,7,ac_psu:R,47R
-R101,7,ac_psu:R,59.0k
-R102,7,ac_psu:R,21.0k
-R103,7,ac_psu:R,118k
-R104,7,ac_psu:R,1k
+R100,7,ac_psu:R,10R
+R101,7,ac_psu:R,365k
+R102,7,ac_psu:R,49.9k
 R105,7,ac_psu:R,0.562R
-R106,7,ac_psu:R,10R
-R107,7,ac_psu:R,10k
 R108,7,ac_psu:R,4.7k
 R109,7,ac_psu:R,4.7k
 R110,11,ac_psu:R,6.8k 0.1%
@@ -336,6 +331,11 @@ R132,7,ac_psu:R,511k
 R133,7,ac_psu:R,105k
 R134,7,ac_psu:R,100k
 R135,7,ac_psu:R,13.3k
+R136,7,ac_psu:R,10M
+R137,7,ac_psu:R,10M
+R138,7,ac_psu:R,10M
+R139,7,ac_psu:R,750k
+R140,7,ac_psu:R,4.7k
 R256,5,ac_psu:R,
 REF1,3,ac_psu:REF3025,REF3025
 REF2,3,ac_psu:REF3025,REF3025
@@ -358,7 +358,7 @@ U14,4,ac_psu:TLV316IDBVR,TLV316IDBVR
 U15,11,ac_psu:Si8661BD-B-IS,Si8661BD-B-IS
 U16,11,ac_psu:Si8660BD-B-IS,Si8660BD-B-IS
 U17,11,ac_psu:Si8661BD-B-IS,Si8661BD-B-IS
-U18,7,ac_psu:UCC28710,UCC28710DR
+U18,7,ac_psu:ICE5AR0680BZS,ICE5AR0680BZS
 U19,11,ac_psu:ISO7760F,ISO7760FDWR
 U20,11,ac_psu:ISO7760F,ISO7760FDWR
 U21,11,ac_psu:CA-IS3742,CA-IS3742LW

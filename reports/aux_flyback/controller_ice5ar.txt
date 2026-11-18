@@ -1,0 +1,20 @@
+VOR 100.5 V, Lp 322 uH, RCS 0.562 ohm, fsw 100 kHz fixed
+design load 19.8 W -> peak current 1.169 A at 100 kHz (DCM)
+peak current limit VCS_N / RCS: 1.28 / 1.42 / 1.57 A (min / typ / max) -> output power at the limit 21.9 / 29.4 / 37.7 W; margin over the load at the minimum 1.11x; ID,pulse 5.82 A
+  Vin 100 V: ton 3.76 us, tdemag 3.75 us, D 0.376, period use 0.75, Ipri rms 0.414 A; U18 loss 0.22 cond + 0.01 Coss + 0.07 turn-off + 0.04 supply = 0.34 W (upper bound 0.44 W) -> Tj ~77 C at 55 C air with drain copper (65 K/W), ~89 C without (100 K/W); upper bound 84 C with copper
+  Vin 300 V: ton 1.25 us, tdemag 3.75 us, D 0.125, period use 0.50, Ipri rms 0.239 A; U18 loss 0.07 cond + 0.11 Coss + 0.21 turn-off + 0.04 supply = 0.43 W (upper bound 0.74 W) -> Tj ~83 C at 55 C air with drain copper (65 K/W), ~98 C without (100 K/W); upper bound 103 C with copper
+  Vin 450 V: ton 0.84 us, tdemag 3.75 us, D 0.084, period use 0.46, Ipri rms 0.195 A; U18 loss 0.05 cond + 0.24 Coss + 0.32 turn-off + 0.04 supply = 0.64 W (upper bound 1.12 W) -> Tj ~97 C at 55 C air with drain copper (65 K/W), ~119 C without (100 K/W); upper bound 128 C with copper
+at the maximum current limit, 100 V: ton 5.04 + tdemag 5.02 us = 1.01 of the period (above 1.0 = CCM, which the controller supports with slope compensation)
+drain peak at 450 V: 450 + clamp 205 = 655 V (82 % of 800 V)
+clamp loss at the design load (leakage 5.9 uH, 1.17 A, Vclamp 205 V): 0.79 W
+clamp loss at the typical limit (leakage 5.9 uH, 1.42 A, Vclamp 205 V): 1.17 W
+RCS 0.562 ohm 1 %: 0.10 W at 100 V
+  Out1: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
+  Out2: N 5, winding 15.70 V -> out 15.00 V; diode reverse 85 V
+  CTRL: N 3, winding 9.42 V -> out 8.97 V; diode reverse 51 V
+VERR divider R101 365k / R102 49.9k from 15V: 14.97 V (14.63 .. 15.30 V from the reference, plus 1 % resistors); 36 uA
+  non-isolated mode needs VERR > 0.24 V from the 9.5 uA bias before the start: R101 || R102 = 43.9 k -> 0.42 V (minimum 25.3 k)
+VCC from 15V via R100 10R + D11: ~14.3 V in operation (off below 10.0 V, over-voltage at 25.5 V)
+start: the cascode charges C113 + C114 (38 uF effective) to 16 V in ~0.40 s typ; hold-up 16 -> 10.4 V at 2.5 mA: 85 ms, against ~30 ms until 15V carries VCC (soft start 12 ms + 0.19 J in the output capacitors)
+start-up chain R136-R138 3 x 10M from AUX_VIN to GATE: 15 uA and 150 V per resistor at 450 V (7 mW)
+FB: R140 4.7k + C145 10n, C146 2.2n, RSel R139 750k (burst option 2): start values from the tube PSU design (~/dev/tube_psu_kicad kicad_next/CHANGES_5_2.md 1.5); loop to be confirmed by a load step on the first board

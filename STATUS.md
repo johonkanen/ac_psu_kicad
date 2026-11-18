@@ -1,6 +1,29 @@
 # Status
 
-Updated: 2026-11-18 (v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-18 (v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 7 – aux flyback controller ICE5AR0680BZS (2026-11-18, branch `v5-layout`)
+
+User 2026-11-18: change the aux flyback to the ICE5 family as in the tube PSU, for board space; "does not need to
+be the exact same part"; **DC+ is limited to 450 V maximum** so that an 800 V integrated switch can be used; the
+part is hand-soldered if JLC has none (8 pcs today). Record: V5_PLAN.md 5.0 and 5.4,
+`reports/aux_flyback/controller_ice5ar.txt`.
+
+- **Part:** ICE5AR0680BZS (100 kHz, 800 V, 0.71 Ω, PG-DIP-7). The tube PSU's ICE5AR4780BZS is too resistive here
+  (about 1.7 W at 100 V input and 20 W).
+- **Schematic (sheet 7):** U18 new symbol and footprint; start-up chain R136–R138; VCC from 15V (R100 10R, D11,
+  C113 47 µF electrolytic, C114 1 µF); the 15V rail is regulated directly by R101/R102 (365k / 49.9k) at VERR;
+  FB network R139, R140, C145, C146; clamp TVS D13 SMBJ150A. Removed: Q15, Q16, Q17, R103, R104, R106, R107.
+- **Board** (`tools/v5/v5_7_aux_controller.py`, seed 5007): the aux parts are still in the staging area; the
+  step swaps the footprints there and updates values and 26 pad nets.
+- **Transformer:** unchanged; at 100 kHz the design load needs 1.17 A peak. The MKF report is still the 71 kHz
+  run (PyOpenMagnetics is not installed here).
+- **BOM:** `fab/jlc_bom.csv` (new passives, C113, D13; UCC28710, MOSFET and buffer rows removed),
+  `fab/hand_fit.csv` (U18).
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED.
+
+**To measure on the first board:** U18 temperature at 450 V and full load (estimate 0.64 W, upper bound 1.12 W;
+copper on the DRAIN pin is required in the layout), the drain peak at 450 V, the 15V load step.
 
 ## v5 step 6 – DC bus wire link past J11 (2026-11-18, branch `v5-layout`)
 

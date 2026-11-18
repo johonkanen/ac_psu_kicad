@@ -1,5 +1,5 @@
 """v5 part list (stdlib only): the aux flyback that replaces the sheet 7 IW1830/EF20 supply
-(V5_PLAN.md: UCC28710 + IPD95R450P7, EE25 vertical, 15V / 15V_ISO / CTRL winding) and the
+(V5_PLAN.md: ICE5AR0680BZS since v5 step 7, EE25 vertical, 15V / 15V_ISO / CTRL winding) and the
 control-card isolation (CTRL_ISOLATION_PLAN.md: CTRL islands A at J11 and B at J12).
 
 One place for refdes, sheet, symbol, value and footprint: tools/v5/make_v5_lists.py writes the
@@ -34,23 +34,24 @@ PARTS = [
     ("R98", 7, "R", "10R 2512", R2512, "aux input damping resistor DC+ -> AUX_VIN"),
     ("C111", 7, "C", "47n 1kV", C1210, "aux input filter"),
     ("C112", 7, "C", "47n 1kV", C1210, "aux input filter"),
-    ("U18", 7, "UCC28710", "UCC28710DR", "ac_psu:SOIC-7_3.9x4.9mm_P1.27mm_UCC28710", "PSR flyback controller (JLC C80866)"),
-    ("C113", 7, "C", "15u 50V", C1210, "UCC28710 VDD capacitor CDD"),
-    ("C114", 7, "C", "100n", C0603, "UCC28710 VDD decoupling"),
-    ("R100", 7, "R", "47R", R0603, "VDD feed from 15V"),
-    ("D11", 7, "D", "BAS16WS", SOD323, "VDD feed diode"),
-    ("R101", 7, "R", "59.0k", R0603, "VS divider RS1 (Out1 winding node)"),
-    ("R102", 7, "R", "21.0k", R0603, "VS divider RS2"),
-    ("R103", 7, "R", "118k", R0603, "cable compensation RCBC"),
-    ("R104", 7, "R", "1k", R0603, "CS line-compensation resistor RLC (tune on the prototype)"),
-    ("R105", 7, "R", "0.562R", R1206, "current-sense resistor RCS"),
-    ("Q15", 7, "MMBT3904", "MMBT3904", SOT23, "gate buffer, source"),
-    ("Q16", 7, "MMBT3906", "MMBT3906", SOT23, "gate buffer, sink"),
-    ("R106", 7, "R", "10R", R0603, "gate resistor"),
-    ("R107", 7, "R", "10k", R0603, "gate-source pull-down"),
-    ("Q17", 7, "IPD95R450P7", "IPD95R450P7", "Package_TO_SOT_SMD:TO-252-2", "950 V MOSFET (JLC C3289115)"),
+    ("U18", 7, "ICE5AR0680BZS", "ICE5AR0680BZS", "Package_DIP:DIP-8-N6_W7.62mm",
+     "fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"),
+    ("C113", 7, "C_Polarized", "47u 35V", "Capacitor_SMD:CP_Elec_6.3x5.4", "VCC capacitor (hold-up 16 -> 10 V during the start)"),
+    ("C114", 7, "C", "1u 50V", C0603, "VCC decoupling at pin 7"),
+    ("R100", 7, "R", "10R", R0603, "VCC feed from 15V (RVCC)"),
+    ("D11", 7, "D", "BAS16WS", SOD323, "VCC feed diode (blocks towards the 15V rail during the start)"),
+    ("R101", 7, "R", "365k", R0603, "VERR divider top, from 15V: 1.80 V x (1 + 365 / 49.9) = 14.97 V (1 %)"),
+    ("R102", 7, "R", "49.9k", R0603, "VERR divider bottom (R101 || R102 = 43.9k: non-isolated mode needs > 25.3k)"),
+    ("R105", 7, "R", "0.562R", R1206, "current-sense resistor: peak limit 0.80 V / 0.562 = 1.42 A (1.28 .. 1.57)"),
+    ("R136", 7, "R", "10M", R1206, "start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"),
+    ("R137", 7, "R", "10M", R1206, "start-up chain"),
+    ("R138", 7, "R", "10M", R1206, "start-up chain"),
+    ("R139", 7, "R", "750k", R0603, "FB RSel: burst mode option 2 (720 .. 790k)"),
+    ("R140", 7, "R", "4.7k", R0603, "FB compensation, in series with C145"),
+    ("C145", 7, "C", "10n", C0603, "FB compensation (with R140)"),
+    ("C146", 7, "C", "2.2n", C0603, "FB to GND (100 kHz ripple filter)"),
     ("D12", 7, "D", "US1M", SMA, "clamp diode 1000 V"),
-    ("D13", 7, "D_TVS", "SMBJ170A", SMB, "clamp TVS (~230 V at 1.4 A): drain peak ~450 + 240 V"),
+    ("D13", 7, "D_TVS", "SMBJ150A", SMB, "clamp TVS (~190 V at 1.2 A): drain peak ~450 + 190 = 640 V, 80 % of 800 V"),
     ("T1", 7, "EE25_AUX_TRANS", "EE25 aux flyback", "ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical",
      "E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"),
     ("D14", 7, "D", "ES2D", SMA, "Out1 rectifier 200 V 2 A"),
@@ -127,5 +128,9 @@ PARTS += [
     ("BUSN1", 4, "PIN", "PIN", TERM, "DC bus wire link ISOPGND, west end"),
     ("BUSN2", 4, "PIN", "PIN", TERM, "DC bus wire link ISOPGND, east end"),
 ]
+
+# v5 parts that were dropped again (v5 step 7: UCC28710 gate buffer, external MOSFET, CBC and CS-series resistors):
+# make_v5_lists.py takes them out of lib/part_map.csv.
+DROPPED = "Q15 Q16 Q17 R103 R104 R106 R107".split()
 
 VALUE = {p[0]: p[3] for p in PARTS}

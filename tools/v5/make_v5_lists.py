@@ -43,7 +43,7 @@ def write_part_map():
     head = [l for l in lines if l.startswith("#") or l.startswith("refdes,")]
     rows = [r for r in csv.reader(l for l in lines if not (l.startswith("#") or l.startswith("refdes,")))]
     new = {p[0] for p in V.PARTS}
-    rows = [r for r in rows if r[0] not in V.REMOVED and r[0] not in new]
+    rows = [r for r in rows if r[0] not in V.REMOVED and r[0] not in new and r[0] not in V.DROPPED]
     inv = {b: a for a, b in V.REFDES.items()}
     rows = [[V.REFDES.get(inv.get(r[0], r[0]), inv.get(r[0], r[0]))] + r[1:] for r in rows]
     rows += [[ref, str(sheet), f"ac_psu:{sym}", value] for ref, sheet, sym, value, fp, note in V.PARTS]

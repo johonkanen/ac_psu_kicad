@@ -83,40 +83,40 @@ part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
 value,C111,,,47n 1kV,v5,
 part,C112,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
 value,C112,,,47n 1kV,v5,
-part,U18,,,ac_psu:SOIC-7_3.9x4.9mm_P1.27mm_UCC28710,v5,PSR flyback controller (JLC C80866)
-value,U18,,,UCC28710DR,v5,
-part,C113,,,Capacitor_SMD:C_1210_3225Metric,v5,UCC28710 VDD capacitor CDD
-value,C113,,,15u 50V,v5,
-part,C114,,,Capacitor_SMD:C_0603_1608Metric,v5,UCC28710 VDD decoupling
-value,C114,,,100n,v5,
-part,R100,,,Resistor_SMD:R_0603_1608Metric,v5,VDD feed from 15V
-value,R100,,,47R,v5,
-part,D11,,,ac_psu:D_SOD-323_AC,v5,VDD feed diode
+part,U18,,,Package_DIP:DIP-8-N6_W7.62mm,v5,"fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"
+value,U18,,,ICE5AR0680BZS,v5,
+part,C113,,,Capacitor_SMD:CP_Elec_6.3x5.4,v5,VCC capacitor (hold-up 16 -> 10 V during the start)
+value,C113,,,47u 35V,v5,
+part,C114,,,Capacitor_SMD:C_0603_1608Metric,v5,VCC decoupling at pin 7
+value,C114,,,1u 50V,v5,
+part,R100,,,Resistor_SMD:R_0603_1608Metric,v5,VCC feed from 15V (RVCC)
+value,R100,,,10R,v5,
+part,D11,,,ac_psu:D_SOD-323_AC,v5,VCC feed diode (blocks towards the 15V rail during the start)
 value,D11,,,BAS16WS,v5,
-part,R101,,,Resistor_SMD:R_0603_1608Metric,v5,VS divider RS1 (Out1 winding node)
-value,R101,,,59.0k,v5,
-part,R102,,,Resistor_SMD:R_0603_1608Metric,v5,VS divider RS2
-value,R102,,,21.0k,v5,
-part,R103,,,Resistor_SMD:R_0603_1608Metric,v5,cable compensation RCBC
-value,R103,,,118k,v5,
-part,R104,,,Resistor_SMD:R_0603_1608Metric,v5,CS line-compensation resistor RLC (tune on the prototype)
-value,R104,,,1k,v5,
-part,R105,,,Resistor_SMD:R_1206_3216Metric,v5,current-sense resistor RCS
+part,R101,,,Resistor_SMD:R_0603_1608Metric,v5,"VERR divider top, from 15V: 1.80 V x (1 + 365 / 49.9) = 14.97 V (1 %)"
+value,R101,,,365k,v5,
+part,R102,,,Resistor_SMD:R_0603_1608Metric,v5,VERR divider bottom (R101 || R102 = 43.9k: non-isolated mode needs > 25.3k)
+value,R102,,,49.9k,v5,
+part,R105,,,Resistor_SMD:R_1206_3216Metric,v5,current-sense resistor: peak limit 0.80 V / 0.562 = 1.42 A (1.28 .. 1.57)
 value,R105,,,0.562R,v5,
-part,Q15,,,Package_TO_SOT_SMD:SOT-23,v5,"gate buffer, source"
-value,Q15,,,MMBT3904,v5,
-part,Q16,,,Package_TO_SOT_SMD:SOT-23,v5,"gate buffer, sink"
-value,Q16,,,MMBT3906,v5,
-part,R106,,,Resistor_SMD:R_0603_1608Metric,v5,gate resistor
-value,R106,,,10R,v5,
-part,R107,,,Resistor_SMD:R_0603_1608Metric,v5,gate-source pull-down
-value,R107,,,10k,v5,
-part,Q17,,,Package_TO_SOT_SMD:TO-252-2,v5,950 V MOSFET (JLC C3289115)
-value,Q17,,,IPD95R450P7,v5,
+part,R136,,,Resistor_SMD:R_1206_3216Metric,v5,"start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"
+value,R136,,,10M,v5,
+part,R137,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
+value,R137,,,10M,v5,
+part,R138,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
+value,R138,,,10M,v5,
+part,R139,,,Resistor_SMD:R_0603_1608Metric,v5,FB RSel: burst mode option 2 (720 .. 790k)
+value,R139,,,750k,v5,
+part,R140,,,Resistor_SMD:R_0603_1608Metric,v5,"FB compensation, in series with C145"
+value,R140,,,4.7k,v5,
+part,C145,,,Capacitor_SMD:C_0603_1608Metric,v5,FB compensation (with R140)
+value,C145,,,10n,v5,
+part,C146,,,Capacitor_SMD:C_0603_1608Metric,v5,FB to GND (100 kHz ripple filter)
+value,C146,,,2.2n,v5,
 part,D12,,,ac_psu:D_SMA_AC,v5,clamp diode 1000 V
 value,D12,,,US1M,v5,
-part,D13,,,ac_psu:D_SMB_AC,v5,clamp TVS (~230 V at 1.4 A): drain peak ~450 + 240 V
-value,D13,,,SMBJ170A,v5,
+part,D13,,,ac_psu:D_SMB_AC,v5,"clamp TVS (~190 V at 1.2 A): drain peak ~450 + 190 = 640 V, 80 % of 800 V"
+value,D13,,,SMBJ150A,v5,
 part,T1,,,ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical,v5,"E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"
 value,T1,,,EE25 aux flyback,v5,
 part,D14,,,ac_psu:D_SMA_AC,v5,Out1 rectifier 200 V 2 A
@@ -287,13 +287,13 @@ add,C111,1,,AUX_VIN,v5,
 add,C111,2,,GND,v5,
 add,C112,1,,AUX_VIN,v5,
 add,C112,2,,GND,v5,
-add,U18,1,,AUX_VDD,v5,
-add,U18,2,,AUX_VS,v5,
-add,U18,3,,AUX_CBC,v5,
-add,U18,4,,GND,v5,
-add,U18,5,,AUX_CSP,v5,
-add,U18,6,,AUX_DRV,v5,
-add,U18,7,,AUX_VIN,v5,
+add,U18,1,,AUX_VERR,v5,
+add,U18,2,,AUX_COMP,v5,
+add,U18,3,,AUX_CS,v5,
+add,U18,4,,AUX_GATE,v5,
+add,U18,5,,AUX_DRAIN,v5,
+add,U18,7,,AUX_VDD,v5,
+add,U18,8,,GND,v5,
 add,C113,1,,AUX_VDD,v5,
 add,C113,2,,GND,v5,
 add,C114,1,,AUX_VDD,v5,
@@ -302,29 +302,26 @@ add,R100,1,,15V,v5,
 add,R100,2,,AUX_VDDR,v5,
 add,D11,A,,AUX_VDDR,v5,
 add,D11,C,,AUX_VDD,v5,
-add,R101,1,,AUX_W1,v5,
-add,R101,2,,AUX_VS,v5,
-add,R102,1,,AUX_VS,v5,
+add,R101,1,,15V,v5,
+add,R101,2,,AUX_VERR,v5,
+add,R102,1,,AUX_VERR,v5,
 add,R102,2,,GND,v5,
-add,R103,1,,AUX_CBC,v5,
-add,R103,2,,GND,v5,
-add,R104,1,,AUX_CS,v5,
-add,R104,2,,AUX_CSP,v5,
 add,R105,1,,AUX_CS,v5,
 add,R105,2,,GND,v5,
-add,Q15,1,,AUX_DRV,v5,
-add,Q15,2,,AUX_GATED,v5,
-add,Q15,3,,AUX_VDD,v5,
-add,Q16,1,,AUX_DRV,v5,
-add,Q16,2,,AUX_GATED,v5,
-add,Q16,3,,GND,v5,
-add,R106,1,,AUX_GATED,v5,
-add,R106,2,,AUX_GATE,v5,
-add,R107,1,,AUX_GATE,v5,
-add,R107,2,,AUX_CS,v5,
-add,Q17,1,,AUX_GATE,v5,
-add,Q17,2,,AUX_DRAIN,v5,
-add,Q17,3,,AUX_CS,v5,
+add,R136,1,,AUX_VIN,v5,
+add,R136,2,,AUX_ST1,v5,
+add,R137,1,,AUX_ST1,v5,
+add,R137,2,,AUX_ST2,v5,
+add,R138,1,,AUX_ST2,v5,
+add,R138,2,,AUX_GATE,v5,
+add,R139,1,,AUX_COMP,v5,
+add,R139,2,,GND,v5,
+add,R140,1,,AUX_COMP,v5,
+add,R140,2,,AUX_COMPC,v5,
+add,C145,1,,AUX_COMPC,v5,
+add,C145,2,,GND,v5,
+add,C146,1,,AUX_COMP,v5,
+add,C146,2,,GND,v5,
 add,D12,A,,AUX_DRAIN,v5,
 add,D12,C,,AUX_CLAMP,v5,
 add,D13,A,,AUX_VIN,v5,

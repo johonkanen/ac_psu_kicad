@@ -1,5 +1,5 @@
 """Converter operating points at Vin 100 / 300 / 450 V -> inputs.json (MAS Inputs for the transformer).
-Full design load (params.OUTPUTS) at the full-load frequency of the UCC28710 (FM region at VCST(max))."""
+Full design load (params.OUTPUTS) at the fixed 100 kHz of the ICE5AR0680BZS."""
 import json, os
 import PyOpenMagnetics as p
 from params import *
@@ -7,7 +7,7 @@ from params import *
 HERE = os.path.dirname(os.path.abspath(__file__))
 WNAMES = ["Primary"] + [o[0] for o in OUTPUTS]
 POUT = sum(v * i for _, v, i, _, _ in OUTPUTS)
-F_FULL = POUT / (0.5 * LP * IPP ** 2 * ETA_XFMR)
+F_FULL = FSW     # fixed-frequency controller (ICE5AR0680BZS); the peak current follows the load
 
 flyback = {
     "inputVoltage": {"minimum": VIN_MIN, "nominal": VIN_MID, "maximum": VIN_MAX},

@@ -168,6 +168,12 @@ FB divider on Out1; a VS divider from the bias winding, a CS resistor, a 950 V M
 both outputs). Step 3 drops the InSOP-24D footprint (SOIC-7 and SOT-223 are KiCad library
 footprints).
 
+### 5.0 Superseded on 2026-11-18: ICE5AR0680BZS (see 5.4)
+
+The UCC28710 + IPD95R450P7 design below (D4, sections 5 to 5.3) was replaced in v5 step 7 by the Infineon
+ICE5AR0680BZS with an integrated 800 V switch. The transformer of 5.3 is unchanged. Section 5.4 has the new
+controller circuit; the text below is kept as the record of the first design.
+
 ### 5.1 Full power at 100 V, passive cooling (user, 2026-10-30)
 
 DC+ is rated 100–450 V, and the aux supply must deliver full power at 100 V: the control card
@@ -467,6 +473,47 @@ today's EF20 and ≈ 25 % less than the E30 alternative (≈ 35 × 31 mm).
 6. standard decided: IEC 61010-1 (user 2026-10-31); PCB targets confirmed by the user 2026-11-01: 5.0 mm reinforced (primary ↔ ISO, primary/ISO ↔ CTRL), 2.5 mm basic (to PE); still to verify: the bobbin (10 mm) and test-voltage values; core insulation tape/caps
 7. trim RS2 / RCBC and check the VS ringing, the start-up and the gate buffer on the prototype
    (decided 2026-10-31: MMBT3904/3906 buffer, RCS 0.562 Ω → CC worst case 23.0 W)
+
+### 5.4 Controller ICE5AR0680BZS (user 2026-11-18, v5 step 7)
+
+**Why:** much less board space (one DIP-7 instead of the SOIC controller, the DPAK MOSFET, the gate buffer and
+six passives), and the same controller family as the tube PSU (`~/dev/tube_psu_kicad`, ICE5AR4780BZS). The
+tube PSU's part itself does not fit here: 8.7 ohm hot gives about 1.7 W at 100 V input and 20 W.
+
+**Condition (user):** the DC link DC+ is limited to **450 V maximum**. Drain peak 450 V + clamp about 205 V
+(SMBJ150A, worst case) = 655 V = 82 % of 800 V. This reverses decision D4 (950 V switch).
+
+**Part:** ICE5AR0680BZS, fixed 100 kHz, 800 V, 0.71 ohm (1.27 ohm at 125 C), integrated error amplifier, PG-DIP-7
+(KiCad `Package_DIP:DIP-8-N6_W7.62mm`), through-hole, hand-fit. JLC 8 pcs on 2026-11-18; Mouser / DigiKey
+otherwise. Data sheet V2.3 (2020-02-03).
+
+**Circuit** (sheet 7; `reports/aux_flyback/params.py` and `controller_ice5ar.txt`):
+
+| Function | Parts | Values |
+|---|---|---|
+| Start-up | R136, R137, R138 | 3 x 10M 1206 from AUX_VIN to GATE (150 V each at 450 V) |
+| Supply | R100, D11, C113, C114 | 15V -> 10R -> BAS16WS -> VCC; 47 uF 35 V electrolytic + 1 uF. About 14.3 V in operation; the cascode charges VCC to 16 V in about 0.4 s; hold-up 85 ms against about 30 ms needed |
+| Regulation | R101, R102 | 365k / 49.9k from the 15V rail to VERR (1.80 V): 14.97 V. R101 parallel R102 = 43.9k: above the 25.3k the non-isolated mode needs |
+| Compensation | R140, C145, C146, R139 | 4.7k + 10n, 2.2n, RSel 750k (burst option 2): start values from the tube PSU, to confirm with a load step |
+| Current sense | R105 | 0.562R (kept): limit 1.28 / 1.42 / 1.57 A; the 19.8 W load needs 1.17 A |
+| Clamp | D12, D13 | US1M + SMBJ150A (was SMBJ170A): about 0.8 W at full load |
+
+**Transformer:** unchanged (EE25, 32 : 5 : 5 : 3 turns, Lp 322 uH). At the fixed 100 kHz the peak current at the
+design load is 1.17 A (was 1.39 A at 71 kHz), DCM at 100 V with 75 % of the period used. The MKF run of 5.3
+(`report.txt`) is still the 71 kHz one: PyOpenMagnetics is not installed here; rerun `inputs.py` and
+`transformer.py` (flux is lower, frequency higher).
+
+**Removed:** Q15, Q16 (gate buffer), Q17 (MOSFET), R103 (cable compensation), R104 (CS series), R106, R107 (gate).
+
+**Lost against the UCC28710:** valley switching and the input under-voltage lockout (this package has no
+line-sense pin; the supply starts as soon as VCC is charged and runs into its overload restart if DC+ is too low).
+
+**Open, to measure on the first board:**
+- **Temperature of U18 at 450 V and full load.** Estimated loss 0.34 W at 100 V and 0.64 W at 450 V (upper bound
+  1.12 W: the turn-off loss is an estimate), i.e. about 97 C at 55 C air with about 230 mm2 of copper on the DRAIN
+  pin, up to 128 C at the upper bound. Layout rule: copper area on pin 5. If it runs too hot: the pin-compatible
+  ICE5BR2280BZ (65 kHz, 2.13 ohm, smaller capacitance) is cooler at high input and hotter at 100 V.
+- The drain peak at 450 V (must stay below about 680 V), and the 15V load step (loop).
 
 ## 6. Not part of v5
 

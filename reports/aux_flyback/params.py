@@ -1,23 +1,28 @@
-"""Design parameters of the v5 aux flyback (20 W, EE25, CTRL on TIW flying leads): UCC28710 (PSR) + IPD95R450P7, 100-450 V DC in,
-Out1 15 V (GND), Out2 15 V (ISOGND), CTRL ~9 V (control card, buck to 5 V), bias for VDD.
-Three reinforced-separated groups: {primary, bias, Out1}, Out2, CTRL. See README.md and
-V5_PLAN.md 5.3. All values SI."""
+"""Design parameters of the v5 aux flyback (20 W, EE25, CTRL on TIW flying leads): Infineon ICE5AR0680BZS (fixed
+100 kHz, integrated 800 V / 0.71 ohm CoolMOS and error amplifier; v5 step 7, 2026-11-18, before that UCC28710 +
+IPD95R450P7), 100-450 V DC in (DC+ limited to 450 V), Out1 15 V (GND, regulated through VERR, feeds VCC),
+Out2 15 V (ISOGND), CTRL ~9 V (control card, buck to 5 V).
+Three reinforced-separated groups: {primary, Out1}, Out2, CTRL. See README.md and V5_PLAN.md 5.4. All values SI."""
 import math
 
-# ---- input / controller (UCC28710, TI SLUSB86C) ------------------------------------------------
-VIN_MIN, VIN_MID, VIN_MAX = 100.0, 300.0, 450.0   # V DC, full power at VIN_MIN continuous
-FMAX = 100e3            # fSW(max) typ (92..106 kHz); full-load point sits below it (FM region at VCST(max))
-FMAX_MIN = 92e3         # datasheet minimum of fSW(max): CC power is checked with this
-VCST_MAX, VCST_MIN = 0.780, 0.195   # CS thresholds (typ); VCST(max) 0.738..0.810
-DMAGCC = 0.425          # demag duty at the CC limit (internal)
-T_RES_HALF = 1.0e-6     # end of demag -> first valley (TI default estimate 500 kHz ring)
-TLEB = 0.280e-6         # leading-edge blanking max = practical minimum on time
-VDD_ON, VDD_OFF = 21.0, 8.1      # UVLO on/off typ (19..23 / 7.7..8.5 V); VDD runs from the 15 V Out1 rail
-IRUN_MAX = 2.65e-3      # run supply current max
-IHV_MIN = 100e-6        # HV start-up current min at VHV = 100 V (typ 250 uA; TI: "typically 300 uA available")
-IDRS = 0.020            # DRV source current min (25 typ) at VDRV 8 V
-QG = 35e-9              # IPD95R450P7 total gate charge at 10 V
-VVSR = 4.05             # VS regulation level
+# ---- input / controller (ICE5ARxxxxBZS datasheet V2.3, 2020-02-03) -----------------------------------
+VIN_MIN, VIN_MID, VIN_MAX = 100.0, 300.0, 450.0   # V DC, full power at VIN_MIN continuous; 450 V is a hard limit now
+FSW = 100e3             # fixed oscillator frequency (94..106 kHz at 25 C, +-4 % jitter)
+FSW_MIN = 92e3          # over temperature
+VCS_N = (0.72, 0.80, 0.88)       # peak current limit threshold at CS: min, typ, max
+RDS_HOT = 1.271         # ohm at Tj 125 C, ID 2 A (0.71 typ / 0.80 max at 25 C), incl. the low-side MOSFET
+CO_ER = 24e-12          # effective output capacitance, energy related, 0..500 V
+RTH_JA = (100.0, 65.0)  # K/W: data sheet with the minimum drain-pin copper; estimate with ~230 mm2 on the drain pin
+                        # (Infineon's 24 W demo board: 61..66 K rise of a 2.2 ohm part at about 1 W)
+K_OFF = 0.4             # turn-off loss as a share of 0.5 V I tf f: the drain capacitance takes over part of the
+                        # current while the channel closes. ESTIMATE; 1.0 is the upper bound. Measure on the board.
+ID_PULSE = 5.82         # A
+VCC_ON, VCC_OFF, VCC_OVP = 16.0, 10.0, 25.5   # typ (VCC_OFF max 10.4)
+IVCC_CH1, IVCC_CH3 = 0.20e-3, 3.0e-3   # VCC charge currents typ (below / above VCC_SCP 1.1 V)
+IVCC_RUN = 2.5e-3       # estimate: IC supply current with the gate charge of the 0.71 ohm switch at 100 kHz
+VERR_REF = 1.80         # error amplifier reference (1.76 .. 1.84)
+IERR_BIAS_MIN, VERR_SEL_MAX = 9.5e-6, 0.24    # VERR bias current min, non-isolated selection threshold max
+T_SS = 12e-3            # digital soft start
 
 # ---- turn set (Np, Ns, Nctrl, Nbias); TURNSET env var for the comparison run ---------------------
 import os as _os
@@ -28,33 +33,27 @@ CTRL_I = 9.0 / CTRL_V                                                       # 9 
 
 # ---- outputs (design load 20 W total, user decision 2026-10-31; was 25 W in 3b4a33d) -------------
 #          name    V     I     diode VF  isolation side (MKF)
-OUTPUTS = [("Out1", 15.0, 0.39, 0.70, "primary"),     # 15V on GND (primary group): 5.5 W + VDD ~20 mA; PSR sense winding
+OUTPUTS = [("Out1", 15.0, 0.39, 0.70, "primary"),     # 15V on GND (primary group): 5.5 W + VCC; regulated through VERR
            ("Out2", 15.0, 0.33, 0.70, "secondary"),   # 15V_ISO on ISOGND, 5 W
            ("CTRL",  CTRL_V, CTRL_I, 0.45, "tertiary")]  # control card: winding into a 5 V buck, 9 W
-# No separate bias winding (user, 2026-10-31): Out1 is the PSR sense winding (VS divider from the
-# Out1 winding node before its rectifier) and supplies VDD through a diode + resistor (VDD ~14.3 V).
+# No separate bias winding (user, 2026-10-31): the 15V rail (Out1) is regulated directly through the VERR
+# divider and supplies VCC through a diode + resistor (~14.3 V).
 ETA = 0.86              # converter efficiency estimate at 100 V full load (for the input power)
-ETA_XFMR = 0.90         # TI's transformer efficiency term (leakage, losses, bias)
+ETA_XFMR = 0.90         # transformer efficiency term (leakage, losses)
 
-# ---- transformer ------------------------------------------------------------------------------
+# ---- transformer (unchanged from the UCC28710 design: same core, turns and inductance) --------------
 NP, NS, NC, NB = TURNSET      # primary, 15 V windings, CTRL, (bias: none, NB = 0)
 VOR = NP / NS * (15.0 + 0.70)  # reflected voltage (~100 V: set by DCM at 100 V input)
-P_CC = 25.5             # output power at the CC limit (typ fSW(max), typ VCST(max)); the worst case
-                        # (fSW(max) 92 kHz, VCST(max) 738 mV) is 0.824 x = 21.0 W, above the 20 W design load
-LP_IPP = DMAGCC * VOR / FMAX                    # V*s at the CC point (demag duty 0.425 at fmax)
-IPP = P_CC / (0.5 * LP_IPP * FMAX * ETA_XFMR)  # primary peak current at VCST(max)
-LP = LP_IPP / IPP                               # primary inductance
-RCS = VCST_MAX / IPP                            # current-sense resistor
-# user decision 2026-10-31: RCS 0.562 ohm (E96) instead of 0.590 for more CC-limit margin over the
-# 20 W load; Lp stays as designed above, the peak current and CC power rise by 5 %
-RCS = 0.562
-IPP = VCST_MAX / RCS
+LP = 322e-6             # primary inductance, as designed for the UCC28710 at its CC point; kept
+RCS = 0.562             # current-sense resistor (E96), kept
+POUT = sum(v * i for _, v, i, _, _ in OUTPUTS)
+IPP_FULL = math.sqrt(2 * POUT / (LP * FSW * ETA_XFMR))   # peak current at the design load, 100 kHz, DCM
+IPP = VCS_N[1] / RCS                                      # typical peak current limit (flux and wire checks use it)
 LP_IPP = LP * IPP
-P_CC = 0.5 * LP * IPP ** 2 * FMAX * ETA_XFMR
 
-# ---- MOSFET / clamp --------------------------------------------------------------------------
-VDS_RATING = 950.0      # IPD95R450P7
-V_CLAMP = 240.0         # TVS clamp voltage at ~1.6 A (P6SMB200A / SMBJ170A class: Vbr 190-210 V, Vc 274 V at 2.2 A)
+# ---- switch / clamp ------------------------------------------------------------------------------
+VDS_RATING = 800.0      # ICE5AR0680BZS
+V_CLAMP = 205.0         # SMBJ150A: Vbr 167..185 V, Vc 243 V at 2.5 A -> ~190 V typ, ~205 V worst at 1.2..1.4 A
 LK_EFF = 5.9e-6         # effective primary leakage at full load: MKF pairwise P->Out1/Out2/CTRL (6.1/11.2/2.9 uH,
                         # winding order O2) weighted by each output's power share (conservative; measure on the sample)
 VDS_PK = VIN_MAX + V_CLAMP
@@ -82,67 +81,68 @@ TURNS = {"Primary": NP, "Out1": NS, "Out2": NS, "CTRL": NC}
 
 
 def summary():
-    rows = [f"VOR {VOR:.1f} V, Lp*Ipp {LP_IPP*1e6:.0f} uVs, Ipp(max) {IPP:.3f} A, Lp {LP*1e6:.0f} uH, RCS {RCS:.3f} ohm"]
-    pout = sum(v * i for _, v, i, _, _ in OUTPUTS)
-    f_full = pout / (0.5 * LP * IPP ** 2 * ETA_XFMR)
-    rows.append(f"design load {pout:.1f} W -> full-load fsw {f_full/1e3:.1f} kHz at Ipp(max) (FM region)")
+    rows = [f"VOR {VOR:.1f} V, Lp {LP*1e6:.0f} uH, RCS {RCS:.3f} ohm, fsw {FSW/1e3:.0f} kHz fixed"]
+    rows.append(f"design load {POUT:.1f} W -> peak current {IPP_FULL:.3f} A at 100 kHz (DCM)")
+    lim = [v / RCS for v in VCS_N]
+    rows.append("peak current limit VCS_N / RCS: " + " / ".join(f"{i:.2f}" for i in lim) + " A (min / typ / max) -> output power at "
+                "the limit " + " / ".join(f"{0.5*LP*i**2*f*ETA_XFMR:.1f}" for i, f in zip(lim, (FSW_MIN, FSW, 106e3)))
+                + f" W; margin over the load at the minimum {0.5*LP*lim[0]**2*FSW_MIN*ETA_XFMR/POUT:.2f}x; ID,pulse {ID_PULSE} A")
     for vin in (VIN_MIN, VIN_MID, VIN_MAX):
-        ton = LP * IPP / vin
-        tdm = LP * IPP / VOR
-        d = ton * f_full
-        rows.append(f"  Vin {vin:3.0f} V: ton {ton*1e6:.2f} us, tdemag {tdm*1e6:.2f} us, D {d:.3f}, demag duty {tdm*f_full:.3f}, "
-                    f"period use {(ton+tdm+T_RES_HALF)*f_full:.2f}, Ipri rms {IPP*math.sqrt(d/3):.3f} A")
-    # CC limit with the minimum fSW(max)
-    p_cc_min = 0.5 * LP * IPP ** 2 * FMAX_MIN * ETA_XFMR
-    rows.append(f"CC limit: {P_CC:.1f} W at 100 kHz, {p_cc_min:.1f} W at fSW(max) min 92 kHz, "
-                f"{p_cc_min*(0.738/VCST_MAX)**2:.1f} W with VCST(max) 738 mV too (worst case)")
-    # DCM check at the CC point, 100 V
-    ton_cc = LP_IPP / VIN_MIN
-    rows.append(f"DCM at the CC point, 100 V: ton {ton_cc*1e6:.2f} + tdemag {LP_IPP/VOR*1e6:.2f} + {T_RES_HALF*1e6:.1f} us "
-                f"= {(ton_cc+LP_IPP/VOR+T_RES_HALF)*FMAX:.2f} of the 10 us period")
-    # light load / high line
-    ton_min = LP * IPP * (VCST_MIN / VCST_MAX) / VIN_MAX
-    rows.append(f"min on time at 450 V, VCST(min): {ton_min*1e9:.0f} ns (LEB max {TLEB*1e9:.0f} ns -> effective "
-                f"{max(ton_min, TLEB)*1e9:.0f} ns); tDMAG(min) {max(ton_min, TLEB)*VIN_MAX/VOR*1e6:.2f} us (TI target >= 1.2 us)")
+        ton = LP * IPP_FULL / vin
+        tdm = LP * IPP_FULL / VOR
+        d = ton * FSW
+        irms = IPP_FULL * math.sqrt(d / 3)
+        p_cond = irms ** 2 * RDS_HOT
+        p_coss = 0.5 * CO_ER * vin ** 2 * FSW          # DCM, hard turn-on at about Vin (no valley switching)
+        p_off = K_OFF * 0.5 * vin * IPP_FULL * 30e-9 * FSW      # turn-off overlap, 30 ns fall time
+        p_hi = p_cond + p_coss + p_off / K_OFF + 15 * IVCC_RUN
+        p = p_cond + p_coss + p_off + 15 * IVCC_RUN
+        rows.append(f"  Vin {vin:3.0f} V: ton {ton*1e6:.2f} us, tdemag {tdm*1e6:.2f} us, D {d:.3f}, period use {(ton+tdm)*FSW:.2f}, "
+                    f"Ipri rms {irms:.3f} A; U18 loss {p_cond:.2f} cond + {p_coss:.2f} Coss + {p_off:.2f} turn-off + "
+                    f"{15*IVCC_RUN:.2f} supply = {p:.2f} W (upper bound {p_hi:.2f} W) -> Tj ~{T_AMB + p*RTH_JA[1]:.0f} C at {T_AMB:.0f} C air "
+                    f"with drain copper ({RTH_JA[1]:.0f} K/W), ~{T_AMB + p*RTH_JA[0]:.0f} C without ({RTH_JA[0]:.0f} K/W); upper bound "
+                    f"{T_AMB + p_hi*RTH_JA[1]:.0f} C with copper")
+    ton_l, tdm_l = LP * lim[2] / VIN_MIN, LP * lim[2] / VOR
+    rows.append(f"at the maximum current limit, 100 V: ton {ton_l*1e6:.2f} + tdemag {tdm_l*1e6:.2f} us = {(ton_l+tdm_l)*FSW:.2f} of the "
+                f"period (above 1.0 = CCM, which the controller supports with slope compensation)")
     rows.append(f"drain peak at 450 V: {VIN_MAX:.0f} + clamp {V_CLAMP:.0f} = {VDS_PK:.0f} V ({VDS_PK/VDS_RATING*100:.0f} % of {VDS_RATING:.0f} V)")
-    p_clamp = 0.5 * LK_EFF * IPP ** 2 * f_full * V_CLAMP / (V_CLAMP - VOR)
-    rows.append(f"clamp loss (leakage {LK_EFF*1e6:.1f} uH, Vclamp {V_CLAMP:.0f} V): {p_clamp:.2f} W at full load "
-                f"(any Vin; Ipp is fixed by VCST(max) in the FM region)")
-    rows.append(f"RCS {RCS:.3f} ohm 1 % (E96): {IPP**2*0.335/3*RCS:.2f} W at 100 V")
+    for name, ipk in (("design load", IPP_FULL), ("typical limit", lim[1])):
+        rows.append(f"clamp loss at the {name} (leakage {LK_EFF*1e6:.1f} uH, {ipk:.2f} A, Vclamp {V_CLAMP:.0f} V): "
+                    f"{0.5*LK_EFF*ipk**2*FSW*V_CLAMP/(V_CLAMP-VOR):.2f} W")
+    rows.append(f"RCS {RCS:.3f} ohm 1 %: {(IPP_FULL*math.sqrt(LP*IPP_FULL/VIN_MIN*FSW/3))**2*RCS:.2f} W at 100 V")
     for name, v, i, vf, _ in OUTPUTS:
         n = {"Out1": NS, "Out2": NS, "CTRL": NC}[name]
         vrev = VIN_MAX * n / NP + v
         rows.append(f"  {name}: N {n}, winding {n*VOR/NP:.2f} V -> out {n*VOR/NP - vf:.2f} V; diode reverse {vrev:.0f} V")
-    rows += out1_sense_vdd(f_full)
+    rows += control()
     return "\n".join(rows)
 
 
-def out1_sense_vdd(f_full):
-    """Out1 as the PSR sense and VDD winding (TI SLUSB86C eq. 24-26, 28)."""
+def control():
+    """VERR divider, VCC supply and start-up of the ICE5AR0680BZS (datasheet 3.1, 3.6)."""
     r = []
-    npa = NP / NS                       # primary to 'auxiliary' (= Out1) turns ratio
-    vin_run = 85.0                      # DC input at which DRV is enabled
-    rs1 = vin_run / (npa * 225e-6)      # IVSL(run) typ 225 uA (DC input: no sqrt(2))
-    rs2 = rs1 * VVSR / (1.0 * (15.0 + 0.45) - VVSR)   # NAS = 1; VF ~0.45 V near zero current (ultrafast); use 21.0 k E96
-    r.append(f"VS divider from the Out1 winding: RS1 {rs1/1e3:.1f} k (run at {vin_run:.0f} V DC, stop at "
-             f"{rs1*npa*80e-6:.0f} V), RS2 {rs2/1e3:.2f} k")
-    vocbc = 0.25                        # cable compensation at the output at full load (diode VF + winding IR)
-    rcbc = 3.2 * 3e3 * (15.0 + 0.45) / (VVSR * vocbc) - 28e3
-    r.append(f"cable compensation {vocbc:.2f} V at full load: RCBC {rcbc/1e3:.0f} k")
-    vdd = 15.0 - 0.7
-    idd = IRUN_MAX + QG * FMAX          # run current + gate charge at fSW(max)
-    vocc = 10.0                         # Out1 level at which VDD (diode from Out1) holds >= VDD_OFF + margin
-    c_out1 = 600e-6                     # Out1 capacitance incl. gate-driver boards and U9 (estimate)
-    p_cc_worst = 0.5 * LP * IPP ** 2 * FMAX_MIN * ETA_XFMR * (0.738 / VCST_MAX) ** 2
-    t_occ = 0.020                       # design start-up time to Out1 = 10 V (estimate x2.5 margin, see README)
-    cdd = idd * t_occ / (19.0 - 8.5 - 1.0)   # worst-case UVLO window 19 V on / 8.5 V off, 1 V margin
-    t_start_typ = 15e-6 * VDD_ON / 250e-6
-    t_start_max = 15e-6 * 23.0 / (IHV_MIN - 30e-6)
-    r.append(f"VDD from Out1 via diode + 47 ohm: ~{vdd:.1f} V; run current {idd*1e3:.1f} mA (IRUN max + Qg x 100 kHz)")
-    r.append(f"CDD >= {cdd*1e6:.1f} uF for {t_occ*1e3:.0f} ms to Out1 {vocc:.0f} V (worst UVLO window 9.5 V) -> 15 uF; "
-             f"start delay with 15 uF: {t_start_typ:.1f} s typ, {t_start_max:.1f} s worst (IHV 100 uA at 100 V)")
-    r.append(f"gate drive: VDD {vdd:.1f} V, DRV ~{vdd-1:.0f} V (clamp 14-16 V only at high VDD); Qg {QG*1e9:.0f} nC at "
-             f"{IDRS*1e3:.0f} mA min source -> {QG/IDRS*1e6:.1f} us to full charge")
+    rt, rb = 365e3, 49.9e3
+    vo = [v * (1 + rt / rb) for v in (1.76, VERR_REF, 1.84)]
+    rpar = rt * rb / (rt + rb)
+    r.append(f"VERR divider R101 365k / R102 49.9k from 15V: {vo[1]:.2f} V ({vo[0]:.2f} .. {vo[2]:.2f} V from the reference, plus 1 % "
+             f"resistors); {15/(rt+rb)*1e6:.0f} uA")
+    r.append(f"  non-isolated mode needs VERR > {VERR_SEL_MAX} V from the {IERR_BIAS_MIN*1e6:.1f} uA bias before the start: "
+             f"R101 || R102 = {rpar/1e3:.1f} k -> {IERR_BIAS_MIN*rpar:.2f} V (minimum {VERR_SEL_MAX/IERR_BIAS_MIN/1e3:.1f} k)")
+    c_vcc = 47e-6 * 0.8 + 0.5e-6        # C113 47 uF electrolytic (-20 %) + C114 1 uF X5R at 15 V
+    t_start = 1.1 * c_vcc / IVCC_CH1 + (VCC_ON - 1.1) * c_vcc / IVCC_CH3
+    t_hold = c_vcc * (VCC_ON - 10.4) / IVCC_RUN
+    c_out = (690e-6, 690e-6, 940e-6)    # 15V, 15V_ISO, CTRL_RAW capacitance on the board
+    e_out = 0.5 * (c_out[0] * 15 ** 2 + c_out[1] * 15 ** 2 + c_out[2] * 9 ** 2)
+    p_lim = 0.5 * LP * (VCS_N[0] / RCS) ** 2 * FSW_MIN * ETA_XFMR
+    t_rise = T_SS + e_out / (p_lim / 2)          # soft start, then about half the limit power into the capacitors
+    r.append(f"VCC from 15V via R100 10R + D11: ~{15.0-0.7:.1f} V in operation (off below {VCC_OFF} V, over-voltage at {VCC_OVP} V)")
+    r.append(f"start: the cascode charges C113 + C114 ({c_vcc*1e6:.0f} uF effective) to {VCC_ON:.0f} V in ~{t_start:.2f} s typ; hold-up "
+             f"16 -> 10.4 V at {IVCC_RUN*1e3:.1f} mA: {t_hold*1e3:.0f} ms, against ~{t_rise*1e3:.0f} ms until 15V carries VCC "
+             f"(soft start {T_SS*1e3:.0f} ms + {e_out:.2f} J in the output capacitors)")
+    r.append(f"start-up chain R136-R138 3 x 10M from AUX_VIN to GATE: {VIN_MAX/30e6*1e6:.0f} uA and {VIN_MAX/3:.0f} V per resistor at "
+             f"{VIN_MAX:.0f} V ({VIN_MAX**2/30e6*1e3:.0f} mW)")
+    r.append("FB: R140 4.7k + C145 10n, C146 2.2n, RSel R139 750k (burst option 2): start values from the tube PSU design "
+             "(~/dev/tube_psu_kicad kicad_next/CHANGES_5_2.md 1.5); loop to be confirmed by a load step on the first board")
     return r
 
 

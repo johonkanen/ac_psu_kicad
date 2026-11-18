@@ -84,20 +84,16 @@ def build():
             [(3, "NO", PAS), (2, "COIL_1", PAS), (1, "COM_1", PAS)],
             desc="Power relay (Proteus refdes R20/R79; no pin 4)"),
     ]
-    # v5: aux flyback (UCC28710 + 950 V MOSFET, EE25) and control-card isolation (CTRL domain)
+    # v5: aux flyback (ICE5AR0680BZS since v5 step 7; was UCC28710 + 950 V MOSFET; EE25) and control-card
+    # isolation (CTRL domain)
     syms += [
-        from_std("Device", "Q_NMOS", "IPD95R450P7", "Q", desc="950 V N-MOSFET, DPAK (TO-252-2), 1=G 2=D (tab) 3=S",
-                 pins={"G": "1", "D": "2", "S": "3"}, names={"1": "G", "2": "D", "3": "S"}),
-        from_std("Device", "Q_NPN", "MMBT3904", "Q", desc="NPN, SOT-23, 1=B 2=E 3=C",
-                 pins={"B": "1", "E": "2", "C": "3"}, names={"1": "B", "2": "E", "3": "C"}),
-        from_std("Device", "Q_PNP", "MMBT3906", "Q", desc="PNP, SOT-23, 1=B 2=E 3=C",
-                 pins={"B": "1", "E": "2", "C": "3"}, names={"1": "B", "2": "E", "3": "C"}),
         from_std("Device", "D_Zener", "D_TVS", "D", desc="Unidirectional TVS diode, pins A/C", pins=D_PINS),
         from_std("Connector_Generic", "Conn_01x02", "CONN_2", "J", desc="2-pin connector"),
         from_std("Amplifier_Operational", "LM2904", "OPA2350EA", "U", desc="Dual rail-to-rail op-amp, VSSOP-8"),
-        box("UCC28710", "U", [(7, "HV", PAS), (1, "VDD", PI), (2, "VS", IN), (3, "CBC", PAS)],
-            [(6, "DRV", OUT), (5, "CS", IN), None, (4, "GND", PI)],
-            desc="PSR flyback controller, SOIC-7 (D): pin 7 = HV at the pin-8 position"),
+        box("ICE5AR0680BZS", "U", [(4, "GATE", PAS), (7, "VCC", PI), (1, "VERR", IN), (2, "FB", PAS), (3, "CS", IN)],
+            [(5, "DRAIN", PAS), None, None, None, (8, "GND", PI)],
+            desc="Fixed-frequency 100 kHz flyback controller with integrated 800 V CoolMOS (0.71 ohm) and error "
+                 "amplifier, PG-DIP-7 (pin 6 absent)"),
         box("EE25_AUX_TRANS", "T", [(i, str(i), PAS) for i in (1, 2, 3, 4, 5)],
             [(i, str(i), PAS) for i in (10, 9, 8, 7, 6)],
             desc="EE25 aux flyback transformer, Ferroxcube CPV-E25/13/7-1S-10P-Z (1 drain, 2 DC+, 3 P1/P2 joint, "

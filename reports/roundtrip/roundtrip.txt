@@ -9,7 +9,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    zone fill     1 clusters, 0.27 mm^2
    pour refill   51 clusters, 94.50 mm^2
    v4 deviation  240 clusters, 1106.29 mm^2
-   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (1573 explained by clearance / pad shape); KiCad 968 draws / 949 flashes, 0 not on Proteus copper (473 explained by pad shape)
+   coverage: Proteus 5318 draws / 903 flashes, 0 not on KiCad copper (1573 explained by clearance / pad shape); KiCad 968 draws / 946 flashes, 0 not on Proteus copper (470 explained by pad shape)
    MISSING   Proteus draw Conductor 1.016 mm at (86.800, -48.320)  76 samples off copper, 145 in clearance/pad shape, of 221; near R23-2 (#00339) 1.38 mm
    explained Proteus draw Conductor 0.762 mm at (86.800, -54.438)  0 samples off copper, 7 in clearance/pad shape, of 7; near C62-2 (#00340) 0.04 mm
    explained Proteus draw Conductor 0.762 mm at (86.762, -54.438)  0 samples off copper, 9 in clearance/pad shape, of 9; near C62-2 (#00340) 0.05 mm
@@ -1588,11 +1588,10 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.127 mm at (96.821, 5.000) {'P': 'U2,3', 'N': 'Net-(U2-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 4.14 mm
    explained KiCad flash SMDPad,CuDef 0.127 mm at (96.821, 2.612) {'P': 'U2,4', 'N': 'Net-(U2--)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-14 (N/C) 4.14 mm
    explained KiCad flash SMDPad,CuDef 0.127 mm at (98.726, 2.612) {'P': 'U2,5', 'N': '3V3_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-14 (N/C) 6.05 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-72.250, -93.275) {'P': 'R102,1', 'N': 'AUX_VS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 15.63 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-72.250, -93.275) {'P': 'R102,1', 'N': 'AUX_VERR'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 15.63 mm
    MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-70.600, -93.275) {'P': 'R102,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 14.88 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-49.163, -93.295) {'P': 'Q16,1', 'N': 'AUX_DRV'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 16.94 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-49.163, -95.195) {'P': 'Q16,2', 'N': 'AUX_GATED'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 18.82 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-47.288, -94.245) {'P': 'Q16,3', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 18.21 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-102.058, -118.745) {'P': 'R136,1', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 40.57 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-99.132, -118.745) {'P': 'R136,2', 'N': 'AUX_ST1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 40.25 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (-4.185, -96.445) {'P': 'T1,1', 'N': 'AUX_DRAIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 21.75 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (0.815, -96.445) {'P': 'T1,2', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 23.81 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (5.815, -96.445) {'P': 'T1,3', 'N': 'unconnected-(T1-Pad3)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 20.53 mm
@@ -1607,8 +1606,17 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (104.487, 14.027) {'P': 'R56,2', 'N': 'Net-(C106-Pad1)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C5-1 (ISOGND) 5.87 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (99.987, 4.310) {'P': 'R76,1', 'N': 'Net-(C102-Pad1)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-15 (N/C) 7.33 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (99.987, 3.290) {'P': 'R76,2', 'N': 'Net-(U2--)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-15 (N/C) 7.32 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-96.407, -118.745) {'P': 'R137,1', 'N': 'AUX_ST1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 40.15 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-93.483, -118.745) {'P': 'R137,2', 'N': 'AUX_ST2'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 40.24 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (94.787, 6.530) {'P': 'C101,1', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 2.62 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (94.787, 5.570) {'P': 'C101,2', 'N': 'Net-(U2-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 2.19 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -119.165) {'P': 'U18,1', 'N': 'AUX_VERR'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 42.96 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -121.705) {'P': 'U18,2', 'N': 'AUX_COMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 45.43 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -124.245) {'P': 'U18,3', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 47.91 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -126.785) {'P': 'U18,4', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 50.40 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -126.785) {'P': 'U18,5', 'N': 'AUX_DRAIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 49.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -121.705) {'P': 'U18,7', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 44.37 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -119.165) {'P': 'U18,8', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 41.84 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (95.700, 4.330) {'P': 'C87,1', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-15 (N/C) 3.09 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (95.700, 3.370) {'P': 'C87,2', 'N': '3V3_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-15 (N/C) 3.04 mm
    explained KiCad flash SMDPad,CuDef 0.25 mm at (116.600, -22.562) {'P': 'R131,1', 'N': 'CTRL_RAW'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J12-44 (5V_ISOL) 6.11 mm
@@ -1641,6 +1649,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (96.470, 0.577) {'P': 'C3,2', 'N': '3V3_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-13 (N/C) 3.83 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (50.835, -94.295) {'P': 'D15,A', 'N': 'AUX_W2'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q3-3 (G3_SOURCE_HI) 14.53 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (46.735, -94.295) {'P': 'D15,C', 'N': '15V_ISO'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q4-1 (G4_GATE_LO) 14.53 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-85.270, -118.345) {'P': 'R139,1', 'N': 'AUX_COMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 38.69 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-83.620, -118.345) {'P': 'R139,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 38.65 mm
    explained KiCad flash ComponentPad 4.0 mm at (51.000, 17.600) {'P': 'PEC1,1', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U15-9 (GND) 4.02 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-114.880, -94.145) {'P': 'C111,1', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 16.82 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-111.930, -94.145) {'P': 'C111,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 16.80 mm
@@ -1655,6 +1665,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (96.687, 12.127) {'P': 'R53,2', 'N': 'Net-(U7A--)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C82-1 (ISOGND) 7.67 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (109.600, 0.025) {'P': 'R135,1', 'N': 'CTRL_FB'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-2 (3V3_ISO) 2.52 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (109.600, 1.675) {'P': 'R135,2', 'N': 'CTRLGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-2 (3V3_ISO) 3.81 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-111.565, -121.165) {'P': 'C113,1', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 43.80 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-105.965, -121.165) {'P': 'C113,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 43.67 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (31.245, -96.945) {'P': 'C115,1', 'N': '15V'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-1 (G2_GATE_LO) 17.32 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (37.745, -96.945) {'P': 'C115,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q4-2 (G3_SOURCE_HI) 17.33 mm
    explained KiCad flash ComponentPad 3.2 mm at (-74.735, 68.535) {'P': 'J7,1', 'N': 'Net-(J7-Pad1)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J7-1 (INDUCTOR_INPUT) 4.15 mm
@@ -1688,6 +1700,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.1625 mm at (80.845, 3.620) {'P': 'U16,16', 'N': 'VCC'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C81-1 (GND) 2.29 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (114.600, -21.325) {'P': 'R133,1', 'N': 'CTRL_EN'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J12-44 (5V_ISOL) 4.38 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (114.600, -19.675) {'P': 'R133,2', 'N': 'CTRLGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J12-44 (5V_ISOL) 2.74 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.225 mm at (-73.070, -118.345) {'P': 'C146,1', 'N': 'AUX_COMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 39.58 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.225 mm at (-71.520, -118.345) {'P': 'C146,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 39.28 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-123.588, -94.475) {'P': 'R98,1', 'N': 'DC+'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 19.93 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-117.662, -94.475) {'P': 'R98,2', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 17.62 mm
    explained KiCad flash SMDPad,CuDef 0.22225 mm at (72.250, -1.896) {'P': 'REF1,1', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C39-1 (GND) 8.21 mm
@@ -1695,8 +1709,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.22225 mm at (71.310, 0.009) {'P': 'REF1,3', 'N': 'Net-(REF1-VOUT)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U12-3 (#00390) 8.05 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (114.443, 12.395) {'P': 'C110,1', 'N': 'REF_1V65_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R40-1 (REF_1V65_ISO) 1.04 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (113.483, 12.395) {'P': 'C110,2', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R40-2 (ISOGND) 1.03 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-95.010, -94.145) {'P': 'C113,1', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 15.59 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-92.060, -94.145) {'P': 'C113,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 16.09 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-81.220, -118.345) {'P': 'R140,1', 'N': 'AUX_COMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 38.71 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-79.570, -118.345) {'P': 'R140,2', 'N': 'AUX_COMPC'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 38.83 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (50.200, 24.110) {'P': 'R129,2', 'N': 'ISOADA2_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U15-8 (ISOGND) 1.76 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (104.487, 12.547) {'P': 'R51,1', 'N': 'Net-(C106-Pad1)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C5-1 (ISOGND) 5.06 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (104.487, 11.527) {'P': 'R51,2', 'N': 'Net-(U7B--)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C5-1 (ISOGND) 4.69 mm
@@ -1719,16 +1733,14 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.1625 mm at (67.574, 3.620) {'P': 'U13,15', 'N': 'PWM_TRANS3'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U12-4 (#00402) 4.30 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-59.938, -93.675) {'P': 'R105,1', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 14.70 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-57.013, -93.675) {'P': 'R105,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 15.85 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-44.550, -93.275) {'P': 'R106,1', 'N': 'AUX_GATED'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 18.12 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-42.900, -93.275) {'P': 'R106,2', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 18.81 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.225 mm at (-77.120, -118.345) {'P': 'C145,1', 'N': 'AUX_COMPC'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 39.15 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.225 mm at (-75.570, -118.345) {'P': 'C145,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 39.43 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (78.640, -1.080) {'P': 'C109,1', 'N': 'REF_1V65'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-6 (N/C) 4.69 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (78.640, -0.120) {'P': 'C109,2', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-5 (N/C) 4.68 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (113.550, -0.287) {'P': 'U28,3', 'N': 'CTRL_RAW'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-1 (ISOGND) 1.76 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (113.550, 1.988) {'P': 'U28,4', 'N': 'CTRL_FB'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-1 (ISOGND) 3.79 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (112.600, 1.988) {'P': 'U28,5', 'N': 'CTRL_EN'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-1 (ISOGND) 3.62 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (111.650, 1.988) {'P': 'U28,6', 'N': 'CTRL_BOOT'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-2 (3V3_ISO) 3.61 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-40.500, -93.275) {'P': 'R107,1', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 20.01 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-38.850, -93.275) {'P': 'R107,2', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 20.96 mm
    explained KiCad flash ComponentPad 3.2 mm at (-61.135, 45.085) {'P': 'J10,1', 'N': '/05 VSI/INU_FILTER_INPUT'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J10-1 (INU_FILTER_INPUT) 6.45 mm
    explained KiCad flash ComponentPad 3.2 mm at (-55.265, 45.085) {'P': 'J10,1', 'N': '/05 VSI/INU_FILTER_INPUT'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J10-1 (INU_FILTER_INPUT) 4.90 mm
    explained KiCad flash SMDPad,CuDef 0.25 mm at (113.050, -25.800) {'P': 'D16,A', 'N': 'CTRL_W'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U8-3 (5V_ISOL) 6.75 mm
@@ -1745,8 +1757,6 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.1625 mm at (56.845, 3.620) {'P': 'U15,16', 'N': 'VCC'} 0 samples off copper, 1 in clearance/pad shape, of 1; near L1-1 (#00396) 1.94 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (95.687, 10.257) {'P': 'C103,1', 'N': 'REF_1V65_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 6.08 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (95.687, 11.217) {'P': 'C103,2', 'N': 'Net-(U7A-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 6.93 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-68.200, -93.275) {'P': 'R103,1', 'N': 'AUX_CBC'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 14.07 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-66.550, -93.275) {'P': 'R103,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 13.73 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (50.200, 25.120) {'P': 'C130,1', 'N': 'ISOADA2_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U15-8 (ISOGND) 2.53 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (50.200, 26.080) {'P': 'C130,2', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U15-8 (ISOGND) 3.38 mm
    MISSING   KiCad flash SMDPad,CuDef 0.225 mm at (-89.440, -93.275) {'P': 'C114,1', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 14.86 mm
@@ -1759,26 +1769,18 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (95.787, 5.790) {'P': 'R1,2', 'N': 'Net-(U2-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 3.21 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (108.000, 0.025) {'P': 'R134,1', 'N': '5V_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-2 (3V3_ISO) 3.87 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (108.000, 1.675) {'P': 'R134,2', 'N': 'CTRL_FB'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C3-2 (3V3_ISO) 4.81 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-35.755, -93.765) {'P': 'Q17,1', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 23.31 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.249997 mm at (-29.455, -96.045) {'P': 'Q17,2', 'N': 'AUX_DRAIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 23.78 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-35.755, -98.325) {'P': 'Q17,3', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 26.86 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (99.857, 9.037) {'P': 'C105,1', 'N': 'REF_1V65_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 8.25 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (100.817, 9.037) {'P': 'C105,2', 'N': 'Net-(U7B-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C5-2 (3V3_ISO) 8.20 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (97.587, 7.730) {'P': 'C2,1', 'N': 'ISOADA3'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 5.63 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (97.587, 6.770) {'P': 'C2,2', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 5.23 mm
    explained KiCad flash ComponentPad 3.0 mm at (110.060, -31.600) {'P': 'W1,1', 'N': 'CTRL_W'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U9-2 (GND) 9.64 mm
    explained KiCad flash ComponentPad 3.0 mm at (115.140, -31.600) {'P': 'W1,2', 'N': 'CTRLGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U9-3 (5V) 10.18 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-64.150, -93.275) {'P': 'R104,1', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 13.58 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-62.500, -93.275) {'P': 'R104,2', 'N': 'AUX_CSP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 13.72 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (76.570, 0.100) {'P': 'C40,1', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C81-1 (GND) 6.33 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (75.610, 0.100) {'P': 'C40,2', 'N': 'Net-(REF1-VOUT)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C81-1 (GND) 6.85 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-109.190, -94.145) {'P': 'C112,1', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 17.24 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-106.240, -94.145) {'P': 'C112,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 18.17 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (96.687, 10.227) {'P': 'R52,1', 'N': 'REF_1V65_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 6.61 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (96.687, 11.247) {'P': 'R52,2', 'N': 'Net-(U7A-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-16 (N/C) 7.45 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-54.112, -93.295) {'P': 'Q15,1', 'N': 'AUX_DRV'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 17.00 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-54.112, -95.195) {'P': 'Q15,2', 'N': 'AUX_GATED'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-1 (FILTER_INPUT) 18.65 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-52.237, -94.245) {'P': 'Q15,3', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C20-2 (FILTER_INPUT) 17.75 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (41.602, -93.495) {'P': 'R108,1', 'N': '15V'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q4-2 (G3_SOURCE_HI) 13.76 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (43.427, -93.495) {'P': 'R108,2', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q4-1 (G4_GATE_LO) 13.89 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (75.630, -1.200) {'P': 'R19,1', 'N': 'Net-(REF1-VOUT)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-6 (N/C) 7.69 mm
@@ -1798,6 +1800,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (98.000, -3.423) {'P': 'U10,3', 'N': '5V_ISOL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-9 (N/C) 5.34 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (98.000, -0.923) {'P': 'U10,4', 'N': 'unconnected-(U10-NR-Pad4)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-11 (N/C) 5.34 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (96.100, -0.923) {'P': 'U10,5', 'N': '3V3_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U17-11 (N/C) 3.45 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-90.757, -118.745) {'P': 'R138,1', 'N': 'AUX_ST2'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 39.73 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-87.832, -118.745) {'P': 'R138,2', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 39.30 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-19.365, -94.295) {'P': 'D12,A', 'N': 'AUX_DRAIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 17.53 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (-23.465, -94.295) {'P': 'D12,C', 'N': 'AUX_CLAMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 19.03 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (100.170, 14.100) {'P': 'C38,1', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R72-2 (MDATA_DAB) 9.03 mm
@@ -1808,15 +1812,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (53.270, -6.439) {'P': 'C95,2', 'N': 'Net-(U1A-+)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near R21-2 (#00016) 1.04 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (55.375, -96.945) {'P': 'C116,1', 'N': '15V_ISO'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q3-2 (DC+) 17.25 mm
    MISSING   KiCad flash SMDPad,CuDef 0.25 mm at (61.875, -96.945) {'P': 'C116,2', 'N': 'ISOGND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q3-1 (G3_GATE_HI) 17.17 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-76.300, -93.275) {'P': 'R101,1', 'N': 'AUX_W1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 15.32 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-74.650, -93.275) {'P': 'R101,2', 'N': 'AUX_VS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 16.15 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-103.100, -93.340) {'P': 'U18,1', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 16.28 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-103.100, -94.610) {'P': 'U18,2', 'N': 'AUX_VS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 17.43 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-103.100, -95.880) {'P': 'U18,3', 'N': 'AUX_CBC'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 18.61 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-103.100, -97.150) {'P': 'U18,4', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 19.79 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-98.150, -97.150) {'P': 'U18,5', 'N': 'AUX_CSP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 18.65 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-98.150, -95.880) {'P': 'U18,6', 'N': 'AUX_DRV'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 17.39 mm
-   MISSING   KiCad flash SMDPad,CuDef 0.15 mm at (-98.150, -93.340) {'P': 'U18,7', 'N': 'AUX_VIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near C22-2 (CMFILT1) 14.87 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-76.300, -93.275) {'P': 'R101,1', 'N': '15V'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 15.32 mm
+   MISSING   KiCad flash SMDPad,CuDef 0.2 mm at (-74.650, -93.275) {'P': 'R101,2', 'N': 'AUX_VERR'} 1 samples off copper, 0 in clearance/pad shape, of 1; near CM1-2 (LEMOUT) 16.15 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (74.450, -0.921) {'P': 'C16,1', 'N': 'GND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C81-1 (GND) 8.37 mm
    explained KiCad flash SMDPad,CuDef 0.14 mm at (74.450, 0.039) {'P': 'C16,2', 'N': 'VCC'} 0 samples off copper, 1 in clearance/pad shape, of 1; near C81-1 (GND) 7.65 mm
    explained KiCad flash SMDPad,CuDef 0.135 mm at (51.800, 24.110) {'P': 'R130,2', 'N': 'ISOADA3_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near U15-8 (ISOGND) 1.16 mm
@@ -2719,7 +2716,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    raw XOR 2349.65 mm^2; after 0.05 mm tolerance: only Proteus 978.00 mm^2, only KiCad 1310.01 mm^2, 248 clusters (21 below 0.01 mm^2)
    pad shape   114 clusters, 544.14 mm^2
    v4 deviation  113 clusters, 1743.81 mm^2
-   coverage: Proteus 2524 draws / 562 flashes, 0 not on KiCad copper (328 explained by clearance / pad shape); KiCad 303 draws / 545 flashes, 0 not on Proteus copper (64 explained by pad shape)
+   coverage: Proteus 2524 draws / 562 flashes, 0 not on KiCad copper (328 explained by clearance / pad shape); KiCad 303 draws / 552 flashes, 0 not on Proteus copper (71 explained by pad shape)
    MISSING   Proteus draw Conductor 0.1524 mm at (88.150, 46.062)  142 samples off copper, 0 in clearance/pad shape, of 551; near J4-46 (ISOGND) 3.44 mm
    MISSING   Proteus draw Conductor 0.508 mm at (57.550, 47.931)  411 samples off copper, 0 in clearance/pad shape, of 448; near J6-46 (ISOGND) 2.80 mm
    MISSING   Proteus draw Conductor 0.1524 mm at (57.550, 44.157)  156 samples off copper, 0 in clearance/pad shape, of 156; near J6-46 (ISOGND) 6.57 mm
@@ -3058,6 +3055,13 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (5.815, -109.145) {'N': 'unconnected-(T1-Pad8)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 31.71 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (0.815, -109.145) {'N': 'unconnected-(T1-Pad9)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 33.93 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (-4.185, -109.145) {'N': 'unconnected-(T1-Pad10)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 33.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -119.165) {'N': 'AUX_VERR', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 42.96 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -121.705) {'N': 'AUX_COMP', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 45.43 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -124.245) {'N': 'AUX_CS', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 47.91 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -126.785) {'N': 'AUX_GATE', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 50.40 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -126.785) {'N': 'AUX_DRAIN', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 49.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -121.705) {'N': 'AUX_VDD', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 44.37 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -119.165) {'N': 'GND', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 41.84 mm
    explained KiCad flash ComponentPad 1.7 mm at (65.330, 17.500) {'N': '5V_CTRL_A', 'C': 'J14'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 19.83 mm
    explained KiCad flash ComponentPad 1.7 mm at (67.870, 17.500) {'N': 'CTRLGND_A', 'C': 'J14'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 22.29 mm
    explained KiCad flash ComponentPad 3.2 mm at (44.065, 62.935) {'N': 'Q5_S', 'C': 'INU_OUT2'} 0 samples off copper, 1 in clearance/pad shape, of 1; near INU_OUT2-1 (Q5_S) 4.66 mm
@@ -3356,7 +3360,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    raw XOR 2322.20 mm^2; after 0.05 mm tolerance: only Proteus 954.82 mm^2, only KiCad 1281.17 mm^2, 327 clusters (19 below 0.01 mm^2)
    pad shape   146 clusters, 599.86 mm^2
    v4 deviation  162 clusters, 1636.09 mm^2
-   coverage: Proteus 3065 draws / 562 flashes, 0 not on KiCad copper (409 explained by clearance / pad shape); KiCad 775 draws / 545 flashes, 0 not on Proteus copper (62 explained by pad shape)
+   coverage: Proteus 3065 draws / 562 flashes, 0 not on KiCad copper (409 explained by clearance / pad shape); KiCad 775 draws / 552 flashes, 0 not on Proteus copper (69 explained by pad shape)
    MISSING   Proteus draw Conductor 0.1524 mm at (100.000, 46.105)  91 samples off copper, 0 in clearance/pad shape, of 611; near J4-26 (DAB_GATE_LO_SEC) 3.50 mm
    MISSING   Proteus draw Conductor 0.1524 mm at (100.120, 42.170)  5 samples off copper, 0 in clearance/pad shape, of 28; near J4-26 (DAB_GATE_LO_SEC) 7.37 mm
    MISSING   Proteus draw Conductor 0.3048 mm at (86.880, 46.010)  18 samples off copper, 0 in clearance/pad shape, of 559; near J4-48 (20V_ISO_SEC) 3.49 mm
@@ -3776,6 +3780,13 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (5.815, -109.145) {'N': 'unconnected-(T1-Pad8)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 31.71 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (0.815, -109.145) {'N': 'unconnected-(T1-Pad9)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 33.93 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (-4.185, -109.145) {'N': 'unconnected-(T1-Pad10)', 'C': 'T1'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 33.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -119.165) {'N': 'AUX_VERR', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 42.96 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -121.705) {'N': 'AUX_COMP', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 45.43 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -124.245) {'N': 'AUX_CS', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 47.91 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -126.785) {'N': 'AUX_GATE', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 50.40 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -126.785) {'N': 'AUX_DRAIN', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 49.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -121.705) {'N': 'AUX_VDD', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 44.37 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -119.165) {'N': 'GND', 'C': 'U18'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 41.84 mm
    explained KiCad flash ComponentPad 1.7 mm at (65.330, 17.500) {'N': '5V_CTRL_A', 'C': 'J14'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 19.83 mm
    explained KiCad flash ComponentPad 1.7 mm at (67.870, 17.500) {'N': 'CTRLGND_A', 'C': 'J14'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 22.29 mm
    explained KiCad flash ComponentPad 3.2 mm at (44.065, 57.065) {'N': 'Q5_S', 'C': 'INU_OUT2'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J8-15 (Q5_S) 5.55 mm
@@ -4156,7 +4167,7 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    zone fill     1 clusters, 0.19 mm^2
    pour refill   18 clusters, 58.35 mm^2
    v4 deviation  219 clusters, 641.86 mm^2
-   coverage: Proteus 3472 draws / 734 flashes, 0 not on KiCad copper (582 explained by clearance / pad shape); KiCad 1220 draws / 929 flashes, 0 not on Proteus copper (363 explained by pad shape)
+   coverage: Proteus 3472 draws / 734 flashes, 0 not on KiCad copper (582 explained by clearance / pad shape); KiCad 1220 draws / 936 flashes, 0 not on Proteus copper (370 explained by pad shape)
    MISSING   Proteus draw Conductor 0.1524 mm at (62.928, 5.143)  193 samples off copper, 0 in clearance/pad shape, of 193; near R3-1 (#00011) 17.22 mm
    MISSING   Proteus draw Conductor 1.27 mm at (80.600, -44.150)  68 samples off copper, 133 in clearance/pad shape, of 201; near C66-1 (#00344) 1.25 mm
    explained Proteus draw Conductor 0.1524 mm at (80.610, -45.410)  0 samples off copper, 3 in clearance/pad shape, of 3; near C65-1 (#00344) 0.01 mm
@@ -4749,6 +4760,13 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (5.815, -109.145) {'P': 'T1,8', 'N': 'unconnected-(T1-Pad8)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 31.71 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (0.815, -109.145) {'P': 'T1,9', 'N': 'unconnected-(T1-Pad9)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near Q2-3 (PGND) 33.93 mm
    MISSING   KiCad flash ComponentPad 2.0 mm at (-4.185, -109.145) {'P': 'T1,10', 'N': 'unconnected-(T1-Pad10)'} 1 samples off copper, 0 in clearance/pad shape, of 1; near J5-1 (SHUNT1) 33.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -119.165) {'P': 'U18,1', 'N': 'AUX_VERR'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 42.96 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -121.705) {'P': 'U18,2', 'N': 'AUX_COMP'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 45.43 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -124.245) {'P': 'U18,3', 'N': 'AUX_CS'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 47.91 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-123.355, -126.785) {'P': 'U18,4', 'N': 'AUX_GATE'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 50.40 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -126.785) {'P': 'U18,5', 'N': 'AUX_DRAIN'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 49.44 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -121.705) {'P': 'U18,7', 'N': 'AUX_VDD'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 44.37 mm
+   MISSING   KiCad flash ComponentPad 1.6 mm at (-115.735, -119.165) {'P': 'U18,8', 'N': 'GND'} 1 samples off copper, 0 in clearance/pad shape, of 1; near R20-1 (JEE) 41.84 mm
    explained KiCad flash ComponentPad 1.7 mm at (65.330, 17.500) {'P': 'J14,1', 'N': '5V_CTRL_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 19.83 mm
    explained KiCad flash ComponentPad 1.7 mm at (67.870, 17.500) {'P': 'J14,2', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 22.29 mm
    explained KiCad flash ComponentPad 4.0 mm at (51.000, 17.600) {'P': 'PEC1,1', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-1 (ISOADA3) 6.96 mm
@@ -5958,8 +5976,8 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
 
 == drills: 16 KiCad via drills (0.3 mm) of the v4 vias in lib/v4_copper.csv
 == drills: v4 footprint swaps: 4 Proteus drills removed, 32 KiCad drills added (terminal areas)
-== drills: v5 pending-layout areas: 104 Proteus drills gone, 43 KiCad drills added
-== drills: Proteus 562, KiCad 545, matched 454 within 0.05 mm
+== drills: v5 pending-layout areas: 104 Proteus drills gone, 50 KiCad drills added
+== drills: Proteus 562, KiCad 552, matched 454 within 0.05 mm
      89 x Proteus 0.3000 mm -> KiCad 0.3000 mm
     218 x Proteus 0.5588 mm -> KiCad 0.5580 mm
       6 x Proteus 0.5588 mm -> KiCad 0.6500 mm  KiCad footprint drill kept (larger)

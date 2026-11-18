@@ -1,0 +1,56 @@
+== v5 step 7: aux flyback controller ICE5AR0680BZS (staged footprints and nets)
+  Q15: SOT-23 removed from the staging area
+  Q16: SOT-23 removed from the staging area
+  Q17: TO-252-2 removed from the staging area
+  R103: R_0603_1608Metric removed from the staging area
+  R104: R_0603_1608Metric removed from the staging area
+  R106: R_0603_1608Metric removed from the staging area
+  R107: R_0603_1608Metric removed from the staging area
+  U18: SOIC-7_3.9x4.9mm_P1.27mm_UCC28710 removed from the staging area (new footprint below)
+  C113: C_1210_3225Metric removed from the staging area (new footprint below)
+  U18: Package_DIP:DIP-8-N6_W7.62mm staged at (-123.36, -119.17)
+  C113: Capacitor_SMD:CP_Elec_6.3x5.4 staged at (-108.77, -121.17)
+  R136: Resistor_SMD:R_1206_3216Metric staged at (-100.59, -118.75)
+  R137: Resistor_SMD:R_1206_3216Metric staged at (-94.94, -118.75)
+  R138: Resistor_SMD:R_1206_3216Metric staged at (-89.29, -118.75)
+  R139: Resistor_SMD:R_0603_1608Metric staged at (-84.44, -118.34)
+  R140: Resistor_SMD:R_0603_1608Metric staged at (-80.39, -118.34)
+  C145: Capacitor_SMD:C_0603_1608Metric staged at (-76.34, -118.34)
+  C146: Capacitor_SMD:C_0603_1608Metric staged at (-72.30, -118.34)
+  C113-1: (none) -> AUX_VDD
+  C113-2: (none) -> GND
+  C114: value 100n -> 1u 50V
+  new net AUX_COMPC
+  C145-1: (none) -> AUX_COMPC
+  C145-2: (none) -> GND
+  new net AUX_COMP
+  C146-1: (none) -> AUX_COMP
+  C146-2: (none) -> GND
+  D13: value SMBJ170A -> SMBJ150A
+  R100: value 47R -> 10R
+  R101: value 59.0k -> 365k
+  R101-1: AUX_W1 -> 15V
+  new net AUX_VERR
+  R101-2: AUX_VS -> AUX_VERR
+  R102: value 21.0k -> 49.9k
+  R102-1: AUX_VS -> AUX_VERR
+  R136-1: (none) -> AUX_VIN
+  new net AUX_ST1
+  R136-2: (none) -> AUX_ST1
+  R137-1: (none) -> AUX_ST1
+  new net AUX_ST2
+  R137-2: (none) -> AUX_ST2
+  R138-1: (none) -> AUX_ST2
+  R138-2: (none) -> AUX_GATE
+  R139-1: (none) -> AUX_COMP
+  R139-2: (none) -> GND
+  R140-1: (none) -> AUX_COMP
+  R140-2: (none) -> AUX_COMPC
+  U18-1: (none) -> AUX_VERR
+  U18-2: (none) -> AUX_COMP
+  U18-3: (none) -> AUX_CS
+  U18-4: (none) -> AUX_GATE
+  U18-5: (none) -> AUX_DRAIN
+  U18-7: (none) -> AUX_VDD
+  U18-8: (none) -> GND
+  26 pad nets changed

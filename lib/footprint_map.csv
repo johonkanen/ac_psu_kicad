@@ -118,8 +118,8 @@ C109,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: REF_1V65 decoupling
 C110,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 11: REF_1V65_ISO decoupling
 C111,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v5: aux input filter
 C112,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v5: aux input filter
-C113,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v5: UCC28710 VDD capacitor CDD
-C114,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: UCC28710 VDD decoupling
+C113,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_6.3x5.4,v5: VCC capacitor (hold-up 16 -> 10 V during the start)
+C114,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: VCC decoupling at pin 7
 C115,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_8x10,v5: Out1 (15V) output capacitor
 C116,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_8x10,v5: Out2 (15V_ISO) output capacitor
 C117,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v5: U19 CTRL side
@@ -150,6 +150,8 @@ C141,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: bootstrap
 C142,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v5: buck output
 C143,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v5: buck output
 C144,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB feed-forward
+C145,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB compensation (with R140)
+C146,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB to GND (100 kHz ripple filter)
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
@@ -159,9 +161,9 @@ D5,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D8,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
 D9,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
 D10,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
-D11,ac_psu:D,ac_psu:D_SOD-323_AC,v5: VDD feed diode
+D11,ac_psu:D,ac_psu:D_SOD-323_AC,v5: VCC feed diode (blocks towards the 15V rail during the start)
 D12,ac_psu:D,ac_psu:D_SMA_AC,v5: clamp diode 1000 V
-D13,ac_psu:D_TVS,ac_psu:D_SMB_AC,v5: clamp TVS (~230 V at 1.4 A): drain peak ~450 + 240 V
+D13,ac_psu:D_TVS,ac_psu:D_SMB_AC,"v5: clamp TVS (~190 V at 1.2 A): drain peak ~450 + 190 = 640 V, 80 % of 800 V"
 D14,ac_psu:D,ac_psu:D_SMA_AC,v5: Out1 rectifier 200 V 2 A
 D15,ac_psu:D,ac_psu:D_SMA_AC,v5: Out2 rectifier 200 V 2 A
 D16,ac_psu:D_Schottky,ac_psu:D_SMA_AC,v5: CTRL rectifier 100 V 3 A
@@ -212,9 +214,6 @@ Q11,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
 Q12,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
 Q13,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 Q14,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
-Q15,ac_psu:MMBT3904,Package_TO_SOT_SMD:SOT-23,"v5: gate buffer, source"
-Q16,ac_psu:MMBT3906,Package_TO_SOT_SMD:SOT-23,"v5: gate buffer, sink"
-Q17,ac_psu:IPD95R450P7,Package_TO_SOT_SMD:TO-252-2,v5: 950 V MOSFET (JLC C3289115)
 R1,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R2,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R3,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
@@ -300,14 +299,10 @@ R95,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Prot
 R96,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R97,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R98,ac_psu:R,Resistor_SMD:R_2512_6332Metric,v5: aux input damping resistor DC+ -> AUX_VIN
-R100,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VDD feed from 15V
-R101,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VS divider RS1 (Out1 winding node)
-R102,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VS divider RS2
-R103,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: cable compensation RCBC
-R104,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: CS line-compensation resistor RLC (tune on the prototype)
-R105,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: current-sense resistor RCS
-R106,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: gate resistor
-R107,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: gate-source pull-down
+R100,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VCC feed from 15V (RVCC)
+R101,ac_psu:R,Resistor_SMD:R_0603_1608Metric,"v5: VERR divider top, from 15V: 1.80 V x (1 + 365 / 49.9) = 14.97 V (1 %)"
+R102,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VERR divider bottom (R101 || R102 = 43.9k: non-isolated mode needs > 25.3k)
+R105,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: current-sense resistor: peak limit 0.80 V / 0.562 = 1.42 A (1.28 .. 1.57)
 R108,ac_psu:R,Resistor_SMD:R_0805_2012Metric,v5: Out1 preload
 R109,ac_psu:R,Resistor_SMD:R_0805_2012Metric,v5: Out2 preload
 R110,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: ISOADA1 divider top (x0.4 with the 8.2k source)
@@ -336,6 +331,11 @@ R132,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: EN divider (start ~7 V)
 R133,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: EN divider
 R134,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB divider top
 R135,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB divider bottom (5.0 V)
+R136,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"
+R137,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
+R138,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
+R139,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB RSel: burst mode option 2 (720 .. 790k)
+R140,ac_psu:R,Resistor_SMD:R_0603_1608Metric,"v5: FB compensation, in series with C145"
 R256,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 REF1,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 REF2,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
@@ -358,7 +358,7 @@ U14,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 
 U15,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U16,ac_psu:Si8660BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U17,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
-U18,ac_psu:UCC28710,ac_psu:SOIC-7_3.9x4.9mm_P1.27mm_UCC28710,v5: PSR flyback controller (JLC C80866)
+U18,ac_psu:ICE5AR0680BZS,Package_DIP:DIP-8-N6_W7.62mm,"v5: fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"
 U19,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q5-Q8, TRANS4/5 (JLC C2878538)"
 U20,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs TRANS6, DAB_SEC, relay (JLC C2878538)"
 U21,ac_psu:CA-IS3742,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5: U4/U6 sigma-delta clock and data (JLC C4944981)

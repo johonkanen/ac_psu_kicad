@@ -166,10 +166,6 @@ PROJECT = {
         base="TerminalBlock_Wuerth:Wuerth_REDCUBE-THR_WP-THRBU_74650074_THR", npth_to_pad=(7.4, 7.4),
         descr="M4 ring-lug terminal, Wuerth REDCUBE THR 74650074R (50 A), plated 4.3 mm centre hole"),
     # v5 (aux flyback, CTRL isolation)
-    "SOIC-7_3.9x4.9mm_P1.27mm_UCC28710": dict(base="Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", drop_pads={"7"},
-                                              renumber={"8": "7"},
-                                              descr="TI SOIC-7 (D): SOIC-8 land pattern without pin 7, HV = pad 7 at the "
-                                                    "pin-8 position (UCC28710)"),
     "D_SMB_AC": dict(base="Diode_SMD:D_SMB", renumber={"1": "C", "2": "A"}, descr="SMB diode, pads C/A"),
     # Ferroxcube CPV-E25/13/7-1S-10P-Z vertical coil former (user 2026-11-02). Its own drawing was not
     # available (2026-11-05): pin grid 5.0 mm x 12.7 mm between the rows as on the Ferroxcube vertical

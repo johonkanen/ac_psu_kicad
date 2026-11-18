@@ -74,7 +74,7 @@ def evaluate(name, inputs, out=print):
     out(f"== {name}: {shape} N87, {bobbin}")
     out(f"   Ae {eff['effectiveArea']*1e6:.1f} mm2, Ve {eff['effectiveVolume']*1e9:.0f} mm3; centre gap {g*1e3:.3f} mm "
         f"for Lm {lm*1e6:.0f} uH (AL {lm/NP**2*1e9:.0f} nH); fits: {p.are_sections_and_layers_fitting(coil)}")
-    out(f"   peak flux at Ipp(max) (VCST max 810 mV): {LP*IPP*0.81/0.78/(NP*eff['effectiveArea'])*1e3:.0f} mT")
+    out(f"   peak flux at the maximum current limit (VCS_N 0.88 V): {LP*VCS_N[2]/RCS/(NP*eff['effectiveArea'])*1e3:.0f} mT")
     rth = thermal_rth(core)
     worst = 0.0
     for op in inputs["operatingPoints"]:

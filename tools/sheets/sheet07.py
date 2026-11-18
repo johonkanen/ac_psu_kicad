@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Sheet 7 - Auxiliary supply, v5 (V5_PLAN.md; the v4 IW1830/EF20 flyback of PDF page 7 is in git
-history before v5): UCC28710 primary-side-regulated flyback with the external 950 V MOSFET Q17,
-EE25 transformer T1 (vertical Ferroxcube former), outputs Out1 = 15V on GND (also the PSR sense and
-VDD winding), Out2 = 15V_ISO on ISOGND (reinforced, TIW), and the CTRL winding W1 (TIW flying
+history before v5): ICE5AR0680BZS fixed-frequency flyback with integrated 800 V switch (v5 step 7; before
+that UCC28710 + a 950 V MOSFET), EE25 transformer T1 (vertical Ferroxcube former), outputs Out1 = 15V on GND
+(regulated directly through the controller's error amplifier; also feeds VCC), Out2 = 15V_ISO on ISOGND (reinforced, TIW), and the CTRL winding W1 (TIW flying
 leads) -> CTRL_RAW -> TPS54202 buck -> 5V_CTRL for the control card at J12 (CTRL island B, bonded
 to PE by PEC2, linked to island A by J13). Kept from v4: C28/C41 (15V), C36/C15 (15V_ISO),
 C67/C58/C57 (5V), C68 (DC+)."""
@@ -47,40 +47,41 @@ sh.text("C67: 100 uF ceramic (X5R 1206; v4 clean-up, was drawn polarized).", g(2
 for i, net in enumerate(("15V", "15V_ISO", "GND")):
     flagged_power(sh, net, g(110 + 8 * i), g(22))
 
-# ---- input, controller, MOSFET, clamp --------------------------------------------------------
-sh.text("Primary: DC+ (100-450 V) -> R98 -> AUX_VIN (C111/C112) -> T1 pin 2; UCC28710 HV start-up from AUX_VIN.",
-        g(16), g(44))
+# ---- input, controller, clamp -------------------------------------------------------------------
+sh.text("Primary: DC+ (100-450 V max) -> R98 -> AUX_VIN (C111/C112) -> T1 pin 2. Start-up: AUX_VIN -> R136-R138 (3 x 10M) "
+        "-> GATE.", g(16), g(44))
 row(g(54), g(20), [
     ("R", "R98", V["R98"], "DC+", "AUX_VIN", 1),
     ("C", "C111", V["C111"], "AUX_VIN", "GND", 1),
     ("C", "C112", V["C112"], "AUX_VIN", "GND", 1),
     ("D", "D12", V["D12"], "AUX_DRAIN", "AUX_CLAMP", "A"),
     ("D_TVS", "D13", V["D13"], "AUX_CLAMP", "AUX_VIN", "C"),
+    ("R", "R136", V["R136"], "AUX_VIN", "AUX_ST1", 1),
+    ("R", "R137", V["R137"], "AUX_ST1", "AUX_ST2", 1),
+    ("R", "R138", V["R138"], "AUX_ST2", "AUX_GATE", 1),
 ])
-sh.text("Clamp: drain -> D12 (1000 V) -> AUX_CLAMP -> D13 TVS -> AUX_VIN (drain peak ~450 + 240 V < 950 V).",
-        g(16), g(71))
-ic(sh, "UCC28710", "U18", g(90), g(84), {7: "AUX_VIN", 1: "AUX_VDD", 2: "AUX_VS", 3: "AUX_CBC",
-                                         6: "AUX_DRV", 5: "AUX_CSP", 4: "GND"}, value=V["U18"])
+sh.text("Clamp: drain -> D12 (1000 V) -> AUX_CLAMP -> D13 TVS -> AUX_VIN (drain peak ~450 + 190 = 640 V, 80 % of 800 V; "
+        "DC+ is limited to 450 V).", g(16), g(71))
+ic(sh, "ICE5AR0680BZS", "U18", g(90), g(86), {4: "AUX_GATE", 7: "AUX_VDD", 1: "AUX_VERR", 2: "AUX_COMP", 3: "AUX_CS",
+                                              5: "AUX_DRAIN", 8: "GND"}, value=V["U18"])
 flag_net("AUX_VDD", g(40), g(84))
-row(g(110), g(20), [
-    ("C", "C113", V["C113"], "AUX_VDD", "GND", 1),
+row(g(112), g(20), [
+    ("C_Polarized", "C113", V["C113"], "AUX_VDD", "GND", 1),
     ("C", "C114", V["C114"], "AUX_VDD", "GND", 1),
     ("R", "R100", V["R100"], "15V", "AUX_VDDR", 1),
     ("D", "D11", V["D11"], "AUX_VDDR", "AUX_VDD", "A"),
-    ("R", "R101", V["R101"], "AUX_W1", "AUX_VS", 1),
-    ("R", "R102", V["R102"], "AUX_VS", "GND", 1),
-    ("R", "R103", V["R103"], "AUX_CBC", "GND", 1),
-    ("R", "R104", V["R104"], "AUX_CS", "AUX_CSP", 1),
+    ("R", "R101", V["R101"], "15V", "AUX_VERR", 1),
+    ("R", "R102", V["R102"], "AUX_VERR", "GND", 1),
     ("R", "R105", V["R105"], "AUX_CS", "GND", 1),
-    ("R", "R106", V["R106"], "AUX_GATED", "AUX_GATE", 1),
-    ("R", "R107", V["R107"], "AUX_GATE", "AUX_CS", 1),
+    ("R", "R139", V["R139"], "AUX_COMP", "GND", 1),
+    ("R", "R140", V["R140"], "AUX_COMP", "AUX_COMPC", 1),
+    ("C", "C145", V["C145"], "AUX_COMPC", "GND", 1),
+    ("C", "C146", V["C146"], "AUX_COMP", "GND", 1),
 ])
-sh.text("VDD from 15V (Out1) via R100 + D11; CDD 15 uF. VS divider RS1/RS2 from the Out1 winding node AUX_W1, "
-        "RCBC 118k, RLC 1k, RCS 0.562R (V5_PLAN.md 5.3).", g(16), g(127))
-ic(sh, "MMBT3904", "Q15", g(150), g(82), {1: "AUX_DRV", 3: "AUX_VDD", 2: "AUX_GATED"}, value=V["Q15"])
-ic(sh, "MMBT3906", "Q16", g(180), g(82), {1: "AUX_DRV", 3: "GND", 2: "AUX_GATED"}, value=V["Q16"])
-ic(sh, "IPD95R450P7", "Q17", g(210), g(82), {1: "AUX_GATE", 2: "AUX_DRAIN", 3: "AUX_CS"}, value=V["Q17"])
-sh.text("Gate buffer Q15/Q16 (DRV sources only 20-25 mA; Q17 Qg 35 nC).", g(140), g(96))
+sh.text("U18 ICE5AR0680BZS (v5 step 7): 100 kHz, integrated 800 V switch and error amplifier. VCC from 15V via R100 + D11 "
+        "(~14.3 V; the cascode charges it to 16 V at the start).", g(16), g(129))
+sh.text("15V is regulated directly: VERR = 1.80 V at R101/R102 (14.97 V). FB: R140 + C145, C146, RSel R139 (burst option 2). "
+        "RCS 0.562R: peak limit 1.42 A.", g(16), g(132))
 
 # ---- transformer and outputs ---------------------------------------------------------------------
 ic(sh, "EE25_AUX_TRANS", "T1", g(270), g(40), {1: "AUX_DRAIN", 2: "AUX_VIN", 3: None, 4: "GND", 5: "AUX_W1",

@@ -1,5 +1,10 @@
 # Aux flyback (v5): UCC28710 PSR, 20 W, Out1 / Out2 / CTRL, EE25 with CTRL on TIW flying leads
 
+> **2026-11-18, v5 step 7: the controller is the Infineon ICE5AR0680BZS** (fixed 100 kHz, integrated 800 V
+> switch and error amplifier), no longer the UCC28710 + IPD95R450P7 this document describes. The transformer is
+> unchanged. Current controller figures: `python params.py` (saved in `controller_ice5ar.txt`) and V5_PLAN.md 5.4.
+> The UCC28710 sections below and the MKF run in `report.txt` (71 kHz) are the record of the first design.
+
 Replacement for the sheet-7 auxiliary supply (today IW1830 + EF20 TR2), redesigned 2026-10-31 for
 V5_PLAN.md sections 5–5.3 and CTRL_ISOLATION_PLAN.md. Computed with PyOpenMagnetics (OpenMagnetics MKF)
 1.7.35. Not yet in the schematic.
