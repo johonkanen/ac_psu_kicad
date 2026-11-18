@@ -32,6 +32,9 @@ T, F = pcbnew.ToMM, pcbnew.FromMM
 STAGING_Y = -84.0
 POLY = {k: v[1] for k, v in L.AREAS.items()}
 DOM = {k: v[0] for k, v in L.AREAS.items()}
+# with the aux flyback areas (v5 step 9). POLY / DOM / strips() without them stay as tools/v5/v5_5_card_area_r2.py used them.
+POLY_ALL = {**POLY, **{k: v[1] for k, v in L.AUX_AREAS.items()}}
+DOM_ALL = {**DOM, **{k: v[0] for k, v in L.AUX_AREAS.items()}}
 
 
 def sps(poly):
@@ -58,10 +61,10 @@ def touches(a, b):
     return c.OutlineCount() > 0 and c.Area() > 1
 
 
-def strips():
+def strips(lines=None):
     """The barrier strips inside / around the card: everything within 2.5 mm of a barrier centre line."""
     s = pcbnew.SHAPE_POLY_SET()
-    for _, _, pl in L.LINES:
+    for _, _, pl in (L.LINES if lines is None else lines):
         for a, b in zip(pl, pl[1:]):
             d = math.dist(a, b)
             nx, ny = -(b[1] - a[1]) / d * 0.005, (b[0] - a[0]) / d * 0.005
@@ -73,15 +76,15 @@ def strips():
 
 
 def static_checks(err):
-    names = sorted(POLY)
+    names = sorted(POLY_ALL)
     for i, a in enumerate(names):
         for b in names[i + 1:]:
-            if DOM[a] != DOM[b] and poly_dist(POLY[a], POLY[b]) < L.GAP - 1e-6:
-                err.append(f"areas {a} and {b}: {poly_dist(POLY[a], POLY[b]):.2f} mm apart")
+            if DOM_ALL[a] != DOM_ALL[b] and poly_dist(POLY_ALL[a], POLY_ALL[b]) < L.GAP - 1e-6:
+                err.append(f"areas {a} and {b}: {poly_dist(POLY_ALL[a], POLY_ALL[b]):.2f} mm apart")
     if min(poly_dist(POLY["CA"], p) for p in L.I_AROUND_CA) < L.GAP - 1e-6:
         err.append("area CA: less than 5 mm from the ISO copper around J11")
-    allpolys = list(POLY.values()) + L.I_AROUND_CA
-    for name, _, pl in L.LINES:
+    allpolys = list(POLY_ALL.values()) + L.I_AROUND_CA
+    for name, _, pl in L.LINES + L.AUX_LINES:
         for a, b in zip(pl, pl[1:]):
             g = min(seg_seg(a, b, c, e) for p in allpolys for c, e in edges(p))
             if g < L.GAP / 2 - 0.05:
@@ -143,7 +146,7 @@ def main():
                 continue
             bb = pad.GetBoundingBox()
             corners = rect(T(bb.GetLeft()), -T(bb.GetBottom()), T(bb.GetRight()), -T(bb.GetTop()))
-            if not any(DOM[k] == d and all(inside(c, POLY[k]) for c in corners) for k in POLY):
+            if not any(DOM_ALL[k] == d and all(inside(c, POLY_ALL[k]) for c in corners) for k in POLY_ALL):
                 err.append(f"{ref}-{pad.GetNumber()} ({domains.short(pad.GetNetname())}, {d}) at "
                            f"({T(pad.GetPosition().x):.2f}, {-T(pad.GetPosition().y):.2f}): outside the {d} copper areas")
         want = L.PLACE[ref][1]
@@ -228,7 +231,7 @@ def main():
             if not any((math.dist(p, s) < 0.01 and math.dist(q, e) < 0.01) or (math.dist(p, e) < 0.01 and math.dist(q, s) < 0.01)
                        for s, e in cuts):
                 err.append(f"slot {name}: side {sg:+d} not on Edge.Cuts")
-    strip = strips()
+    strip = strips(L.LINES + L.AUX_LINES)
     ntr = 0
     for t in board.GetTracks():
         px, py = T(t.GetStart().x), -T(t.GetStart().y)

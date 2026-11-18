@@ -1,0 +1,52 @@
+== v5 step 9: aux flyback area placed (T1 across the P|I gap, controller and parts around it)
+  T1: footprint taken again from the library (fly-lead holes 12 / 11, 4.8 mm apart)
+  T1    F (  87.40,  -38.60) rot   0  EEL19 between U8 and J3; primary row and fly leads west, isolated row east
+  D15   B (  93.00,  -28.50) rot   0  Out2 rectifier, between U8 and T1 pin 10
+  C116  B (  93.00,  -42.20) rot 270  Out2 capacitor, south of T1 pins 9 / 10
+  R109  B (  90.30,  -33.50) rot 270  Out2 preload
+  U18   B (  73.70,  -37.25) rot 180  controller, DRAIN pins south, next to fly-lead hole 12 (drain)
+  C113  B (  73.60,  -25.20) rot  90  VCC capacitor, north of U18
+  C114  B (  71.60,  -31.00) rot   0  VCC decoupling at pins 11 / 12
+  C147  B (  75.20,  -31.00) rot 180  VIN filter at pin 1
+  D14   B (  81.05,  -28.80) rot 270  Out1 rectifier, anode at T1 pin 1
+  C28   B (  72.20,  -16.50) rot 180  15V output capacitor (v4 part, was top at (95.2, -44.8): it stood in T1's slot)
+  C41   B (  74.90,   -8.00) rot   0  15V ceramic (v4 part, was top at (94.0, -40.1))
+  R108  B (  81.00,  -23.00) rot   0  15V preload
+  R102  B (  78.45,  -33.35) rot  90  VERR divider bottom, at pin 2
+  C146  B (  78.45,  -36.40) rot 270  FB capacitor, at pin 3; 2.5 mm from the DRAIN pins
+  R101  B (  78.30,  -30.30) rot 270  VERR divider top, from 15V
+  R144  B (  78.30,  -27.20) rot  90  line over-voltage divider bottom
+  R140  B (  78.30,  -24.10) rot  90  FB compensation resistor
+  C145  B (  78.30,  -21.00) rot  90  FB compensation capacitor
+  R139  B (  73.60,  -11.00) rot 180  FB RSel (C146 is at the pin)
+  R105  B (  81.60,  -40.35) rot 270  current-sense resistor, below T1 pin 2 (GND)
+  D12   B (  80.90,  -48.20) rot  90  clamp diode, anode at fly-lead hole 12 (drain)
+  D13   F (  79.20,  -24.75) rot 180  clamp TVS, top side north of T1
+  C111  F (  79.00,  -52.60) rot   0  input capacitor at fly-lead hole 11 (DC+), top side south of T1; DC+ pad west
+  C68   F (  72.00,  -51.50) rot   0  DC+ 100n (v4 part) turned 180 degrees and 1.3 mm west: its DC+ pad now faces fly
+  C112  B (  69.50,  -11.00) rot   0  input capacitor, under the card
+  D11   F (  77.60,  -20.50) rot   0  VCC feed diode
+  R100  F (  81.20,  -20.50) rot 180  VCC feed resistor
+  R98   F (  74.00,  -12.30) rot   0  input resistor DC+ -> AUX_VIN, under the card (0.65 mm high)
+  R136  F (  69.50,   -7.70) rot   0  start-up chain, DC+ end west
+  R137  F (  74.30,   -7.70) rot   0  start-up chain
+  R138  F (  79.10,   -7.70) rot   0  start-up chain, GATE end
+  R141  F (  69.50,   -5.30) rot   0  line over-voltage chain, DC+ end west: beside the start-up chain, equal voltages
+  R142  F (  74.30,   -5.30) rot   0  line over-voltage chain
+  R143  F (  79.10,   -5.30) rot   0  line over-voltage chain, VIN end
+  pad clearance of the high-voltage pads: U18-5 2.5, U18-6 2.5, U18-7 2.5, U18-8 2.5, T1-11 2.0, T1-12 2.5, D12-A 1.5, D12-C 1.5, D13-A 1.5, D13-C 1.5, C111-1 1.5, C112-1 1.5, R98-1 1.5, R98-2 1.5
+  deleted   49 track P copper in or within 5 mm of the other domain's aux area (15V, GND)
+  deleted    2 via   P copper in or within 5 mm of the other domain's aux area (15V, GND)
+  deleted    5 track inside the aux barrier strip (DAB_PWM_PRI_HI, DAB_PWM_PRI_LO, GND)
+  deleted    7 track stub at the old place of C28 / C41 (DC+, GND)
+  deleted   24 track under a pad of a placed part (DAB_PWM_PRI_HI, DC+, GND)
+  deleted    1 via   under a pad of a placed part (DAB_PWM_PRI_HI, DC+, GND)
+  deleted    3 track within the clearance of a high-voltage pad (GND)
+  deleted    1 via   within the clearance of a high-voltage pad (GND)
+  deleted zone Proteus F.Cu pour 17 [GND] F.Cu (C68's old GND pad; under the clamp and input parts now)
+  1 barrier rule area (no tracks, vias, pours; all copper layers) along: B-PI aux
+  zone Proteus F.Cu pour 19 [GND] F.Cu: cut back, 1 piece(s), the largest 28 mm2 (was 125)
+  zone Proteus F.Cu pour 20 [15V] F.Cu: cut back, 1 piece(s), the largest 92 mm2 (was 150)
+  zone Proteus B.Cu pour 0 (fix 14) [PGND] B.Cu: cut back, 1 piece(s), the largest 2453 mm2 (was 2453)
+  deleted   14 tracks / vias left without a pad or a pour of their net
+  zones filled again on the reloaded board

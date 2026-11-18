@@ -21,6 +21,9 @@ in the card area (U19–U24, the difference amplifiers, U27, C137/C138, L2): ord
 Hand-fit there: PEC1/PEC2 (lug and screw on the bottom), J13/J14 (no headers: a two-wire cable soldered from the
 bottom), W1 (transformer leads). The CPL is regenerated after routing.
 
+Since v5 step 9 the aux flyback south of the card is placed as well: most of its parts are on the bottom side
+(U18, C28, C113, C116, D12, D14, D15 and the small parts); T1 (EEL19, user-wound) is hand-fitted on top.
+
 **DC bus wire link (v5 step 6).** The CTRL domain at J11 cuts the isolated DC bus; two pieces of 2.5 mm round
 enamelled copper wire on the bottom side join it (about 10 A; four 3.0 mm solder holes, IPC frame mm):
 

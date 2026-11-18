@@ -1,6 +1,44 @@
 # Status
 
-Updated: 2026-11-18 (v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 9 – aux flyback area placed (2026-11-18, branch `v5-layout`)
+
+User 2026-11-18: "do the real placement on the aux area". All 33 aux parts have left the staging area; nothing is
+routed. Geometry and positions: `tools/v5/card_layout.py` (`AUX_AREAS`, `AUX_LINES`, `HV_PADS`, `PLACE`); script
+`tools/v5/v5_9_aux_area.py` (seed 5009), log `reports/v5_layout/v5_9_aux_area.log`; renders
+`reports/v5_layout/aux_F.png` and `aux_B.png`.
+
+- **Two more copper areas:** PX (primary, x 67.0…82.9, y −54.6…−4.0, including the free strip under the card) and
+  IA (ISO, x 88.0…97.5, y −48.0…−25.5, joined to the ISO copper at U8). 5.1 mm apart; a barrier rule area along
+  x 85.42 (no slot: T1 has 10.8 mm between its pad rows).
+- **T1** (EEL19) at (87.4, −38.6) between U8 and J3: primary row and fly-lead holes west, isolated row east. Its
+  footprint changed once more: the fly-lead holes are 4.8 mm apart (2.6 mm between pads, was 1.3 mm) and hole 12
+  (drain) is the one next to the controller.
+- **ISO side (bottom):** D15, C116, R109 at T1's pins 9 / 10.
+- **Primary side:** U18 on the bottom at (73.7, −37.25), DRAIN pins at fly-lead hole 12; C113, C114, C147 north of
+  it; the VERR / FB / line-sense parts in a column east of it; D14 and C28 at T1's pins 1 / 2; clamp diode D12 at
+  hole 12, TVS D13 on the top side north of T1; C111 on the top side at hole 11; R98 and the two 10M chains on the
+  top side under the card (low parts), side by side with equal voltages; C112, R139, C41 below them on the bottom.
+- **Moved v4 parts:** C28 and C41 (they stood in T1's slot) and C68 (turned 180° and 1.3 mm west: its GND pad was
+  1.1 mm from fly-lead hole 11).
+- **High-voltage spacing:** the pads of the drain, the fly-lead holes, the clamp, the input capacitors and R98
+  carry their own clearance (2.5 / 2.0 / 1.5 mm, `HV_PADS`); zone fills and the DRC keep it. The PGND pour on the
+  bottom is pulled back from U18's DRAIN pins. Old copper inside these clearances, in the barrier, within 5 mm of
+  the other domain's area or under new pads is deleted (15V, GND, DC+ and three PWM lines to J3: ratsnest now);
+  the small GND pour at C68 is gone; the 15V and GND pours at U9 are cut back from the ISO aux area.
+- **Checks:** `check_layout.py` covers the aux areas too (`POLY_ALL`); the aux rectangles of `lib/v5_copper.csv`
+  are `unrouted` now (clearance and domain gaps strict). `tools/check_all.sh` ALL CHECKS PASSED: domain_gaps 0
+  violations and nothing pending, DRC 0 clearance items pending, every pour still one piece.
+
+**Not solved by the placement:**
+- **Copper on U18's DRAIN pins.** There is no room for the 230 mm² the loss estimate assumed: the PGND pour, the
+  fly-lead holes and the FB parts surround the pins. With little copper the estimate is about 115 °C at 450 V and
+  55 °C air (94 K/W), up to 160 °C at the upper bound of the loss. Inner-layer copper under T1 (with vias at the
+  pins) is the option to try in routing; measure on the first board.
+- The primary switching loop (C111 → hole 11 … hole 12 → U18 → R105) is compact; the clamp loop (D12 → D13) is
+  about 25 mm long, and RSel R139 is 25 mm from the FB pin (C146 is at the pin).
+- Routing: 354 open connections on 140 nets (`reports/v5_layout/routing_list.md`, group 8a = aux flyback).
 
 ## v5 step 8 – aux flyback on the EEL19, controller ICE5AR0680AG in PG-DSO-12 (2026-11-18, branch `v5-layout`)
 

@@ -171,11 +171,12 @@ PROJECT = {
     # (~/dev/tube_psu_kicad tools/next/gen_next_footprints.py eel19(): rows 12.5 mm apart, primary row pitch 3.5 mm,
     # isolated row pitch 2.7 mm, base 15.8 x 22.5 mm from the seller's data; CONFIRM WITH CALIPERS). Differences here:
     # only the pins this board uses have pads (1 Out1, 2 GND; 9 ISOGND, 10 Out2; the others are clipped), the two
-    # primary fly-lead holes 11 / 12 are beside the primary row instead of beyond the end (the slot between U8 and J3
-    # is 28 mm long), and there is no milled slot (10.8 mm between the rows' pads; this board asks for 5.0 mm).
+    # primary fly-lead holes 12 (drain) / 11 (DC+) are beside the primary row instead of beyond the end (the slot
+    # between U8 and J3 is 28 mm long), 4.8 mm apart as in the tube PSU (2.6 mm between their pads: the full primary
+    # voltage), and there is no milled slot (10.8 mm between the rows' pads; this board asks for 5.0 mm).
     "Transformer_EEL19_V_4+6_SideLeads": dict(
         pins=[("1", -6.25, -5.25, 1.8, 1.0), ("2", -6.25, -1.75, 1.8, 1.0), ("9", 6.25, -4.05, 1.6, 0.9), ("10", 6.25, -6.75, 1.6, 0.9),
-              ("11", -10.6, 5.5, 2.2, 1.2), ("12", -10.6, 9.0, 2.2, 1.2)],
+              ("12", -10.6, 5.5, 2.2, 1.2), ("11", -10.6, 10.3, 2.2, 1.2)],
         pad=1.8, drill=1.0, body=(15.8, 22.5),
         descr="EEL19 vertical bobbin 4+6 (rows 12.5 mm apart), aux flyback T1: 1 Out1, 2 GND, 9 ISOGND, 10 Out2, fly leads "
               "11 DC+ / 12 drain beside the primary row; body 15.8 x 22.5 mm, height about 29 mm (confirm with calipers)"),

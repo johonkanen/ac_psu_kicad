@@ -79,3 +79,59 @@ PLACE.update(_L1._blk("AD1 R87 C9 R86 C17 U12 L1 C18", "P", "B", 61.1, 0.0,
 PLACE.update(_L1._blk("REF1 C40 C16 R19 R30 C109", "P", "F", 74.8, -0.9,
                       "1.65 V reference group as it is, 24.75 mm east and 5 mm south (top side): x 70.5..79.2, y -2.9..1.0"))
 GROUPS = _L1.GROUPS + ["AD1 R87 C9 R86 C17 U12 L1 C18", "REF1 C40 C16 R19 R30 C109"]
+
+
+# ---- aux flyback area (v5 step 9, user 2026-11-18) -----------------------------------------------------
+# South of the card: the aux flyback between C12 (west), U8 and the ISO copper (north-east), U9 and the J12 CTRL
+# piece (east) and J3 (south). Two more copper areas; the transformer T1 stands across the 5 mm gap between them.
+AUX_AREAS = {
+    # primary side of the aux flyback (GND / DC+ / 15V): also the free strip under the card up to y -4
+    "PX": ("P", [(67.0, -54.6), (82.9, -54.6), (82.9, -4.0), (67.0, -4.0)]),
+    # ISO side: T1 pins 9 / 10, D15, C116, R109; north it joins the ISO copper at U8 (area IS)
+    "IA": ("I", [(88.0, -25.5), (97.5, -25.5), (97.5, -48.0), (88.0, -48.0)]),
+}
+AUX_LINES = [("B-PI aux", "P|I", [(85.42, -50.5), (85.42, -6.5)])]     # ends 2.5 mm above y -53: primary copper may pass south of IA
+T1_ORIGIN = (87.4, -38.6)    # footprint origin; pins 1 / 2 at x 81.15, pins 9 / 10 at x 93.65, fly leads 12 / 11 at x 76.8
+# High-voltage nets of the primary side (V5_PLAN.md 4: 2.5 mm on the outer layers for DC+, the drain and the clamp).
+# Pad clearance to other nets, set by the placement script: zone fills and the DRC keep it.
+HV_PADS = {("U18", "5"): 2.5, ("U18", "6"): 2.5, ("U18", "7"): 2.5, ("U18", "8"): 2.5, ("T1", "11"): 2.0, ("T1", "12"): 2.5,
+           ("D12", "A"): 1.5, ("D12", "C"): 1.5, ("D13", "A"): 1.5, ("D13", "C"): 1.5, ("C111", "1"): 1.5, ("C112", "1"): 1.5,
+           ("R98", "1"): 1.5, ("R98", "2"): 1.5}
+#   (1.5 mm where a part's own pads are 1.9 .. 2.0 mm apart; the positions keep 2.5 mm to low-voltage parts where it fits)
+# ref -> (area, side, x, y, note); rotations are chosen by tools/v5/v5_9_aux_area.py
+PLACE.update({
+    "T1": ("PX|IA", "F", 87.4, -38.6, "EEL19 between U8 and J3; primary row and fly leads west, isolated row east"),
+    "D15": ("IA", "B", 93.0, -28.5, "Out2 rectifier, between U8 and T1 pin 10"),
+    "C116": ("IA", "B", 93.0, -42.2, "Out2 capacitor, south of T1 pins 9 / 10"),
+    "R109": ("IA", "B", 90.3, -33.5, "Out2 preload"),
+    "U18": ("PX", "B", 73.7, -37.25, "controller, DRAIN pins south, next to fly-lead hole 12 (drain)"),
+    "C113": ("PX", "B", 73.6, -25.2, "VCC capacitor, north of U18"),
+    "C114": ("PX", "B", 71.6, -31.0, "VCC decoupling at pins 11 / 12"),
+    "C147": ("PX", "B", 75.2, -31.0, "VIN filter at pin 1"),
+    "C28": ("PX", "B", 72.2, -16.5, "15V output capacitor (v4 part, was top at (95.2, -44.8): it stood in T1's slot)"),
+    "C41": ("PX", "B", 74.9, -8.0, "15V ceramic (v4 part, was top at (94.0, -40.1))"),
+    "D14": ("PX", "B", 81.05, -28.8, "Out1 rectifier, anode at T1 pin 1"),
+    "R108": ("PX", "B", 81.0, -23.0, "15V preload"),
+    "R102": ("PX", "B", 78.45, -33.35, "VERR divider bottom, at pin 2"),
+    "C146": ("PX", "B", 78.45, -36.4, "FB capacitor, at pin 3; 2.5 mm from the DRAIN pins"),
+    "R101": ("PX", "B", 78.3, -30.3, "VERR divider top, from 15V"),
+    "R144": ("PX", "B", 78.3, -27.2, "line over-voltage divider bottom"),
+    "R140": ("PX", "B", 78.3, -24.1, "FB compensation resistor"),
+    "C145": ("PX", "B", 78.3, -21.0, "FB compensation capacitor"),
+    "R139": ("PX", "B", 73.6, -11.0, "FB RSel (C146 is at the pin)"),
+    "R105": ("PX", "B", 81.6, -40.35, "current-sense resistor, below T1 pin 2 (GND)"),
+    "D12": ("PX", "B", 80.9, -48.2, "clamp diode, anode at fly-lead hole 12 (drain)"),
+    "D13": ("PX", "F", 79.2, -24.75, "clamp TVS, top side north of T1"),
+    "C111": ("PX", "F", 79.0, -52.6, "input capacitor at fly-lead hole 11 (DC+), top side south of T1; DC+ pad west"),
+    "C68": ("PX", "F", 72.0, -51.5, "DC+ 100n (v4 part) turned 180 degrees and 1.3 mm west: its DC+ pad now faces fly-lead hole 11"),
+    "C112": ("PX", "B", 69.5, -11.0, "input capacitor, under the card"),
+    "D11": ("PX", "F", 77.6, -20.5, "VCC feed diode"),
+    "R100": ("PX", "F", 81.2, -20.5, "VCC feed resistor"),
+    "R98": ("PX", "F", 74.0, -12.3, "input resistor DC+ -> AUX_VIN, under the card (0.65 mm high)"),
+    "R136": ("PX", "F", 69.5, -7.7, "start-up chain, DC+ end west"), "R137": ("PX", "F", 74.3, -7.7, "start-up chain"),
+    "R138": ("PX", "F", 79.1, -7.7, "start-up chain, GATE end"),
+    "R141": ("PX", "F", 69.5, -5.3, "line over-voltage chain, DC+ end west: beside the start-up chain, equal voltages side by side"),
+    "R142": ("PX", "F", 74.3, -5.3, "line over-voltage chain"), "R143": ("PX", "F", 79.1, -5.3, "line over-voltage chain, VIN end"),
+})
+HEIGHT.update({"Infineon_PG-DSO-12_CoolSET": 1.75, "Transformer_EEL19_V_4+6_SideLeads": 29.2, "CP_Elec_6.3x5.4": 5.4,
+               "D_SMB_AC": 2.4, "R_2512_6332Metric": 0.65, "D_SOD-323_AC": 1.0, "R_0805_2012Metric": 0.65})

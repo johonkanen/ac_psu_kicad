@@ -9,8 +9,8 @@
 #   wire     off-board wire between two pads of one net at (x, y) and (x1, y1): the checks count the pads
 #            as joined (assign_nets), and one unconnected DRC item of the net per wire is the wire.
 kind,layer,x,y,x1,y1,net,note
-pending,*,65.0,-62.0,85.0,-10.0,,aux flyback area (sheet 7: removed IW1830/EF20 copper; T1/U18/Q17 to place)
-pending,*,85.0,-62.0,110.0,-40.0,,aux flyback area, part south of the J12 CTRL piece
+unrouted,*,65.0,-62.0,85.0,-3.0,,aux flyback area, west part (tools/v5/v5_9_aux_area.py): placed, routing open
+unrouted,*,85.0,-62.0,116.0,-40.0,,aux flyback area, part south of the J12 CTRL piece (to U9: the 15V / GND pours are cut back from the ISO aux area): placed, routing open
 unrouted,*,22.0,-22.0,118.65,54.0,,card area in three domains (tools/v5/v5_4_card_area.py): placed, planes done, routing open
 unrouted,*,85.0,-40.0,118.65,-22.0,,J12 CTRL piece south of the card and U8 (moved 13.36 mm west)
 pending,*,-130.0,-160.0,120.0,-84.0,,staging area below the board (new v5 parts, unplaced)

@@ -10,7 +10,7 @@ with `--version`. KiCad's Python is `tools/p2k/bin/kipy`; `kicad-cli` is `tools/
 
 ## Goal
 
-Connect the 307 open connections on 121 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
+Connect the 354 open connections on 140 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
 final board with zones refilled:
 
 - `tools/check_all.sh` ends with ALL CHECKS PASSED;
