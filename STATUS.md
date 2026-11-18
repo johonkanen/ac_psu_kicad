@@ -21,7 +21,8 @@ be bought from JLC. Record: V5_PLAN.md 5.5, `reports/aux_flyback/controller_ice5
 - **Checks:** `tools/check_all.sh` ALL CHECKS PASSED.
 
 **Open:** the aux area is still not placed. C28 and C41 must move. With the real footprints the rough placement
-finds a spot for every part (see the session report); a usable layout needs the controller next to fly-lead hole
+finds a spot for every part (`reports/v5_layout/aux_fit_rough.png`: top side left, bottom side right; an
+automatic packing, not a layout); a usable layout needs the controller next to fly-lead hole
 12 and copper on its DRAIN pins.
 
 ## v5 step 7 – aux flyback controller ICE5AR0680BZS (2026-11-18, branch `v5-layout`)
