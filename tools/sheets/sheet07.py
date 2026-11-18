@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Sheet 7 - Auxiliary supply, v5 (V5_PLAN.md; the v4 IW1830/EF20 flyback of PDF page 7 is in git
-history before v5): ICE5AR0680BZS fixed-frequency flyback with integrated 800 V switch (v5 step 7; before
-that UCC28710 + a 950 V MOSFET), EE25 transformer T1 (vertical Ferroxcube former), outputs Out1 = 15V on GND
+history before v5): ICE5AR0680AG fixed-frequency flyback with integrated 800 V switch (v5 steps 7 and 8; before
+that UCC28710 + a 950 V MOSFET), EEL19 transformer T1 (vertical 4+6 bobbin, primary on fly leads), outputs Out1 = 15V on GND
 (regulated directly through the controller's error amplifier; also feeds VCC), Out2 = 15V_ISO on ISOGND (reinforced, TIW), and the CTRL winding W1 (TIW flying
 leads) -> CTRL_RAW -> TPS54202 buck -> 5V_CTRL for the control card at J12 (CTRL island B, bonded
 to PE by PEC2, linked to island A by J13). Kept from v4: C28/C41 (15V), C36/C15 (15V_ISO),
-C67/C58/C57 (5V), C68 (DC+)."""
+C67/C58/C57 (5V), C68 (DC+). C28 is the 15V output capacitor (C115 dropped in v5 step 8)."""
 import os
 import sys
 
@@ -62,8 +62,9 @@ row(g(54), g(20), [
 ])
 sh.text("Clamp: drain -> D12 (1000 V) -> AUX_CLAMP -> D13 TVS -> AUX_VIN (drain peak ~450 + 190 = 640 V, 80 % of 800 V; "
         "DC+ is limited to 450 V).", g(16), g(71))
-ic(sh, "ICE5AR0680BZS", "U18", g(90), g(86), {4: "AUX_GATE", 7: "AUX_VDD", 1: "AUX_VERR", 2: "AUX_COMP", 3: "AUX_CS",
-                                              5: "AUX_DRAIN", 8: "GND"}, value=V["U18"])
+ic(sh, "ICE5AR0680AG", "U18", g(90), g(86), {10: "AUX_GATE", 11: "AUX_VDD", 1: "AUX_LOVP", 2: "AUX_VERR", 3: "AUX_COMP",
+                                             4: "AUX_CS", 5: "AUX_DRAIN", 6: "AUX_DRAIN", 7: "AUX_DRAIN", 8: "AUX_DRAIN",
+                                             9: None, 12: "GND"}, value=V["U18"])
 flag_net("AUX_VDD", g(40), g(84))
 row(g(112), g(20), [
     ("C_Polarized", "C113", V["C113"], "AUX_VDD", "GND", 1),
@@ -78,23 +79,29 @@ row(g(112), g(20), [
     ("C", "C145", V["C145"], "AUX_COMPC", "GND", 1),
     ("C", "C146", V["C146"], "AUX_COMP", "GND", 1),
 ])
-sh.text("U18 ICE5AR0680BZS (v5 step 7): 100 kHz, integrated 800 V switch and error amplifier. VCC from 15V via R100 + D11 "
+row(g(54), g(110), [
+    ("R", "R141", V["R141"], "AUX_VIN", "AUX_LV1", 1),
+    ("R", "R142", V["R142"], "AUX_LV1", "AUX_LV2", 1),
+    ("R", "R143", V["R143"], "AUX_LV2", "AUX_LOVP", 1),
+    ("R", "R144", V["R144"], "AUX_LOVP", "GND", 1),
+    ("C", "C147", V["C147"], "AUX_LOVP", "GND", 1),
+])
+sh.text("Line over-voltage: R141-R143 / R144 to VIN, switching stops above 478 V (461 .. 495 V). DC+ limit 450 V.", g(110), g(71))
+sh.text("U18 ICE5AR0680AG (v5 step 8, PG-DSO-12): 100 kHz, integrated 800 V switch and error amplifier. VCC from 15V via R100 + D11 "
         "(~14.3 V; the cascode charges it to 16 V at the start).", g(16), g(129))
 sh.text("15V is regulated directly: VERR = 1.80 V at R101/R102 (14.97 V). FB: R140 + C145, C146, RSel R139 (burst option 2). "
         "RCS 0.562R: peak limit 1.42 A.", g(16), g(132))
 
 # ---- transformer and outputs ---------------------------------------------------------------------
-ic(sh, "EE25_AUX_TRANS", "T1", g(270), g(40), {1: "AUX_DRAIN", 2: "AUX_VIN", 3: None, 4: "GND", 5: "AUX_W1",
-                                               6: "AUX_W2", 7: "ISOGND", 8: None, 9: None, 10: None},
+ic(sh, "EEL19_AUX_TRANS", "T1", g(270), g(40), {11: "AUX_VIN", 12: "AUX_DRAIN", 1: "AUX_W1", 2: "GND", 10: "AUX_W2", 9: "ISOGND"},
    value=V["T1"], n=4)
-for i, t in enumerate(("T1: E25/13/7 N87 on Ferroxcube CPV-E25/13/7-1S-10P-Z (vertical), Lp 322 uH, gap ~0.22 mm.",
-                       "Primary row: 1 drain, 2 DC+ (AUX_VIN), 3 P1/P2 joint (no net), 4 GND, 5 Out1.",
-                       "Secondary row: 6 Out2+, 7 ISOGND, 8-10 cut. CTRL winding = W1 (TIW flying leads).",
-                       "Reinforced: {primary, Out1} | Out2 | CTRL. Core floating: insulate it (tape/caps).")):
+for i, t in enumerate(("T1: EEL19 PC40 on the vertical 4+6 bobbin of the tube PSU (v5 step 8), Lp 322 uH, 100 kHz.",
+                       "Primary 70 T on fly leads: 11 DC+ (AUX_VIN), 12 drain. Primary row: 1 Out1 (11 T), 2 GND.",
+                       "Isolated row: 10 Out2+ (11 T TIW), 9 ISOGND. CTRL winding (7 T TIW) = W1 (flying leads).",
+                       "Reinforced: {primary, Out1} | Out2 | CTRL. Core = primary: wrap it with 3 layers of tape.")):
     sh.text(t, g(240), g(56 + 3 * i))
 row(g(84), g(240), [
     ("D", "D14", V["D14"], "AUX_W1", "15V", "A"),
-    ("C_Polarized", "C115", V["C115"], "15V", "GND", 1),
     ("R", "R108", V["R108"], "15V", "GND", 1),
     ("D", "D15", V["D15"], "AUX_W2", "15V_ISO", "A"),
     ("C_Polarized", "C116", V["C116"], "15V_ISO", "ISOGND", 1),

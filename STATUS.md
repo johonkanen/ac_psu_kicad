@@ -1,6 +1,28 @@
 # Status
 
-Updated: 2026-11-18 (v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-18 (v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 8 – aux flyback on the EEL19, controller ICE5AR0680AG in PG-DSO-12 (2026-11-18, branch `v5-layout`)
+
+A rough automatic placement (scratch study, not in the repo) showed that the aux supply of step 7 does not fit
+its space: no place for the EE25 at all with C28/C41 where they are, a 28.0 mm slot for its 28.6 mm courtyard
+once they move, and the DIP controller 37 mm from the drain pin. User 2026-11-18: use the tube PSU's EEL19 if it
+is smaller and the SMD controller; the EEL19 has room for 15–20 W at the ICE5's frequency; the ICE5AR0680AG will
+be bought from JLC. Record: V5_PLAN.md 5.5, `reports/aux_flyback/controller_ice5ar.txt`.
+
+- **T1:** EEL19 PC40, vertical 4+6 bobbin, footprint `Transformer_EEL19_V_4+6_SideLeads` (fly-lead holes beside
+  the body). 70 / 11 / 11 / 7 turns, Lp 322 µH, 230 mT at the 19.8 W load, window 56 % full. **Hand calculation:**
+  losses 0.33–0.70 W, 11–20 K rise; a winding design run and measurements are still needed.
+- **U18:** ICE5AR0680AG, footprint `Infineon_PG-DSO-12_CoolSET`, JLC C17699638. Line over-voltage stop at 478 V
+  (R141–R144, C147).
+- **Dropped:** C115; C28 is the 15V output capacitor.
+- **Board** (`tools/v5/v5_8_aux_eel19.py`, seed 5008): footprints swapped in the staging area, 28 pad nets
+  updated. `tools/v4/domains.py`: T1's isolated side is now bobbin pins 5–10.
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED.
+
+**Open:** the aux area is still not placed. C28 and C41 must move. With the real footprints the rough placement
+finds a spot for every part (see the session report); a usable layout needs the controller next to fly-lead hole
+12 and copper on its DRAIN pins.
 
 ## v5 step 7 – aux flyback controller ICE5AR0680BZS (2026-11-18, branch `v5-layout`)
 

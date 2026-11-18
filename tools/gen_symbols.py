@@ -84,20 +84,20 @@ def build():
             [(3, "NO", PAS), (2, "COIL_1", PAS), (1, "COM_1", PAS)],
             desc="Power relay (Proteus refdes R20/R79; no pin 4)"),
     ]
-    # v5: aux flyback (ICE5AR0680BZS since v5 step 7; was UCC28710 + 950 V MOSFET; EE25) and control-card
+    # v5: aux flyback (ICE5AR0680BZS in v5 step 7, ICE5AR0680AG and the EEL19 since step 8; was UCC28710 + 950 V MOSFET; EE25) and control-card
     # isolation (CTRL domain)
     syms += [
         from_std("Device", "D_Zener", "D_TVS", "D", desc="Unidirectional TVS diode, pins A/C", pins=D_PINS),
         from_std("Connector_Generic", "Conn_01x02", "CONN_2", "J", desc="2-pin connector"),
         from_std("Amplifier_Operational", "LM2904", "OPA2350EA", "U", desc="Dual rail-to-rail op-amp, VSSOP-8"),
-        box("ICE5AR0680BZS", "U", [(4, "GATE", PAS), (7, "VCC", PI), (1, "VERR", IN), (2, "FB", PAS), (3, "CS", IN)],
-            [(5, "DRAIN", PAS), None, None, None, (8, "GND", PI)],
-            desc="Fixed-frequency 100 kHz flyback controller with integrated 800 V CoolMOS (0.71 ohm) and error "
-                 "amplifier, PG-DIP-7 (pin 6 absent)"),
-        box("EE25_AUX_TRANS", "T", [(i, str(i), PAS) for i in (1, 2, 3, 4, 5)],
-            [(i, str(i), PAS) for i in (10, 9, 8, 7, 6)],
-            desc="EE25 aux flyback transformer, Ferroxcube CPV-E25/13/7-1S-10P-Z (1 drain, 2 DC+, 3 P1/P2 joint, "
-                 "4 GND, 5 Out1, 6 Out2, 7 ISOGND, 8-10 cut)"),
+        box("ICE5AR0680AG", "U", [(10, "GATE", PAS), (11, "VCC", PI), (1, "VIN", IN), (2, "VERR", IN), (3, "FB", PAS), (4, "CS", IN)],
+            [(5, "DRAIN", PAS), (6, "DRAIN", PAS), (7, "DRAIN", PAS), (8, "DRAIN", PAS), (9, "NC", PAS), (12, "GND", PI)],
+            desc="Fixed-frequency 100 kHz flyback controller with integrated 800 V CoolMOS (0.71 ohm), error amplifier and "
+                 "line over-voltage input, PG-DSO-12 (SO-16 narrow outline without pins 5, 6, 11, 12)"),
+        box("EEL19_AUX_TRANS", "T", [(11, "FL_DC", PAS), (12, "FL_D", PAS), (1, "1", PAS), (2, "2", PAS)],
+            [(10, "10", PAS), (9, "9", PAS)],
+            desc="EEL19 aux flyback transformer, vertical 4+6 bobbin: fly leads 11 = DC+ end, 12 = drain end of the primary; "
+                 "1 Out1, 2 GND (primary row); 10 Out2, 9 ISOGND (isolated row); other pins clipped; CTRL winding = W1"),
         box("CTRL_WINDING", "W", [(1, "CTRL+", PAS)], [(2, "CTRL-", PAS)],
             desc="CTRL winding of the aux transformer T1: TIW flying leads soldered into two holes (no pins on T1)"),
         box("ISO7760F", "U", [(1, "VCC1", PI)] + [(i + 2, f"IN{c}", IN) for i, c in enumerate("ABCDEF")] + [(8, "GND1", PI)],

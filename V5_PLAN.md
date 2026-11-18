@@ -515,6 +515,46 @@ line-sense pin; the supply starts as soon as VCC is charged and runs into its ov
   ICE5BR2280BZ (65 kHz, 2.13 ohm, smaller capacitance) is cooler at high input and hotter at 100 V.
 - The drain peak at 450 V (must stay below about 680 V), and the 15V load step (loop).
 
+### 5.5 EEL19 transformer and SMD controller ICE5AR0680AG (user 2026-11-18, v5 step 8)
+
+**Why:** a rough placement showed that the EE25 (courtyard 20.6 x 28.6 mm) and the DIP controller of 5.4 do not
+fit the space of the aux supply: the only slot for the transformer, between U8 and J3, is 28.0 mm long, and the
+primary parts have only narrow strips beside it. User: use the EEL19 of the tube PSU if it is smaller, and the
+SMD package; "eel19 should have room for 15-20W with the higher switching frequency"; the ICE5AR0680AG will be
+bought from JLC (13 pcs on 2026-11-18).
+
+**Transformer T1:** EEL19 PC40 on the vertical 4+6 bobbin of the tube PSU (`~/dev/tube_psu_kicad`,
+simulation/flyback/EEL19_DESIGN.md). Body 15.8 x 22.5 mm. Footprint `ac_psu:Transformer_EEL19_V_4+6_SideLeads`:
+pads only for the pins used (1 Out1, 2 GND; 9 ISOGND, 10 Out2), the primary's two fly-lead holes beside the
+primary row (the tube PSU has them beyond the end: too long for the slot), no milled slot (10.8 mm between the
+rows' pads). **The bobbin base dimensions are the seller's data: confirm with calipers.**
+
+| | EE25 (5.3) | EEL19 (hand calculation, `reports/aux_flyback/controller_ice5ar.txt`) |
+|---|---|---|
+| Core area | 51.8 mm2 | 23.4 mm2 |
+| Turns primary / Out1 / Out2 / CTRL | 32 / 5 / 5 / 3 | 70 / 11 / 11 / 7 |
+| Lp, frequency | 322 uH, 71 kHz | 322 uH, 100 kHz |
+| Peak flux at the 19.8 W load | 270 mT | 230 mT |
+| Peak flux at the current limit (max) | 280 mT | 308 mT (PC40 saturates at about 390 mT at 100 C) |
+| Gap | 0.22 mm | 0.45 mm in total |
+| Window | fits (MKF) | build 2.24 mm of 3.98 mm (56 %), every winding one layer |
+| Losses at 100 V | 0.64 W (MKF) | 0.33 W with DC resistance only, 0.70 W with a factor 3 for AC effects: 11 to 20 K rise |
+
+The EEL19 figures are a **hand calculation**: DC resistance, a flat factor for skin, proximity and gap fringing,
+and a core-loss estimate. The tube PSU's MKF runs gave two to three times the DC loss on the same core, which the
+factor 3 covers. A winding design run (MKF, in the tube PSU session) and a measurement of the inductance and the
+temperature on the first sample are still needed. CTRL is now 9.5 V (7 turns; was 9.0 V).
+
+**Controller U18:** ICE5AR0680AG in PG-DSO-12 (SO-16 narrow outline without positions 5, 6, 11, 12; footprint
+`ac_psu:Infineon_PG-DSO-12_CoolSET`), JLC C17699638, assembled by JLC. Same circuit as 5.4. Pin-compatible:
+ICE5GR4780AG (4.13 ohm, about 11 to 12 W at 100 V input by estimate), ICE5GR2280AG, ICE5GR1680AG (all 125 kHz:
+the peak current and the losses change). New: **line over-voltage stop** on the VIN pin, R141-R143 3 x 10M +
+R144 180k + C147 1n: switching stops above 478 V (461 to 495 V), a hardware backstop for the 450 V limit.
+RthJA 94 K/W with the minimum copper on the four DRAIN pins; copper on pins 5-8 is still a layout rule.
+
+**Removed:** C115 (470 uF on 15V): the existing C28 (220 uF) is the 15V output capacitor. C28 and C41 move with
+the aux layout (they stand in the transformer's slot).
+
 ## 6. Not part of v5
 
 v4 clean-up and manufacturing items (C67, silk positions, pad decisions, JLC alternatives, CPL)

@@ -1,0 +1,104 @@
+(footprint "Transformer_EEL19_V_4+6_SideLeads"
+	(version 20260206)
+	(generator "ac_psu_gen_footprints")
+	(layer "F.Cu")
+	(descr "EEL19 vertical bobbin 4+6 (rows 12.5 mm apart), aux flyback T1: 1 Out1, 2 GND, 9 ISOGND, 10 Out2, fly leads 11 DC+ / 12 drain beside the primary row; body 15.8 x 22.5 mm, height about 29 mm (confirm with calipers) (ac_psu)")
+	(property "Reference" "REF**"
+		(at 0 -12.75 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Transformer_EEL19_V_4+6_SideLeads"
+		(at 0 12.75 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -7.9 -11.25)
+		(end 7.9 11.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_rect
+		(start -8.02 -11.37)
+		(end 8.02 11.37)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+	)
+	(fp_rect
+		(start -11.75 -11.5)
+		(end 8.15 11.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at -6.25 -5.25)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "2" thru_hole circle
+		(at -6.25 -1.75)
+		(size 1.8 1.8)
+		(drill 1)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "9" thru_hole circle
+		(at 6.25 -4.05)
+		(size 1.6 1.6)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "10" thru_hole circle
+		(at 6.25 -6.75)
+		(size 1.6 1.6)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "11" thru_hole circle
+		(at -10.6 5.5)
+		(size 2.2 2.2)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "12" thru_hole circle
+		(at -10.6 9)
+		(size 2.2 2.2)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+)

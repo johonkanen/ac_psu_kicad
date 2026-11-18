@@ -552,6 +552,18 @@
       },
       {
         "netclass": "DOM_P",
+        "pattern": "AUX_LOVP"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "AUX_LV1"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "AUX_LV2"
+      },
+      {
+        "netclass": "DOM_P",
         "pattern": "AUX_ST1"
       },
       {
@@ -1464,23 +1476,11 @@
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(T1-Pad10)"
+        "pattern": "unconnected-(U10-NR-Pad4)"
       },
       {
         "netclass": "DOM_P",
-        "pattern": "unconnected-(T1-Pad3)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "unconnected-(T1-Pad8)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "unconnected-(T1-Pad9)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "unconnected-(U10-NR-Pad4)"
+        "pattern": "unconnected-(U18-NC-Pad9)"
       },
       {
         "netclass": "DOM_I",

@@ -1,5 +1,5 @@
 """v5 part list (stdlib only): the aux flyback that replaces the sheet 7 IW1830/EF20 supply
-(V5_PLAN.md: ICE5AR0680BZS since v5 step 7, EE25 vertical, 15V / 15V_ISO / CTRL winding) and the
+(V5_PLAN.md: ICE5AR0680AG and the EEL19 since v5 step 8, 15V / 15V_ISO / CTRL winding) and the
 control-card isolation (CTRL_ISOLATION_PLAN.md: CTRL islands A at J11 and B at J12).
 
 One place for refdes, sheet, symbol, value and footprint: tools/v5/make_v5_lists.py writes the
@@ -34,8 +34,8 @@ PARTS = [
     ("R98", 7, "R", "10R 2512", R2512, "aux input damping resistor DC+ -> AUX_VIN"),
     ("C111", 7, "C", "47n 1kV", C1210, "aux input filter"),
     ("C112", 7, "C", "47n 1kV", C1210, "aux input filter"),
-    ("U18", 7, "ICE5AR0680BZS", "ICE5AR0680BZS", "Package_DIP:DIP-8-N6_W7.62mm",
-     "fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"),
+    ("U18", 7, "ICE5AR0680AG", "ICE5AR0680AG", "ac_psu:Infineon_PG-DSO-12_CoolSET",
+     "fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DSO-12 (v5 step 8; JLC C17699638)"),
     ("C113", 7, "C_Polarized", "47u 35V", "Capacitor_SMD:CP_Elec_6.3x5.4", "VCC capacitor (hold-up 16 -> 10 V during the start)"),
     ("C114", 7, "C", "1u 50V", C0603, "VCC decoupling at pin 7"),
     ("R100", 7, "R", "10R", R0603, "VCC feed from 15V (RVCC)"),
@@ -46,16 +46,21 @@ PARTS = [
     ("R136", 7, "R", "10M", R1206, "start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"),
     ("R137", 7, "R", "10M", R1206, "start-up chain"),
     ("R138", 7, "R", "10M", R1206, "start-up chain"),
+    ("R141", 7, "R", "10M", R1206, "line over-voltage divider AUX_VIN -> VIN, 3 x 10M"),
+    ("R142", 7, "R", "10M", R1206, "line over-voltage divider"),
+    ("R143", 7, "R", "10M", R1206, "line over-voltage divider"),
+    ("R144", 7, "R", "180k", R0603, "line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)"),
+    ("C147", 7, "C", "1n", C0603, "VIN filter"),
     ("R139", 7, "R", "750k", R0603, "FB RSel: burst mode option 2 (720 .. 790k)"),
     ("R140", 7, "R", "4.7k", R0603, "FB compensation, in series with C145"),
     ("C145", 7, "C", "10n", C0603, "FB compensation (with R140)"),
     ("C146", 7, "C", "2.2n", C0603, "FB to GND (100 kHz ripple filter)"),
     ("D12", 7, "D", "US1M", SMA, "clamp diode 1000 V"),
     ("D13", 7, "D_TVS", "SMBJ150A", SMB, "clamp TVS (~190 V at 1.2 A): drain peak ~450 + 190 = 640 V, 80 % of 800 V"),
-    ("T1", 7, "EE25_AUX_TRANS", "EE25 aux flyback", "ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical",
-     "E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"),
+    ("T1", 7, "EEL19_AUX_TRANS", "EEL19 aux flyback", "ac_psu:Transformer_EEL19_V_4+6_SideLeads",
+     "EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW "
+     "(reports/aux_flyback; v5 step 8)"),
     ("D14", 7, "D", "ES2D", SMA, "Out1 rectifier 200 V 2 A"),
-    ("C115", 7, "C_Polarized", "470u 25V", CP8, "Out1 (15V) output capacitor"),
     ("R108", 7, "R", "4.7k", R0805, "Out1 preload"),
     ("D15", 7, "D", "ES2D", SMA, "Out2 rectifier 200 V 2 A"),
     ("C116", 7, "C_Polarized", "470u 25V", CP8, "Out2 (15V_ISO) output capacitor"),
@@ -131,6 +136,6 @@ PARTS += [
 
 # v5 parts that were dropped again (v5 step 7: UCC28710 gate buffer, external MOSFET, CBC and CS-series resistors):
 # make_v5_lists.py takes them out of lib/part_map.csv.
-DROPPED = "Q15 Q16 Q17 R103 R104 R106 R107".split()
+DROPPED = "Q15 Q16 Q17 R103 R104 R106 R107 C115".split()     # C115: v5 step 8, C28 is the 15V output capacitor
 
 VALUE = {p[0]: p[3] for p in PARTS}

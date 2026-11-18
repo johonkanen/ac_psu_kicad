@@ -83,8 +83,8 @@ part,C111,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
 value,C111,,,47n 1kV,v5,
 part,C112,,,Capacitor_SMD:C_1210_3225Metric,v5,aux input filter
 value,C112,,,47n 1kV,v5,
-part,U18,,,Package_DIP:DIP-8-N6_W7.62mm,v5,"fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"
-value,U18,,,ICE5AR0680BZS,v5,
+part,U18,,,ac_psu:Infineon_PG-DSO-12_CoolSET,v5,"fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DSO-12 (v5 step 8; JLC C17699638)"
+value,U18,,,ICE5AR0680AG,v5,
 part,C113,,,Capacitor_SMD:CP_Elec_6.3x5.4,v5,VCC capacitor (hold-up 16 -> 10 V during the start)
 value,C113,,,47u 35V,v5,
 part,C114,,,Capacitor_SMD:C_0603_1608Metric,v5,VCC decoupling at pin 7
@@ -105,6 +105,16 @@ part,R137,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
 value,R137,,,10M,v5,
 part,R138,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
 value,R138,,,10M,v5,
+part,R141,,,Resistor_SMD:R_1206_3216Metric,v5,"line over-voltage divider AUX_VIN -> VIN, 3 x 10M"
+value,R141,,,10M,v5,
+part,R142,,,Resistor_SMD:R_1206_3216Metric,v5,line over-voltage divider
+value,R142,,,10M,v5,
+part,R143,,,Resistor_SMD:R_1206_3216Metric,v5,line over-voltage divider
+value,R143,,,10M,v5,
+part,R144,,,Resistor_SMD:R_0603_1608Metric,v5,line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)
+value,R144,,,180k,v5,
+part,C147,,,Capacitor_SMD:C_0603_1608Metric,v5,VIN filter
+value,C147,,,1n,v5,
 part,R139,,,Resistor_SMD:R_0603_1608Metric,v5,FB RSel: burst mode option 2 (720 .. 790k)
 value,R139,,,750k,v5,
 part,R140,,,Resistor_SMD:R_0603_1608Metric,v5,"FB compensation, in series with C145"
@@ -117,12 +127,10 @@ part,D12,,,ac_psu:D_SMA_AC,v5,clamp diode 1000 V
 value,D12,,,US1M,v5,
 part,D13,,,ac_psu:D_SMB_AC,v5,"clamp TVS (~190 V at 1.2 A): drain peak ~450 + 190 = 640 V, 80 % of 800 V"
 value,D13,,,SMBJ150A,v5,
-part,T1,,,ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical,v5,"E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"
-value,T1,,,EE25 aux flyback,v5,
+part,T1,,,ac_psu:Transformer_EEL19_V_4+6_SideLeads,v5,"EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW (reports/aux_flyback; v5 step 8)"
+value,T1,,,EEL19 aux flyback,v5,
 part,D14,,,ac_psu:D_SMA_AC,v5,Out1 rectifier 200 V 2 A
 value,D14,,,ES2D,v5,
-part,C115,,,Capacitor_SMD:CP_Elec_8x10,v5,Out1 (15V) output capacitor
-value,C115,,,470u 25V,v5,
 part,R108,,,Resistor_SMD:R_0805_2012Metric,v5,Out1 preload
 value,R108,,,4.7k,v5,
 part,D15,,,ac_psu:D_SMA_AC,v5,Out2 rectifier 200 V 2 A
@@ -287,13 +295,18 @@ add,C111,1,,AUX_VIN,v5,
 add,C111,2,,GND,v5,
 add,C112,1,,AUX_VIN,v5,
 add,C112,2,,GND,v5,
-add,U18,1,,AUX_VERR,v5,
-add,U18,2,,AUX_COMP,v5,
-add,U18,3,,AUX_CS,v5,
-add,U18,4,,AUX_GATE,v5,
+add,U18,1,,AUX_LOVP,v5,
+add,U18,2,,AUX_VERR,v5,
+add,U18,3,,AUX_COMP,v5,
+add,U18,4,,AUX_CS,v5,
 add,U18,5,,AUX_DRAIN,v5,
-add,U18,7,,AUX_VDD,v5,
-add,U18,8,,GND,v5,
+add,U18,6,,AUX_DRAIN,v5,
+add,U18,7,,AUX_DRAIN,v5,
+add,U18,8,,AUX_DRAIN,v5,
+add,U18,9,,N/C,v5,
+add,U18,10,,AUX_GATE,v5,
+add,U18,11,,AUX_VDD,v5,
+add,U18,12,,GND,v5,
 add,C113,1,,AUX_VDD,v5,
 add,C113,2,,GND,v5,
 add,C114,1,,AUX_VDD,v5,
@@ -314,6 +327,16 @@ add,R137,1,,AUX_ST1,v5,
 add,R137,2,,AUX_ST2,v5,
 add,R138,1,,AUX_ST2,v5,
 add,R138,2,,AUX_GATE,v5,
+add,R141,1,,AUX_VIN,v5,
+add,R141,2,,AUX_LV1,v5,
+add,R142,1,,AUX_LV1,v5,
+add,R142,2,,AUX_LV2,v5,
+add,R143,1,,AUX_LV2,v5,
+add,R143,2,,AUX_LOVP,v5,
+add,R144,1,,AUX_LOVP,v5,
+add,R144,2,,GND,v5,
+add,C147,1,,AUX_LOVP,v5,
+add,C147,2,,GND,v5,
 add,R139,1,,AUX_COMP,v5,
 add,R139,2,,GND,v5,
 add,R140,1,,AUX_COMP,v5,
@@ -326,20 +349,14 @@ add,D12,A,,AUX_DRAIN,v5,
 add,D12,C,,AUX_CLAMP,v5,
 add,D13,A,,AUX_VIN,v5,
 add,D13,C,,AUX_CLAMP,v5,
-add,T1,1,,AUX_DRAIN,v5,
-add,T1,2,,AUX_VIN,v5,
-add,T1,3,,N/C,v5,
-add,T1,4,,GND,v5,
-add,T1,5,,AUX_W1,v5,
-add,T1,6,,AUX_W2,v5,
-add,T1,7,,ISOGND,v5,
-add,T1,8,,N/C,v5,
-add,T1,9,,N/C,v5,
-add,T1,10,,N/C,v5,
+add,T1,1,,AUX_W1,v5,
+add,T1,2,,GND,v5,
+add,T1,9,,ISOGND,v5,
+add,T1,10,,AUX_W2,v5,
+add,T1,11,,AUX_VIN,v5,
+add,T1,12,,AUX_DRAIN,v5,
 add,D14,A,,AUX_W1,v5,
 add,D14,C,,15V,v5,
-add,C115,1,,15V,v5,
-add,C115,2,,GND,v5,
 add,R108,1,,15V,v5,
 add,R108,2,,GND,v5,
 add,D15,A,,AUX_W2,v5,

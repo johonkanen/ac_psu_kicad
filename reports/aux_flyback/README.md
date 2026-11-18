@@ -1,5 +1,8 @@
 # Aux flyback (v5): UCC28710 PSR, 20 W, Out1 / Out2 / CTRL, EE25 with CTRL on TIW flying leads
 
+> **2026-11-18, v5 step 8: the transformer is an EEL19 (hand calculation in `params.py` `eel19()`) and the controller
+> the ICE5AR0680AG in PG-DSO-12**; V5_PLAN.md 5.5. The MKF scripts and results here still describe the EE25.
+>
 > **2026-11-18, v5 step 7: the controller is the Infineon ICE5AR0680BZS** (fixed 100 kHz, integrated 800 V
 > switch and error amplifier), no longer the UCC28710 + IPD95R450P7 this document describes. The transformer is
 > unchanged. Current controller figures: `python params.py` (saved in `controller_ice5ar.txt`) and V5_PLAN.md 5.4.

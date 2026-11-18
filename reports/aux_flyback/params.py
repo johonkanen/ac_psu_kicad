@@ -2,7 +2,8 @@
 100 kHz, integrated 800 V / 0.71 ohm CoolMOS and error amplifier; v5 step 7, 2026-11-18, before that UCC28710 +
 IPD95R450P7), 100-450 V DC in (DC+ limited to 450 V), Out1 15 V (GND, regulated through VERR, feeds VCC),
 Out2 15 V (ISOGND), CTRL ~9 V (control card, buck to 5 V).
-Three reinforced-separated groups: {primary, Out1}, Out2, CTRL. See README.md and V5_PLAN.md 5.4. All values SI."""
+Three reinforced-separated groups: {primary, Out1}, Out2, CTRL. See README.md and V5_PLAN.md 5.4 / 5.5. All values SI.
+v5 step 8: EEL19 core and bobbin (TURNSETS A) and the SMD package ICE5AR0680AG; the MKF scripts still describe the EE25."""
 import math
 
 # ---- input / controller (ICE5ARxxxxBZS datasheet V2.3, 2020-02-03) -----------------------------------
@@ -12,7 +13,7 @@ FSW_MIN = 92e3          # over temperature
 VCS_N = (0.72, 0.80, 0.88)       # peak current limit threshold at CS: min, typ, max
 RDS_HOT = 1.271         # ohm at Tj 125 C, ID 2 A (0.71 typ / 0.80 max at 25 C), incl. the low-side MOSFET
 CO_ER = 24e-12          # effective output capacitance, energy related, 0..500 V
-RTH_JA = (100.0, 65.0)  # K/W: data sheet with the minimum drain-pin copper; estimate with ~230 mm2 on the drain pin
+RTH_JA = (94.0, 65.0)   # K/W: ICE5AR0680AG data sheet with the minimum drain-pin copper; estimate with ~230 mm2 on the drain pins
                         # (Infineon's 24 W demo board: 61..66 K rise of a 2.2 ohm part at about 1 W)
 K_OFF = 0.4             # turn-off loss as a share of 0.5 V I tf f: the drain capacitance takes over part of the
                         # current while the channel closes. ESTIMATE; 1.0 is the upper bound. Measure on the board.
@@ -26,8 +27,8 @@ T_SS = 12e-3            # digital soft start
 
 # ---- turn set (Np, Ns, Nctrl, Nbias); TURNSET env var for the comparison run ---------------------
 import os as _os
-TURNSETS = {"A": (32, 5, 3, 0), "B": (38, 6, 4, 0)}   # (Np, Ns, Nctrl, Nbias): no bias winding since 2026-10-31
-TURNSET = TURNSETS[_os.environ.get("TURNSET", "A")]   # A chosen: lower leakage (clamp), 9 V CTRL; B: 216 mT, more leakage
+TURNSETS = {"A": (70, 11, 7, 0), "EE25": (32, 5, 3, 0)}   # A: EEL19 (v5 step 8); EE25: the first design   # (Np, Ns, Nctrl, Nbias): no bias winding since 2026-10-31
+TURNSET = TURNSETS[_os.environ.get("TURNSET", "A")]
 CTRL_V = TURNSET[2] * TURNSET[0] / TURNSET[1] * 15.7 / TURNSET[0] - 0.45   # CTRL winding minus Schottky drop
 CTRL_I = 9.0 / CTRL_V                                                       # 9 W into the buck
 
@@ -115,7 +116,45 @@ def summary():
         vrev = VIN_MAX * n / NP + v
         rows.append(f"  {name}: N {n}, winding {n*VOR/NP:.2f} V -> out {n*VOR/NP - vf:.2f} V; diode reverse {vrev:.0f} V")
     rows += control()
+    rows += eel19()
     return "\n".join(rows)
+
+
+# ---- EEL19 (v5 step 8): hand calculation, not an MKF run -------------------------------------------------
+EEL19 = dict(Ae=23.4e-6, Ve=1.45e-6, win_w=21.2e-3, win_h=3.975e-3, mlt=(30e-3, 34e-3, 38e-3, 42e-3), surface=19.6e-4)
+#   core data and window from ~/dev/tube_psu_kicad simulation/flyback/EEL19_DESIGN.md (seller's table; window assumed)
+EEL19_WIND = [   # layer (inner -> outer): name, turns, strands, copper d, outer d, Irms at 100 V
+    ("P1", NP // 2, 1, 0.35e-3, 0.39e-3, None), ("CTRL (TIW) + Out1", None, None, None, 0.66e-3, None),
+    ("P2", NP - NP // 2, 1, 0.35e-3, 0.39e-3, None), ("Out2 (TIW)", NS, 1, 0.40e-3, 0.60e-3, None)]
+
+
+def eel19():
+    e = EEL19
+    lim = [v / RCS for v in VCS_N]
+    r = [f"EEL19 PC40 (Ae {e['Ae']*1e6:.1f} mm2), turns {NP} / {NS} / {NS} / {NC}: HAND CALCULATION, to confirm by a winding design run"]
+    r.append(f"  peak flux {LP*IPP_FULL/(NP*e['Ae'])*1e3:.0f} mT at the design load, " + " / ".join(f"{LP*i/(NP*e['Ae'])*1e3:.0f}" for i in lim)
+             + " mT at the current limit (min / typ / max); PC40 saturates at about 390 mT at 100 C")
+    r.append(f"  gap for {LP*1e6:.0f} uH: {4e-7*math.pi*NP**2*e['Ae']/LP*1e3:.2f} mm in total")
+    build = 0.39e-3 * 2 + 0.66e-3 + 0.60e-3 + 4 * 0.05e-3
+    r.append(f"  window {e['win_w']*1e3:.1f} x {e['win_h']*1e3:.2f} mm: P1 {NP//2} T (0.35 mm, {NP//2*0.39:.1f} mm wide) | CTRL {NC} T x 3 TIW 25 AWG "
+             f"({NC*3*0.66:.1f} mm) beside Out1 {NS} T 0.5 mm ({NS*0.55:.1f} mm) | P2 {NP-NP//2} T | Out2 {NS} T TIW 0.4 mm ({NS*0.6:.1f} mm); "
+             f"build {build*1e3:.2f} mm = {build/e['win_h']*100:.0f} % of the window height")
+    d2 = LP * IPP_FULL / VOR * FSW                     # demagnetisation duty
+    k = math.sqrt(4 / (3 * d2))                        # secondary rms / average
+    irms_p = IPP_FULL * math.sqrt(LP * IPP_FULL / VIN_MIN * FSW / 3)
+    rho = 0.0172e-6 * 1.3                              # copper at about 100 C
+    def loss(n, strands, dcu, mlt, irms): return irms ** 2 * rho * n * mlt / (strands * math.pi * dcu ** 2 / 4)
+    out = {o[0]: o[2] for o in OUTPUTS}
+    pw = (loss(NP // 2, 1, 0.35e-3, e["mlt"][0], irms_p) + loss(NP - NP // 2, 1, 0.35e-3, e["mlt"][2], irms_p)
+          + loss(NS, 1, 0.5e-3, e["mlt"][1], out["Out1"] * k) + loss(NC, 3, 0.455e-3, e["mlt"][1], out["CTRL"] * k)
+          + loss(NS, 1, 0.40e-3, e["mlt"][3], out["Out2"] * k))
+    bac = LP * IPP_FULL / (NP * e["Ae"]) / 2
+    pc = 410e3 * (bac / 0.2) ** 2.5 * e["Ve"]          # PC40: about 410 kW/m3 at 100 kHz, 200 mT, 100 C
+    for name, f in (("DC resistance only", 1.0), ("with a factor 3 for skin, proximity and gap fringing", 3.0)):
+        p = pw * f + pc
+        r.append(f"  losses at 100 V input, {name}: windings {pw*f:.2f} W + core {pc:.2f} W = {p:.2f} W -> rise about "
+                 f"{(p*1e3/(e['surface']*1e4))**0.833:.0f} K (surface {e['surface']*1e4:.1f} cm2)")
+    return r
 
 
 def control():
@@ -131,7 +170,7 @@ def control():
     c_vcc = 47e-6 * 0.8 + 0.5e-6        # C113 47 uF electrolytic (-20 %) + C114 1 uF X5R at 15 V
     t_start = 1.1 * c_vcc / IVCC_CH1 + (VCC_ON - 1.1) * c_vcc / IVCC_CH3
     t_hold = c_vcc * (VCC_ON - 10.4) / IVCC_RUN
-    c_out = (690e-6, 690e-6, 940e-6)    # 15V, 15V_ISO, CTRL_RAW capacitance on the board
+    c_out = (220e-6, 690e-6, 940e-6)    # 15V (C28; C115 dropped in v5 step 8), 15V_ISO, CTRL_RAW capacitance on the board
     e_out = 0.5 * (c_out[0] * 15 ** 2 + c_out[1] * 15 ** 2 + c_out[2] * 9 ** 2)
     p_lim = 0.5 * LP * (VCS_N[0] / RCS) ** 2 * FSW_MIN * ETA_XFMR
     t_rise = T_SS + e_out / (p_lim / 2)          # soft start, then about half the limit power into the capacitors

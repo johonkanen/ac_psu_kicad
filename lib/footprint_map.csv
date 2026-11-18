@@ -120,7 +120,6 @@ C111,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v5: aux input filter
 C112,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v5: aux input filter
 C113,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_6.3x5.4,v5: VCC capacitor (hold-up 16 -> 10 V during the start)
 C114,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: VCC decoupling at pin 7
-C115,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_8x10,v5: Out1 (15V) output capacitor
 C116,ac_psu:C_Polarized,Capacitor_SMD:CP_Elec_8x10,v5: Out2 (15V_ISO) output capacitor
 C117,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v5: U19 CTRL side
 C118,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v5: U19 ISO side
@@ -152,6 +151,7 @@ C143,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v5: buck output
 C144,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB feed-forward
 C145,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB compensation (with R140)
 C146,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB to GND (100 kHz ripple filter)
+C147,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: VIN filter
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
@@ -336,10 +336,14 @@ R137,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
 R138,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
 R139,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB RSel: burst mode option 2 (720 .. 790k)
 R140,ac_psu:R,Resistor_SMD:R_0603_1608Metric,"v5: FB compensation, in series with C145"
+R141,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: line over-voltage divider AUX_VIN -> VIN, 3 x 10M"
+R142,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
+R143,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
+R144,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)
 R256,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 REF1,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 REF2,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
-T1,ac_psu:EE25_AUX_TRANS,ac_psu:Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical,"v5: E25/13/7 N87, Lp 322 uH, P1 16 / CTRL 3 TIW / Out1 5 / P2 16 / Out2 5 TIW (reports/aux_flyback)"
+T1,ac_psu:EEL19_AUX_TRANS,ac_psu:Transformer_EEL19_V_4+6_SideLeads,"v5: EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW (reports/aux_flyback; v5 step 8)"
 TR1,ac_psu:ETD34_TRAN_1P1S,,not on the board
 U1,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U2,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
@@ -358,7 +362,7 @@ U14,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 
 U15,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U16,ac_psu:Si8660BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U17,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
-U18,ac_psu:ICE5AR0680BZS,Package_DIP:DIP-8-N6_W7.62mm,"v5: fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DIP-7 (v5 step 7; hand-fit)"
+U18,ac_psu:ICE5AR0680AG,ac_psu:Infineon_PG-DSO-12_CoolSET,"v5: fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DSO-12 (v5 step 8; JLC C17699638)"
 U19,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q5-Q8, TRANS4/5 (JLC C2878538)"
 U20,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs TRANS6, DAB_SEC, relay (JLC C2878538)"
 U21,ac_psu:CA-IS3742,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5: U4/U6 sigma-delta clock and data (JLC C4944981)

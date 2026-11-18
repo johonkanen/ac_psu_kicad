@@ -5,7 +5,7 @@ C = control-card domain (v5: CTRLGND / CTRLGND_A, SELV, bonded to PE through PEC
 Nets are joined through every part except the barrier parts, which are split into their sides:
 TR1 (DAB transformer, off-board: PRI/SEC nets), TR2 (aux transformer: pins 1-5 / 6-10),
 U13/U15/U16/U17 (digital isolators: 1-8 / 9-16), U4/U5/U6 (isolated modulators: 1-4 / 5-8) and
-the Y capacitors (each pin on its own); v5: T1 (aux flyback: pins 1-5 / 6-10; its CTRL winding is
+the Y capacitors (each pin on its own); v5: T1 (aux flyback, EEL19: pins 1-4, 11, 12 / 5-10; its CTRL winding is
 the separate part W1), U19/U20/U21 (CTRL isolators: 1-8 / 9-16) and U22/U23/U24 (AMC1311: 1-4 /
 5-8). A group is P if it holds GND, PGND or DC+, I if it holds ISOGND, ISOPGND or ISODC+, C if it
 holds CTRLGND or CTRLGND_A, and E if it holds a pin of a PE terminal (PE<n>; the CTRL bonding
@@ -32,8 +32,10 @@ def short(net):
 def _side(ref, pin, net):
     if ref == "TR1":
         return "PRI" in net
-    if ref in ("TR2", "T1"):
+    if ref == "TR2":
         return int(pin) <= 5
+    if ref == "T1":      # EEL19 since v5 step 8: isolated row = bobbin pins 5-10; primary row 1-4 and the fly leads 11, 12
+        return not 5 <= int(pin) <= 10
     if ref in ("U13", "U15", "U16", "U17", "U19", "U20", "U21"):
         return int(pin) <= 8
     if ref in ("U4", "U5", "U6", "U22", "U23", "U24"):

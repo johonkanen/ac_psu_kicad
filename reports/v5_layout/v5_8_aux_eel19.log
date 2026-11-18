@@ -1,0 +1,44 @@
+== v5 step 8: aux flyback on the EEL19 with the ICE5AR0680AG (staged footprints and nets)
+  C115: CP_Elec_8x10 removed from the staging area
+  T1: Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical removed from the staging area (new footprint below)
+  U18: DIP-8-N6_W7.62mm removed from the staging area (new footprint below)
+  T1: ac_psu:Transformer_EEL19_V_4+6_SideLeads staged at (-112.70, -140.78)
+  U18: ac_psu:Infineon_PG-DSO-12_CoolSET staged at (-99.77, -134.49)
+  R141: Resistor_SMD:R_1206_3216Metric staged at (-92.69, -130.41)
+  R142: Resistor_SMD:R_1206_3216Metric staged at (-87.05, -130.41)
+  R143: Resistor_SMD:R_1206_3216Metric staged at (-81.39, -130.41)
+  R144: Resistor_SMD:R_0603_1608Metric staged at (-76.55, -130.01)
+  C147: Capacitor_SMD:C_0603_1608Metric staged at (-72.50, -130.01)
+  new net AUX_LOVP
+  C147-1: (none) -> AUX_LOVP
+  C147-2: (none) -> GND
+  R141-1: (none) -> AUX_VIN
+  new net AUX_LV1
+  R141-2: (none) -> AUX_LV1
+  R142-1: (none) -> AUX_LV1
+  new net AUX_LV2
+  R142-2: (none) -> AUX_LV2
+  R143-1: (none) -> AUX_LV2
+  R143-2: (none) -> AUX_LOVP
+  R144-1: (none) -> AUX_LOVP
+  R144-2: (none) -> GND
+  T1-1: (none) -> AUX_W1
+  T1-2: (none) -> GND
+  T1-9: (none) -> ISOGND
+  T1-10: (none) -> AUX_W2
+  T1-11: (none) -> AUX_VIN
+  T1-12: (none) -> AUX_DRAIN
+  U18-1: (none) -> AUX_LOVP
+  U18-2: (none) -> AUX_VERR
+  U18-3: (none) -> AUX_COMP
+  U18-4: (none) -> AUX_CS
+  U18-5: (none) -> AUX_DRAIN
+  U18-6: (none) -> AUX_DRAIN
+  U18-7: (none) -> AUX_DRAIN
+  U18-8: (none) -> AUX_DRAIN
+  new net unconnected-(U18-NC-Pad9)
+  U18-9: (none) -> unconnected-(U18-NC-Pad9)
+  U18-10: (none) -> AUX_GATE
+  U18-11: (none) -> AUX_VDD
+  U18-12: (none) -> GND
+  28 pad nets changed

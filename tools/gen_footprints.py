@@ -167,16 +167,25 @@ PROJECT = {
         descr="M4 ring-lug terminal, Wuerth REDCUBE THR 74650074R (50 A), plated 4.3 mm centre hole"),
     # v5 (aux flyback, CTRL isolation)
     "D_SMB_AC": dict(base="Diode_SMD:D_SMB", renumber={"1": "C", "2": "A"}, descr="SMB diode, pads C/A"),
-    # Ferroxcube CPV-E25/13/7-1S-10P-Z vertical coil former (user 2026-11-02). Its own drawing was not
-    # available (2026-11-05): pin grid 5.0 mm x 12.7 mm between the rows as on the Ferroxcube vertical
-    # E25 former CSV-E25/13/7-1S-6P-C (datasheet E25/13/7, 2008, Fig. 2), pins 0.7 mm square
-    # (CPH 10-pin, Fig. 3). VERIFY ON THE CPV DRAWING BEFORE ORDERING THE PCB. Row A pins 1-5,
-    # row B pins 6-10 (6 opposite 5). Core E25/13/7: 25.8 x 7.5 mm between the rows (fab).
-    "Transformer_EE25_Ferroxcube_CPV-E25-13-7-1S-10P_Vertical": dict(
-        pins=[(str(i + 1), -10.0 + 5.0 * i, -6.35) for i in range(5)] + [(str(10 - i), -10.0 + 5.0 * i, 6.35) for i in range(5)],
-        pad=2.0, drill=1.2, body=(28.0, 20.0), core=(25.8, 7.5),
-        descr="EE25 vertical coil former Ferroxcube CPV-E25/13/7-1S-10P-Z, 2 x 5 pins P5.0 mm, rows 12.7 mm apart "
-              "(assumed from CSV-E25/13/7-1S-6P-C; verify), core 25.8 x 7.5 mm"),
+    # v5 step 8 (user 2026-11-18): the aux flyback moves to the EEL19 vertical 4+6 bobbin of the tube PSU
+    # (~/dev/tube_psu_kicad tools/next/gen_next_footprints.py eel19(): rows 12.5 mm apart, primary row pitch 3.5 mm,
+    # isolated row pitch 2.7 mm, base 15.8 x 22.5 mm from the seller's data; CONFIRM WITH CALIPERS). Differences here:
+    # only the pins this board uses have pads (1 Out1, 2 GND; 9 ISOGND, 10 Out2; the others are clipped), the two
+    # primary fly-lead holes 11 / 12 are beside the primary row instead of beyond the end (the slot between U8 and J3
+    # is 28 mm long), and there is no milled slot (10.8 mm between the rows' pads; this board asks for 5.0 mm).
+    "Transformer_EEL19_V_4+6_SideLeads": dict(
+        pins=[("1", -6.25, -5.25, 1.8, 1.0), ("2", -6.25, -1.75, 1.8, 1.0), ("9", 6.25, -4.05, 1.6, 0.9), ("10", 6.25, -6.75, 1.6, 0.9),
+              ("11", -10.6, 5.5, 2.2, 1.2), ("12", -10.6, 9.0, 2.2, 1.2)],
+        pad=1.8, drill=1.0, body=(15.8, 22.5),
+        descr="EEL19 vertical bobbin 4+6 (rows 12.5 mm apart), aux flyback T1: 1 Out1, 2 GND, 9 ISOGND, 10 Out2, fly leads "
+              "11 DC+ / 12 drain beside the primary row; body 15.8 x 22.5 mm, height about 29 mm (confirm with calipers)"),
+    # Infineon PG-DSO-12 of the CoolSET ICE5xRxxxxAG (data sheet V2.3 figure 39): SO-16 narrow outline (3.9 x 9.9 mm,
+    # 1.27 mm pitch) with positions 5, 6, 11, 12 empty: 3.81 mm between the control pins and the DRAIN pins.
+    "Infineon_PG-DSO-12_CoolSET": dict(
+        base="Package_SO:SOIC-16_3.9x9.9mm_P1.27mm", drop_pads={"5", "6", "11", "12"},
+        renumber={"7": "5", "8": "6", "9": "7", "10": "8", "13": "9", "14": "10", "15": "11", "16": "12"},
+        descr="Infineon PG-DSO-12 (CoolSET ICE5xRxxxxAG): SO-16 narrow land pattern without positions 5, 6, 11, 12; "
+              "pins 5-8 = DRAIN"),
     # v5: the CTRL winding of T1 leaves the former as TIW flying leads, soldered into two holes
     # (V5_PLAN.md 5.3: 1.6 mm holes, 3.0 mm pads, 5.08 mm apart)
     "CTRL_Winding_Leads_2x1.6mm_P5.08mm": dict(
@@ -498,8 +507,8 @@ def from_pins(name, spec):
     (fab, silk 0.12 mm outside), courtyard 0.25 mm around body and pads; optional core rect (fab)."""
     pins, d, dr = spec["pins"], spec["pad"], spec["drill"]
     w, h = spec["body"]
-    px = [x for _, x, _ in pins]
-    py = [y for _, _, y in pins]
+    px = [q[1] for q in pins]
+    py = [q[2] for q in pins]
     bx0, bx1 = min(min(px) - d / 2, -w / 2), max(max(px) + d / 2, w / 2)
     by0, by1 = min(min(py) - d / 2, -h / 2), max(max(py) + d / 2, h / 2)
     node = [Sym("footprint"), name, [Sym("version"), 20260206], [Sym("generator"), "ac_psu_gen_footprints"],
@@ -514,9 +523,9 @@ def from_pins(name, spec):
     if spec.get("core"):
         cw, ch = spec["core"]
         node.append(_rect(-cw / 2, -ch / 2, cw / 2, ch / 2, "Fab", 0.1))
-    for num, x, y in pins:
+    for num, x, y, pd, pdr in [(q + (d, dr))[:5] for q in pins]:     # optional per-pin pad and drill
         node.append([Sym("pad"), num, Sym("thru_hole"), Sym("rect" if num == "1" else "circle"),
-                     [Sym("at"), _r4(x), _r4(y)], [Sym("size"), d, d], [Sym("drill"), dr],
+                     [Sym("at"), _r4(x), _r4(y)], [Sym("size"), pd, pd], [Sym("drill"), pdr],
                      [Sym("layers"), "*.Cu", "*.Mask"]])
     node.append([Sym("embedded_fonts"), Sym("no")])
     return node

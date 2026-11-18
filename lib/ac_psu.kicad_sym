@@ -5608,7 +5608,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "ICE5AR0680BZS"
+	(symbol "ICE5AR0680AG"
 		(pin_names
 			(offset 1.016)
 		)
@@ -5616,7 +5616,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at -10.16 8.89 0)
+			(at -10.16 11.43 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5624,7 +5624,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "ICE5AR0680BZS"
+		(property "Value" "ICE5AR0680AG"
 			(at -10.16 -8.89 0)
 			(effects
 				(font
@@ -5651,7 +5651,7 @@
 				)
 			)
 		)
-		(property "Description" "Fixed-frequency 100 kHz flyback controller with integrated 800 V CoolMOS (0.71 ohm) and error amplifier, PG-DIP-7 (pin 6 absent)"
+		(property "Description" "Fixed-frequency 100 kHz flyback controller with integrated 800 V CoolMOS (0.71 ohm), error amplifier and line over-voltage input, PG-DSO-12 (SO-16 narrow outline without pins 5, 6, 11, 12)"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -5660,9 +5660,9 @@
 				)
 			)
 		)
-		(symbol "ICE5AR0680BZS_0_1"
+		(symbol "ICE5AR0680AG_0_1"
 			(rectangle
-				(start -10.16 7.62)
+				(start -10.16 10.16)
 				(end 10.16 -7.62)
 				(stroke
 					(width 0.254)
@@ -5673,9 +5673,9 @@
 				)
 			)
 		)
-		(symbol "ICE5AR0680BZS_1_1"
+		(symbol "ICE5AR0680AG_1_1"
 			(pin passive line
-				(at -12.7 5.08 0)
+				(at -12.7 7.62 0)
 				(length 2.54)
 				(name "GATE"
 					(effects
@@ -5684,7 +5684,7 @@
 						)
 					)
 				)
-				(number "4"
+				(number "10"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5693,7 +5693,7 @@
 				)
 			)
 			(pin power_in line
-				(at -12.7 2.54 0)
+				(at -12.7 5.08 0)
 				(length 2.54)
 				(name "VCC"
 					(effects
@@ -5702,7 +5702,25 @@
 						)
 					)
 				)
-				(number "7"
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin input line
+				(at -12.7 2.54 0)
+				(length 2.54)
+				(name "VIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5720,7 +5738,7 @@
 						)
 					)
 				)
-				(number "1"
+				(number "2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5738,7 +5756,7 @@
 						)
 					)
 				)
-				(number "2"
+				(number "3"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5756,7 +5774,25 @@
 						)
 					)
 				)
-				(number "3"
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 7.62 180)
+				(length 2.54)
+				(name "DRAIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5774,7 +5810,61 @@
 						)
 					)
 				)
-				(number "5"
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 2.54 180)
+				(length 2.54)
+				(name "DRAIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 0 180)
+				(length 2.54)
+				(name "DRAIN"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 12.7 -2.54 180)
+				(length 2.54)
+				(name "NC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5792,7 +5882,7 @@
 						)
 					)
 				)
-				(number "8"
+				(number "12"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -5803,7 +5893,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "EE25_AUX_TRANS"
+	(symbol "EEL19_AUX_TRANS"
 		(pin_names
 			(offset 1.016)
 		)
@@ -5811,7 +5901,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "T"
-			(at -5.08 8.89 0)
+			(at -7.62 8.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5819,8 +5909,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "EE25_AUX_TRANS"
-			(at -5.08 -8.89 0)
+		(property "Value" "EEL19_AUX_TRANS"
+			(at -7.62 -6.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5846,7 +5936,7 @@
 				)
 			)
 		)
-		(property "Description" "EE25 aux flyback transformer, Ferroxcube CPV-E25/13/7-1S-10P-Z (1 drain, 2 DC+, 3 P1/P2 joint, 4 GND, 5 Out1, 6 Out2, 7 ISOGND, 8-10 cut)"
+		(property "Description" "EEL19 aux flyback transformer, vertical 4+6 bobbin: fly leads 11 = DC+ end, 12 = drain end of the primary; 1 Out1, 2 GND (primary row); 10 Out2, 9 ISOGND (isolated row); other pins clipped; CTRL winding = W1"
 			(at 0 0 0)
 			(hide yes)
 			(effects
@@ -5855,10 +5945,10 @@
 				)
 			)
 		)
-		(symbol "EE25_AUX_TRANS_0_1"
+		(symbol "EEL19_AUX_TRANS_0_1"
 			(rectangle
-				(start -5.08 7.62)
-				(end 5.08 -7.62)
+				(start -7.62 7.62)
+				(end 7.62 -5.08)
 				(stroke
 					(width 0.254)
 					(type default)
@@ -5868,9 +5958,45 @@
 				)
 			)
 		)
-		(symbol "EE25_AUX_TRANS_1_1"
+		(symbol "EEL19_AUX_TRANS_1_1"
 			(pin passive line
-				(at -7.62 5.08 0)
+				(at -10.16 5.08 0)
+				(length 2.54)
+				(name "FL_DC"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "11"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -10.16 2.54 0)
+				(length 2.54)
+				(name "FL_D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "12"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -10.16 0 0)
 				(length 2.54)
 				(name "1"
 					(effects
@@ -5888,7 +6014,7 @@
 				)
 			)
 			(pin passive line
-				(at -7.62 2.54 0)
+				(at -10.16 -2.54 0)
 				(length 2.54)
 				(name "2"
 					(effects
@@ -5906,61 +6032,7 @@
 				)
 			)
 			(pin passive line
-				(at -7.62 0 0)
-				(length 2.54)
-				(name "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "3"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -7.62 -2.54 0)
-				(length 2.54)
-				(name "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "4"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at -7.62 -5.08 0)
-				(length 2.54)
-				(name "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "5"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 5.08 180)
+				(at 10.16 5.08 180)
 				(length 2.54)
 				(name "10"
 					(effects
@@ -5978,7 +6050,7 @@
 				)
 			)
 			(pin passive line
-				(at 7.62 2.54 180)
+				(at 10.16 2.54 180)
 				(length 2.54)
 				(name "9"
 					(effects
@@ -5988,60 +6060,6 @@
 					)
 				)
 				(number "9"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 0 180)
-				(length 2.54)
-				(name "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "8"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -2.54 180)
-				(length 2.54)
-				(name "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "7"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-			)
-			(pin passive line
-				(at 7.62 -5.08 180)
-				(length 2.54)
-				(name "6"
-					(effects
-						(font
-							(size 1.27 1.27)
-						)
-					)
-				)
-				(number "6"
 					(effects
 						(font
 							(size 1.27 1.27)
