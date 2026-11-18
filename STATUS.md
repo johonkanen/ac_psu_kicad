@@ -1,6 +1,35 @@
 # Status
 
-Updated: 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-18 (v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 6 – DC bus wire link past J11 (2026-11-18, branch `v5-layout`)
+
+The isolated DC bus (ISODC+ on B.Cu, ISOPGND on F.Cu) has been cut at J11 since v5 step 1, and INU_OUT2 cannot
+move to open a copper path. User 2026-11-18: join it with two pieces of **2.5 mm round enamelled copper wire,
+soldered**, on the bottom side (15 mm standoffs; about 10 A). Blade tabs (TE 63951-1) were tried first and
+dropped: the 34 mm straight run of the receptacle fits at the west ends only.
+
+**Step 6** (`tools/v5/v5_6_bus_link.py`, seed 5006; log `reports/v5_layout/v5_6_bus_link.log`):
+- Four solder holes `ac_psu:Terminal_D4.0mm_Drill3.0mm` (schematic sheet 4, symbol PIN): BUSP1 (32.5, 38.5) and
+  BUSP2 (63.5, 45.5) on ISODC+, BUSN1 (33.0, 31.5) and BUSN2 (90.5, 45.0) on ISOPGND. Each sits in a pour of
+  its own net, joined without thermal relief.
+- Clearance to other nets on the outer layers ≥ 2.5 mm (bare soldered pads at DC-link voltage): pad clearance
+  2.5 mm at BUSP1/BUSN1; at BUSP2/BUSN2 0.5 mm (they pass the ISO planes and In3) and the distance by position:
+  the dead end of the F.Cu ISOPGND pour west of x 68 is removed. Every pour is still one piece (measured before
+  and after).
+- BUSN2 is not between Q6 and Q8: there the hole cut the Q6 gate strap on In1, or lay under Q6's body.
+- No cable-tie anchors: the wire is solid and soldered at both ends.
+
+**Checks:** new deviation kind `wire` in `lib/v5_copper.csv` (two rows). `assign_nets.py` counts the two pads of a
+wire as joined, `drc.py` takes one unconnected item per wire as the wire, `gerber_roundtrip.py` accepts the
+holes' drills. `tools/check_all.sh` ALL CHECKS PASSED: 381 footprints, ISODC+ no longer open; ISOPGND keeps one
+open connection at R97 that belongs to the routing.
+
+**Assembly:** `fab/README.md` (wire forms and distances) and `fab/hand_fit.csv`. The enamel is not safety
+insulation: the wires are formed to stay ≥ 5 mm from J11's pin tails and the CTRL parts.
+
+**Open:** routing of the card area (339 unconnected items pending; `reports/v5_layout/routing_brief.md`, rule 3a
+for the holes).
 
 ## v5 step 5 – card-area placement, revision 2 (2026-11-17, branch `v5-layout`)
 

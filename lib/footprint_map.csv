@@ -6,6 +6,10 @@ ACOUT1,ac_psu:PIN,ac_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"two holes, both
 ACOUT2,ac_psu:PIN,ac_psu:Terminal_2x1_P5.00mm_D2.0mm_Drill1.4mm,"two holes, both pad 1"
 AD1,ac_psu:ADS7056,ac_psu:X2QFN-8_1.5x1.5mm_P0.5mm_ADS7056,X2QFN-8 (RUG)
 AFE_OUT1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
+BUSN1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISOPGND, west end"
+BUSN2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISOPGND, east end"
+BUSP1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISODC+, west end (2.5 mm enamelled wire, soldered)"
+BUSP2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISODC+, east end"
 C1,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C2,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C3,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402

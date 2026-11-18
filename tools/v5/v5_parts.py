@@ -119,4 +119,13 @@ PARTS = [
     ("C133", 11, "C", "100n", C0402, "U26 decoupling"),
 ]
 
+# ---- sheet 4: DC bus wire link past J11 (v5 step 6, user 2026-11-18): 2.5 mm round enamelled copper wire,
+# soldered into 3.0 mm holes from the bottom side ----
+PARTS += [
+    ("BUSP1", 4, "PIN", "PIN", TERM, "DC bus wire link ISODC+, west end (2.5 mm enamelled wire, soldered)"),
+    ("BUSP2", 4, "PIN", "PIN", TERM, "DC bus wire link ISODC+, east end"),
+    ("BUSN1", 4, "PIN", "PIN", TERM, "DC bus wire link ISOPGND, west end"),
+    ("BUSN2", 4, "PIN", "PIN", TERM, "DC bus wire link ISOPGND, east end"),
+]
+
 VALUE = {p[0]: p[3] for p in PARTS}

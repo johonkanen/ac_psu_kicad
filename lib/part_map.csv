@@ -6,6 +6,10 @@ ACOUT1,5,ac_psu:PIN,PIN
 ACOUT2,5,ac_psu:PIN,PIN
 AD1,9,ac_psu:ADS7056,ADS7056
 AFE_OUT1,1,ac_psu:PIN,PIN
+BUSN1,4,ac_psu:PIN,PIN
+BUSN2,4,ac_psu:PIN,PIN
+BUSP1,4,ac_psu:PIN,PIN
+BUSP2,4,ac_psu:PIN,PIN
 C1,6,ac_psu:C,
 C2,4,ac_psu:C,
 C3,3,ac_psu:C,

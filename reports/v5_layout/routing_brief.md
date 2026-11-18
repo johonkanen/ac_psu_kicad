@@ -10,7 +10,7 @@ with `--version`. KiCad's Python is `tools/p2k/bin/kipy`; `kicad-cli` is `tools/
 
 ## Goal
 
-Connect the 306 open connections on 120 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
+Connect the 307 open connections on 121 nets of [`routing_list.md`](routing_list.md) (groups 1–9). Done means, on the
 final board with zones refilled:
 
 - `tools/check_all.sh` ends with ALL CHECKS PASSED;
@@ -60,6 +60,10 @@ Stack-up JLC06161H-3313: F.Cu–In1 and In4–B.Cu 0.10 mm, In1–In2 and In3–
    J8 pads and the INU_OUT2 pads (net Q5_S, the switch node: keep the clearance the DRC asks). Use In3 and In4 there and
    leave F.Cu and B.Cu free: the DC bus link may need them (group 10, the owner's decision). If the tracks do not
    all fit, report how many fit and which nets are left; do not squeeze the clearance.
+3a. **The DC bus wire holes** BUSP1 (32.5, 38.5), BUSN1 (33.0, 31.5), BUSP2 (63.5, 45.5) and BUSN2 (90.5, 45.0) are
+   bare soldered pads at DC-link voltage (v5 step 6). No track or via of another net within 2.5 mm of their pads on
+   F.Cu or B.Cu; on In3 the pads' own 0.5 mm clearance applies. Their two unconnected items (ISODC+, ISOPGND) are
+   the wires and stay open.
 4. **Do not move or rotate parts, and do not touch slots, rule areas, plane zones or the power-stage pours.** If a
    placement makes a route impossible or clearly bad, report it with a proposed position; do not move it yourself.
 5. Do not edit `tools/v5/card_layout.py`, `lib/*.csv`, `kicad/ac_psu.kicad_dru` or any check to make something pass.

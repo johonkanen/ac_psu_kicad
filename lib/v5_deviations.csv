@@ -273,6 +273,14 @@ part,C132,,,Capacitor_SMD:C_0402_1005Metric,v5,U25 decoupling
 value,C132,,,100n,v5,
 part,C133,,,Capacitor_SMD:C_0402_1005Metric,v5,U26 decoupling
 value,C133,,,100n,v5,
+part,BUSP1,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,"DC bus wire link ISODC+, west end (2.5 mm enamelled wire, soldered)"
+value,BUSP1,,,PIN,v5,
+part,BUSP2,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,"DC bus wire link ISODC+, east end"
+value,BUSP2,,,PIN,v5,
+part,BUSN1,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,"DC bus wire link ISOPGND, west end"
+value,BUSN1,,,PIN,v5,
+part,BUSN2,,,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,"DC bus wire link ISOPGND, east end"
+value,BUSN2,,,PIN,v5,
 add,R98,1,,DC+,v5,
 add,R98,2,,AUX_VIN,v5,
 add,C111,1,,AUX_VIN,v5,
@@ -562,6 +570,10 @@ add,C132,1,,3V3_CTRL,v5,
 add,C132,2,,CTRLGND_A,v5,
 add,C133,1,,3V3_CTRL,v5,
 add,C133,2,,CTRLGND_A,v5,
+add,BUSP1,1,,ISODC+,v5,
+add,BUSP2,1,,ISODC+,v5,
+add,BUSN1,1,,ISOPGND,v5,
+add,BUSN2,1,,ISOPGND,v5,
 pin,C82,1,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)
 pin,C82,2,3V3_ISO,3V3_CTRL,v5,v5 (was 3V3_ISO)
 pin,C83,1,ISOGND,CTRLGND_A,v5,v5 (was ISOGND)

@@ -107,6 +107,13 @@ def in_pending(x, y, margin=0.0):
                for x0, y0, x1, y1, _ in pending_areas())
 
 
+def wire_links():
+    """[(net, (x, y), (x1, y1), note)] off-board wire links between two pads of one net (kind wire,
+    lib/v5_copper.csv): the checks count the two pads as joined (v5 step 6: DC bus past J11)."""
+    return [(r["net"], (float(r["x"]), float(r["y"])), (float(r["x1"]), float(r["y1"])), r["note"])
+            for r in copper_rows() if r["kind"] == "wire"]
+
+
 def unrouted_areas():
     """[(x0, y0, x1, y1, note)] placed, not yet routed (kind unrouted)."""
     out = []

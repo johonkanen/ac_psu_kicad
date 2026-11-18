@@ -1,0 +1,7 @@
+== v5 step 6: DC bus wire link past J11 (four solder holes for 2.5 mm enamelled copper wire)
+  BUSP1: solder hole 3.0 mm, pad 4.0 mm at (32.5, 38.5) on ISODC+, pad clearance 2.5 mm
+  BUSN1: solder hole 3.0 mm, pad 4.0 mm at (33.0, 31.5) on ISOPGND, pad clearance 2.5 mm
+  BUSP2: solder hole 3.0 mm, pad 4.0 mm at (63.5, 45.5) on ISODC+, pad clearance 0.5 mm
+  BUSN2: solder hole 3.0 mm, pad 4.0 mm at (90.5, 45.0) on ISOPGND, pad clearance 0.5 mm
+  zone Proteus F.Cu pour 8 (fix 14) (part 2) (part 2) [ISOPGND] F.Cu: dead end x 56.0..68.0, y 40.5..50.0 removed (65 mm2), 2.5 mm from BUSP2
+  zones filled again on the reloaded board

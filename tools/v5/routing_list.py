@@ -99,10 +99,11 @@ def main():
             ps = sorted(pads[n], key=lambda p: (p[2], p[3]))
             out.append(f"| {n} | {dom.get(full.get(n, n)) or '-'} | {c} | " + ", ".join(f"{r}-{pin} ({x:.1f}, {y:.1f}) {s}" for r, pin, x, y, s in ps[:14]) + " |")
         out.append("")
-    out += ["## 10. DC bus past J11 (open decision, not for the router)", "",
-            "ISODC+ (B.Cu) and ISOPGND (F.Cu) are each in two pieces since v5 step 1: the pours end 5 mm from J11 on both sides, "
-            "and J8 / INU_OUT2 close the corridor north of J11 (y 51.1 .. 53.5). West piece: C8 and the inverter bridge. East piece: "
-            "the band y 43.2 .. 48.8 under J6, C47/C48, Q11, R64. The link needs the owner's decision (STATUS.md).", ""]
+    out += ["## 10. DC bus past J11 (wire link, not for the router)", "",
+            "ISODC+ (B.Cu) and ISOPGND (F.Cu) are each in two pieces: the pours end 5 mm from J11 on both sides. Since v5 step 6 "
+            "two soldered 2.5 mm enamelled copper wires on the bottom side join them: BUSP1 (32.5, 38.5) - BUSP2 (63.5, 45.5) and "
+            "BUSN1 (33.0, 31.5) - BUSN2 (90.5, 45.0). Their two unconnected items stay; keep other nets 2.5 mm from the four "
+            "pads on F.Cu and B.Cu (routing_brief.md rule 3a).", ""]
     aux = [(n, c) for n, c in rest if not scope(n)]
     out += ["## Not in this step", "",
             f"{sum(c for _, c in aux)} open connections on {len(aux)} nets belong to the aux flyback (27 parts still in the staging area) "

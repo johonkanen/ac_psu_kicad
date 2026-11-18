@@ -6,6 +6,8 @@
 #   unrouted rectangle that is placed and has its planes, but is not routed: the copper may differ from
 #            Proteus; only DRC unconnected items, copper opens and vias are excused. Clearance and domain
 #            gaps are strict. Becomes an area row (or goes) when the routing is done.
+#   wire     off-board wire between two pads of one net at (x, y) and (x1, y1): the checks count the pads
+#            as joined (assign_nets), and one unconnected DRC item of the net per wire is the wire.
 kind,layer,x,y,x1,y1,net,note
 pending,*,65.0,-62.0,85.0,-10.0,,aux flyback area (sheet 7: removed IW1830/EF20 copper; T1/U18/Q17 to place)
 pending,*,85.0,-62.0,110.0,-40.0,,aux flyback area, part south of the J12 CTRL piece
@@ -13,3 +15,5 @@ unrouted,*,22.0,-22.0,118.65,54.0,,card area in three domains (tools/v5/v5_4_car
 unrouted,*,85.0,-40.0,118.65,-22.0,,J12 CTRL piece south of the card and U8 (moved 13.36 mm west)
 pending,*,-130.0,-160.0,120.0,-84.0,,staging area below the board (new v5 parts, unplaced)
 unrouted,*,0.0,36.0,22.0,54.0,,U4 clock/data and PWM_Q5/Q7/TRANS6 to J8 (from U21/U19/U20, north of J11)
+wire,*,32.5,38.5,63.5,45.5,ISODC+,BUSP1 - BUSP2: DC bus link past J11, 2.5 mm round enamelled copper wire soldered on the bottom side (v5 step 6)
+wire,*,33.0,31.5,90.5,45.0,ISOPGND,BUSN1 - BUSN2: DC bus link past J11, 2.5 mm round enamelled copper wire soldered on the bottom side (v5 step 6)

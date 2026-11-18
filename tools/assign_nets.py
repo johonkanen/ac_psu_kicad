@@ -320,6 +320,18 @@ def run_check(board, layers, vianets):
         layers = list(layers[:3]) + [_ExtraLayer("In3.Cu"), _ExtraLayer("In4.Cu")] + list(layers[3:])
     items = build_items(board, layers, "C", vianets)
     uf = connect(items, layers)
+    # off-board wire links (lib/v5_copper.csv kind wire): the two pads count as joined
+    import deviations as _dev
+    for net, a, b, note in _dev.wire_links():
+        ends = []
+        for q in (a, b):
+            hit = [i for i, it in enumerate(items) if it.kind == "pad" and it.obj.GetNetname().split("/")[-1] == net
+                   and abs(pcbnew.ToMM(it.obj.GetPosition().x) - q[0]) < 0.05 and abs(-pcbnew.ToMM(it.obj.GetPosition().y) - q[1]) < 0.05]
+            if len(hit) != 1:
+                print(f"assign_nets: wire link {net} {a} - {b}: {len(hit)} pads of the net at {q}")
+                return 1
+            ends.append(hit[0])
+        uf.union(*ends)
     res = analyse(items, uf)
     # every copper item must carry its group's net
     wrong = []

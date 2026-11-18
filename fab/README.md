@@ -21,6 +21,21 @@ in the card area (U19–U24, the difference amplifiers, U27, C137/C138, L2): ord
 Hand-fit there: PEC1/PEC2 (lug and screw on the bottom), J13/J14 (no headers: a two-wire cable soldered from the
 bottom), W1 (transformer leads). The CPL is regenerated after routing.
 
+**DC bus wire link (v5 step 6).** The CTRL domain at J11 cuts the isolated DC bus; two pieces of 2.5 mm round
+enamelled copper wire on the bottom side join it (about 10 A; four 3.0 mm solder holes, IPC frame mm):
+
+| Wire | Net | From | To | Suggested form (bottom view coordinates as on the board) | Length |
+|---|---|---|---|---|---|
+| 1 | ISODC+ | BUSP1 (32.5, 38.5) | BUSP2 (63.5, 45.5) | north along x 32.5 to y 55, east to x 63.5, south | about 60 mm |
+| 2 | ISOPGND | BUSN1 (33.0, 31.5) | BUSN2 (90.5, 45.0) | west to x 28, north to y 59, east to x 84, south to y 50, then to the hole | about 115 mm |
+
+Wire 1 lies inside the loop of wire 2, so they do not cross. The enamel is **not** safety insulation: treat the
+wires as bare conductors at DC-link voltage. Keep them at least 5 mm from J11's pin tails and from every CTRL part
+(the suggested forms are 9 mm or more away), 4 mm from each other, and 3 mm in air above the solder tails they pass
+(J8, J6, J4, INU_OUT2; stand the wire 6 mm or more off the board there). Strip the enamel only at the ends; trim
+BUSP2 and BUSN2 flush on the top side (they are under the control card). The wire is stiff enough to keep its form;
+if it is ever replaced by flexible wire, that wire needs reinforced insulation and cable ties.
+
 Values: the series resistors on the sigma-delta inputs are 12.4R (C477607) for a 5 nH shunt
 inductance (2.5 Ω per nH with the 100 nF C0G capacitors C90–C92). Re-pick them if the
 inductance is measured.

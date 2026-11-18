@@ -487,6 +487,9 @@ def compare_drills(kdir, report):
         if deviations.in_pending(x, y) or deviations.in_unrouted(x, y):
             npend_k += 1        # v5: new THT parts (staging / pending-layout areas)
             continue
+        if any(math.hypot(q[0] - x, q[1] - y) < TOL for w in deviations.wire_links() for q in w[1:3]):
+            npend_k += 1        # v5: solder hole of an off-board wire link (lib/v5_copper.csv kind wire)
+            continue
         errors.append(f"KiCad {fn} {d} mm at ({x}, {y}) has no Proteus drill")
     if nv4 != len(v4):
         errors.append(f"{len(v4)} v4 vias listed, {nv4} v4 via drills found")

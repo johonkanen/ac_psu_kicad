@@ -83,6 +83,16 @@ def main():
     pending = [u for u in unconnected if any(v5_item(i) or unrouted(i) for i in u["items"])]
     unrouted_too = False
     unconnected = [u for u in unconnected if u not in pending]
+    # off-board wire links (lib/v5_copper.csv kind wire): KiCad sees the two halves of the net as unconnected.
+    # One unconnected item per wire of that net is the wire itself (pour-to-pour items first).
+    wired = []
+    for net in sorted({w[0] for w in deviations.wire_links()}):
+        n = sum(1 for w in deviations.wire_links() if w[0] == net)
+        mine = [u for u in pending + unconnected if all(f"[{net}]" in i["description"] for i in u["items"])]
+        mine.sort(key=lambda u: -sum(i["description"].startswith("Zone") for i in u["items"]))
+        wired += mine[:n]
+    pending = [u for u in pending if u not in wired]
+    unconnected = [u for u in unconnected if u not in wired]
     parity = d.get("schematic_parity", [])
     # v5: clearance violations of the v5 change (CTRL domain rules on the v4 layout, staged parts)
     # (not in the unrouted areas: placed parts and planes there keep every clearance)
@@ -101,6 +111,9 @@ def main():
     for (t, sev), n in sorted(by_type.items()):
         if sev == "error" and t != "shorting_items" and t not in ACCEPTED:
             errors.append(f"{n} {t}")
+    if wired:
+        print(f"drc: {len(wired)} unconnected items are off-board wire links (lib/v5_copper.csv): "
+              + ", ".join(f"{w[0]} {w[1]} - {w[2]}" for w in deviations.wire_links()))
     print(f"drc: {len(viol)} violations, {shorts} shorts, {len(unconnected)} unconnected, "
           f"{len(parity)} parity issues (reports/drc.json)"
           + (f"; {len(pending)} unconnected v5 items and {len(pend_viol)} v5 clearance violations pending GUI layout"
