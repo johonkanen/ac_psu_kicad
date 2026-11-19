@@ -85,7 +85,7 @@ def prep(b):
         keepout(b, "fence " + name, rect(*r), al)
     # no track on the ground layers inside the card planes (pass 1 put a tap through the In4 ISOGND plane); vias allowed
     for i, r in enumerate(((44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8))):
-        keepout(b, f"ground planes {i}", rect(*r), ["In1.Cu", "In4.Cu"], vias=False)
+        keepout(b, f"planes {i}", rect(*r), ["In1.Cu", "In2.Cu", "In4.Cu"], vias=False)   # pass 3: In2 too
     # north-row pins of J6 / J4 that are reached from the south (under the bus band, In3): a 0.152 mm stub through
     # the 0.46 mm gap of the south row, like the J11 stubs
     m = 0
@@ -168,8 +168,37 @@ def domain(b, dom):
     print(f"domain: fences for {dom} ({len(DOMAIN_FENCES[dom])})")
 
 
+def prune(b, ref):
+    """Delete new copper (not in the placed board `ref`) that lies in a fence (the router laid a 15V track through
+    the west fence in pass 2: its power-net passes do not honour keep-outs). Reports what it deletes."""
+    def key(t):
+        if t.Type() == pcbnew.PCB_VIA_T:
+            return ("via", t.GetPosition().x, t.GetPosition().y, t.GetNetname())
+        a, c = (t.GetStart().x, t.GetStart().y), (t.GetEnd().x, t.GetEnd().y)
+        return ("trk", t.GetLayer(), min(a, c), max(a, c), t.GetWidth(), t.GetNetname())
+    old = {key(t) for t in pcbnew.LoadBoard(ref).GetTracks()}
+    fences = [z for z in b.Zones() if z.GetIsRuleArea() and z.GetZoneName().startswith(TMP + "fence")]
+    dead = []
+    for t in b.GetTracks():
+        if key(t) in old:
+            continue
+        pts = [t.GetPosition()] if t.Type() == pcbnew.PCB_VIA_T else [t.GetStart(), t.GetEnd()]
+        if any(z.Outline().Contains(q) for z in fences for q in pts):
+            dead.append(t)
+    for t in dead:
+        q = t.GetPosition() if t.Type() == pcbnew.PCB_VIA_T else t.GetStart()
+        print(f"prune: {t.GetNetname()} {b.GetLayerName(t.GetLayer())} at ({pcbnew.ToMM(q.x):.1f}, {-pcbnew.ToMM(q.y):.1f}) deleted (inside a fence)")
+        b.Delete(t)
+    print(f"prune: {len(dead)} new tracks / vias inside the fences deleted")
+
+
 def main():
     mode, src, dst = sys.argv[1:4]
+    if mode == "prune":
+        b = pcbnew.LoadBoard(src)
+        prune(b, sys.argv[4])
+        b.Save(dst)
+        return
     b = pcbnew.LoadBoard(src)
     if mode == "domain":
         domain(b, sys.argv[4])
