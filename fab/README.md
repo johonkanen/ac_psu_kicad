@@ -63,6 +63,9 @@ Open items that need a decision or a measurement by the user. Tick them off here
       memory, not looked up: about 15 A with 1.5 mm2 / 16 AWG, 20 A with 2.5 mm2 / 14 AWG wire) would cover
       10-12 A RMS with a 2.5 mm2 receptacle. Confirm on the receptacle's data sheet when it is chosen, and
       check the AC input / output current the same way.
+      **User's test (2026-11-19):** 15 A through the 6.3 mm receptacles used on the tube amplifier power
+      supply did not heat them much. With the same receptacles and wire size this covers the DAB leads
+      (10-12 A RMS); a different receptacle or thinner wire needs its own check.
 - [ ] DAB_SEC_1: 2.0 mm between its tab pads and the pads of C47 (ISODC+) and C50; accept, or leave this lead
       soldered, or move a capacitor.
 - [ ] EEL19 transformer T1: bobbin base dimensions with calipers; winding design run (the turns are a hand
