@@ -4,7 +4,7 @@
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
 converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-16 done), branch v5-layout.
-Read README.md, STATUS.md (first "v5 step 16", "v5 step 15", "v5 step 14", "v5 step 13", "v5 step 12", "v5 step 11", "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
+Read README.md, STATUS.md (first "Routing pass 3", "v5 step 16", "v5 step 15", "v5 step 14", "v5 step 13", "v5 step 12", "v5 step 11", "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
 reports/v5_layout/proposal_r2.md (the board as placed; proposal.md is revision 1), reports/v5_layout/routing_brief.md,
 CTRL_ISOLATION_PLAN.md section 8, fab/README.md and tools/check_all.sh.
 Never run the KiCad AppImage with --version.
