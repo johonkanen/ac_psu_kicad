@@ -1,0 +1,298 @@
+CMD: python -X utf8 py_router/route.py /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/in.kicad_pcb /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/out.kicad_pcb --nets PWM_Q5 PWM_Q7 PWM_TRANS6 --track-width 0.2 --via-size 0.4572 --vi
+ENV KNOBS: KICAD_ENV=/home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/tools/p2k/bin/kicad_env.sh KICAD_PYTHON=/tmp/.mount_kicadremp17350511091871881925/bin/python3.11 KICAD_RIP_PREEXISTING=0
+--clearance 0.15: the Default net class routes at it this run; other classes are honoured (pass --clearance-ceiling to cap every class).
+--hole-to-hole-clearance not given; using 0.25mm [board constraint].
+--board-edge-clearance not given; using 0.25mm [board constraint].
+Loading /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/in.kicad_pcb to expand net patterns...
+Routing 3 nets: ['PWM_Q5', 'PWM_Q7', 'PWM_TRANS6']
+Loaded per-net clearances for 8/280 nets from /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/tools/v5/route_pass1/hv_clearances.json
+Loading /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/in.kicad_pcb...
+Using 4 routing layers: ['In3.Cu', 'In4.Cu', 'B.Cu', 'F.Cu']
+  Full-stack: appended 2 unrequested copper layer(s) as FORBIDDEN obstacles (no routing, vias respect their copper): In1.Cu, In2.Cu
+  Layer costs: In3.Cu=1.0x, In4.Cu=1.0x, B.Cu=3.0x, F.Cu=3.0x, In1.Cu=-1x, In2.Cu=-1x
+No BGA components detected - no exclusion zones needed
+  .kicad_dru: rule 'C-I reinforced 5.0 mm': clearance 5.0mm has a non-layer scope (netclass/area/... condition) -- skipped, KiCad will still enforce it
+  .kicad_dru: rule 'C-P reinforced 5.0 mm': clearance 5.0mm has a non-layer scope (netclass/area/... condition) -- skipped, KiCad will still enforce it
+  .kicad_dru: rule 'E-I basic 2.5 mm': clearance 2.5mm has a non-layer scope (netclass/area/... condition) -- skipped, KiCad will still enforce it
+  .kicad_dru: rule 'E-P basic 2.5 mm': clearance 2.5mm has a non-layer scope (netclass/area/... condition) -- skipped, KiCad will still enforce it
+  .kicad_dru: rule 'I-P reinforced 5.0 mm': clearance 5.0mm has a non-layer scope (netclass/area/... condition) -- skipped, KiCad will still enforce it
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 3 nets with 0 crossing conflicts detected
+MPS Round 1: 3 units: PWM_Q7, PWM_TRANS6, PWM_Q5
+
+Routing 3 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 7.58s
+Found 257 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 1.28s (257 nets)
+Plane fragility: exact-fill geometry (84 filled island(s) from KiCad refill)
+Plane fragility field: 8093859 cells near the edges of 74 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/3] Routing PWM_Q7 (id=110)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2420799 iterations (forward), trying backward...
+No route found after 2563195 iterations (both directions)
+  FAILED: Could not find route (1.48s)
+  ROUTE FAILED - no rippable blockers found
+  Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'ISO_AFE_SDM_RAW_VOLTAGE' 'PWM_TRANS6' '5V_ISOL' 'Net-(U7A-+)' 'Net-(U7B-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+Hint: the box also includes PROTECTED net(s) 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'PWM_Q8' (locked), '3V3_ISO' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_TRANS5' (locked), 'Net-(U7A-+)' (locke
+
+[2/3 (1 failed)] Routing PWM_TRANS6 (id=112)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2480890 iterations (forward), trying backward...
+No route found after 2628563 iterations (both directions)
+  FAILED: Could not find route (1.12s)
+  ROUTE FAILED - no rippable blockers found
+  6 blocking net(s) ('PWM_Q8' 'Net-(U7A-+)' 'Net-(U7B-+)' 'PWM_Q6' 'Net-(U2-+)' 'MDATA_DAB') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.  [rationale as above]
+Hint: the box also includes PROTECTED net(s) 'ISOGND' (locked), '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked), 'Net-(U7A-+)' (locked) within 3mm of the failing endpoint(s).  [rationale as ab
+
+[3/3 (2 failed)] Routing PWM_Q5 (id=111)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2560770 iterations (forward), trying backward...
+No route found after 2709529 iterations (both directions)
+  FAILED: Could not find route (1.10s)
+  ROUTE FAILED - no rippable blockers found
+  6 blocking net(s) ('PWM_Q8' '5V_ISOL' 'PWM_TRANS6' 'PWM_Q7' 'Net-(U7B-+)' 'Net-(U7A-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.  [rationale as above]
+Hint: the box also includes PROTECTED net(s) '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked) within 3mm of the failing endpoint(s).  [rat
+
+Per-net fine-parameter rescue (#331/#371): 3 candidate net(s)
+  Rescuing PWM_Q5 (failed, 2 disconnected parts)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 49875 iterations (forward), trying backward...
+No route found after 1286995 iterations (both directions)
+    rescue failed (1.0s)
+  Rescuing PWM_Q7 (failed, 2 disconnected parts)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 3920415 iterations (forward), trying backward...
+No route found after 4084506 iterations (both directions)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 3920415 iterations (forward), trying backward...
+No route found after 4084506 iterations (both directions)
+    rescue failed (4.6s)
+  Rescuing PWM_TRANS6 (failed, 2 disconnected parts)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 279082 iterations (forward), trying backward...
+No route found after 1186544 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 279082 iterations (forward), trying backward...
+No route found after 1186544 iterations (both directions)
+    rescue failed (2.6s)
+Rescue pass: 0 recovered, 0 improved, 3 unchanged (8.2s)
+
+WARNING: 4 stacked-copper finding(s) on the write model (same-net duplicates KiCad will not flag):
+  PGND B.Cu: 2 duplicate segments stacked on (16.500, 33.200)-(16.500, 35.800)
+  PWM_Q7 In2.Cu: 2 duplicate segments stacked on (27.586, -44.214)-(28.122, -44.751)
+  GPIO_BYPASS_RLY_ISO In2.Cu: 2 duplicate segments stacked on (25.259, -40.659)-(25.259, -40.659)
+  GPIO_BYPASS_RLY_ISO In2.Cu: 2 duplicate segments stacked on (25.259, -40.659)-(25.650, -41.050)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  0/3 routed (3 FAILED)
+  Total vias:    0
+  Total time:    3.70s
+  Iterations:    7,901,287
+
+Failed single-ended nets:
+  PWM_Q7
+  PWM_TRANS6
+  PWM_Q5
+
+============================================================
+FAILED NET HISTORIES
+============================================================
+
+PWM_Q7:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, ISO_AFE_SDM_RAW_VOLTAGE, PWM_TRANS6 (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'ISO_AFE_SDM_RAW_VOLTAGE' 'PWM_TRANS6' '5V_ISOL' 'Net-(U7A-+)' 'Net-(U7B-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan aroun
+  Hint: the box also includes PROTECTED net(s) 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'PWM_Q8' (locked), '3V3_ISO' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_TRANS5' (locked), 'Net-(U7A-+)' (loc
+  [0] rescue_failed
+
+PWM_TRANS6:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, Net-(U7A-+), Net-(U7B-+) (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'Net-(U7A-+)' 'Net-(U7B-+)' 'PWM_Q6' 'Net-(U2-+)' 'MDATA_DAB') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+  Hint: the box also includes PROTECTED net(s) 'ISOGND' (locked), '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked), 'Net-(U7A-+)' (locked) within 3mm of the failing endpoint(s). The router will
+  [0] rescue_failed
+
+PWM_Q5:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, 5V_ISOL, PWM_TRANS6 (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' '5V_ISOL' 'PWM_TRANS6' 'PWM_Q7' 'Net-(U7B-+)' 'Net-(U7A-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+  Hint: the box also includes PROTECTED net(s) '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked) within 3mm of the failing endpoint(s). The
+  [0] rescue_failed
+JSON_SUMMARY: {"routed_single": [], "failed_single": ["PWM_Q7", "PWM_TRANS6", "PWM_Q5"], "open_single": [], "failed_multipoint": [], "multipoint_nets": 0, "multipoint_pads_connected": 0, "multipoint_pads_total": 0, "multipoint_edges_routed": 0, "multipoint_edges_failed": 0, "ripup_success_pairs": []
+Wrote unchanged copy to /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/out.kicad_pcb (nothing to route)
+  Plane finalize: zone net(s) /01 afe/CMFILT1, /01 afe/CMFILT2, /01 afe/FILTER_INPUT, /01 afe/JEE, /01 afe/LEMOUT, /01 afe/SHUNT1_FORCE, /05 VSI/AFE_RELAY, /05 VSI/INDUCTOR_OUTPUT, /05 VSI/INU_FILTER_INPUT, 15V, 15V_ISO, 3V3_CTRL, 3V3_ISO, 5V, 5V_CTRL, AC_IN2, AC_IN_1, AC_OUT_1, AC_OUT_2, CTRLGND, C
+
+Final reconciliation: retrying 3 incomplete/custody net(s) against the finished board: PWM_Q7, PWM_TRANS6, PWM_Q5
+  Preserving routed width 0.1524mm for reconciled net PWM_Q7 (original copper was wider than this run's 0.152mm default)
+Loading /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/out.kicad_pcb...
+Using 4 routing layers: ['In3.Cu', 'In4.Cu', 'B.Cu', 'F.Cu']
+  Full-stack: appended 2 unrequested copper layer(s) as FORBIDDEN obstacles (no routing, vias respect their copper): In1.Cu, In2.Cu
+  Layer costs: In3.Cu=1.0x, In4.Cu=1.0x, B.Cu=3.0x, F.Cu=3.0x, In1.Cu=-1x, In2.Cu=-1x
+No BGA components detected - no exclusion zones needed
+
+Power net width assignments (1 nets):
+  0.1524mm: PWM_Q7
+
+Using MPS ordering strategy...
+MPS: Using segment intersection method (no nets on BGA chips)
+MPS: 3 nets with 0 crossing conflicts detected
+MPS Round 1: 3 units: PWM_Q7, PWM_TRANS6, PWM_Q5
+
+Routing 3 single-ended net(s)...
+============================================================
+Building base obstacle map...
+Base obstacle map built in 4.56s
+Found 257 unrouted nets in PCB for stub proximity
+Pre-computing net obstacle cache...
+Net obstacle cache built in 0.99s (257 nets)
+Plane fragility: exact-fill geometry (84 filled island(s) from KiCad refill)
+Plane fragility field: 8093859 cells near the edges of 74 pour(s) (KICAD_PLANE_FRAGILITY_COST=2.0mm-equiv, DYNAMIC #466 (=0 via KICAD_PLANE_FRAGILITY_DYNAMIC reverts))
+History congestion (#590) armed: +0.1mm-equiv per contest, cap 0.5, escalate 0.0, rip weight 1.0 (radius +0.25mm), frontier weight 0.25
+
+[1/3] Routing PWM_Q7 (id=110)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2366468 iterations (forward), trying backward...
+No route found after 2497293 iterations (both directions)
+  FAILED: Could not find route (2.95s)
+  ROUTE FAILED - no rippable blockers found
+  Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'ISO_AFE_SDM_RAW_VOLTAGE' '5V_ISOL' 'PWM_TRANS6' 'ADCLK_DAB' 'Net-(U7B-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+Hint: the box also includes PROTECTED net(s) 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'PWM_Q8' (locked), '3V3_ISO' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_TRANS5' (locked), 'Net-(U7A-+)' (locke
+
+[2/3 (1 failed)] Routing PWM_TRANS6 (id=112)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2480890 iterations (forward), trying backward...
+No route found after 2628563 iterations (both directions)
+  FAILED: Could not find route (1.12s)
+  ROUTE FAILED - no rippable blockers found
+  6 blocking net(s) ('PWM_Q8' 'Net-(U7A-+)' 'Net-(U7B-+)' 'PWM_Q6' 'Net-(U2-+)' 'MDATA_DAB') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.  [rationale as above]
+Hint: the box also includes PROTECTED net(s) 'ISOGND' (locked), '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked), 'Net-(U7A-+)' (locked) within 3mm of the failing endpoint(s).  [rationale as ab
+
+[3/3 (2 failed)] Routing PWM_Q5 (id=111)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 2560770 iterations (forward), trying backward...
+No route found after 2709529 iterations (both directions)
+  FAILED: Could not find route (1.21s)
+  ROUTE FAILED - no rippable blockers found
+  6 blocking net(s) ('PWM_Q8' '5V_ISOL' 'PWM_TRANS6' 'PWM_Q7' 'Net-(U7B-+)' 'Net-(U7A-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.  [rationale as above]
+Hint: the box also includes PROTECTED net(s) '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked) within 3mm of the failing endpoint(s).  [rat
+
+Per-net fine-parameter rescue (#331/#371): 3 candidate net(s)
+  Rescuing PWM_Q5 (failed, 2 disconnected parts)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 49875 iterations (forward), trying backward...
+No route found after 1286995 iterations (both directions)
+    rescue failed (1.2s)
+  Rescuing PWM_Q7 (failed, 2 disconnected parts)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 3867913 iterations (forward), trying backward...
+No route found after 4023130 iterations (both directions)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+    endpoint cell blocked for J8.43 -- seeded 18 free on-pad cell(s)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 3920295 iterations (forward), trying backward...
+No route found after 4084383 iterations (both directions)
+    rescue failed (11.2s)
+  Rescuing PWM_TRANS6 (failed, 2 disconnected parts)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 279082 iterations (forward), trying backward...
+No route found after 1186544 iterations (both directions)
+Probe: forward=5000, backward=5000 iters, trying forward with full iterations...
+No route found after 279082 iterations (forward), trying backward...
+No route found after 1186544 iterations (both directions)
+    rescue failed (3.9s)
+Rescue pass: 0 recovered, 0 improved, 3 unchanged (16.2s)
+
+WARNING: 4 stacked-copper finding(s) on the write model (same-net duplicates KiCad will not flag):
+  PGND B.Cu: 2 duplicate segments stacked on (16.500, 33.200)-(16.500, 35.800)
+  PWM_Q7 In2.Cu: 2 duplicate segments stacked on (27.586, -44.214)-(28.122, -44.751)
+  GPIO_BYPASS_RLY_ISO In2.Cu: 2 duplicate segments stacked on (25.259, -40.659)-(25.259, -40.659)
+  GPIO_BYPASS_RLY_ISO In2.Cu: 2 duplicate segments stacked on (25.259, -40.659)-(25.650, -41.050)
+
+============================================================
+Routing complete
+============================================================
+  Single-ended:  0/3 routed (3 FAILED)
+  Total vias:    0
+  Total time:    5.28s
+  Iterations:    7,835,385
+
+Failed single-ended nets:
+  PWM_Q7
+  PWM_TRANS6
+  PWM_Q5
+
+============================================================
+FAILED NET HISTORIES
+============================================================
+
+PWM_Q7:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, ISO_AFE_SDM_RAW_VOLTAGE, 5V_ISOL (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'ISO_AFE_SDM_RAW_VOLTAGE' '5V_ISOL' 'PWM_TRANS6' 'ADCLK_DAB' 'Net-(U7B-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around 
+  Hint: the box also includes PROTECTED net(s) 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'PWM_Q8' (locked), '3V3_ISO' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_TRANS5' (locked), 'Net-(U7A-+)' (loc
+  [0] rescue_failed
+
+PWM_TRANS6:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, Net-(U7A-+), Net-(U7B-+) (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' 'Net-(U7A-+)' 'Net-(U7B-+)' 'PWM_Q6' 'Net-(U2-+)' 'MDATA_DAB') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+  Hint: the box also includes PROTECTED net(s) 'ISOGND' (locked), '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked), 'Net-(U7A-+)' (locked) within 3mm of the failing endpoint(s). The router will
+  [0] rescue_failed
+
+PWM_Q5:
+  [0] Re-route FAILED: no rippable blockers found
+  [0] Blocked by pre-existing copper: PWM_Q8, 5V_ISOL, PWM_TRANS6 (+3 more)
+         Hint: the blocking copper belongs to pre-existing net(s) committed by an earlier run/step. 6 blocking net(s) ('PWM_Q8' '5V_ISOL' 'PWM_TRANS6' 'PWM_Q7' 'Net-(U7B-+)' 'Net-(U7A-+)') carry KiCad-locked copper, which no flag can rip (#521): unlock it in the board, or plan around it.
+  Hint: the box also includes PROTECTED net(s) '3V3_ISO' (locked), 'ISO_AFE_SDM_RAW_VOLTAGE' (locked), 'PWM_Q7' (locked), 'PWM_TRANS6' (locked), 'PWM_Q6' (locked), 'ISOGND' (locked), 'Q7_G' (locked), '5V_ISOL' (locked), '15V_ISO' (locked), 'PWM_Q8' (locked) within 3mm of the failing endpoint(s). The
+  [0] rescue_failed
+
+Power trace ampacity (bottleneck segment, IPC-2152):
+  PWM_Q7: 0.33A max (0.152mm on In2.Cu (0.43 oz copper, 10°C rise), IPC-2221: 0.17A)
+JSON_SUMMARY: {"routed_single": [], "failed_single": ["PWM_Q7", "PWM_TRANS6", "PWM_Q5"], "open_single": [], "failed_multipoint": [], "multipoint_nets": 0, "multipoint_pads_connected": 0, "multipoint_pads_total": 0, "multipoint_edges_routed": 0, "multipoint_edges_failed": 0, "ripup_success_pairs": []
+Note: the JSON_SUMMARY above covers only the reconciliation subset (it carries scope="reconciliation-subset"). The run's tally is the final re-grade of the shipped board (JSON_REGRADE, folded into JSON_SUMMARY_MIN and --json-out). Never scrape the LAST JSON_SUMMARY of a route log.
+
+  FAB NOTE (route): 61 via(s) in a pad or paste opening [C101.1 F.Paste (pad), C107.1 B.Paste (pad), C110.2 F.Paste (pad), C119.2 B.Paste (pad), C121.1 B.Paste (pad), C136.1 B.Paste (pad), C141.2 F.Paste (pad), C97.2 F.Paste (pad), +53 more] -- 0 stamped (capping yes) (filling yes), 56 already fille
+VIA_IN_PAD_JSON: {"count": 61, "sites": ["C101.1 F.Paste (pad)", "C107.1 B.Paste (pad)", "C110.2 F.Paste (pad)", "C119.2 B.Paste (pad)", "C121.1 B.Paste (pad)", "C136.1 B.Paste (pad)", "C141.2 F.Paste (pad)", "C97.2 F.Paste (pad)", "D11.C F.Paste (pad)", "R100.1 F.Paste (pad)", "R113.1 B.Paste (pad)
+JSON_REGRADE: {"board": "file", "graded_nets": 3, "seconds": 1.05, "routed_single": [], "failed_single": ["PWM_Q5", "PWM_Q7", "PWM_TRANS6"], "open_single": [], "failed_multipoint": [], "multipoint_pads_total": 0, "multipoint_pads_connected": 0, "successful": 0, "failed": 3, "unowned_broken": [], "re
+
+============================================================
+Run complete -- whole run, re-graded on the written board (3 net(s), 1.1s)
+============================================================
+  Single-ended:  0/3 routed (3 FAILED)
+  Ships broken: 3 net(s) -- the `failed` count, over every net the run owns
+  route summary written to /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/diag/out.json
+JSON_IMPROVEMENT_GATE: {"lost": [], "gained": [], "lost_zone": [], "gained_zone": [], "worsened": [], "disconnected_pads_before": 89, "disconnected_pads_after": 89, "nets_compared": 257, "verdict": "accept"}
+JSON_SUMMARY_MIN: {"escalations": 0, "failed": 3, "failed_single": ["PWM_Q5", "PWM_Q7", "PWM_TRANS6"], "finalize_excluded_nets": ["/01 afe/CMFILT1", "/01 afe/CMFILT2", "/01 afe/FILTER_INPUT", "/01 afe/JEE", "/01 afe/LEMOUT", "/01 afe/SHUNT1_FORCE", "/05 VSI/AFE_RELAY", "/05 VSI/INDUCTOR_OUTPUT", "/0
+  Power-net widths (measured by board_score): 1 recorded in out.kicad_pro (+1 this step)
+EXIT=0
