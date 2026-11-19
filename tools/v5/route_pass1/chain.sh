@@ -69,6 +69,10 @@ if [ "${WEST_FENCE:-1}" = 0 ] && { [ "$SKIP" = 0 ] || [ "$FROM" = taps_vias ]; }
     kpy "$H/prep.py" unfence "$CUR" "$CUR"
 fi
 script taps_vias scripted.py taps
+# --- the passage north of J11 as a drawn bus (scripted.py bus): 8 lanes on In3 entered from the J6 / J4 gap, 3
+#     signal lanes on In4 entered through the J6 column at x 68.98, ISOGND on In4 from the plane edge. The router
+#     does only the ends.
+script bus scripted.py bus
 
 # --- ISO side. The PWM lines to J6 / J4 first: they cross the DC bus band on In3 only (pin -> via south of the
 #     band -> In3 -> through-hole pin), so everything that runs east-west there has to go around them. Then the
@@ -108,16 +112,20 @@ D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2
 #     with its own time budget: pads outside the planes (U4 / C37 / J8 west of J11, the aux area) and the rails
 #     without a plane (15V_ISO, 5V_ISOL, 15V, 5V_CTRL_A).
 script plane_vias scripted.py planes fill
-STMO="${SUPPLY_TMO:-240}"      # time budget of each supply step, seconds
+STMO="${SUPPLY_TMO:-420}"      # time budget of each supply step, seconds
+Q="--quick"                    # main pass only for the rails that timed out in pass 2: no rescue / reconciliation laps
 PW=(--power-nets 3V3_CTRL CTRLGND_A CTRLGND 5V_CTRL 5V_CTRL_A 3V3_ISO ISOGND 15V_ISO 5V_ISOL GND VCC 15V
     --power-nets-widths 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.5 0.8 0.4 0.4 0.5)
 D=C TMO=$STMO step supply_C  supply_C  --layers F.Cu In3.Cu B.Cu --layer-costs 1 4 1 "${PW[@]}"
 for n in 5V_ISOL 15V_ISO 3V3_ISO ISOGND; do
-    D=I TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu In4.Cu B.Cu In2.Cu --layer-costs 1 2 2 1 8 "${PW[@]}"
+    D=I TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu In4.Cu B.Cu In2.Cu --layer-costs 1 2 2 1 8 "${PW[@]}" $Q
 done
-for n in VCC 15V GND; do
+for n in VCC 15V; do
     D=P TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}"
 done
+D=P TMO=$STMO step supply_GND GND --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}" $Q
+# --- the router's power-net passes do not honour the fences (15V track at y -74 in pass 2): delete what lies in one
+kpy "$H/prep.py" prune "$CUR" "$CUR" "$R/kicad/ac_psu.kicad_pcb" | grep -v "Debug: Adding"
 
 cp "$CUR" "$W/final_locked.kicad_pcb"
 kpy "$H/prep.py" finish "$CUR" "$OUT"
