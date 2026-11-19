@@ -1,0 +1,33 @@
+1. existing tracks/vias missing or changed: 0
+2. new copper outside the unrouted rectangles but inside the brief's passage (y 54..55.3): 88 ends on 3 nets {'Net-(U2-+)': 36, 'PWM_Q8': 4, 'Net-(U7A-+)': 48}
+2. new copper outside the unrouted rectangles: 7 ends on 2 nets {'15V': 4, 'GPIO_BYPASS_RLY': 3}
+      15V In2.Cu (-103.24, -74.06)
+      15V In2.Cu (-103.24, -74.06)
+      15V In2.Cu (-62.64, -74.06)
+      15V In2.Cu (-62.64, -74.06)
+      GPIO_BYPASS_RLY F.Cu (43.60, -22.05)
+      GPIO_BYPASS_RLY F.Cu (45.50, -22.05)
+3. rule 2 / 3 / 3a / plane-layer findings: 22
+      12 x track on plane layer In2.Cu in the card area: 15V
+      10 x track on plane layer In2.Cu in the card area: DAB_PWM_HI_SEC
+4. high-voltage spacing violations, HV net to a non-HV net (2.5 mm on F.Cu / B.Cu, pairs with new copper): 0
+4b. two different HV nets closer than 2.5 mm (pairs with new copper; the placement puts their pads 1.0 .. 2.0 mm apart, the router kept 1.0 mm between HV nets): 0
+5. new vias: 274 (143 signal); new track mm per layer: B.Cu 1145, F.Cu 1284, In2.Cu 19, In3.Cu 866, In4.Cu 107
+   open connections: 63 on 22 nets
+      passage        9 open on  9/12 nets  INU_ADCLK:1 MDATA_INU:1 PWM_Q5:1 PWM_Q7:1 PWM_TRANS6:1 GPIO_BYPASS_RLY_ISO:1 Net-(U2--):1 Net-(U7A--):1 Net-(U7B--):1
+      sdm_rest       0 open on  0/2 nets  
+      pwm_rest       0 open on  0/6 nets  
+      taps_rest      0 open on  0/7 nets  
+      other          0 open on  0/1 nets  
+      j11_top        0 open on  0/21 nets  
+      j11_bot        2 open on  2/14 nets  ADCLK_DAB_CTRL:1 PWM_TRANS6_CTRL:1
+      ctrl_analog    0 open on  0/17 nets  
+      buck           0 open on  0/6 nets  
+      primary        1 open on  1/22 nets  CLK1:1
+      aux_hv         1 open on  1/8 nets  AUX_VIN:1
+      aux_lv         1 open on  1/9 nets  AUX_LOVP:1
+      aux_iso        0 open on  0/1 nets  
+      supply_C       0 open on  0/5 nets  
+      supply_I      25 open on  4/4 nets  15V_ISO:9 3V3_ISO:4 5V_ISOL:2 ISOGND:10
+      supply_P      21 open on  2/3 nets  GND:20 15V:1
+      (not in scope)   3  ISODC+:1 ISOPGND:2
