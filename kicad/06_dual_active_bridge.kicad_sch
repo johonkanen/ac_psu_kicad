@@ -2376,7 +2376,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
+		(property "Footprint" "ac_psu:Tab_FASTON250_TE_62409-1_Vertical"
 			(at 27.94 69.85 0)
 			(effects
 				(font
@@ -2462,7 +2462,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
+		(property "Footprint" "ac_psu:Tab_FASTON250_TE_62409-1_Vertical"
 			(at 91.44 67.31 0)
 			(effects
 				(font
@@ -3388,7 +3388,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
+		(property "Footprint" "ac_psu:Tab_FASTON250_TE_62409-1_Vertical"
 			(at 154.94 69.85 0)
 			(effects
 				(font
@@ -3474,7 +3474,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
+		(property "Footprint" "ac_psu:Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm"
 			(at 119.38 77.47 0)
 			(effects
 				(font

@@ -1,0 +1,18 @@
+== v5 step 11: cable-tie anchors removed, vertical blade tabs for the four DAB transformer wires
+  TIE_ACIN1: cable-tie anchor at (-114.87, -51.51) deleted
+  TIE_ACOUT1: cable-tie anchor at (-97.30, -6.50) deleted
+  TIE_ACOUT2: cable-tie anchor at (-118.24, 33.44) deleted
+  TIE_AFE_OUT1: cable-tie anchor at (52.70, -70.60) deleted
+  TIE_PE1: cable-tie anchor at (-60.75, -63.00) deleted
+  TIE_PE2: cable-tie anchor at (-121.80, -54.71) deleted
+  TIE_PE3: cable-tie anchor at (-90.37, -68.25) deleted
+  TIE_PE5: cable-tie anchor at (-61.40, 28.60) deleted
+     DAB_PRI_1: nearest other net there: DAB_GATE_LO_PRI
+  DAB_PRI_1 [DAB_SOURCE_HI_PRI]: Terminal_D4.0mm_Drill3.0mm -> blade tab at (110.75, -71.80), 90 degrees; nearest other net 2.8 mm (the 4.0 mm pad had 2.8 mm)
+     DAB_PRI_2: nearest other net there: DAB_SOURCE_HI_PRI
+  DAB_PRI_2 [DAB_CAP_PRI]: Terminal_D4.0mm_Drill3.0mm -> blade tab at (111.25, -63.70), 0 degrees; nearest other net 3.0 mm (the 4.0 mm pad had 2.3 mm)
+     DAB_SEC_1: nearest other net there: DAB_CAP_SEC
+  DAB_SEC_1 [DAB_SOURCE_HI_SEC]: Terminal_D4.0mm_Drill3.0mm -> blade tab at (97.65, 61.70), 0 degrees; nearest other net 2.0 mm (the 4.0 mm pad had 2.7 mm)
+     DAB_SEC_2: nearest other net there: DAB_SOURCE_HI_SEC
+  DAB_SEC_2 [DAB_CAP_SEC]: Terminal_D4.0mm_Drill3.0mm -> blade tab at (97.90, 55.90), 0 degrees; nearest other net 3.1 mm (the 4.0 mm pad had 2.3 mm)
+  zones filled again on the reloaded board

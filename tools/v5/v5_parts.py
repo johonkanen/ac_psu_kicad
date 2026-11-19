@@ -139,4 +139,11 @@ PARTS += [
 # make_v5_lists.py takes them out of lib/part_map.csv.
 DROPPED = "Q15 Q16 Q17 R103 R104 R106 R107 C115".split()     # C115: v5 step 8, C28 is the 15V output capacitor
 
+# Footprints swapped on Proteus parts in v5 (kind footprint; Proteus refdes): ref -> (old, new, note)
+FOOTPRINT_SWAPS = {
+    ref: ("ac_psu:Terminal_D4.0mm_Drill3.0mm", "ac_psu:Tab_FASTON250_TE_62409-1_Vertical" + ("_Pad2.0mm" if ref == "DAB_SEC_1" else ""),
+          "vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)")
+    for ref in ("DAB_PRI_1", "DAB_PRI_2", "DAB_SEC_1", "DAB_SEC_2")
+}
+
 VALUE = {p[0]: p[3] for p in PARTS}

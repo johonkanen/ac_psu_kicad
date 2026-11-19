@@ -70,6 +70,8 @@ def base_rows():
     for a, b in V.REFDES.items():
         out.append(dict(kind="refdes", ref="", pin="", **{"from": a}, to=b, fix=FIX,
                         note="KiCad needs a trailing number (annotation check of Update PCB)"))
+    for ref, (old, new_fp, note) in V.FOOTPRINT_SWAPS.items():
+        out.append(dict(kind="footprint", ref=ref, pin="", **{"from": old}, to=new_fp, fix=FIX, note=note))
     import card_layout
     import json
     new = {p[0] for p in V.PARTS}

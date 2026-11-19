@@ -3,8 +3,8 @@
 
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
-converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-10 done), branch v5-layout.
-Read README.md, STATUS.md (first "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
+converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-11 done), branch v5-layout.
+Read README.md, STATUS.md (first "v5 step 11", "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
 reports/v5_layout/proposal_r2.md (the board as placed; proposal.md is revision 1), reports/v5_layout/routing_brief.md,
 CTRL_ISOLATION_PLAN.md section 8, fab/README.md and tools/check_all.sh.
 Never run the KiCad AppImage with --version.
@@ -22,7 +22,7 @@ never loosen a check or a gap.
 
 Verify first: tools/check_all.sh (~3 min) must end with ALL CHECKS PASSED; at handoff:
   compare: parts 365/365 present ... wrong-net pins 0 ... compare: OK
-  check_board: 384 footprints, 1196 pads ... 45 v5 moved parts ... 3162 tracks, 118 vias, 91 zones; OK
+  check_board: 376 footprints, 1200 pads ... 45 v5 moved parts ... 3162 tracks, 118 vias, 91 zones; OK
   assign_nets: 0 shorts, 8 orphans (card planes without a via yet), 0 opens; 139 v5 opens pending
   drc: 413 violations, 0 shorts, 0 unconnected, 0 parity; 2 wire links, 352 unconnected + 0 clearance pending
   domain_gaps: 0 violations, nothing pending
@@ -48,7 +48,8 @@ Open points (ask the user which to do):
    STATUS.md.
 2. Aux flyback: placed in v5 step 9; route it with the card area (routing list group 8a: high-voltage spacing,
    copper on U18's DRAIN pins); the EEL19 winding design run and the bobbin dimensions.
-3. v5 M4 ring-lug terminals for the 17 lead connections that keep soldered pins.
+3. Wire terminals are settled (v5 step 11): blade tabs on the AC and DAB wires, PE = screws, the rest soldered
+   links. Open: the tab's current rating against the DAB and AC currents.
 4. fab: ICE5AR0680AG from JLC (13 pcs on 2026-11-18, the user buys them), EEL19 winding design run, JLC price for 6 layers with
    slots and both-side assembly.
 5. Still open from before: switching-noise firmware items (reports/noise/README.md), R73/R74 when the shunt

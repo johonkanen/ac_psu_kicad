@@ -167,10 +167,10 @@ D13,ac_psu:D_TVS,ac_psu:D_SMB_AC,"v5: clamp TVS (~190 V at 1.2 A): drain peak ~4
 D14,ac_psu:D,ac_psu:D_SMA_AC,v5: Out1 rectifier 200 V 2 A
 D15,ac_psu:D,ac_psu:D_SMA_AC,v5: Out2 rectifier 200 V 2 A
 D16,ac_psu:D_Schottky,ac_psu:D_SMA_AC,v5: CTRL rectifier 100 V 3 A
-DAB_PRI_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-DAB_PRI_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-DAB_SEC_1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-DAB_SEC_2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
+DAB_PRI_1,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+DAB_PRI_2,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+DAB_SEC_1,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+DAB_SEC_2,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
 FILTER_IN1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
 FILTER_OUT1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
 INU_OUT2,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (inverter half-bridge output)

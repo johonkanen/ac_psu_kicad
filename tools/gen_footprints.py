@@ -180,6 +180,17 @@ PROJECT = {
         pad=1.8, drill=1.0, body=(15.8, 22.5),
         descr="EEL19 vertical bobbin 4+6 (rows 12.5 mm apart), aux flyback T1: 1 Out1, 2 GND, 9 ISOGND, 10 Out2, fly leads "
               "11 DC+ / 12 drain beside the primary row; body 15.8 x 22.5 mm, height about 29 mm (confirm with calipers)"),
+    # v5 step 11 (user 2026-11-19): vertical blade tab instead of a soldered wire. TE 62409-1 FASTON 250 PCB tab,
+    # customer drawing C-62409 rev S: two posts 5.08 mm apart in 1.34-1.52 mm holes, blade 6.35 x 0.8 mm, body 7.5 mm
+    # wide, 12.6 mm above the board. Both posts are pin 1. The body rectangle is the room of an insulated receptacle.
+    "Tab_FASTON250_TE_62409-1_Vertical": dict(
+        pins=[("1", -2.54, 0.0, 2.6, 1.4), ("1", 2.54, 0.0, 2.6, 1.4)], pad=2.6, drill=1.4, body=(8.0, 4.5),
+        descr="Vertical FASTON 250 PCB tab TE 62409-1 (6.35 x 0.8 mm blade, 2 posts P5.08 mm, 1.4 mm holes, 12.6 mm high)"),
+    # the same tab with 2.0 mm pads (0.3 mm ring, as the AC terminals of the Proteus layout have): for DAB_SEC_1, which
+    # stands in 11 mm between the pads of C47 (ISODC+) and C50 (DAB_CAP_SEC)
+    "Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm": dict(
+        pins=[("1", -2.54, 0.0, 2.0, 1.4), ("1", 2.54, 0.0, 2.0, 1.4)], pad=2.0, drill=1.4, body=(8.0, 4.5),
+        descr="Vertical FASTON 250 PCB tab TE 62409-1, 2.0 mm pads (2 posts P5.08 mm, 1.4 mm holes, 12.6 mm high)"),
     # Infineon PG-DSO-12 of the CoolSET ICE5xRxxxxAG (data sheet V2.3 figure 39): SO-16 narrow outline (3.9 x 9.9 mm,
     # 1.27 mm pitch) with positions 5, 6, 11, 12 empty: 3.81 mm between the control pins and the DRAIN pins.
     "Infineon_PG-DSO-12_CoolSET": dict(
@@ -275,7 +286,7 @@ def assign():
             continue
         if out[ref][0] != old:
             errors.append(f"{ref}: footprint change from {old}, but the rule gives {out[ref][0]}")
-        out[ref] = (new, f"v4 fix {fix}: {note}")
+        out[ref] = (new, (f"v4 fix {fix}: " if fix != "v5" else "v5: ") + note)
     return out, errors
 
 

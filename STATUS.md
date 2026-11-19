@@ -1,6 +1,31 @@
 # Status
 
-Updated: 2026-11-19 (v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-19 (v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 11 – cable-tie anchors removed, blade tabs for the DAB transformer wires (2026-11-19, branch `v5-layout`)
+
+User 2026-11-19: remove the cable ties and use vertical blade connectors; the PE connections are screws; blade tabs
+go on the DAB transformer wires and the AC input and output; the other wire holes are soldered links inside the
+unit. This replaces v4 fix 15 (second fixing of soldered wires by cable ties).
+
+- **Removed:** the eight board-only anchors `TIE_*` (16 unplated 3.0 mm holes) and their 12 rows in
+  `lib/v4_copper.csv`; the pours refill.
+- **AC terminals** ACIN1, ACIN2, ACOUT1, ACOUT2: unchanged. Their Proteus footprint already is the pattern of a
+  vertical 6.35 mm tab (two 1.4 mm holes 5.00 mm apart).
+- **DAB_PRI_1, DAB_PRI_2, DAB_SEC_1, DAB_SEC_2:** footprint `ac_psu:Tab_FASTON250_TE_62409-1_Vertical` (TE 62409-1,
+  customer drawing C-62409: two posts 5.08 mm apart, 1.4 mm holes, 12.6 mm high) instead of the single 3.0 mm
+  hole; `tools/v5/v5_11_blade_tabs.py` (seed 5011) picks for each the position within 3 mm of the old hole with
+  the largest distance to other nets, both posts in the net's pour, no courtyard overlap. Kind `footprint` rows
+  come from `v5_parts.FOOTPRINT_SWAPS`; terminal areas are in `lib/v5_copper.csv`.
+- **Distances to the nearest other net** (pad edge to copper, measured): DAB_PRI_1 2.75 mm (was 2.8), DAB_PRI_2
+  3.0 (was 2.3), DAB_SEC_2 3.1 (was 2.3), **DAB_SEC_1 2.0 mm (was 2.7)**: it stands in 11 mm between C47 pad 1
+  (ISODC+) and C50 pad 1 (DAB_CAP_SEC), centred, with the 2.0 mm pad variant of the footprint.
+- **Not changed:** PE1–PE8 (screws), AFE_OUT1 and the other soldered links.
+- `tools/check_all.sh` ALL CHECKS PASSED.
+
+**Open:** no current rating for the TE 62409-1 was found in TE's documents, and the DAB and AC currents are not
+recorded here: check before ordering (`fab/hand_fit.csv`). The first attempt of this step put a tab on AFE_OUT1;
+that was a wrong guess and is not on the board.
 
 ## v5 step 10 – spare isolator U17 removed (2026-11-19, branch `v5-layout`)
 

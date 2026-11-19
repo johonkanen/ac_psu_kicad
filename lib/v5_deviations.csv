@@ -36,6 +36,10 @@ rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
 refdes,,,AFE_OUT,AFE_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_IN,FILTER_IN1,v5,KiCad needs a trailing number (annotation check of Update PCB)
 refdes,,,FILTER_OUT,FILTER_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)
+footprint,DAB_PRI_1,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+footprint,DAB_PRI_2,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+footprint,DAB_SEC_1,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+footprint,DAB_SEC_2,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
 moved,AD1,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
 moved,C2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
 moved,C3,,,,v5,"card-area layout: 3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leave"

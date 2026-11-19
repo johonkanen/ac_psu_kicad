@@ -17,3 +17,7 @@ pending,*,-130.0,-160.0,120.0,-84.0,,staging area below the board (new v5 parts,
 unrouted,*,0.0,36.0,22.0,54.0,,U4 clock/data and PWM_Q5/Q7/TRANS6 to J8 (from U21/U19/U20, north of J11)
 wire,*,32.5,38.5,63.5,45.5,ISODC+,BUSP1 - BUSP2: DC bus link past J11, 2.5 mm round enamelled copper wire soldered on the bottom side (v5 step 6)
 wire,*,33.0,31.5,90.5,45.0,ISOPGND,BUSN1 - BUSN2: DC bus link past J11, 2.5 mm round enamelled copper wire soldered on the bottom side (v5 step 6)
+area,*,104.2,-74.8,118.2,-65.8,,DAB_PRI_1 vertical blade tab TE 62409-1: two posts instead of the lead pin (v5 step 11)
+area,*,104.2,-67.7,118.2,-58.7,,DAB_PRI_2 vertical blade tab TE 62409-1: two posts instead of the lead pin (v5 step 11)
+area,*,90.9,57.2,104.9,66.2,,DAB_SEC_1 vertical blade tab TE 62409-1: two posts instead of the lead pin (v5 step 11)
+area,*,90.9,50.9,104.9,59.9,,DAB_SEC_2 vertical blade tab TE 62409-1: two posts instead of the lead pin (v5 step 11)
