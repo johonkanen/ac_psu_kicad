@@ -43,6 +43,24 @@ Values: the series resistors on the sigma-delta inputs are 12.4R (C477607) for a
 inductance (2.5 Ω per nH with the 100 nF C0G capacitors C90–C92). Re-pick them if the
 inductance is measured.
 
+## Checklist before ordering
+
+Open items that need a decision or a measurement by the user. Tick them off here.
+
+- [ ] **PE connections PE1–PE8 (flagged 2026-11-19).** They are screw connections (user), but the holes on the
+      board are not one size: 3.0 mm (PE1, PE5, PE6, PE7), 2.55 mm (PE3), 2.0 mm (PE2, PE4), 1.52 mm (PE8), all
+      with 4.0 mm pads (PE8: 3.0 mm). To check for each: which screw and washer, does it pass the hole, is the
+      pad large enough for the screw head or lug, is the hole plated as wanted, and is the PE path low-resistance
+      and secured against loosening (IEC 61010-1 protective bonding). Enlarge the holes or pads by a script step
+      if needed.
+- [ ] Blade tabs TE 62409-1 on the AC and DAB wires: tab and receptacle current rating against the AC and DAB
+      currents (neither is recorded in this repo).
+- [ ] DAB_SEC_1: 2.0 mm between its tab pads and the pads of C47 (ISODC+) and C50; accept, or leave this lead
+      soldered, or move a capacitor.
+- [ ] EEL19 transformer T1: bobbin base dimensions with calipers; winding design run (the turns are a hand
+      calculation).
+- [ ] DC+ must stay at or below 450 V (800 V switch in U18); the line over-voltage stop is at about 478 V.
+
 ## Substitutions (the schematic still names the original part)
 
 | Ref | Design part | BOM part | Check |

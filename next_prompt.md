@@ -50,6 +50,8 @@ Open points (ask the user which to do):
    copper on U18's DRAIN pins); the EEL19 winding design run and the bobbin dimensions.
 3. Wire terminals are settled (v5 step 11): blade tabs on the AC and DAB wires, PE = screws, the rest soldered
    links. Open: the tab's current rating against the DAB and AC currents.
+   **PE1-PE8 screw holes are flagged** in the checklist of fab/README.md ("Checklist before ordering"): hole
+   sizes differ (3.0 / 2.55 / 2.0 / 1.52 mm); the user has to say which screws.
 4. fab: ICE5AR0680AG from JLC (13 pcs on 2026-11-18, the user buys them), EEL19 winding design run, JLC price for 6 layers with
    slots and both-side assembly.
 5. Still open from before: switching-noise firmware items (reports/noise/README.md), R73/R74 when the shunt
