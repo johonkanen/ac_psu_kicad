@@ -146,4 +146,11 @@ FOOTPRINT_SWAPS = {
     for ref in ("DAB_PRI_1", "DAB_PRI_2", "DAB_SEC_1", "DAB_SEC_2")
 }
 
+# v5 step 12: every PE screw hole 3.0 mm (M3 pan head on top, standoff below; user 2026-11-19)
+FOOTPRINT_SWAPS.update({
+    ref: (old, "ac_psu:Terminal_D4.0mm_Drill3.0mm", "3.0 mm hole for the M3 PE screw (user 2026-11-19)")
+    for ref, old in (("PE2", "ac_psu:Terminal_D4.0mm_Drill2.0mm"), ("PE3", "ac_psu:Terminal_D4.0mm_Drill2.55mm"),
+                     ("PE4", "ac_psu:Terminal_D4.0mm_Drill2.0mm"), ("PE8", "ac_psu:Terminal_D3.05mm_Drill1.52mm"))
+})
+
 VALUE = {p[0]: p[3] for p in PARTS}

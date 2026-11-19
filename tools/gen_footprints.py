@@ -203,8 +203,6 @@ PROJECT = {
     "CTRL_Winding_Leads_2x1.6mm_P5.08mm": dict(
         pins=[("1", -2.54, 0.0), ("2", 2.54, 0.0)], pad=3.0, drill=1.6, body=(8.6, 3.6),
         descr="Solder holes for the CTRL winding's TIW flying leads, 1.6 mm drill, 3.0 mm pads, 5.08 mm apart"),
-    "Terminal_D3.05mm_Drill1.52mm": dict(ipc="PE8", descr="Single PIN terminal"),
-    "Terminal_D4.0mm_Drill2.0mm": dict(ipc="PE2", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill2.55mm": dict(ipc="J5", descr="Single PIN terminal"),
     "Terminal_D4.0mm_Drill3.0mm": dict(ipc="PE1", descr="Single PIN terminal"),
 }

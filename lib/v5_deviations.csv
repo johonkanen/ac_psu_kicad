@@ -40,6 +40,10 @@ footprint,DAB_PRI_1,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_6
 footprint,DAB_PRI_2,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
 footprint,DAB_SEC_1,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
 footprint,DAB_SEC_2,,ac_psu:Terminal_D4.0mm_Drill3.0mm,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5,vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+footprint,PE2,,ac_psu:Terminal_D4.0mm_Drill2.0mm,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,3.0 mm hole for the M3 PE screw (user 2026-11-19)
+footprint,PE3,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,3.0 mm hole for the M3 PE screw (user 2026-11-19)
+footprint,PE4,,ac_psu:Terminal_D4.0mm_Drill2.0mm,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,3.0 mm hole for the M3 PE screw (user 2026-11-19)
+footprint,PE8,,ac_psu:Terminal_D3.05mm_Drill1.52mm,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5,3.0 mm hole for the M3 PE screw (user 2026-11-19)
 moved,AD1,,,,v5,"card-area layout: ADC group as it is, mirrored to the bottom and 5 mm south: x"
 moved,C2,,,,v5,"card-area layout: ISO DC-link block (ISOADA3), moved as it is to x 94.3..101.5"
 moved,C3,,,,v5,"card-area layout: 3V3_ISO LDO block, moved to x 95.3..98.8, y -5.7..1.1 (leave"

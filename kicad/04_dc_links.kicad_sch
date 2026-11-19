@@ -2476,7 +2476,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D3.05mm_Drill1.52mm"
+		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
 			(at 88.9 50.8 0)
 			(effects
 				(font

@@ -1,6 +1,27 @@
 # Status
 
-Updated: 2026-11-19 (v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-19 (v5 step 12: PE screw holes 3.0 mm, PE6 / PE7 open; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 12 – PE screw holes (2026-11-19, branch `v5-layout`)
+
+User 2026-11-19: all PE connections are M3 screws, "standoff and a m3 pan head"; "positions are not fixed, move the
+holes". `tools/v5/v5_12_pe_screws.py` (seed 5012), log `reports/v5_layout/v5_12_pe_screws.log`.
+
+- **Holes:** PE2, PE4 (2.0 mm), PE3 (2.55 mm) and PE8 (1.52 mm, 3.0 mm pad) now have the 3.0 mm hole and 4.0 mm
+  pad of PE1 / PE5 / PE6 / PE7. The footprints `Terminal_D4.0mm_Drill2.0mm` and `Terminal_D3.05mm_Drill1.52mm`
+  are no longer used and are removed from the library.
+- **Head and standoff are PE metal on the solder mask:** taken as 6.0 mm (pan head, top) and 6.4 mm (5.5 mm
+  hexagon across the corners, bottom). At PE1, PE2, PE3, PE4, PE5 and PE8 the pours of other nets are cut back to
+  2.5 mm (basic insulation to PE) from those circles; measured after the fill: 2.55 mm or more on both sides.
+- **PE4 moved 0.8 mm west** to (-89.8, -43.5), the middle between C24 and R10: the head has 0.2 mm to the drawn
+  body of each (3.2 mm from the hole centre). Tight; a head of 5.6 mm (ISO 7045) has 0.4 mm.
+- **OPEN, PE6 and PE7 not changed:** each stands in the middle of the space between two Y capacitors (C29 / C30:
+  5.8 mm, C31 / C32: 5.9 mm between the drawn 5.0 mm wide bodies), with the board edge 2.7 / 3.2 mm west and a
+  7 uF film capacitor east. No hole position fits a 6.0 mm head there; the capacitors would have to move apart
+  by about 0.8 mm, or a smaller head is used, or the head may touch the capacitors. Also open at PE6: 2.2 mm from
+  the 6.4 mm standoff to the INDUCTOR_OUTPUT pour on B.Cu (cut back not done), and the standoff reaches 0.5 mm
+  over the board edge.
+- Terminal areas for the six changed places are in `lib/v5_copper.csv`. `tools/check_all.sh` ALL CHECKS PASSED.
 
 ## v5 step 11 – cable-tie anchors removed, blade tabs for the DAB transformer wires (2026-11-19, branch `v5-layout`)
 

@@ -8673,7 +8673,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.0mm"
+		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
 			(at 30.48 190.5 0)
 			(effects
 				(font
@@ -8769,7 +8769,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.55mm"
+		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
 			(at 40.64 190.5 0)
 			(effects
 				(font
@@ -8865,7 +8865,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill2.0mm"
+		(property "Footprint" "ac_psu:Terminal_D4.0mm_Drill3.0mm"
 			(at 50.8 190.5 0)
 			(effects
 				(font

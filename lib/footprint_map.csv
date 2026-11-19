@@ -191,13 +191,13 @@ J14,ac_psu:CONN_2,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,v5:
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 L2,ac_psu:L,Inductor_SMD:L_Sunlord_SWPA6045S,v5: buck inductor 15 uH (SWPA6045S150MT)
 PE1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-PE2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.0mm,PIN terminal
-PE3,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.55mm,PIN terminal
-PE4,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill2.0mm,PIN terminal
+PE2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: 3.0 mm hole for the M3 PE screw (user 2026-11-19)
+PE3,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: 3.0 mm hole for the M3 PE screw (user 2026-11-19)
+PE4,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: 3.0 mm hole for the M3 PE screw (user 2026-11-19)
 PE5,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 PE6,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 PE7,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
-PE8,ac_psu:PIN,ac_psu:Terminal_D3.05mm_Drill1.52mm,PIN terminal
+PE8,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: 3.0 mm hole for the M3 PE screw (user 2026-11-19)
 PEC1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: PE bond of CTRL island A (CTRLGND_A)
 PEC2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: PE bond of CTRL island B (CTRLGND)
 Q1,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
