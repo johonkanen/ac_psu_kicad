@@ -1,0 +1,10 @@
+{
+ "AUX_DRAIN": 2.5,
+ "AUX_CLAMP": 2.5,
+ "AUX_VIN": 2.5,
+ "DC+": 2.5,
+ "AUX_ST1": 2.5,
+ "AUX_ST2": 2.5,
+ "AUX_LV1": 2.5,
+ "AUX_LV2": 2.5
+}
