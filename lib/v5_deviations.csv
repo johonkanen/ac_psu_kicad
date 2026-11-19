@@ -143,8 +143,8 @@ part,T1,,,ac_psu:Transformer_EEL19_V_4+6_SideLeads,v5,"EEL19 PC40, vertical 4+6 
 value,T1,,,EEL19 aux flyback,v5,
 part,D14,,,ac_psu:D_SMA_AC,v5,Out1 rectifier 200 V 2 A
 value,D14,,,ES2D,v5,
-part,R108,,,Resistor_SMD:R_0805_2012Metric,v5,Out1 preload
-value,R108,,,4.7k,v5,
+part,R108,,,Resistor_SMD:R_0805_2012Metric,v5,"Out1 preload, 4.5 mA (68 mW; was 4.7k, v5 step 14)"
+value,R108,,,3.3k,v5,
 part,D15,,,ac_psu:D_SMA_AC,v5,Out2 rectifier 200 V 2 A
 value,D15,,,ES2D,v5,
 part,C116,,,Capacitor_SMD:CP_Elec_8x10,v5,Out2 (15V_ISO) output capacitor

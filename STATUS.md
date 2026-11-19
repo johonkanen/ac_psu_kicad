@@ -1,6 +1,25 @@
 # Status
 
-Updated: 2026-11-19 (v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## v5 step 14 – R108 3.3k; U7 / U2 stay (2026-11-19, branch `v5-layout`)
+
+User 2026-11-19: "Move u7 and u2 and change r108".
+
+- **R108** (preload on the regulated 15 V output of the aux flyback): 4.7k -> **3.3k**, 4.5 mA, 68 mW in 0805
+  (125 mW). The controller's reference design needed about 5 mA on the regulated rail at light load.
+  `tools/v5/v5_14_r108.py` (seed 5014), JLC C26010 (1.2 million in stock 2026-11-19). R109 stays 4.7k.
+- **U7 / U2 blocks NOT moved; reported back to the user.** Looking at the west region showed that the earlier
+  suggestion does not hold:
+  - The taps arrive as differential pairs and the difference amplifiers sit at the receiving end, on the
+    ISOGND / 3V3_ISO planes next to the AMC1311 inputs. West of x 58.9 there are no ISO planes; an amplifier
+    there would send a single-ended output about 100 mm past the DC bus, referenced to a ground without plane.
+  - It does not unload the passage north of J11: instead of six taps, three outputs plus REF_1V65_ISO (it comes
+    from REF2 at x 114) would cross, and 3V3_ISO / ISOGND would have to come from U4 by tracks.
+  - Space is there (top side x -30..3, y 27..62 is empty), but the ISODC+ pour on F.Cu starts at x 5.4 and the
+    divider chains with up to 450 V are underneath on B.Cu.
+  The six taps keep the routing rule of `reports/v5_layout/routing_list.md` group 2 (pairs side by side on In3).
+- `tools/check_all.sh` ALL CHECKS PASSED.
 
 ## v5 step 13 – PE6 and PE7 accepted between their Y capacitors (2026-11-19, branch `v5-layout`)
 

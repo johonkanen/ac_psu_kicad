@@ -62,7 +62,7 @@ PARTS = [
      "EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW "
      "(reports/aux_flyback; v5 step 8)"),
     ("D14", 7, "D", "ES2D", SMA, "Out1 rectifier 200 V 2 A"),
-    ("R108", 7, "R", "4.7k", R0805, "Out1 preload"),
+    ("R108", 7, "R", "3.3k", R0805, "Out1 preload, 4.5 mA (68 mW; was 4.7k, v5 step 14)"),
     ("D15", 7, "D", "ES2D", SMA, "Out2 rectifier 200 V 2 A"),
     ("C116", 7, "C_Polarized", "470u 25V", CP8, "Out2 (15V_ISO) output capacitor"),
     ("R109", 7, "R", "4.7k", R0805, "Out2 preload"),

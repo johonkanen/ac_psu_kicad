@@ -303,7 +303,7 @@ R100,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VCC feed from 15V (RVCC)
 R101,ac_psu:R,Resistor_SMD:R_0603_1608Metric,"v5: VERR divider top, from 15V: 1.80 V x (1 + 365 / 49.9) = 14.97 V (1 %)"
 R102,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: VERR divider bottom (R101 || R102 = 43.9k: non-isolated mode needs > 25.3k)
 R105,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: current-sense resistor: peak limit 0.80 V / 0.562 = 1.42 A (1.28 .. 1.57)
-R108,ac_psu:R,Resistor_SMD:R_0805_2012Metric,v5: Out1 preload
+R108,ac_psu:R,Resistor_SMD:R_0805_2012Metric,"v5: Out1 preload, 4.5 mA (68 mW; was 4.7k, v5 step 14)"
 R109,ac_psu:R,Resistor_SMD:R_0805_2012Metric,v5: Out2 preload
 R110,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: ISOADA1 divider top (x0.4 with the 8.2k source)
 R111,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: ISOADA1 divider bottom

@@ -303,7 +303,7 @@ R100,7,ac_psu:R,10R
 R101,7,ac_psu:R,365k
 R102,7,ac_psu:R,49.9k
 R105,7,ac_psu:R,0.562R
-R108,7,ac_psu:R,4.7k
+R108,7,ac_psu:R,3.3k
 R109,7,ac_psu:R,4.7k
 R110,11,ac_psu:R,6.8k 0.1%
 R111,11,ac_psu:R,10k 0.1%
