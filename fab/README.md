@@ -48,10 +48,9 @@ inductance is measured.
 Open items that need a decision or a measurement by the user. Tick them off here.
 
 - [ ] **PE screws PE1–PE8 (M3 pan head on top, standoff below; v5 step 12).** All holes are 3.0 mm with 4.0 mm
-      pads; at PE1–PE5 and PE8 other copper is 2.5 mm from a 6.0 mm head and a 6.4 mm standoff. **Open: PE6 and
-      PE7** stand between two Y capacitors 5.8 / 5.9 mm apart (drawn bodies), a 6.0 mm head does not fit between
-      them; PE6 also has only 2.2 mm from the standoff to the INDUCTOR_OUTPUT pour on the bottom and is 2.7 mm
-      from the board edge. PE4: only 0.2 mm between the head and C24 / R10. Check with the real screws, standoffs
+      pads; at PE1–PE5 and PE8 other copper is 2.5 mm from a 6.0 mm head and a 6.4 mm standoff. PE6 and PE7 stand between two Y
+      capacitors 5.8 / 5.9 mm apart (drawn bodies): the 6.0 mm head touches them, accepted for now (user
+      2026-11-19, v5 step 13). PE6's standoff reaches about 0.45 mm over the board edge. PE4: only 0.2 mm between the head and C24 / R10. Check with the real screws, standoffs
       and capacitors; the PE path must be low-resistance and secured against loosening (IEC 61010-1).
 - [ ] Blade tabs TE 62409-1 on the AC and DAB wires: tab and receptacle current rating against the AC and DAB
       currents (neither is recorded in this repo).

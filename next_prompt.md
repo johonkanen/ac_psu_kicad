@@ -3,8 +3,8 @@
 
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
-converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-12 done), branch v5-layout.
-Read README.md, STATUS.md (first "v5 step 12", "v5 step 11", "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
+converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-13 done), branch v5-layout.
+Read README.md, STATUS.md (first "v5 step 13", "v5 step 12", "v5 step 11", "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
 reports/v5_layout/proposal_r2.md (the board as placed; proposal.md is revision 1), reports/v5_layout/routing_brief.md,
 CTRL_ISOLATION_PLAN.md section 8, fab/README.md and tools/check_all.sh.
 Never run the KiCad AppImage with --version.
@@ -51,8 +51,8 @@ Open points (ask the user which to do):
 3. Wire terminals are settled (v5 step 11): blade tabs on the AC and DAB wires, PE = screws, the rest soldered
    links. Open: the tab's current rating against the DAB and AC currents.
    **PE1-PE8 screw holes are flagged** in the checklist of fab/README.md ("Checklist before ordering"): hole
-   M3 pan head + standoff, all holes 3.0 mm (v5 step 12). **Open: PE6 / PE7**, no room for the head between their Y
-   capacitors: the user decides (move the capacitors apart, smaller head, or accept).
+   M3 pan head + standoff, all holes 3.0 mm (v5 step 12). PE6 / PE7: the head touches their Y
+   capacitors, accepted for now (v5 step 13); check on the real parts.
 4. fab: ICE5AR0680AG from JLC (13 pcs on 2026-11-18, the user buys them), EEL19 winding design run, JLC price for 6 layers with
    slots and both-side assembly.
 5. Still open from before: switching-noise firmware items (reports/noise/README.md), R73/R74 when the shunt

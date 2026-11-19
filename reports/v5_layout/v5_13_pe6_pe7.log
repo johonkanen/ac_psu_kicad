@@ -1,0 +1,11 @@
+== v5 step 13: PE6 / PE7 pours 2.5 mm from the screw head and the standoff
+     PE6: drawn body of C30 is 2.85 mm from the hole centre, -0.15 mm from the edge of the 6.0 mm head (accepted by the user)
+     PE6: drawn body of C29 is 2.95 mm from the hole centre, -0.05 mm from the edge of the 6.0 mm head (accepted by the user)
+     PE6: drawn body of C33 is 4.25 mm from the hole centre, +1.25 mm from the edge of the 6.0 mm head (accepted by the user)
+  PE6: zone Proteus B.Cu pour 14 [INDUCTOR_OUTPUT] B.Cu cut back to 5.7 mm from the hole centre (0.9 mm2 of outline)
+     PE7: drawn body of C34 is 4.25 mm from the hole centre, +1.25 mm from the edge of the 6.0 mm head (accepted by the user)
+     PE7: drawn body of C32 is 2.95 mm from the hole centre, -0.05 mm from the edge of the 6.0 mm head (accepted by the user)
+     PE7: drawn body of C31 is 2.95 mm from the hole centre, -0.05 mm from the edge of the 6.0 mm head (accepted by the user)
+  zones filled again on the reloaded board
+  PE6: head / standoff to the nearest other copper: F.Cu 4.10 mm, B.Cu 2.55 mm; hole centre 2.75 mm from the board edge
+  PE7: head / standoff to the nearest other copper: F.Cu 4.90 mm, B.Cu 8.80 mm; hole centre 3.25 mm from the board edge
