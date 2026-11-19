@@ -103,6 +103,10 @@ R139 moved. Corrections to this brief from that pass: the aux parts are placed (
 J11 is inside the `unrouted` rectangle only up to y 54; In4 must be fenced against routing from the first step; the
 2.5 mm high-voltage spacing is per pad (`card_layout.HV_PADS`), two HV nets of one part may be closer.
 
+After pass 2 (branch `routing-pass2`), v5 step 16: PWM_TRANS6 / Q7 / Q5 are on U20 pins 10..12, the relay line on
+U19 pin 15, U19 pins 13 / 14 free. BUSP2 (63.5, 45.5) and BUSN2 (90.5, 45.0) forbid vias within 2.5 mm of their
+4 mm pads. The passage north of J11 is to be drawn as a scripted bus (In3, In4), not left to the router.
+
 ## Swaps that are allowed
 
 Swap to remove a crossing or a via, not for its own sake. Each swap is a schematic change in

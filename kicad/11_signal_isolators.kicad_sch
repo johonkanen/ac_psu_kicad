@@ -6962,7 +6962,7 @@
 		)
 		(uuid "06a1ef34-0769-5ece-9448-e568953b80aa")
 	)
-	(global_label "PWM_TRANS6_CTRL"
+	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
 		(shape passive)
 		(at 320.04 38.1 180)
 		(fields_autoplaced yes)
@@ -6994,25 +6994,69 @@
 		)
 		(uuid "6eba2a73-7fde-5d7e-854c-261c4d3fda22")
 	)
-	(global_label "PWM_Q5_CTRL"
-		(shape passive)
-		(at 320.04 40.64 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
+	(symbol
+		(lib_id "ac_psu:CTRLGND_A")
+		(at 320.04 40.64 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c9f9cb43-94d7-5896-bc34-1e46c8ad9bd3")
+		(property "Reference" "#PWR014"
+			(at 313.69 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
-			(justify right)
 		)
-		(uuid "7746e857-5d20-501c-a98b-caa896acfa57")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+		(property "Value" "CTRLGND_A"
+			(at 316.74 40.64 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
 			(at 320.04 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 320.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
+			(at 320.04 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1068fc23-8ab6-5c8c-85f9-fddafd0a5662")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
+					(reference "#PWR014")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -7024,27 +7068,71 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "043c9834-99a2-569f-aec6-c266a76ee079")
+		(uuid "7746e857-5d20-501c-a98b-caa896acfa57")
 	)
-	(global_label "PWM_Q7_CTRL"
-		(shape passive)
-		(at 320.04 43.18 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
+	(symbol
+		(lib_id "ac_psu:CTRLGND_A")
+		(at 320.04 43.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "9ee69edf-6d0e-5584-85da-e516ec0466f8")
+		(property "Reference" "#PWR015"
+			(at 313.69 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
-			(justify right)
 		)
-		(uuid "a2591c2c-7757-5eaa-8c1a-6054e1783845")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+		(property "Value" "CTRLGND_A"
+			(at 316.74 43.18 270)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
 			(at 320.04 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
+			(at 320.04 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d3d51d47-efa3-50d7-ab58-003e1fac2278")
+		)
+		(instances
+			(project "ac_psu"
+				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
+					(reference "#PWR015")
+					(unit 1)
+				)
 			)
 		)
 	)
@@ -7056,7 +7144,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1725400a-8395-5ba6-8e5d-5d299d81463f")
+		(uuid "043c9834-99a2-569f-aec6-c266a76ee079")
 	)
 	(global_label "PWM_Q6_CTRL"
 		(shape passive)
@@ -7068,7 +7156,7 @@
 			)
 			(justify right)
 		)
-		(uuid "0a6889b2-7ef8-51ce-8120-19035ffd0f46")
+		(uuid "a2591c2c-7757-5eaa-8c1a-6054e1783845")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 45.72 0)
 			(effects
@@ -7088,7 +7176,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "679ab8e8-e9fe-55f0-b434-f0ae03e3935e")
+		(uuid "1725400a-8395-5ba6-8e5d-5d299d81463f")
 	)
 	(global_label "PWM_Q8_CTRL"
 		(shape passive)
@@ -7100,7 +7188,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d340ab73-16a6-5334-85df-0e5236c9acac")
+		(uuid "0a6889b2-7ef8-51ce-8120-19035ffd0f46")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 48.26 0)
 			(effects
@@ -7120,7 +7208,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f3f4672c-4aad-5544-b437-abc32a0a1ee2")
+		(uuid "679ab8e8-e9fe-55f0-b434-f0ae03e3935e")
 	)
 	(global_label "PWM_TRANS5_CTRL"
 		(shape passive)
@@ -7132,7 +7220,7 @@
 			)
 			(justify right)
 		)
-		(uuid "22d877b8-07e8-54d3-b3df-c1f1f7328bbb")
+		(uuid "d340ab73-16a6-5334-85df-0e5236c9acac")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 50.8 0)
 			(effects
@@ -7152,7 +7240,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d39c97ee-fe3c-5ec8-b91c-cda68c1ff9be")
+		(uuid "f3f4672c-4aad-5544-b437-abc32a0a1ee2")
 	)
 	(symbol
 		(lib_id "ac_psu:CTRLGND_A")
@@ -7162,8 +7250,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c9f9cb43-94d7-5896-bc34-1e46c8ad9bd3")
-		(property "Reference" "#PWR014"
+		(uuid "c6cba959-33cb-5a70-b9f8-02f7ed5dd1e0")
+		(property "Reference" "#PWR016"
 			(at 313.69 53.34 0)
 			(effects
 				(font
@@ -7209,12 +7297,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "1068fc23-8ab6-5c8c-85f9-fddafd0a5662")
+			(uuid "ce85fa94-9bfb-5c14-b3e7-709344d9fe2a")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR014")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -7228,7 +7316,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b4b043cd-5815-53dc-a998-684858911456")
+		(uuid "22d877b8-07e8-54d3-b3df-c1f1f7328bbb")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -7238,8 +7326,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9ee69edf-6d0e-5584-85da-e516ec0466f8")
-		(property "Reference" "#PWR015"
+		(uuid "d2b22199-8f64-5cd8-9534-312aa33b70ab")
+		(property "Reference" "#PWR017"
 			(at 341.63 35.56 0)
 			(effects
 				(font
@@ -7285,12 +7373,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "d3d51d47-efa3-50d7-ab58-003e1fac2278")
+			(uuid "529071f6-b40c-51de-aea1-6912542e51ba")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR015")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -7304,9 +7392,9 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b15b2a9a-7b05-5e4a-83da-4e76712b07ba")
+		(uuid "d39c97ee-fe3c-5ec8-b91c-cda68c1ff9be")
 	)
-	(global_label "PWM_TRANS6"
+	(global_label "GPIO_BYPASS_RLY_ISO"
 		(shape passive)
 		(at 345.44 38.1 0)
 		(fields_autoplaced yes)
@@ -7316,7 +7404,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f6e3f7d7-fe24-590f-85fa-d229a811feb5")
+		(uuid "b4b043cd-5815-53dc-a998-684858911456")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 38.1 0)
 			(effects
@@ -7328,69 +7416,13 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 342.9 40.64) (xy 345.44 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "49a95db8-8328-5be6-aef1-78eb891a9552")
+	(no_connect
+		(at 342.9 40.64)
+		(uuid "b15b2a9a-7b05-5e4a-83da-4e76712b07ba")
 	)
-	(global_label "PWM_Q5"
-		(shape passive)
-		(at 345.44 40.64 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9187f3ec-5f9c-5420-b4f3-a63a3bd4617e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 345.44 40.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 342.9 43.18) (xy 345.44 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "225a050a-0948-54cf-bd7e-bfcf2a819080")
-	)
-	(global_label "PWM_Q7"
-		(shape passive)
-		(at 345.44 43.18 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "8176f84a-8ba2-5cc1-beff-ac3060139639")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 345.44 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 342.9 43.18)
+		(uuid "f6e3f7d7-fe24-590f-85fa-d229a811feb5")
 	)
 	(wire
 		(pts
@@ -7400,7 +7432,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "64354881-3a1e-5417-b21e-2195d7be2a8a")
+		(uuid "49a95db8-8328-5be6-aef1-78eb891a9552")
 	)
 	(global_label "PWM_Q6"
 		(shape passive)
@@ -7412,7 +7444,7 @@
 			)
 			(justify left)
 		)
-		(uuid "9ea73de7-59d3-54e9-b4f6-dc5ad0fcd605")
+		(uuid "9187f3ec-5f9c-5420-b4f3-a63a3bd4617e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 45.72 0)
 			(effects
@@ -7432,7 +7464,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "250d2dfa-9944-595e-a5d4-405d7ce98dbf")
+		(uuid "225a050a-0948-54cf-bd7e-bfcf2a819080")
 	)
 	(global_label "PWM_Q8"
 		(shape passive)
@@ -7444,7 +7476,7 @@
 			)
 			(justify left)
 		)
-		(uuid "bf1cc63c-d9d1-53bc-8466-cbb4c9a983ef")
+		(uuid "8176f84a-8ba2-5cc1-beff-ac3060139639")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 48.26 0)
 			(effects
@@ -7464,7 +7496,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "39c0c38a-5158-5808-9236-5e34712327e4")
+		(uuid "64354881-3a1e-5417-b21e-2195d7be2a8a")
 	)
 	(global_label "PWM_TRANS5"
 		(shape passive)
@@ -7476,7 +7508,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f94fcdcf-b883-5761-a00f-04c147f16d74")
+		(uuid "9ea73de7-59d3-54e9-b4f6-dc5ad0fcd605")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 50.8 0)
 			(effects
@@ -7496,7 +7528,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a578c2cb-89f1-50ca-ac2a-be315204e066")
+		(uuid "250d2dfa-9944-595e-a5d4-405d7ce98dbf")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7506,8 +7538,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c6cba959-33cb-5a70-b9f8-02f7ed5dd1e0")
-		(property "Reference" "#PWR016"
+		(uuid "1ef96833-6b8b-57c3-a877-8d8033cb7144")
+		(property "Reference" "#PWR018"
 			(at 351.79 53.34 0)
 			(effects
 				(font
@@ -7553,12 +7585,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "ce85fa94-9bfb-5c14-b3e7-709344d9fe2a")
+			(uuid "c62c6a6c-55ca-55c3-b5a0-3887b58c0628")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR016")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -7683,7 +7715,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e14e23cb-7cbc-50ee-8912-929db197b7f8")
+		(uuid "bf1cc63c-d9d1-53bc-8466-cbb4c9a983ef")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_CTRL")
@@ -7693,8 +7725,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d2b22199-8f64-5cd8-9534-312aa33b70ab")
-		(property "Reference" "#PWR017"
+		(uuid "9c38527a-8611-5720-b853-633943c5c501")
+		(property "Reference" "#PWR019"
 			(at 323.85 86.36 0)
 			(effects
 				(font
@@ -7740,12 +7772,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "529071f6-b40c-51de-aea1-6912542e51ba")
+			(uuid "9c35658c-a167-5538-976a-db5ca7e7f9c4")
 		)
 		(instances
 			(project "ac_psu"
 				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR017")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -7759,7 +7791,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2f62c288-82a5-5db3-a552-fd74023c26eb")
+		(uuid "39c0c38a-5158-5808-9236-5e34712327e4")
 	)
 	(global_label "DAB_PWM_HI_SEC_CTRL"
 		(shape passive)
@@ -7771,7 +7803,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a203fdc7-64a0-53b1-820f-a2609d448828")
+		(uuid "f94fcdcf-b883-5761-a00f-04c147f16d74")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 88.9 0)
 			(effects
@@ -7791,7 +7823,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "84a5c657-39c0-59af-8dff-e9a432914516")
+		(uuid "a578c2cb-89f1-50ca-ac2a-be315204e066")
 	)
 	(global_label "DAB_PWM_LO_SEC_CTRL"
 		(shape passive)
@@ -7803,7 +7835,7 @@
 			)
 			(justify right)
 		)
-		(uuid "65d9c924-66d1-5047-9970-1543ed3ff59a")
+		(uuid "e14e23cb-7cbc-50ee-8912-929db197b7f8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 91.44 0)
 			(effects
@@ -7823,7 +7855,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "320640e5-dbe7-5222-9463-268138a14832")
+		(uuid "2f62c288-82a5-5db3-a552-fd74023c26eb")
 	)
 	(global_label "PWM_TRANS4_CTRL"
 		(shape passive)
@@ -7835,7 +7867,7 @@
 			)
 			(justify right)
 		)
-		(uuid "de615951-dc63-517c-88e0-a05fea1400bf")
+		(uuid "a203fdc7-64a0-53b1-820f-a2609d448828")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 93.98 0)
 			(effects
@@ -7855,9 +7887,9 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "45865261-bea4-520e-bb8a-f8b26f313f74")
+		(uuid "84a5c657-39c0-59af-8dff-e9a432914516")
 	)
-	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
+	(global_label "PWM_Q5_CTRL"
 		(shape passive)
 		(at 320.04 96.52 180)
 		(fields_autoplaced yes)
@@ -7867,7 +7899,7 @@
 			)
 			(justify right)
 		)
-		(uuid "5955e4dc-961a-54aa-9913-9bfed161e05d")
+		(uuid "65d9c924-66d1-5047-9970-1543ed3ff59a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 96.52 0)
 			(effects
@@ -7887,71 +7919,27 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "386ee79b-0aa5-5c5d-b7ca-db53506052c6")
+		(uuid "320640e5-dbe7-5222-9463-268138a14832")
 	)
-	(symbol
-		(lib_id "ac_psu:CTRLGND_A")
-		(at 320.04 99.06 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1ef96833-6b8b-57c3-a877-8d8033cb7144")
-		(property "Reference" "#PWR018"
-			(at 313.69 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
+	(global_label "PWM_Q7_CTRL"
+		(shape passive)
+		(at 320.04 99.06 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "CTRLGND_A"
-			(at 316.74 99.06 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
+		(uuid "de615951-dc63-517c-88e0-a05fea1400bf")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 320.04 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
-			(at 320.04 99.06 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "c62c6a6c-55ca-55c3-b5a0-3887b58c0628")
-		)
-		(instances
-			(project "ac_psu"
-				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR018")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -7963,71 +7951,27 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a99550e0-5320-5b80-83c1-4ed69f6ca1e4")
+		(uuid "45865261-bea4-520e-bb8a-f8b26f313f74")
 	)
-	(symbol
-		(lib_id "ac_psu:CTRLGND_A")
-		(at 320.04 101.6 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "9c38527a-8611-5720-b853-633943c5c501")
-		(property "Reference" "#PWR019"
-			(at 313.69 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
+	(global_label "PWM_TRANS6_CTRL"
+		(shape passive)
+		(at 320.04 101.6 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
 			)
+			(justify right)
 		)
-		(property "Value" "CTRLGND_A"
-			(at 316.74 101.6 270)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
+		(uuid "5955e4dc-961a-54aa-9913-9bfed161e05d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 320.04 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 320.04 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol for net \"CTRLGND_A\" (IPC net name)"
-			(at 320.04 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9c35658c-a167-5538-976a-db5ca7e7f9c4")
-		)
-		(instances
-			(project "ac_psu"
-				(path "/04fb09b4-531d-41de-805c-3ed4ed6dcfa8/95801083-7726-4ef5-9984-22d9f5c92147"
-					(reference "#PWR019")
-					(unit 1)
-				)
 			)
 		)
 	)
@@ -8039,7 +7983,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e58bdf35-f32e-53db-95ee-d9c3e59d697a")
+		(uuid "386ee79b-0aa5-5c5d-b7ca-db53506052c6")
 	)
 	(symbol
 		(lib_id "ac_psu:CTRLGND_A")
@@ -8115,7 +8059,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "00216702-664d-5164-a655-2e24216cd593")
+		(uuid "a99550e0-5320-5b80-83c1-4ed69f6ca1e4")
 	)
 	(symbol
 		(lib_id "ac_psu:3V3_ISO")
@@ -8191,7 +8135,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "258905f0-4422-5e82-ad38-bff9257704c0")
+		(uuid "e58bdf35-f32e-53db-95ee-d9c3e59d697a")
 	)
 	(global_label "DAB_PWM_HI_SEC"
 		(shape passive)
@@ -8203,7 +8147,7 @@
 			)
 			(justify left)
 		)
-		(uuid "339aeae8-d224-589b-9066-f6bea0a0ace1")
+		(uuid "00216702-664d-5164-a655-2e24216cd593")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 88.9 0)
 			(effects
@@ -8223,7 +8167,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7d65748d-3e68-5209-a956-9df2163b85a8")
+		(uuid "258905f0-4422-5e82-ad38-bff9257704c0")
 	)
 	(global_label "DAB_PWM_LO_SEC"
 		(shape passive)
@@ -8235,7 +8179,7 @@
 			)
 			(justify left)
 		)
-		(uuid "74113cd2-2e09-535b-90b8-92f2ad7c4c4d")
+		(uuid "339aeae8-d224-589b-9066-f6bea0a0ace1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 91.44 0)
 			(effects
@@ -8255,7 +8199,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "277ccb7b-735e-59e9-a183-7dbf54dd1409")
+		(uuid "7d65748d-3e68-5209-a956-9df2163b85a8")
 	)
 	(global_label "PWM_TRANS4"
 		(shape passive)
@@ -8267,7 +8211,7 @@
 			)
 			(justify left)
 		)
-		(uuid "f403bda7-aa15-5381-a735-add48ff863b8")
+		(uuid "74113cd2-2e09-535b-90b8-92f2ad7c4c4d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 93.98 0)
 			(effects
@@ -8287,9 +8231,9 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bdf12334-7484-51e8-a906-5ddc5d59178f")
+		(uuid "277ccb7b-735e-59e9-a183-7dbf54dd1409")
 	)
-	(global_label "GPIO_BYPASS_RLY_ISO"
+	(global_label "PWM_Q5"
 		(shape passive)
 		(at 345.44 96.52 0)
 		(fields_autoplaced yes)
@@ -8299,7 +8243,7 @@
 			)
 			(justify left)
 		)
-		(uuid "eec140ea-50f6-56c2-ad25-2e7de7328fce")
+		(uuid "f403bda7-aa15-5381-a735-add48ff863b8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 345.44 96.52 0)
 			(effects
@@ -8311,13 +8255,69 @@
 			)
 		)
 	)
-	(no_connect
-		(at 342.9 99.06)
+	(wire
+		(pts
+			(xy 342.9 99.06) (xy 345.44 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bdf12334-7484-51e8-a906-5ddc5d59178f")
+	)
+	(global_label "PWM_Q7"
+		(shape passive)
+		(at 345.44 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "eec140ea-50f6-56c2-ad25-2e7de7328fce")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 345.44 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 342.9 101.6) (xy 345.44 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
 		(uuid "b2747af2-9b00-5387-8b3d-414486bf1a4c")
 	)
-	(no_connect
-		(at 342.9 101.6)
+	(global_label "PWM_TRANS6"
+		(shape passive)
+		(at 345.44 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
 		(uuid "40993d9e-9b75-5901-8fa2-f7486329395e")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 345.44 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
 	)
 	(wire
 		(pts
@@ -8395,9 +8395,9 @@
 			)
 		)
 	)
-	(text "U20 INE/INF unused (tied to CTRLGND_A), OUTE/OUTF open."
+	(text "U19 INB/INC unused (tied to CTRLGND_A), OUTB/OUTC open."
 		(exclude_from_sim no)
-		(at 304.8 116.84 0)
+		(at 304.8 66.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)

@@ -1484,11 +1484,11 @@
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(U20-OUTE-Pad11)"
+        "pattern": "unconnected-(U19-OUTB-Pad14)"
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(U20-OUTF-Pad10)"
+        "pattern": "unconnected-(U19-OUTC-Pad13)"
       },
       {
         "netclass": "DOM_P",

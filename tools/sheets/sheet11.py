@@ -2,7 +2,7 @@
 """Sheet 11 - signal isolators (PDF page 11): U15, U13, U16 Si866x digital isolators between
 the VCC (3V3) side and the isolated side, R22 series resistor in ADCLK (the unpopulated spare U17 is removed).
 v5 (CTRL_ISOLATION_PLAN.md): their isolated side is CTRL island A (3V3_CTRL / CTRLGND_A at J11),
-and the island's new parts are drawn here: U19/U20 ISO7760F (ISO-side PWMs and relay; channel order of v5 step 15), U21
+and the island's new parts are drawn here: U19/U20 ISO7760F (ISO-side PWMs and relay; channel order of v5 step 16), U21
 CA-IS3742 (U4/U6 sigma-delta clock and data), U22-U24 AMC1311 + U25/U26 difference amplifiers
 (ISOADA1-3), U27 3V3_CTRL LDO, J14 (5V_CTRL_A link from island B) and PEC1 (PE bond)."""
 import os
@@ -88,18 +88,20 @@ def row(y, x0, parts, step=10):
 
 sh.text("v5 CTRL island A: ISO-side PWMs / relay (U19, U20), U4/U6 sigma-delta lines (U21), ISOADA1-3 (U22-U26). "
         "Side 1 = CTRL (J11), side 2 = ISO.", g(220), g(14))
-# channel order after routing pass 1 (v5 step 15): U19 now stands at the west end of the row and carries, west to
-# east on the board (pins 10 .. 15), the J6 nets TRANS5 / Q8 / Q6 and the J8 nets Q7 / Q5 / TRANS6; U20 at the east
-# end carries the relay and the J4 nets (TRANS4, DAB LO / HI). Was Q5 Q6 Q7 Q8 TRANS4 TRANS5 / TRANS6 HI LO relay.
-PW = [("PWM_TRANS6", "PWM_Q5", "PWM_Q7", "PWM_Q6", "PWM_Q8", "PWM_TRANS5"),
-      ("DAB_PWM_HI_SEC", "DAB_PWM_LO_SEC", "PWM_TRANS4", "GPIO_BYPASS_RLY_ISO", None, None)]
+# channel order (v5 step 16, after routing pass 2). U19 stands at the west end of the row under the bus wire pad
+# BUSP2: its pins 10 .. 12 carry the J6 nets TRANS5 / Q8 / Q6, pin 15 (outside the pad's keep-out) the relay line,
+# two channels are free. U20 at the east end carries on pins 10 .. 12, under the gap between J6 and J4, the J8 nets
+# TRANS6 / Q7 / Q5, and on 13 .. 15 the J4 nets TRANS4, DAB LO / HI.
+# Step 15 had Q7 / Q5 / TRANS6 on U19 13 .. 15 (no via site under BUSP2); Proteus-era order before that.
+PW = [("GPIO_BYPASS_RLY_ISO", None, None, "PWM_Q6", "PWM_Q8", "PWM_TRANS5"),
+      ("DAB_PWM_HI_SEC", "DAB_PWM_LO_SEC", "PWM_TRANS4", "PWM_Q5", "PWM_Q7", "PWM_TRANS6")]
 for ref, y, sig in (("U19", g(36), PW[0]), ("U20", g(76), PW[1])):
     nets = {1: "3V3_CTRL", 8: "CTRLGND_A", 16: "3V3_ISO", 9: "ISOGND"}
     for k, s_ in enumerate(sig):
         nets[2 + k] = f"{s_}_CTRL" if s_ else "CTRLGND_A"   # unused inputs tied low
         nets[15 - k] = s_                                    # unused outputs open
     ic(sh, "ISO7760F", ref, g(262), y, nets, value=V[ref])
-sh.text("U20 INE/INF unused (tied to CTRLGND_A), OUTE/OUTF open.", g(240), g(92))
+sh.text("U19 INB/INC unused (tied to CTRLGND_A), OUTB/OUTC open.", g(240), g(52))
 ic(sh, "CA-IS3742", "U21", g(262), g(118),
    {1: "3V3_CTRL", 2: "CTRLGND_A", 8: "CTRLGND_A", 3: "INU_ADCLK_CTRL", 4: "ADCLK_DAB_CTRL", 5: "MDATA_INU_CTRL",
     6: "MDATA_DAB_CTRL", 7: "3V3_CTRL", 16: "3V3_ISO", 9: "ISOGND", 15: "ISOGND", 14: "INU_ADCLK", 13: "ADCLK_DAB",

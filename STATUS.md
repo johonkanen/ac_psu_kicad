@@ -2,6 +2,26 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v5 step 16 – U19 / U20 channels after routing pass 2 (2026-11-19, branch `v5-layout`)
+
+Routing pass 2 (branch `routing-pass2`, commit fc1b889, report `reports/v5_layout/routing_pass2.md` there) on the
+step 15 placement: legal (0 shorts, 0 gap violations, check_layout OK), 63 unconnected (pass 1: 123), 14 signal
+connections open. D13 / D12 and R139 did what they should; J14 made no difference. **The isolator exchange of
+step 15 was half wrong**: the J6 / J4 nets now route straight, but PWM_Q7 / Q5 / TRANS6 on U19 pins 13..15 sat
+under the bus wire pad BUSP2 (63.5, 45.5), whose 2.5 mm keep-out leaves no via site: no path (exhaustive search).
+
+User 2026-11-19: "go ahead with your recommendations" (channels again instead of moving BUSP2; passage as a
+scripted bus in the next pass). `tools/v5/v5_16_channels.py` (seed 5016), `tools/sheets/sheet11.py`:
+
+- U19 (x 63.65): pins 10..12 = PWM_TRANS5, Q8, Q6 (J6, as in step 15), pin 15 = GPIO_BYPASS_RLY_ISO (x 66.83,
+  outside the keep-out), pins 13 / 14 free (inputs 3 / 4 tied to CTRLGND_A).
+- U20 (x 85.55): pins 10..12 = PWM_TRANS6, Q7, Q5 (x 82.4..84.9, under the gap between J6 and J4), pins
+  13..15 = PWM_TRANS4, DAB_PWM_LO_SEC, DAB_PWM_HI_SEC (as in step 15). No free channel left on U20.
+- Not solved by this: BUSN2 (90.5, 45.0) stands over U20 pin 15 / 16 and C120 (pass 2 closed DAB_PWM_HI_SEC only
+  with a hop on In2); the passage north of J11 (12 signals + ISO rails on 7..8 lanes per layer) is undecided
+  until it is drawn as a bus; R87 / CLK1; GND in the aux area (no plane there).
+- `tools/check_all.sh` ALL CHECKS PASSED, `tools/regen_check.sh` OK.
+
 ## v5 step 15 – placement changes after routing pass 1 (2026-11-19, branch `v5-layout`)
 
 Routing pass 1 (branch `routing-pass1`, commit 23ed936, report `reports/v5_layout/routing_pass1.md` there; a quick

@@ -82526,7 +82526,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_TRANS6_CTRL")
+			(net "GPIO_BYPASS_RLY_ISO_CTRL")
 			(uuid "96b5b79e-6fee-44c2-a0a3-3db0db703568")
 		)
 		(pad "3" smd roundrect
@@ -82534,7 +82534,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_Q5_CTRL")
+			(net "CTRLGND_A")
 			(uuid "2871c5ea-c359-4e84-8f5a-117561e7d105")
 		)
 		(pad "4" smd roundrect
@@ -82542,7 +82542,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_Q7_CTRL")
+			(net "CTRLGND_A")
 			(uuid "cc2e88af-37a2-4f42-9d83-231d0ffec838")
 		)
 		(pad "5" smd roundrect
@@ -82614,7 +82614,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_Q7")
+			(net "unconnected-(U19-OUTC-Pad13)")
 			(uuid "f4b25ec7-6086-4b38-8dfa-39dc405bcecf")
 		)
 		(pad "14" smd roundrect
@@ -82622,7 +82622,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_Q5")
+			(net "unconnected-(U19-OUTB-Pad14)")
 			(uuid "d3b85517-818e-4fdc-89a8-3fe0975ae871")
 		)
 		(pad "15" smd roundrect
@@ -82630,7 +82630,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "PWM_TRANS6")
+			(net "GPIO_BYPASS_RLY_ISO")
 			(uuid "684f11a8-8bb1-4b22-a729-064a08b37e4b")
 		)
 		(pad "16" smd roundrect
@@ -97119,7 +97119,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "GPIO_BYPASS_RLY_ISO_CTRL")
+			(net "PWM_Q5_CTRL")
 			(uuid "15b74a04-8cb1-48bf-ac06-4019f7d59b14")
 		)
 		(pad "6" smd roundrect
@@ -97127,7 +97127,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "CTRLGND_A")
+			(net "PWM_Q7_CTRL")
 			(uuid "95953209-97b4-448d-9151-6f3b087a8226")
 		)
 		(pad "7" smd roundrect
@@ -97135,7 +97135,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "CTRLGND_A")
+			(net "PWM_TRANS6_CTRL")
 			(uuid "4723b48e-2a7c-41ae-8387-38ea1ea50ea5")
 		)
 		(pad "8" smd roundrect
@@ -97159,7 +97159,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U20-OUTF-Pad10)")
+			(net "PWM_TRANS6")
 			(uuid "dca6351f-af57-4ce1-9c98-dbe3e237630d")
 		)
 		(pad "11" smd roundrect
@@ -97167,7 +97167,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "unconnected-(U20-OUTE-Pad11)")
+			(net "PWM_Q7")
 			(uuid "68e18144-57ed-4add-b1df-1c23e37b7c86")
 		)
 		(pad "12" smd roundrect
@@ -97175,7 +97175,7 @@
 			(size 2.05 0.6)
 			(layers "B.Cu" "B.Mask" "B.Paste")
 			(roundrect_rratio 0.25)
-			(net "GPIO_BYPASS_RLY_ISO")
+			(net "PWM_Q5")
 			(uuid "e931cda8-494b-4986-944b-2e05b9a62c2c")
 		)
 		(pad "13" smd roundrect

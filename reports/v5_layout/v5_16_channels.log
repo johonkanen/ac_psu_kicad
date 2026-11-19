@@ -1,0 +1,15 @@
+== v5 step 16: U19 / U20 channels
+  new net unconnected-(U19-OUTC-Pad13)
+  new net unconnected-(U19-OUTB-Pad14)
+  U19-2: PWM_TRANS6_CTRL -> GPIO_BYPASS_RLY_ISO_CTRL
+  U19-3: PWM_Q5_CTRL -> CTRLGND_A
+  U19-4: PWM_Q7_CTRL -> CTRLGND_A
+  U19-13: PWM_Q7 -> unconnected-(U19-OUTC-Pad13)
+  U19-14: PWM_Q5 -> unconnected-(U19-OUTB-Pad14)
+  U19-15: PWM_TRANS6 -> GPIO_BYPASS_RLY_ISO
+  U20-5: GPIO_BYPASS_RLY_ISO_CTRL -> PWM_Q5_CTRL
+  U20-6: CTRLGND_A -> PWM_Q7_CTRL
+  U20-7: CTRLGND_A -> PWM_TRANS6_CTRL
+  U20-10: unconnected-(U20-OUTF-Pad10) -> PWM_TRANS6
+  U20-11: unconnected-(U20-OUTE-Pad11) -> PWM_Q7
+  U20-12: GPIO_BYPASS_RLY_ISO -> PWM_Q5

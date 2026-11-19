@@ -5198,9 +5198,9 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (106.975, 22.200) {'P': 'R115,1', 'N': 'ISOADA3_AIN'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 27.30 mm
    explained KiCad flash SMDPad,CuDef 0.2 mm at (108.625, 22.200) {'P': 'R115,2', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-16 (DAB_GROUND) 27.34 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (68.095, 30.850) {'P': 'U19,1', 'N': '3V3_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J6-30 (ISOPGND) 19.88 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (66.825, 30.850) {'P': 'U19,2', 'N': 'PWM_TRANS6_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J6-32 (ISOPGND) 19.88 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (65.555, 30.850) {'P': 'U19,3', 'N': 'PWM_Q5_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 19.39 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (64.285, 30.850) {'P': 'U19,4', 'N': 'PWM_Q7_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 18.13 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (66.825, 30.850) {'P': 'U19,2', 'N': 'GPIO_BYPASS_RLY_ISO_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J6-32 (ISOPGND) 19.88 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (65.555, 30.850) {'P': 'U19,3', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 19.39 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (64.285, 30.850) {'P': 'U19,4', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 18.13 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (63.015, 30.850) {'P': 'U19,5', 'N': 'PWM_Q6_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 16.86 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (61.745, 30.850) {'P': 'U19,6', 'N': 'PWM_Q8_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 15.59 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (60.475, 30.850) {'P': 'U19,7', 'N': 'PWM_TRANS5_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J11-13 (CS1_ISO) 14.32 mm
@@ -5307,14 +5307,14 @@ board outline -128.2 .. 118.6 x -83.0 .. 71.7 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (88.725, 30.850) {'P': 'U20,2', 'N': 'DAB_PWM_HI_SEC_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-46 (ISOGND) 18.66 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (87.455, 30.850) {'P': 'U20,3', 'N': 'DAB_PWM_LO_SEC_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.66 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (86.185, 30.850) {'P': 'U20,4', 'N': 'PWM_TRANS4_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.66 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (84.915, 30.850) {'P': 'U20,5', 'N': 'GPIO_BYPASS_RLY_ISO_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.75 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (83.645, 30.850) {'P': 'U20,6', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.93 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (82.375, 30.850) {'P': 'U20,7', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 19.19 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (84.915, 30.850) {'P': 'U20,5', 'N': 'PWM_Q5_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.75 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (83.645, 30.850) {'P': 'U20,6', 'N': 'PWM_Q7_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 18.93 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (82.375, 30.850) {'P': 'U20,7', 'N': 'PWM_TRANS6_CTRL'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 19.19 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (81.105, 30.850) {'P': 'U20,8', 'N': 'CTRLGND_A'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 19.52 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (81.105, 40.150) {'P': 'U20,9', 'N': 'ISOGND'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 10.99 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (82.375, 40.150) {'P': 'U20,10', 'N': 'unconnected-(U20-OUTF-Pad10)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 10.38 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (83.645, 40.150) {'P': 'U20,11', 'N': 'unconnected-(U20-OUTE-Pad11)'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.89 mm
-   explained KiCad flash SMDPad,CuDef 0.15 mm at (84.915, 40.150) {'P': 'U20,12', 'N': 'GPIO_BYPASS_RLY_ISO'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.55 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (82.375, 40.150) {'P': 'U20,10', 'N': 'PWM_TRANS6'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 10.38 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (83.645, 40.150) {'P': 'U20,11', 'N': 'PWM_Q7'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.89 mm
+   explained KiCad flash SMDPad,CuDef 0.15 mm at (84.915, 40.150) {'P': 'U20,12', 'N': 'PWM_Q5'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.55 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (86.185, 40.150) {'P': 'U20,13', 'N': 'PWM_TRANS4'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.38 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (87.455, 40.150) {'P': 'U20,14', 'N': 'DAB_PWM_LO_SEC'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-48 (20V_ISO_SEC) 9.37 mm
    explained KiCad flash SMDPad,CuDef 0.15 mm at (88.725, 40.150) {'P': 'U20,15', 'N': 'DAB_PWM_HI_SEC'} 0 samples off copper, 1 in clearance/pad shape, of 1; near J4-46 (ISOGND) 9.37 mm

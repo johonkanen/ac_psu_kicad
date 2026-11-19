@@ -362,8 +362,8 @@ U14,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 
 U15,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U16,ac_psu:Si8660BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U18,ac_psu:ICE5AR0680AG,ac_psu:Infineon_PG-DSO-12_CoolSET,"v5: fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DSO-12 (v5 step 8; JLC C17699638)"
-U19,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q5-Q8, TRANS4/5 (JLC C2878538)"
-U20,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs TRANS6, DAB_SEC, relay (JLC C2878538)"
+U19,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q6, Q8, TRANS5 and the relay line (JLC C2878538)"
+U20,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q5, Q7, TRANS4, TRANS6, DAB_SEC (JLC C2878538)"
 U21,ac_psu:CA-IS3742,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,v5: U4/U6 sigma-delta clock and data (JLC C4944981)
 U22,ac_psu:AMC1311,Package_SO:SOIC-8_7.5x5.85mm_P1.27mm,v5: ISOADA1 isolated amplifier (JLC C783598)
 U23,ac_psu:AMC1311,Package_SO:SOIC-8_7.5x5.85mm_P1.27mm,v5: ISOADA2 isolated amplifier (JLC C783598)
