@@ -8,6 +8,7 @@
                                     stub never comes closer to that copper than the pad itself is (the pad gap is
                                     the placement's, kept by the pad clearances of card_layout.HV_PADS), keeps
                                     2.5 mm to everything else, and ends where 2.5 mm holds all round
+  kipy scripted.py bus IN OUT       the passage north of J11 as drawn lanes on In3 / In4 (see bus() below)
   kipy scripted.py planes IN OUT    a via with a stub next to every SMD pad of a plane net that lies inside its
                                     plane and has no track yet (brief rule 7); a same-net via in reach is shared
 
@@ -87,7 +88,7 @@ class Ctx:
             c = max(1.0, lc)
         return c + MARGIN
 
-    def clear(self, net, shape, bbox, layer, is_via=False, override=None, same_net_too=False, extra=0.0):
+    def clear(self, net, shape, bbox, layer, is_via=False, override=None, same_net_too=False, extra=0.0, keep=True):
         box = pcbnew.BOX2I(bbox.GetPosition(), bbox.GetSize())
         box.Inflate(F(2.6 + extra))
         for o in self.items[layer]:
@@ -105,7 +106,7 @@ class Ctx:
                 c = max(2.5 if (layer in OUTER and ((net in HV) != (znet in HV))) else 0.25, extra)
                 if fill.Collide(shape, F(c)):
                     return False
-        for outline, kb, notr, novia in self.keep[layer]:
+        for outline, kb, notr, novia in self.keep[layer] if keep else ():
             if (novia if is_via else notr) and box.Intersects(kb) and outline.Collide(shape, F(0.05)):
                 return False
         return True
@@ -315,11 +316,84 @@ def hvstubs(b, cx):
                       + (f"; {len(foreign)} of them are not pads of {ref}" if foreign else ""))
 
 
+
+# ---- the passage north of J11 as a drawn bus (pass 3) --------------------------------------------------------
+# Lanes: horizontal 0.152 mm tracks at 0.305 mm pitch between the J8 north-row pads (top edge y 52.605) and the
+# north fence y 55.3 (INU_OUT2 pads at 55.46): 8 per layer, y 52.84 .. 54.975, on In3 and In4.
+# In3 lanes are entered without a via from the gap between J6 and J4 (x 77.2 .. 86.2): a vertical from y 49.3 (just
+# north of the DC bus band) up to the lane; west to east in the gap = south to north in the lanes.
+# In4 lanes are entered through the missing pin column of J6 at x 68.98: vias at y 49.95 below the south row
+# (0.61 mm via pitch: three tracks fit the 1.73 mm column), In4 north through the column, then west.
+# Exits: through the missing pin columns of J8 (x 33.78 and x 24.89; lowest lane = eastmost slot) down to y 50.0
+# south of the J8 pads. The router does the ends (pin -> lane start, lane end -> U4 / R50 / J8 pins / old In2 ends).
+LANE_Y0, LANE_PITCH, BUS_W = 52.84, 0.305, 0.152
+COL_E, COL_W, COL_J6 = 33.78, 24.89, 68.98
+#          net                   lane  entry x   exit column, slot (0 = eastmost)
+BUS_IN3 = [("Net-(U7B--)",          0, 79.000, COL_E, 0),
+           ("Net-(U7B-+)",          1, 79.305, COL_E, 1),
+           ("Net-(U2--)",           2, 79.610, COL_E, 2),
+           ("Net-(U2-+)",           3, 79.915, COL_E, 3),
+           ("Net-(U7A-+)",          4, 80.220, COL_E, 4),
+           ("PWM_TRANS6",           5, 82.380, COL_W, 0),
+           ("PWM_Q7",               6, 83.640, COL_W, 1),
+           ("PWM_Q5",               7, 84.920, COL_W, 2)]
+BUS_IN4 = [("GPIO_BYPASS_RLY_ISO",  2, COL_J6 - 0.61, COL_E, 3),
+           ("MDATA_INU",            3, COL_J6,        COL_W, 0),
+           ("INU_ADCLK",            4, COL_J6 + 0.61, COL_W, 1)]
+# ISOGND needs no via: its In4 plane ends at y 48.8, so a 0.4 mm In4 track starts on the plane edge, passes the
+# other missing column of J6 (x 60.09) and takes the two lowest In4 lanes; it leaves through the J8 column at 33.78.
+ISOGND_BUS = [(60.09, 48.82), (60.09, LANE_Y0 + 0.124), (COL_E + 0.42, LANE_Y0 + 0.124), (COL_E + 0.42, 50.0)]
+
+
+def bus(b, cx):
+    def draw(net, layer, pts, via_at=None):
+        segs = []
+        for a, c in zip(pts, pts[1:]):
+            t = cx.mktrack(net, layer, a, c, BUS_W)
+            if not cx.clear(net, t.GetEffectiveShape(layer), t.GetBoundingBox(), layer):
+                return f"blocked at ({a[0]:.2f}, {a[1]:.2f}) - ({c[0]:.2f}, {c[1]:.2f})"
+            segs.append(t)
+        v = None
+        if via_at:
+            v = cx.via_ok(net, *via_at)
+            if v is None:
+                return f"no via at ({via_at[0]:.2f}, {via_at[1]:.2f})"
+        cx.commit(*segs, *([v] if v else []))
+        return None
+
+    global MARGIN
+    MARGIN = 0.002          # the lanes stand at exactly 0.153 mm from each other; the DRC gate follows
+    n = 0
+    for net, k, xe, col, slot in BUS_IN3:
+        y = LANE_Y0 + k * LANE_PITCH
+        xs = col + 0.61 - slot * LANE_PITCH
+        err = draw(net, pcbnew.In3_Cu, [(xe, 49.3), (xe, y), (xs, y), (xs, 50.0)])
+        print(f"bus: In3 lane {k} y {y:.3f} {net}: " + (err or f"x {xe:.2f} -> column x {xs:.3f}, down to y 50.0"))
+        n += not err
+    for net, k, xe, col, slot in BUS_IN4:
+        y = LANE_Y0 + k * LANE_PITCH
+        xs = col + 0.61 - slot * LANE_PITCH
+        err = draw(net, pcbnew.In4_Cu, [(xe, 49.95), (xe, y), (xs, y), (xs, 50.0)], via_at=(xe, 49.95))
+        print(f"bus: In4 lane {k} y {y:.3f} {net}: " + (err or f"via ({xe:.2f}, 49.95) -> column x {xs:.3f}, down to y 50.0"))
+        n += not err
+    segs = []
+    for a, c in zip(ISOGND_BUS, ISOGND_BUS[1:]):
+        t = cx.mktrack("ISOGND", pcbnew.In4_Cu, a, c, 0.4)
+        # keep=False: the first 0.2 mm end cap lies on the plane edge, inside the In4 plane fence
+        if not cx.clear("ISOGND", t.GetEffectiveShape(pcbnew.In4_Cu), t.GetBoundingBox(), pcbnew.In4_Cu, keep=False):
+            segs = None
+            break
+        segs.append(t)
+    if segs:
+        cx.commit(*segs)
+    print("bus: In4 lanes 0+1 ISOGND 0.4 mm from the plane edge at (60.09, 48.82): " + ("drawn" if segs else "BLOCKED"))
+    print(f"bus: {n} of {len(BUS_IN3) + len(BUS_IN4)} signal lanes drawn")
+
 def main():
     mode, src, dst = sys.argv[1:4]
     b = pcbnew.LoadBoard(src)
     cx = Ctx(b)
-    {"taps": taps, "planes": planes, "hvstubs": hvstubs}[mode](b, cx)
+    {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus}[mode](b, cx)
     b.Save(dst)
 
 

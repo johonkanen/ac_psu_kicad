@@ -276,7 +276,7 @@
  "unconnected-(R87D-R4.2-Pad5)": 2.5,
  "unconnected-(U10-NR-Pad4)": 2.5,
  "unconnected-(U18-NC-Pad9)": 2.5,
- "unconnected-(U20-OUTE-Pad11)": 2.5,
- "unconnected-(U20-OUTF-Pad10)": 2.5,
+ "unconnected-(U19-OUTB-Pad14)": 2.5,
+ "unconnected-(U19-OUTC-Pad13)": 2.5,
  "unconnected-(U3-NR-Pad4)": 2.5
 }
