@@ -57,8 +57,12 @@ Open items that need a decision or a measurement by the user. Tick them off here
       carries the Proteus name `ETD34_TRAN_1P1S`. Its four leads get 6.3 mm crimp receptacles for the tabs
       DAB_PRI_1/2 and DAB_SEC_1/2: check that the lead wire (cross-section and insulation diameter) fits the
       receptacle chosen.
-- [ ] Blade tabs TE 62409-1 on the AC and DAB wires: tab and receptacle current rating against the AC and DAB
-      currents (neither is recorded in this repo).
+- [ ] Blade tabs TE 62409-1 on the AC and DAB wires. DAB winding current (user 2026-11-19): 20-25 A peak,
+      RMS less than half of that (about 10-12 A), 66 kHz. No current rating for the 62409-1 itself was found
+      (TE drawing, distributor pages, two web searches). The usual test currents for 6.3 mm tabs (UL 310, from
+      memory, not looked up: about 15 A with 1.5 mm2 / 16 AWG, 20 A with 2.5 mm2 / 14 AWG wire) would cover
+      10-12 A RMS with a 2.5 mm2 receptacle. Confirm on the receptacle's data sheet when it is chosen, and
+      check the AC input / output current the same way.
 - [ ] DAB_SEC_1: 2.0 mm between its tab pads and the pads of C47 (ISODC+) and C50; accept, or leave this lead
       soldered, or move a capacitor.
 - [ ] EEL19 transformer T1: bobbin base dimensions with calipers; winding design run (the turns are a hand
