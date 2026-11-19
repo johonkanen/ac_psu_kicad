@@ -83,6 +83,9 @@ def prep(b):
     for name, r in (("north", (-130, 55.3, 125, 80)), ("west", (-130, -90, 0, 55.3)), ("west 2", (0, -90, 22, 36)),
                     ("south 1", (22, -90, 65, -25.5)), ("south 2", (65, -90, 125, -62))):
         keepout(b, "fence " + name, rect(*r), al)
+    # no track on the ground layers inside the card planes (pass 1 put a tap through the In4 ISOGND plane); vias allowed
+    for i, r in enumerate(((44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8))):
+        keepout(b, f"ground planes {i}", rect(*r), ["In1.Cu", "In4.Cu"], vias=False)
     # north-row pins of J6 / J4 that are reached from the south (under the bus band, In3): a 0.152 mm stub through
     # the 0.46 mm gap of the south row, like the J11 stubs
     m = 0
@@ -140,17 +143,38 @@ def unfence(b):
     zs = [z for z in b.Zones() if z.GetIsRuleArea() and z.GetZoneName().startswith(TMP + "fence west")]
     for z in zs:
         b.Delete(z)
-    # found in run 1: the router lays tracks through the ISOGND plane on In4 (three islands). No tracks on In4 inside
-    # the card planes from here on (vias allowed). TODO next pass: put this into prep() so the passage step has it too.
-    for i, r in enumerate(((44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8))):
-        keepout(b, f"In4 plane {i}", rect(*r), ["In4.Cu"], vias=False)
-    print(f"unfence: {len(zs)} west fences removed, In4 fenced inside the card planes")
+    print(f"unfence: {len(zs)} west fences removed")
+
+
+# The router does not know the 5 mm rules between the net classes; the barrier strips (rule areas) stop it only
+# where they are drawn. Where two domains meet without a strip (south of the ISO aux area at y < -53, around the
+# primary area, west of the card) it walked an ISO net through the primary and aux areas (pass 2, first try). So
+# each router step gets the fence of its domain: everything that belongs to the other side.
+DOMAIN_FENCES = {
+    "I": [(-130, -90, 88.0, 8.3), (88.0, -90, 125, -48.0)],           # primary area, aux primary side, south of IA
+    "P": [(-130, 8.3, 125, 80), (88.0, -53.0, 125, 8.3)],             # north of the C|P line; the ISO side down to
+                                                                      # y -53 (IA ends at -48: 5 mm)
+    "C": [],                                                          # both CTRL pieces are ringed by strips
+}
+
+
+def domain(b, dom):
+    zs = [z for z in b.Zones() if z.GetIsRuleArea() and z.GetZoneName().startswith(TMP + "domain")]
+    for z in zs:
+        b.Delete(z)
+    al = ["F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"]
+    for i, r in enumerate(DOMAIN_FENCES[dom]):
+        keepout(b, f"domain {dom} {i}", rect(*r), al)
+    print(f"domain: fences for {dom} ({len(DOMAIN_FENCES[dom])})")
 
 
 def main():
     mode, src, dst = sys.argv[1:4]
     b = pcbnew.LoadBoard(src)
-    {"prep": prep, "finish": finish, "unfence": unfence}[mode](b)
+    if mode == "domain":
+        domain(b, sys.argv[4])
+    else:
+        {"prep": prep, "finish": finish, "unfence": unfence}[mode](b)
     b.Save(dst)
 
 
