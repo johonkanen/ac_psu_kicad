@@ -9,7 +9,7 @@ the Y capacitors (each pin on its own); v5: T1 (aux flyback, EEL19: pins 1-4, 11
 the separate part W1), U19/U20/U21 (CTRL isolators: 1-8 / 9-16) and U22/U23/U24 (AMC1311: 1-4 /
 5-8). A group is P if it holds GND, PGND or DC+, I if it holds ISOGND, ISOPGND or ISODC+, C if it
 holds CTRLGND or CTRLGND_A, and E if it holds a pin of a PE terminal (PE<n>; the CTRL bonding
-terminals PEC1/PEC2 are C); anything else is None (unconnected pins of the spare U17).
+terminals PEC1/PEC2 are C); anything else is None.
 
 Used by tools/v4/fix_14_insulation_gaps.py and tools/v4/domain_gaps.py (IEC 61010-1 spacing:
 P <-> I reinforced, P/I <-> E basic; see STATUS.md "v4 fix 13/14"; v5: P/I <-> C reinforced, C <-> E

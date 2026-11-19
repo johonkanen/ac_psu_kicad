@@ -361,7 +361,6 @@ U13,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U14,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
 U15,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U16,ac_psu:Si8660BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
-U17,ac_psu:Si8661BD-B-IS,ac_psu:SOIC-16W_7.5x10.3mm_P1.27mm_Proteus,SOIC-16W
 U18,ac_psu:ICE5AR0680AG,ac_psu:Infineon_PG-DSO-12_CoolSET,"v5: fixed-frequency 100 kHz flyback controller with 800 V / 0.71 ohm CoolMOS, PG-DSO-12 (v5 step 8; JLC C17699638)"
 U19,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs Q5-Q8, TRANS4/5 (JLC C2878538)"
 U20,ac_psu:ISO7760F,Package_SO:SOIC-16W_7.5x10.3mm_P1.27mm,"v5: ISO-side PWMs TRANS6, DAB_SEC, relay (JLC C2878538)"

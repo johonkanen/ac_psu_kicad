@@ -9,6 +9,7 @@ part_map rows and the part/value rows of lib/v5_deviations.csv from it, and the 
 
 # Proteus parts deleted in v5 (V5_PLAN.md step 2: the IW1830 flyback and its parts)
 REMOVED = ("PWM1 TR2 R43 R34 R33 D7 C65 C66 R24 C62 R23 D6 R44 R25 C63 R26 R29 R31 R45 R47 D2 D1 R49").split()
+REMOVED += ["U17"]     # spare isolator footprint across the P|I barrier, nothing connected: removed by the user 2026-11-19
 
 # whole-net renames (V5_PLAN.md D6)
 RENAMES = {"20V": "15V", "20V_ISO_SEC": "15V_ISO"}

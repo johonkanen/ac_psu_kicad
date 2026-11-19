@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Sheet 11 - signal isolators (PDF page 11): U15, U13, U16 Si866x digital isolators between
-the VCC (3V3) side and the isolated side, U17 unpopulated spare, R22 series resistor in ADCLK.
+the VCC (3V3) side and the isolated side, R22 series resistor in ADCLK (the unpopulated spare U17 is removed).
 v5 (CTRL_ISOLATION_PLAN.md): their isolated side is CTRL island A (3V3_CTRL / CTRLGND_A at J11),
 and the island's new parts are drawn here: U19/U20 ISO7760F (ISO-side PWMs and relay), U21
 CA-IS3742 (U4/U6 sigma-delta clock and data), U22-U24 AMC1311 + U25/U26 difference amplifiers
@@ -74,11 +74,7 @@ isolator(sh, "U16", "Si8660BD-B-IS", X, g(112),
          ["DAB_PWM_PRI_LO", "DAB_PWM_PRI_HI", "PWM_G3", "PWM_G1", "PWM_G2", "PWM_G4"],
          ["DAB_PWM_PRI_LO_ISO", "DAB_PWM_PRI_HI_ISO", "PWM_G3_ISO", "PWM_G1_ISO", "PWM_G2_ISO", "PWM_G4_ISO"],
          ("C81", "100n"), ("C82", "100n"))
-# U17: footprint only, nothing connected (all 16 pins N/C in Proteus)
-u17 = sh.place("Si8661BD-B-IS", "U17", X, g(148), value="Si8661BD-B-IS")
-for pin in u17.pins:
-    sh.no_connect(*u17.pin(pin))
-sh.text("U17: spare isolator footprint, not connected (all pins N/C in Proteus).", X + g(12), g(150))
+# U17 (spare isolator footprint, all pins N/C in Proteus) is removed: user 2026-11-19 (v5 step 10)
 sh.text("3V3 / DC- terminals in the Proteus schematic = nets VCC / GND.", g(20), g(170))
 sh.text("v5: the isolated side of U15/U13/U16 is CTRL island A (3V3_CTRL / CTRLGND_A; was 3V3_ISO / ISOGND).",
         g(20), g(173))

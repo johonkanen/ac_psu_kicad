@@ -30,6 +30,7 @@ remove,R47,,,,v5,v5: IW1830/EF20 aux supply replaced
 remove,D2,,,,v5,v5: IW1830/EF20 aux supply replaced
 remove,D1,,,,v5,v5: IW1830/EF20 aux supply replaced
 remove,R49,,,,v5,v5: IW1830/EF20 aux supply replaced
+remove,U17,,,,v5,v5: IW1830/EF20 aux supply replaced
 rename,,,20V,15V,v5,v5 D6: 15 V aux outputs
 rename,,,20V_ISO_SEC,15V_ISO,v5,v5 D6: 15 V aux outputs
 refdes,,,AFE_OUT,AFE_OUT1,v5,KiCad needs a trailing number (annotation check of Update PCB)

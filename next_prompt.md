@@ -3,8 +3,8 @@
 
 ```
 Work in /home/jari/dev/ac_psu_kicad (KiCad 10.0.7 design of the single-phase inverter PSU,
-converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-9 done), branch v5-layout.
-Read README.md, STATUS.md (first "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
+converted from Proteus, tag proteus-conversion-complete; v4 fixes 1-16 and v5 steps 1-10 done), branch v5-layout.
+Read README.md, STATUS.md (first "v5 step 10", "v5 step 9", "v5 step 8", "v5 step 7", "v5 step 6", "v5 step 5" and "v5 steps 3-4", then "v5 step 2", "v5 step 1", "v4 fix 16"),
 reports/v5_layout/proposal_r2.md (the board as placed; proposal.md is revision 1), reports/v5_layout/routing_brief.md,
 CTRL_ISOLATION_PLAN.md section 8, fab/README.md and tools/check_all.sh.
 Never run the KiCad AppImage with --version.
@@ -22,7 +22,7 @@ never loosen a check or a gap.
 
 Verify first: tools/check_all.sh (~3 min) must end with ALL CHECKS PASSED; at handoff:
   compare: parts 365/365 present ... wrong-net pins 0 ... compare: OK
-  check_board: 385 footprints, 1212 pads ... 45 v5 moved parts ... 3162 tracks, 118 vias, 91 zones; OK
+  check_board: 384 footprints, 1196 pads ... 45 v5 moved parts ... 3162 tracks, 118 vias, 91 zones; OK
   assign_nets: 0 shorts, 8 orphans (card planes without a via yet), 0 opens; 139 v5 opens pending
   drc: 413 violations, 0 shorts, 0 unconnected, 0 parity; 2 wire links, 352 unconnected + 0 clearance pending
   domain_gaps: 0 violations, nothing pending
