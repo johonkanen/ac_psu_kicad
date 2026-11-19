@@ -52,6 +52,11 @@ Open items that need a decision or a measurement by the user. Tick them off here
       capacitors 5.8 / 5.9 mm apart (drawn bodies): the 6.0 mm head touches them, accepted for now (user
       2026-11-19, v5 step 13). PE6's standoff reaches about 0.45 mm over the board edge. PE4: only 0.2 mm between the head and C24 / R10. Check with the real screws, standoffs
       and capacitors; the PE path must be low-resistance and secured against loosening (IEC 61010-1).
+- [ ] DAB transformer TR1 is an off-board **toroid** wound with insulated wire, mounted against the heatsink
+      wall behind an insulating sheet (user's photo of the built unit, 2026-11-19). The schematic symbol still
+      carries the Proteus name `ETD34_TRAN_1P1S`. Its four leads get 6.3 mm crimp receptacles for the tabs
+      DAB_PRI_1/2 and DAB_SEC_1/2: check that the lead wire (cross-section and insulation diameter) fits the
+      receptacle chosen.
 - [ ] Blade tabs TE 62409-1 on the AC and DAB wires: tab and receptacle current rating against the AC and DAB
       currents (neither is recorded in this repo).
 - [ ] DAB_SEC_1: 2.0 mm between its tab pads and the pads of C47 (ISODC+) and C50; accept, or leave this lead
