@@ -1,0 +1,21 @@
+== v5 step 15: placement after routing pass 1
+  U19: (74.6, 35.5, 90.0, 'B') -> (63.65, 35.5, 90.0, 'B')  west end of the row
+  U21: (63.65, 35.5, 90.0, 'B') -> (74.6, 35.5, 90.0, 'B')  middle of the row
+  U19-2: PWM_Q5_CTRL -> PWM_TRANS6_CTRL
+  U19-3: PWM_Q6_CTRL -> PWM_Q5_CTRL
+  U19-5: PWM_Q8_CTRL -> PWM_Q6_CTRL
+  U19-6: PWM_TRANS4_CTRL -> PWM_Q8_CTRL
+  U19-11: PWM_TRANS4 -> PWM_Q8
+  U19-12: PWM_Q8 -> PWM_Q6
+  U19-14: PWM_Q6 -> PWM_Q5
+  U19-15: PWM_Q5 -> PWM_TRANS6
+  U20-2: PWM_TRANS6_CTRL -> DAB_PWM_HI_SEC_CTRL
+  U20-3: DAB_PWM_HI_SEC_CTRL -> DAB_PWM_LO_SEC_CTRL
+  U20-4: DAB_PWM_LO_SEC_CTRL -> PWM_TRANS4_CTRL
+  U20-13: DAB_PWM_LO_SEC -> PWM_TRANS4
+  U20-14: DAB_PWM_HI_SEC -> DAB_PWM_LO_SEC
+  U20-15: PWM_TRANS6 -> DAB_PWM_HI_SEC
+  J14: (65.33, 17.5, 90.0, 'F') -> (69.0, 23.5, 90.0, 'F')  out of the J11 fan-out
+  D12: (80.9, -48.2, 90.0, 'B') -> (80.9, -47.2, 90.0, 'B')  1.0 mm north, room for D13
+  D13: (79.2, -24.75, 180.0, 'F') -> (79.2, -53.3, 180.0, 'B')  bottom side, south of D12
+  R139: (73.6, -11.0, 180.0, 'B') -> (80.7, -35.1, 0.0, 'B')  at U18 pin 3 / C146, GND end at T1 pin 2

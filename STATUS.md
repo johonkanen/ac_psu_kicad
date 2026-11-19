@@ -2,6 +2,36 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v5 step 15 – placement changes after routing pass 1 (2026-11-19, branch `v5-layout`)
+
+Routing pass 1 (branch `routing-pass1`, commit 23ed936, report `reports/v5_layout/routing_pass1.md` there; a quick
+chain over the card and aux areas, nothing merged) closed 155 of 174 signal connections with 0 shorts and 0 domain
+gap violations. Its placement findings, applied on the user's "Go with your recommendation" (2026-11-19) by
+`tools/v5/v5_15_pass1_placement.py` (seed 5015) and `tools/sheets/sheet11.py`:
+
+- **North isolator row**: U19 and U21 change places (U19 to x 63.65, U21 to x 74.6) and the channels of
+  U19 / U20 are reordered. ISO pins west to east: U19 10..15 = PWM_TRANS5, Q8, Q6 (J6), Q7, Q5, TRANS6 (J8);
+  U21 as before (MDATA_DAB, MDATA_INU, ADCLK_DAB, INU_ADCLK); U20 12..15 = relay, PWM_TRANS4, DAB_PWM_LO_SEC,
+  DAB_PWM_HI_SEC (J4). Before, TRANS4 / TRANS6 crossed and Q6 / Q8 / TRANS5 ran across U21's ISO pins.
+  The J11 side stays scrambled for some nets (J11 pins are fixed); the ISO side had priority because it has to
+  pass the J6 / J4 pin rows. C121 / C122 now stand at U19 and C117 / C118 at U21 (same nets, not moved).
+- **J14** (5 V link holes): pad 1 from (65.33, 17.5) to (69.0, 23.5), out of the diagonal of the J11 fan-out,
+  between the LDO block and the difference amplifiers (free on both sides, clear of card tails).
+- **Clamp**: D13 from the top side at (79.2, -24.75) to the bottom side at (79.2, -53.3), anode below fly-lead
+  hole 11 (AUX_VIN), cathode below D12's cathode; D12 1.0 mm north to (80.9, -47.2). The loop was 25 mm long.
+  D12's drain pad keeps 1.5 mm to R105 (a first try with 1.5 mm north left 1.03 mm: DRC stopped it).
+- **R139** (FB RSel 750k): from (73.6, -11.0) to (80.7, -35.1) between T1 pins 1 and 2 on the bottom side,
+  3.7 mm from U18 pin 3 (was 25 mm), GND end at T1 pin 2.
+- **R87 NOT changed.** CLK1 stays open at R87 pad 3 (no way out between pads 2 and 4, 0.6 mm from the edge of
+  the primary area). Tried: SCLK / CLK1 on the unused unit D at the east end of the array. The Proteus comparisons
+  (compare_netlists_v4, check_board, assign_nets, ipc356_diff) have no deviation kind for a v4 pin that becomes
+  N/C or an N/C pin that gets a net, so the change was backed out rather than loosen them. Options left: move
+  the ADC group 1 mm south (v4 copper inside the group moves with it), or add that deviation kind.
+- Not placement, for the next routing pass: fence In4 from the start (pass 1 put a tap on the ISOGND plane),
+  scripted vias at the six U7 / U2 inputs, HV rule per pad (card_layout.HV_PADS) instead of a flat 2.5 mm.
+- `tools/check_all.sh` ALL CHECKS PASSED, `tools/regen_check.sh` OK; drc: 0 shorts, 352 unconnected v5 items
+  pending (as before).
+
 ## v5 step 14 – R108 3.3k; U7 / U2 stay (2026-11-19, branch `v5-layout`)
 
 User 2026-11-19: "Move u7 and u2 and change r108".

@@ -95,6 +95,14 @@ Route in the order of the groups in the routing list, lock each finished group, 
 7. Primary side of U13/U15/U16, the ADC group and the reference group.
 8. ISO supply vias and 5V_ISOL.
 
+## State after routing pass 1 (v5 step 15)
+
+Pass 1 (branch `routing-pass1`, `reports/v5_layout/routing_pass1.md` there) led to placement changes, see STATUS.md
+"v5 step 15": U19 now stands at x 63.65 and U21 at x 74.6, the U19 / U20 channels are reordered, J14, D12, D13 and
+R139 moved. Corrections to this brief from that pass: the aux parts are placed (not staged); the passage north of
+J11 is inside the `unrouted` rectangle only up to y 54; In4 must be fenced against routing from the first step; the
+2.5 mm high-voltage spacing is per pad (`card_layout.HV_PADS`), two HV nets of one part may be closer.
+
 ## Swaps that are allowed
 
 Swap to remove a crossing or a via, not for its own sake. Each swap is a schematic change in

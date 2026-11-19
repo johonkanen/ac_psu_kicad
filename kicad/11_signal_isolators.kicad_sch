@@ -6962,7 +6962,7 @@
 		)
 		(uuid "06a1ef34-0769-5ece-9448-e568953b80aa")
 	)
-	(global_label "PWM_Q5_CTRL"
+	(global_label "PWM_TRANS6_CTRL"
 		(shape passive)
 		(at 320.04 38.1 180)
 		(fields_autoplaced yes)
@@ -6994,7 +6994,7 @@
 		)
 		(uuid "6eba2a73-7fde-5d7e-854c-261c4d3fda22")
 	)
-	(global_label "PWM_Q6_CTRL"
+	(global_label "PWM_Q5_CTRL"
 		(shape passive)
 		(at 320.04 40.64 180)
 		(fields_autoplaced yes)
@@ -7058,7 +7058,7 @@
 		)
 		(uuid "1725400a-8395-5ba6-8e5d-5d299d81463f")
 	)
-	(global_label "PWM_Q8_CTRL"
+	(global_label "PWM_Q6_CTRL"
 		(shape passive)
 		(at 320.04 45.72 180)
 		(fields_autoplaced yes)
@@ -7090,7 +7090,7 @@
 		)
 		(uuid "679ab8e8-e9fe-55f0-b434-f0ae03e3935e")
 	)
-	(global_label "PWM_TRANS4_CTRL"
+	(global_label "PWM_Q8_CTRL"
 		(shape passive)
 		(at 320.04 48.26 180)
 		(fields_autoplaced yes)
@@ -7306,7 +7306,7 @@
 		)
 		(uuid "b15b2a9a-7b05-5e4a-83da-4e76712b07ba")
 	)
-	(global_label "PWM_Q5"
+	(global_label "PWM_TRANS6"
 		(shape passive)
 		(at 345.44 38.1 0)
 		(fields_autoplaced yes)
@@ -7338,7 +7338,7 @@
 		)
 		(uuid "49a95db8-8328-5be6-aef1-78eb891a9552")
 	)
-	(global_label "PWM_Q6"
+	(global_label "PWM_Q5"
 		(shape passive)
 		(at 345.44 40.64 0)
 		(fields_autoplaced yes)
@@ -7402,7 +7402,7 @@
 		)
 		(uuid "64354881-3a1e-5417-b21e-2195d7be2a8a")
 	)
-	(global_label "PWM_Q8"
+	(global_label "PWM_Q6"
 		(shape passive)
 		(at 345.44 45.72 0)
 		(fields_autoplaced yes)
@@ -7434,7 +7434,7 @@
 		)
 		(uuid "250d2dfa-9944-595e-a5d4-405d7ce98dbf")
 	)
-	(global_label "PWM_TRANS4"
+	(global_label "PWM_Q8"
 		(shape passive)
 		(at 345.44 48.26 0)
 		(fields_autoplaced yes)
@@ -7761,7 +7761,7 @@
 		)
 		(uuid "2f62c288-82a5-5db3-a552-fd74023c26eb")
 	)
-	(global_label "PWM_TRANS6_CTRL"
+	(global_label "DAB_PWM_HI_SEC_CTRL"
 		(shape passive)
 		(at 320.04 88.9 180)
 		(fields_autoplaced yes)
@@ -7793,7 +7793,7 @@
 		)
 		(uuid "84a5c657-39c0-59af-8dff-e9a432914516")
 	)
-	(global_label "DAB_PWM_HI_SEC_CTRL"
+	(global_label "DAB_PWM_LO_SEC_CTRL"
 		(shape passive)
 		(at 320.04 91.44 180)
 		(fields_autoplaced yes)
@@ -7825,7 +7825,7 @@
 		)
 		(uuid "320640e5-dbe7-5222-9463-268138a14832")
 	)
-	(global_label "DAB_PWM_LO_SEC_CTRL"
+	(global_label "PWM_TRANS4_CTRL"
 		(shape passive)
 		(at 320.04 93.98 180)
 		(fields_autoplaced yes)
@@ -8193,7 +8193,7 @@
 		)
 		(uuid "258905f0-4422-5e82-ad38-bff9257704c0")
 	)
-	(global_label "PWM_TRANS6"
+	(global_label "DAB_PWM_HI_SEC"
 		(shape passive)
 		(at 345.44 88.9 0)
 		(fields_autoplaced yes)
@@ -8225,7 +8225,7 @@
 		)
 		(uuid "7d65748d-3e68-5209-a956-9df2163b85a8")
 	)
-	(global_label "DAB_PWM_HI_SEC"
+	(global_label "DAB_PWM_LO_SEC"
 		(shape passive)
 		(at 345.44 91.44 0)
 		(fields_autoplaced yes)
@@ -8257,7 +8257,7 @@
 		)
 		(uuid "277ccb7b-735e-59e9-a183-7dbf54dd1409")
 	)
-	(global_label "DAB_PWM_LO_SEC"
+	(global_label "PWM_TRANS4"
 		(shape passive)
 		(at 345.44 93.98 0)
 		(fields_autoplaced yes)

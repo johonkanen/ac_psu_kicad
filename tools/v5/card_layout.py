@@ -35,7 +35,7 @@ LINES = [
 SLOTS = [
     ("U15", (47.9, 8.3), (56.9, 8.3)), ("U13", (59.9, 8.3), (68.9, 8.3)), ("U16", (71.9, 8.3), (80.9, 8.3)),
     ("C|P east run", (82.9, 8.3), (85.4, 8.3)),
-    ("U21", (59.15, 35.5), (68.15, 35.5)), ("U19", (70.1, 35.5), (79.1, 35.5)), ("U20", (81.05, 35.5), (90.05, 35.5)),
+    ("U19", (59.15, 35.5), (68.15, 35.5)), ("U21", (70.1, 35.5), (79.1, 35.5)), ("U20", (81.05, 35.5), (90.05, 35.5)),
     ("U22", (88.0, 10.95), (88.0, 15.55)), ("U23", (97.6, 27.4), (97.6, 32.0)), ("U24", (97.6, 20.8), (97.6, 25.4)),
     ("P|I run south (was under the spare U17)", (88.0, -4.0), (88.0, 5.0)), ("P|I run", (88.0, 7.0), (88.0, 8.95)),
 ] + [s for s in _L1.SLOTS if s[0].startswith("J12")]
@@ -135,3 +135,19 @@ PLACE.update({
 })
 HEIGHT.update({"Infineon_PG-DSO-12_CoolSET": 1.75, "Transformer_EEL19_V_4+6_SideLeads": 29.2, "CP_Elec_6.3x5.4": 5.4,
                "D_SMB_AC": 2.4, "R_2512_6332Metric": 0.65, "D_SOD-323_AC": 1.0, "R_0805_2012Metric": 0.65})
+
+
+# ---- after routing pass 1 (v5 step 15, tools/v5/v5_15_pass1_placement.py; user 2026-11-19) ---------------
+# U19 and U21 change places (their slots keep their geometry and take the new names above; the capacitors
+# C121 / C122 and C117 / C118 stay, same nets); J14 leaves the J11 fan-out; the clamp TVS D13 goes to the bottom
+# side below D12; R139 goes to U18 pin 3.
+PLACE.update({
+    "U19": ("CA|I", "B", 63.65, 35.5, "bottom, west end of the row: J6 nets and J8 nets (was x 74.6)"),
+    "U21": ("CA|I", "B", 74.6, 35.5, "bottom, middle of the row: sigma-delta lines under the J6 / J4 gap (was x 63.65)"),
+    "C121": ("CA", "B", 68.1, 28.95, "at U19 (placed with U21)"), "C117": ("CA", "B", 79.05, 28.95, "at U21 (placed with U19)"),
+    "C122": ("I", "F", 66.4, 40.15, "at U19 (placed with U21)"), "C118": ("I", "F", 79.05, 40.15, "at U21 (placed with U19)"),
+    "J14": ("CA", "THT", 70.27, 23.5, "5 V link wires, between the LDO block and the difference amplifiers; north-east of the J11 fan-out"),
+    "D12": ("PX", "B", 80.9, -47.2, "clamp diode, anode at fly-lead hole 12 (drain); 1.0 mm north of its first place"),
+    "D13": ("PX", "B", 79.2, -53.3, "clamp TVS, bottom side south of D12: anode below fly-lead hole 11, cathode below D12's"),
+    "R139": ("PX", "B", 80.7, -35.1, "FB RSel, between T1 pins 1 and 2: 1.4 mm from C146 pad 1, GND end at T1 pin 2"),
+})
