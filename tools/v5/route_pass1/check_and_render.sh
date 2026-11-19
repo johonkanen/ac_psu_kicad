@@ -12,7 +12,7 @@ SK="${ROUTING_SKILL:-$HOME/.claude/skills/kicad-agentic-routing/scripts}"
 export KICAD_ENV="${KICAD_ENV:-$R/tools/p2k/bin/kicad_env.sh}"
 export ROUTING_CONFIG="$R/routing.json"
 source "$SK/kenv.sh"
-B="${1:-$R/build/route/routed.kicad_pcb}"; O="${2:-$R/build/pass1}"
+B="${1:-$R/build/route/routed.kicad_pcb}"; O="${2:-$R/build/pass2}"
 mkdir -p "$O"
 cd "$R"
 "$SK/check_board.sh" "$B" "$O/check" > "$O/check_board.txt" 2>&1
@@ -28,6 +28,8 @@ echo "--- check_layout.py"
 kpy "$R/tools/v5/check_layout.py" --board "$C" | grep -v "Debug: Adding" | tee "$O/check_layout.txt" | tail -15
 echo "--- renders"
 "$SK/render_layers.sh" "$C" "$O/card" F.Cu,In1.Cu,In2.Cu,In3.Cu,In4.Cu,B.Cu 400 38,-57,120,24
-"$SK/render_layers.sh" "$C" "$O/passage" In3.Cu,In4.Cu,F.Cu,B.Cu 500 15,-58,95,-34
-"$SK/render_layers.sh" "$C" "$O/j11" F.Cu,In3.Cu,B.Cu 600 42,-48,96,-9
-"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,In3.Cu,B.Cu 500 62,2,100,58
+"$SK/render_layers.sh" "$C" "$O/isorow" In3.Cu,In4.Cu,B.Cu,F.Cu 800 55,-56,95,-34      # north of the isolator row
+"$SK/render_layers.sh" "$C" "$O/passage" In3.Cu,In4.Cu 700 15,-58,62,-36               # passage north of J11
+"$SK/render_layers.sh" "$C" "$O/u7u2" F.Cu,In3.Cu,B.Cu 1200 90,-18,108,0               # U7 / U2 block
+"$SK/render_layers.sh" "$C" "$O/j11" F.Cu,In3.Cu,B.Cu 600 42,-48,96,-9                 # J11 fan-out, J14
+"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,In3.Cu,B.Cu 600 64,2,92,58                   # aux flyback, D12 / D13 / R139

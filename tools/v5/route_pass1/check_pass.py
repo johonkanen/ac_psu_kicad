@@ -143,6 +143,12 @@ def main():
                 if b[0] in HV and b[0] < a[0]:
                     continue        # each HV-HV pair once
                 req = min(v for v in (a[4], b[4], 2.5) if v)
+                if a[5] == "track" and b[0] not in HV:
+                    # "pads as listed": a track that starts on an HV pad may be as close to low-voltage copper as
+                    # that pad itself is (the pad gap is the placement's), never closer
+                    for s in (i[1] for i in hv if i[0] == a[0] and i[5].startswith("pad") and i[1].Collide(a[1], 0)):
+                        if s.Collide(b[1], F(2.5)):
+                            req = min(req, gap(s, b[1], 0, 2.5) - 0.02)
                 if a[1].Collide(b[1], F(req - 0.005)):
                     c = a[2].Centre()
                     (hvhv if b[0] in HV else viol).append((routed.GetLayerName(lay), a[0], a[5], b[0], b[5], req,
