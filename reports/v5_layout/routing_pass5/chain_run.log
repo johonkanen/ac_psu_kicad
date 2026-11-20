@@ -293,3 +293,75 @@ lock_tracks: 6875 tracks and vias: lock-all
 prune: 0 new tracks / vias inside the fences deleted
 finish: 20 temporary keep-outs removed, 6875 tracks and vias unlocked
 wrote /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p5/routed.kicad_pcb
+(follow-up: supply steps rerun from supply_15V_ISO with 420 s budgets)
+== supply_15V_ISO (domain I)
+  Single-ended:  1/1 routed
+  Multi-point:   12/12 pads connected (1 nets)
+  Total vias:    3
+  Single-ended:  1/1 routed
+  Multi-point:   12/12 pads connected
+lock_tracks: 6346 tracks and vias: lock-all
+   313 s
+== supply_3V3_ISO (domain I)
+  Single-ended:  0/1 routed
+  Multi-point:   25/26 pads connected (1 FAILED)
+  Total vias:    1
+  Single-ended:  0/1 routed
+  Multi-point:   25/26 pads connected (1 FAILED)
+  not routed: {'net_name': '3V3_ISO', 'failed_pads': [{'x': 89.995, 'y': -40.15, 'component_ref': 'U20', 'pad_number': '?'}]}, {'net': '3V3_ISO', 'pairs_connected': 24, 'pairs_total': 25, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 6414 tracks and vias: lock-all
+   84 s
+== supply_ISOGND (domain I)
+  Single-ended:  0/1 routed
+  Multi-point:   54/56 pads connected (2 FAILED)
+  Total vias:    6
+  Single-ended:  0/1 routed
+  Multi-point:   54/56 pads connected (2 FAILED)
+  not routed: {'net_name': 'ISOGND', 'failed_pads': [{'x': 90.475, 'y': -40.15, 'component_ref': 'C120', 'pad_number': '?'}, {'x': 88.15, 'y': -49.5, 'component_ref': 'J4', 'pad_number': '?'}]}, {'net': 'ISOGND', 'pairs_connected': 53, 'pairs_total': 55, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 6585 tracks and vias: lock-all
+   85 s
+== supply_C (domain C)
+  Single-ended:  4/4 routed
+  Multi-point:   85/85 pads connected (4 nets)
+  Total vias:    7
+  Single-ended:  4/4 routed
+  Multi-point:   85/85 pads connected
+lock_tracks: 6724 tracks and vias: lock-all
+   117 s
+== supply_VCC (domain P)
+  Single-ended:  1/1 routed
+  Multi-point:   19/19 pads connected (1 nets)
+  Total vias:    1
+  Single-ended:  1/1 routed
+  Multi-point:   19/19 pads connected
+lock_tracks: 6739 tracks and vias: lock-all
+   84 s
+== supply_15V (domain P)
+   TIMED OUT after 420 s: step skipped
+lock_tracks: 6739 tracks and vias: lock-all
+   423 s
+== supply_GND (domain P)
+  Single-ended:  0/1 routed
+  Multi-point:   53/64 pads connected (11 FAILED)
+  Total vias:    9
+  Single-ended:  0/1 routed
+  Multi-point:   53/64 pads connected (11 FAILED)
+  not routed: {'net_name': 'GND', 'failed_pads': [{'x': 109.2, 'y': 41.2, 'component_ref': 'U9', 'pad_number': '?'}, {'x': 105.3625, 'y': 49.0, 'component_ref': 'C57', 'pad_number': '?'}, {'x': 70.4375, 'y': 51.5, 'component_ref': 'C68', 'pad_number': '?'}, {'x': 105.3625, 'y': 44.0, 'component_ref': 'C67', 'pad_number': '?'}, {'x': 110.75, 'y': 56.53, 'component_ref': 'J3', 'pad_number': '?'}, {'
+lock_tracks: 6949 tracks and vias: lock-all
+   154 s
+== aux_links
+aux: C68-1 GND (70.4, -51.5): NO legal link to any of 10 nearest points of the net
+aux: C112-2 GND (71.0, -11.0): NO legal link to any of 12 nearest points of the net
+aux: C114-2 GND (72.4, -31.0): NO legal link to any of 12 nearest points of the net
+aux: R102-2 GND (78.5, -32.5): NO legal link to any of 12 nearest points of the net
+aux: C145-2 GND (78.3, -20.2): NO legal link to any of 12 nearest points of the net
+aux: R105-2 GND (81.6, -41.8): linked to (80.85, -39.90), 2.1 mm away
+aux: R101-1 15V (78.3, -29.5): NO legal link to any of 2 nearest points of the net
+aux: AUX_VIN R136-1: no legal F.Cu path to 1 target(s) under the 2.5 mm rule
+aux: AUX_LOVP R143-2: no legal F.Cu path to 1 target(s) under the 2.5 mm rule
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 6951 tracks and vias: lock-all
+prune: 0 new tracks / vias inside the fences deleted
+finish: 20 temporary keep-outs removed, 6951 tracks and vias unlocked
+wrote /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p5/routed.kicad_pcb

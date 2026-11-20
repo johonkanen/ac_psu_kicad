@@ -4,6 +4,37 @@ Branch `routing-pass5`, from 559175a. A gauge, not a layout. Coordinates: IPC fr
 `tools/v5/route_pass1/chain.sh` (new: `maze.py`); final board `build/route_p5/routed.kicad_pcb` (not committed),
 refilled copy `build/pass5/check/ac_psu.kicad_pcb`. One chain run, no rerun.
 
+## Follow-up (supply steps rerun with 420 s budgets; the numbers in this section replace those below)
+
+Final board `build/route_p5/routed.kicad_pcb` after the rerun from `supply_15V_ISO`. Checked on the refilled copy:
+**22 unconnected on 10 nets**, 0 shorts, 0 clearance errors, parity 0, domain gaps 0, `check_layout.py` OK, no pour
+cut (84 compared), HV check 0, existing copper unchanged. The restore step had nothing to put back; the tap lanes
+are all there (tool count).
+
+- **Closed by the rerun: 15V_ISO, all 7** (the step needed 313 s; my 300 s budget had cut it off).
+- **15V (6) still open**: its step ran into the 420 s budget as well (pass 4: 260 s) and was skipped whole. Its
+  open pads are all in the aux area (C41-1, C28-1, R108-1, R100-1, D14-C, R101-1).
+- **GND (7)**, five of them the pads asked about. Nearest GND copper on the pad's layer and what blocks a
+  straight link (`aux_gnd_report.txt`, by tool):
+
+  | Pad | Nearest GND copper | In the way |
+  |---|---|---|
+  | C68-1 (70.44, -51.50) F | track end (74.95, -56.85), 7.0 mm | HV rule: its own part's DC+ pad (1.25 mm, needs 2.5) and DC+ tracks at (72..73, -55) |
+  | C112-2 (70.97, -11.00) B | track end (76.45, -10.00), 5.6 mm | AUX_VIN track at (67.6, -10.3) is at exactly 2.5 mm; a PWM_G3 track crosses at (73.5, -10.6) |
+  | C114-2 (72.38, -31.00) B | track end (74.40, -31.00), 2.0 mm | an AUX_VDD track crosses at (73.1, -31.9): low voltage, not the HV rule |
+  | R102-2 (78.45, -32.52) B | track end (75.35, -31.85), 3.2 mm | AUX_LOVP pad U18-1 and tracks, AUX_VERR tracks: low voltage |
+  | C145-2 (78.30, -20.23) B | via (77.35, -19.25), 1.4 mm | a DAB_PWM_PRI_HI track crosses at (77.6..78.0, -19.3..-19.8): low voltage |
+
+  So three of the five are shut in by ordinary signal tracks routed before GND, not by the HV rule; they need a
+  via or GND routed earlier (or a GND pour on an inner layer there). This corrects what I wrote in pass 3.
+- **AUX_VIN, AUX_LOVP**: the aux script now tries them with the grid router on F.Cu under the 2.5 mm rule; no legal
+  path for either (R136-1 to R98-2; R143-2 to the net's vias). Left open.
+- **DAB_PWM_PRI_HI_ISO** (render `prihi_F.png`): the stub of J11-22 ends at (47.0, 35.95); the leftovers step put the
+  vias of its neighbours at (47.4, 35.9), (48.1, 35.4) and (48.6, 34.9), right in front of it, and a via in the pad
+  U16-3 at (78.15, 13.15) with nothing in between. An order matter. A step that routes this net first and alone is
+  added to the chain but **not run** (it would need the CTRL steps again).
+- Left open as told: CLK1, 3V3_ISO at U20-16, ISOGND at C120-2.
+
 ## Verdict
 
 - **The ISO signals close.** All 12 nets that go west past J11 are connected: the six divider taps, the
