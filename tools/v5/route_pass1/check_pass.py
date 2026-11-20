@@ -177,6 +177,23 @@ def main():
             length[routed.GetLayerName(t.GetLayer())] += T(t.GetLength())
     print(f"5. new vias: {len(vias)} ({sum(1 for v in vias if v.GetNetname() not in power)} signal); new track mm per layer: "
           + ", ".join(f"{k} {v:.0f}" for k, v in sorted(length.items())))
+    if len(sys.argv) > 4:
+        # 6. islands of every pour, placed (refilled) against routed (refilled): a via or track near a pour makes it
+        #    give way; it must not fall apart
+        base = pcbnew.LoadBoard(sys.argv[4])
+
+        def isl(bd):
+            out = {}
+            for z in bd.Zones():
+                if not z.GetIsRuleArea():
+                    for l in z.GetLayerSet().Seq():
+                        out[(z.GetZoneName(), z.GetNetname(), bd.GetLayerName(l))] = z.GetFilledPolysList(l).OutlineCount()
+            return out
+        a, c = isl(base), isl(routed)
+        diff = [(k, a[k], c.get(k)) for k in a if a[k] != c.get(k)]
+        print(f"6. pours whose island count changed (of {len(a)}): {len(diff)}")
+        for k, x, y in diff:
+            print(f"      {k[2]} {k[1]} '{k[0]}': {x} -> {y}")
     if len(sys.argv) > 3:
         d = json.load(open(sys.argv[3]))
         opens = collections.Counter()

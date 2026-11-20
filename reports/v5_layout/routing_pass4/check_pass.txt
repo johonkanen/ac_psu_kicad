@@ -1,0 +1,33 @@
+1. existing tracks/vias missing or changed: 0
+2. new copper outside the unrouted rectangles but inside the brief's passage (y 54..55.3): 64 ends on 8 nets {'Net-(U2--)': 8, 'PWM_Q7': 4, 'PWM_Q5': 4, 'PWM_TRANS6': 12, 'Net-(U7B--)': 8, 'Net-(U7B-+)': 8, 'GPIO_BYPASS_RLY_ISO': 10, 'INU_ADCLK': 10}
+2. new copper outside the unrouted rectangles: 40 ends on 5 nets {'15V': 17, 'PWM_Q7': 8, 'PWM_Q5': 8, 'GPIO_BYPASS_RLY': 3, 'GPIO_BYPASS_RLY_ISO': 4}
+      15V B.Cu (64.95, -25.25)
+      15V B.Cu (64.40, -25.00)
+      15V B.Cu (59.50, -24.45)
+      15V B.Cu (64.15, -24.45)
+      15V B.Cu (63.75, -24.35)
+      15V B.Cu (64.40, -25.00)
+3. rule 2 / 3 / 3a / plane-layer findings: 0
+4. high-voltage spacing violations, HV net to a non-HV net (2.5 mm on F.Cu / B.Cu, pairs with new copper): 0
+4b. two different HV nets closer than 2.5 mm (pairs with new copper; the placement puts their pads 1.0 .. 2.0 mm apart, the router kept 1.0 mm between HV nets): 0
+5. new vias: 296 (149 signal); new track mm per layer: B.Cu 1421, F.Cu 1346, In1.Cu 0, In2.Cu 0, In3.Cu 1461, In4.Cu 388
+6. pours whose island count changed (of 84): 1
+      In2.Cu 3V3_CTRL 'v5 card CA In2.Cu 3V3_CTRL': 8 -> 1
+   open connections: 25 on 17 nets
+      passage        6 open on  6/12 nets  Net-(U2-+):1 Net-(U2--):1 Net-(U7A-+):1 Net-(U7A--):1 Net-(U7B-+):1 Net-(U7B--):1
+      sdm_rest       0 open on  0/2 nets  
+      pwm_rest       0 open on  0/6 nets  
+      taps_rest      0 open on  0/7 nets  
+      other          0 open on  0/1 nets  
+      j11_top        1 open on  1/21 nets  DAB_PWM_PRI_HI_ISO:1
+      j11_bot        0 open on  0/14 nets  
+      ctrl_analog    0 open on  0/17 nets  
+      buck           0 open on  0/6 nets  
+      primary        1 open on  1/22 nets  CLK1:1
+      aux_hv         1 open on  1/8 nets  AUX_VIN:1
+      aux_lv         1 open on  1/9 nets  AUX_LOVP:1
+      aux_iso        0 open on  0/1 nets  
+      supply_C       0 open on  0/5 nets  
+      supply_I       4 open on  3/4 nets  15V_ISO:2 3V3_ISO:1 ISOGND:1
+      supply_P       8 open on  2/3 nets  GND:7 15V:1
+      (not in scope)   3  ISODC+:1 ISOPGND:2
