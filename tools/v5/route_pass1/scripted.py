@@ -29,7 +29,7 @@ HV = set(json.load(open(os.path.join(HERE, "hv_clearances.json"))))
 CLR, MARGIN, VIA, DRILL = 0.15, 0.02, 0.4572, 0.3
 TAPS = ["Net-(U2-+)", "Net-(U2--)", "Net-(U7A-+)", "Net-(U7A--)", "Net-(U7B-+)", "Net-(U7B--)"]
 PLANE_NETS = ["CTRLGND_A", "3V3_CTRL", "CTRLGND", "5V_CTRL", "ISOGND", "3V3_ISO", "GND", "VCC"]
-SCOPE = (38.0, -36.0, 119.0, 50.0)      # the card area: plane vias only here
+SCOPE = (38.0, -56.0, 119.0, 50.0)      # the card area and the aux area: plane vias only here
 OUTER = (pcbnew.F_Cu, pcbnew.B_Cu)
 STRICT_POUR = False     # True (via_scan.py): keep the zone's own clearance to another net's pour, so that a refill
 #                         does not move the pour edge at all. False: 0.25 mm; the pour then gives way by its own
@@ -628,6 +628,37 @@ def westends(b, cx):
                        else "NO legal via point on the old track")))
 
 
+def auxgnd(b, cx):
+    """Pass 6: a via from each GND pad of the aux area into the In2 GND pour (v5 step 17), before any signal there."""
+    global PLANE_NETS, SCOPE
+    PLANE_NETS, SCOPE = ["GND"], (66.5, -56.0, 83.5, -21.0)
+    planes(b, cx)
+
+
+def clk1(b, cx):
+    """Pass 6: the CLK1 escape at R87 as the owner specified it: 0.127 mm on B.Cu from pad 3 south to y 4.489, then
+    east between the pad rows past the unused pads 4 / 5 to (60.75, 4.489). Drawn only if every piece is clear."""
+    global MARGIN
+    MARGIN = 0.0
+    lay = pcbnew.B_Cu
+    pts = [(59.593, 4.964), (59.593, 4.489), (60.75, 4.489)]
+    segs = [cx.mktrack("CLK1", lay, a, c, 0.127) for a, c in zip(pts, pts[1:])]
+    bad = []
+    for t in segs:
+        sh = t.GetEffectiveShape(lay)
+        for o in cx.items[lay]:
+            if o[0] != "CLK1" and sh.Collide(o[1], F(cx.need("CLK1", lay, o))):
+                c = o[2].Centre()
+                bad.append(f"{o[3]} {o[5]} [{o[0]}] at ({T(c.x):.3f}, {-T(c.y):.3f}): needs {cx.need('CLK1', lay, o):.3f} mm, has {gap(sh, o[1]):.3f} mm")
+        if not cx.clear("CLK1", sh, t.GetBoundingBox(), lay):
+            bad.append("(zone or keep-out)") if not bad else None
+    if bad:
+        print("clk1: NOT drawn, the escape violates: " + "; ".join(sorted(set(bad))))
+    else:
+        cx.commit(*segs)
+        print("clk1: escape drawn, 0.127 mm on B.Cu, pad 3 -> (59.593, 4.489) -> (60.75, 4.489)")
+
+
 def main():
     mode, src, dst = sys.argv[1:4]
     b = pcbnew.LoadBoard(src)
@@ -635,7 +666,8 @@ def main():
     if mode == "hooks":
         hooks(b, cx, sys.argv[4].split(","))
     else:
-        {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus, "fan": fan, "westends": westends}[mode](b, cx)
+        {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus, "fan": fan, "westends": westends,
+         "auxgnd": auxgnd, "clk1": clk1}[mode](b, cx)
     b.Save(dst)
 
 

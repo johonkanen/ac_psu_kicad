@@ -93,6 +93,8 @@ def prep(b):
     # no track on the ground layers inside the card planes (pass 1 put a tap through the In4 ISOGND plane); vias allowed
     for i, r in enumerate(((44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8))):
         keepout(b, f"planes {i}", rect(*r), ["In1.Cu", "In2.Cu", "In4.Cu"], vias=False)   # pass 3: In2 too
+    # pass 6: the GND pour of the aux area on In2 (v5 step 17) is a plane like the card planes: no track there
+    keepout(b, "planes aux In2", rect(72.0, -54.6, 82.9, -21.6), ["In2.Cu"], vias=False)
     # north-row pins of J6 / J4 that are reached from the south (under the bus band, In3): a 0.152 mm stub through
     # the 0.46 mm gap of the south row, like the J11 stubs
     m = 0
