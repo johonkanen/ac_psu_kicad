@@ -48,7 +48,7 @@ for i, net in enumerate(("15V", "15V_ISO", "GND")):
     flagged_power(sh, net, g(110 + 8 * i), g(22))
 
 # ---- input, controller, clamp -------------------------------------------------------------------
-sh.text("Primary: DC+ (100-450 V max) -> R98 -> AUX_VIN (C111/C112) -> T1 pin 2. Start-up: AUX_VIN -> R136-R138 (3 x 10M) "
+sh.text("Primary: DC+ (100-450 V max) -> R98 -> AUX_VIN (C111/C112) -> T1 pin 2. Start-up: DC+ -> R136-R138 (3 x 10M) "
         "-> GATE.", g(16), g(44))
 row(g(54), g(20), [
     ("R", "R98", V["R98"], "DC+", "AUX_VIN", 1),
@@ -56,7 +56,7 @@ row(g(54), g(20), [
     ("C", "C112", V["C112"], "AUX_VIN", "GND", 1),
     ("D", "D12", V["D12"], "AUX_DRAIN", "AUX_CLAMP", "A"),
     ("D_TVS", "D13", V["D13"], "AUX_CLAMP", "AUX_VIN", "C"),
-    ("R", "R136", V["R136"], "AUX_VIN", "AUX_ST1", 1),
+    ("R", "R136", V["R136"], "DC+", "AUX_ST1", 1),      # v5 step 19: from DC+, was AUX_VIN (10R apart)
     ("R", "R137", V["R137"], "AUX_ST1", "AUX_ST2", 1),
     ("R", "R138", V["R138"], "AUX_ST2", "AUX_GATE", 1),
 ])
@@ -80,13 +80,13 @@ row(g(112), g(20), [
     ("C", "C146", V["C146"], "AUX_COMP", "GND", 1),
 ])
 row(g(54), g(110), [
-    ("R", "R141", V["R141"], "AUX_VIN", "AUX_LV1", 1),
+    ("R", "R141", V["R141"], "DC+", "AUX_LV1", 1),      # v5 step 19: from DC+, was AUX_VIN
     ("R", "R142", V["R142"], "AUX_LV1", "AUX_LV2", 1),
     ("R", "R143", V["R143"], "AUX_LV2", "AUX_LOVP", 1),
     ("R", "R144", V["R144"], "AUX_LOVP", "GND", 1),
     ("C", "C147", V["C147"], "AUX_LOVP", "GND", 1),
 ])
-sh.text("Line over-voltage: R141-R143 / R144 to VIN, switching stops above 478 V (461 .. 495 V). DC+ limit 450 V.", g(110), g(71))
+sh.text("Line over-voltage: DC+ -> R141-R143 / R144 to VIN, switching stops above 478 V (461 .. 495 V). DC+ limit 450 V.", g(110), g(71))
 sh.text("U18 ICE5AR0680AG (v5 step 8, PG-DSO-12): 100 kHz, integrated 800 V switch and error amplifier. VCC from 15V via R100 + D11 "
         "(~14.3 V; the cascode charges it to 16 V at the start).", g(16), g(129))
 sh.text("15V is regulated directly: VERR = 1.80 V at R101/R102 (14.97 V). FB: R140 + C145, C146, RSel R139 (burst option 2). "

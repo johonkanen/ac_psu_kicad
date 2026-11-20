@@ -111,13 +111,13 @@ part,R102,,,Resistor_SMD:R_0603_1608Metric,v5,VERR divider bottom (R101 || R102 
 value,R102,,,49.9k,v5,
 part,R105,,,Resistor_SMD:R_1206_3216Metric,v5,current-sense resistor: peak limit 0.80 V / 0.562 = 1.42 A (1.28 .. 1.57)
 value,R105,,,0.562R,v5,
-part,R136,,,Resistor_SMD:R_1206_3216Metric,v5,"start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"
+part,R136,,,Resistor_SMD:R_1206_3216Metric,v5,"start-up chain DC+ -> GATE, 3 x 10M (150 V each at 450 V)"
 value,R136,,,10M,v5,
 part,R137,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
 value,R137,,,10M,v5,
 part,R138,,,Resistor_SMD:R_1206_3216Metric,v5,start-up chain
 value,R138,,,10M,v5,
-part,R141,,,Resistor_SMD:R_1206_3216Metric,v5,"line over-voltage divider AUX_VIN -> VIN, 3 x 10M"
+part,R141,,,Resistor_SMD:R_1206_3216Metric,v5,"line over-voltage divider DC+ -> VIN, 3 x 10M"
 value,R141,,,10M,v5,
 part,R142,,,Resistor_SMD:R_1206_3216Metric,v5,line over-voltage divider
 value,R142,,,10M,v5,
@@ -333,13 +333,13 @@ add,R102,1,,AUX_VERR,v5,
 add,R102,2,,GND,v5,
 add,R105,1,,AUX_CS,v5,
 add,R105,2,,GND,v5,
-add,R136,1,,AUX_VIN,v5,
+add,R136,1,,DC+,v5,
 add,R136,2,,AUX_ST1,v5,
 add,R137,1,,AUX_ST1,v5,
 add,R137,2,,AUX_ST2,v5,
 add,R138,1,,AUX_ST2,v5,
 add,R138,2,,AUX_GATE,v5,
-add,R141,1,,AUX_VIN,v5,
+add,R141,1,,DC+,v5,
 add,R141,2,,AUX_LV1,v5,
 add,R142,1,,AUX_LV1,v5,
 add,R142,2,,AUX_LV2,v5,

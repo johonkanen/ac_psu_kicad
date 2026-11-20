@@ -123,7 +123,7 @@ PLACE.update({
     "D12": ("PX", "B", 80.9, -48.2, "clamp diode, anode at fly-lead hole 12 (drain)"),
     "D13": ("PX", "F", 79.2, -24.75, "clamp TVS, top side north of T1"),
     "C111": ("PX", "F", 79.0, -52.6, "input capacitor at fly-lead hole 11 (DC+), top side south of T1; DC+ pad west"),
-    "C68": ("PX", "F", 72.0, -51.5, "DC+ 100n (v4 part) turned 180 degrees and 1.3 mm west: its DC+ pad now faces fly-lead hole 11"),
+    "C68": ("PX", "F", 72.0, -52.3, "DC+ 100n (v4 part) turned 180 degrees and 1.3 mm west: its DC+ pad now faces fly-lead hole 11"),
     "C112": ("PX", "B", 69.5, -11.0, "input capacitor, under the card"),
     "D11": ("PX", "F", 77.6, -20.5, "VCC feed diode"),
     "R100": ("PX", "F", 81.2, -20.5, "VCC feed resistor"),
@@ -150,4 +150,11 @@ PLACE.update({
     "D12": ("PX", "B", 80.9, -47.2, "clamp diode, anode at fly-lead hole 12 (drain); 1.0 mm north of its first place"),
     "D13": ("PX", "B", 79.2, -53.3, "clamp TVS, bottom side south of D12: anode below fly-lead hole 11, cathode below D12's"),
     "R139": ("PX", "B", 80.7, -35.1, "FB RSel, between T1 pins 1 and 2: 1.4 mm from C146 pad 1, GND end at T1 pin 2"),
+})
+
+# ---- v5 step 19 (tools/v5/v5_19_aux_input.py; user 2026-11-20): the input resistor and the second input capacitor
+# go to T1 pin 11 on the bottom side, south of U18; the 10M chains stay under the card and start at DC+.
+PLACE.update({
+    "R98": ("PX", "B", 71.0, -48.6, "input resistor DC+ -> AUX_VIN, bottom side south of U18: AUX_VIN end 2.1 mm from fly-lead hole 11, 2.5 mm from hole 12 (drain)"),
+    "C112": ("PX", "B", 72.0, -52.3, "input capacitor, bottom side south of R98, AUX_VIN end east"),
 })

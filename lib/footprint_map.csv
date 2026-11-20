@@ -331,12 +331,12 @@ R132,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: EN divider (start ~7 V)
 R133,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: EN divider
 R134,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB divider top
 R135,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB divider bottom (5.0 V)
-R136,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: start-up chain AUX_VIN -> GATE, 3 x 10M (150 V each at 450 V)"
+R136,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: start-up chain DC+ -> GATE, 3 x 10M (150 V each at 450 V)"
 R137,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
 R138,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: start-up chain
 R139,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: FB RSel: burst mode option 2 (720 .. 790k)
 R140,ac_psu:R,Resistor_SMD:R_0603_1608Metric,"v5: FB compensation, in series with C145"
-R141,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: line over-voltage divider AUX_VIN -> VIN, 3 x 10M"
+R141,ac_psu:R,Resistor_SMD:R_1206_3216Metric,"v5: line over-voltage divider DC+ -> VIN, 3 x 10M"
 R142,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
 R143,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
 R144,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)

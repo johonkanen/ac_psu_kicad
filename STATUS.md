@@ -2,6 +2,19 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v5 step 19 – R98 and C112 at T1, the 10M chains from DC+ (2026-11-20, branch `v5-layout`)
+
+User 2026-11-20 "Go with both" (proposal in step 18 above).
+- `tools/v5/v5_19_aux_input.py` (seed 5019): R98 from the top side at (74.0, -12.3) to the bottom side at
+  (71.0, -48.6), DC+ end west, AUX_VIN end east beside fly-lead hole 11; C112 from (69.5, -11.0) to (72.0, -52.3),
+  AUX_VIN end east. A first try with R98 at y -46.5 left 1.31 mm to the drain fly-lead pad T1-12 (2.5 needed):
+  DRC stopped it. No pour changed its island count. (The log line for C112 shows the new position as the old one:
+  it is printed after a first rotation try; the move itself is right.)
+- `tools/sheets/sheet07.py`: R136 pin 1 and R141 pin 1 on DC+ instead of AUX_VIN. AUX_VIN is now R98-2, C111-1,
+  C112-1, T1-11, D13-A, all within a few millimetres. The chains sense the bus ahead of R98 (10R): if R98 opens,
+  the start-up and line-sense pins of U18 still see the bus voltage.
+- `tools/check_all.sh` ALL CHECKS PASSED, `tools/regen_check.sh` OK; drc 349 unconnected v5 items pending.
+
 ## v5 step 18 – supply vias of U20 pin 16 and C120 beside BUSN2 (2026-11-20, branch `v5-layout`)
 
 User 2026-11-20 "Go with your recommendation" (move C120; move the two 10M chains towards T1).
