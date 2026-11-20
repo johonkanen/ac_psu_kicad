@@ -20,6 +20,11 @@ unconnected on 11 nets.
 - Cheapest next step: rerun only the supply steps with the pass 4 budgets
   (`ROUTE_DIR=$PWD/build/route_p5 tools/v5/route_pass1/chain.sh "" supply_15V_ISO`, about 25 minutes).
 - Not checked: that the tap pairs run side by side all the way (U7B is split over In3 / In4).
+- Follow-up run (commit a519c6e on `routing-pass5`, rechecked here: legal, 22 unconnected on 10 nets): 15V_ISO
+  closed (313 s). 15V (6 pads, all in the aux area) ran out of 420 s. GND 7: C114-2, C112-2 and C145-2 are shut in
+  by signal tracks routed before GND, C68-1 and R102-2 by HV / LOVP copper: the aux area wants GND first or a GND
+  pour on an inner layer. AUX_VIN, AUX_LOVP: no legal F.Cu path found by the script. DAB_PWM_PRI_HI_ISO: three
+  vias in front of its J11-22 stub at (47.0, 35.95); a route-it-first step is written, not run.
 
 ## Routing pass 4 – fanned bus: legal, 25 unconnected (2026-11-20)
 
