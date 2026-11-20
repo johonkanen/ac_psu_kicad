@@ -7,14 +7,15 @@
                               on the old track or beside the pad. Every piece is gated by scripted.Ctx.clear.
   kipy maze.py aux IN OUT     short links in the aux area for pads beside an HV pad (after the router steps)
 
-Lanes (0.152 mm at 0.305 mm; index from the south): In3 0 relay, 1 MDATA_INU, 2 INU_ADCLK, 3 Net-(U7A-+),
-4 Net-(U7A--), 5 Net-(U7B--), 6 Net-(U7B-+), 7 Net-(U2--), 8 PWM_TRANS6, 9 PWM_Q7, 10 PWM_Q5.
-In4: 5V_ISOL 0.8 mm (0..3), ISOGND 0.4 mm (3..4), Net-(U2-+) (5), 15V_ISO 0.4 mm (6..7), 3V3_ISO 0.4 mm (8..9).
+Lanes (0.152 mm at 0.305 mm; index from the south): In3 0 relay, 1 MDATA_INU, 2 INU_ADCLK, 3..7 five taps
+(taps as TAP_ORDER below), 8 PWM_TRANS6, 9 PWM_Q7, 10 PWM_Q5.
+In4: 5V_ISOL 0.8 mm (0..3), ISOGND 0.4 mm (3..4), the sixth tap (5), 15V_ISO 0.4 mm (6..7), 3V3_ISO 0.4 mm (8..9).
 The relay line moved to In3 and one tap to In4: with the taps drawn, a net that starts west of the tap risers
 (x 79..81.5) cannot reach an In4 entry east of J4, and an In4 entry west of J4-45 would cross the 5V_ISOL lane.
 """
 import heapq
 import math
+import os
 import sys
 
 import pcbnew
@@ -27,18 +28,19 @@ G = 0.1
 W = S.BUS_W
 P = S.LANE_PITCH
 IN3, IN4 = pcbnew.In3_Cu, pcbnew.In4_Cu
-#           net                 lane entry x
-FAN_IN3 = [("GPIO_BYPASS_RLY_ISO", 0, 77.25), ("MDATA_INU", 1, 77.85), ("INU_ADCLK", 2, 78.45),
-           ("Net-(U7A-+)", 3, 79.05), ("Net-(U7A--)", 4, 79.65), ("Net-(U7B--)", 5, 80.25),
-           ("Net-(U7B-+)", 6, 80.85), ("Net-(U2--)", 7, 81.45),
-           ("PWM_TRANS6", 8, 82.38), ("PWM_Q7", 9, 83.64), ("PWM_Q5", 10, 84.92)]
-EXIT3 = {i: 34.95 - 0.6 * i for i in range(5)}                 # fanned-out end below the J8 column at x 33.78
+# The five In3 taps in lane order (south to north = west to east in the corridor x >= 100.1 = the order they are
+# routed in), then the tap that takes the In4 lane. Nets from the U2 side come up west of U7 and so lie inside the
+# U7A pair; the U7B via east of U7 is the outermost and takes the In4 lane. MAZE_TAPS overrides (testing).
+TAP_ORDER = (os.environ.get("MAZE_TAPS") or "Net-(U2-+),Net-(U2--),Net-(U7A-+),Net-(U7A--),Net-(U7B-+),Net-(U7B--)").split(",")
+FAN_IN3 = ([("GPIO_BYPASS_RLY_ISO", 0, 77.25), ("MDATA_INU", 1, 77.85), ("INU_ADCLK", 2, 78.45)]
+           + [(n, 3 + k, 79.05 + 0.6 * k) for k, n in enumerate(TAP_ORDER[:5])]
+           + [("PWM_TRANS6", 8, 82.38), ("PWM_Q7", 9, 83.64), ("PWM_Q5", 10, 84.92)])
+EXIT3 = {i: (33.78 if i == 2 else 34.95 - 0.6 * i) for i in range(5)}                 # fanned-out end below the J8 column at x 33.78
 EXIT3.update({i: 26.75 - 0.6 * (i - 5) for i in (5, 6, 7)})     # ... and below the column at x 24.89
-#           net            lane   width  col x (In3, y 48.9)  via x (y 51.9)  west end x (y 49.4)
-FAN_IN4 = [("Net-(U2-+)",  5.0,   W,     98.95,              98.65,          19.65),
-           ("15V_ISO",     6.4,   0.4,   99.45,              99.45,          19.05),
-           ("3V3_ISO",     8.2,   0.4,   100.05,             100.25,         18.35)]
-TAPS = ["Net-(U7A-+)", "Net-(U7A--)", "Net-(U7B--)", "Net-(U7B-+)", "Net-(U2--)", "Net-(U2-+)"]
+#           net            lane   width  col x  via x (y 51.9)  west end x  In3 goal        In4: west at y, climb from x
+FAN_IN4 = [(TAP_ORDER[5],  5.0,   W,     98.95, 98.65,          19.65,      (98.15, 47.5),  52.55, 92.90),
+           ("15V_ISO",     6.45,  0.4,   99.45, 99.45,          19.05,      (99.45, 47.2),  53.05, 93.10),
+           ("3V3_ISO",     8.3,   0.4,   100.05, 100.25,        18.35,      (100.85, 47.5), 53.65, 93.31)]
 
 
 def fan(b, cx):
@@ -49,7 +51,9 @@ def fan(b, cx):
         if i <= 7:
             xs = (S.COL_E if i <= 4 else S.COL_W) + 0.61 - (i if i <= 4 else i - 5) * P
             xt = EXIT3[i]
-            tail = [(xs, y), (xs, 50.3), (xt, 50.3 - abs(xt - xs)), (xt, 49.4 if i <= 4 else 48.6)]
+            # parallel 45 degree pieces need 0.43 mm between their starts: the one that shifts most starts highest
+            ys = 50.3 - 0.13 * {0: 0, 1: 1, 2: 0, 3: 1, 4: 0, 5: 0, 6: 1, 7: 2}[i]
+            tail = [(xs, y), (xs, ys), (xt, ys - abs(xt - xs)), (xt, 49.4 if i <= 4 else 48.6)]
         elif i == 8:
             tail = [(24.585, y), (24.585, 50.0), (21.715, 50.0), (21.715, 51.565), (21.08, 52.2)]
         elif i == 9:
@@ -69,17 +73,18 @@ def fan(b, cx):
                   + [(20.25, 52.84 + d), (20.25, 49.9), (22.35, 49.9), (22.35, 50.93)], 0.4, keep=False)
     err = err or S._poly(cx, "ISOGND", IN4, [(88.15, 49.5), (88.15, 48.82)], 0.4, keep=False)     # J4-46 onto the plane edge
     print("fan: In4 ISOGND 0.4 mm plane edge -> J8-46, and J4-46 to the plane edge: " + (err or "drawn"))
-    for net, idx, w, xc, xv, xw in FAN_IN4:
+    for net, idx, w, xc, xv, xw, goal, ya, xk in FAN_IN4:
         d = idx * P
         mid = S.offset_poly(S.FAN_BASE, d)[1:-1]
         v = cx.via_ok(net, xv, 51.9)
         err = None if v is not None else f"no via at ({xv}, 51.9)"
         if not err:
             cx.commit(v)
-            pts3 = [(xc, 48.9), (xc, 51.9 - 0.25 - abs(xv - xc)), (xv, 51.9 - 0.25), (xv, 51.9)]
+            pts3 = [goal, (xc, 47.5 + abs(goal[0] - xc)), (xc, 51.9 - 0.25 - abs(xv - xc)), (xv, 51.9 - 0.25), (xv, 51.9)]
             err = S._poly(cx, net, IN3, pts3, w)
-            err = err or S._poly(cx, net, IN4, [(xv, 51.9), (xv, 52.84 + d)] + mid + [(xw, 52.84 + d), (xw, 49.4)], w)
-        print(f"fan: In4 lane {idx} {net} {w} mm: " + (err or f"In3 from ({xc}, 48.9) through the J4 column, via ({xv}, 51.9), west end ({xw}, 49.4)"))
+            yl = 52.84 + d
+            err = err or S._poly(cx, net, IN4, [(xv, 51.9), (xv, ya), (xk, ya), (xk - (yl - ya), yl)] + mid + [(xw, yl), (xw, 49.4)], w)
+        print(f"fan: In4 lane {idx} {net} {w} mm: " + (err or f"In3 from {goal} through the J4 column, via ({xv}, 51.9), west end ({xw}, 49.4)"))
 
 
 # ---- grid router -------------------------------------------------------------------------------------------------
@@ -278,7 +283,7 @@ def to_old_track(b, cx, grid, net, layer, a, w, box=(0.5, 36.5, 40.0, 52.5)):
         if v is None:
             continue
         legal += 1
-        if legal > 8:
+        if legal > 30:
             break
         blk = grid.build(net, w)
         pts = grid.route(blk, a, (x, y))
@@ -323,41 +328,59 @@ def runs(b, cx):
         run(cx, east3, net, IN3, v, entry[net], W, what=f"{ref}-{num} via ({v[0]:.2f}, {v[1]:.2f}) -> lane entry")
     # --- the divider taps from the vias at the U7 / U2 inputs: north along x >= 100.1, west under the U20 pins
     #     (south of their vias: wall above y 40.75 east of x 81.9), up to the lane entries. Lane order.
-    wall = [(81.9, 40.75, 112.0, 50.5)]
-    for net in ["Net-(U2--)", "Net-(U7B-+)", "Net-(U7B--)", "Net-(U7A--)", "Net-(U7A-+)", "Net-(U2-+)"]:   # eastmost entry first
+    #     Order: the tap with the westmost entry lies southmost in the band and westmost in the corridor, so it goes
+    #     first, under its own ceiling (0.45 mm per tap below the wall); the others nest outside it.
+    goal4 = {net: goal for net, _, _, _, _, _, goal, _, _ in FAN_IN4}
+    for k, net in enumerate(TAP_ORDER):
+        wall = [(81.9, 40.75 - 0.45 * (4 - k), 112.0, 50.5)]
         vs = [(T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T
-              and t.GetNetname() == net and T(t.GetPosition().x) > 90]
+              and t.GetNetname() == net and T(t.GetPosition().x) > 90 and -T(t.GetPosition().y) < 20]
         if not vs:
             print(f"runs: {net}: no via at the U7 / U2 block")
             continue
-        if net in entry:
-            run(cx, east3, net, IN3, vs[0], entry[net], W, wall, what=f"block via ({vs[0][0]:.2f}, {vs[0][1]:.2f}) -> lane entry")
-        else:               # the In4 tap: on to the J4 column at x 99.58
-            run(cx, east3, net, IN3, vs[0], (98.95, 48.9), W, what=f"block via ({vs[0][0]:.2f}, {vs[0][1]:.2f}) -> J4 column (In4 lane)")
+        goal, wl = (entry[net], wall) if net in entry else (goal4[net], ())
+        ok = run(cx, east3, net, IN3, vs[0], goal, W, wl, what=f"block via ({vs[0][0]:.2f}, {vs[0][1]:.2f}) -> " + ("lane entry" if net in entry else "J4 column (In4 lane)"))
+        if not ok:
+            for fp in b.GetFootprints():
+                for pd in fp.Pads():
+                    if ok or pd.GetNetname() != net or pd.HasHole() or T(pd.GetPosition().x) < 90 or fp.GetReference().startswith("U"):
+                        continue
+                    v = new_via_at(b, cx, fp.GetReference(), pd.GetNumber(), 2.5)
+                    if v is not None:
+                        ok = run(cx, east3, net, IN3, v, goal, W, wl, what=f"second try, via ({v[0]:.2f}, {v[1]:.2f}) at {fp.GetReference()}-{pd.GetNumber()} ->")
     # --- 15V_ISO from the through-hole pin U8-1, 3V3_ISO from a new via into its In2 plane, to the J4 column
     p = pad_of(b, "U8", "1")
-    run(cx, east3, "15V_ISO", IN3, (T(p.GetPosition().x), -T(p.GetPosition().y)), (99.45, 48.9), 0.4, what="U8-1 -> J4 column (In4 lane)")
-    v = None
-    for x, y in ((104.05, 40.35), (105.05, 40.35), (106.05, 40.35), (108.55, 40.35), (108.55, 42.05), (110.05, 44.05), (104.05, 38.55)):
+    run(cx, east3, "15V_ISO", IN3, (T(p.GetPosition().x), -T(p.GetPosition().y)), goal4["15V_ISO"], 0.4, what="U8-1 -> J4 column (In4 lane)")
+    done = False
+    for n in range(60):
+        x, y = 103.05 + 0.5 * (n % 20), 40.35 - 0.5 * (n // 20)
         v = cx.via_ok("3V3_ISO", x, y)
-        if v is not None:
-            cx.commit(v)
-            run(cx, east3, "3V3_ISO", IN3, (x, y), (100.05, 48.9), 0.4, what=f"plane via ({x}, {y}) -> J4 column (In4 lane)")
-            break
-    if v is None:
-        print("runs: 3V3_ISO: no place for a plane via among the points tried")
+        if v is None:
+            continue
+        pts = east3.route(east3.build("3V3_ISO", 0.4), (x, y), goal4["3V3_ISO"])
+        if pts is None:
+            continue
+        cx.commit(v)
+        S.MARGIN = 0.002
+        err = S._poly(cx, "3V3_ISO", IN3, pts, 0.4)
+        print(f"runs: 3V3_ISO plane via ({x:.2f}, {y:.2f}) -> J4 column (In4 lane): " + (f"path found but {err}" if err else "drawn"))
+        done = True
+        break
+    if not done:
+        print("runs: 3V3_ISO: no plane via place in x 103..113, y 39.3..40.4 from which the J4 column is reached")
     # --- west ends on In3: relay and taps onto their old In2 tracks, the sigma-delta pair to vias at R50-2 / U4-7
-    for net, ref, num in (("MDATA_INU", "R50", "2"), ("INU_ADCLK", "U4", "7")):
+    xw = {net: (x, 49.4) for net, _, _, _, _, x, _, _, _ in FAN_IN4}
+    to_old_track(b, cx, west4, TAP_ORDER[5], IN4, xw[TAP_ORDER[5]], W)
+    for net, ref, num in (("INU_ADCLK", "U4", "7"), ("MDATA_INU", "R50", "2")):
         v = new_via_at(b, cx, ref, num)
         if v is None:
             print(f"runs: {net} west end: NO PLACE for a via within 3 mm of {ref}-{num}")
         else:
             run(cx, west3, net, IN3, exit3[net], v, W, what=f"west end -> via ({v[0]:.2f}, {v[1]:.2f}) at {ref}-{num}")
-    for net in ["Net-(U2--)", "Net-(U7B-+)", "Net-(U7B--)", "Net-(U7A--)", "Net-(U7A-+)", "GPIO_BYPASS_RLY_ISO"]:
+    to_old_track(b, cx, west3, "GPIO_BYPASS_RLY_ISO", IN3, exit3["GPIO_BYPASS_RLY_ISO"], W)
+    for net in [TAP_ORDER[4], TAP_ORDER[3], TAP_ORDER[2], TAP_ORDER[1], TAP_ORDER[0]]:      # west exits first
         to_old_track(b, cx, west3, net, IN3, exit3[net], W)
     # --- west ends on In4, around the west end of J8
-    xw = {net: (x, 49.4) for net, _, _, _, _, x in FAN_IN4}
-    to_old_track(b, cx, west4, "Net-(U2-+)", IN4, xw["Net-(U2-+)"], W)
     to_old_track(b, cx, west4, "15V_ISO", IN4, xw["15V_ISO"], 0.4)
     for ref, num in (("U4", "8"), ("C37", "2")):
         v = new_via_at(b, cx, ref, num)
