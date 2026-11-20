@@ -2,6 +2,20 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Routing pass 7 – 16 unconnected, NOT legal: ISODC+ pour cut again (2026-11-20)
+
+Branch `routing-pass7`, commit c5b062f (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report
+`reports/v5_layout/routing_pass7.md` there; on the step 19 board (36d3da7), nothing merged. DRC, domain_gaps and
+check_layout rerun here: 0 shorts, 0 clearance errors, parity 0, 0 gap violations, check_layout OK; 16 unconnected
+on 10 nets, one of them the B.Cu ISODC+ pour in two islands (router vias just outside the pass 4 keep-out).
+
+- Worked: AUX_VIN closed (R98 / C112 at T1); U20-16, C120-1, C120-2 connected by the step 18 vias.
+- Open: ADCLK_DAB, MDATA_DAB (closed in pass 6; the agent suspects the step 18 via at (90.0, 38.7) in the In3 band
+  south of the U20 pins, not verified); DAB_PWM_PRI_HI_ISO (either it or the J11 bottom fan closes, depending on
+  the order: needs a drawn route); DC+ at R98-1 (needs a via to the F.Cu pour); AUX_GATE (28.8 mm from U18-10 to
+  R138-2, closed in pass 6, the DC+ runs to the chains are new there); AUX_LOVP; 5V_ISOL at J4-45 (closed in
+  pass 6); GND 5 (C112-2 and C68-1 between HV pads outside the pour, C145-2, two links at U9).
+
 ## v5 step 19 – R98 and C112 at T1, the 10M chains from DC+ (2026-11-20, branch `v5-layout`)
 
 User 2026-11-20 "Go with both" (proposal in step 18 above).
