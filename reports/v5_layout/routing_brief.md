@@ -107,6 +107,17 @@ After pass 2 (branch `routing-pass2`), v5 step 16: PWM_TRANS6 / Q7 / Q5 are on U
 U19 pin 15, U19 pins 13 / 14 free. BUSP2 (63.5, 45.5) and BUSN2 (90.5, 45.0) forbid vias within 2.5 mm of their
 4 mm pads. The passage north of J11 is to be drawn as a scripted bus (In3, In4), not left to the router.
 
+After pass 3 (branch `routing-pass3`: 16 straight lanes, 6 short), user 2026-11-20 "Go with option 1": INU_OUT2
+stays (north is closed: 2.35 mm to Q6's gate pad). The passage is a fanned bus on In3 / In4 only:
+- pinch at x 42.5..51.5 under the two south pads of INU_OUT2 (round, r 1.6 mm at (44.06, 57.06) and (49.94, 57.06)):
+  ISO copper between y 51.1 (barrier strip) and the pads, about 13 lanes per layer at 0.152 mm / 0.305 mm pitch;
+- west of x 41.4 (over J8) and east of x 53 (over J6) In3 and In4 are empty up to y 60: lanes may spread north up
+  to y 58 there, tracks only, no vias north of y 54 (F.Cu / B.Cu pours of other nets, zone clearance up to 1.95 mm).
+- No via in the gap between J6 and J4 that cuts the B.Cu ISODC+ pour (pass 3 did, zone clearance 1.95 mm).
+No list changes for this: lib/v5_copper.csv rectangles concern F.Cu / B.Cu copper and vias, In3 / In4 are new layers.
+The lanes run 0.11 mm from the Q5_S pour on In2 and 0.10 mm from the Q7_S pour on B.Cu (switch nodes): keep the
+sigma-delta pair and the taps on the lanes farthest from them where there is a choice, and say what ended up where.
+
 ## Swaps that are allowed
 
 Swap to remove a crossing or a via, not for its own sake. Each swap is a schematic change in

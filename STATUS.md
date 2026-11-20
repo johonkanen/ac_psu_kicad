@@ -2,6 +2,18 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Passage north of J11: fanned bus instead of moving INU_OUT2 (2026-11-20)
+
+User: "Move inu out 2", then, after the report below, "Go with option 1".
+- INU_OUT2 (M4 terminal at (47, 60), net Q5_S) NOT moved: its north-east pad is 2.35 mm from Q6 pin 1 (gate; Q5_S
+  is Q6's drain; the TO-247's own pad gap is 2.41 mm), and its body touches Q5 / Q6.
+- It limits the passage only at x 42.5..51.5 (two south pads): ISO corridor y 51.1..55.46 there, about 13 lanes
+  per layer. Over J8 and J6 In3 / In4 are empty up to y 60; pass 3's 8 lanes per layer came from straight lanes
+  above the J8 pins and the fence at y 55.3.
+- Option 1: lanes fan out north of J8 / J6 up to y 58 on In3 / In4 (tracks only). No change to lib/v5_copper.csv
+  (its rectangles concern F.Cu / B.Cu copper and vias). Routing brief updated; pass 4 on branch `routing-pass4`.
+- Known cost: lanes 0.11 mm from the Q5_S pour (In2) and 0.10 mm from the Q7_S pour (B.Cu), both switch nodes.
+
 ## Routing pass 3 – finished (2026-11-20): the passage north of J11 is 6 lanes short
 
 Branch `routing-pass3`, commit e61031b (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report
