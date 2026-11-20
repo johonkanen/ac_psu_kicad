@@ -77,14 +77,14 @@ script taps_vias scripted.py taps
 #     controller's small signals (2.5 mm to the HV nets: hv_clearances.json, the default of every step)
 script hv_stubs scripted.py hvstubs
 D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
-# --- the passage north of J11 as a drawn bus (scripted.py bus): 8 lanes on In3 entered from the J6 / J4 gap, 3
-#     signal lanes on In4 entered through the J6 column at x 68.98, ISOGND on In4 from the plane edge. The router
-#     does only the ends.
-script bus scripted.py bus
-# --- hooks: via beside the source pin and In3 up to the lane start for the six bus nets that start at U20 / U21 /
-#     U19 (try 2 of pass 3: the router boxed PWM_Q7 in at U20-11, then laid taps across the pins)
-script hooks scripted.py hooks PWM_TRANS6,PWM_Q7,PWM_Q5,GPIO_BYPASS_RLY_ISO,MDATA_INU,INU_ADCLK
-
+# --- the passage north of J11 as a fanned bus (scripted.py fan, pass 4): 11 signal lanes on In3 entered from the
+#     J6 / J4 gap, on In4 5V_ISOL (0.8 mm, from pin J4-45, drops onto J6-45 and J8-45) and ISOGND (0.4 mm, from the
+#     plane edge through the J4 column at x 90.69). Then hooks: a via beside the source pin and In3 up to the lane
+#     start for the five lane nets that start at U20 / U21. Then westends: vias at U4-7 / R50-2 and on the old In2
+#     tracks of the six taps. The router does what is left of the ends.
+script bus scripted.py fan
+script hooks scripted.py hooks PWM_TRANS6,PWM_Q7,PWM_Q5,MDATA_INU,INU_ADCLK
+script westends scripted.py westends
 # --- ISO side. The PWM lines to J6 / J4 first: they cross the DC bus band on In3 only (pin -> via south of the
 #     band -> In3 -> through-hole pin), so everything that runs east-west there has to go around them. Then the
 #     nets that pass north of J11 (In3 / In4; F.Cu / B.Cu fenced there), then the rest of the ISO signals.
@@ -118,13 +118,15 @@ D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-cost
 #     with its own time budget: pads outside the planes (U4 / C37 / J8 west of J11, the aux area) and the rails
 #     without a plane (15V_ISO, 5V_ISOL, 15V, 5V_CTRL_A).
 script plane_vias scripted.py planes fill
-STMO="${SUPPLY_TMO:-420}"      # time budget of each supply step, seconds
+STMO="${SUPPLY_TMO:-420}"; ITMO="${ISOGND_TMO:-900}"      # time budget of each supply step, seconds
 Q="--quick"                    # main pass only for the rails that timed out in pass 2: no rescue / reconciliation laps
 PW=(--power-nets 3V3_CTRL CTRLGND_A CTRLGND 5V_CTRL 5V_CTRL_A 3V3_ISO ISOGND 15V_ISO 5V_ISOL GND VCC 15V
     --power-nets-widths 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.5 0.8 0.4 0.4 0.5)
 for n in 5V_ISOL 15V_ISO 3V3_ISO ISOGND; do
+    [ "$n" = ISOGND ] && STMO=$ITMO
     D=I TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu In4.Cu B.Cu In2.Cu --layer-costs 1 2 2 1 8 "${PW[@]}" $Q
 done
+STMO="${SUPPLY_TMO:-420}"
 D=C TMO=$STMO step supply_C  supply_C  --layers F.Cu In3.Cu B.Cu --layer-costs 1 4 1 "${PW[@]}"
 for n in VCC 15V; do
     D=P TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}"

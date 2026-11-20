@@ -34,11 +34,11 @@ def P(x, y):
     return pcbnew.VECTOR2I(F(x), F(-y))
 
 
-def keepout(b, name, pts, layers, vias=True):
+def keepout(b, name, pts, layers, vias=True, tracks=True):
     z = pcbnew.ZONE(b)
     z.SetIsRuleArea(True)
     z.SetZoneName(TMP + name)
-    z.SetDoNotAllowTracks(True)
+    z.SetDoNotAllowTracks(tracks)
     z.SetDoNotAllowVias(vias)
     z.SetDoNotAllowZoneFills(False)
     z.SetDoNotAllowPads(False)
@@ -80,9 +80,16 @@ def prep(b):
     # passage height of the brief (y 55.3, the INU_OUT2 pads) and to y -25.5 at x 22..65 (the In2 track ends of
     # PWM_G2 / PWM_G4 / PWM_TRANS1 lie at y -24.5 .. -24.8, outside the rectangle)
     al = ["F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"]
-    for name, r in (("north", (-130, 55.3, 125, 80)), ("west", (-130, -90, 0, 55.3)), ("west 2", (0, -90, 22, 36)),
+    for name, r in (("north", (-130, 58.3, 125, 80)), ("west", (-130, -90, 0, 55.3)), ("west 2", (0, -90, 22, 36)),
                     ("south 1", (22, -90, 65, -25.5)), ("south 2", (65, -90, 125, -62))):
         keepout(b, "fence " + name, rect(*r), al)
+    # pass 4, fanned bus: In3 / In4 tracks may lie up to y 58.3 north of J8 and J6 (the INU_OUT2 pads limit them in
+    # between); the other layers stay below y 55.3, and no via north of y 54
+    keepout(b, "fence north outer", rect(-130, 55.3, 125, 58.3), ["F.Cu", "In1.Cu", "In2.Cu", "B.Cu"])
+    keepout(b, "no via north of 54", rect(-130, 54.0, 125, 58.3), al, vias=True, tracks=False)
+    # no via in the gap between J6 and J4: the B.Cu ISODC+ pour (zone clearance 1.95 mm) passes north through it
+    # and three vias cut it in two in pass 3
+    keepout(b, "no via J6 J4 gap", rect(76.5, 48.8, 87.0, 54.0), al, vias=True, tracks=False)
     # no track on the ground layers inside the card planes (pass 1 put a tap through the In4 ISOGND plane); vias allowed
     for i, r in enumerate(((44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8))):
         keepout(b, f"planes {i}", rect(*r), ["In1.Cu", "In2.Cu", "In4.Cu"], vias=False)   # pass 3: In2 too
@@ -183,7 +190,11 @@ def prune(b, ref):
         if key(t) in old:
             continue
         pts = [t.GetPosition()] if t.Type() == pcbnew.PCB_VIA_T else [t.GetStart(), t.GetEnd()]
-        if any(z.Outline().Contains(q) for z in fences for q in pts):
+        via = t.Type() == pcbnew.PCB_VIA_T
+        # only fences that forbid this item on its layer (pass 4: the first version took In3 / In4 lanes at y > 55.3
+        # for trespassers of the outer-layer fence and deleted them)
+        if any(z.Outline().Contains(q) for z in fences for q in pts
+               if (z.GetDoNotAllowVias() if via else (z.GetDoNotAllowTracks() and z.IsOnLayer(t.GetLayer())))):
             dead.append(t)
     for t in dead:
         q = t.GetPosition() if t.Type() == pcbnew.PCB_VIA_T else t.GetStart()
