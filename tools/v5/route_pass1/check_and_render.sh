@@ -28,7 +28,7 @@ kpy "$R/tools/v4/domain_gaps.py" --board "$C" | grep -v "Debug: Adding" | tee "$
 echo "--- check_layout.py"
 kpy "$R/tools/v5/check_layout.py" --board "$C" | grep -v "Debug: Adding" | tee "$O/check_layout.txt" | tail -15
 echo "--- renders"
-"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,In2.Cu,In3.Cu,B.Cu 500 64,2,92,58             # aux flyback with the In2 GND pour
-"$SK/render_layers.sh" "$C" "$O/r87" F.Cu,B.Cu 3000 56,-8,67,-1                        # CLK1 escape at R87
-"$SK/render_layers.sh" "$C" "$O/j11_22" F.Cu,B.Cu 1200 42,-40,62,-28                   # J11-22 stub
+"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,In2.Cu,B.Cu 500 64,2,92,58                   # aux flyback
+"$SK/render_layers.sh" "$C" "$O/j11bot" B.Cu,In3.Cu 600 42,-47,96,-26                  # J11 bottom fan
+"$SK/render_layers.sh" "$C" "$O/busn2" F.Cu,B.Cu 1500 84,-48,96,-36                    # U20 / BUSN2 corner
 "$SK/render_layers.sh" "$C" "$O/passage" In3.Cu,In4.Cu 900 15,-59,60,-49               # the passage

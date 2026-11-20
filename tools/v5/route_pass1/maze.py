@@ -336,10 +336,13 @@ def runs(b, cx):
     # --- the divider taps from the vias at the U7 / U2 inputs: north along x >= 100.1, west under the U20 pins
     #     (south of their vias: wall above y 40.75 east of x 81.9), up to the lane entries. Lane order.
     #     Order: the tap with the westmost entry lies southmost in the band and westmost in the corridor, so it goes
-    #     first, under its own ceiling (0.45 mm per tap below the wall); the others nest outside it.
+    #     first, under its own ceiling (0.5 mm per tap below the wall); the others nest outside it.
     goal4 = {net: goal for net, _, _, _, _, _, goal, _, _ in FAN_IN4}
     for k, net in enumerate(TAP_ORDER):
-        wall = [(81.9, 40.75 - 0.45 * (4 - k), 112.0, 50.5)]
+        # pass 7: the wall ends at x 89.6 (east of the U20 pins there is nothing to stay under, and the fixed vias
+        # at (90.0, 38.7) and (91.3, 40.15) of v5 step 19 stand in the band); ceilings 0.6 mm apart
+        # (0.6 mm apart filled the band down to y 38.5 and left no room for the sigma-delta pair to U6: 0.5 mm)
+        wall = [(81.9, 40.9 - 0.5 * (4 - k), 89.6, 50.5)]
         vs = [(T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T
               and t.GetNetname() == net and T(t.GetPosition().x) > 90 and -T(t.GetPosition().y) < 20]
         if not vs:
@@ -399,40 +402,45 @@ def runs(b, cx):
 
 
 def aux(b, cx):
-    """Short links in the aux area: a pad that is still alone on its net gets a link to the nearest copper of the net
-    on its own layer (HV rule per pad as in scripted.Ctx.need)."""
+    """Pass 7: short links in the aux area (x 64..110, y -58..-2), driven by the open connections of a DRC run made just
+    before (AUX_DRC = its JSON report). For each open pair on one outer layer: a simple link, else the grid router
+    with the HV rule in its obstacle map; every segment gated by Ctx.clear (per-pad rule). Pairs on two different
+    layers are reported, not drawn (they need a via)."""
+    import json
+    import re
     S.MARGIN = 0.02
-    todo = [("C68", "1"), ("C112", "2"), ("C114", "2"), ("R102", "2"), ("C145", "2"), ("R105", "2"), ("R101", "1"),
-            ("C112", "1"), ("R143", "2")]
-    for ref, num in todo:
-        pad = pad_of(b, ref, num)
-        net = pad.GetNetname()
-        _, x, y, layer, smin, smax = S.pad_info(pad)
-        ps = pad.GetEffectiveShape(layer)
-        if any(t.GetNetname() == net and (t.Type() == pcbnew.PCB_VIA_T or t.GetLayer() == layer)
-               and ps.Collide(t.GetEffectiveShape(layer), 0) for t in b.GetTracks()):
-            continue            # has a stub: the two nets below are handled with the grid router
-        cand = []
-        for t in b.GetTracks():
-            if t.GetNetname() != net:
-                continue
-            if t.Type() == pcbnew.PCB_VIA_T:
-                cand.append((T(t.GetPosition().x), -T(t.GetPosition().y)))
-            elif t.GetLayer() == layer:
-                cand += [(T(t.GetStart().x), -T(t.GetStart().y)), (T(t.GetEnd().x), -T(t.GetEnd().y))]
-        for fp in b.GetFootprints():
-            for p in fp.Pads():
-                if p.GetNetname() == net and p is not pad and p.IsOnLayer(layer) and (fp.GetReference(), p.GetNumber()) != (ref, num):
-                    cand.append((T(p.GetPosition().x), -T(p.GetPosition().y)))
-        cand = sorted((math.hypot(cx_ - x, cy_ - y), cx_, cy_) for cx_, cy_ in cand if 0.2 < math.hypot(cx_ - x, cy_ - y) < 8.0)
+    rep = json.load(open(os.environ["AUX_DRC"]))
+    for u in rep.get("unconnected_items", []):
+        its = u["items"]
+        m = re.search(r"\[([^\]]+)\]", its[0]["description"])
+        net = m.group(1) if m else ""
+        pts = [(i["pos"]["x"], -i["pos"]["y"]) for i in its]
+        if len(pts) != 2 or any(not (64 <= x <= 110 and -58 <= y <= -2) for x, y in pts) or any(i["description"].startswith("Zone") for i in its):
+            continue
+        lays = [re.search(r" on (\S+\.Cu)", i["description"]) for i in its]
+        lays = [x.group(1) if x and " - " not in i["description"] else None for x, i in zip(lays, its)]
+        what = " | ".join(i["description"][:40] for i in its)
+        d = math.hypot(pts[0][0] - pts[1][0], pts[0][1] - pts[1][1])
+        named = {x for x in lays if x}
+        if len(named) > 1 or (named and not named & {"F.Cu", "B.Cu"}):
+            print(f"aux: {net} ({pts[0][0]:.1f}, {pts[0][1]:.1f}) - ({pts[1][0]:.1f}, {pts[1][1]:.1f}), {d:.1f} mm: on {' and '.join(sorted(named))}, needs a via: not drawn [{what}]")
+            continue
         done = None
-        for d, tx, ty in cand[:12]:
-            if S.link(cx, net, (x, y), (tx, ty), layer=layer, w=min(0.3, smin)):
-                done = (tx, ty, d)
+        for ln in (sorted(named) or ["F.Cu", "B.Cu"]):
+            layer = b.GetLayerID(ln)
+            w = 0.3
+            if S.link(cx, net, pts[0], pts[1], layer=layer, w=w):
+                done = ln + ", simple link"
                 break
-        print(f"aux: {ref}-{num} {net} ({x:.1f}, {y:.1f}): " + (f"linked to ({done[0]:.2f}, {done[1]:.2f}), {done[2]:.1f} mm away" if done
-                                                             else f"NO legal link to any of {min(len(cand), 12)} nearest points of the net"))
-    aux_hv_runs(b, cx)
+            if d < 30:
+                g = Grid(b, layer, (math.floor(min(pts[0][0], pts[1][0]) - 6) + 0.05, math.floor(min(pts[0][1], pts[1][1]) - 6) + 0.05,
+                                    math.ceil(max(pts[0][0], pts[1][0]) + 6) + 0.05, math.ceil(max(pts[0][1], pts[1][1]) + 6) + 0.05))
+                p = g.route(g.build(net, w, hv=True), pts[0], pts[1])
+                if p is not None and S._poly(cx, net, layer, p, w) is None:
+                    done = ln + ", grid router"
+                    break
+        print(f"aux: {net} ({pts[0][0]:.1f}, {pts[0][1]:.1f}) - ({pts[1][0]:.1f}, {pts[1][1]:.1f}), {d:.1f} mm: "
+              + (f"drawn on {done}" if done else "NO legal link on " + " / ".join(sorted(named) or ["F.Cu", "B.Cu"])) + f" [{what}]")
 
 
 def aux_hv_runs(b, cx):

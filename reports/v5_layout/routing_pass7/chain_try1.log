@@ -1,0 +1,84 @@
+== aux_15V (domain P)
+  Single-ended:  1/1 routed
+  Multi-point:   12/12 pads connected (1 nets)
+  Total vias:    2
+  Single-ended:  1/1 routed
+  Multi-point:   12/12 pads connected
+lock_tracks: 3509 tracks and vias: lock-all
+   42 s
+== hv_stubs
+hvstubs: C68-2 DC+ F.Cu: stub 1.20 mm to (74.41, -52.35); within 2.95 mm: C68[GND]
+hvstubs: C111-1 AUX_VIN F.Cu: stub 1.65 mm to (76.61, -51.23); within 2.95 mm: C111[GND], track[GND]
+hvstubs: R141-1 DC+ F.Cu: stub 1.18 mm to (69.01, -4.65); within 2.95 mm: C39[GND], C39[VCC], via[VCC]
+hvstubs: T1-11 AUX_VIN F.Cu: stub 1.40 mm to (75.81, -47.91); within 2.95 mm: C111[GND], track[15V]
+hvstubs: T1-12 AUX_DRAIN F.Cu: stub 1.40 mm to (76.02, -42.94); within 2.95 mm: track[15V]
+hvstubs: R98-1 DC+ B.Cu (68.0, -48.6): NO legal stub; within 2.95 mm: C112[GND]; 1 of them are not pads of R98
+hvstubs: R98-2 AUX_VIN B.Cu (74.0, -48.6): NO legal stub; within 2.95 mm: C112[GND]; 1 of them are not pads of R98
+hvstubs: C112-1 AUX_VIN B.Cu (73.5, -52.3): NO legal stub; within 2.95 mm: C112[GND]
+hvstubs: U18-5 AUX_DRAIN B.Cu: stub 1.27 mm to (74.92, -40.18); within 2.95 mm: C146[GND]
+hvstubs: D12-A AUX_DRAIN B.Cu: stub 1.55 mm to (79.38, -45.45); within 2.95 mm: R105[GND], track[GND], via[GND]
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3516 tracks and vias: lock-all
+== aux_hv (domain P)
+   TIMED OUT after 600 s: step skipped
+lock_tracks: 3516 tracks and vias: lock-all
+   605 s
+== bus
+fan: In3 lane  0 GPIO_BYPASS_RLY_ISO: entry (77.25, 49.3), exit (34.95, 49.4)
+fan: In3 lane  1 MDATA_INU: entry (77.85, 49.3), exit (34.35, 49.4)
+fan: In3 lane  2 INU_ADCLK: entry (78.45, 49.3), exit (33.78, 49.4)
+fan: In3 lane  3 Net-(U2-+): entry (79.05, 49.3), exit (33.15, 49.4)
+fan: In3 lane  4 Net-(U2--): entry (79.65, 49.3), exit (32.55, 49.4)
+fan: In3 lane  5 Net-(U7A-+): entry (80.25, 49.3), exit (26.75, 48.6)
+fan: In3 lane  6 Net-(U7A--): entry (80.85, 49.3), exit (26.15, 48.6)
+fan: In3 lane  7 Net-(U7B-+): entry (81.45, 49.3), exit (25.55, 48.6)
+fan: In3 lane  8 PWM_TRANS6: entry (82.38, 49.3), to its J8 pin
+fan: In3 lane  9 PWM_Q7: entry (83.64, 49.3), to its J8 pin
+fan: In3 lane 10 PWM_Q5: entry (84.92, 49.3), to its J8 pin
+fan: In4 5V_ISOL 0.8 mm J4-45 -> J6-45 -> J8-45: drawn
+fan: In4 ISOGND 0.4 mm plane edge -> J8-46, and J4-46 to the plane edge: drawn
+fan: In4 lane 5.0 Net-(U7B--) 0.152 mm: In3 from (98.15, 47.5) through the J4 column, via (98.65, 51.9), west end (19.65, 49.4)
+fan: In4 lane 6.45 15V_ISO 0.4 mm: In3 from (99.45, 47.2) through the J4 column, via (99.45, 51.9), west end (19.05, 49.4)
+fan: In4 lane 8.3 3V3_ISO 0.4 mm: In3 from (100.85, 47.5) through the J4 column, via (100.25, 51.9), west end (18.35, 49.4)
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3672 tracks and vias: lock-all
+== runs
+runs: GPIO_BYPASS_RLY_ISO U19-15 via (67.57, 41.44) -> lane entry: drawn, 13.0 mm, 4 segments
+runs: MDATA_INU U21-12 via (74.71, 41.44) -> lane entry: drawn, 9.2 mm, 4 segments
+runs: INU_ADCLK U21-14 via (77.25, 41.44) -> lane entry: drawn, 8.4 mm, 4 segments
+runs: PWM_TRANS6 U20-10 via (83.12, 41.44) -> lane entry: drawn, 8.2 mm, 4 segments
+runs: PWM_Q7 U20-11 via (84.39, 41.44) -> lane entry: drawn, 8.2 mm, 4 segments
+runs: PWM_Q5 U20-12 via (85.66, 41.44) -> lane entry: drawn, 8.2 mm, 4 segments
+runs: Net-(U2-+) block via (96.18, 5.00) -> lane entry: NO PATH on the grid from (96.18, 5.00) to (79.05, 49.30)
+runs: Net-(U2-+) second try, via (94.79, 4.90) at C101-2 ->: NO PATH on the grid from (94.79, 4.90) to (79.05, 49.30)
+runs: Net-(U2-+) second try, via (96.55, 5.79) at R1-2 ->: NO PATH on the grid from (96.55, 5.79) to (79.05, 49.30)
+runs: Net-(U2--) block via (96.30, 2.09) -> lane entry: drawn, 67.0 mm, 10 segments
+runs: Net-(U7A-+) block via (99.54, 11.89) -> lane entry: NO PATH on the grid from (99.54, 11.89) to (80.25, 49.30)
+runs: Net-(U7A-+) second try, via (95.02, 11.60) at C103-2 ->: NO PATH on the grid from (95.02, 11.60) to (80.25, 49.30)
+runs: Net-(U7A-+) second try, via (94.99, 10.79) at R52-2 ->: NO PATH on the grid from (94.99, 10.79) to (80.25, 49.30)
+runs: Net-(U7A--) block via (99.64, 12.57) -> lane entry: NO PATH on the grid from (99.64, 12.57) to (80.85, 49.30)
+runs: Net-(U7A--) second try, via (94.99, 12.58) at R53-2 ->: NO PATH on the grid from (94.99, 12.58) to (80.85, 49.30)
+runs: Net-(U7A--) second try, via (94.65, 13.20) at C104-2 ->: NO PATH on the grid from (94.65, 13.20) to (80.85, 49.30)
+runs: Net-(U7B-+) block via (102.89, 10.40) -> lane entry: NO PATH on the grid from (102.89, 10.40) to (81.45, 49.30)
+runs: Net-(U7B-+) second try, via (101.75, 10.42) at R46-2 ->: NO PATH on the grid from (101.75, 10.42) to (81.45, 49.30)
+runs: Net-(U7B-+) second try, via (100.43, 8.37) at C105-2 ->: NO PATH on the grid from (100.43, 8.37) to (81.45, 49.30)
+runs: Net-(U7B--) block via (104.52, 9.21) -> J4 column (In4 lane): drawn, 41.0 mm, 4 segments
+runs: 15V_ISO U8-1 -> J4 column (In4 lane): drawn, 76.4 mm, 10 segments
+runs: 3V3_ISO plane via (109.05, 39.85) -> J4 column (In4 lane): drawn
+runs: Net-(U7B--) west end: via on the old In2 track at (22.46, 46.72); drawn
+runs: INU_ADCLK west end -> via (24.75, 41.17) at U4-7: drawn, 12.5 mm, 4 segments
+runs: MDATA_INU west end -> via (26.44, 40.63) at R50-2: NO PATH on the grid from (34.35, 49.40) to (26.44, 40.63)
+runs: GPIO_BYPASS_RLY_ISO west end: 10 legal via points on the old In2 track tried, NOT reached
+runs: Net-(U7B-+) west end: via on the old In2 track at (22.44, 47.90); drawn
+runs: Net-(U7A--) west end: via on the old In2 track at (4.63, 48.73); drawn
+runs: Net-(U7A-+) west end: via on the old In2 track at (4.92, 47.22); drawn
+runs: Net-(U2--) west end: via on the old In2 track at (23.22, 45.62); drawn
+runs: Net-(U2-+) west end: 3 legal via points on the old In2 track tried, NOT reached
+runs: 15V_ISO west end: via on the old In2 track at (21.96, 49.24); drawn
+runs: 3V3_ISO west end -> via (24.58, 40.55) at U4-8: drawn, 11.6 mm, 5 segments
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3806 tracks and vias: lock-all
+== pwm_rest (domain I)

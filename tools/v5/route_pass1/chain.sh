@@ -82,7 +82,10 @@ script aux_gnd scripted.py auxgnd fill
 script clk1_escape scripted.py clk1
 D=P TMO=900 step aux_15V 15V --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1 --power-nets 15V --power-nets-widths 0.5
 script hv_stubs scripted.py hvstubs
-D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
+#     pass 7: DC+ in a step of its own (it now has to reach R136-1 / R141-1 at y -5..-8 from the pour south of y -21;
+#     with it in the group the whole HV step ran out of 600 s)
+D=P NC="$H/hv_step_clearances.json" TMO=600 step aux_hv AUX_CLAMP,AUX_DRAIN,AUX_LV1,AUX_LV2,AUX_ST1,AUX_ST2,AUX_VIN --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN --power-nets-widths 1.0 0.6 0.6
+D=P NC="$H/hv_step_clearances.json" TMO=900 step aux_dc 'DC+' --layers F.Cu B.Cu --power-nets 'DC+' --power-nets-widths 0.6
 # --- pass 5: the fanned bus (maze.py fan) and every run to and from it drawn by script (maze.py runs: sources at
 #     the isolators, the six taps from the U7 / U2 block, 15V_ISO and 3V3_ISO to their In4 lanes, the west ends).
 #     SNAP is the board after these steps: after every router step prep.py restore puts back scripted copper the
@@ -95,12 +98,14 @@ D=I step pwm_rest  pwm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 3
 D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2.Cu --layer-costs 1 1.2 1.5 1.5 8 --track-width 0.152
 D=I step sdm_rest  sdm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 2
 D=I step taps_rest taps_rest,other --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 2 1 8
+D=I TMO=300 step left_iso2 sdm_rest,passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu --layer-costs 1 1.2 1.5 1.5 --track-width 0.152
 # --- CTRL piece at J11: the fan to the top-side isolators is planar on F.Cu in pin order (make_groups.py J11_TOP);
 #     then the bottom-side isolators (all three layers), then the analog chain
 D=C step j11_top   j11_top   --layers F.Cu --ordering original
-#     DAB_PWM_PRI_HI_ISO alone, before its neighbours drop vias in front of its stub at J11-22 (pass 5 finding)
-D=C TMO=300 step left_prihi DAB_PWM_PRI_HI_ISO --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=C step j11_bot   j11_bot   --layers B.Cu In3.Cu F.Cu --layer-costs 1 1.2 1.5
+#     DAB_PWM_PRI_HI_ISO alone: after the bottom fan (in pass 6 it ran first, took 34 mm of In3 across the CTRL area
+#     and three bottom-fan nets stayed open), before the leftovers step whose vias shut its stub at J11-22 in (pass 5)
+D=C TMO=300 step left_prihi DAB_PWM_PRI_HI_ISO --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=C step ctrl_analog ctrl_analog --layers F.Cu In3.Cu B.Cu --layer-costs 2 2 1
 # --- CTRL piece at J12: buck ------------------------------------------------------------------------------------
 D=C step buck      buck      --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1 \
@@ -135,6 +140,10 @@ for n in VCC 15V; do
 done
 D=P TMO=$STMO step supply_GND GND --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}" $Q
 # --- aux area: short links for pads beside an HV pad that the router's flat 2.5 mm boxes in (maze.py aux)
+if [ "$SKIP" = 0 ] || [ "$FROM" = aux_links ]; then
+    kcli pcb drc --severity-all --format json -o "$W/pre_aux.drc.json" "$CUR" > /dev/null || true
+fi
+export AUX_DRC="$W/pre_aux.drc.json"
 script aux_links maze.py aux
 # --- the router's power-net passes do not honour the fences (15V track at y -74 in pass 2): delete what lies in one
 kpy "$H/prep.py" prune "$CUR" "$CUR" "$R/kicad/ac_psu.kicad_pcb" | grep -v "Debug: Adding"

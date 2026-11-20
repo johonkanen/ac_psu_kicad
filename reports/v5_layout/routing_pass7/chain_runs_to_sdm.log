@@ -1,0 +1,22 @@
+== runs
+runs: Net-(U2-+) block via (96.18, 5.00) -> lane entry: NO PATH on the grid from (96.18, 5.00) to (79.05, 49.30)
+runs: Net-(U2-+) second try, via (94.79, 4.90) at C101-2 ->: NO PATH on the grid from (94.79, 4.90) to (79.05, 49.30)
+runs: Net-(U2-+) second try, via (96.55, 5.79) at R1-2 ->: NO PATH on the grid from (96.55, 5.79) to (79.05, 49.30)
+runs: Net-(U7A--) block via (99.64, 12.57) -> lane entry: NO PATH on the grid from (99.64, 12.57) to (80.85, 49.30)
+runs: Net-(U7A--) second try, via (95.08, 11.70) at R53-2 ->: NO PATH on the grid from (95.08, 11.70) to (80.85, 49.30)
+runs: Net-(U7A--) second try, via (95.02, 12.54) at C104-2 ->: NO PATH on the grid from (95.02, 12.54) to (80.85, 49.30)
+runs: Net-(U7B-+) block via (102.89, 10.40) -> lane entry: NO PATH on the grid from (102.89, 10.40) to (81.45, 49.30)
+runs: Net-(U7B-+) second try, via (101.75, 10.42) at R46-2 ->: NO PATH on the grid from (101.75, 10.42) to (81.45, 49.30)
+runs: Net-(U7B-+) second try, via (100.43, 8.37) at C105-2 ->: NO PATH on the grid from (100.43, 8.37) to (81.45, 49.30)
+runs: MDATA_INU west end -> via (26.44, 40.63) at R50-2: NO PATH on the grid from (34.35, 49.40) to (26.44, 40.63)
+runs: GPIO_BYPASS_RLY_ISO west end: 10 legal via points on the old In2 track tried, NOT reached
+runs: Net-(U2-+) west end: 3 legal via points on the old In2 track tried, NOT reached
+== pwm_rest (domain I)
+   44 s
+== left_iso (domain I)
+   50 s
+== sdm_rest (domain I)
+  not routed: ADCLK_DAB, MDATA_DAB, {'net': 'ADCLK_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'MDATA_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'op
+   114 s
+
+[exited with code 0]

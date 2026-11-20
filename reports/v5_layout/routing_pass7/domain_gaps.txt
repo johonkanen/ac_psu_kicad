@@ -1,0 +1,2 @@
+domain_gaps: 0 violations (P<->I, P/I<->C >= 5.0 mm, P/I<->E >= 2.5 mm on every layer, no P/I/C overlap between adjacent layers)
+domain_gaps: OK
