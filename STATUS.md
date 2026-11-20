@@ -2,6 +2,23 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Routing pass 6 – 16 unconnected, legal (2026-11-20)
+
+Branch `routing-pass6`, commit b1f3412 (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report
+`reports/v5_layout/routing_pass6.md` there; on the step 17 board (d5654c3), nothing merged. DRC, domain_gaps and
+check_layout rerun here on its refilled board: 0 shorts, 0 clearance errors, parity 0, 0 gap violations,
+check_layout OK; 16 unconnected on 10 nets (3 of them the wire links).
+
+- The In2 GND pour worked: vias at 10 GND pads, 15V closed in 48 s (all 6), GND 7 -> 5 open.
+- CLK1 closed: the escape between the pad rows of R87 passed the DRC gate. DAB_PWM_PRI_HI_ISO closed (routed
+  first and alone).
+- Regression: DAB_PWM_LO_SEC_CTRL, INU_ADCLK_CTRL, PWM_Q5_CTRL (J11 -> bottom isolators) open, closed in pass 5;
+  probably the changed step order (not analysed).
+- Open: AUX_VIN 2 (trunk in two pieces, no legal F.Cu path under 2.5 mm), AUX_LOVP 1 (R143-2 beside the HV pad of
+  its own part), GND 5 (C68-1 and C112-2 outside the pour; C145-2 skipped by the script, a 1.3 mm link is free;
+  two links at U9 east of the pour), 3V3_ISO at U20-16 and ISOGND at C120-2 beside BUSN2 (nearest legal via
+  sites 5.4 mm and 3.9 mm away).
+
 ## v5 step 17 – GND pour on In2 under the aux flyback controller (2026-11-20, branch `v5-layout`)
 
 User 2026-11-20 "Go with your recommendation" (after the pass 5 follow-up: seven GND pads open in the aux area).
