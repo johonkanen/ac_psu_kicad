@@ -1,0 +1,33 @@
+1. existing tracks/vias missing or changed: 0
+2. new copper outside the unrouted rectangles but inside the brief's passage (y 54..55.3): 80 ends on 10 nets {'Net-(U2--)': 8, '3V3_ISO': 4, '15V_ISO': 12, 'Net-(U7A--)': 8, 'PWM_Q7': 4, 'PWM_Q5': 4, 'PWM_TRANS6': 12, 'Net-(U7B--)': 8, 'Net-(U7B-+)': 12, 'Net-(U7A-+)': 8}
+2. new copper outside the unrouted rectangles: 27 ends on 4 nets {'3V3_ISO': 8, 'PWM_Q7': 8, 'PWM_Q5': 8, 'GPIO_BYPASS_RLY': 3}
+      3V3_ISO In4.Cu (42.23, 55.37)
+      3V3_ISO In4.Cu (18.35, 55.37)
+      3V3_ISO In4.Cu (91.59, 55.37)
+      3V3_ISO In4.Cu (52.95, 55.37)
+      3V3_ISO In4.Cu (42.23, 55.37)
+      3V3_ISO In4.Cu (18.35, 55.37)
+3. rule 2 / 3 / 3a / plane-layer findings: 0
+4. high-voltage spacing violations, HV net to a non-HV net (2.5 mm on F.Cu / B.Cu, pairs with new copper): 0
+4b. two different HV nets closer than 2.5 mm (pairs with new copper; the placement puts their pads 1.0 .. 2.0 mm apart, the router kept 1.0 mm between HV nets): 0
+5. new vias: 295 (162 signal); new track mm per layer: B.Cu 1286, F.Cu 1385, In1.Cu 0, In3.Cu 1839, In4.Cu 459
+6. pours whose island count changed (of 84): 1
+      In2.Cu 3V3_CTRL 'v5 card CA In2.Cu 3V3_CTRL': 8 -> 1
+   open connections: 29 on 11 nets
+      passage        0 open on  0/12 nets  
+      sdm_rest       0 open on  0/2 nets  
+      pwm_rest       0 open on  0/6 nets  
+      taps_rest      0 open on  0/7 nets  
+      other          0 open on  0/1 nets  
+      j11_top        1 open on  1/21 nets  DAB_PWM_PRI_HI_ISO:1
+      j11_bot        0 open on  0/14 nets  
+      ctrl_analog    0 open on  0/17 nets  
+      buck           0 open on  0/6 nets  
+      primary        1 open on  1/22 nets  CLK1:1
+      aux_hv         1 open on  1/8 nets  AUX_VIN:1
+      aux_lv         1 open on  1/9 nets  AUX_LOVP:1
+      aux_iso        0 open on  0/1 nets  
+      supply_C       0 open on  0/5 nets  
+      supply_I       9 open on  3/4 nets  15V_ISO:7 3V3_ISO:1 ISOGND:1
+      supply_P      13 open on  2/3 nets  GND:7 15V:6
+      (not in scope)   3  ISODC+:1 ISOPGND:2
