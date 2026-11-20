@@ -57,6 +57,7 @@ step() {    # step NAME GROUPS [route.py options]
         cp "${CUR%.kicad_pcb}.kicad_pro" "${out%.kicad_pcb}.kicad_pro"; cp "${CUR%.kicad_pcb}.kicad_dru" "${out%.kicad_pcb}.kicad_dru"
     elif [ "$rc" != 0 ]; then exit "$rc"; fi
     CUR="$out"
+    if [ -n "${SNAP:-}" ] && [ -f "$SNAP" ]; then kpy "$H/prep.py" restore "$CUR" "$CUR" "$SNAP" | grep "^restore" || true; fi
     kpy "$SK/lock_tracks.py" "$CUR" lock-all | tail -1
     echo "   $((SECONDS - t0)) s"
     if [ "$LAST" = "$1" ]; then cp "$CUR" "$OUT"; echo "stopped after $1: wrote $OUT"; exit 0; fi
@@ -77,26 +78,18 @@ script taps_vias scripted.py taps
 #     controller's small signals (2.5 mm to the HV nets: hv_clearances.json, the default of every step)
 script hv_stubs scripted.py hvstubs
 D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
-# --- the passage north of J11 as a fanned bus (scripted.py fan, pass 4): 11 signal lanes on In3 entered from the
-#     J6 / J4 gap, on In4 5V_ISOL (0.8 mm, from pin J4-45, drops onto J6-45 and J8-45) and ISOGND (0.4 mm, from the
-#     plane edge through the J4 column at x 90.69). Then hooks: a via beside the source pin and In3 up to the lane
-#     start for the five lane nets that start at U20 / U21. Then westends: vias at U4-7 / R50-2 and on the old In2
-#     tracks of the six taps. The router does what is left of the ends.
-script bus scripted.py fan
-script hooks scripted.py hooks PWM_TRANS6,PWM_Q7,PWM_Q5,MDATA_INU,INU_ADCLK
-script westends scripted.py westends
-# --- ISO side. The PWM lines to J6 / J4 first: they cross the DC bus band on In3 only (pin -> via south of the
-#     band -> In3 -> through-hole pin), so everything that runs east-west there has to go around them. Then the
-#     nets that pass north of J11 (In3 / In4; F.Cu / B.Cu fenced there), then the rest of the ISO signals.
+# --- pass 5: the fanned bus (maze.py fan) and every run to and from it drawn by script (maze.py runs: sources at
+#     the isolators, the six taps from the U7 / U2 block, 15V_ISO and 3V3_ISO to their In4 lanes, the west ends).
+#     SNAP is the board after these steps: after every router step prep.py restore puts back scripted copper the
+#     router removed.
+script bus maze.py fan
+script runs maze.py runs
+SNAP="$W/snap_runs.kicad_pcb"; [ -f "$CUR" ] && [ "$SKIP" = 0 -o ! -f "$SNAP" ] && cp "$CUR" "$SNAP"
+# --- ISO side, router: the PWM lines to J6 / J4, whatever the scripts above left open, the rest of the ISO signals
 D=I step pwm_rest  pwm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 3
-#     North of the bus band a via fits only in a few patches (via_scan.py: x 59.5..72 beside the J6 pins, x 77.5..79,
-#     above J8 at x 26..40, west of J8), so In4 is hard to enter there and In3 carries most of the passage: these
-#     nets get the board's narrowest track (0.152 mm).
-D=I step passage_a PWM_TRANS6,PWM_Q7,PWM_Q5,INU_ADCLK,MDATA_INU,GPIO_BYPASS_RLY_ISO  --layers In3.Cu In4.Cu B.Cu F.Cu In2.Cu --layer-costs 1 1.2 3 2 8 --track-width 0.152
-D=I step passage_b passage  --layers In3.Cu In4.Cu B.Cu F.Cu In2.Cu --layer-costs 1 1.2 3 2 8 --track-width 0.152
+D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2.Cu --layer-costs 1 1.2 1.5 1.5 8 --track-width 0.152
 D=I step sdm_rest  sdm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 2
 D=I step taps_rest taps_rest,other --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 2 1 8
-D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2.Cu --layer-costs 1 1.2 1.5 1.5 8 --track-width 0.152
 # --- CTRL piece at J11: the fan to the top-side isolators is planar on F.Cu in pin order (make_groups.py J11_TOP);
 #     then the bottom-side isolators (all three layers), then the analog chain
 D=C step j11_top   j11_top   --layers F.Cu --ordering original
@@ -111,7 +104,8 @@ D=P step primary   primary   --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1.
 D=P step aux_lv    aux_lv --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 D=I step aux_iso   aux_iso --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 # --- leftovers of the signals, split by area (one step over everything ran out of time in pass 1) ----------------
-D=C TMO=420 step left_ctrl j11_top,j11_bot --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
+#     (pin order: in pass 3 / 4 the neighbours of J11-22 were routed first and boxed its stub in)
+D=C TMO=420 step left_ctrl j11_top,j11_bot --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1 --ordering original
 D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1 1 8
 # --- supplies. First a via next to every SMD pad of a plane net inside its plane (scripted.py planes, brief rule
 #     7), zones refilled so the router sees the planes; then the router for what is left, one net per step, each
@@ -132,6 +126,8 @@ for n in VCC 15V; do
     D=P TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}"
 done
 D=P TMO=$STMO step supply_GND GND --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}" $Q
+# --- aux area: short links for pads beside an HV pad that the router's flat 2.5 mm boxes in (maze.py aux)
+script aux_links maze.py aux
 # --- the router's power-net passes do not honour the fences (15V track at y -74 in pass 2): delete what lies in one
 kpy "$H/prep.py" prune "$CUR" "$CUR" "$R/kicad/ac_psu.kicad_pcb" | grep -v "Debug: Adding"
 
