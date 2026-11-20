@@ -203,8 +203,50 @@ def prune(b, ref):
     print(f"prune: {len(dead)} new tracks / vias inside the fences deleted")
 
 
+def restore(b, snap):
+    """Put back scripted copper that a router step removed (pass 4: a supply step deleted the lanes of nets it
+    was not even routing). `snap` is the board after the last scripted step."""
+    def key(t):
+        if t.Type() == pcbnew.PCB_VIA_T:
+            return ("via", t.GetPosition().x, t.GetPosition().y, t.GetNetname())
+        a, c = (t.GetStart().x, t.GetStart().y), (t.GetEnd().x, t.GetEnd().y)
+        return ("trk", t.GetLayer(), min(a, c), max(a, c), t.GetWidth(), t.GetNetname())
+    have = {key(t) for t in b.GetTracks()}
+    sb = pcbnew.LoadBoard(snap)
+    n = 0
+    nets = set()
+    for t in sb.GetTracks():
+        if key(t) in have:
+            continue
+        if t.Type() == pcbnew.PCB_VIA_T:
+            o = pcbnew.PCB_VIA(b)
+            o.SetViaType(pcbnew.VIATYPE_THROUGH)
+            o.SetPosition(t.GetPosition())
+            o.SetWidth(pcbnew.F_Cu, t.GetWidth(pcbnew.F_Cu))
+            o.SetDrill(t.GetDrill())
+            o.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+        else:
+            o = pcbnew.PCB_TRACK(b)
+            o.SetStart(t.GetStart())
+            o.SetEnd(t.GetEnd())
+            o.SetWidth(t.GetWidth())
+            o.SetLayer(t.GetLayer())
+        o.SetNetCode(b.GetNetcodeFromNetname(t.GetNetname()))
+        o.SetLocked(True)
+        b.Add(o)
+        n += 1
+        nets.add(t.GetNetname())
+    if n:
+        print(f"restore: {n} scripted tracks / vias had been removed by the router step and were put back: {', '.join(sorted(nets))}")
+
+
 def main():
     mode, src, dst = sys.argv[1:4]
+    if mode == "restore":
+        b = pcbnew.LoadBoard(src)
+        restore(b, sys.argv[4])
+        b.Save(dst)
+        return
     if mode == "prune":
         b = pcbnew.LoadBoard(src)
         prune(b, sys.argv[4])
