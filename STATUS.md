@@ -2,27 +2,27 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Routing pass 3 – stopped unfinished at the end of the session (2026-11-19)
+## Routing pass 3 – finished (2026-11-20): the passage north of J11 is 6 lanes short
 
-Branch `routing-pass3`, commit 452a99f (not pushed), in the worktree
-`.claude/worktrees/agent-a3594812f032992fa/`; status in `reports/v5_layout/routing_pass3.md` there. On the step 16
-board (7ecd979). Nothing of it is merged into `v5-layout`.
+Branch `routing-pass3`, commit e61031b (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report
+`reports/v5_layout/routing_pass3.md` there; on the step 16 board (7ecd979). Nothing merged into `v5-layout`.
+DRC, domain_gaps and check_layout rerun here on its refilled board: 0 shorts, 0 clearance errors, parity 0,
+0 gap violations, check_layout OK; 39 unconnected on 17 nets (pass 2: 63, pass 1: 123), 9 signal connections open.
 
-- Done and checked by tool: the passage north of J11 drawn as a scripted bus (11 signal lanes + ISOGND on In3 /
-  In4), DRC gate 0 conflicts, check_layout OK on the board with only the bus.
-- From router logs only, NOT verified: J11 -> bottom isolators 14 of 14 (pass 2: 12), passage ends 7 of 12,
-  PWM bundle 4 of 6 (DAB_PWM_HI_SEC, PWM_Q8 open), CLK1, AUX_LOVP, AUX_VIN / DC+ partial.
-- **Lane count of the passage** (y 52.84..54.975): 8 lanes per layer at 0.152 mm track / 0.305 mm pitch, 16 on
-  In3 + In4; demand 12 signals + 4 ISO rails = 16. Exactly full at minimum width; at the brief's rail widths
-  (0.4 / 0.4 / 0.5 / 0.8 mm) 7 lanes short. The upper 4 lanes per layer lie at y 54..55.3, outside the `unrouted`
-  rectangle. Without a lane so far: Net-(U7A--), 3V3_ISO, 15V_ISO, 5V_ISOL (In4 lanes 5..7 free, no entry drawn).
-- Not run: aux_iso, leftovers, plane vias, all supply steps, final checks and renders. Open questions: does the
-  ISO side close, do the supplies route, does GND in the aux area need a pour.
-- Resume from the worktree: `ROUTE_DIR=$PWD/build/route_p3 tools/v5/route_pass1/chain.sh "" aux_iso`, then
-  `tools/v5/route_pass1/check_and_render.sh build/route_p3/routed.kicad_pcb build/pass3` (step boards 01..15 are
-  in `build/route_p3/`, not committed; without them run the chain without arguments, about 50 minutes).
-- Decision waiting for the user: the passage is the bottleneck. Either the ISO rails west of J11 get another way
-  (e.g. a wire link like the DC bus, or local regulation at U4 / J8), or the passage is widened.
+- **Not legal as routed**: three new vias in the gap between J6 and J4 ((77.75, 50.60), (81.60, 50.10),
+  (85.38, 51.42)) cut the B.Cu ISODC+ pour (zone clearance 1.95 mm) into 2 islands. The gap needs a via keep-out;
+  the "via patch" at x 77.5..79 named in pass 2 does not exist.
+- **Passage** (y 52.6..55.3): 16 lanes at 0.152 mm (8 on In3, 8 on In4), all assigned: 12 signals, ISOGND (2 lanes,
+  0.4 mm), 15V_ISO (2 lanes). No lane for 3V3_ISO (2) and 5V_ISOL (4): 6 short. Net-(U7A--) has a lane but no
+  legal entry. The upper 4 lanes per layer lie at y 54..55.3, outside the `unrouted` rectangle.
+- Step 16 worked: J11 -> bottom isolators 14 of 14, PWM bundle to J6 / J4 6 of 6 without In2, the J8 nets leave
+  U20 pins 10..12 straight into their lanes.
+- Open: INU_ADCLK and PWM_Q7 at their J8 / U4 ends (not analysed); three taps at their old In2 ends near
+  (19..21, 44) under F / B pours; DAB_PWM_PRI_HI_ISO (closed in pass 2); CLK1 (R87); AUX_VIN, AUX_LOVP and 6 GND
+  pads in the aux area (router's flat 2.5 mm at pads next to an HV pad: tooling, not placement); ISOGND 11
+  (step out of time); 15V_ISO 3, 5V_ISOL 3, 3V3_ISO 1.
+- Decision waiting for the user: how 3V3_ISO and 5V_ISOL reach the parts west of J11 (U4, C37, J8-45), since
+  the passage cannot carry them.
 
 ## v5 step 16 – U19 / U20 channels after routing pass 2 (2026-11-19, branch `v5-layout`)
 
