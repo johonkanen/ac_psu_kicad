@@ -89,7 +89,7 @@ def prep(b):
     # north-row pins of J6 / J4 that are reached from the south (under the bus band, In3): a 0.152 mm stub through
     # the 0.46 mm gap of the south row, like the J11 stubs
     m = 0
-    for ref, num, dx, yend in (("J6", "43", -0.635, 49.9), ("J6", "47", 0.635, 50.0), ("J4", "43", -0.635, 48.7),
+    for ref, num, dx, yend in (("J6", "43", 0.635, 49.9), ("J6", "47", 0.635, 50.0), ("J4", "43", 0.635, 48.7),   # 43: east side (pass 3)
                                ("J4", "47", 0.635, 48.7)):
         pad = [p for p in b.FindFootprintByReference(ref).Pads() if p.GetNumber() == num][0]
         x, y = pcbnew.ToMM(pad.GetPosition().x), -pcbnew.ToMM(pad.GetPosition().y)

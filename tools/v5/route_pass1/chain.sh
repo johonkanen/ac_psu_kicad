@@ -30,8 +30,9 @@ script() {  # script NAME MODE: a scripted-copper step (prep.py / scripted.py), 
     N=$((N + 1)); local out="$W/$(printf %02d "$N")_$1.kicad_pcb"
     if [ "$SKIP" = 1 ] && [ "$FROM" != "$1" ]; then CUR="$out"; return; fi
     SKIP=0; echo "== $1"
-    kpy "$H/$2" "$3" "$CUR" "$out" | grep -v "Debug: Adding"
-    [ "${4:-}" = fill ] && kpy "$SK/fill_zones.py" "$out" "$out" | tail -1
+    if [ "${4:-}" = fill ] || [ -z "${4:-}" ]; then kpy "$H/$2" "$3" "$CUR" "$out" | grep -v "Debug: Adding"
+    else kpy "$H/$2" "$3" "$CUR" "$out" "$4" | grep -v "Debug: Adding"; fi
+    if [ "${4:-}" = fill ]; then kpy "$SK/fill_zones.py" "$out" "$out" | tail -1; fi
     gate "$out"; CUR="$out"
     kpy "$SK/lock_tracks.py" "$CUR" lock-all | tail -1
     if [ "$LAST" = "$1" ]; then cp "$CUR" "$OUT"; echo "stopped after $1: wrote $OUT"; exit 0; fi
@@ -69,10 +70,20 @@ if [ "${WEST_FENCE:-1}" = 0 ] && { [ "$SKIP" = 0 ] || [ "$FROM" = taps_vias ]; }
     kpy "$H/prep.py" unfence "$CUR" "$CUR"
 fi
 script taps_vias scripted.py taps
+# --- (run before the bus: this router step deleted the drawn lanes of nets that were still open, pass 3 try 1)
+# --- aux flyback, high voltage, before any other primary net (most constrained; low-voltage tracks laid first
+#     took the room around R98 / C112 in the first try): escape stubs at the HV pads that have low-voltage copper closer than 2.5 mm (scripted.py), then
+#     the HV nets (2.5 mm to every other net, 1.0 mm between two HV nets: hv_step_clearances.json), then the
+#     controller's small signals (2.5 mm to the HV nets: hv_clearances.json, the default of every step)
+script hv_stubs scripted.py hvstubs
+D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
 # --- the passage north of J11 as a drawn bus (scripted.py bus): 8 lanes on In3 entered from the J6 / J4 gap, 3
 #     signal lanes on In4 entered through the J6 column at x 68.98, ISOGND on In4 from the plane edge. The router
 #     does only the ends.
 script bus scripted.py bus
+# --- hooks: via beside the source pin and In3 up to the lane start for the six bus nets that start at U20 / U21 /
+#     U19 (try 2 of pass 3: the router boxed PWM_Q7 in at U20-11, then laid taps across the pins)
+script hooks scripted.py hooks PWM_TRANS6,PWM_Q7,PWM_Q5,GPIO_BYPASS_RLY_ISO,MDATA_INU,INU_ADCLK
 
 # --- ISO side. The PWM lines to J6 / J4 first: they cross the DC bus band on In3 only (pin -> via south of the
 #     band -> In3 -> through-hole pin), so everything that runs east-west there has to go around them. Then the
@@ -81,9 +92,11 @@ D=I step pwm_rest  pwm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 3
 #     North of the bus band a via fits only in a few patches (via_scan.py: x 59.5..72 beside the J6 pins, x 77.5..79,
 #     above J8 at x 26..40, west of J8), so In4 is hard to enter there and In3 carries most of the passage: these
 #     nets get the board's narrowest track (0.152 mm).
-D=I step passage   passage   --layers In3.Cu In4.Cu B.Cu F.Cu In2.Cu --layer-costs 1 1.2 3 2 8 --track-width 0.152
+D=I step passage_a PWM_TRANS6,PWM_Q7,PWM_Q5,INU_ADCLK,MDATA_INU,GPIO_BYPASS_RLY_ISO  --layers In3.Cu In4.Cu B.Cu F.Cu In2.Cu --layer-costs 1 1.2 3 2 8 --track-width 0.152
+D=I step passage_b passage  --layers In3.Cu In4.Cu B.Cu F.Cu In2.Cu --layer-costs 1 1.2 3 2 8 --track-width 0.152
 D=I step sdm_rest  sdm_rest  --layers In3.Cu B.Cu F.Cu --layer-costs 1 2 2
 D=I step taps_rest taps_rest,other --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 2 1 8
+D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2.Cu --layer-costs 1 1.2 1.5 1.5 8 --track-width 0.152
 # --- CTRL piece at J11: the fan to the top-side isolators is planar on F.Cu in pin order (make_groups.py J11_TOP);
 #     then the bottom-side isolators (all three layers), then the analog chain
 D=C step j11_top   j11_top   --layers F.Cu --ordering original
@@ -92,12 +105,6 @@ D=C step ctrl_analog ctrl_analog --layers F.Cu In3.Cu B.Cu --layer-costs 2 2 1
 # --- CTRL piece at J12: buck ------------------------------------------------------------------------------------
 D=C step buck      buck      --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1 \
                --power-nets CTRL_SW CTRL_RAW CTRL_W --power-nets-widths 1.0 1.0 1.0
-# --- aux flyback, high voltage, before any other primary net (most constrained; low-voltage tracks laid first
-#     took the room around R98 / C112 in the first try): escape stubs at the HV pads that have low-voltage copper closer than 2.5 mm (scripted.py), then
-#     the HV nets (2.5 mm to every other net, 1.0 mm between two HV nets: hv_step_clearances.json), then the
-#     controller's small signals (2.5 mm to the HV nets: hv_clearances.json, the default of every step)
-script hv_stubs scripted.py hvstubs
-D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
 # --- primary side of U13/U15/U16, ADC and reference -------------------------------------------------------------
 #     (In2 only to reach the old In2 track ends south of the VCC plane, y -21.6 .. -24.8)
 D=P step primary   primary   --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1.5 1 8
@@ -106,7 +113,6 @@ D=I step aux_iso   aux_iso --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 # --- leftovers of the signals, split by area (one step over everything ran out of time in pass 1) ----------------
 D=C TMO=420 step left_ctrl j11_top,j11_bot --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1 1 8
-D=I TMO=420 step left_iso  passage,pwm_rest --layers In3.Cu In4.Cu F.Cu B.Cu In2.Cu --layer-costs 1 1.2 1.5 1.5 8 --track-width 0.152
 # --- supplies. First a via next to every SMD pad of a plane net inside its plane (scripted.py planes, brief rule
 #     7), zones refilled so the router sees the planes; then the router for what is left, one net per step, each
 #     with its own time budget: pads outside the planes (U4 / C37 / J8 west of J11, the aux area) and the rails
@@ -116,10 +122,10 @@ STMO="${SUPPLY_TMO:-420}"      # time budget of each supply step, seconds
 Q="--quick"                    # main pass only for the rails that timed out in pass 2: no rescue / reconciliation laps
 PW=(--power-nets 3V3_CTRL CTRLGND_A CTRLGND 5V_CTRL 5V_CTRL_A 3V3_ISO ISOGND 15V_ISO 5V_ISOL GND VCC 15V
     --power-nets-widths 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.5 0.8 0.4 0.4 0.5)
-D=C TMO=$STMO step supply_C  supply_C  --layers F.Cu In3.Cu B.Cu --layer-costs 1 4 1 "${PW[@]}"
 for n in 5V_ISOL 15V_ISO 3V3_ISO ISOGND; do
     D=I TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu In4.Cu B.Cu In2.Cu --layer-costs 1 2 2 1 8 "${PW[@]}" $Q
 done
+D=C TMO=$STMO step supply_C  supply_C  --layers F.Cu In3.Cu B.Cu --layer-costs 1 4 1 "${PW[@]}"
 for n in VCC 15V; do
     D=P TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}"
 done
