@@ -149,9 +149,16 @@ class Grid:
         self.keep = blk
         return blk
 
-    def build(self, net, w, walls=()):
+    def build(self, net, w, walls=(), hv=False):
         blk = bytearray(self.keepouts())
         hw = w / 2
+
+        def clr(onet, lc=0.0):
+            if hv and onet and ((net in S.HV) != (onet in S.HV)):
+                return lc if (lc and onet in S.HV) else 2.5
+            if hv and net in S.HV and onet in S.HV:
+                return max(1.0, lc)
+            return max(0.15, lc)
         xa, ya = self.x0 - 3, self.y0 - 3
         xb, yb = self.x0 + self.nx * G + 3, self.y0 + self.ny * G + 3
         for t in self.b.GetTracks():
@@ -163,12 +170,12 @@ class Grid:
             x, y = T(t.GetStart().x), -T(t.GetStart().y)
             if via:
                 if xa < x < xb and ya < y < yb:
-                    self.disc(blk, x, y, 0.2286 + 0.15 + hw + 0.06)
+                    self.disc(blk, x, y, 0.2286 + clr(t.GetNetname()) + hw + 0.06)
                 continue
             x1, y1 = T(t.GetEnd().x), -T(t.GetEnd().y)
             if max(x, x1) < xa or min(x, x1) > xb or max(y, y1) < ya or min(y, y1) > yb:
                 continue
-            r = T(t.GetWidth()) / 2 + 0.15 + hw + 0.06
+            r = T(t.GetWidth()) / 2 + clr(t.GetNetname()) + hw + 0.06
             L = math.hypot(x1 - x, y1 - y)
             n = max(1, int(L / (G * 0.7)))
             for k in range(n + 1):
@@ -183,7 +190,7 @@ class Grid:
                     continue
                 s = p.GetSize(self.layer)
                 lc = p.GetLocalClearance()
-                c = max(0.15, T(lc) if lc else 0) + hw + 0.06
+                c = clr(p.GetNetname(), T(lc) if lc else 0.0) + hw + 0.06
                 bb = p.GetBoundingBox()
                 self.rect(blk, T(bb.GetLeft()) - c, -T(bb.GetBottom()) - c, T(bb.GetRight()) + c, -T(bb.GetTop()) + c)
         for r in walls:
@@ -404,8 +411,7 @@ def aux(b, cx):
         ps = pad.GetEffectiveShape(layer)
         if any(t.GetNetname() == net and (t.Type() == pcbnew.PCB_VIA_T or t.GetLayer() == layer)
                and ps.Collide(t.GetEffectiveShape(layer), 0) for t in b.GetTracks()):
-            print(f"aux: {ref}-{num} {net}: has copper already")
-            continue
+            continue            # has a stub: the two nets below are handled with the grid router
         cand = []
         for t in b.GetTracks():
             if t.GetNetname() != net:
@@ -426,6 +432,36 @@ def aux(b, cx):
                 break
         print(f"aux: {ref}-{num} {net} ({x:.1f}, {y:.1f}): " + (f"linked to ({done[0]:.2f}, {done[1]:.2f}), {done[2]:.1f} mm away" if done
                                                              else f"NO legal link to any of {min(len(cand), 12)} nearest points of the net"))
+    aux_hv_runs(b, cx)
+
+
+def aux_hv_runs(b, cx):
+    """AUX_VIN (R136-1 group to the trunk at R98-2) and AUX_LOVP (R143-2 to the rest of the net): F.Cu, grid router
+    with the HV rule in its obstacle map, every segment gated by Ctx.clear (per-pad rule)."""
+    g = Grid(b, pcbnew.F_Cu, (64.05, -56.05, 84.05, -2.05))
+    S.MARGIN = 0.02
+    jobs = [("AUX_VIN", "R136", "1", [("R98", "2")]), ("AUX_LOVP", "R143", "2", None)]
+    for net, ref, num, targets in jobs:
+        pad = pad_of(b, ref, num)
+        a = (T(pad.GetPosition().x), -T(pad.GetPosition().y))
+        if targets:
+            goals = [(T(pad_of(b, r, n).GetPosition().x), -T(pad_of(b, r, n).GetPosition().y)) for r, n in targets]
+        else:
+            goals = sorted(((T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks()
+                            if t.Type() == pcbnew.PCB_VIA_T and t.GetNetname() == net),
+                           key=lambda q: math.hypot(q[0] - a[0], q[1] - a[1]))[:4]
+        done = False
+        for c in goals:
+            pts = g.route(g.build(net, 0.3, hv=True), a, c)
+            if pts is None:
+                continue
+            err = S._poly(cx, net, pcbnew.F_Cu, pts, 0.3)
+            print(f"aux: {net} {ref}-{num} -> ({c[0]:.2f}, {c[1]:.2f}) on F.Cu: " + (f"path found but {err}" if err else "drawn"))
+            done = not err
+            if done:
+                break
+        if not done:
+            print(f"aux: {net} {ref}-{num}: no legal F.Cu path to {len(goals)} target(s) under the 2.5 mm rule")
 
 
 def main():

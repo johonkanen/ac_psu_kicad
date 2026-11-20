@@ -1,0 +1,15 @@
+C68-1 GND at (70.44, -51.50) on F.Cu:
+   nearest reachable on its layer: track end on F.Cu at (74.95, -56.85), 7.00 mm; straight link blocked by: pad C68 [DC+] at (73.6, -51.5) needs 2.50 mm, has 1.25; track  [DC+] at (72.4, -54.9) needs 2.50 mm, has 0.20; track  [DC+] at (71.8, -55.2) needs 2.50 mm, has 0.82; track  [DC+] at (72.7, -54.7) needs 2.50 mm, has 0.00; track  [DC+] at (74.4, -52.7) needs 2.50 mm, has 1.55
+   nearest reachable on its layer: track end on F.Cu at (74.95, -56.85), 7.00 mm; straight link blocked by: pad C68 [DC+] at (73.6, -51.5) needs 2.50 mm, has 1.25; track  [DC+] at (72.4, -54.9) needs 2.50 mm, has 0.20; track  [DC+] at (71.8, -55.2) needs 2.50 mm, has 0.82; track  [DC+] at (72.7, -54.7) needs 2.50 mm, has 0.00; track  [DC+] at (74.4, -52.7) needs 2.50 mm, has 1.55
+C112-2 GND at (70.97, -11.00) on B.Cu:
+   nearest reachable on its layer: track end on B.Cu at (76.45, -10.00), 5.57 mm; straight link blocked by: track  [AUX_VIN] at (67.6, -10.3) needs 2.50 mm, has 2.50; track  [PWM_G3] at (73.5, -10.6) needs 0.15 mm, has 0.00
+   nearest reachable on its layer: track end on B.Cu at (76.45, -10.00), 5.57 mm; straight link blocked by: track  [AUX_VIN] at (67.6, -10.3) needs 2.50 mm, has 2.50; track  [PWM_G3] at (73.5, -10.6) needs 0.15 mm, has 0.00
+C114-2 GND at (72.38, -31.00) on B.Cu:
+   nearest reachable on its layer: track end on B.Cu at (74.40, -31.00), 2.03 mm; straight link blocked by: track  [AUX_VDD] at (73.1, -31.9) needs 0.15 mm, has 0.00
+   nearest reachable on its layer: track end on B.Cu at (74.40, -31.00), 2.03 mm; straight link blocked by: track  [AUX_VDD] at (73.1, -31.9) needs 0.15 mm, has 0.00
+R102-2 GND at (78.45, -32.52) on B.Cu:
+   nearest reachable on its layer: track end on B.Cu at (75.35, -31.85), 3.17 mm; straight link blocked by: pad U18 [AUX_LOVP] at (76.2, -32.8) needs 0.15 mm, has 0.14; track  [AUX_LOVP] at (76.2, -32.0) needs 0.15 mm, has 0.00; track  [AUX_VERR] at (78.0, -31.8) needs 0.15 mm, has 0.01; track  [AUX_VERR] at (77.7, -32.5) needs 0.15 mm, has 0.00
+   nearest reachable on its layer: track end on B.Cu at (75.35, -31.85), 3.17 mm; straight link blocked by: pad U18 [AUX_LOVP] at (76.2, -32.8) needs 0.15 mm, has 0.14; track  [AUX_LOVP] at (76.2, -32.0) needs 0.15 mm, has 0.00; track  [AUX_VERR] at (78.0, -31.8) needs 0.15 mm, has 0.01; track  [AUX_VERR] at (77.7, -32.5) needs 0.15 mm, has 0.00
+C145-2 GND at (78.30, -20.23) on B.Cu:
+   nearest reachable on its layer: track end on B.Cu at (77.35, -19.25), 1.36 mm; straight link blocked by: track  [DAB_PWM_PRI_HI] at (78.0, -19.3) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.7, -19.7) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.6, -19.8) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.5, -20.2) needs 0.15 mm, has 0.00
+   nearest reachable on its layer: via at (77.35, -19.25), 1.36 mm; straight link blocked by: track  [DAB_PWM_PRI_HI] at (78.0, -19.3) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.7, -19.7) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.6, -19.8) needs 0.15 mm, has 0.00; track  [DAB_PWM_PRI_HI] at (77.5, -20.2) needs 0.15 mm, has 0.00
