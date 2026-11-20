@@ -387,13 +387,99 @@ def bus(b, cx):
     if segs:
         cx.commit(*segs)
     print("bus: In4 lanes 0+1 ISOGND 0.4 mm from the plane edge at (60.09, 48.82): " + ("drawn" if segs else "BLOCKED"))
-    print(f"bus: {n} of {len(BUS_IN3) + len(BUS_IN4)} signal lanes drawn")
+    # Net-(U7A--): In4 lane 5, entered through the one via patch in the J6 / J4 gap (x 77.75), leaves through the
+    # J8 column at x 24.89
+    y5 = LANE_Y0 + 5 * LANE_PITCH
+    err = draw("Net-(U7A--)", pcbnew.In3_Cu, [(77.75, 49.3), (77.75, 50.6)], via_at=(77.75, 50.6))
+    err = err or draw("Net-(U7A--)", pcbnew.In4_Cu, [(77.75, 50.6), (77.75, y5), (24.89, y5), (24.89, 50.0)])
+    print(f"bus: In4 lane 5 y {y5:.3f} Net-(U7A--): " + (err or "via (77.75, 50.60) -> column x 24.89, down to y 50.0"))
+    n += not err
+    # 15V_ISO: 0.4 mm on In4 lanes 6+7, no via: from the through-hole pin J4-48 west along y 49.5, up at x 81.0,
+    # west over J8, around its west end to the through-hole pin J8-48
+    yr = LANE_Y0 + 6.5 * LANE_PITCH
+    pts = [(86.88, 49.5), (81.0, 49.5), (81.0, yr), (20.3, yr), (20.3, 50.93), (21.08, 50.93)]
+    segs = []
+    for a, c in zip(pts, pts[1:]):
+        t = cx.mktrack("15V_ISO", pcbnew.In4_Cu, a, c, 0.4)
+        if not cx.clear("15V_ISO", t.GetEffectiveShape(pcbnew.In4_Cu), t.GetBoundingBox(), pcbnew.In4_Cu):
+            print(f"bus: 15V_ISO blocked at ({a[0]:.2f}, {a[1]:.2f}) - ({c[0]:.2f}, {c[1]:.2f})")
+            segs = None
+            break
+        segs.append(t)
+    if segs:
+        cx.commit(*segs)
+    print("bus: In4 lanes 6+7 15V_ISO 0.4 mm J4-48 -> J8-48: " + ("drawn" if segs else "NOT drawn"))
+    print(f"bus: {n} of {len(BUS_IN3) + len(BUS_IN4) + 1} signal lanes drawn")
+
+
+# ---- hooks: source pin -> lane start, for bus nets the router left open at the source end (pass 3) ------------
+# NET: (source ref, pad, lane start x, y on In3). A via at the pad (an existing one of the net within 2.5 mm, else
+# a new one beside the pad), then In3: vertical, 45 degrees, vertical to the lane start. Every piece gated.
+HOOKS = {"PWM_Q7": ("U20", "11", 83.64, 49.3), "PWM_Q5": ("U20", "12", 84.92, 49.3), "PWM_TRANS6": ("U20", "10", 82.38, 49.3),
+         "INU_ADCLK": ("U21", "14", COL_J6 + 0.61, 49.95), "MDATA_INU": ("U21", "12", COL_J6, 49.95),
+         "GPIO_BYPASS_RLY_ISO": ("U19", "15", COL_J6 - 0.61, 49.95), "Net-(U7A--)": (None, None, 77.75, 49.3)}
+
+
+def hooks(b, cx, nets):
+    global MARGIN
+    MARGIN = 0.002
+    for net in nets:
+        ref, num, sx, sy = HOOKS[net]
+        if ref is None:
+            print(f"hooks: {net}: no source pin in reach (comes from the U7 / U2 block), left to the router")
+            continue
+        pad = [p for p in b.FindFootprintByReference(ref).Pads() if p.GetNumber() == num][0]
+        _, px, py, layer, smin, smax = pad_info(pad)
+        vias = [(T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks()
+                if t.Type() == pcbnew.PCB_VIA_T and t.GetNetname() == net and math.hypot(T(t.GetPosition().x) - px, -T(t.GetPosition().y) - py) < 2.5]
+        how = "existing via"
+        if not vias:
+            before = {(t.GetPosition().x, t.GetPosition().y) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T}
+            if via_at_pad(cx, pad, net, 2.5, 0.2) is None:
+                print(f"hooks: {net}: NO PLACE for a via within 2.5 mm of {ref}-{num}")
+                continue
+            vias = [(T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T
+                    and (t.GetPosition().x, t.GetPosition().y) not in before and t.GetNetname() == net]
+            how = "new via"
+        done = None
+        for vx, vy in vias:
+            dx = sx - vx
+            ym = vy
+            while ym <= sy - abs(dx) + 1e-6 and not done:
+                pts = [(vx, vy), (vx, ym), (sx, ym + abs(dx)), (sx, sy)]
+                pts = [q for i, q in enumerate(pts) if i == 0 or math.hypot(q[0] - pts[i - 1][0], q[1] - pts[i - 1][1]) > 1e-4]
+                segs = [cx.mktrack(net, pcbnew.In3_Cu, a, c, BUS_W) for a, c in zip(pts, pts[1:])]
+                if all(cx.clear(net, t.GetEffectiveShape(pcbnew.In3_Cu), t.GetBoundingBox(), pcbnew.In3_Cu) for t in segs):
+                    cx.commit(*segs)
+                    done = (vx, vy, ym)
+                ym += 0.25
+            if done:
+                break
+        print(f"hooks: {net}: " + (f"{how} ({done[0]:.2f}, {done[1]:.2f}) -> In3 -> ({sx:.2f}, {sy:.2f})" if done
+                                   else f"{how} at {vias}, but NO clear In3 path to ({sx:.2f}, {sy:.2f})"))
+    # west ends the router cannot make: J8-43 (north row) from the south through the 0.46 mm gap of the south row
+    # (the PWM_Q7 lane comes down the J8 column at x 24.89), and a via beside U4-7 for INU_ADCLK
+    pad = [p for p in b.FindFootprintByReference("J8").Pads() if p.GetNumber() == "43"][0]
+    x, y = T(pad.GetPosition().x), -T(pad.GetPosition().y)
+    pts = [(x, y), (x - 0.635, y - 0.635), (x - 0.635, 50.1)]
+    segs = [cx.mktrack(pad.GetNetname(), pcbnew.In3_Cu, a, c, BUS_W) for a, c in zip(pts, pts[1:])]
+    ok = all(cx.clear(pad.GetNetname(), t.GetEffectiveShape(pcbnew.In3_Cu), t.GetBoundingBox(), pcbnew.In3_Cu) for t in segs)
+    if ok:
+        cx.commit(*segs)
+    print(f"hooks: J8-43 {pad.GetNetname()} stub to ({x - 0.635:.3f}, 50.1): " + ("drawn" if ok else "BLOCKED"))
+    for ref, num in (("U4", "7"),):
+        pad = [p for p in b.FindFootprintByReference(ref).Pads() if p.GetNumber() == num][0]
+        r = via_at_pad(cx, pad, pad.GetNetname(), 3.0, 0.2)
+        print(f"hooks: {ref}-{num} {pad.GetNetname()}: " + (f"via {r:.2f} mm from the pad" if r is not None else "NO PLACE for a via within 3 mm"))
 
 def main():
     mode, src, dst = sys.argv[1:4]
     b = pcbnew.LoadBoard(src)
     cx = Ctx(b)
-    {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus}[mode](b, cx)
+    if mode == "hooks":
+        hooks(b, cx, sys.argv[4].split(","))
+    else:
+        {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus}[mode](b, cx)
     b.Save(dst)
 
 
