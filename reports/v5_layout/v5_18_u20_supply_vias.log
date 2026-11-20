@@ -1,0 +1,9 @@
+== v5 step 18: supply vias of U20 pin 16 and C120
+  via at (90.0, 38.7): 4.09 mm from the BUSN2 pad
+  via at (91.3, 40.15): 2.69 mm from the BUSN2 pad
+  via 3V3_ISO at (90.000,38.700) 0.4572/0.3
+  track B.Cu 3V3_ISO w0.3: (89.995,40.150)-(90.000,38.700)
+  track F.Cu 3V3_ISO w0.3: (89.515,40.150)-(89.515,39.180)
+  track F.Cu 3V3_ISO w0.3: (89.515,39.180)-(90.000,38.700)
+  via ISOGND at (91.300,40.150) 0.4572/0.3
+  track F.Cu ISOGND w0.3: (90.475,40.150)-(91.300,40.150)
