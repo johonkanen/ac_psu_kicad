@@ -105,6 +105,9 @@ D=P step aux_lv    aux_lv --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 D=I step aux_iso   aux_iso --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 # --- leftovers of the signals, split by area (one step over everything ran out of time in pass 1) ----------------
 #     (pin order: in pass 3 / 4 the neighbours of J11-22 were routed first and boxed its stub in)
+#     (added after the pass 5 follow-up, NOT RUN YET: DAB_PWM_PRI_HI_ISO first and alone. In the run its stub end at
+#     (47.0, 35.95) was shut in by the vias the neighbours dropped at (47.4, 35.9), (48.1, 35.4), (48.6, 34.9).)
+D=C TMO=300 step left_prihi DAB_PWM_PRI_HI_ISO --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=C TMO=420 step left_ctrl j11_top,j11_bot --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1 --ordering original
 D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1 1 8
 # --- supplies. First a via next to every SMD pad of a plane net inside its plane (scripted.py planes, brief rule

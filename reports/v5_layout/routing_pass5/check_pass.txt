@@ -10,10 +10,10 @@
 3. rule 2 / 3 / 3a / plane-layer findings: 0
 4. high-voltage spacing violations, HV net to a non-HV net (2.5 mm on F.Cu / B.Cu, pairs with new copper): 0
 4b. two different HV nets closer than 2.5 mm (pairs with new copper; the placement puts their pads 1.0 .. 2.0 mm apart, the router kept 1.0 mm between HV nets): 0
-5. new vias: 295 (162 signal); new track mm per layer: B.Cu 1286, F.Cu 1385, In1.Cu 0, In3.Cu 1839, In4.Cu 459
+5. new vias: 298 (162 signal); new track mm per layer: B.Cu 1329, F.Cu 1401, In1.Cu 0, In2.Cu 0, In3.Cu 1844, In4.Cu 471
 6. pours whose island count changed (of 84): 1
       In2.Cu 3V3_CTRL 'v5 card CA In2.Cu 3V3_CTRL': 8 -> 1
-   open connections: 29 on 11 nets
+   open connections: 22 on 10 nets
       passage        0 open on  0/12 nets  
       sdm_rest       0 open on  0/2 nets  
       pwm_rest       0 open on  0/6 nets  
@@ -28,6 +28,6 @@
       aux_lv         1 open on  1/9 nets  AUX_LOVP:1
       aux_iso        0 open on  0/1 nets  
       supply_C       0 open on  0/5 nets  
-      supply_I       9 open on  3/4 nets  15V_ISO:7 3V3_ISO:1 ISOGND:1
+      supply_I       2 open on  2/4 nets  3V3_ISO:1 ISOGND:1
       supply_P      13 open on  2/3 nets  GND:7 15V:6
       (not in scope)   3  ISODC+:1 ISOPGND:2
