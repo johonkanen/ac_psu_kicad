@@ -1,0 +1,6 @@
+C68-1 GND at (70.44, -51.50) on F.Cu:
+   nearest reachable on its layer: track end on F.Cu at (71.65, -48.20), 3.52 mm; straight link blocked by: pad C68 [DC+] at (73.6, -51.5) needs 2.50 mm, has 1.92; track  [DC+] at (74.0, -51.9) needs 2.50 mm, has 2.48; pour [DC+]
+C112-2 GND at (70.97, -11.00) on B.Cu:
+   nearest reachable on its layer: pad C28-2 B.Cu at (69.95, -16.50), 5.59 mm; straight link blocked by: track  [AUX_VIN] at (67.6, -10.3) needs 2.50 mm, has 2.45; track  [PWM_G3] at (70.1, -13.1) needs 0.15 mm, has 0.00; track  [PWM_G3] at (71.0, -12.7) needs 0.15 mm, has 0.00
+C145-2 GND at (78.30, -20.23) on B.Cu:
+   nearest reachable on its layer: track end on B.Cu at (77.00, -20.20), 1.30 mm; straight link is free

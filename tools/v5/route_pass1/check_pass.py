@@ -28,7 +28,8 @@ HV = set(json.load(open(os.path.join(HERE, "hv_clearances.json"))))
 GROUPS = json.load(open(os.path.join(HERE, "groups.json")))
 BUS_BAND = (58.9, 43.2, 118.1, 48.8)
 PASSAGE = (40.0, 51.1, 59.0, 55.0)
-CARD_PLANES = [(44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8)]
+CARD_PLANES = [(44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8),
+               (72.0, -54.6, 82.9, -21.6)]      # the last one: the In2 GND pour of the aux area (pass 6)
 
 
 def key(t):

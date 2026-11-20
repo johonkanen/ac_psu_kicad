@@ -1,0 +1,4 @@
+U20-16 3V3_ISO at (90.00, 40.15) on B.Cu: nearest legal via site (95.07, 38.30), 5.40 mm from the pad; no site within 8 mm has a clear straight stub from the pad
+   the stub to the nearest site is blocked by: track  [DAB_PWM_HI_SEC] at (91.0, 39.5); track  [Net-(U7A--)] at (88.2, 38.5); track  [Net-(U7A--)] at (95.2, 39.1)
+C120-2 ISOGND at (90.47, 40.15) on F.Cu: nearest legal via site (86.81, 41.48), 3.90 mm from the pad; no site within 8 mm has a clear straight stub from the pad
+   the stub to the nearest site is blocked by: a keep-out rule area; pad C120 [3V3_ISO] at (89.5, 40.1); track  [3V3_ISO] at (86.5, 40.1); via  [DAB_PWM_LO_SEC] at (87.5, 41.1)

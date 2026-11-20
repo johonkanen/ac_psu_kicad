@@ -76,6 +76,11 @@ script taps_vias scripted.py taps
 #     took the room around R98 / C112 in the first try): escape stubs at the HV pads that have low-voltage copper closer than 2.5 mm (scripted.py), then
 #     the HV nets (2.5 mm to every other net, 1.0 mm between two HV nets: hv_step_clearances.json), then the
 #     controller's small signals (2.5 mm to the HV nets: hv_clearances.json, the default of every step)
+# --- pass 6: the aux area GND first (a via from each GND pad into the new In2 pour), then 15V, then the HV nets;
+#     and the CLK1 escape at R87
+script aux_gnd scripted.py auxgnd fill
+script clk1_escape scripted.py clk1
+D=P TMO=900 step aux_15V 15V --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1 --power-nets 15V --power-nets-widths 0.5
 script hv_stubs scripted.py hvstubs
 D=P NC="$H/hv_step_clearances.json" step aux_hv    aux_hv    --layers F.Cu B.Cu --power-nets AUX_DRAIN AUX_CLAMP AUX_VIN 'DC+' --power-nets-widths 1.0 0.6 0.6 0.6
 # --- pass 5: the fanned bus (maze.py fan) and every run to and from it drawn by script (maze.py runs: sources at
@@ -93,6 +98,8 @@ D=I step taps_rest taps_rest,other --layers F.Cu In3.Cu B.Cu In2.Cu --layer-cost
 # --- CTRL piece at J11: the fan to the top-side isolators is planar on F.Cu in pin order (make_groups.py J11_TOP);
 #     then the bottom-side isolators (all three layers), then the analog chain
 D=C step j11_top   j11_top   --layers F.Cu --ordering original
+#     DAB_PWM_PRI_HI_ISO alone, before its neighbours drop vias in front of its stub at J11-22 (pass 5 finding)
+D=C TMO=300 step left_prihi DAB_PWM_PRI_HI_ISO --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=C step j11_bot   j11_bot   --layers B.Cu In3.Cu F.Cu --layer-costs 1 1.2 1.5
 D=C step ctrl_analog ctrl_analog --layers F.Cu In3.Cu B.Cu --layer-costs 2 2 1
 # --- CTRL piece at J12: buck ------------------------------------------------------------------------------------
@@ -100,14 +107,12 @@ D=C step buck      buck      --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1 \
                --power-nets CTRL_SW CTRL_RAW CTRL_W --power-nets-widths 1.0 1.0 1.0
 # --- primary side of U13/U15/U16, ADC and reference -------------------------------------------------------------
 #     (In2 only to reach the old In2 track ends south of the VCC plane, y -21.6 .. -24.8)
+D=P step clk1 CLK1 --layers F.Cu In3.Cu B.Cu --layer-costs 1 2 1 --track-width 0.152
 D=P step primary   primary   --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1.5 1 8
 D=P step aux_lv    aux_lv --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 D=I step aux_iso   aux_iso --layers F.Cu In3.Cu B.Cu --layer-costs 1 3 1
 # --- leftovers of the signals, split by area (one step over everything ran out of time in pass 1) ----------------
 #     (pin order: in pass 3 / 4 the neighbours of J11-22 were routed first and boxed its stub in)
-#     (added after the pass 5 follow-up, NOT RUN YET: DAB_PWM_PRI_HI_ISO first and alone. In the run its stub end at
-#     (47.0, 35.95) was shut in by the vias the neighbours dropped at (47.4, 35.9), (48.1, 35.4), (48.6, 34.9).)
-D=C TMO=300 step left_prihi DAB_PWM_PRI_HI_ISO --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1
 D=C TMO=420 step left_ctrl j11_top,j11_bot --layers F.Cu In3.Cu B.Cu --layer-costs 1 1 1 --ordering original
 D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 1 1 8
 # --- supplies. First a via next to every SMD pad of a plane net inside its plane (scripted.py planes, brief rule
@@ -115,7 +120,7 @@ D=P TMO=420 step left_pri  primary --layers F.Cu In3.Cu B.Cu In2.Cu --layer-cost
 #     with its own time budget: pads outside the planes (U4 / C37 / J8 west of J11, the aux area) and the rails
 #     without a plane (15V_ISO, 5V_ISOL, 15V, 5V_CTRL_A).
 script plane_vias scripted.py planes fill
-STMO="${SUPPLY_TMO:-420}"; ITMO="${ISOGND_TMO:-900}"      # time budget of each supply step, seconds
+STMO="${SUPPLY_TMO:-600}"; ITMO="${ISOGND_TMO:-900}"      # time budget of each supply step, seconds
 Q="--quick"                    # main pass only for the rails that timed out in pass 2: no rescue / reconciliation laps
 PW=(--power-nets 3V3_CTRL CTRLGND_A CTRLGND 5V_CTRL 5V_CTRL_A 3V3_ISO ISOGND 15V_ISO 5V_ISOL GND VCC 15V
     --power-nets-widths 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.5 0.8 0.4 0.4 0.5)
@@ -123,7 +128,7 @@ for n in 5V_ISOL 15V_ISO 3V3_ISO ISOGND; do
     [ "$n" = ISOGND ] && STMO=$ITMO
     D=I TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu In4.Cu B.Cu In2.Cu --layer-costs 1 2 2 1 8 "${PW[@]}" $Q
 done
-STMO="${SUPPLY_TMO:-420}"
+STMO="${SUPPLY_TMO:-600}"
 D=C TMO=$STMO step supply_C  supply_C  --layers F.Cu In3.Cu B.Cu --layer-costs 1 4 1 "${PW[@]}"
 for n in VCC 15V; do
     D=P TMO=$STMO step "supply_$n" "$n" --layers F.Cu In3.Cu B.Cu In2.Cu --layer-costs 1 3 1 8 "${PW[@]}"

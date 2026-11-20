@@ -28,8 +28,7 @@ kpy "$R/tools/v4/domain_gaps.py" --board "$C" | grep -v "Debug: Adding" | tee "$
 echo "--- check_layout.py"
 kpy "$R/tools/v5/check_layout.py" --board "$C" | grep -v "Debug: Adding" | tee "$O/check_layout.txt" | tail -15
 echo "--- renders"
-"$SK/render_layers.sh" "$C" "$O/passage" In3.Cu,In4.Cu 900 15,-59,60,-49               # the whole passage
-"$SK/render_layers.sh" "$C" "$O/taprun" In3.Cu 450 76,-52,114,2                        # U7 / U2 block to the lane entries
-"$SK/render_layers.sh" "$C" "$O/isorow" In3.Cu,In4.Cu 800 55,-56,102,-34               # isolator row, J6 / J4, In4 entries
-"$SK/render_layers.sh" "$C" "$O/west" In3.Cu,In4.Cu 900 0,-52,40,-36                   # west ends
-"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,B.Cu 600 64,2,92,58                          # aux flyback
+"$SK/render_layers.sh" "$C" "$O/aux" F.Cu,In2.Cu,In3.Cu,B.Cu 500 64,2,92,58             # aux flyback with the In2 GND pour
+"$SK/render_layers.sh" "$C" "$O/r87" F.Cu,B.Cu 3000 56,-8,67,-1                        # CLK1 escape at R87
+"$SK/render_layers.sh" "$C" "$O/j11_22" F.Cu,B.Cu 1200 42,-40,62,-28                   # J11-22 stub
+"$SK/render_layers.sh" "$C" "$O/passage" In3.Cu,In4.Cu 900 15,-59,60,-49               # the passage
