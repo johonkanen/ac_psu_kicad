@@ -14,7 +14,8 @@ import pcbnew
 import scripted as S
 
 b = pcbnew.LoadBoard(sys.argv[1])
-net = sys.argv[2] if len(sys.argv) > 2 else "PWM_Q5"
+net = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith("--") else "PWM_Q5"
+S.STRICT_POUR = "--loose" not in sys.argv      # default: the zone's own clearance to pours (1.95 mm at the ISODC+ pour)
 cx = S.Ctx(b)
 X0, X1, Y0, Y1 = 15.0, 95.0, 36.0, 55.25
 n = 0

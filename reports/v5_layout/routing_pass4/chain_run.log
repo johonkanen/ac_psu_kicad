@@ -1,0 +1,399 @@
+== prep
+prep: 3281 existing tracks and vias locked
+prep: 4 J6 / J4 north-row escape stubs (In3)
+prep: 17 J11 west-row escape stubs
+fill_zones: 109 zones filled
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3323 tracks and vias: lock-all
+== taps_vias
+taps: Net-(U2-+): U2-3 (96.8, 5.0), via 0.64 mm from the pad centre
+taps: Net-(U2--): U2-4 (96.8, 2.6), via 0.74 mm from the pad centre
+taps: Net-(U7A-+): U7-3 (98.6, 11.6), via 0.99 mm from the pad centre
+taps: Net-(U7A--): U7-2 (98.6, 12.3), via 1.09 mm from the pad centre
+taps: Net-(U7B-+): U7-5 (102.9, 11.0), via 0.59 mm from the pad centre
+taps: Net-(U7B--): U7-6 (102.9, 11.6), via 0.99 mm from the pad centre
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3335 tracks and vias: lock-all
+== hv_stubs
+hvstubs: C68-2 DC+ F.Cu: stub 1.20 mm to (74.41, -52.35); within 2.95 mm: C68[GND]
+hvstubs: C111-1 AUX_VIN F.Cu: stub 1.65 mm to (76.61, -51.23); within 2.95 mm: C111[GND], track[GND]
+hvstubs: R141-1 AUX_VIN F.Cu: stub 1.18 mm to (69.01, -4.65); within 2.95 mm: C39[GND], C39[VCC], via[VCC]
+hvstubs: T1-11 AUX_VIN F.Cu: stub 1.40 mm to (78.09, -48.36); within 2.95 mm: C111[GND]
+hvstubs: C112-1 AUX_VIN B.Cu: stub 1.65 mm to (67.11, -9.63); within 2.95 mm: C112[GND]
+hvstubs: U18-5 AUX_DRAIN B.Cu: stub 1.27 mm to (74.92, -40.18); within 2.95 mm: C146[GND]
+hvstubs: D12-A AUX_DRAIN B.Cu: stub 1.55 mm to (79.38, -45.45); within 2.95 mm: R105[GND]
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3342 tracks and vias: lock-all
+== aux_hv (domain P)
+  Single-ended:  7/8 routed
+  Multi-point:   22/25 pads connected (3 FAILED)
+  Total vias:    2
+  AUX_CLAMP: 1.65A max (0.600mm on B.Cu (1 oz copper, 10°C rise), IPC-2221: 1.65A)
+  AUX_DRAIN: 1.65A max (0.600mm on B.Cu (1 oz copper, 10°C rise), IPC-2221: 1.65A)
+  AUX_VIN: 1.65A max (0.600mm on B.Cu (1 oz copper, 10°C rise), IPC-2221: 1.65A)
+  DC+: 0.61A max (0.152mm on B.Cu (1 oz copper, 10°C rise), IPC-2221: 0.61A)
+JSON_SUMMARY: {"routed_single": ["AUX_ST1", "AUX_LV1", "AUX_LV2", "AUX_ST2", "AUX_CLAMP", "AUX_DRAIN", "DC+"], "failed_single": [], "open_single": [], "failed_multipoint": [{"net_name": "AUX_VIN", "failed_pads": [{"component_ref": "R136", "pad_number": "?", "x": 68.0375, "y": 7.7}, {"component_ref": "R141", "pad_number": "?", "x": 68.0375, "y": 5.3}, {"component_ref": "C112", "pad_number": "?", "x
+
+Writing output to /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p4/04_aux_hv.kicad_pcb...
+  Moved 3 copper graphic(s)/logo(s) to silkscreen
+Successfully wrote /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p4/04_aux_hv.kicad_pcb
+  Plane finalize: zone net(s) /01 afe/CMFILT1, /01 afe/CMFILT2, /01 afe/FILTER_INPUT, /01 afe/JEE, /01 afe/LEMOUT, /01 afe/SHUNT1_FORCE, /05 VSI/AFE_RELAY, /05 VSI/INDUCTOR_OUTPUT, /05 VSI/INU_FILTER_INPUT, 15V, 15V_ISO, 3V3_CTRL, 3V3_ISO, 5V, 5V_CTRL, AC_IN2, AC_IN_1, AC_OUT_1, AC_OUT_2, CTRLGND, CTRLGND_A, DAB_CAP_PRI, DAB_CAP_SEC, DAB_GATE_HI_PRI, DAB_GATE_HI_SEC, DAB_GATE_LO_PRI, DAB_GATE_LO_S
+
+Plane finalize (#562): all zone nets complete (fill-aware) -- skipping engine/cleanup legs, oracle verifies
+WARNING: kicad-cli NOT FOUND. This is not a supported mode -- every KiCad-oracle leg becomes a NO-OP (not a degraded pass): the plane-finalize audit, the #589 re-audit and the oracle-summary check all silently do nothing, and check_drc's drc_real falls back to raw DRC. A result measured here can be a perfect null that looks like data (#650). Install KiCad, or set KICAD_CLI=/path/to/kicad-cli if it
+  KiCad-oracle recheck: deterministic exact-fill link source (pcbnew refill)
+  KiCad-oracle recheck round 1: KiCad reports 1 missing link(s) on processed nets
+== aux_hv (domain P)
+  Single-ended:  7/8 routed
+  Multi-point:   22/25 pads connected (3 FAILED)
+  Total vias:    2
+  Single-ended:  1/2 routed
+  Multi-point:   16/19 pads connected (3 FAILED)
+  Total vias:    0
+  Single-ended:  1/2 routed
+  Multi-point:   16/19 pads connected (3 FAILED)
+  Total vias:    0
+  Single-ended:  1/2 routed
+  Multi-point:   16/19 pads connected (3 FAILED)
+  Total vias:    0
+  Single-ended:  6/8 routed
+  Multi-point:   21/25 pads connected (4 FAILED)
+  not routed: {'net_name': 'AUX_VIN', 'failed_pads': [{'x': 68.0375, 'y': 7.7, 'component_ref': 'R136', 'pad_number': '?'}, {'x': 68.0375, 'y': 5.3, 'component_ref': 'R141', 'pad_number': '?'}, {'x': 68.025, 'y': 11.0, 'component_ref': 'C112', 'pad_number': '?'}]}, {'net_name': 'DC+', 'failed_pads': [{'x': 59.5, 'y': 30.7245, 'component_ref': 'R41', 'pad_number': '2'}]}, {'net': 'AUX_VIN', 'pairs_
+lock_tracks: 3527 tracks and vias: lock-all
+   256 s
+== bus
+fan: In3 lane  0 MDATA_INU: entry x 77.400; J8 column, x 34.390, down to y 50.0
+fan: In3 lane  1 INU_ADCLK: entry x 77.705; J8 column, x 34.085, down to y 50.0
+fan: In3 lane  2 Net-(U7A-+): entry x 78.600; J8 column, x 33.780, down to y 50.0
+fan: In3 lane  3 Net-(U7A--): entry x 78.905; J8 column, x 33.475, down to y 50.0
+fan: In3 lane  4 Net-(U7B--): entry x 79.210; J8 column, x 33.170, down to y 50.0
+fan: In3 lane  5 Net-(U7B-+): entry x 79.515; J8 column, x 25.500, down to y 50.0
+fan: In3 lane  6 Net-(U2--): entry x 79.820; J8 column, x 25.195, down to y 50.0
+fan: In3 lane  7 Net-(U2-+): entry x 80.125; J8 column, x 24.890, down to y 50.0
+fan: In3 lane  8 PWM_TRANS6: entry x 82.380; column x 24.585, under J8, gap x 21.715, pin J8-47
+fan: In3 lane  9 PWM_Q7: entry x 83.640; column x 24.255, pin J8-43
+fan: In3 lane 10 PWM_Q5: entry x 84.920; gap x 22.985 of the north row, pin J8-44
+fan: In4 5V_ISOL 0.8 mm J4-45 -> J6-45 -> J8-45 (lanes 0..3): drawn
+fan: In4 ISOGND 0.4 mm plane edge (90.69, 48.82) -> J8-46 (lanes 3..4): drawn
+fan: 11 of 11 In3 signal lanes drawn
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3626 tracks and vias: lock-all
+== hooks
+hooks: PWM_TRANS6: new via (83.02, 41.27) -> In3 -> (82.38, 49.30)
+hooks: PWM_Q7: new via (84.29, 41.27) -> In3 -> (83.64, 49.30)
+hooks: PWM_Q5: new via (85.56, 41.27) -> In3 -> (84.92, 49.30)
+hooks: MDATA_INU: new via (74.61, 41.27) -> In3 -> (77.40, 49.30)
+hooks: INU_ADCLK: new via (77.15, 41.27) -> In3 -> (77.70, 49.30)
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3646 tracks and vias: lock-all
+== westends
+westends: MDATA_INU: via (26.44, 40.63) at R50-2; In3 from the column: NO clear path
+westends: INU_ADCLK: via (24.75, 41.17) at U4-7; In3 from the column: NO clear path
+westends: Net-(U7A-+): 28 points on the old In2 track in reach, via on it at (4.92, 47.22); In3 from the column: left to the router
+westends: Net-(U7A--): 21 points on the old In2 track in reach, via on it at (4.63, 48.73); In3 from the column: left to the router
+westends: Net-(U7B--): 54 points on the old In2 track in reach, via on it at (23.34, 47.60); In3 from the column: left to the router
+westends: Net-(U7B-+): 109 points on the old In2 track in reach, via on it at (22.44, 47.90); In3 from the column: left to the router
+westends: Net-(U2--): 47 points on the old In2 track in reach, via on it at (23.93, 46.33); In3 from the column: left to the router
+westends: Net-(U2-+): 48 points on the old In2 track in reach, via on it at (23.41, 46.91); In3 from the column: left to the router
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 3656 tracks and vias: lock-all
+== pwm_rest (domain I)
+  Single-ended:  6/6 routed
+  Total vias:    8
+  Single-ended:  6/6 routed
+lock_tracks: 3810 tracks and vias: lock-all
+   39 s
+== passage_a (domain I)
+  Single-ended:  3/3 routed
+  Multi-point:   3/3 pads connected (1 nets)
+  Total vias:    3
+  Single-ended:  3/3 routed
+  Multi-point:   3/3 pads connected
+lock_tracks: 3877 tracks and vias: lock-all
+   40 s
+== passage_b (domain I)
+  Single-ended:  1/6 routed (3 FAILED)
+  Multi-point:   10/12 pads connected (2 FAILED)
+  Total vias:    5
+  Single-ended:  0/5 routed (1 FAILED)
+  Multi-point:   12/16 pads connected (4 FAILED)
+  Total vias:    0
+  Single-ended:  1/6 routed (1 FAILED)
+  Multi-point:   16/20 pads connected (4 FAILED)
+  not routed: Net-(U7A-+), {'net_name': 'Net-(U2-+)', 'failed_pads': [{'x': -14.6, 'y': -27.975, 'component_ref': 'R82', 'pad_number': '?'}]}, {'net_name': 'Net-(U2--)', 'failed_pads': [{'x': -10.5, 'y': -27.675, 'component_ref': 'R85', 'pad_number': '?'}]}, {'net_name': 'Net-(U7A--)', 'failed_pads': [{'x': -6.675, 'y': -48.0, 'component_ref': 'R256', 'pad_number': '?'}]}, {'net_name': 'Net-(U7B--
+lock_tracks: 3877 tracks and vias: lock-all
+   229 s
+== sdm_rest (domain I)
+  Single-ended:  2/2 routed
+  Total vias:    2
+  Single-ended:  2/2 routed
+lock_tracks: 3894 tracks and vias: lock-all
+   70 s
+== taps_rest (domain I)
+  Single-ended:  8/8 routed
+  Multi-point:   19/19 pads connected (5 nets)
+  Total vias:    6
+  Single-ended:  8/8 routed
+  Multi-point:   25/25 pads connected
+lock_tracks: 3992 tracks and vias: lock-all
+   90 s
+== left_iso (domain I)
+(chain restarted from pwm_rest after the west-ends fix)
+== pwm_rest (domain I)
+  Single-ended:  6/6 routed
+  Total vias:    8
+  Single-ended:  6/6 routed
+lock_tracks: 3819 tracks and vias: lock-all
+   67 s
+== passage_a (domain I)
+  Single-ended:  2/2 routed
+  Multi-point:   3/3 pads connected (1 nets)
+  Total vias:    3
+  Single-ended:  2/2 routed
+  Multi-point:   3/3 pads connected
+lock_tracks: 3891 tracks and vias: lock-all
+   61 s
+== passage_b (domain I)
+  Single-ended:  1/6 routed (2 FAILED)
+  Multi-point:   13/16 pads connected (3 FAILED)
+  Total vias:    5
+  Single-ended:  0/5 routed (1 FAILED)
+  Multi-point:   12/16 pads connected (4 FAILED)
+  Total vias:    0
+  Single-ended:  1/6 routed (1 FAILED)
+  Multi-point:   16/20 pads connected (4 FAILED)
+  not routed: Net-(U7A-+), {'net_name': 'Net-(U2-+)', 'failed_pads': [{'x': -14.6, 'y': -27.975, 'component_ref': 'R82', 'pad_number': '?'}]}, {'net_name': 'Net-(U2--)', 'failed_pads': [{'x': -10.5, 'y': -27.675, 'component_ref': 'R85', 'pad_number': '?'}]}, {'net_name': 'Net-(U7A--)', 'failed_pads': [{'x': -6.675, 'y': -48.0, 'component_ref': 'R256', 'pad_number': '?'}]}, {'net_name': 'Net-(U7B--
+lock_tracks: 3891 tracks and vias: lock-all
+   336 s
+== sdm_rest (domain I)
+  Single-ended:  2/2 routed
+  Total vias:    2
+  Single-ended:  2/2 routed
+lock_tracks: 3908 tracks and vias: lock-all
+   35 s
+== taps_rest (domain I)
+  Single-ended:  8/8 routed
+  Multi-point:   19/19 pads connected (5 nets)
+  Total vias:    5
+  Single-ended:  8/8 routed
+  Multi-point:   25/25 pads connected
+lock_tracks: 4009 tracks and vias: lock-all
+   74 s
+== left_iso (domain I)
+  Single-ended:  1/6 routed (2 FAILED)
+  Multi-point:   13/16 pads connected (3 FAILED)
+  Total vias:    6
+  Single-ended:  0/5 routed (1 FAILED)
+  Multi-point:   12/16 pads connected (4 FAILED)
+  Total vias:    0
+  Single-ended:  1/6 routed (1 FAILED)
+  Multi-point:   16/20 pads connected (4 FAILED)
+  not routed: Net-(U7A-+), {'net_name': 'Net-(U2-+)', 'failed_pads': [{'x': -14.6, 'y': -27.975, 'component_ref': 'R82', 'pad_number': '?'}]}, {'net_name': 'Net-(U2--)', 'failed_pads': [{'x': -10.5, 'y': -27.675, 'component_ref': 'R85', 'pad_number': '?'}]}, {'net_name': 'Net-(U7A--)', 'failed_pads': [{'x': -6.675, 'y': -48.0, 'component_ref': 'R256', 'pad_number': '?'}]}, {'net_name': 'Net-(U7B--
+lock_tracks: 4009 tracks and vias: lock-all
+   333 s
+== j11_top (domain C)
+  Single-ended:  17/21 routed (4 FAILED)
+  Multi-point:   9/9 pads connected (3 nets)
+  Total vias:    0
+  Single-ended:  0/4 routed (4 FAILED)
+  Total vias:    0
+  Single-ended:  17/21 routed (4 FAILED)
+  Multi-point:   9/9 pads connected
+  not routed: DAB_PWM_PRI_HI_ISO, DAB_PWM_PRI_LO_ISO, PWM_G2_ISO, PWM_G3_ISO, {'net': 'DAB_PWM_PRI_HI_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_PWM_PRI_LO_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'PWM_G2_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open
+lock_tracks: 4244 tracks and vias: lock-all
+   182 s
+== j11_bot (domain C)
+  Single-ended:  14/14 routed
+  Total vias:    29
+  Single-ended:  14/14 routed
+lock_tracks: 4662 tracks and vias: lock-all
+   133 s
+== ctrl_analog (domain C)
+  Single-ended:  17/17 routed
+  Multi-point:   27/27 pads connected (9 nets)
+  Total vias:    30
+  Single-ended:  17/17 routed
+  Multi-point:   27/27 pads connected
+lock_tracks: 4810 tracks and vias: lock-all
+   99 s
+== buck (domain C)
+  Single-ended:  6/6 routed
+  Multi-point:   18/18 pads connected (4 nets)
+  Total vias:    9
+  Single-ended:  6/6 routed
+  Multi-point:   18/18 pads connected
+lock_tracks: 4880 tracks and vias: lock-all
+   101 s
+== primary (domain P)
+  Single-ended:  21/22 routed (1 FAILED)
+  Multi-point:   14/14 pads connected (4 nets)
+  Total vias:    33
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  21/22 routed (1 FAILED)
+  Multi-point:   13/13 pads connected
+  not routed: CLK1, {'net': 'CLK1', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+lock_tracks: 5552 tracks and vias: lock-all
+   145 s
+== aux_lv (domain P)
+  Single-ended:  8/9 routed
+  Multi-point:   14/15 pads connected (1 FAILED)
+  Total vias:    5
+  Single-ended:  0/1 routed (1 OPEN)
+  Total vias:    0
+  Single-ended:  8/9 routed (1 OPEN)
+  Multi-point:   11/11 pads connected
+  not routed: AUX_LOVP, {'net_name': 'AUX_LOVP', 'failed_pads': [{'x': 80.5625, 'y': 5.3, 'component_ref': 'R143', 'pad_number': '?'}]}, {'net': 'AUX_LOVP', 'pairs_connected': 2, 'pairs_total': 3, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 5629 tracks and vias: lock-all
+   99 s
+== aux_iso (domain I)
+  Single-ended:  1/1 routed
+  Total vias:    0
+  Single-ended:  1/1 routed
+lock_tracks: 5631 tracks and vias: lock-all
+   50 s
+== left_ctrl (domain C)
+  Single-ended:  3/4 routed (1 FAILED)
+  Total vias:    4
+  Single-ended:  0/1 routed (1 OPEN)
+  Total vias:    0
+  Single-ended:  3/4 routed (1 OPEN)
+  not routed: DAB_PWM_PRI_HI_ISO, {'net_name': 'DAB_PWM_PRI_HI_ISO', 'failed_pads': [{'x': 78.305, 'y': -12.98, 'component_ref': 'U16', 'pad_number': '?'}]}, {'net': 'DAB_PWM_PRI_HI_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 5658 tracks and vias: lock-all
+   75 s
+== left_pri (domain P)
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed (1 FAILED)
+  not routed: CLK1, {'net': 'CLK1', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+lock_tracks: 5658 tracks and vias: lock-all
+   54 s
+== plane_vias
+planes: CTRLGND_A: 30 vias, 2 pads on a shared via, 9 farther than 1.0 mm, 4 without a place: U26-4 (74.4, 27.0), U24-5 (92.3, 21.2), U19-3 (65.6, 30.9), U19-4 (64.3, 30.9)
+planes: 3V3_CTRL: 19 vias, 1 pads on a shared via, 5 farther than 1.0 mm, 5 without a place: U26-8 (78.6, 25.0), C119-1 (89.5, 28.9), C121-1 (67.6, 28.9), C117-1 (78.6, 28.9), U21-7 (71.4, 30.9)
+planes: CTRLGND: 8 vias, 0 pads on a shared via, 4 farther than 1.0 mm, 2 without a place: U28-1 (111.7, -0.3), C142-2 (111.4, -20.2)
+planes: 5V_CTRL: 5 vias, 0 pads on a shared via, 3 farther than 1.0 mm, 0 without a place
+planes: ISOGND: 19 vias, 1 pads on a shared via, 5 farther than 1.0 mm, 1 without a place: U24-3 (102.9, 22.5)
+planes: 3V3_ISO: 13 vias, 0 pads on a shared via, 7 farther than 1.0 mm, 1 without a place: C120-1 (89.5, 40.1)
+planes: GND: 6 vias, 0 pads on a shared via, 1 farther than 1.0 mm, 0 without a place
+planes: VCC: 6 vias, 0 pads on a shared via, 0 farther than 1.0 mm, 0 without a place
+fill_zones: 111 zones filled
+prep_check: 0 conflicts in the scripted copper
+
+lock_tracks: 5874 tracks and vias: lock-all
+== supply_5V_ISOL (domain I)
+  Single-ended:  1/1 routed
+  Multi-point:   8/8 pads connected (1 nets)
+  Total vias:    4
+  Single-ended:  1/1 routed
+  Multi-point:   8/8 pads connected
+lock_tracks: 5970 tracks and vias: lock-all
+   50 s
+== supply_15V_ISO (domain I)
+  Single-ended:  0/1 routed
+  Multi-point:   9/12 pads connected (3 FAILED)
+  Total vias:    2
+  Single-ended:  0/1 routed
+  Multi-point:   9/12 pads connected (3 FAILED)
+  not routed: {'net_name': '15V_ISO', 'failed_pads': [{'x': -72.0, 'y': 0.3, 'component_ref': 'R79', 'pad_number': '?'}, {'x': 21.08, 'y': -50.93, 'component_ref': 'J8', 'pad_number': '?'}, {'x': -75.8, 'y': 0.3, 'component_ref': 'D4', 'pad_number': '?'}]}, {'net': '15V_ISO', 'pairs_connected': 9, 'pairs_total': 11, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 6057 tracks and vias: lock-all
+   206 s
+== supply_3V3_ISO (domain I)
+  Single-ended:  0/1 routed
+  Multi-point:   24/26 pads connected (2 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed
+  Multi-point:   24/26 pads connected (2 FAILED)
+  not routed: {'net_name': '3V3_ISO', 'failed_pads': [{'x': 22.47, 'y': -44.85, 'component_ref': 'C37', 'pad_number': '?'}, {'x': 23.462, 'y': -39.901, 'component_ref': 'U4', 'pad_number': '?'}]}, {'net': '3V3_ISO', 'pairs_connected': 24, 'pairs_total': 25, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 6117 tracks and vias: lock-all
+   99 s
+== supply_ISOGND (domain I)
+  Single-ended:  0/1 routed
+  Multi-point:   55/56 pads connected (1 FAILED)
+  Total vias:    7
+  Single-ended:  0/1 routed
+  Multi-point:   55/56 pads connected (1 FAILED)
+  not routed: {'net_name': 'ISOGND', 'failed_pads': [{'x': 88.15, 'y': -49.5, 'component_ref': 'J4', 'pad_number': '?'}]}, {'net': 'ISOGND', 'pairs_connected': 54, 'pairs_total': 55, 'outcome': 'open', 'open_subtype': 'partial'}
+lock_tracks: 6238 tracks and vias: lock-all
+   49 s
+== supply_C (domain C)
+  Single-ended:  4/4 routed
+  Multi-point:   85/85 pads connected (4 nets)
+  Total vias:    7
+  Single-ended:  4/4 routed
+  Multi-point:   85/85 pads connected
+lock_tracks: 6365 tracks and vias: lock-all
+   59 s
+== supply_VCC (domain P)
+  Single-ended:  1/1 routed
+  Multi-point:   19/19 pads connected (1 nets)
+  Total vias:    1
+  Single-ended:  1/1 routed
+  Multi-point:   19/19 pads connected
+lock_tracks: 6380 tracks and vias: lock-all
+   43 s
+== supply_15V (domain P)
+  Single-ended:  0/1 routed
+  Multi-point:   11/12 pads connected (1 FAILED)
+  Total vias:    7
+  Single-ended:  0/1 routed
+  Multi-point:   11/12 pads connected (1 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed (1 FAILED)
+  not routed: 15V, {'net': '15V', 'pairs_connected': 10, 'pairs_total': 11, 'outcome': 'open', 'open_subtype': 'unrouted'}
+lock_tracks: 6508 tracks and vias: lock-all
+   225 s
+== supply_GND (domain P)
+  Single-ended:  0/1 routed
+  Multi-point:   55/64 pads connected (9 FAILED)
+  Total vias:    11
+  Single-ended:  0/1 routed
+  Multi-point:   55/64 pads connected (9 FAILED)
+  not routed: {'net_name': 'GND', 'failed_pads': [{'x': 105.3625, 'y': 49.0, 'component_ref': 'C57', 'pad_number': '?'}, {'x': 70.4375, 'y': 51.5, 'component_ref': 'C68', 'pad_number': '?'}, {'x': 105.3625, 'y': 44.0, 'component_ref': 'C67', 'pad_number': '?'}, {'x': 105.3625, 'y': 46.5, 'component_ref': 'C58', 'pad_number': '?'}, {'x': 78.45, 'y': 32.525, 'component_ref': 'R102', 'pad_number': '?
+lock_tracks: 6709 tracks and vias: lock-all
+   66 s
+prune: 15V In2.Cu at (-62.6, -74.1) deleted (inside a fence)
+prune: 15V In2.Cu at (-103.2, -74.1) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (83.6, 55.6) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (83.6, 49.3) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (24.3, 55.6) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (43.5, 54.9) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (52.9, 55.6) deleted (inside a fence)
+prune: PWM_Q7 In3.Cu at (42.3, 55.6) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (43.6, 55.2) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (84.9, 49.3) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (23.0, 55.9) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (52.7, 55.9) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (42.4, 55.9) deleted (inside a fence)
+prune: PWM_Q5 In3.Cu at (84.9, 55.9) deleted (inside a fence)
+prune: GPIO_BYPASS_RLY_ISO In4.Cu at (91.0, 57.4) deleted (inside a fence)
+prune: GPIO_BYPASS_RLY_ISO In4.Cu at (50.5, 54.8) deleted (inside a fence)
+prune: GPIO_BYPASS_RLY_ISO In4.Cu at (53.1, 57.4) deleted (inside a fence)
+prune: 17 new tracks / vias inside the fences deleted
+finish: 20 temporary keep-outs removed, 6692 tracks and vias unlocked
+wrote /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p4/routed.kicad_pcb
+(prune deleted In3/In4 lanes above y 55.3 by mistake; prune fixed, supply_GND rerun)
+== supply_GND (domain P)
+  Single-ended:  0/1 routed
+  Multi-point:   55/64 pads connected (9 FAILED)
+  Total vias:    11
+  Single-ended:  0/1 routed
+  Multi-point:   55/64 pads connected (9 FAILED)
+  not routed: {'net_name': 'GND', 'failed_pads': [{'x': 105.3625, 'y': 49.0, 'component_ref': 'C57', 'pad_number': '?'}, {'x': 70.4375, 'y': 51.5, 'component_ref': 'C68', 'pad_number': '?'}, {'x': 105.3625, 'y': 44.0, 'component_ref': 'C67', 'pad_number': '?'}, {'x': 105.3625, 'y': 46.5, 'component_ref': 'C58', 'pad_number': '?'}, {'x': 78.45, 'y': 32.525, 'component_ref': 'R102', 'pad_number': '?
+lock_tracks: 6709 tracks and vias: lock-all
+   99 s
+prune: 15V In2.Cu at (-62.6, -74.1) deleted (inside a fence)
+prune: 15V In2.Cu at (-103.2, -74.1) deleted (inside a fence)
+prune: 2 new tracks / vias inside the fences deleted
+finish: 20 temporary keep-outs removed, 6707 tracks and vias unlocked
+wrote /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3594812f032992fa/build/route_p4/routed.kicad_pcb

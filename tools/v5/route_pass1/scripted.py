@@ -31,6 +31,9 @@ TAPS = ["Net-(U2-+)", "Net-(U2--)", "Net-(U7A-+)", "Net-(U7A--)", "Net-(U7B-+)",
 PLANE_NETS = ["CTRLGND_A", "3V3_CTRL", "CTRLGND", "5V_CTRL", "ISOGND", "3V3_ISO", "GND", "VCC"]
 SCOPE = (38.0, -36.0, 119.0, 50.0)      # the card area: plane vias only here
 OUTER = (pcbnew.F_Cu, pcbnew.B_Cu)
+STRICT_POUR = False     # True (via_scan.py): keep the zone's own clearance to another net's pour, so that a refill
+#                         does not move the pour edge at all. False: 0.25 mm; the pour then gives way by its own
+#                         clearance, and check_pass.py compares the islands of every pour before and after.
 
 
 def P(x, y):
@@ -104,6 +107,8 @@ class Ctx:
         for znet, fill, zb, _ in self.zones[layer] if layer in OUTER else ():     # inner planes: the refill makes the antipad
             if znet != net and box.Intersects(zb) and fill.OutlineCount():
                 c = max(2.5 if (layer in OUTER and ((net in HV) != (znet in HV))) else 0.25, extra)
+                if STRICT_POUR:
+                    c = max(c, T(_.GetLocalClearance() or 0) + 0.23)
                 if fill.Collide(shape, F(c)):
                     return False
         for outline, kb, notr, novia in self.keep[layer] if keep else ():
@@ -416,8 +421,7 @@ def bus(b, cx):
 # NET: (source ref, pad, lane start x, y on In3). A via at the pad (an existing one of the net within 2.5 mm, else
 # a new one beside the pad), then In3: vertical, 45 degrees, vertical to the lane start. Every piece gated.
 HOOKS = {"PWM_Q7": ("U20", "11", 83.64, 49.3), "PWM_Q5": ("U20", "12", 84.92, 49.3), "PWM_TRANS6": ("U20", "10", 82.38, 49.3),
-         "INU_ADCLK": ("U21", "14", COL_J6 + 0.61, 49.95), "MDATA_INU": ("U21", "12", COL_J6, 49.95),
-         "GPIO_BYPASS_RLY_ISO": ("U19", "15", COL_J6 - 0.61, 49.95), "Net-(U7A--)": (None, None, 77.75, 49.3)}
+         "INU_ADCLK": ("U21", "14", 77.705, 49.3), "MDATA_INU": ("U21", "12", 77.4, 49.3)}
 
 
 def hooks(b, cx, nets):
@@ -457,20 +461,172 @@ def hooks(b, cx, nets):
                 break
         print(f"hooks: {net}: " + (f"{how} ({done[0]:.2f}, {done[1]:.2f}) -> In3 -> ({sx:.2f}, {sy:.2f})" if done
                                    else f"{how} at {vias}, but NO clear In3 path to ({sx:.2f}, {sy:.2f})"))
-    # west ends the router cannot make: J8-43 (north row) from the south through the 0.46 mm gap of the south row
-    # (the PWM_Q7 lane comes down the J8 column at x 24.89), and a via beside U4-7 for INU_ADCLK
-    pad = [p for p in b.FindFootprintByReference("J8").Pads() if p.GetNumber() == "43"][0]
-    x, y = T(pad.GetPosition().x), -T(pad.GetPosition().y)
-    pts = [(x, y), (x - 0.635, y - 0.635), (x - 0.635, 50.1)]
-    segs = [cx.mktrack(pad.GetNetname(), pcbnew.In3_Cu, a, c, BUS_W) for a, c in zip(pts, pts[1:])]
-    ok = all(cx.clear(pad.GetNetname(), t.GetEffectiveShape(pcbnew.In3_Cu), t.GetBoundingBox(), pcbnew.In3_Cu) for t in segs)
-    if ok:
-        cx.commit(*segs)
-    print(f"hooks: J8-43 {pad.GetNetname()} stub to ({x - 0.635:.3f}, 50.1): " + ("drawn" if ok else "BLOCKED"))
-    for ref, num in (("U4", "7"),):
+
+
+
+# ---- pass 4: the passage as a fanned bus -----------------------------------------------------------------------
+# INU_OUT2's two south pads (r 1.6 at (44.06, 57.06) and (49.94, 57.06)) pinch the corridor only at x 42.5 .. 51.5.
+# The narrowest place is the neck between the west pad and the corner pin of J8 at (41.4, 52.2): 5.54 mm between
+# centres, 3.08 mm free for track centre lines = 11 lanes of 0.152 mm at 0.305 mm pitch per layer. The lanes pass
+# the pinch packed at y 52.165 .. 55.215, cross the neck at right angles to the line of centres (28.7 degrees) and
+# spread over J8 (y 52.84 .. 55.89); east of the pinch they step up 0.675 mm over J6.
+FAN_BASE = [(90.0, 52.84), (54.0, 52.84), (53.325, 52.165), (42.81, 52.165), (41.58, 52.84), (15.0, 52.84)]
+#          net              lane  entry x (In3 vertical from y 49.3)
+FAN_IN3 = [("MDATA_INU",       0, 77.400), ("INU_ADCLK",     1, 77.705),
+           ("Net-(U7A-+)",     2, 78.600), ("Net-(U7A--)",   3, 78.905), ("Net-(U7B--)", 4, 79.210),
+           ("Net-(U7B-+)",     5, 79.515), ("Net-(U2--)",    6, 79.820), ("Net-(U2-+)",  7, 80.125),
+           ("PWM_TRANS6",      8, 82.380), ("PWM_Q7",        9, 83.640), ("PWM_Q5",     10, 84.920)]
+
+
+def offset_poly(pts, d):
+    """Parallel polyline d to the right of the direction of travel (north, for a path that runs west)."""
+    lines = []
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+        L = math.hypot(x1 - x0, y1 - y0)
+        nx, ny = (y1 - y0) / L, -(x1 - x0) / L
+        lines.append(((x0 + nx * d, y0 + ny * d), (x1 + nx * d, y1 + ny * d)))
+    out = [lines[0][0]]
+    for (a0, a1), (b0, b1) in zip(lines, lines[1:]):
+        dax, day, dbx, dby = a1[0] - a0[0], a1[1] - a0[1], b1[0] - b0[0], b1[1] - b0[1]
+        den = dax * dby - day * dbx
+        t = ((b0[0] - a0[0]) * dby - (b0[1] - a0[1]) * dbx) / den
+        out.append((a0[0] + t * dax, a0[1] + t * day))
+    out.append(lines[-1][1])
+    return out
+
+
+def _poly(cx, net, layer, pts, w, keep=True):
+    segs = []
+    for a, c in zip(pts, pts[1:]):
+        if math.hypot(a[0] - c[0], a[1] - c[1]) < 1e-4:
+            continue
+        t = cx.mktrack(net, layer, a, c, w)
+        if not cx.clear(net, t.GetEffectiveShape(layer), t.GetBoundingBox(), layer, keep=keep):
+            return f"blocked at ({a[0]:.2f}, {a[1]:.2f}) - ({c[0]:.2f}, {c[1]:.2f})"
+        segs.append(t)
+    cx.commit(*segs)
+    return None
+
+
+def fan(b, cx):
+    global MARGIN
+    MARGIN = 0.002
+    n = 0
+    for net, i, xe in FAN_IN3:
+        mid = offset_poly(FAN_BASE, i * LANE_PITCH)[1:-1]
+        ye, yw = 52.84 + i * LANE_PITCH, 52.84 + i * LANE_PITCH
+        if i <= 4:
+            xs = COL_E + 0.61 - i * LANE_PITCH
+            tail = [(xs, yw), (xs, 50.0)]
+            how = f"J8 column, x {xs:.3f}, down to y 50.0"
+        elif i <= 7:
+            xs = COL_W + 0.61 - (i - 5) * LANE_PITCH
+            tail = [(xs, yw), (xs, 50.0)]
+            how = f"J8 column, x {xs:.3f}, down to y 50.0"
+        elif i == 8:        # PWM_TRANS6 -> J8-47 (north row) from the south through the 0.46 mm gap at x 21.715
+            tail = [(24.585, yw), (24.585, 50.0), (21.715, 50.0), (21.715, 51.565), (21.08, 52.2)]
+            how = "column x 24.585, under J8, gap x 21.715, pin J8-47"
+        elif i == 9:        # PWM_Q7 -> J8-43 (north row) from the north-east
+            tail = [(24.255, yw), (24.255, 52.835), (23.62, 52.2)]
+            how = "column x 24.255, pin J8-43"
+        else:               # PWM_Q5 -> J8-44 (south row) from the north through the gap at x 22.985
+            tail = [(22.985, yw), (22.985, 51.565), (23.62, 50.93)]
+            how = "gap x 22.985 of the north row, pin J8-44"
+        err = _poly(cx, net, pcbnew.In3_Cu, [(xe, 49.3), (xe, ye)] + mid + tail, BUS_W)
+        print(f"fan: In3 lane {i:2d} {net}: " + (err or f"entry x {xe:.3f}; {how}"))
+        n += not err
+    # In4: 5V_ISOL 0.8 mm, southmost (it has to drop onto the north-row pins J6-45 and J8-45), from pin J4-45
+    d = 0.33
+    mid = offset_poly(FAN_BASE, d)[1:-1]
+    err = _poly(cx, "5V_ISOL", pcbnew.In4_Cu, [(88.15, 50.77), (88.15, 52.84 + d)] + mid + [(22.35, 52.84 + d), (22.35, 52.2)], 0.8)
+    err = err or _poly(cx, "5V_ISOL", pcbnew.In4_Cu, [(57.55, 52.84 + d), (57.55, 52.0)], 0.8)
+    print("fan: In4 5V_ISOL 0.8 mm J4-45 -> J6-45 -> J8-45 (lanes 0..3): " + (err or "drawn"))
+    # In4: ISOGND 0.4 mm from the plane edge through the missing pin column of J4 at x 90.69 (east of J4-45, so it
+    # does not cross the 5V_ISOL lane), around the west end of J8 to pin J8-46
+    d = 1.09
+    mid = offset_poly(FAN_BASE, d)[1:-1]
+    err = _poly(cx, "ISOGND", pcbnew.In4_Cu, [(90.69, 48.82), (90.69, 52.84 + d)] + mid
+                + [(20.25, 52.84 + d), (20.25, 49.9), (22.35, 49.9), (22.35, 50.93)], 0.4, keep=False)
+    print("fan: In4 ISOGND 0.4 mm plane edge (90.69, 48.82) -> J8-46 (lanes 3..4): " + (err or "drawn"))
+    print(f"fan: {n} of {len(FAN_IN3)} In3 signal lanes drawn")
+
+
+def link(cx, net, a, c, layer=pcbnew.In3_Cu, w=BUS_W, dry=False):
+    """A short octilinear connection a -> c on one layer, first pattern that is clear. Returns the tracks (drawn
+    unless dry) or None."""
+    (ax, ay), (bx, by) = a, c
+    dx, dy = bx - ax, by - ay
+    sx, sy = (1 if dx > 0 else -1), (1 if dy > 0 else -1)
+    m = min(abs(dx), abs(dy))
+    pats = [[a, (ax, by), c], [a, (bx, ay), c],
+            [a, (ax, by - sy * abs(dx)), c] if abs(dy) >= abs(dx) else [a, (bx - sx * abs(dy), ay), c],
+            [a, (ax + sx * m, ay + sy * m), c]]
+    k = 0.5
+    while k < 14:           # vertical, horizontal at another height (also beyond the target), vertical
+        pats.append([a, (ax, ay + sy * k), (bx, ay + sy * k), c])
+        if abs(dx) > k:
+            pats.append([a, (ax + sx * k, ay), (ax + sx * k, by), c])
+        k += 0.25
+    for pts in pats:
+        segs = [cx.mktrack(net, layer, p, q, w) for p, q in zip(pts, pts[1:]) if math.hypot(p[0] - q[0], p[1] - q[1]) > 1e-4]
+        if all(cx.clear(net, t.GetEffectiveShape(layer), t.GetBoundingBox(), layer) for t in segs):
+            if not dry:
+                cx.commit(*segs)
+            return segs
+    return None
+
+
+def westends(b, cx):
+    """West ends of the lanes that the router did not make in pass 3 (run after fan and hooks)."""
+    global MARGIN
+    MARGIN = 0.002          # the column tracks stand 0.153 mm apart; a link continues one of them
+    drop = {net: ((COL_E if i <= 4 else COL_W) + 0.61 - (i if i <= 4 else i - 5) * LANE_PITCH, 50.0) for net, i, _ in FAN_IN3 if i <= 7}
+    # sigma-delta pair: a via beside the pad at U4 / R50, then In3 from the column
+    for net, ref, num in (("MDATA_INU", "R50", "2"), ("INU_ADCLK", "U4", "7")):
         pad = [p for p in b.FindFootprintByReference(ref).Pads() if p.GetNumber() == num][0]
-        r = via_at_pad(cx, pad, pad.GetNetname(), 3.0, 0.2)
-        print(f"hooks: {ref}-{num} {pad.GetNetname()}: " + (f"via {r:.2f} mm from the pad" if r is not None else "NO PLACE for a via within 3 mm"))
+        before = {(t.GetPosition().x, t.GetPosition().y) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T}
+        r = via_at_pad(cx, pad, net, 3.0, 0.2)
+        if r is None:
+            print(f"westends: {net}: NO PLACE for a via within 3 mm of {ref}-{num}")
+            continue
+        v = [(T(t.GetPosition().x), -T(t.GetPosition().y)) for t in b.GetTracks() if t.Type() == pcbnew.PCB_VIA_T
+             and (t.GetPosition().x, t.GetPosition().y) not in before][0]
+        ok = link(cx, net, drop[net], v)
+        print(f"westends: {net}: via ({v[0]:.2f}, {v[1]:.2f}) at {ref}-{num}; In3 from the column: " + ("drawn" if ok else "NO clear path, left to the router"))
+    # divider taps: the old copper is on In2 and ends under pours; a via on the old track where one fits and where
+    # an In3 link from the column reaches it. The near ones first, the two that go on to x 5 last (they pass below).
+    order = ["Net-(U7B-+)", "Net-(U2--)", "Net-(U2-+)", "Net-(U7B--)", "Net-(U7A-+)", "Net-(U7A--)"]
+    for net in order:
+        cand = []
+        for t in b.GetTracks():
+            if t.Type() == pcbnew.PCB_VIA_T or t.GetNetname() != net or t.GetLayer() != pcbnew.In2_Cu:
+                continue
+            (x0, y0), (x1, y1) = (T(t.GetStart().x), -T(t.GetStart().y)), (T(t.GetEnd().x), -T(t.GetEnd().y))
+            L = math.hypot(x1 - x0, y1 - y0)
+            for k in range(int(L / 0.25) + 1):
+                f = k * 0.25 / L if L else 0
+                x, y = x0 + f * (x1 - x0), y0 + f * (y1 - y0)
+                if 0.5 <= x <= 45 and 36.5 <= y <= 53.5:
+                    cand.append((math.hypot(x - drop[net][0], y - drop[net][1]), x, y))
+        done, legal, first = None, 0, None
+        for _, x, y in sorted(cand):
+            v = cx.via_ok(net, x, y)
+            if v is None:
+                continue
+            legal += 1
+            first = first or (x, y)
+            segs = link(cx, net, drop[net], (x, y), dry=True)
+            if segs:
+                cx.commit(v, *segs)
+                done = (x, y)
+                break
+        if not done and first:
+            cx.commit(cx.via_ok(net, *first))
+        print(f"westends: {net}: {len(cand)} points on the old In2 track in reach, {legal} legal for a via; "
+              + (f"via at ({done[0]:.2f}, {done[1]:.2f}) and In3 from the column drawn" if done
+                 else (f"via at ({first[0]:.2f}, {first[1]:.2f}), no simple In3 link: left to the router" if first
+                       else "NO legal via point on the old track")))
+
 
 def main():
     mode, src, dst = sys.argv[1:4]
@@ -479,7 +635,7 @@ def main():
     if mode == "hooks":
         hooks(b, cx, sys.argv[4].split(","))
     else:
-        {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus}[mode](b, cx)
+        {"taps": taps, "planes": planes, "hvstubs": hvstubs, "bus": bus, "fan": fan, "westends": westends}[mode](b, cx)
     b.Save(dst)
 
 

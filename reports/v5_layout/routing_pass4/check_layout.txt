@@ -1,0 +1,4 @@
+check_layout: v4 part U6 (SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701) is 2.8 mm on top under the card (fixed, as on the built board)
+check_layout: v4 parts under card tails (fixed, tails trimmed): C36 C74 C75 C76 C77 H4 R37 R64 R74 R75 U6
+check_layout: 158 placed / moved parts in their domain areas, 15 slots, 10 plane zones; 0 errors
+check_layout: OK
