@@ -1,0 +1,98 @@
+DRC violations: 534 | without silk/lib_footprint/courtyard: 44
+   199 silk_over_copper (warning)
+   139 silk_overlap (warning)
+   111 lib_footprint_issues (warning)
+    37 courtyards_overlap (error)
+    33 track_dangling (warning)
+     9 via_dangling (warning)
+     4 silk_edge_clearance (warning)
+     2 pth_inside_courtyard (error)
+    pth_inside_courtyard: PTH pad 47 [PWM_TRANS4] of J4 @(86.88,-50.77); Footprint J6 @(85.49,-52.00)
+    pth_inside_courtyard: PTH pad 48 [15V_ISO] of J4 @(86.88,-49.50); Footprint J6 @(85.49,-52.00)
+    track_dangling: Track [ISOGND] on F.Cu, length 0.0107 mm @(96.85,-38.17)
+    track_dangling: Track [ISOGND] on In1.Cu, length 3.4481 mm @(22.35,-50.93)
+    via_dangling: Via [Net-(U2-+)] on F.Cu - B.Cu @(96.18,-5.00)
+    track_dangling: Track [Net-(U2-+)] on In2.Cu, length 4.6669 mm @(20.40,-43.90)
+    via_dangling: Via [Net-(U2--)] on F.Cu - B.Cu @(96.30,-2.09)
+    track_dangling: Track [Net-(U2--)] on In2.Cu, length 4.6669 mm @(21.10,-43.50)
+    via_dangling: Via [3V3_ISO] on F.Cu - B.Cu @(25.69,-38.07)
+    track_dangling: Track [3V3_ISO] on B.Cu, length 3.0011 mm @(102.94,-13.77)
+    track_dangling: Track [3V3_ISO] on B.Cu, length 0.4789 mm @(96.00,-2.62)
+    track_dangling: Track [15V] on B.Cu, length 0.3500 mm @(73.00,53.75)
+    track_dangling: Track [GND] on F.Cu, length 0.0026 mm @(60.60,2.05)
+    track_dangling: Track [GND] on F.Cu, length 0.7984 mm @(60.60,0.18)
+    track_dangling: Track [GND] on B.Cu, length 0.1842 mm @(61.19,5.00)
+    track_dangling: Track [GND] on In1.Cu, length 2.7441 mm @(107.89,52.46)
+    track_dangling: Track [DC+] on F.Cu, length 5.1713 mm @(68.65,56.30)
+    track_dangling: Track [VCC] on F.Cu, length 1.0382 mm @(74.29,2.51)
+    via_dangling: Via [VCC] on F.Cu - B.Cu @(43.69,20.29)
+    track_dangling: Track [5V_ISOL] on In2.Cu, length 0.9843 mm @(22.98,-50.30)
+    track_dangling: Track [15V_ISO] on In2.Cu, length 0.6167 mm @(55.20,-52.29)
+    track_dangling: Track [15V_ISO] on In2.Cu, length 1.3011 mm @(21.08,-50.12)
+    track_dangling: Track [15V_ISO] on In2.Cu, length 4.9469 mm @(23.00,-42.81)
+    track_dangling: Track [15V_ISO] on In2.Cu, length 2.8680 mm @(59.90,-52.04)
+    track_dangling: Track [Net-(U7A--)] on In4.Cu, length 4.3650 mm @(24.89,-54.37)
+    track_dangling: Track [DAB_PWM_PRI_HI] on In2.Cu, length 1.5384 mm @(109.29,53.99)
+    track_dangling: Track [DAB_PWM_PRI_LO] on In2.Cu, length 2.0191 mm @(108.44,52.10)
+    track_dangling: Track [DAB_PWM_PRI_HI_ISO] on F.Cu, length 1.4650 mm @(45.53,-35.95)
+    via_dangling: Via [DAB_PWM_PRI_HI_ISO] on F.Cu - B.Cu @(78.15,-13.15)
+    track_dangling: Track [PWM_Q7] on In3.Cu, length 1.4650 mm @(22.98,-51.56)
+    track_dangling: Track [PWM_Q7] on In3.Cu, length 4.6700 mm @(25.20,-54.67)
+    track_dangling: Track [PWM_Q5] on In3.Cu, length 4.9750 mm @(24.89,-54.98)
+    track_dangling: Track [REF_1V65_ISO] on B.Cu, length 0.4840 mm @(105.10,-9.46)
+    track_dangling: Track [Net-(U7B--)] on B.Cu, length 0.9233 mm @(103.18,-9.21)
+    via_dangling: Via [Net-(U7B-+)] on F.Cu - B.Cu @(102.89,-10.40)
+    track_dangling: Track [Net-(U7B-+)] on In2.Cu, length 5.1477 mm @(18.90,-44.36)
+    track_dangling: Track [Net-(U11-X)] on B.Cu, length 0.5388 mm @(59.89,5.46)
+    via_dangling: Via [CLK1] on F.Cu - B.Cu @(63.76,-3.62)
+    track_dangling: Track [GPIO_BYPASS_RLY] on F.Cu, length 3.0688 mm @(45.52,22.04)
+    track_dangling: Track [ISOADA3] on F.Cu, length 2.6203 mm @(97.59,-7.70)
+    via_dangling: Via [AUX_LOVP] on F.Cu - B.Cu @(81.00,4.85)
+    track_dangling: Track [GPIO_BYPASS_RLY_ISO] on In2.Cu, length 0.5536 mm @(25.65,-41.05)
+    via_dangling: Via [INU_ADCLK] on F.Cu - B.Cu @(24.75,-41.17)
+    track_dangling: Track [INU_ADCLK] on In4.Cu, length 4.0600 mm @(25.20,-54.06)
+unconnected items: 39 on 17 nets
+  1 15V
+  3 15V_ISO
+  1 3V3_ISO
+  3 5V_ISOL
+  1 AUX_LOVP
+  1 AUX_VIN
+  1 CLK1
+  1 DAB_PWM_PRI_HI_ISO
+  7 GND
+  1 INU_ADCLK
+  2 ISODC+
+  11 ISOGND
+  2 ISOPGND
+  1 Net-(U2-+)
+  1 Net-(U2--)
+  1 Net-(U7B-+)
+  1 PWM_Q7
+schematic parity: 0
+In1.Cu CTRLGND_A: 1 island(s), mm2 [935.25]
+In1.Cu ISOGND: 1 island(s), mm2 [106.65]
+In1.Cu GND: 1 island(s), mm2 [811.87]
+In1.Cu ISOGND: 1 island(s), mm2 [1377.39]
+In1.Cu CTRLGND: 1 island(s), mm2 [407.75]
+  In1.Cu ISOGND: 6 via/pad outside the fill: (-67.81,-11.73) (25.11,-43.71) (88.15,-49.50) (22.35,-50.93) (93.65,34.55) (57.55,-50.73)
+  In1.Cu GND: 16 via/pad outside the fill: (71.95,58.35) (71.90,33.35) (79.10,23.85) (76.55,19.55) (73.40,35.45) (-103.41,65.47) (88.10,54.95) (74.00,11.60) (92.55,55.45) (82.50,39.85) (3.10,49.71) (109.20,41.20)
+  In1.Cu: 305 tracks
+In2.Cu 3V3_ISO: 1 island(s), mm2 [1370.53]
+In2.Cu 3V3_CTRL: 1 island(s), mm2 [901.92]
+In2.Cu 5V_CTRL: 1 island(s), mm2 [377.96]
+In2.Cu VCC: 1 island(s), mm2 [808.09]
+  In2.Cu 3V3_ISO: 1 via/pad outside the fill: (25.69,-38.07)
+  In2.Cu VCC: 1 via/pad outside the fill: (8.68,48.31)
+  In2.Cu: 768 tracks
+In4.Cu ISOGND: 1 island(s), mm2 [1377.49]
+In4.Cu CTRLGND: 1 island(s), mm2 [407.75]
+In4.Cu CTRLGND_A: 1 island(s), mm2 [935.02]
+In4.Cu GND: 1 island(s), mm2 [813.72]
+  In4.Cu ISOGND: 12 via/pad outside the fill: (93.53,18.20) (-67.81,-11.73) (95.00,19.25) (94.48,22.90) (94.50,17.25) (25.11,-43.71) (96.00,15.50) (88.15,-49.50) (22.35,-50.93) (93.65,34.55) (57.55,-50.73) (93.54,20.10)
+  In4.Cu GND: 16 via/pad outside the fill: (71.95,58.35) (71.90,33.35) (79.10,23.85) (76.55,19.55) (73.40,35.45) (-103.41,65.47) (88.10,54.95) (74.00,11.60) (92.55,55.45) (82.50,39.85) (3.10,49.71) (109.20,41.20)
+  In4.Cu: 52 tracks
+plane audit: 1177 to review
+tracks per layer: {'F.Cu': 2059, 'B.Cu': 2220, 'In1.Cu': 305, 'In2.Cu': 768, 'In3.Cu': 790, 'In4.Cu': 52}
+vias: 405 signal vias: 212 on 98 nets
+signal track mm per layer: {'F.Cu': 1598.7, 'B.Cu': 2200.6, 'In2.Cu': 1336.9, 'In1.Cu': 275.9, 'In3.Cu': 1134.3, 'In4.Cu': 233.1}
