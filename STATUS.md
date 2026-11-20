@@ -2,6 +2,25 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Routing pass 4 – fanned bus: legal, 25 unconnected (2026-11-20)
+
+Branch `routing-pass4`, commit 41b0f63 (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report
+`reports/v5_layout/routing_pass4.md` there; step 16 board, nothing merged. DRC, domain_gaps and check_layout rerun
+here on its refilled board: 0 shorts, 0 clearance errors, parity 0, 0 gap violations, check_layout OK; 25
+unconnected on 17 nets (pass 3: 39, pass 2: 63, pass 1: 123). No pour cut, no signal on In2.
+
+- Passage: 14 lanes per layer fit in the pinch under INU_OUT2; the neck between its west pad and the corner pin
+  of J8 (41.4, 52.2) passes 11 per layer (drawn, DRC-gated). In3 11 of 11 used (12 signals minus the relay),
+  In4 about 7 of 11 (5V_ISOL 0.8 mm, ISOGND 0.4 mm, relay).
+- Closed now: PWM_Q5 / Q7 / TRANS6, sigma-delta pair, relay, 5V_ISOL, INU_ADCLK at U4-7, PWM_Q7 at J8-43.
+- Open, routing tool rather than placement: the six divider taps (lanes and west ends exist, the router fails the
+  60 mm from the U7 / U2 block to the lane entries near (79.5, 49.3) and deleted three drawn lanes); 15V_ISO (2)
+  and 3V3_ISO (1) have no drawn In4 entry (free lanes exist; the relay's way in via (99.3, 51.75) is unproven
+  for them); DAB_PWM_PRI_HI_ISO (step order at J11-22); ISOGND J4-46; GND 7 / 15V 1 / AUX_VIN / AUX_LOVP in the
+  aux area (router's flat 2.5 mm at pads beside an HV pad). Open by placement: CLK1 at R87 pad 3.
+- The sigma-delta pair and the taps are on In3 (0.11 mm above the Q5_S pour on In2): In4 can only be entered from
+  a through-hole pin, a plane edge or far east.
+
 ## Passage north of J11: fanned bus instead of moving INU_OUT2 (2026-11-20)
 
 User: "Move inu out 2", then, after the report below, "Go with option 1".
