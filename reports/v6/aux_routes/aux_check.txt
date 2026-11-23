@@ -1,0 +1,61 @@
+23:09:21: Debug: Adding duplicate image handler for 'PNG file'
+23:09:21: Debug: Adding duplicate image handler for 'JPEG file'
+23:09:21: Debug: Adding duplicate image handler for 'TIFF file'
+23:09:21: Debug: Adding duplicate image handler for 'GIF file'
+23:09:21: Debug: Adding duplicate image handler for 'PNM file'
+23:09:21: Debug: Adding duplicate image handler for 'PCX file'
+23:09:21: Debug: Adding duplicate image handler for 'IFF file'
+23:09:21: Debug: Adding duplicate image handler for 'Windows icon file'
+23:09:21: Debug: Adding duplicate image handler for 'Windows cursor file'
+23:09:21: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+23:09:21: Debug: Adding duplicate image handler for 'TGA file'
+23:09:21: Debug: Adding duplicate image handler for 'XPM file'
+23:09:21: Debug: Adding duplicate image handler for 'WebP file'
+HV clearance: 0 violations by aux copper, 42 close pairs accepted by the rules above, 21 pre-existing pairs without aux copper (placement / outside the areas)
+  pre-existing F.Cu R136-2 [AUX_ST1] - R141-2 [AUX_LV1]: 0.650 mm < 1.0
+  pre-existing F.Cu R142-1 [AUX_LV1] - REF1-1 [GND]: 2.022 mm < 2.5
+  pre-existing F.Cu R142-1 [AUX_LV1] - track (72.78,-1.90)-(73.77,-0.91) [GND]: 2.453 mm < 2.5
+  pre-existing F.Cu R142-1 [AUX_LV1] - track (74.29,-2.51)-(75.03,-1.77) [VCC]: 2.126 mm < 2.5
+  pre-existing F.Cu R142-2 [AUX_LV2] - R137-2 [AUX_ST2]: 0.650 mm < 1.0
+  pre-existing F.Cu R142-2 [AUX_LV2] - track (74.29,-2.51)-(75.03,-1.77) [VCC]: 2.131 mm < 2.5
+  pre-existing F.Cu R142-2 [AUX_LV2] - via (77.64,-2.21) [REF_1V65]: 2.436 mm < 2.5
+  pre-existing F.Cu R137-1 [AUX_ST1] - R142-1 [AUX_LV1]: 0.650 mm < 1.0
+  pre-existing F.Cu R141-2 [AUX_LV1] - REF1-1 [GND]: 2.132 mm < 2.5
+  pre-existing F.Cu R143-1 [AUX_LV2] - R138-1 [AUX_ST2]: 0.650 mm < 1.0
+  pre-existing F.Cu R143-1 [AUX_LV2] - R138-2 [AUX_GATE]: 2.071 mm < 2.5
+  pre-existing F.Cu R143-1 [AUX_LV2] - track (77.64,-1.10)-(77.64,-2.21) [REF_1V65]: 2.140 mm < 2.5
+  pre-existing F.Cu R143-1 [AUX_LV2] - track (77.64,-2.21)-(77.64,-2.21) [REF_1V65]: 2.136 mm < 2.5
+  pre-existing F.Cu R143-1 [AUX_LV2] - via (77.64,-2.21) [REF_1V65]: 1.983 mm < 2.5
+  pre-existing F.Cu R138-1 [AUX_ST2] - R143-2 [AUX_LOVP]: 2.071 mm < 2.5
+  pre-existing F.Cu track (68.65,-56.30)-(64.99,-52.64) [DC+] - J34-1 [PGND]: 1.705 mm < 2.5
+  pre-existing F.Cu track (68.65,-56.30)-(64.99,-52.64) [DC+] - J34-1 [PGND]: 0.549 mm < 2.5
+  pre-existing F.Cu zone 'Proteus F.Cu pour 5 (fix 14)' [DC+] - J34-1 [PGND]: 1.946 mm < 2.5
+  pre-existing B.Cu C12-1 [DC+] - zone 'Proteus B.Cu pour 0 (fix 14)' [PGND]: 0.575 mm < 2.5
+  pre-existing B.Cu J33-1 [DC+] - zone 'Proteus B.Cu pour 0 (fix 14)' [PGND]: 0.550 mm < 2.5
+  pre-existing B.Cu J33-1 [DC+] - zone 'Proteus B.Cu pour 0 (fix 14)' [PGND]: 0.550 mm < 2.5
+pours touching the areas: islands (base -> now)
+  'Proteus B.Cu pour 0 (fix 14)' [PGND]: 1 -> 1
+  'Proteus F.Cu pour 20' [15V]: 1 -> 1
+  'Proteus F.Cu pour 5 (fix 14)' [DC+]: 1 -> 1
+  'Proteus In1.Cu pour 1' [GND]: 1 -> 1
+  'Proteus In2.Cu pour 1' [VCC]: 1 -> 1
+  'v5 aux P In2.Cu GND' [GND]: 1 -> 1
+  'v5 card I In1.Cu ISOGND' [ISOGND]: 1 -> 1
+  'v5 card I In2.Cu 3V3_ISO' [3V3_ISO]: 1 -> 1
+  'v5 card I In4.Cu ISOGND' [ISOGND]: 1 -> 1
+  'v5 card P In4.Cu GND' [GND]: 1 -> 1
+  'v6 aux P In1.Cu AUX_DRAIN' [AUX_DRAIN]: new -> 1
+  'v6 aux P In2.Cu GND north' [GND]: new -> 1
+  'v6 aux P In4.Cu AUX_DRAIN' [AUX_DRAIN]: new -> 1
+  'v6 aux P In4.Cu GND north' [GND]: new -> 1
+AUX_DRAIN copper (mm2): B.Cu tracks 17.3, In1.Cu 77.0, In4.Cu 77.0
+DRC: 445 unconnected items on the whole board, 9 with an end inside the areas; 450 violations on the board, 0 errors inside the areas
+  OPEN Track [ISOGND] on B.Cu, length 8.0500 mm (96.90, -33.55) | Zone 'Proteus B.Cu pour 15' [ISOGND] on B.Cu, priority 15 (97.38, -13.08)
+  OPEN Track [15V] on F.Cu, length 33.2000 mm (82.45, -21.40) | Zone 'Proteus F.Cu pour 20' [15V] on F.Cu, priority 37 (107.53, -39.93)
+  OPEN Track [15V] on F.Cu, length 33.2000 mm (82.45, -21.40) | PTH pad 6 [15V] of J22 (53.75, -58.86)
+  OPEN PTH pad 9 [GND] of J22 (56.29, -60.13) | Track [GND] on B.Cu, length 0.7826 mm (70.80, -53.60)
+  OPEN Track [GND] on F.Cu, length 0.0399 mm (81.94, -51.50) | PTH pad 2 [GND] of J23 (88.01, -58.16)
+  OPEN Track [5V] on In2.Cu, length 3.8184 mm (64.30, -24.51) | Track [5V] on In2.Cu, length 1.7089 mm (67.50, -54.60)
+  OPEN Track [5V] on In2.Cu, length 1.7089 mm (67.50, -54.60) | PTH pad 7 [5V] of J22 (55.02, -60.13)
+  OPEN Track [5V] on In2.Cu, length 1.7089 mm (67.50, -54.60) | PTH pad 7 [5V] of J23 (91.82, -59.44)
+  OPEN Track [15V_ISO] on B.Cu, length 3.0000 mm (90.95, -28.50) | Pad 1 [15V_ISO] of C93 on B.Cu (90.56, -22.90)

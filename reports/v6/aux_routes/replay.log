@@ -1,0 +1,27 @@
+aux_routes: 81 pads checked: all at their positions with their nets
+aux_routes: foreign: track In1.Cu [GND] (67.474, -40.520)-(67.474, -27.688) deleted
+aux_routes: foreign: track In1.Cu [GND] (71.949, -52.418)-(71.949, -44.995) deleted
+aux_routes: foreign: track In1.Cu [GND] (67.474, -27.688)-(64.300, -24.514) cut at the area edge: kept (67.000, -27.214)-(64.300, -24.514)
+aux_routes: foreign: track In1.Cu [GND] (71.990, -52.459)-(71.949, -52.418) deleted
+aux_routes: foreign: track In1.Cu [GND] (71.949, -44.995)-(67.474, -40.520) deleted
+aux_routes: foreign: track In2.Cu [5V] (67.500, -27.714)-(67.500, -56.309) cut at the area edge: kept (67.500, -54.600)-(67.500, -56.309)
+aux_routes: foreign: track In2.Cu [5V] (64.300, -24.514)-(67.500, -27.714) cut at the area edge: kept (64.300, -24.514)-(67.000, -27.214)
+aux_routes: foreign: via [PWM_TRANS2] (67.200, -22.106) deleted
+aux_routes: foreign: track B.Cu [PWM_TRANS2] (67.200, -22.106)-(67.199, -22.106) deleted
+aux_routes: foreign: track B.Cu [PWM_TRANS2] (67.199, -22.106)-(67.199, -20.600) deleted
+aux_routes: foreign: track In2.Cu [PWM_TRANS2] (67.200, -24.400)-(67.200, -22.106) deleted
+aux_routes: foreign: track In2.Cu [PWM_TRANS2] (70.600, -27.800)-(67.200, -24.400) deleted
+aux_routes: foreign: track In2.Cu [PWM_G1] (69.029, -27.729)-(65.869, -24.569) cut at the area edge: kept (67.000, -25.700)-(65.869, -24.569)
+aux_routes: foreign: track In2.Cu [PWM_TRANS3] (107.500, -53.400)-(73.000, -53.400) cut at the area edge: kept (107.500, -53.400)-(82.900, -53.400)
+aux_routes: foreign: track In2.Cu [PWM_TRANS3] (73.000, -53.400)-(71.000, -51.400) deleted
+aux_routes: foreign: track In2.Cu [PWM_TRANS3] (71.000, -27.600)-(67.800, -24.400) deleted
+aux_routes: foreign: track In2.Cu [PWM_TRANS3] (67.800, -24.400)-(67.800, -21.600) deleted
+aux_routes: foreign: track In2.Cu [PWM_TRANS3] (71.000, -51.400)-(71.000, -27.600) deleted
+aux_routes: zone 'v5 aux P In2.Cu GND': clearance 1.000 -> 0.500 mm
+aux_routes: move C68 -> (70.4000, -13.0000) rot 180.0 side F
+aux_routes: zone v6 aux P In2.Cu GND north [GND] In2.Cu prio 131 clearance 0.500
+aux_routes: zone v6 aux P In4.Cu GND north [GND] In4.Cu prio 132 clearance 0.500
+aux_routes: zone v6 aux P In1.Cu AUX_DRAIN [AUX_DRAIN] In1.Cu prio 140 clearance 2.000
+aux_routes: zone v6 aux P In4.Cu AUX_DRAIN [AUX_DRAIN] In4.Cu prio 141 clearance 2.000
+aux_routes: added 140 tracks, 21 vias, 4 zones
+aux_routes: saved /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a3b2d36f63f866513/kicad/ac_psu.kicad_pcb
