@@ -11,7 +11,8 @@ lib/v5_deviations.csv  v5 (aux flyback, CTRL isolation): the same kinds plus
                        moved  = Proteus part placed elsewhere (v5 card-area layout): its pads are
                        not compared with the Proteus positions, pad numbers and nets still are
 lib/v6_deviations.csv  v6 (baseboard for the half-bridge power cards, V6_PLAN.md): the same kinds
-lib/v6_copper.csv      v6 board copper: the same kinds as lib/v5_copper.csv
+lib/v6_copper.csv      v6 board copper: the same kinds as lib/v5_copper.csv, plus
+                       gone = a v4 via (kind via of lib/v4_copper.csv) at (x, y) deleted with its circuit
 lib/v5_copper.csv      v5 board copper: area rows as above, and pending = rectangle where the
                        layout is left to the KiCad GUI (unrouted new parts, re-cut planes): DRC
                        clearance/unconnected items, opens and domain gaps there are reported as
@@ -83,6 +84,12 @@ def rows():
 
 def copper_rows():
     return [] if proteus_mode() else _read_all(COPPER_CSVS)
+
+
+def gone_vias():
+    """[(x, y)] of v4 vias (lib/v4_copper.csv kind via) that a later revision deleted with their circuit
+    (kind gone in lib/v6_copper.csv)."""
+    return [(float(r["x"]), float(r["y"])) for r in copper_rows() if r["kind"] == "gone"]
 
 
 def removed():

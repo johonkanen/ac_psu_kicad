@@ -1,7 +1,14 @@
 # v6 board copper (IPC frame, mm, Y up), on top of lib/v4_copper.csv and lib/v5_copper.csv; read by
-# tools/deviations.py (same kinds). The two strips along the heatsink walls lost the power stage in v6 step 1:
-# the switches, gate-card headers, switch-node copper and split capacitors are gone, the half-bridge cards hang
-# there. Until they are laid out again (V6_PLAN.md steps 2-5) they are unrouted areas; afterwards area rows.
+# tools/deviations.py (same kinds, plus gone = a v4 via deleted with its circuit). The two strips along the heatsink
+# walls lost the power stage in v6 step 1 and their copper in step 2; the half-bridge cards hang there and the card
+# terminals, headers and the moved current-sense circuits are placed and routed in steps 3-5. Until then they are
+# unrouted areas; afterwards area rows.
 kind,layer,x,y,x1,y1,net,note
-unrouted,*,5.0,-84.0,124.0,-46.0,,primary card strip (AFE leg 1, AFE leg 2, DAB primary): power stage removed in v6 step 1, layout open
-unrouted,*,5.0,40.0,124.0,72.5,,ISO card strip (inverter leg B, inverter leg A, DAB secondary): power stage removed in v6 step 1, layout open
+unrouted,*,-2.5,-84.0,124.0,-46.0,,primary card strip and the band of its terminals (AFE leg 1, AFE leg 2, DAB primary), with the AFE current sense R48 / U5: layout open
+unrouted,*,0.0,36.0,124.0,72.5,,ISO card strip and the band of its terminals (inverter leg B, inverter leg A, DAB secondary), with the inverter current sense R91 / U4: layout open
+unrouted,*,-82.0,38.0,-62.0,58.0,,choke-lead terminal J9 (now INU_CHOKE): the shunt R91 and U4 are placed and connected here in steps 3-5
+unrouted,*,-43.0,-62.0,-23.0,-42.0,,choke-lead terminal FILTER_OUT1 (now AFE_CHOKE1): the shunt R48 and U5 are placed and connected here in steps 3-5
+area,B.Cu,-25.0,-82.0,-2.5,-66.0,,pour of SHUNT1_FORCE from J5 to the old place of R48 deleted with the net (J5 is a plain landing terminal now)
+area,In1.Cu,21.0,9.5,101.0,36.0,,pour of a switch-node net of the inverter / DAB secondary legs deleted with the net (v6 step 1)
+area,B.Cu,-75.0,47.0,2.0,70.0,,copper of INDUCTOR_INPUT (J7 to the old place of R91) deleted with the net; the INDUCTOR_OUTPUT sense track along y 48 pulled back from J9 (v6 step 1)
+area,In2.Cu,60.0,-29.0,68.0,-20.0,,tracks of a removed gate-card net deleted with the net (v6 step 1)

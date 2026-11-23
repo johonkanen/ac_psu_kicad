@@ -524,6 +524,10 @@
       },
       {
         "netclass": "DOM_P",
+        "pattern": "AFE_CHOKE1"
+      },
+      {
+        "netclass": "DOM_P",
         "pattern": "AUX_CLAMP"
       },
       {
@@ -720,6 +724,18 @@
       },
       {
         "netclass": "DOM_I",
+        "pattern": "INU_CHOKE"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "INU_SHUNT1"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "INU_SHUNT2"
+      },
+      {
+        "netclass": "DOM_I",
         "pattern": "ISOADA1"
       },
       {
@@ -828,6 +844,10 @@
       },
       {
         "netclass": "DOM_I",
+        "pattern": "ISO_AFE_SDM_RAW_VOLTAGE"
+      },
+      {
+        "netclass": "DOM_I",
         "pattern": "ISO_DAB_SDM_RAW_VOLTAGE"
       },
       {
@@ -853,14 +873,6 @@
       {
         "netclass": "DOM_C",
         "pattern": "MDATA_ISO"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "MDAT_AFE"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "MDAT_INU_CARD"
       },
       {
         "netclass": "DOM_P",
@@ -921,6 +933,14 @@
       {
         "netclass": "DOM_P",
         "pattern": "Net-(D5-K)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(D8-K)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(D9-K)"
       },
       {
         "netclass": "DOM_I",
@@ -1077,6 +1097,30 @@
       {
         "netclass": "DOM_I",
         "pattern": "Net-(U2--)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-MDAT)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-VIN+)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "Net-(U4-VIN-)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-MDAT)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-VIN+)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "Net-(U5-VIN-)"
       },
       {
         "netclass": "DOM_I",
@@ -1280,11 +1324,31 @@
       },
       {
         "netclass": "DOM_P",
+        "pattern": "SDM_RAW_VOLTAGE"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SHUNT1"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "SHUNT2"
+      },
+      {
+        "netclass": "DOM_P",
         "pattern": "VCC"
       },
       {
         "netclass": "DOM_C",
         "pattern": "unconnected-(J11-Pad38)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J21-Pad10)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J21-Pad8)"
       },
       {
         "netclass": "DOM_P",
@@ -1301,6 +1365,14 @@
       {
         "netclass": "DOM_P",
         "pattern": "unconnected-(J23-Pad8)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J24-Pad10)"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "unconnected-(J24-Pad8)"
       },
       {
         "netclass": "DOM_I",

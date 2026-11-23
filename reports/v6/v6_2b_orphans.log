@@ -1,0 +1,64 @@
+19:43:16: Debug: Adding duplicate image handler for 'PNG file'
+19:43:16: Debug: Adding duplicate image handler for 'JPEG file'
+19:43:16: Debug: Adding duplicate image handler for 'TIFF file'
+19:43:16: Debug: Adding duplicate image handler for 'GIF file'
+19:43:16: Debug: Adding duplicate image handler for 'PNM file'
+19:43:16: Debug: Adding duplicate image handler for 'PCX file'
+19:43:16: Debug: Adding duplicate image handler for 'IFF file'
+19:43:16: Debug: Adding duplicate image handler for 'Windows icon file'
+19:43:16: Debug: Adding duplicate image handler for 'Windows cursor file'
+19:43:16: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+19:43:16: Debug: Adding duplicate image handler for 'TGA file'
+19:43:16: Debug: Adding duplicate image handler for 'XPM file'
+19:43:16: Debug: Adding duplicate image handler for 'WebP file'
+== v6 step 2b: copper groups without a pad deleted
+  round 1: track In2.Cu(90.341,-54.438)-(106.990,-54.438) [5V] deleted: its group has no pad
+  round 1: track In2.Cu(88.797,-55.981)-(90.341,-54.438) [5V] deleted: its group has no pad
+  round 1: track In2.Cu(106.990,-54.438)-(108.200,-55.648) [5V] deleted: its group has no pad
+  round 1: track In2.Cu(66.600,-24.521)-(70.017,-27.938) [PWM_G3] deleted: its group has no pad
+  round 1: track In2.Cu(66.600,-21.600)-(66.600,-24.521) [PWM_G3] deleted: its group has no pad
+  round 1: track In2.Cu(62.671,-24.671)-(62.671,-20.412) [PWM_G4] deleted: its group has no pad
+  round 1: track In2.Cu(66.500,-28.500)-(62.671,-24.671) [PWM_G4] deleted: its group has no pad
+  round 1: track In2.Cu(66.500,-55.000)-(66.500,-28.500) [PWM_G4] deleted: its group has no pad
+  round 1: track In1.Cu(102.724,-56.530)-(103.130,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(103.130,-56.936)-(103.130,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(100.184,-56.530)-(100.590,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(100.590,-56.124)-(100.590,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(100.590,-56.936)-(100.590,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(103.130,-56.124)-(103.130,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(100.996,-56.530)-(100.590,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(102.266,-56.530)-(101.860,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(101.860,-56.936)-(101.860,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(101.454,-56.530)-(101.860,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In1.Cu(101.860,-56.124)-(101.860,-56.530) [PGND] deleted: its group has no pad
+  round 1: zone Proteus In1.Cu pour 10 In1.Cu#0 [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(102.584,-56.530)-(102.626,-56.488) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(101.856,-56.534)-(101.860,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(101.311,-56.530)-(101.315,-56.534) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(100.590,-56.530)-(101.311,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(102.626,-56.488)-(103.088,-56.488) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(101.315,-56.534)-(101.856,-56.534) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(101.860,-56.530)-(102.584,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(103.088,-56.488)-(103.130,-56.530) [PGND] deleted: its group has no pad
+  round 1: track In2.Cu(67.000,-28.200)-(63.588,-24.788) [PWM_G2] deleted: its group has no pad
+  round 1: track In2.Cu(63.588,-24.788)-(63.588,-21.339) [PWM_G2] deleted: its group has no pad
+  round 1: track In2.Cu(67.000,-55.800)-(67.000,-28.200) [PWM_G2] deleted: its group has no pad
+  round 1: track In2.Cu(64.976,-24.476)-(64.976,-21.400) [PWM_TRANS1] deleted: its group has no pad
+  round 1: track In2.Cu(68.200,-27.700)-(64.976,-24.476) [PWM_TRANS1] deleted: its group has no pad
+  round 1: track In2.Cu(108.800,-55.730)-(109.288,-55.242) [DAB_PWM_PRI_HI] deleted: its group has no pad
+  round 1: track In2.Cu(109.288,-53.988)-(108.200,-52.900) [DAB_PWM_PRI_HI] deleted: its group has no pad
+  round 1: track In2.Cu(109.288,-55.242)-(109.288,-53.988) [DAB_PWM_PRI_HI] deleted: its group has no pad
+  round 1: track In2.Cu(109.863,-56.147)-(109.480,-56.530) [DAB_PWM_PRI_LO] deleted: its group has no pad
+  round 1: track In2.Cu(108.436,-52.100)-(109.863,-53.528) [DAB_PWM_PRI_LO] deleted: its group has no pad
+  round 1: track In2.Cu(109.863,-53.528)-(109.863,-56.147) [DAB_PWM_PRI_LO] deleted: its group has no pad
+  round 1: via(25.794,42.787) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(24.427,45.263)-(25.794,43.896) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(25.794,43.896)-(25.794,42.787) [PWM_Q7] deleted: its group has no pad
+  round 1: track In2.Cu(27.586,44.214)-(28.122,44.751) [PWM_Q7] deleted: its group has no pad
+  round 1: track In2.Cu(28.122,44.751)-(28.122,44.751) [PWM_Q7] deleted: its group has no pad
+  round 1: track In2.Cu(26.158,42.787)-(27.586,44.214) [PWM_Q7] deleted: its group has no pad
+  round 1: track In2.Cu(25.794,42.787)-(26.158,42.787) [PWM_Q7] deleted: its group has no pad
+  round 1: track In2.Cu(27.586,44.214)-(28.122,44.751) [PWM_Q7] deleted: its group has no pad
+  round 1: zone Proteus B.Cu pour 0 (fix 14) (v6 piece 2) B.Cu#0 [PGND] deleted: its group has no pad
+  round 1: zone Proteus In2.Cu pour 13 In2.Cu#0 [DAB_GROUND] deleted: its group has no pad
+  49 items without a pad deleted

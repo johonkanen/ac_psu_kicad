@@ -65,145 +65,18 @@ items 5127, groups 447, shorts 0, orphans 16, opens 45
 items 5206, groups 248, shorts 0, orphans 0, opens 0
 == assignment: 4225 tracks/vias got a net, 0 without
 == after zone fill (KiCad pads, tracks, vias, filled zones)
-items 3485, groups 740, shorts 0, orphans 38, opens 0
-  orphan group 1164 (1 track) net from vias -: track In1.Cu(22.350,50.930)-(24.788,48.492)
-  orphan group 1263 (9 track, 1 via) net from vias ['3V3_ISO']: via(25.687,38.068)
-  orphan group 1315 (13 track, 1 zone) net from vias -: track B.Cu(91.761,-77.161)-(89.314,-74.714)
-  orphan group 1688 (41 track, 1 zone) net from vias -: track In2.Cu(104.660,49.906)-(104.660,49.500)
-  orphan group 1833 (13 track, 1 zone) net from vias -: track F.Cu(83.400,60.466)-(83.400,60.542)
-  orphan group 1953 (1 track) net from vias -: track In2.Cu(100.850,50.770)-(100.000,49.920)
-  orphan group 1969 (3 track) net from vias -: track In2.Cu(22.984,51.566)-(22.984,50.296)
-  orphan group 2002 (12 track) net from vias -: track In2.Cu(58.186,51.551)-(58.186,52.503)
-  orphan group 2014 (2 track) net from vias -: track In2.Cu(21.080,50.120)-(22.000,49.200)
-  orphan group 2091 (10 track, 1 zone) net from vias -: track F.Cu(80.653,68.100)-(79.700,68.100)
-  orphan group 2121 (32 track, 1 zone) net from vias -: track In2.Cu(63.653,68.100)-(62.700,68.100)
-  orphan group 2123 (41 track, 1 zone) net from vias -: track In2.Cu(76.584,50.847)-(76.650,50.780)
-  orphan group 2307 (2 track) net from vias -: track F.Cu(19.720,-64.800)-(20.990,-64.800)
-  orphan group 2325 (6 track) net from vias -: track B.Cu(28.610,-64.800)-(28.610,-63.530)
-  orphan group 2331 (4 track) net from vias -: track B.Cu(22.260,-64.800)-(22.260,-63.530)
-  orphan group 2369 (26 track, 1 zone) net from vias -: track In1.Cu(102.724,-56.530)-(103.130,-56.530)
-  orphan group 2371 (18 track, 1 zone) net from vias -: track In1.Cu(35.791,-79.800)-(34.839,-79.800)
-  orphan group 2413 (22 track, 1 zone) net from vias -: track In2.Cu(20.584,-63.530)-(20.990,-63.530)
-  orphan group 2417 (20 track) net from vias -: track In2.Cu(102.611,-57.830)-(103.100,-57.830)
-  orphan group 2580 (9 track, 2 via) net from vias ['PWM_G1']: track F.Cu(65.869,-22.164)-(65.869,-19.281)
-  orphan group 2591 (6 track, 1 via) net from vias ['PWM_G3']: via(68.799,-58.799)
-  orphan group 2598 (10 track, 2 via) net from vias ['PWM_TRANS2']: via(72.674,-61.249)
-  orphan group 2671 (5 track) net from vias -: track In2.Cu(108.800,-55.730)-(109.288,-55.242)
-  orphan group 2676 (3 track) net from vias -: track In2.Cu(109.863,-56.147)-(109.480,-56.530)
-  orphan group 2679 (12 track, 1 via) net from vias ['PWM_TRANS3']: via(108.773,-54.344)
-  orphan group 2705 (11 track, 1 via) net from vias ['PWM_G4']: via(40.143,-58.639)
-  orphan group 2717 (8 track, 1 via) net from vias ['PWM_G2']: via(40.304,-59.715)
-  orphan group 2726 (9 track, 1 via) net from vias -: via(25.794,42.787)
-  orphan group 2883 (8 track, 1 via) net from vias ['PWM_TRANS1']: via(41.289,-59.599)
-  orphan group 3157 (11 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
-  orphan group 3468 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#0
-  orphan group 3469 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#1
-  orphan group 3470 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#2
-  orphan group 3471 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#3
-  orphan group 3472 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#4
-  orphan group 3473 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#5
-  orphan group 3474 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#6
-  orphan group 3475 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#7
-v5 opens pending GUI layout: 147: 15V 15V_ISO 3V3_CTRL 3V3_ISO 5V 5V_CTRL 5V_CTRL_A 5V_ISOL ADA3 ADASEL0 ADASEL0_ISO ADASEL1 ADASEL1_ISO ADASEL2 ADASEL2_ISO ADCLK ADCLK_DAB ADCLK_DAB_CTRL ADCLK_ISO AUX_CLAMP AUX_COMP AUX_COMPC AUX_CS AUX_DRAIN AUX_GATE AUX_LOVP AUX_LV1 AUX_LV2 AUX_ST1 AUX_ST2 AUX_VDD AUX_VDDR AUX_VERR AUX_VIN AUX_W1 AUX_W2 CLK1 CLK1_ISO CS1 CS1_ISO CTRLGND CTRLGND_A CTRL_BOOT CTRL_EN CTRL_FB CTRL_NR CTRL_RAW CTRL_SW CTRL_W DAB_GROUND DAB_PWM_HI_SEC DAB_PWM_HI_SEC_CTRL DAB_PWM_LO_SEC DAB_PWM_LO_SEC_CTRL DAB_PWM_PRI_HI DAB_PWM_PRI_HI_ISO DAB_PWM_PRI_LO DAB_PWM_PRI_LO_ISO DAB_SHUNT2 DC+ GND GPIO_BYPASS_RLY GPIO_BYPASS_RLY_ISO GPIO_BYPASS_RLY_ISOLATED GPIO_BYPASS_RLY_ISO_CTRL INU_ADCLK INU_ADCLK_CTRL ISOADA1 ISOADA1_AIN ISOADA1_CTRL ISOADA1_M ISOADA1_N ISOADA1_OUT ISOADA1_P ISOADA1_PL ISOADA2 ISOADA2_AIN ISOADA2_CTRL ISOADA2_M ISOADA2_N ISOADA2_OUT ISOADA2_P ISOADA2_PL ISOADA3 ISOADA3_AIN ISOADA3_CTRL ISOADA3_M ISOADA3_N ISOADA3_OUT ISOADA3_P ISOADA3_PL ISODC+ ISOGND ISOPGND ISO_DAB_SDM_RAW_VOLTAGE MDATA MDATA_DAB MDATA_DAB_CTRL MDATA_INU MDATA_INU_CTRL MDATA_ISO MDAT_AFE MDAT_INU_CARD Net-(D17-K) Net-(U11-X) Net-(U15-B5) Net-(U2-+) Net-(U2--) Net-(U7A-+) Net-(U7A--) Net-(U7B-+) Net-(U7B--) OPA_SPARE PGND PWM_G1 PWM_G1_ISO PWM_G2 PWM_G2_ISO PWM_G3 PWM_G3_ISO PWM_G4 PWM_G4_ISO PWM_Q5 PWM_Q5_CTRL PWM_Q6 PWM_Q6_CTRL PWM_Q7 PWM_Q7_CTRL PWM_Q8 PWM_Q8_CTRL PWM_TRANS1 PWM_TRANS1_ISO PWM_TRANS2 PWM_TRANS2_ISO PWM_TRANS3 PWM_TRANS3_ISO PWM_TRANS4 PWM_TRANS4_CTRL PWM_TRANS5 PWM_TRANS5_CTRL PWM_TRANS6 PWM_TRANS6_CTRL REF_1V65 REF_1V65_ISO SDATA1 SDATA1_ISO VCC
+items 3232, groups 754, shorts 0, orphans 11, opens 0
+  orphan group 1828 (4 track, 1 via) net from vias ['PWM_TRANS2']: via(67.200,-22.106)
+  orphan group 2328 (3 track, 1 via) net from vias ['PWM_G1']: track F.Cu(65.869,-22.164)-(65.869,-19.281)
+  orphan group 2508 (9 track, 1 via) net from vias ['PWM_TRANS3']: via(108.773,-54.344)
+  orphan group 3218 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#0
+  orphan group 3219 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#1
+  orphan group 3220 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#2
+  orphan group 3221 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#3
+  orphan group 3222 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#4
+  orphan group 3223 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#5
+  orphan group 3224 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#6
+  orphan group 3225 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#7
+v5 opens pending GUI layout: 153: /01 afe/LEMOUT /05 VSI/INDUCTOR_OUTPUT 15V 15V_ISO 3V3_CTRL 3V3_ISO 5V 5V_CTRL 5V_CTRL_A 5V_ISOL ADA3 ADASEL0 ADASEL0_ISO ADASEL1 ADASEL1_ISO ADASEL2 ADASEL2_ISO ADCLK ADCLK_DAB ADCLK_DAB_CTRL ADCLK_ISO AFE_CHOKE1 AUX_CLAMP AUX_COMP AUX_COMPC AUX_CS AUX_DRAIN AUX_GATE AUX_LOVP AUX_LV1 AUX_LV2 AUX_ST1 AUX_ST2 AUX_VDD AUX_VDDR AUX_VERR AUX_VIN AUX_W1 AUX_W2 CLK1 CLK1_ISO CS1 CS1_ISO CTRLGND CTRLGND_A CTRL_BOOT CTRL_EN CTRL_FB CTRL_NR CTRL_RAW CTRL_SW CTRL_W DAB_GROUND DAB_PWM_HI_SEC DAB_PWM_HI_SEC_CTRL DAB_PWM_LO_SEC DAB_PWM_LO_SEC_CTRL DAB_PWM_PRI_HI DAB_PWM_PRI_HI_ISO DAB_PWM_PRI_LO DAB_PWM_PRI_LO_ISO DAB_SHUNT2 DC+ GND GPIO_BYPASS_RLY GPIO_BYPASS_RLY_ISO GPIO_BYPASS_RLY_ISOLATED GPIO_BYPASS_RLY_ISO_CTRL INU_ADCLK INU_ADCLK_CTRL INU_CHOKE INU_SHUNT2 ISOADA1 ISOADA1_AIN ISOADA1_CTRL ISOADA1_M ISOADA1_N ISOADA1_OUT ISOADA1_P ISOADA1_PL ISOADA2 ISOADA2_AIN ISOADA2_CTRL ISOADA2_M ISOADA2_N ISOADA2_OUT ISOADA2_P ISOADA2_PL ISOADA3 ISOADA3_AIN ISOADA3_CTRL ISOADA3_M ISOADA3_N ISOADA3_OUT ISOADA3_P ISOADA3_PL ISODC+ ISOGND ISOPGND ISO_AFE_SDM_RAW_VOLTAGE ISO_DAB_SDM_RAW_VOLTAGE MDATA MDATA_DAB MDATA_DAB_CTRL MDATA_INU MDATA_INU_CTRL MDATA_ISO Net-(D17-K) Net-(U11-X) Net-(U15-B5) Net-(U2-+) Net-(U2--) Net-(U7A-+) Net-(U7A--) Net-(U7B-+) Net-(U7B--) OPA_SPARE PGND PWM_G1 PWM_G1_ISO PWM_G2 PWM_G2_ISO PWM_G3 PWM_G3_ISO PWM_G4 PWM_G4_ISO PWM_Q5 PWM_Q5_CTRL PWM_Q6 PWM_Q6_CTRL PWM_Q7 PWM_Q7_CTRL PWM_Q8 PWM_Q8_CTRL PWM_TRANS1 PWM_TRANS1_ISO PWM_TRANS2 PWM_TRANS2_ISO PWM_TRANS3 PWM_TRANS3_ISO PWM_TRANS4 PWM_TRANS4_CTRL PWM_TRANS5 PWM_TRANS5_CTRL PWM_TRANS6 PWM_TRANS6_CTRL REF_1V65 REF_1V65_ISO SDATA1 SDATA1_ISO SDM_RAW_VOLTAGE SHUNT1 VCC
 card-area planes without a pad yet (unrouted): v5 card CA In2.Cu 3V3_CTRL
-items carrying another net than their group: 294
-  track In1.Cu(22.350,50.930)-(24.788,48.492): net 'ISOGND', group has no pad
-  track B.Cu(91.761,-77.161)-(89.314,-74.714): net 'DC+', group has no pad
-  track B.Cu(91.761,-79.800)-(91.761,-77.161): net 'DC+', group has no pad
-  track B.Cu(92.713,-79.800)-(91.761,-79.800): net 'DC+', group has no pad
-  track B.Cu(75.252,-79.800)-(74.300,-79.800): net 'DC+', group has no pad
-  track B.Cu(91.761,-78.847)-(91.761,-79.800): net 'DC+', group has no pad
-  track B.Cu(89.314,-74.714)-(76.486,-74.714): net 'DC+', group has no pad
-  track B.Cu(76.486,-74.714)-(74.300,-76.900): net 'DC+', group has no pad
-  track B.Cu(91.761,-80.752)-(91.761,-79.800): net 'DC+', group has no pad
-  track B.Cu(73.347,-79.800)-(74.300,-79.800): net 'DC+', group has no pad
-  track B.Cu(74.300,-76.900)-(74.300,-79.800): net 'DC+', group has no pad
-  track B.Cu(74.300,-78.847)-(74.300,-79.800): net 'DC+', group has no pad
-  track B.Cu(74.300,-80.752)-(74.300,-79.800): net 'DC+', group has no pad
-  track B.Cu(90.808,-79.800)-(91.761,-79.800): net 'DC+', group has no pad
-  zone Proteus B.Cu pour 3 B.Cu#0: net 'DC+', group has no pad
-  track In2.Cu(104.660,49.906)-(104.660,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.794,50.770)-(107.200,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.264,49.564)-(107.201,49.501): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.524,49.500)-(105.930,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.660,51.176)-(104.660,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,50.364)-(105.930,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.660,50.364)-(104.660,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.264,50.706)-(107.264,49.789): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.066,50.770)-(104.660,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.660,49.094)-(104.660,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,50.770)-(105.930,50.788): net 'DAB_GROUND', group has no pad
-  track In2.Cu(114.700,67.147)-(114.700,68.100): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.202,49.500)-(105.190,49.512): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.336,50.770)-(105.930,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.232,49.501)-(105.931,49.501): net 'DAB_GROUND', group has no pad
-  track In2.Cu(113.748,68.100)-(114.700,68.100): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.190,49.512)-(104.672,49.512): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.660,49.500)-(104.546,49.614): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.201,49.501)-(106.232,49.501): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.066,49.500)-(104.660,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(115.653,68.100)-(114.700,68.100): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.794,49.500)-(107.200,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,50.770)-(106.527,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.090,50.788)-(105.930,50.788): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.524,50.770)-(105.930,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,49.094)-(105.930,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.672,49.512)-(104.660,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.264,49.789)-(107.264,49.564): net 'DAB_GROUND', group has no pad
-  track In2.Cu(114.700,69.052)-(114.700,68.100): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,49.500)-(105.202,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,49.906)-(105.930,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(104.660,50.770)-(105.072,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.931,49.501)-(105.930,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.527,50.770)-(106.532,50.765): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.532,50.765)-(107.195,50.765): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.195,50.765)-(107.200,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.930,51.176)-(105.930,50.770): net 'DAB_GROUND', group has no pad
-  track In2.Cu(105.072,50.770)-(105.090,50.788): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.201,49.501)-(107.200,49.500): net 'DAB_GROUND', group has no pad
-  track In2.Cu(107.200,50.770)-(107.264,50.706): net 'DAB_GROUND', group has no pad
-  track In2.Cu(106.336,49.500)-(105.930,49.500): net 'DAB_GROUND', group has no pad
-  zone Proteus In2.Cu pour 13 In2.Cu#0: net 'DAB_GROUND', group has no pad
-  track F.Cu(83.400,60.466)-(83.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(91.337,68.100)-(92.239,68.100): net 'ISODC+', group has no pad
-  track F.Cu(93.141,68.100)-(92.239,68.100): net 'ISODC+', group has no pad
-  track F.Cu(83.476,60.542)-(83.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(83.324,60.542)-(83.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(89.400,60.618)-(89.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(83.400,60.618)-(83.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(89.324,60.542)-(89.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(83.400,60.542)-(89.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(92.239,69.002)-(92.239,68.100): net 'ISODC+', group has no pad
-  track F.Cu(89.476,60.542)-(89.400,60.542): net 'ISODC+', group has no pad
-  track F.Cu(92.239,67.198)-(92.239,68.100): net 'ISODC+', group has no pad
-  track F.Cu(89.400,60.466)-(89.400,60.542): net 'ISODC+', group has no pad
-  zone Proteus F.Cu pour 14 F.Cu#0: net 'ISODC+', group has no pad
-  track In2.Cu(100.850,50.770)-(100.000,49.920): net 'ISO_DAB_SDM_RAW_VOLTAGE', group has no pad
-  track In2.Cu(22.984,51.566)-(22.984,50.296): net '5V_ISOL', group has no pad
-  track In2.Cu(22.984,50.296)-(23.680,49.600): net '5V_ISOL', group has no pad
-  track In2.Cu(22.350,52.200)-(22.984,51.566): net '5V_ISOL', group has no pad
-  track In2.Cu(58.186,51.551)-(58.186,52.503): net '15V_ISO', group has no pad
-  track In2.Cu(58.420,52.737)-(59.200,52.737): net '15V_ISO', group has no pad
-  track In2.Cu(58.186,52.503)-(58.420,52.737): net '15V_ISO', group has no pad
-  track In2.Cu(56.916,52.261)-(56.916,51.366): net '15V_ISO', group has no pad
-  track In2.Cu(59.200,52.737)-(59.900,52.037): net '15V_ISO', group has no pad
-  track In2.Cu(56.452,52.725)-(56.916,52.261): net '15V_ISO', group has no pad
-  track In2.Cu(55.200,52.289)-(55.636,52.725): net '15V_ISO', group has no pad
-  track In2.Cu(58.000,51.366)-(58.186,51.551): net '15V_ISO', group has no pad
-  track In2.Cu(56.916,51.366)-(58.000,51.366): net '15V_ISO', group has no pad
-  track In2.Cu(56.280,50.730)-(56.916,51.366): net '15V_ISO', group has no pad
-  track In2.Cu(55.636,52.725)-(56.452,52.725): net '15V_ISO', group has no pad
-  track In2.Cu(59.900,52.037)-(59.900,49.169): net '15V_ISO', group has no pad
-  track In2.Cu(21.080,50.120)-(22.000,49.200): net '15V_ISO', group has no pad
-  track In2.Cu(21.080,50.930)-(21.080,50.120): net '15V_ISO', group has no pad
-  track F.Cu(80.653,68.100)-(79.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(79.700,69.052)-(79.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(61.748,68.100)-(62.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(79.700,67.147)-(79.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(62.700,69.052)-(62.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(62.700,67.147)-(62.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(78.748,68.100)-(79.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(63.653,68.100)-(62.700,68.100): net 'ISOPGND', group has no pad
-  track F.Cu(62.700,68.100)-(62.700,64.691): net 'ISOPGND', group has no pad
-  track F.Cu(62.700,64.691)-(51.286,53.277): net 'ISOPGND', group has no pad
-  zone Proteus F.Cu pour 8 (fix 14) (part 2) F.Cu#0: net 'ISOPGND', group has no pad
+items carrying another net than their group: 0

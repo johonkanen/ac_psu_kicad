@@ -1,0 +1,72 @@
+19:43:05: Debug: Adding duplicate image handler for 'PNG file'
+19:43:05: Debug: Adding duplicate image handler for 'JPEG file'
+19:43:05: Debug: Adding duplicate image handler for 'TIFF file'
+19:43:05: Debug: Adding duplicate image handler for 'GIF file'
+19:43:05: Debug: Adding duplicate image handler for 'PNM file'
+19:43:05: Debug: Adding duplicate image handler for 'PCX file'
+19:43:05: Debug: Adding duplicate image handler for 'IFF file'
+19:43:05: Debug: Adding duplicate image handler for 'Windows icon file'
+19:43:05: Debug: Adding duplicate image handler for 'Windows cursor file'
+19:43:05: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+19:43:05: Debug: Adding duplicate image handler for 'TGA file'
+19:43:05: Debug: Adding duplicate image handler for 'XPM file'
+19:43:05: Debug: Adding duplicate image handler for 'WebP file'
+== v6 step 2: card strips cleared (tracks, vias, pours of the old power stage)
+  ISO strip: 14 tracks of 15V_ISO deleted
+  ISO strip: 3 tracks of 5V_ISOL deleted
+  ISO strip: 59 tracks of DAB_GROUND deleted
+  ISO strip: 1 tracks of INU_SHUNT2 deleted
+  ISO strip: 24 tracks of ISODC+ deleted
+  ISO strip: 1 tracks of ISOGND deleted
+  ISO strip: 83 tracks of ISOPGND deleted
+  ISO strip: 6 tracks of ISO_AFE_SDM_RAW_VOLTAGE deleted
+  ISO strip: 1 tracks of ISO_DAB_SDM_RAW_VOLTAGE deleted
+  ISO strip: 2 tracks of PWM_Q7 deleted
+  primary strip: 18 tracks of 15V deleted
+  primary strip: 1 vias of 15V deleted
+  primary strip: 33 tracks of 5V deleted
+  primary strip: 2 vias of 5V deleted
+  primary strip: 2 tracks of DAB_PWM_PRI_HI deleted
+  primary strip: 29 tracks of DC+ deleted
+  primary strip: 12 tracks of GND deleted
+  primary strip: 104 tracks of PGND deleted
+  primary strip: 6 tracks of PWM_G1 deleted
+  primary strip: 1 vias of PWM_G1 deleted
+  primary strip: 5 tracks of PWM_G2 deleted
+  primary strip: 1 vias of PWM_G2 deleted
+  primary strip: 4 tracks of PWM_G3 deleted
+  primary strip: 1 vias of PWM_G3 deleted
+  primary strip: 8 tracks of PWM_G4 deleted
+  primary strip: 1 vias of PWM_G4 deleted
+  primary strip: 6 tracks of PWM_TRANS1 deleted
+  primary strip: 1 vias of PWM_TRANS1 deleted
+  primary strip: 6 tracks of PWM_TRANS2 deleted
+  primary strip: 1 vias of PWM_TRANS2 deleted
+  primary strip: 3 tracks of PWM_TRANS3 deleted
+  primary strip: 11 tracks of SDM_RAW_VOLTAGE deleted
+  primary strip: pour Proteus F.Cu pour 5 (fix 14) [DC+] cut back to the strip edge, 1 piece(s)
+  ISO strip: pour Proteus F.Cu pour 8 (fix 14) (part 2) [ISOPGND] deleted (wholly in the strip)
+  ISO strip: pour Proteus F.Cu pour 8 (fix 14) (part 2) (part 2) [ISOPGND] cut back to the strip edge, 1 piece(s)
+  ISO strip: pour Proteus F.Cu pour 14 [ISODC+] deleted (wholly in the strip)
+  ISO strip: pour Proteus F.Cu pour 12 [DAB_GROUND] cut back to the strip edge, 1 piece(s)
+  ISO strip: pour Proteus F.Cu pour 11 [ISODC+] cut back to the strip edge, 1 piece(s)
+  primary strip: pour Proteus F.Cu pour 20 [15V] cut back to the strip edge, 1 piece(s)
+  primary strip: pour Proteus F.Cu pour 7 [PGND] cut back to the strip edge, 1 piece(s)
+  primary strip: pour Proteus B.Cu pour 3 [DC+] deleted (wholly in the strip)
+  ISO strip: pour Proteus B.Cu pour 5 (fix 14) (part 2) [ISODC+] cut back to the strip edge, 1 piece(s)
+  zone Proteus B.Cu pour 0 (fix 14) (v6 piece 2) B.Cu PGND prio 0: (85.103547,-52.965405) (85.415,-52.985) (85.425,-52.985) (85.581034,-52.980096) (85.890643,-52.940984) (85.95757,-52.9238) (86.0,-52.9238) (86.033062,-52.931346) (86.053882,-52.946118) (89.053882,-55.946118) (89.071924,-55.974833) (89.0762,-56.0) (89.0762,-57.0) (81.380992,-57.0) (81.38123,-55.910433) (81.388783,-55.877373) (81.403548,-55.856568) (82.497443,-54.762672) (82.49808,-53.220009) (82.50564,-53.18695) (82.526795,-53.160445) (82.552162,-53.147121) (82.625516,-53.12487) (82.64702,-53.113377) (82.679736,-53.104447) (82.68294,-53.10438) (83.628876,-53.10438) (83.787138,-52.946118) (83.815853,-52.928076) (83.84102,-52.9238) (84.885447,-52.9238)
+  primary strip: pour Proteus B.Cu pour 0 (fix 14) [PGND] cut back to the strip edge, 2 piece(s)
+  primary strip: pour Proteus In1.Cu pour 10 [PGND] cut back to the strip edge, 1 piece(s)
+  primary strip: pour Proteus In1.Cu pour 6 [PGND] deleted (wholly in the strip)
+  primary strip: pour Proteus In2.Cu pour 4 [PGND] deleted (wholly in the strip)
+  ISO strip: pour Proteus In2.Cu pour 12 [ISOPGND] deleted (wholly in the strip)
+  ISO strip: pour Proteus In2.Cu pour 3 [ISOPGND] deleted (wholly in the strip)
+  ISO strip: pour Proteus In2.Cu pour 13 [DAB_GROUND] cut back to the strip edge, 1 piece(s)
+  islands Proteus B.Cu pour 0 (fix 14) (v6 piece 2) [PGND] B.Cu: - -> 1
+  islands Proteus B.Cu pour 3 [DC+] B.Cu: 1 -> -
+  islands Proteus F.Cu pour 14 [ISODC+] F.Cu: 1 -> -
+  islands Proteus F.Cu pour 8 (fix 14) (part 2) [ISOPGND] F.Cu: 1 -> -
+  islands Proteus In1.Cu pour 6 [PGND] In1.Cu: 1 -> -
+  islands Proteus In2.Cu pour 12 [ISOPGND] In2.Cu: 1 -> -
+  islands Proteus In2.Cu pour 3 [ISOPGND] In2.Cu: 1 -> -
+  islands Proteus In2.Cu pour 4 [PGND] In2.Cu: 1 -> -

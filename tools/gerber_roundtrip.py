@@ -558,6 +558,10 @@ def main():
         for c in s["other"]:
             print(f"roundtrip: {s['layer']} OTHER only {c['side']} {c['area']:.3f} mm^2 at ({c['x']:.3f}, {c['y']:.3f}), "
                   f"box x {c['box'][0]:.2f}..{c['box'][2]:.2f} y {c['box'][1]:.2f}..{c['box'][3]:.2f}, near {c['pad']}, {c['via']}")
+    for s in summaries:      # the unexplained draws / flashes by position (first 12 per layer and side)
+        for who in ("miss_P", "miss_K"):
+            for m in s[who][:12]:
+                print(f"roundtrip: {s['layer']} MISSING {'Proteus' if who == 'miss_P' else 'KiCad'} item at ({m[1]:.2f}, {m[2]:.2f})")
     print(f"roundtrip: drills {len(drill_errors)} mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png")
     for e in drill_errors[:10]:
         print("roundtrip: ERROR " + e)

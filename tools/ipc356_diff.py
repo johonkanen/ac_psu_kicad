@@ -213,6 +213,8 @@ def main():
             continue
         if want not in pnets and (r["net"] == want or (len(r["net"]) >= 12 and want.startswith(r["net"]))):
             continue   # a new v5 net (no Proteus image; the IPC export truncates long names)
+        if want not in mapping and r["net"] == want and want not in back:
+            continue   # v6: a Proteus net that lost all its Proteus pads (power stage removed); the name is kept
         if mapping.get(want) != r["net"]:
             errors.append(f"v4 {r['kind']} {r['refdes']}-{r['pin']} at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): "
                           f"KiCad net {r['net']}, listed {want} -> {mapping.get(want)}")
@@ -228,15 +230,19 @@ def main():
         print(f"ipc356_diff: {len(movedrecs)} pads of {len(movedset)} v5 moved parts (nets checked, not positions); "
               f"{len(newvias)} new vias and {len(v4gone)} deleted v4 vias in the unrouted areas")
     for r, tref in swaprecs:   # swapped footprints: in their terminal area, on the IPC pin's net
+        if swap_net.get(tref) == "N/C" and kicad_unconnected(r["net"]):
+            continue   # v6: a terminal that became a wire landing point without a net (pin row ... -> N/C)
         if mapping.get(swap_net.get(tref)) != r["net"]:
             errors.append(f"v4 footprint swap {tref} pad at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): KiCad net {r['net']}, "
                           f"IPC net {swap_net.get(tref)} -> {mapping.get(swap_net.get(tref))}")
     missing = sorted(set(swapped) - {t for _, t in swaprecs})
     if missing:
         errors.append(f"v4 footprint swaps without KiCad pad records: {' '.join(missing)}")
-    nv4p = sum(1 for r, _ in v4recs if r["kind"] == "pad")
-    if nv4p != sum(len(p["pins"]) for p in v4parts.values()) or len(v4recs) - nv4p != len(v4vias):
-        errors.append(f"v4 records: {nv4p} pads, {len(v4recs) - nv4p} vias found; "
+    # a pin with several pads (v6: the four press-fit pins of a REDCUBE terminal share number 1) counts once
+    npadrec = sum(1 for r, _ in v4recs if r["kind"] == "pad")
+    nv4p = len({(r["refdes"], r["pin"]) for r, _ in v4recs if r["kind"] == "pad"})
+    if nv4p != sum(len(p["pins"]) for p in v4parts.values()) or len(v4recs) - npadrec != len(v4vias):
+        errors.append(f"v4 records: {nv4p} pads, {len(v4recs) - npadrec} vias found; "
                       f"listed {sum(len(p['pins']) for p in v4parts.values())} pads, {len(v4vias)} vias")
 
     stats = Counter()

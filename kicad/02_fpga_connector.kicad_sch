@@ -3945,69 +3945,13 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 58.42 53.34) (xy 63.5 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
+	(no_connect
+		(at 58.42 53.34)
 		(uuid "60c0169d-652a-5e3d-ad36-6241ec85aec1")
 	)
-	(global_label "ADCLK"
-		(shape passive)
-		(at 63.5 53.34 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
+	(no_connect
+		(at 58.42 55.88)
 		(uuid "31cee9cc-e699-54ef-aa7c-81b98edfb2eb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.5 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 58.42 55.88) (xy 63.5 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61d9f0c4-c1b3-5a5a-8331-106731941f7d")
-	)
-	(global_label "MDAT_AFE"
-		(shape passive)
-		(at 63.5 55.88 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "1cb8ad71-5e56-52ad-8171-0af519632380")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.5 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -4083,7 +4027,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e7ab616e-17da-555d-b9e8-b9a81ca8848d")
+		(uuid "61d9f0c4-c1b3-5a5a-8331-106731941f7d")
 	)
 	(symbol
 		(lib_id "ac_psu:DC+")
@@ -4155,7 +4099,7 @@
 		(at 104.14 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a3b5b95e-b95c-5a94-a1a1-29dc6584d9bb")
+		(uuid "1cb8ad71-5e56-52ad-8171-0af519632380")
 	)
 	(wire
 		(pts
@@ -4165,7 +4109,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b293dcde-3fe5-55ea-bfc6-49bbda959cc1")
+		(uuid "e7ab616e-17da-555d-b9e8-b9a81ca8848d")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -4306,7 +4250,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "45ecc599-ef53-52b8-a8f7-0654d853a9a4")
+		(uuid "a3b5b95e-b95c-5a94-a1a1-29dc6584d9bb")
 	)
 	(symbol
 		(lib_id "ac_psu:PGND")
@@ -4378,7 +4322,7 @@
 		(at 104.14 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "96e409bd-a502-5ac0-8bce-a80c3d6b64e1")
+		(uuid "b293dcde-3fe5-55ea-bfc6-49bbda959cc1")
 	)
 	(wire
 		(pts
@@ -4388,7 +4332,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e3dcd921-3542-55fc-b824-53db795ca6a4")
+		(uuid "45ecc599-ef53-52b8-a8f7-0654d853a9a4")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -4530,7 +4474,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "8d8e81c0-67cd-589a-9123-326bc67db296")
+		(uuid "96e409bd-a502-5ac0-8bce-a80c3d6b64e1")
 	)
 	(symbol
 		(lib_id "ac_psu:15V")
@@ -4605,7 +4549,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "17ecb5cb-2a4b-541f-9be7-d51702cee0a6")
+		(uuid "e3dcd921-3542-55fc-b824-53db795ca6a4")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -4747,7 +4691,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b0ada20-e356-5caa-a618-7f66d422c350")
+		(uuid "8d8e81c0-67cd-589a-9123-326bc67db296")
 	)
 	(symbol
 		(lib_id "ac_psu:5V")
@@ -4822,7 +4766,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "172f1315-64d6-5496-94b2-6dd57ecd34b5")
+		(uuid "17ecb5cb-2a4b-541f-9be7-d51702cee0a6")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -4898,7 +4842,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "a68a6d96-e373-5138-ad10-7f0e0d309c3e")
+		(uuid "6b0ada20-e356-5caa-a618-7f66d422c350")
 	)
 	(symbol
 		(lib_id "ac_psu:HDR_2X5")
@@ -5001,7 +4945,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f543a7a6-fce1-592c-9a44-86fb85e38656")
+		(uuid "172f1315-64d6-5496-94b2-6dd57ecd34b5")
 	)
 	(global_label "PWM_G3"
 		(shape passive)
@@ -5013,7 +4957,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d6ef7d44-e5f1-560f-b715-4ccf3c53a58e")
+		(uuid "a68a6d96-e373-5138-ad10-7f0e0d309c3e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 45.72 0)
 			(effects
@@ -5033,7 +4977,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c8eb82cc-06a7-5a12-8130-489c520581b7")
+		(uuid "f543a7a6-fce1-592c-9a44-86fb85e38656")
 	)
 	(global_label "PWM_G4"
 		(shape passive)
@@ -5045,7 +4989,7 @@
 			)
 			(justify right)
 		)
-		(uuid "57beaec3-b47f-5292-ae69-35f3a0c5b244")
+		(uuid "d6ef7d44-e5f1-560f-b715-4ccf3c53a58e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 48.26 0)
 			(effects
@@ -5065,7 +5009,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d6557e42-b772-5699-84d0-e598408fd273")
+		(uuid "c8eb82cc-06a7-5a12-8130-489c520581b7")
 	)
 	(global_label "PWM_TRANS2"
 		(shape passive)
@@ -5077,7 +5021,7 @@
 			)
 			(justify right)
 		)
-		(uuid "65feb6dc-da3d-531b-8fc0-a19781f65da1")
+		(uuid "57beaec3-b47f-5292-ae69-35f3a0c5b244")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 50.8 0)
 			(effects
@@ -5097,7 +5041,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ff8aa0fd-0119-541f-9619-bbf57020844a")
+		(uuid "d6557e42-b772-5699-84d0-e598408fd273")
 	)
 	(symbol
 		(lib_id "ac_psu:5V")
@@ -5173,7 +5117,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a59b915b-2ee8-5a2f-9606-cdd5de4947cb")
+		(uuid "65feb6dc-da3d-531b-8fc0-a19781f65da1")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -5249,7 +5193,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "84627dcc-c1d5-5ba2-928f-73386c543730")
+		(uuid "ff8aa0fd-0119-541f-9619-bbf57020844a")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -5325,7 +5269,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "20e364e0-3d2d-56df-9401-5dbaefdca314")
+		(uuid "a59b915b-2ee8-5a2f-9606-cdd5de4947cb")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -5401,7 +5345,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "41bca39b-0657-5566-ae87-2b172eca023f")
+		(uuid "84627dcc-c1d5-5ba2-928f-73386c543730")
 	)
 	(symbol
 		(lib_id "ac_psu:15V")
@@ -5471,11 +5415,11 @@
 	)
 	(no_connect
 		(at 198.12 53.34)
-		(uuid "239ee597-3700-5714-9356-f51a8ae9e56f")
+		(uuid "20e364e0-3d2d-56df-9401-5dbaefdca314")
 	)
 	(no_connect
 		(at 198.12 55.88)
-		(uuid "d59b3e46-0eaf-5636-81d5-9c37fa6df823")
+		(uuid "41bca39b-0657-5566-ae87-2b172eca023f")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -5551,7 +5495,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "904165a7-3bf0-5e76-a1db-67f2b632157b")
+		(uuid "239ee597-3700-5714-9356-f51a8ae9e56f")
 	)
 	(symbol
 		(lib_id "ac_psu:DC+")
@@ -5693,7 +5637,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4beae31c-f20b-5e47-aed2-b2835671d1e7")
+		(uuid "d59b3e46-0eaf-5636-81d5-9c37fa6df823")
 	)
 	(symbol
 		(lib_id "ac_psu:PGND")
@@ -5836,7 +5780,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1c10a826-4622-5bfe-8184-0667e553f277")
+		(uuid "904165a7-3bf0-5e76-a1db-67f2b632157b")
 	)
 	(symbol
 		(lib_id "ac_psu:15V")
@@ -5911,7 +5855,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0d4afe8d-e0a8-5709-a91f-275a3b3a890e")
+		(uuid "4beae31c-f20b-5e47-aed2-b2835671d1e7")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -6053,7 +5997,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "13121657-ccd5-5d75-922b-664a9c8e2264")
+		(uuid "1c10a826-4622-5bfe-8184-0667e553f277")
 	)
 	(symbol
 		(lib_id "ac_psu:5V")
@@ -6128,7 +6072,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c8433590-5179-51b5-917d-f9f6b172d5ac")
+		(uuid "0d4afe8d-e0a8-5709-a91f-275a3b3a890e")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -6204,7 +6148,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d1708a38-f5fc-5114-961d-b1ab01d82d69")
+		(uuid "13121657-ccd5-5d75-922b-664a9c8e2264")
 	)
 	(symbol
 		(lib_id "ac_psu:HDR_2X5")
@@ -6307,7 +6251,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "371445dd-c8dd-51e7-bb82-44d1ce73afa6")
+		(uuid "c8433590-5179-51b5-917d-f9f6b172d5ac")
 	)
 	(global_label "DAB_PWM_PRI_HI"
 		(shape passive)
@@ -6319,7 +6263,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ba2bd0a9-2784-5afc-939f-e660fe75013c")
+		(uuid "d1708a38-f5fc-5114-961d-b1ab01d82d69")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 45.72 0)
 			(effects
@@ -6339,7 +6283,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "42ee2ae2-4438-5404-acf5-5d795f98efee")
+		(uuid "371445dd-c8dd-51e7-bb82-44d1ce73afa6")
 	)
 	(global_label "DAB_PWM_PRI_LO"
 		(shape passive)
@@ -6351,7 +6295,7 @@
 			)
 			(justify right)
 		)
-		(uuid "cd1bf50e-dd25-57b2-afab-d129fbfbae71")
+		(uuid "ba2bd0a9-2784-5afc-939f-e660fe75013c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 48.26 0)
 			(effects
@@ -6371,7 +6315,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6c36d73b-c122-5c47-a19e-988c34ea72c2")
+		(uuid "42ee2ae2-4438-5404-acf5-5d795f98efee")
 	)
 	(global_label "PWM_TRANS3"
 		(shape passive)
@@ -6383,7 +6327,7 @@
 			)
 			(justify right)
 		)
-		(uuid "1ae27a9c-f4f3-5ef1-a919-885b7094a31d")
+		(uuid "cd1bf50e-dd25-57b2-afab-d129fbfbae71")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 50.8 0)
 			(effects
@@ -6403,7 +6347,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "3cc29ddc-2c03-52f5-98de-a6b9538f7474")
+		(uuid "6c36d73b-c122-5c47-a19e-988c34ea72c2")
 	)
 	(symbol
 		(lib_id "ac_psu:5V")
@@ -6479,7 +6423,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bc573c71-08d2-5971-84d0-5be1f3abc2fa")
+		(uuid "1ae27a9c-f4f3-5ef1-a919-885b7094a31d")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -6555,7 +6499,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d5eae774-b9db-547e-8179-673049d37f5e")
+		(uuid "3cc29ddc-2c03-52f5-98de-a6b9538f7474")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -6631,7 +6575,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "465af95a-4784-5d16-8d04-4d8e1397fa12")
+		(uuid "bc573c71-08d2-5971-84d0-5be1f3abc2fa")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -6707,7 +6651,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "eaee8691-9d92-54f1-8326-265ce9f32587")
+		(uuid "d5eae774-b9db-547e-8179-673049d37f5e")
 	)
 	(symbol
 		(lib_id "ac_psu:15V")
@@ -6777,11 +6721,11 @@
 	)
 	(no_connect
 		(at 337.82 53.34)
-		(uuid "eb75e99a-382f-557f-88cd-e45d02a5a35e")
+		(uuid "465af95a-4784-5d16-8d04-4d8e1397fa12")
 	)
 	(no_connect
 		(at 337.82 55.88)
-		(uuid "1e16f517-e9ce-5792-8ab7-6969ac7e7b24")
+		(uuid "eaee8691-9d92-54f1-8326-265ce9f32587")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -6857,7 +6801,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f80092b8-dfe5-5e51-91da-054d3ed89f8e")
+		(uuid "eb75e99a-382f-557f-88cd-e45d02a5a35e")
 	)
 	(symbol
 		(lib_id "ac_psu:DC+")
@@ -6999,7 +6943,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "33df8810-67aa-561e-bea4-2c55d41a0bfc")
+		(uuid "1e16f517-e9ce-5792-8ab7-6969ac7e7b24")
 	)
 	(symbol
 		(lib_id "ac_psu:PGND")
@@ -7142,7 +7086,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6c7ee3f5-9f6a-519b-890a-68ecec9f1fbd")
+		(uuid "f80092b8-dfe5-5e51-91da-054d3ed89f8e")
 	)
 	(symbol
 		(lib_id "ac_psu:15V")
@@ -7217,7 +7161,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a5ef6764-4aa5-506e-8e76-f0b667b4968e")
+		(uuid "33df8810-67aa-561e-bea4-2c55d41a0bfc")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -7359,7 +7303,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1f96e911-a7bc-534a-8f48-7188d9375d60")
+		(uuid "6c7ee3f5-9f6a-519b-890a-68ecec9f1fbd")
 	)
 	(symbol
 		(lib_id "ac_psu:5V")
@@ -7434,7 +7378,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ff7e2bb0-62bc-533e-9684-5f13114f7442")
+		(uuid "a5ef6764-4aa5-506e-8e76-f0b667b4968e")
 	)
 	(symbol
 		(lib_id "ac_psu:GND")
@@ -7510,7 +7454,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "8b07966e-884b-5b81-93e9-f5f2c44c832f")
+		(uuid "1f96e911-a7bc-534a-8f48-7188d9375d60")
 	)
 	(symbol
 		(lib_id "ac_psu:HDR_2X5")
@@ -7613,7 +7557,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "aae79e43-6ab6-56cc-b3bd-2cd95ad365bc")
+		(uuid "ff7e2bb0-62bc-533e-9684-5f13114f7442")
 	)
 	(global_label "PWM_Q7"
 		(shape passive)
@@ -7625,7 +7569,7 @@
 			)
 			(justify right)
 		)
-		(uuid "d5fe3b21-c756-502a-927e-dc507a96a4a2")
+		(uuid "8b07966e-884b-5b81-93e9-f5f2c44c832f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 38.1 111.76 0)
 			(effects
@@ -7645,7 +7589,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c3d3922d-9e5d-5488-aadd-305252629c29")
+		(uuid "aae79e43-6ab6-56cc-b3bd-2cd95ad365bc")
 	)
 	(global_label "PWM_Q8"
 		(shape passive)
@@ -7657,7 +7601,7 @@
 			)
 			(justify right)
 		)
-		(uuid "52851fae-7fff-5f31-8ecc-8ff20360b132")
+		(uuid "d5fe3b21-c756-502a-927e-dc507a96a4a2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 38.1 114.3 0)
 			(effects
@@ -7677,7 +7621,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ea8dcab6-f57c-5537-9af1-75a32022950c")
+		(uuid "c3d3922d-9e5d-5488-aadd-305252629c29")
 	)
 	(global_label "PWM_TRANS6"
 		(shape passive)
@@ -7689,7 +7633,7 @@
 			)
 			(justify right)
 		)
-		(uuid "a28ec965-da3e-5d8a-95c4-c3c08b454d0c")
+		(uuid "52851fae-7fff-5f31-8ecc-8ff20360b132")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 38.1 116.84 0)
 			(effects
@@ -7709,7 +7653,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f61a76d3-a154-5bd8-a027-19207c3906b8")
+		(uuid "ea8dcab6-f57c-5537-9af1-75a32022950c")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -7785,7 +7729,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5b915e1a-3bec-5342-aae4-9432b79ded66")
+		(uuid "a28ec965-da3e-5d8a-95c4-c3c08b454d0c")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7861,7 +7805,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e34b2b04-6cbc-575c-9aa4-1907cdc5ee8b")
+		(uuid "f61a76d3-a154-5bd8-a027-19207c3906b8")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -7937,7 +7881,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fd1c9b24-8b38-5ffd-8284-500f28bf620c")
+		(uuid "5b915e1a-3bec-5342-aae4-9432b79ded66")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -8013,7 +7957,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "66073182-9857-54ab-a819-5e9043d3f937")
+		(uuid "e34b2b04-6cbc-575c-9aa4-1907cdc5ee8b")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -8081,69 +8025,13 @@
 			)
 		)
 	)
-	(wire
-		(pts
-			(xy 58.42 119.38) (xy 63.5 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2bb6b6c4-0805-50db-898c-2971d7599898")
+	(no_connect
+		(at 58.42 119.38)
+		(uuid "fd1c9b24-8b38-5ffd-8284-500f28bf620c")
 	)
-	(global_label "INU_ADCLK"
-		(shape passive)
-		(at 63.5 119.38 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9a037f9a-b61a-502f-a70d-96f40ebc0305")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.5 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 58.42 121.92) (xy 63.5 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "97928468-156a-5d9f-b7a7-09561c59cdd2")
-	)
-	(global_label "MDAT_INU_CARD"
-		(shape passive)
-		(at 63.5 121.92 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5e5cefe6-a6a2-5453-9da4-78f221e4a077")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.5 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
+	(no_connect
+		(at 58.42 121.92)
+		(uuid "66073182-9857-54ab-a819-5e9043d3f937")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -8219,7 +8107,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fce2009b-f9fa-5acb-a555-3533bdeddb94")
+		(uuid "2bb6b6c4-0805-50db-898c-2971d7599898")
 	)
 	(symbol
 		(lib_id "ac_psu:ISODC+")
@@ -8291,7 +8179,7 @@
 		(at 104.14 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d6b1cc63-e772-52a6-b73c-b601447b7e04")
+		(uuid "9a037f9a-b61a-502f-a70d-96f40ebc0305")
 	)
 	(wire
 		(pts
@@ -8301,7 +8189,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fd18980c-4589-55a5-80e1-5f0655043c76")
+		(uuid "97928468-156a-5d9f-b7a7-09561c59cdd2")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")
@@ -8442,7 +8330,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2f166964-a8c5-567a-8067-6ec3d54bf48e")
+		(uuid "5e5cefe6-a6a2-5453-9da4-78f221e4a077")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOPGND")
@@ -8585,7 +8473,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "73943a83-06f2-5faf-adc5-e319022aef07")
+		(uuid "fce2009b-f9fa-5acb-a555-3533bdeddb94")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -8660,7 +8548,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e9c7441c-5ea3-5633-a704-397b394a28e9")
+		(uuid "d6b1cc63-e772-52a6-b73c-b601447b7e04")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -8802,7 +8690,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "10c99c23-eb98-505f-bf50-cbacd1d56b59")
+		(uuid "fd18980c-4589-55a5-80e1-5f0655043c76")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -8877,7 +8765,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2ab4ebab-9b02-5288-823e-0262e8e6c602")
+		(uuid "2f166964-a8c5-567a-8067-6ec3d54bf48e")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -8953,7 +8841,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ad039779-47a4-5977-8394-ffdbd2a82f4d")
+		(uuid "73943a83-06f2-5faf-adc5-e319022aef07")
 	)
 	(symbol
 		(lib_id "ac_psu:HDR_2X5")
@@ -9056,7 +8944,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bd4ec24e-974a-5ea9-96d5-62d0514a6a56")
+		(uuid "e9c7441c-5ea3-5633-a704-397b394a28e9")
 	)
 	(global_label "PWM_Q5"
 		(shape passive)
@@ -9068,7 +8956,7 @@
 			)
 			(justify right)
 		)
-		(uuid "19835752-bc59-536d-9991-436e3d1e1f1e")
+		(uuid "10c99c23-eb98-505f-bf50-cbacd1d56b59")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 111.76 0)
 			(effects
@@ -9088,7 +8976,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9c049e80-0967-55c6-bb3a-6ee22ec2239f")
+		(uuid "2ab4ebab-9b02-5288-823e-0262e8e6c602")
 	)
 	(global_label "PWM_Q6"
 		(shape passive)
@@ -9100,7 +8988,7 @@
 			)
 			(justify right)
 		)
-		(uuid "171c7b2a-4e9b-5e89-b5da-b455382abcf2")
+		(uuid "ad039779-47a4-5977-8394-ffdbd2a82f4d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 114.3 0)
 			(effects
@@ -9120,7 +9008,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "eb0481cc-6dac-56e4-a402-af26179b0e0a")
+		(uuid "bd4ec24e-974a-5ea9-96d5-62d0514a6a56")
 	)
 	(global_label "PWM_TRANS5"
 		(shape passive)
@@ -9132,7 +9020,7 @@
 			)
 			(justify right)
 		)
-		(uuid "7d734687-7b0d-521a-a566-8bfe22653616")
+		(uuid "19835752-bc59-536d-9991-436e3d1e1f1e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 177.8 116.84 0)
 			(effects
@@ -9152,7 +9040,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b0e2e146-ac1e-518e-9de4-e0b40cdbfdf2")
+		(uuid "9c049e80-0967-55c6-bb3a-6ee22ec2239f")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -9228,7 +9116,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "705d7b61-7482-536d-86a3-24e39214f9f2")
+		(uuid "171c7b2a-4e9b-5e89-b5da-b455382abcf2")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -9304,7 +9192,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "00a00193-13ca-5cb1-ba73-640b1a0b319e")
+		(uuid "eb0481cc-6dac-56e4-a402-af26179b0e0a")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -9380,7 +9268,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7beae0c7-bcd3-5024-ac29-f67b9a281f08")
+		(uuid "7d734687-7b0d-521a-a566-8bfe22653616")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -9456,7 +9344,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "420eb307-49d2-5992-9416-40fc95258418")
+		(uuid "b0e2e146-ac1e-518e-9de4-e0b40cdbfdf2")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -9526,11 +9414,11 @@
 	)
 	(no_connect
 		(at 198.12 119.38)
-		(uuid "640838dc-b11f-5736-8f71-8ee90b9e6959")
+		(uuid "705d7b61-7482-536d-86a3-24e39214f9f2")
 	)
 	(no_connect
 		(at 198.12 121.92)
-		(uuid "5688b871-15fe-5d1f-ae71-c2e616b49825")
+		(uuid "00a00193-13ca-5cb1-ba73-640b1a0b319e")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -9606,7 +9494,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "984f1b7a-4cde-5920-ac43-575adbbac3dd")
+		(uuid "7beae0c7-bcd3-5024-ac29-f67b9a281f08")
 	)
 	(symbol
 		(lib_id "ac_psu:ISODC+")
@@ -9748,7 +9636,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "22da22e8-1b3e-5520-a40c-c2a0e42bb907")
+		(uuid "420eb307-49d2-5992-9416-40fc95258418")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOPGND")
@@ -9891,7 +9779,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d82afca2-d9c4-52e6-903a-e95a16af80b7")
+		(uuid "640838dc-b11f-5736-8f71-8ee90b9e6959")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -9966,7 +9854,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "52cf6a2e-3de5-5d96-b0ab-760a5becb12a")
+		(uuid "5688b871-15fe-5d1f-ae71-c2e616b49825")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -10108,7 +9996,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bc569357-e78d-51b9-b35e-09ef3b80a72a")
+		(uuid "984f1b7a-4cde-5920-ac43-575adbbac3dd")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -10183,7 +10071,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f2c9d8c9-8847-570a-8f33-9e72a1e43100")
+		(uuid "22da22e8-1b3e-5520-a40c-c2a0e42bb907")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -10259,7 +10147,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "c82b0aba-9a53-5768-9dbd-b6c174644aaa")
+		(uuid "d82afca2-d9c4-52e6-903a-e95a16af80b7")
 	)
 	(symbol
 		(lib_id "ac_psu:HDR_2X5")
@@ -10362,7 +10250,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "540826d5-198d-581e-9a69-134886a40f11")
+		(uuid "52cf6a2e-3de5-5d96-b0ab-760a5becb12a")
 	)
 	(global_label "DAB_PWM_HI_SEC"
 		(shape passive)
@@ -10374,7 +10262,7 @@
 			)
 			(justify right)
 		)
-		(uuid "db9a9e08-5d4d-52d4-a406-be62b33c5b9f")
+		(uuid "bc569357-e78d-51b9-b35e-09ef3b80a72a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 111.76 0)
 			(effects
@@ -10394,7 +10282,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f7b7652b-0d8d-5498-b35c-b75fc3362de7")
+		(uuid "f2c9d8c9-8847-570a-8f33-9e72a1e43100")
 	)
 	(global_label "DAB_PWM_LO_SEC"
 		(shape passive)
@@ -10406,7 +10294,7 @@
 			)
 			(justify right)
 		)
-		(uuid "3e0f5346-7c33-52d7-af19-1e468cc46bf3")
+		(uuid "c82b0aba-9a53-5768-9dbd-b6c174644aaa")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 114.3 0)
 			(effects
@@ -10426,7 +10314,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "cc9b6343-b5ae-5a25-8bbb-ae5180b6a752")
+		(uuid "540826d5-198d-581e-9a69-134886a40f11")
 	)
 	(global_label "PWM_TRANS4"
 		(shape passive)
@@ -10438,7 +10326,7 @@
 			)
 			(justify right)
 		)
-		(uuid "67cbafe2-aa98-5748-8356-52778f092597")
+		(uuid "db9a9e08-5d4d-52d4-a406-be62b33c5b9f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 317.5 116.84 0)
 			(effects
@@ -10458,7 +10346,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2c5998cb-60f3-5807-9618-72010b38e3cc")
+		(uuid "f7b7652b-0d8d-5498-b35c-b75fc3362de7")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -10534,7 +10422,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ddea8498-7046-5df0-8617-ed1c83d2cab5")
+		(uuid "3e0f5346-7c33-52d7-af19-1e468cc46bf3")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -10610,7 +10498,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6942c228-f989-51f9-a208-3c86e6f490f8")
+		(uuid "cc9b6343-b5ae-5a25-8bbb-ae5180b6a752")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -10686,7 +10574,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "eb964639-a9ae-5dd6-9723-64c05e3d8731")
+		(uuid "67cbafe2-aa98-5748-8356-52778f092597")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -10762,7 +10650,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "946b023d-4e70-5d53-9a67-a729360c2ada")
+		(uuid "2c5998cb-60f3-5807-9618-72010b38e3cc")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -10832,11 +10720,11 @@
 	)
 	(no_connect
 		(at 337.82 119.38)
-		(uuid "2fc5afd9-f56d-54a0-8d1f-2543fb622d60")
+		(uuid "ddea8498-7046-5df0-8617-ed1c83d2cab5")
 	)
 	(no_connect
 		(at 337.82 121.92)
-		(uuid "e4980dc8-4ea1-5484-bd67-affb98361514")
+		(uuid "6942c228-f989-51f9-a208-3c86e6f490f8")
 	)
 	(symbol
 		(lib_id "ac_psu:PIN")
@@ -10912,7 +10800,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bf8693ca-6e24-5e0f-9e9d-ae94fd7fc0f6")
+		(uuid "eb964639-a9ae-5dd6-9723-64c05e3d8731")
 	)
 	(symbol
 		(lib_id "ac_psu:ISODC+")
@@ -11054,7 +10942,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0b81b7e9-c217-5075-a895-9cd50cc47405")
+		(uuid "946b023d-4e70-5d53-9a67-a729360c2ada")
 	)
 	(symbol
 		(lib_id "ac_psu:DAB_GROUND")
@@ -11197,7 +11085,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "75afa70d-be42-5eb6-9ca9-85f112a5cf43")
+		(uuid "2fc5afd9-f56d-54a0-8d1f-2543fb622d60")
 	)
 	(symbol
 		(lib_id "ac_psu:15V_ISO")
@@ -11272,7 +11160,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "53bbf132-7df1-5e3d-a7f4-74ca456cea10")
+		(uuid "e4980dc8-4ea1-5484-bd67-affb98361514")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -11414,7 +11302,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "062eeaa5-95fe-5204-8c64-54a7d32e4ca1")
+		(uuid "bf8693ca-6e24-5e0f-9e9d-ae94fd7fc0f6")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_ISOL")
@@ -11489,7 +11377,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "956f9130-41c5-558e-87b9-6e5e929baec4")
+		(uuid "0b81b7e9-c217-5075-a895-9cd50cc47405")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -11565,7 +11453,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "71bd5781-69cd-5d3f-b8e4-41eda1c2b5c9")
+		(uuid "75afa70d-be42-5eb6-9ca9-85f112a5cf43")
 	)
 	(text "MCLK / MDAT are used by AFE leg 1 and inverter leg B only. The DC- terminal of the DAB secondary card is DAB_GROUND (R64 to ISOPGND, sheet 8)."
 		(exclude_from_sim no)
@@ -11576,7 +11464,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "0a4dc1ef-e23c-5984-9b55-411a7f3cd414")
+		(uuid "53bbf132-7df1-5e3d-a7f4-74ca456cea10")
 	)
 	(symbol
 		(lib_id "ac_psu:HEADER_38_50MIL")
@@ -11763,7 +11651,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "32cec54a-8a5b-56ce-9a89-2ad24dd1dd57")
+		(uuid "062eeaa5-95fe-5204-8c64-54a7d32e4ca1")
 	)
 	(global_label "ISOADA3_CTRL"
 		(shape passive)
@@ -11775,7 +11663,7 @@
 			)
 			(justify right)
 		)
-		(uuid "b5f59a0c-8467-5184-b254-ff7a35aace0d")
+		(uuid "956f9130-41c5-558e-87b9-6e5e929baec4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 180.34 0)
 			(effects
@@ -11795,7 +11683,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "ff568a60-894e-51fc-af9e-23afef128d9e")
+		(uuid "71bd5781-69cd-5d3f-b8e4-41eda1c2b5c9")
 	)
 	(symbol
 		(lib_id "ac_psu:CTRLGND_A")
@@ -11871,7 +11759,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1adc8e8c-d91e-5c05-b671-12bb1d01e0e1")
+		(uuid "0a4dc1ef-e23c-5984-9b55-411a7f3cd414")
 	)
 	(global_label "ISOADA2_CTRL"
 		(shape passive)
@@ -11883,7 +11771,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f29e894e-50dd-5700-9fc0-b02b489a9b43")
+		(uuid "32cec54a-8a5b-56ce-9a89-2ad24dd1dd57")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 182.88 0)
 			(effects
@@ -11903,7 +11791,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5cd00ad3-761d-5ae8-99a3-6606e243e260")
+		(uuid "b5f59a0c-8467-5184-b254-ff7a35aace0d")
 	)
 	(global_label "ISOADA1_CTRL"
 		(shape passive)
@@ -11915,7 +11803,7 @@
 			)
 			(justify left)
 		)
-		(uuid "64c844cb-e386-54a9-b042-be7a3d2129c9")
+		(uuid "ff568a60-894e-51fc-af9e-23afef128d9e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 182.88 0)
 			(effects
@@ -11935,7 +11823,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5fa36c0c-b557-5af0-8b2f-3a6029ada70b")
+		(uuid "1adc8e8c-d91e-5c05-b671-12bb1d01e0e1")
 	)
 	(symbol
 		(lib_id "ac_psu:CTRLGND_A")
@@ -12011,7 +11899,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "1c7163f8-98e7-5655-b249-e30e65e5b55c")
+		(uuid "f29e894e-50dd-5700-9fc0-b02b489a9b43")
 	)
 	(global_label "MDATA_ISO"
 		(shape passive)
@@ -12023,7 +11911,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ebf07696-2df9-5d9c-827d-79c8575d0c06")
+		(uuid "5cd00ad3-761d-5ae8-99a3-6606e243e260")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 185.42 0)
 			(effects
@@ -12043,7 +11931,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0cb2b08f-4b39-5803-81a0-78874e4efb15")
+		(uuid "64c844cb-e386-54a9-b042-be7a3d2129c9")
 	)
 	(global_label "ADCLK_ISO"
 		(shape passive)
@@ -12055,7 +11943,7 @@
 			)
 			(justify right)
 		)
-		(uuid "27dc50d2-7324-5d2e-9b2e-8198205aa7e4")
+		(uuid "5fa36c0c-b557-5af0-8b2f-3a6029ada70b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 187.96 0)
 			(effects
@@ -12075,7 +11963,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2cc0c509-cfce-5ff9-a939-4290bd630f85")
+		(uuid "1c7163f8-98e7-5655-b249-e30e65e5b55c")
 	)
 	(global_label "GPIO_BYPASS_RLY_ISOLATED"
 		(shape passive)
@@ -12087,7 +11975,7 @@
 			)
 			(justify left)
 		)
-		(uuid "48117c06-b0aa-598c-8f73-570133829f35")
+		(uuid "ebf07696-2df9-5d9c-827d-79c8575d0c06")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 187.96 0)
 			(effects
@@ -12107,7 +11995,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d1078799-cb22-59b2-bfb7-675872f6d3cc")
+		(uuid "0cb2b08f-4b39-5803-81a0-78874e4efb15")
 	)
 	(global_label "ADASEL2_ISO"
 		(shape passive)
@@ -12119,7 +12007,7 @@
 			)
 			(justify right)
 		)
-		(uuid "b19d0b1c-93e6-576f-80cb-87728ad1eee8")
+		(uuid "27dc50d2-7324-5d2e-9b2e-8198205aa7e4")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 190.5 0)
 			(effects
@@ -12139,7 +12027,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "f69df642-d70c-5425-9921-b72f500b03fc")
+		(uuid "2cc0c509-cfce-5ff9-a939-4290bd630f85")
 	)
 	(global_label "ADASEL1_ISO"
 		(shape passive)
@@ -12151,7 +12039,7 @@
 			)
 			(justify left)
 		)
-		(uuid "5fa63744-f558-5f4a-a3f6-72e190b42a43")
+		(uuid "48117c06-b0aa-598c-8f73-570133829f35")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 190.5 0)
 			(effects
@@ -12171,7 +12059,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "24b6833e-0c7c-5ced-8e89-045f6ed1cceb")
+		(uuid "d1078799-cb22-59b2-bfb7-675872f6d3cc")
 	)
 	(global_label "ADASEL0_ISO"
 		(shape passive)
@@ -12183,7 +12071,7 @@
 			)
 			(justify right)
 		)
-		(uuid "cc0a2ff4-b57a-5a34-8fbb-3e8aecf646d6")
+		(uuid "b19d0b1c-93e6-576f-80cb-87728ad1eee8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 193.04 0)
 			(effects
@@ -12203,7 +12091,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "525706ed-04f8-5863-af1d-eaacbd516cbd")
+		(uuid "f69df642-d70c-5425-9921-b72f500b03fc")
 	)
 	(global_label "SDATA1_ISO"
 		(shape passive)
@@ -12215,7 +12103,7 @@
 			)
 			(justify left)
 		)
-		(uuid "e3d74cfe-38c1-500d-b4d8-ee65f8dad349")
+		(uuid "5fa63744-f558-5f4a-a3f6-72e190b42a43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 193.04 0)
 			(effects
@@ -12235,7 +12123,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7636cee0-4f71-5111-8189-7df7a87e0114")
+		(uuid "24b6833e-0c7c-5ced-8e89-045f6ed1cceb")
 	)
 	(global_label "CS1_ISO"
 		(shape passive)
@@ -12247,7 +12135,7 @@
 			)
 			(justify right)
 		)
-		(uuid "ee614075-d6ca-5b92-8e30-4bfaa46fccfe")
+		(uuid "cc0a2ff4-b57a-5a34-8fbb-3e8aecf646d6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 195.58 0)
 			(effects
@@ -12267,7 +12155,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "d91d7ab5-f31a-566b-8bfb-04d03a551b94")
+		(uuid "525706ed-04f8-5863-af1d-eaacbd516cbd")
 	)
 	(global_label "CLK1_ISO"
 		(shape passive)
@@ -12279,7 +12167,7 @@
 			)
 			(justify left)
 		)
-		(uuid "66f7e374-2d72-58d0-8119-f965b109b32a")
+		(uuid "e3d74cfe-38c1-500d-b4d8-ee65f8dad349")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 195.58 0)
 			(effects
@@ -12299,7 +12187,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c6016143-962f-5a9b-95e5-fe6d0ed9d59e")
+		(uuid "7636cee0-4f71-5111-8189-7df7a87e0114")
 	)
 	(global_label "PWM_TRANS1_ISO"
 		(shape passive)
@@ -12311,7 +12199,7 @@
 			)
 			(justify right)
 		)
-		(uuid "403a3a7b-2c3c-5e2b-8cdf-5a4d4ff26ec7")
+		(uuid "ee614075-d6ca-5b92-8e30-4bfaa46fccfe")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 198.12 0)
 			(effects
@@ -12331,7 +12219,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e6c7c628-1fcf-5066-9e14-a76eaccd51ba")
+		(uuid "d91d7ab5-f31a-566b-8bfb-04d03a551b94")
 	)
 	(global_label "PWM_TRANS2_ISO"
 		(shape passive)
@@ -12343,7 +12231,7 @@
 			)
 			(justify left)
 		)
-		(uuid "282b033e-583a-59f5-a1d0-c093ef55fb07")
+		(uuid "66f7e374-2d72-58d0-8119-f965b109b32a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 198.12 0)
 			(effects
@@ -12363,7 +12251,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "caffeee9-4ea7-5e72-b0a1-3ce4a4c8630d")
+		(uuid "c6016143-962f-5a9b-95e5-fe6d0ed9d59e")
 	)
 	(global_label "PWM_TRANS3_ISO"
 		(shape passive)
@@ -12375,7 +12263,7 @@
 			)
 			(justify right)
 		)
-		(uuid "99db83d2-baf6-5a3a-aaa5-7ac02d3cf45b")
+		(uuid "403a3a7b-2c3c-5e2b-8cdf-5a4d4ff26ec7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 200.66 0)
 			(effects
@@ -12395,7 +12283,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "23b781b4-f34b-54f0-a11e-c85deb11da29")
+		(uuid "e6c7c628-1fcf-5066-9e14-a76eaccd51ba")
 	)
 	(global_label "PWM_G4_ISO"
 		(shape passive)
@@ -12407,7 +12295,7 @@
 			)
 			(justify left)
 		)
-		(uuid "5816606b-fe15-5696-9807-cb551f2f57d9")
+		(uuid "282b033e-583a-59f5-a1d0-c093ef55fb07")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 200.66 0)
 			(effects
@@ -12427,7 +12315,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "55fccfdf-15af-5322-ad45-424f58f4b3c7")
+		(uuid "caffeee9-4ea7-5e72-b0a1-3ce4a4c8630d")
 	)
 	(global_label "PWM_G2_ISO"
 		(shape passive)
@@ -12439,7 +12327,7 @@
 			)
 			(justify right)
 		)
-		(uuid "80f16aa7-e034-5254-9643-8487c60bc665")
+		(uuid "99db83d2-baf6-5a3a-aaa5-7ac02d3cf45b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 203.2 0)
 			(effects
@@ -12459,7 +12347,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "da627180-0851-5996-b139-444aea9583e7")
+		(uuid "23b781b4-f34b-54f0-a11e-c85deb11da29")
 	)
 	(global_label "PWM_G1_ISO"
 		(shape passive)
@@ -12471,7 +12359,7 @@
 			)
 			(justify left)
 		)
-		(uuid "660c52fe-b713-5c94-8e74-3f3cdb1c55c2")
+		(uuid "5816606b-fe15-5696-9807-cb551f2f57d9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 203.2 0)
 			(effects
@@ -12491,7 +12379,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "500d335a-5012-506b-890b-e2b0ea4b1210")
+		(uuid "55fccfdf-15af-5322-ad45-424f58f4b3c7")
 	)
 	(global_label "PWM_G3_ISO"
 		(shape passive)
@@ -12503,7 +12391,7 @@
 			)
 			(justify right)
 		)
-		(uuid "7cbe735c-bae7-55ef-947b-935d7dff127c")
+		(uuid "80f16aa7-e034-5254-9643-8487c60bc665")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 205.74 0)
 			(effects
@@ -12523,7 +12411,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "407e095f-264a-5026-9924-16b4b082d6f5")
+		(uuid "da627180-0851-5996-b139-444aea9583e7")
 	)
 	(global_label "DAB_PWM_PRI_HI_ISO"
 		(shape passive)
@@ -12535,7 +12423,7 @@
 			)
 			(justify left)
 		)
-		(uuid "46166583-103a-5695-b6e8-e9a181f04d25")
+		(uuid "660c52fe-b713-5c94-8e74-3f3cdb1c55c2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 205.74 0)
 			(effects
@@ -12555,7 +12443,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "46769fcd-bb37-5403-a390-b9ab9b70b79f")
+		(uuid "500d335a-5012-506b-890b-e2b0ea4b1210")
 	)
 	(global_label "DAB_PWM_PRI_LO_ISO"
 		(shape passive)
@@ -12567,7 +12455,7 @@
 			)
 			(justify right)
 		)
-		(uuid "c6e76401-1c35-5212-89c3-13042cb562f6")
+		(uuid "7cbe735c-bae7-55ef-947b-935d7dff127c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 208.28 0)
 			(effects
@@ -12587,7 +12475,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b472d785-5a04-5f9b-8789-deff0050ab40")
+		(uuid "407e095f-264a-5026-9924-16b4b082d6f5")
 	)
 	(global_label "ADCLK_DAB_CTRL"
 		(shape passive)
@@ -12599,7 +12487,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ba22c721-7580-5427-ac9b-299d21006f84")
+		(uuid "46166583-103a-5695-b6e8-e9a181f04d25")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 208.28 0)
 			(effects
@@ -12619,7 +12507,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "13de6c31-dc1a-5d0a-be75-13a48bcc1fbd")
+		(uuid "46769fcd-bb37-5403-a390-b9ab9b70b79f")
 	)
 	(global_label "PWM_TRANS4_CTRL"
 		(shape passive)
@@ -12631,7 +12519,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f5c71598-2d48-5e84-9296-c64d756608ef")
+		(uuid "c6e76401-1c35-5212-89c3-13042cb562f6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 210.82 0)
 			(effects
@@ -12651,7 +12539,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4c02abf7-6949-58e9-9028-66b27deecd1f")
+		(uuid "b472d785-5a04-5f9b-8789-deff0050ab40")
 	)
 	(global_label "MDATA_DAB_CTRL"
 		(shape passive)
@@ -12663,7 +12551,7 @@
 			)
 			(justify left)
 		)
-		(uuid "883729e9-3585-598c-be0d-0dc8f9c908a5")
+		(uuid "ba22c721-7580-5427-ac9b-299d21006f84")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 210.82 0)
 			(effects
@@ -12683,7 +12571,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "0791b1d6-a12f-52fb-8906-425f7cb835d3")
+		(uuid "13de6c31-dc1a-5d0a-be75-13a48bcc1fbd")
 	)
 	(global_label "DAB_PWM_HI_SEC_CTRL"
 		(shape passive)
@@ -12695,7 +12583,7 @@
 			)
 			(justify right)
 		)
-		(uuid "f045bae9-3c23-58e1-9dc7-14da573b2c3f")
+		(uuid "f5c71598-2d48-5e84-9296-c64d756608ef")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 213.36 0)
 			(effects
@@ -12715,7 +12603,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "bb9047a7-72a8-51b0-be46-f5c809d06689")
+		(uuid "4c02abf7-6949-58e9-9028-66b27deecd1f")
 	)
 	(global_label "PWM_TRANS6_CTRL"
 		(shape passive)
@@ -12727,7 +12615,7 @@
 			)
 			(justify left)
 		)
-		(uuid "6bcf0f98-8e71-5662-b518-63abafaac789")
+		(uuid "883729e9-3585-598c-be0d-0dc8f9c908a5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 213.36 0)
 			(effects
@@ -12747,7 +12635,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "dbeae508-5882-5129-93fe-3fcb5e7602e8")
+		(uuid "0791b1d6-a12f-52fb-8906-425f7cb835d3")
 	)
 	(global_label "DAB_PWM_LO_SEC_CTRL"
 		(shape passive)
@@ -12759,7 +12647,7 @@
 			)
 			(justify right)
 		)
-		(uuid "32707a7e-232f-5226-9e6c-98c8a3dfd70a")
+		(uuid "f045bae9-3c23-58e1-9dc7-14da573b2c3f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 215.9 0)
 			(effects
@@ -12779,7 +12667,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "abff032a-362e-5fda-89b7-9dd0904bdf76")
+		(uuid "bb9047a7-72a8-51b0-be46-f5c809d06689")
 	)
 	(global_label "PWM_Q5_CTRL"
 		(shape passive)
@@ -12791,7 +12679,7 @@
 			)
 			(justify left)
 		)
-		(uuid "7d38fb89-9f60-5aac-b1b4-b545b1fa0e70")
+		(uuid "6bcf0f98-8e71-5662-b518-63abafaac789")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 215.9 0)
 			(effects
@@ -12811,7 +12699,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "5f4b855d-2e69-5a88-99fb-85e4d1a0a3ec")
+		(uuid "dbeae508-5882-5129-93fe-3fcb5e7602e8")
 	)
 	(global_label "PWM_Q6_CTRL"
 		(shape passive)
@@ -12823,7 +12711,7 @@
 			)
 			(justify right)
 		)
-		(uuid "b07817dd-64d2-5761-ae18-be7f6a28e968")
+		(uuid "32707a7e-232f-5226-9e6c-98c8a3dfd70a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 218.44 0)
 			(effects
@@ -12843,7 +12731,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "93dc2dd3-239d-5773-9bd1-fcc0d1994567")
+		(uuid "abff032a-362e-5fda-89b7-9dd0904bdf76")
 	)
 	(global_label "INU_ADCLK_CTRL"
 		(shape passive)
@@ -12855,7 +12743,7 @@
 			)
 			(justify left)
 		)
-		(uuid "c5ff5c11-6276-5879-87ff-a6594c0853af")
+		(uuid "7d38fb89-9f60-5aac-b1b4-b545b1fa0e70")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 218.44 0)
 			(effects
@@ -12875,7 +12763,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b14f812e-6427-54bf-8705-2d591edf5812")
+		(uuid "5f4b855d-2e69-5a88-99fb-85e4d1a0a3ec")
 	)
 	(global_label "PWM_Q8_CTRL"
 		(shape passive)
@@ -12887,7 +12775,7 @@
 			)
 			(justify right)
 		)
-		(uuid "c8e75324-86df-5094-9610-99f55575dfc7")
+		(uuid "b07817dd-64d2-5761-ae18-be7f6a28e968")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 220.98 0)
 			(effects
@@ -12907,7 +12795,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "a90ccb97-8181-5341-abe8-a1fa44d48603")
+		(uuid "93dc2dd3-239d-5773-9bd1-fcc0d1994567")
 	)
 	(global_label "MDATA_INU_CTRL"
 		(shape passive)
@@ -12919,7 +12807,7 @@
 			)
 			(justify left)
 		)
-		(uuid "e3dcbe5d-3696-5405-8291-6cbbbc6abb5e")
+		(uuid "c5ff5c11-6276-5879-87ff-a6594c0853af")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 220.98 0)
 			(effects
@@ -12939,7 +12827,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "b60fe10c-f798-520f-9e1c-121feed8fa74")
+		(uuid "b14f812e-6427-54bf-8705-2d591edf5812")
 	)
 	(global_label "PWM_TRANS5_CTRL"
 		(shape passive)
@@ -12951,7 +12839,7 @@
 			)
 			(justify right)
 		)
-		(uuid "bf96cccb-2628-5a60-bdd6-cf0a3a03fac6")
+		(uuid "c8e75324-86df-5094-9610-99f55575dfc7")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 223.52 0)
 			(effects
@@ -12971,7 +12859,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2d4ea98c-93dd-56c9-89a1-2f6c0fe57bc5")
+		(uuid "a90ccb97-8181-5341-abe8-a1fa44d48603")
 	)
 	(global_label "GPIO_BYPASS_RLY_ISO_CTRL"
 		(shape passive)
@@ -12983,7 +12871,7 @@
 			)
 			(justify left)
 		)
-		(uuid "e1537a36-45dc-585f-8ec0-a6ec17ba313c")
+		(uuid "e3dcbe5d-3696-5405-8291-6cbbbc6abb5e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 111.76 223.52 0)
 			(effects
@@ -13003,7 +12891,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "77c46efe-1cce-5a1f-9aa8-e595e23413ab")
+		(uuid "b60fe10c-f798-520f-9e1c-121feed8fa74")
 	)
 	(global_label "PWM_Q7_CTRL"
 		(shape passive)
@@ -13015,7 +12903,7 @@
 			)
 			(justify right)
 		)
-		(uuid "1c915f50-ddbd-537d-92f4-33d10798daf6")
+		(uuid "bf96cccb-2628-5a60-bdd6-cf0a3a03fac6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 91.44 226.06 0)
 			(effects
@@ -13029,7 +12917,7 @@
 	)
 	(no_connect
 		(at 109.22 226.06)
-		(uuid "7b99edb7-e99a-537a-bea1-b9334bcab94e")
+		(uuid "2d4ea98c-93dd-56c9-89a1-2f6c0fe57bc5")
 	)
 	(symbol
 		(lib_id "ac_psu:HEADER_2X3_43_48")
@@ -13120,7 +13008,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4496e78d-bbdc-5c31-8dcf-92bbb239e162")
+		(uuid "e1537a36-45dc-585f-8ec0-a6ec17ba313c")
 	)
 	(wire
 		(pts
@@ -13130,7 +13018,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2a67b1cf-5cc5-5288-8ff4-ae3f0597c2b1")
+		(uuid "77c46efe-1cce-5a1f-9aa8-e595e23413ab")
 	)
 	(wire
 		(pts
@@ -13140,7 +13028,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "2bc1f8a8-b799-5ff1-a046-c465650f24ba")
+		(uuid "1c915f50-ddbd-537d-92f4-33d10798daf6")
 	)
 	(wire
 		(pts
@@ -13150,7 +13038,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "fa83c00a-ea4d-5ab1-98ca-0902f2abd25b")
+		(uuid "7b99edb7-e99a-537a-bea1-b9334bcab94e")
 	)
 	(wire
 		(pts
@@ -13160,13 +13048,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "e8cba30b-eacf-57ca-892d-740252d82024")
+		(uuid "4496e78d-bbdc-5c31-8dcf-92bbb239e162")
 	)
 	(junction
 		(at 289.56 198.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "869d8cc0-97a9-582e-9ad5-e9d099a09e05")
+		(uuid "2a67b1cf-5cc5-5288-8ff4-ae3f0597c2b1")
 	)
 	(symbol
 		(lib_id "ac_psu:CTRLGND")
@@ -13242,7 +13130,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "6b2f69c7-df3b-5304-bc6c-7cdd41387dea")
+		(uuid "2bc1f8a8-b799-5ff1-a046-c465650f24ba")
 	)
 	(wire
 		(pts
@@ -13252,7 +13140,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "02299e88-aed8-540b-ae41-06f18547dd7c")
+		(uuid "fa83c00a-ea4d-5ab1-98ca-0902f2abd25b")
 	)
 	(wire
 		(pts
@@ -13262,7 +13150,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "388ba10d-a542-5ec6-9c9f-db8fee18dba0")
+		(uuid "e8cba30b-eacf-57ca-892d-740252d82024")
 	)
 	(wire
 		(pts
@@ -13272,7 +13160,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "9c7fa3f3-d2f9-5080-9a4d-06c1642f4b56")
+		(uuid "869d8cc0-97a9-582e-9ad5-e9d099a09e05")
 	)
 	(wire
 		(pts
@@ -13282,13 +13170,13 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "72fdf51b-2c0f-53e3-9493-43253e836c63")
+		(uuid "6b2f69c7-df3b-5304-bc6c-7cdd41387dea")
 	)
 	(junction
 		(at 309.88 198.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "12685417-1ca3-5f12-b452-945aa77696a1")
+		(uuid "02299e88-aed8-540b-ae41-06f18547dd7c")
 	)
 	(symbol
 		(lib_id "ac_psu:5V_CTRL")
@@ -13365,7 +13253,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "099de394-a73a-5395-83b5-c62ff957db08")
+		(uuid "388ba10d-a542-5ec6-9c9f-db8fee18dba0")
 	)
 	(text "ISOGND: PWR_FLAG here; GND, 15V, 15V_ISO, CTRLGND, 5V_CTRL are flagged on sheet 7."
 		(exclude_from_sim no)
@@ -13376,7 +13264,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "ffb4d528-bd61-5d52-9dd8-d62d482c5752")
+		(uuid "9c7fa3f3-d2f9-5080-9a4d-06c1642f4b56")
 	)
 	(symbol
 		(lib_id "ac_psu:ISOGND")
@@ -13451,7 +13339,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "528c045a-9542-56b5-a091-e8818f7565c5")
+		(uuid "72fdf51b-2c0f-53e3-9493-43253e836c63")
 	)
 	(symbol
 		(lib_id "ac_psu:PWR_FLAG")

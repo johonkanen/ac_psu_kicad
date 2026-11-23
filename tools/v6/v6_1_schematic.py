@@ -51,6 +51,7 @@ for n in sorted(dead):
     b.log.append(f"net {n} is gone: {dead[n][0]} tracks, {dead[n][1]} vias, {dead[n][2]} zones deleted")
 
 # -- 3. pads of kept parts
+moved_pads = []          # pads that left a net which lives on: the tracks ending on them go
 for fp in b.b.GetFootprints():
     ref = fp.GetReference()
     for pad in fp.Pads():
@@ -63,6 +64,26 @@ for fp in b.b.GetFootprints():
         elif have != want:
             b.log.append(f"{ref}-{pad.GetNumber()}: {have} -> {want}")
             pad.SetNet(b.net(want))
+            if have in live and have.split("/")[-1] != want.split("/")[-1]:
+                moved_pads.append((ref, pad, have))
+
+for ref, pad, have in moved_pads:
+    n = 0
+    for t in list(b.b.GetTracks()):
+        if t.GetClass() != "PCB_VIA" and t.GetNetname() == have and (pad.HitTest(t.GetStart()) or pad.HitTest(t.GetEnd())):
+            if t.GetLength() > F(10.0):
+                # a long track that served other pads too: pulled back 4 mm from the pad, it stays in its pour
+                at_start = pad.HitTest(t.GetStart())
+                p0, p1 = (t.GetStart(), t.GetEnd()) if at_start else (t.GetEnd(), t.GetStart())
+                k = F(4.0) / t.GetLength()
+                q = pcbnew.VECTOR2I(int(p0.x + (p1.x - p0.x) * k), int(p0.y + (p1.y - p0.y) * k))
+                (t.SetStart if at_start else t.SetEnd)(q)
+                b.log.append(f"{ref}-{pad.GetNumber()}: {T(t.GetLength()):.1f} mm track of {have} pulled back 4 mm from the pad")
+                continue
+            b.b.Delete(t)
+            n += 1
+    if n:
+        b.log.append(f"{ref}-{pad.GetNumber()}: {n} tracks of {have} that ended on the pad deleted")
 
 # -- 4. new parts in the staging area
 x, y, rowh = STAGE_X0, STAGE_Y0, 0.0

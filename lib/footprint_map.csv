@@ -44,6 +44,7 @@ C32,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Prote
 C33,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C34,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C36,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
+C37,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C38,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C39,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C40,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -51,21 +52,30 @@ C41,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C42,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C43,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C44,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C51,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C52,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C53,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C54,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C55,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C56,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C57,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C58,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C59,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C60,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C61,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
+C64,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C67,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C68,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C69,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C70,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
+C71,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C72,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
+C73,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C74,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C75,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C76,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C77,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
+C78,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C79,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C80,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C81,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -77,6 +87,8 @@ C86,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C87,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C88,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA2 (like C42 on ADA1)
 C89,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA3
+C90,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U4 differential 100n C0G (shunt L compensation)
+C91,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U5 differential 100n C0G
 C92,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U6 differential 100n C0G
 C93,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v4 fix 10: U8 input cap (K7805-2000R3 datasheet Fig. 2)
 C94,ac_psu:C,Capacitor_SMD:C_0805_2012Metric,v4 fix 10: U8 output cap (K7805-2000R3 datasheet Fig. 2)
@@ -144,12 +156,18 @@ C156,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V_ISO at J25
 C157,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V_ISOL at J25
 C158,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V_ISO at J26
 C159,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V_ISOL at J26
+C160,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: U29 input
+C161,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: U29 output
+C162,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: U30 input
+C163,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: U30 output
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 D3,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D4,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D5,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
+D8,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
+D9,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
 D10,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D11,ac_psu:D,ac_psu:D_SOD-323_AC,v5: VCC feed diode (blocks towards the 15V rail during the start)
 D12,ac_psu:D,ac_psu:D_SMA_AC,v5: clamp diode 1000 V
@@ -236,6 +254,7 @@ R40,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R41,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R42,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R46,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R48,ac_psu:FKK5R0020FE-TR,ac_psu:R_Shunt_FKK5R0020FE,4-terminal shunt
 R50,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R51,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R52,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
@@ -243,6 +262,9 @@ R53,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R54,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R55,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R56,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R57,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R58,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R59,ac_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R60,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R61,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R62,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
@@ -274,6 +296,10 @@ R87,ac_psu:RESISTOR_ARRAY_4,ac_psu:R_Array_Convex_4x0402_Proteus,4x0402 array
 R88,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R89,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R90,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
+R91,ac_psu:FKK5R0020FE-TR,ac_psu:R_Shunt_FKK5R0020FE,4-terminal shunt
+R92,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R93,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
+R94,ac_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R95,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R96,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R97,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
@@ -328,6 +354,8 @@ TR1,ac_psu:ETD34_TRAN_1P1S,,not on the board
 U1,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U2,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
 U3,ac_psu:TPS73033DBVT,ac_psu:SOT-23-5_TPS73033,"SOT-23-5 (DBV), Proteus pad rows 2.50 mm apart"
+U4,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
+U5,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U6,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U7,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U8,ac_psu:VXO7805-1000,ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
@@ -350,4 +378,6 @@ U25,ac_psu:OPA2350EA,Package_SO:VSSOP-8_3x3mm_P0.65mm,v5: CTRL diff amps ch1/ch2
 U26,ac_psu:OPA2350EA,Package_SO:VSSOP-8_3x3mm_P0.65mm,v5: CTRL diff amp ch3 (B spare)
 U27,ac_psu:TPS73033DBVT,Package_TO_SOT_SMD:SOT-23-5,v5: 3V3_CTRL LDO
 U28,ac_psu:TPS54202,Package_TO_SOT_SMD:SOT-23-6,v5: 5V_CTRL buck for the control card
+U29,ac_psu:B05XXS,ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4,v6: U5 side-1 supply from 5V (AFE current sense at the choke's filter end)
+U30,ac_psu:B05XXS,ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4,v6: U4 side-1 supply from 5V_ISOL (inverter current sense at the choke's output end)
 W1,ac_psu:CTRL_WINDING,ac_psu:CTRL_Winding_Leads_2x1.6mm_P5.08mm,v5: CTRL winding flying leads of T1 (3 x TIW 25 AWG)

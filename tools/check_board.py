@@ -201,8 +201,9 @@ def check_copper(board, recs, mapping, errors):
             errors.append(f"via ({q['x_mm']}, {q['y_mm']}): net {hit.GetNetname()!r}, IPC {q['net']} -> {want}")
     v4vias = deviations.vias()
     nv4 = nnew = 0
-    v4gone = [d for d in v4vias if deviations.in_unrouted(d[0], d[1]) and not any(
-        math.hypot(d[0] - mm(v.GetPosition().x), d[1] + mm(v.GetPosition().y)) < 0.01 for v in vias)]
+    gone = deviations.gone_vias()      # v6: v4 vias deleted with their circuit (lib/v6_copper.csv kind gone)
+    v4gone = [d for d in v4vias if (deviations.in_unrouted(d[0], d[1]) or any(math.hypot(d[0] - x, d[1] - y) < 0.01 for x, y in gone))
+              and not any(math.hypot(d[0] - mm(v.GetPosition().x), d[1] + mm(v.GetPosition().y)) < 0.01 for v in vias)]
     v4vias = [d for d in v4vias if d not in v4gone]   # v4 vias deleted with the card-area re-layout
     for v in vias:
         if v.m_Uuid.AsString() not in matched:

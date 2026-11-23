@@ -10,16 +10,20 @@ SWITCHES = [f"Q{i}" for i in range(1, 13)]
 GATE_HEADERS = "J1 J2 J3 J4 J6 J8".split()
 DAB_TABS = "DAB_PRI_1 DAB_PRI_2 DAB_SEC_1 DAB_SEC_2".split()
 DAB_CAPS = "C1 C35 C45 C46 C47 C48 C49 C50".split()
-# switch-node current sense with its input filters and local supplies: AFE leg 1 (U5) and inverter leg B (U4)
-SENSE_AFE = "R48 U5 D8 R59 R57 R58 C52 C53 C91 C71 C73 C64".split()
-SENSE_INU = "R91 U4 D9 R94 R92 R93 C51 C54 C90 C55 C78 C37".split()
-REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS + SENSE_AFE + SENSE_INU
+REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS
 REMOVED_NOTE = {**{r: "v6: switch on the power card" for r in SWITCHES},
                 **{r: "v6: gate-card header replaced by the card CTRL header" for r in GATE_HEADERS},
                 **{r: "v6: DAB leads go from the card to the transformer" for r in DAB_TABS},
-                **{r: "v6: DAB split capacitor on the DAB card" for r in DAB_CAPS},
-                **{r: "v6: switch-node current sense on the card (AFE leg 1)" for r in SENSE_AFE},
-                **{r: "v6: switch-node current sense on the card (inverter leg B)" for r in SENSE_INU}}
+                **{r: "v6: DAB split capacitor on the DAB card" for r in DAB_CAPS}}
+# V6_PLAN.md section 9 (user 2026-11-23): the two current-sense circuits R48 / U5 and R91 / U4 STAY on the board
+# with all their parts. Each shunt moves to the other end of its choke (the end that does not switch):
+#   R48: between the choke lead on terminal FILTER_OUT1 (new net AFE_CHOKE1) and the filter node LEMOUT
+#   R91: between the choke lead on terminal J9 (new net INU_CHOKE) and the filter node INDUCTOR_OUTPUT
+# Side 1 of U5 / U4 was fed from the gate cards (header pin 39): now one isolated DC/DC module each.
+
+# pins of kept parts that change net (KiCad refdes): stated here, because nets this small cannot be matched by members
+PIN_TO = {("R48", "3"): "LEMOUT", ("R48", "4"): "AFE_CHOKE1", ("FILTER_OUT1", "1"): "AFE_CHOKE1",
+          ("R91", "3"): "INDUCTOR_OUTPUT", ("R91", "4"): "INU_CHOKE", ("J9", "1"): "INU_CHOKE"}
 
 HDR = "ac_psu:Samtec_SHF-105-01-L-D-TH"
 TERM = "ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3"
@@ -29,10 +33,10 @@ C0603 = "Capacitor_SMD:C_0603_1608Metric"
 #                      MCLK, MDAT, DC+ net, DC- net, capacitor on 15 V, capacitor on 5 V)
 # BASEBOARD.md section 4; header pinout of CARD_REV1_PLAN.md section 4 (ribbon 1:1).
 CARDS = [
-    ("AFE leg 1", "J21", "J31", "J32", "PWM_G1", "PWM_G2", "PWM_TRANS1", "15V", "5V", "GND", "ADCLK", "MDAT_AFE", "DC+", "PGND", "C148", "C149"),
+    ("AFE leg 1", "J21", "J31", "J32", "PWM_G1", "PWM_G2", "PWM_TRANS1", "15V", "5V", "GND", None, None, "DC+", "PGND", "C148", "C149"),
     ("AFE leg 2", "J22", "J33", "J34", "PWM_G3", "PWM_G4", "PWM_TRANS2", "15V", "5V", "GND", None, None, "DC+", "PGND", "C150", "C151"),
     ("DAB primary", "J23", "J35", "J36", "DAB_PWM_PRI_HI", "DAB_PWM_PRI_LO", "PWM_TRANS3", "15V", "5V", "GND", None, None, "DC+", "PGND", "C152", "C153"),
-    ("Inverter leg B", "J24", "J37", "J38", "PWM_Q7", "PWM_Q8", "PWM_TRANS6", "15V_ISO", "5V_ISOL", "ISOGND", "INU_ADCLK", "MDAT_INU_CARD", "ISODC+", "ISOPGND", "C154", "C155"),
+    ("Inverter leg B", "J24", "J37", "J38", "PWM_Q7", "PWM_Q8", "PWM_TRANS6", "15V_ISO", "5V_ISOL", "ISOGND", None, None, "ISODC+", "ISOPGND", "C154", "C155"),
     ("Inverter leg A", "J25", "J39", "J40", "PWM_Q5", "PWM_Q6", "PWM_TRANS5", "15V_ISO", "5V_ISOL", "ISOGND", None, None, "ISODC+", "ISOPGND", "C156", "C157"),
     ("DAB secondary", "J26", "J41", "J42", "DAB_PWM_HI_SEC", "DAB_PWM_LO_SEC", "PWM_TRANS4", "15V_ISO", "5V_ISOL", "ISOGND", None, None, "ISODC+", "DAB_GROUND", "C158", "C159"),
 ]
@@ -60,5 +64,18 @@ for c in CARDS:
 PARTS += [
     ("R257", 8, "R", "390R", "Resistor_SMD:R_1206_3216Metric", "U6 VDD1 dropper from 15V_ISO (with R75 470R)"),
     ("D17", 8, "D_Zener", "MM3Z5V1T1", "ac_psu:D_SOD-323_AC", "U6 VDD1 5.1 V"),
+]
+# Side-1 supplies of U5 / U4: Mornsun B0512S-1WR3 (5 V in, 12 V out, 1 W, 1.5 kV; JLC C7465188, 10680 in stock on
+# 2026-11-23) into the existing 470R + 5.1 V zener (R59 / D8, R94 / D9): 12 .. 14 V unloaded-ish, 15 .. 19 mA, as the
+# gate cards gave before. Pins as the B_S-1WR3 data sheet (to verify): 1 Vin, 2 GND, 4 0V, 6 +Vo.
+DCDC = "ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4"
+C0603_ = "Capacitor_SMD:C_0603_1608Metric"
+PARTS += [
+    ("U29", 8, "B05XXS", "B0512S-1WR3", DCDC, "U5 side-1 supply from 5V (AFE current sense at the choke's filter end)"),
+    ("C160", 8, "C", "1u", C0603_, "U29 input"),
+    ("C161", 8, "C", "1u 25V", C0603_, "U29 output"),
+    ("U30", 10, "B05XXS", "B0512S-1WR3", DCDC, "U4 side-1 supply from 5V_ISOL (inverter current sense at the choke's output end)"),
+    ("C162", 10, "C", "1u", C0603_, "U30 input"),
+    ("C163", 10, "C", "1u 25V", C0603_, "U30 output"),
 ]
 VALUE = {p[0]: p[3] for p in PARTS}

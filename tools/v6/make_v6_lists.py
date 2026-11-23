@@ -81,6 +81,7 @@ def net_rows():
     finally:
         _write(v6)
     ref_nets = {rp: n for rp, n in ref_nets.items() if n not in ("N/C", "(no net)", None) and rp[0] not in new}
+    stated = {rp: ref_nets.pop(rp) for rp in list(ref_nets) if rp in V.PIN_TO}
     members = {}
     for rp, n in ref_nets.items():
         members.setdefault(n, []).append(rp)
@@ -97,6 +98,11 @@ def net_rows():
         for p in pins:
             k = pin_net.get((ref, p), "N/C")
             out.append(dict(kind="add", ref=ref, pin=p, **{"from": ""}, to=inverse.get(k, k), fix=FIX, note=""))
+    for (r, p), n in sorted(stated.items()):
+        proteus = {b: a for a, b in deviations.refdes_map().items()}.get(r, r)
+        assert pin_net.get((r, p), "").split("/")[-1] == V.PIN_TO[(r, p)], (r, p, pin_net.get((r, p)))   # sheet-local nets
+        out.append(dict(kind="pin", ref=proteus, pin=p, **{"from": ipc.get((r, p), n)}, to=V.PIN_TO[(r, p)], fix=FIX,
+                        note=f"v6: current sense at the quiet end of the choke (was {n})"))
     for (r, p), n in sorted(ref_nets.items()):
         if r in V.REMOVED or not n:
             continue

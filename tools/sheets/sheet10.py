@@ -4,13 +4,18 @@ from the isolated AFE raw voltage via R94/D9) and the two relay drivers Q14 (pri
 Q13 (isolated side)."""
 from _common import *  # noqa: F401,F403
 
+sys.path.insert(0, os.path.join(TOOLS, "v6"))
+import v6_parts as V6  # noqa: E402
+
 sh = sheet("10_inu_sdm_relay_drive.kicad_sch")
 
 # ---- U4 ADuM7701 sigma-delta modulator on the INU shunt --------------------------------
-# v6: U4 with its input filter and supply is on the inverter leg-B power card. Its MDAT comes back on the card's
-# CTRL header (sheet 2) and still passes R50 into MDATA_INU; INU_ADCLK goes out on the same header.
-part2(sh, "R", "R50", g(150), g(40), "33R", "MDAT_INU_CARD", "MDATA_INU", horizontal=True)
-sh.text("v6: the inverter leg-B shunt and its ADuM7701 are on the power card; MDAT_INU_CARD = pin 10 of J24 (sheet 2).", g(56), g(52))
+adum_block(sh, g(150), g(40), "U4", "ADUM7701-8BRIZ-RL7", "ISO_AFE_SDM_RAW_VOLTAGE", ("R94", "470R"),
+           ("D9", "MM3Z5V1T1"), (("C55", "100n"), ("C78", "100n")),
+           (("R92", "12.4R"), "INU_SHUNT1", ("C54", "220p")), (("R93", "12.4R"), "INU_SHUNT2", ("C51", "220p")),
+           "INU_SHUNT2", "3V3_ISO", "ISOGND", "INU_ADCLK", ("R50", "33R"), "MDATA_INU", ("C37", "100n"),
+           note="VDD1/GND1 of U4 float on the INU shunt: VDD1 is 5.1 V from D9 via R94 (Proteus auto-named nets), GND1 = INU_SHUNT2.",
+           cdiff=("C90", "100n C0G"))
 
 
 # ---- relay drivers -----------------------------------------------------------------------
@@ -62,5 +67,10 @@ relay_drive(sh, g(70), g(104), ("Q14", "2N7000"), ("D5", "ZLLS400TA"), ("D10", "
 relay_drive(sh, g(190), g(104), ("Q13", "2N7000"), ("D3", "ZLLS400TA"), ("D4", "ZLLS400TA"), "15V_ISO", "ISOGND",
             ("R78", "2.2k"), ("C43", "100n"), ("R88", "2.2k"), "RELAY_DRIVE_ISO", "GPIO_BYPASS_RLY_ISO")
 sh.text("Relay drivers: RELAY_DRIVE -> R20 coil (sheet 1), RELAY_DRIVE_ISO -> R79 coil (sheet 5).", g(40), g(128))
+# v6: U4 side 1 was fed from the inverter gate card (J8 pin 39); now from the isolated DC/DC U30 (5 V -> 12 V)
+ic(sh, "B05XXS", "U30", g(250), g(40), {1: "5V_ISOL", 2: "ISOGND", 6: "ISO_AFE_SDM_RAW_VOLTAGE", 4: "INU_SHUNT2"}, value=V6.VALUE["U30"], n=4)
+part2(sh, "C", "C162", g(236), g(62), V6.VALUE["C162"], "5V_ISOL", "ISOGND")
+part2(sh, "C", "C163", g(264), g(62), V6.VALUE["C163"], "ISO_AFE_SDM_RAW_VOLTAGE", "INU_SHUNT2")
+sh.text("v6: U4 now floats at the output end of the inverter choke (R91, sheet 5); VDD1 from U30 through R94 / D9.", g(206), g(76))
 sh.save()
 print("sheet10: written")

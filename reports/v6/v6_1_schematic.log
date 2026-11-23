@@ -29,30 +29,6 @@
   C48 (C_2220_5750Metric_Pad1.97x5.40mm_HandSolder) at (83.40, 57.94) deleted
   C49 (C_2220_5750Metric_Pad1.97x5.40mm_HandSolder) at (106.80, 55.70) deleted
   C50 (C_2220_5750Metric_Pad1.97x5.40mm_HandSolder) at (106.80, 61.80) deleted
-  R48 (R_Shunt_FKK5R0020FE) at (4.55, -69.35) deleted
-  U5 (SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701) at (5.83, -55.83) deleted
-  D8 (D_SOD-323_AC) at (0.09, -59.51) deleted
-  R59 (R_0805_2012Metric_Pad1.20x1.40mm_HandSolder) at (10.20, -61.70) deleted
-  R57 (R_0402_1005Metric) at (6.46, -63.24) deleted
-  R58 (R_0402_1005Metric) at (5.21, -63.24) deleted
-  C52 (C_0603_1608Metric) at (1.83, -62.99) deleted
-  C53 (C_0603_1608Metric) at (1.83, -59.69) deleted
-  C91 (C_1206_3216Metric) at (8.10, -64.03) deleted
-  C71 (C_0603_1608Metric) at (-0.71, -63.27) deleted
-  C73 (C_0603_1608Metric) at (-2.27, -63.27) deleted
-  C64 (C_0402_1005Metric) at (2.60, -51.75) deleted
-  R91 (R_Shunt_FKK5R0020FE) at (12.90, 57.32) deleted
-  U4 (SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701) at (18.61, 41.81) deleted
-  D9 (D_SOD-323_AC) at (14.82, 47.95) deleted
-  R94 (R_0805_2012Metric_Pad1.20x1.40mm_HandSolder) at (18.60, 46.80) deleted
-  R92 (R_0402_1005Metric) at (11.20, 41.18) deleted
-  R93 (R_0402_1005Metric) at (11.20, 42.44) deleted
-  C51 (C_0603_1608Metric) at (11.45, 45.41) deleted
-  C54 (C_0603_1608Metric) at (14.75, 45.41) deleted
-  C90 (C_1206_3216Metric) at (10.23, 37.30) deleted
-  C55 (C_0603_1608Metric) at (11.17, 47.95) deleted
-  C78 (C_0603_1608Metric) at (11.17, 49.51) deleted
-  C37 (C_0402_1005Metric) at (22.95, 44.85) deleted
   net /01 afe/SHUNT1_FORCE is gone: 8 tracks, 0 vias, 1 zones deleted
   net DAB_CAP_PRI is gone: 32 tracks, 0 vias, 2 zones deleted
   net DAB_CAP_SEC is gone: 21 tracks, 0 vias, 1 zones deleted
@@ -68,18 +44,7 @@
   net G3_GATE_HI is gone: 24 tracks, 0 vias, 1 zones deleted
   net G3_SOURCE_HI is gone: 43 tracks, 0 vias, 2 zones deleted
   net G4_GATE_LO is gone: 24 tracks, 0 vias, 1 zones deleted
-  net INU_SHUNT1 is gone: 6 tracks, 0 vias, 0 zones deleted
-  net INU_SHUNT2 is gone: 34 tracks, 0 vias, 0 zones deleted
-  net ISO_AFE_SDM_RAW_VOLTAGE is gone: 10 tracks, 0 vias, 0 zones deleted
-  net Net-(D8-K) is gone: 17 tracks, 0 vias, 0 zones deleted
-  net Net-(D9-K) is gone: 17 tracks, 0 vias, 0 zones deleted
   net Net-(J7-Pad1) is gone: 7 tracks, 0 vias, 1 zones deleted
-  net Net-(U4-MDAT) is gone: 2 tracks, 0 vias, 0 zones deleted
-  net Net-(U4-VIN+) is gone: 7 tracks, 0 vias, 0 zones deleted
-  net Net-(U4-VIN-) is gone: 8 tracks, 2 vias, 0 zones deleted
-  net Net-(U5-MDAT) is gone: 2 tracks, 0 vias, 0 zones deleted
-  net Net-(U5-VIN+) is gone: 9 tracks, 0 vias, 0 zones deleted
-  net Net-(U5-VIN-) is gone: 8 tracks, 2 vias, 0 zones deleted
   net Net-(U6-VDD1) is gone: 10 tracks, 0 vias, 0 zones deleted
   net Q5_G is gone: 35 tracks, 0 vias, 1 zones deleted
   net Q5_S is gone: 62 tracks, 0 vias, 2 zones deleted
@@ -87,9 +52,6 @@
   net Q7_G is gone: 35 tracks, 0 vias, 1 zones deleted
   net Q7_S is gone: 65 tracks, 0 vias, 2 zones deleted
   net Q8_G is gone: 16 tracks, 0 vias, 1 zones deleted
-  net SDM_RAW_VOLTAGE is gone: 15 tracks, 0 vias, 0 zones deleted
-  net SHUNT1 is gone: 35 tracks, 0 vias, 0 zones deleted
-  net SHUNT2 is gone: 6 tracks, 0 vias, 0 zones deleted
   INU_OUT2-1: Q5_S -> unconnected-(INU_OUT2-Pad1)
   new net unconnected-(INU_OUT2-Pad1)
   INU_OUT2-1: Q5_S -> unconnected-(INU_OUT2-Pad1)
@@ -115,16 +77,35 @@
   new net unconnected-(AFE_OUT1-Pad1)
   R75-1: Net-(U6-VDD1) -> Net-(D17-K)
   U6-1: Net-(U6-VDD1) -> Net-(D17-K)
-  R55-1: Net-(U5-MDAT) -> MDAT_AFE
-  new net MDAT_AFE
-  R50-1: Net-(U4-MDAT) -> MDAT_INU_CARD
-  new net MDAT_INU_CARD
+  J9-1: /05 VSI/INDUCTOR_OUTPUT -> INU_CHOKE
+  new net INU_CHOKE
+  J9-1: /05 VSI/INDUCTOR_OUTPUT -> INU_CHOKE
+  J9-1: /05 VSI/INDUCTOR_OUTPUT -> INU_CHOKE
+  J9-1: /05 VSI/INDUCTOR_OUTPUT -> INU_CHOKE
+  J9-1: /05 VSI/INDUCTOR_OUTPUT -> INU_CHOKE
+  FILTER_OUT1-1: /01 afe/LEMOUT -> AFE_CHOKE1
+  new net AFE_CHOKE1
+  FILTER_OUT1-1: /01 afe/LEMOUT -> AFE_CHOKE1
+  FILTER_OUT1-1: /01 afe/LEMOUT -> AFE_CHOKE1
+  FILTER_OUT1-1: /01 afe/LEMOUT -> AFE_CHOKE1
+  FILTER_OUT1-1: /01 afe/LEMOUT -> AFE_CHOKE1
+  R91-3: Q7_S -> /05 VSI/INDUCTOR_OUTPUT
+  R91-4: Net-(J7-Pad1) -> INU_CHOKE
+  R48-3: /01 afe/SHUNT1_FORCE -> /01 afe/LEMOUT
+  R48-4: G1_SOURCE_HI -> AFE_CHOKE1
+  J9-1: 47.4 mm track of /05 VSI/INDUCTOR_OUTPUT pulled back 4 mm from the pad
+  J9-1: 5 tracks of /05 VSI/INDUCTOR_OUTPUT that ended on the pad deleted
+  FILTER_OUT1-1: 4 tracks of /01 afe/LEMOUT that ended on the pad deleted
+  new net unconnected-(J21-Pad8)
+  new net unconnected-(J21-Pad10)
   new net unconnected-(J22-Pad8)
   new net unconnected-(J22-Pad10)
   new net unconnected-(J23-Pad8)
   new net unconnected-(J23-Pad10)
+  new net unconnected-(J24-Pad8)
+  new net unconnected-(J24-Pad10)
   new net unconnected-(J25-Pad8)
   new net unconnected-(J25-Pad10)
   new net unconnected-(J26-Pad8)
   new net unconnected-(J26-Pad10)
-  placed 32 v6 parts in the staging area (IPC y -92.0 .. -106.3)
+  placed 38 v6 parts in the staging area (IPC y -92.0 .. -106.3)

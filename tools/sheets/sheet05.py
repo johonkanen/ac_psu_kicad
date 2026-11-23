@@ -10,14 +10,26 @@ sh = sheet("05_vsi.kicad_sch")
 for ref, y in (("INU_OUT2", g(44)), ("J7", g(60))):
     t = terminal(sh, ref, g(100), y, "right")
     sh.no_connect(*t.pin(1))
-sh.text("v6: inverter leg A (Q5 / Q6) and leg B (Q7 / Q8, shunt R91, U4) are half-bridge power cards (sheet 2).", g(20), g(92))
+sh.text("v6: inverter leg A (Q5 / Q6) and leg B (Q7 / Q8) are half-bridge power cards (sheet 2).", g(20), g(92))
+
+# ---- R91 shunt, v6: at the output end of the inverter choke (V6_PLAN.md section 9), sensed by U4 (sheet 10) ---
+SX, SY = g(118), g(36)
+r91 = sh.place("FKK5R0020FE-TR", "R91", SX, SY, value="FKK5R0020FE-TR",
+               ref_at=(SX - g(3), SY - 1.27, 0, "right"), value_at=(SX - g(3), SY + 1.27, 0, "right"))
+sh.wire(r91.pin(1), up(r91.pin(1), 2)); sh.glabel("INU_SHUNT2", *up(r91.pin(1), 2), 90)
+sh.wire(r91.pin(2), down(r91.pin(2), 2)); sh.glabel("INU_SHUNT1", *down(r91.pin(2), 2), 270)
+sh.wire(r91.pin(3), right(r91.pin(3), 6)); sh.label("INDUCTOR_OUTPUT", *right(r91.pin(3), 1), 0)      # local label: the net keeps its name
+glabel_right(sh, "INU_CHOKE", r91.pin(4), 6)
+sh.text("R91 2 mOhm shunt, v6: 4 = INU_CHOKE (choke lead on terminal J9), 3 = INDUCTOR_OUTPUT (output filter),", SX - g(16), SY + g(14))
+sh.text("1/2 = INU_SHUNT2/INU_SHUNT1 sense -> U4 (sheet 10), which floats on the filter node (line frequency).", SX - g(16), SY + g(17))
 sh.text("INU_OUT2 = SW wire of the leg-A card + output lead, J7 = SW wire of the leg-B card + inductor lead: no copper.", g(20), g(95))
 
 # ---- output filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)
 Y = (TOP + BOT) / 2
 terminal(sh, "J10", X0, TOP, "up")
-terminal(sh, "J9", X0, BOT, "down")
+t = terminal(sh, "J9", X0 - g(26), BOT + g(16), "down")      # v6: the choke lead; R91 sits between it and INDUCTOR_OUTPUT
+sh.wire(t.pin(1), up(t.pin(1), 3)); sh.glabel("INU_CHOKE", *up(t.pin(1), 3), 90)
 XA, XB = X0 - g(6), X0 - g(12)
 sh.wire((XA, TOP), (X0, TOP)); sh.wire((XB, BOT), (X0, BOT))
 sh.label("INU_FILTER_INPUT", X0 - g(4), TOP, 0); sh.label("INDUCTOR_OUTPUT", X0 - g(10), BOT, 0)

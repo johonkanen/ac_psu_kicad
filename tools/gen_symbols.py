@@ -131,6 +131,9 @@ def build():
     syms.append(box("HEADER_2X3_43_48", "J", l, r, show_pin_names=False,
                     desc="2x3 50 mil connector numbered 43..48"))
 
+    # v6: isolated 1 W DC/DC module SIP-4 (Mornsun B05xxS-1WR3: 1 Vin, 2 GND, 4 0V, 6 +Vo)
+    syms.append(box("B05XXS", "U", [(1, "Vin", PI), (2, "GND", PI)], [(6, "+Vo", PAS), (4, "0V", PAS)],
+                    desc="Isolated DC/DC converter 1 W, SIP-4 (pins 1, 2, 4, 6)"))
     # v6: CTRL header of a half-bridge power card (keyed shrouded 2x5, 1.27 mm; pinout CARD_REV1_PLAN.md section 4)
     l, r = header(range(1, 11))
     syms.append(box("HDR_2X5", "J", l, r, show_pin_names=False, desc="Keyed shrouded header 2x5, 1.27 mm (power card CTRL)"))

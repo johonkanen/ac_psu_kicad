@@ -33,30 +33,6 @@ remove,C47,,,,v6,v6: DAB split capacitor on the DAB card
 remove,C48,,,,v6,v6: DAB split capacitor on the DAB card
 remove,C49,,,,v6,v6: DAB split capacitor on the DAB card
 remove,C50,,,,v6,v6: DAB split capacitor on the DAB card
-remove,R48,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,U5,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,D8,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,R59,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,R57,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,R58,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C52,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C53,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C91,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C71,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C73,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,C64,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
-remove,R91,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,U4,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,D9,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,R94,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,R92,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,R93,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C51,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C54,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C90,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C55,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C78,,,,v6,v6: switch-node current sense on the card (inverter leg B)
-remove,C37,,,,v6,v6: switch-node current sense on the card (inverter leg B)
 part,J21,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the AFE leg 1 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
 value,J21,,,CTRL AFE leg 1,v6,
 part,J31,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
@@ -121,6 +97,18 @@ part,R257,,,Resistor_SMD:R_1206_3216Metric,v6,U6 VDD1 dropper from 15V_ISO (with
 value,R257,,,390R,v6,
 part,D17,,,ac_psu:D_SOD-323_AC,v6,U6 VDD1 5.1 V
 value,D17,,,MM3Z5V1T1,v6,
+part,U29,,,ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4,v6,U5 side-1 supply from 5V (AFE current sense at the choke's filter end)
+value,U29,,,B0512S-1WR3,v6,
+part,C160,,,Capacitor_SMD:C_0603_1608Metric,v6,U29 input
+value,C160,,,1u,v6,
+part,C161,,,Capacitor_SMD:C_0603_1608Metric,v6,U29 output
+value,C161,,,1u 25V,v6,
+part,U30,,,ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4,v6,U4 side-1 supply from 5V_ISOL (inverter current sense at the choke's output end)
+value,U30,,,B0512S-1WR3,v6,
+part,C162,,,Capacitor_SMD:C_0603_1608Metric,v6,U30 input
+value,C162,,,1u,v6,
+part,C163,,,Capacitor_SMD:C_0603_1608Metric,v6,U30 output
+value,C163,,,1u 25V,v6,
 add,J21,1,,PWM_G1,v6,
 add,J21,2,,GND,v6,
 add,J21,3,,PWM_G2,v6,
@@ -128,9 +116,9 @@ add,J21,4,,GND,v6,
 add,J21,5,,PWM_TRANS1,v6,
 add,J21,6,,15V,v6,
 add,J21,7,,5V,v6,
-add,J21,8,,ADCLK,v6,
+add,J21,8,,N/C,v6,
 add,J21,9,,GND,v6,
-add,J21,10,,#00354,v6,
+add,J21,10,,N/C,v6,
 add,J31,1,,DC+,v6,
 add,J32,1,,PGND,v6,
 add,C148,1,,15V,v6,
@@ -176,9 +164,9 @@ add,J24,4,,ISOGND,v6,
 add,J24,5,,PWM_TRANS6,v6,
 add,J24,6,,15V_ISO,v6,
 add,J24,7,,5V_ISOL,v6,
-add,J24,8,,INU_ADCLK,v6,
+add,J24,8,,N/C,v6,
 add,J24,9,,ISOGND,v6,
-add,J24,10,,#00431,v6,
+add,J24,10,,N/C,v6,
 add,J37,1,,ISODC+,v6,
 add,J38,1,,ISOPGND,v6,
 add,C154,1,,15V_ISO,v6,
@@ -221,6 +209,28 @@ add,R257,1,,15V_ISO,v6,
 add,R257,2,,ISO_DAB_SDM_RAW_VOLTAGE,v6,
 add,D17,A,,DAB_SHUNT2,v6,
 add,D17,C,,#00359,v6,
+add,U29,1,,5V,v6,
+add,U29,2,,GND,v6,
+add,U29,4,,SHUNT1,v6,
+add,U29,6,,SDM_RAW_VOLTAGE,v6,
+add,C160,1,,5V,v6,
+add,C160,2,,GND,v6,
+add,C161,1,,SDM_RAW_VOLTAGE,v6,
+add,C161,2,,SHUNT1,v6,
+add,U30,1,,5V_ISOL,v6,
+add,U30,2,,ISOGND,v6,
+add,U30,4,,INU_SHUNT2,v6,
+add,U30,6,,ISO_AFE_SDM_RAW_VOLTAGE,v6,
+add,C162,1,,5V_ISOL,v6,
+add,C162,2,,ISOGND,v6,
+add,C163,1,,ISO_AFE_SDM_RAW_VOLTAGE,v6,
+add,C163,2,,INU_SHUNT2,v6,
+pin,FILTER_OUT,1,LEMOUT,AFE_CHOKE1,v6,v6: current sense at the quiet end of the choke (was LEMOUT)
+pin,J9,1,INDUCTOR_OUTPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was INDUCTOR_OUTPUT)
+pin,R48,3,SHUNT1,LEMOUT,v6,v6: current sense at the quiet end of the choke (was SHUNT1_FORCE)
+pin,R48,4,G1_SOURCE_HI,AFE_CHOKE1,v6,v6: current sense at the quiet end of the choke (was G1_SOURCE_HI)
+pin,R91,3,Q7_S,INDUCTOR_OUTPUT,v6,v6: current sense at the quiet end of the choke (was Q7_S)
+pin,R91,4,INDUCTOR_INPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was INDUCTOR_INPUT)
 pin,AFE_OUT,1,G3_SOURCE_HI,N/C,v6,v6 (was G3_SOURCE_HI)
 pin,INU_OUT2,1,Q5_S,N/C,v6,v6 (was Q5_S)
 pin,J5,1,SHUNT1,N/C,v6,v6 (was SHUNT1_FORCE)

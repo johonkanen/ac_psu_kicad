@@ -11,13 +11,25 @@ sh = sheet("01_afe.kicad_sch")
 for ref, y in (("J5", g(44)), ("AFE_OUT1", g(60))):
     t = terminal(sh, ref, g(100), y, "right")
     sh.no_connect(*t.pin(1))
-sh.text("v6: AFE leg 1 (Q1 / Q2, shunt R48, U5) and leg 2 (Q3 / Q4) are half-bridge power cards (sheet 2).", g(20), g(92))
+sh.text("v6: AFE leg 1 (Q1 / Q2) and leg 2 (Q3 / Q4) are half-bridge power cards (sheet 2).", g(20), g(92))
 sh.text("J5 = SW wire of the leg-1 card + choke lead, AFE_OUT1 = SW wire of the leg-2 card + choke lead: no copper.", g(20), g(95))
+
+# ---- R48 shunt, v6: at the filter end of the leg-1 choke (V6_PLAN.md section 9), sensed by U5 (sheet 8) -------
+SX, SY = g(118), g(36)
+r48 = sh.place("FKK5R0020FE-TR", "R48", SX, SY, value="FKK5R0020FE-TR",
+               ref_at=(SX - g(3), SY - 1.27, 0, "right"), value_at=(SX - g(3), SY + 1.27, 0, "right"))
+sh.wire(r48.pin(1), up(r48.pin(1), 2)); sh.glabel("SHUNT1", *up(r48.pin(1), 2), 90)
+sh.wire(r48.pin(2), down(r48.pin(2), 2)); sh.glabel("SHUNT2", *down(r48.pin(2), 2), 270)
+sh.wire(r48.pin(3), right(r48.pin(3), 6)); sh.label("LEMOUT", *right(r48.pin(3), 1), 0)      # local label: the net keeps its name
+glabel_right(sh, "AFE_CHOKE1", r48.pin(4), 6)
+sh.text("R48 2 mOhm shunt, v6: 4 = AFE_CHOKE1 (choke lead on terminal FILTER_OUT1), 3 = LEMOUT (EMI filter),", SX - g(16), SY + g(14))
+sh.text("1/2 = SHUNT1/SHUNT2 sense to U5 (sheet 8), which floats on SHUNT1 = the filter node (line frequency).", SX - g(16), SY + g(17))
 
 # ---- EMI filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)
 Y = (TOP + BOT) / 2
-terminal(sh, "FILTER_OUT1", X0, TOP, "up")
+t = terminal(sh, "FILTER_OUT1", X0 - g(26), TOP - g(16), "up")      # v6: the choke lead; R48 sits between it and LEMOUT
+sh.wire(t.pin(1), down(t.pin(1), 3)); sh.glabel("AFE_CHOKE1", *down(t.pin(1), 3), 270)
 terminal(sh, "FILTER_IN1", X0, BOT, "down")
 XA, XB = X0 - g(6), X0 - g(12)                      # divider columns for U1:B
 sh.wire((XA, TOP), (X0, TOP)); sh.wire((XB, BOT), (X0, BOT))

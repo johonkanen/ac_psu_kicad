@@ -197,6 +197,11 @@ PROJECT = {
         pins=[("1", -1.27, -1.27, 2.0, 1.475), ("1", 1.27, -1.27, 2.0, 1.475), ("1", -1.27, 1.27, 2.0, 1.475), ("1", 1.27, 1.27, 2.0, 1.475)],
         pad=2.0, drill=1.475, body=(5.0, 5.0),
         descr="Wuerth REDCUBE press-fit WP-BUFU 7462810, M3, 4 pins on 2.54 mm, finished hole 1.475 mm, 7.0 mm high, 70 A"),
+    # Mornsun B05xxS-1WR3 (SIP-4 on a 2.54 mm grid, pins 1, 2, 4, 6; body 11.6 x 6.0 mm, 10.2 mm high)
+    "Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4": dict(
+        pins=[("1", -6.35, 0.0, 1.6, 0.9), ("2", -3.81, 0.0, 1.6, 0.9), ("4", 1.27, 0.0, 1.6, 0.9), ("6", 6.35, 0.0, 1.6, 0.9)],
+        pad=1.6, drill=0.9, body=(11.6, 6.0),
+        descr="Mornsun B05xxS-1WR3 isolated DC/DC 1 W, SIP-4: pins 1 Vin, 2 GND, 4 0V, 6 +Vo on a 2.54 mm grid, 10.2 mm high"),
     # Samtec SHF-105-01-L-D-TH: keyed shrouded header 2x5, 1.27 mm, through-hole; body 12.70 x 5.59, 5.33 high.
     "Samtec_SHF-105-01-L-D-TH": dict(
         pins=[(str(2 * i + 1 + k), (-0.635, 0.635)[k], (i - 2) * 1.27, 1.05, 0.74) for i in range(5) for k in (0, 1)],

@@ -2,6 +2,74 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 steps 1 and 2 redone: current sense stays on the board at the quiet end of the chokes; `check_all.sh` passes (2026-11-23, branch `v6-baseboard`)
+
+V6_PLAN.md section 9 (user decision 2026-11-23, sent by the planning session). The two entries below describe the
+first version of steps 1 and 2; where they say that R48 / U5 and R91 / U4 are removed, this entry replaces them.
+The board was rebuilt from the v5 state (6244ea6) with the same three scripts.
+
+- **Kept:** R48, U5, D8, R59 and R91, U4, D9, R94 with their filters and capacitors (24 parts). Removed parts are
+  now 30: Q1-Q12, J1-J4 / J6 / J8, the four DAB tabs, the eight split capacitors. Added 38: the 32 of the first
+  version plus U29 / C160 / C161 and U30 / C162 / C163.
+- **Where the shunts are now** (found in sheets 1 and 5; both choke ends are on the board as wire terminals):
+  - AFE leg 1: the choke lead on terminal FILTER_OUT1 is the new net AFE_CHOKE1; R48 sits between it (pin 4) and
+    LEMOUT (pin 3). U5 floats on SHUNT1 as before, which is now the filter node.
+  - Inverter leg B: the choke lead on terminal J9 is the new net INU_CHOKE; R91 sits between it (pin 4) and
+    INDUCTOR_OUTPUT (pin 3). U4 floats on INU_SHUNT2.
+  - J5 and J7 are plain landing terminals without a net, like AFE_OUT1 and INU_OUT2. Pins 8 and 10 of all six card
+    headers are no-connects. R55 / R50 carry MDATA / MDATA_INU as before the v6 change.
+- **Side-1 supplies:** U29 for U5 (from 5V / GND) and U30 for U4 (from 5V_ISOL / ISOGND): Mornsun B0512S-1WR3
+  (5 V in, 12 V out, 1 W, 1.5 kV, SIP-4; JLC C7465188, 10680 in stock on 2026-11-23), 1 uF on each side. The 12 V
+  goes into the existing nodes SDM_RAW_VOLTAGE / ISO_AFE_SDM_RAW_VOLTAGE, so R59 / D8 and R94 / D9 work as before.
+  New footprint `ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4`, symbol `B05XXS`.
+- **Board, step 1** (`tools/v6/v6_1_schematic.py`): besides the first version: a pad that leaves a net which lives on
+  (FILTER_OUT1 from LEMOUT, J9 from INDUCTOR_OUTPUT) loses the tracks that ended on it; the 47 mm sense track of
+  INDUCTOR_OUTPUT to R62 is pulled back 4 mm from J9 instead. 23 dead nets with their copper deleted, 38 parts in
+  the staging area. R48 / U5 and R91 / U4 are still at their old places (IPC (4.5, -69) and (13, 57)): step 3 moves
+  them to FILTER_OUT1 at (-33, -52) and J9 at (-72, 48).
+- **Board, step 2** (`v6_2_clear_strips.py`, `v6_2b_orphans.py`): strips now x 14 .. 124 (the sense circuits west
+  of x 12 stay until step 3); 30 + 19 copper changes in the primary / ISO strip, 49 orphan items deleted.
+- **Lists:** `lib/v6_deviations.csv` 236 rows (6 `pin` rows for the shunt and terminal pins are stated in
+  `tools/v6/v6_parts.py` `PIN_TO`); `lib/v6_copper.csv`: the two strips, 12 mm boxes around J9 and FILTER_OUT1 as
+  open layout, four area rows for pours that went with their nets.
+- **Tools:** `tools/ipc356_diff.py` counts a pin with several pads once (the four press-fit pins of a terminal);
+  `tools/gerber_roundtrip.py` prints the position of unexplained items.
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED (`reports/v6/v6_2_check_all.log`): ERC 0 errors, netlist
+  380 / 380 parts and 1044 pins with 0 wrong, DRC 0 shorts / 0 unconnected / parity 0 (475 unconnected items and 7
+  clearances wait in the open-layout areas), assign_nets 0 shorts / 0 opens, domain gaps OK, IPC and Gerber
+  comparisons OK.
+
+Decisions taken by the worker:
+- 12 V module into the existing resistor + zener (not 5 V + LDO): no new regulator part, and the zener already
+  limits the light-load voltage of the module. R59 / R94 keep 470R (about 15 mA at 12 V, as with the gate cards).
+- The shunts keep their footprint and their sense-pin assignment; only pins 3 and 4 change net.
+
+To verify:
+- B0512S-1WR3 pin numbers (1 Vin, 2 GND, 4 0V, 6 +Vo) and the hole pattern against the data sheet.
+- Module output at about 15 mA load: an unregulated 1 W module is above 12 V at 10 % load; R59 / R94 dissipation.
+- That the choke leads really land on FILTER_OUT1 and J9 in the built unit (taken from the net names).
+- U5 / U4 now float at a line-frequency node: the common-mode filter capacitors C19 / C21 and C29 / C33 see the
+  shunt in series (2 mOhm).
+
+## v6 step 2 – card strips cleared, comparison tools know the v6 cases (2026-11-23, branch `v6-baseboard`)
+
+Decisions "Fable 2026-11-23" (planning session): go on with the baseboard; two deviation kinds; clear the strips.
+- `tools/v6/v6_2_clear_strips.py` (seed 6002, log `reports/v6/v6_2_clear_strips.log`): strips primary y -84 .. -57,
+  ISO y 49.5 .. 72.5 (x 5 .. 124). Tracks and vias with an end in a strip deleted; 9 pours wholly in a strip
+  deleted (DC+ B.Cu pour 3, ISODC+ F.Cu pour 14, ISOPGND F.Cu pour 8 part 2, PGND In1 pour 6 / In2 pour 4, ISOPGND
+  In2 pours 3 / 12); 10 pours cut back to the strip edge (DC+ F.Cu pour 5, PGND F.Cu pour 7 and B.Cu pour 0, ISODC+
+  F.Cu pour 11 and B.Cu pour 5 part 2, ISOPGND F.Cu pour 8, DAB_GROUND pours 12 / 13, 15V pour 20, PGND In1 pour
+  10); the two keep-outs of the U5 jumper vias deleted. Island counts before / after are in the log.
+- `tools/v6/v6_2b_orphans.py` (seed 6003, log `reports/v6/v6_2b_orphans.log`): 49 copper items whose group has no
+  pad left deleted (runs to the old gate-card headers outside the strips, one PGND pour piece, DAB_GROUND In2 pour
+  13). The planes of the unrouted card area stay.
+- Comparison tools: `lib/v6_copper.csv` kind `gone` (a v4 via deleted with its circuit: the four U4 / U5 jumper
+  vias; `tools/check_board.py`); `tools/ipc356_diff.py` accepts a Proteus net that lost all its Proteus pads when
+  the KiCad net keeps the name, and a swapped terminal pad that became no-connect (pin row ... -> N/C).
+- pcbnew traps met: `ZONE.SetOutline()` with a temporary polygon crashes at `SaveBoard` (change `zone.Outline()` in
+  place); `ZONE.Duplicate()` crashes too (build a new zone).
+- Checks after the step: see "Last verification" below this entry when it is filled in.
+
 ## v6 step 1 – schematic for the six power cards, board staged; check_all NOT passing yet (2026-11-23, branch `v6-baseboard`)
 
 Plan `V6_PLAN.md`; card side `~/dev/hb_power_card-rev1` (its STATUS.md: the card is placed, not fully routed).

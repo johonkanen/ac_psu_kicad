@@ -208,3 +208,19 @@ ipc356_diff: ERROR via at (25.794, 42.786): Proteus net PWM_Q7 -> None, KiCad ne
 ipc356_diff: FAILED
 !! FAILED: python3 tools/ipc356_diff.py
 == Gerber round trip vs Proteus (copper, drills; v4 areas)
+roundtrip: F.Cu   XOR 2833.86 mm^2, beyond 0.05 mm: only Proteus 2199.77, only KiCad 563.30 mm^2; clusters >= 0.01 mm^2: 513 pad shape, 14 clearance, 1 zone fill, 40 pour refill, 259 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1481 inside v4 areas) (+3 Proteus pour strokes inside zones)
+roundtrip: In1.Cu XOR 3483.03 mm^2, beyond 0.05 mm: only Proteus 2092.14, only KiCad 1329.38 mm^2; clusters >= 0.01 mm^2: 259 pad shape, 123 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+725 inside v4 areas)
+roundtrip: In2.Cu XOR 3552.60 mm^2, beyond 0.05 mm: only Proteus 1915.79, only KiCad 1547.82 mm^2; clusters >= 0.01 mm^2: 236 pad shape, 184 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+826 inside v4 areas)
+roundtrip: B.Cu   XOR 4967.27 mm^2, beyond 0.05 mm: only Proteus 4213.00, only KiCad 677.50 mm^2; clusters >= 0.01 mm^2: 739 pad shape, 4 clearance, 1 zone fill, 15 pour refill, 239 v4 deviation, 6 other; draws/flashes off the other copper: 58 Proteus, 0 KiCad (+1222 inside v4 areas) (+2 Proteus pour strokes inside zones)
+roundtrip: B.Cu OTHER only Proteus 278.134 mm^2 at (-8.395, -73.771), box x -24.15..5.53 y -80.65..-59.88, near J5-1 (SHUNT1) 7.28 mm, via (GND) 26.66 mm
+roundtrip: B.Cu OTHER only Proteus 9.051 mm^2 at (3.993, -60.238), box x -2.77..10.93 y -62.95..-57.50, near U5-4 (SHUNT1) 0.44 mm, via (GND) 10.56 mm
+roundtrip: B.Cu OTHER only Proteus 4.051 mm^2 at (6.694, -66.714), box x 4.95..8.45 y -67.83..-63.45, near R48-2 (SHUNT2) 0.66 mm, via (GND) 17.38 mm
+roundtrip: B.Cu OTHER only Proteus 3.343 mm^2 at (4.627, -60.079), box x 1.33..6.80 y -63.02..-58.40, near U5-3 (#00350) 0.83 mm, via (GND) 10.48 mm
+roundtrip: B.Cu OTHER only Proteus 3.128 mm^2 at (3.875, -61.772), box x 1.33..5.53 y -63.02..-59.88, near U5-4 (SHUNT1) 1.10 mm, via (GND) 12.08 mm
+roundtrip: B.Cu OTHER only Proteus 1.268 mm^2 at (5.204, -50.824), box x 4.85..5.65 y -51.80..-49.35, near U5-6 (#00354) 0.15 mm, via (GND) 2.38 mm
+roundtrip: drills 1 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: ERROR 13 v4 vias listed, 12 v4 via drills found
+roundtrip: FAILED (6 unexplained clusters, 58 draws/flashes without copper in the other set, 1 drill mismatches)
+!! FAILED: python3 tools/gerber_roundtrip.py --check
+
+SOME CHECKS FAILED
