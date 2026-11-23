@@ -7,11 +7,24 @@ Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 ste
 - Done and committed: card rev 1 routed and checked (`~/dev/hb_power_card-rev1`, branch `card-rev1`, last
   commit 2d4ebeb: R_off 10R); baseboard steps 1, 2, 3 (4b2d4c2), steps 3c and 4 (this commit, see the entry below).
   Nothing is pushed (plan rule: do not push).
-- Running when the session ended: an Opus helper routing the aux flyback areas PX / IA in its own Agent worktree
-  (branch `aux-routes`, started from 4b2d4c2), delivering `tools/v6/aux_routes.py`, a boundary list and
-  `reports/v6/aux_routes.md` (V6_PLAN section 10). If it did not finish, start it again from the brief in this
-  section of the plan; its result is replayed onto this board only after DRC, parity, domain_gaps and the island
-  comparison pass.
+- Aux flyback areas PX / IA: the Opus helper finished. Branch `aux-routes`, commit 879aa02 (from 4b2d4c2; not merged,
+  never merge the board file). It delivers `tools/v6/aux_routes.py` (seed 6100) + `tools/v6/aux_routes_copper.csv`
+  (140 tracks, 21 vias, 4 inner zones, 1 part move; checks 81 pads first and refuses to save if one moved) and
+  `reports/v6/aux_routes.md`. On its replayed board: 0 opens inside the areas, DRC 0 shorts / 0 clearance, parity 0,
+  domain_gaps / check_layout / check_layout_v6 OK, all pours 1 -> 1 island. **Not yet replayed onto 4704efe** (step 4
+  is newer): take the two files from the branch (`git checkout aux-routes -- tools/v6/aux_routes.py
+  tools/v6/aux_routes_copper.csv ...`), run it as the first chain step, keep it only after DRC, parity,
+  domain_gaps and the island comparison pass here. Points to decide when replaying:
+  - C68 (DC+ / GND 100 nF) moved from (72.0, -51.5) to (70.4, -13.0), turned 180 degrees: no legal DC+ connection
+    at the old place.
+  - One DC+ via in pad R98-1: needs JLC's filled and capped via-in-pad on 6 layers (to confirm), else move it.
+  - The v5 aux In2 GND pour clearance lowered from 1.0 to 0.5 mm; a 2.0 mm inner-layer rule added for AUX_DRAIN /
+    AUX_CLAMP.
+  - Foreign copper cut at the area edges (PWM_TRANS2, PWM_TRANS3, PWM_G1, 5V on In2, a GND branch on In1): the parts
+    outside still dangle and must be deleted or rerouted by the chain.
+  - Boundary points: 15V (82.45, -54.6) F.Cu towards J23 / U9; 15V (67.0, -19.8) B.Cu towards J21 / J22; 15V_ISO
+    (90.95, -25.5) B.Cu; ISOGND (96.9, -25.5) B.Cu; GND joins the card-P In4 plane; DC+ ends in the F.Cu pour.
+  - U18 drain copper about 171 mm2 (In1 77, In4 77, B 17) against the 230 mm2 of the v5 loss estimate.
 - Next: step 5, routing passes on branches `v6-routing-passN` (V6_PLAN section 6: aux area first (helper script),
   then the HV aux nets drawn by script, the CTRL-side buses, then the rest; the two current-sense groups at
   FILTER_OUT1 / J9 and the card headers are new routing work). One heavy job at a time, `free -g` >= 6 GB, shared
