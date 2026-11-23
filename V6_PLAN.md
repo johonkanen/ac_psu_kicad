@@ -150,3 +150,25 @@ card.
 - An isolator channel that has to change.
 - A card interface change that CARD_REV1_PLAN.md §8 does not allow.
 - A fixed part of §4 that must move more than a few millimetres.
+
+## 9. Current sense stays on the baseboard, on the quiet side of the chokes (user 2026-11-23)
+
+Supersedes §5 where it removes R48 / U5 and R91 / U4, and the MDAT / MCLK header pins. Reason: the sense parts did
+not fit the card (CARD_REV1_PLAN.md §10).
+
+- **R48 + U5 (AFE leg 1) and R91 + U4 (inverter leg B) stay**, with their input filters, D8 / R59, D9 / R94 and
+  capacitors. They are no longer at the switch node: each shunt goes in series at the **other end of its choke**,
+  between the choke lead that does not switch and the filter it feeds (AFE: the choke's line-side lead; inverter:
+  the choke's output-side lead, today's J9 side). The choke current is the same at both ends, and the ADuM7701 then
+  floats at a line-frequency node. Find the nodes in sheets 1 and 5; if a choke end is not on the board, say so.
+- **Side-1 supply of U5 and U4:** it used to come from the gate cards (header pin 39). Now one small isolated DC/DC
+  module per sensor, fed from the domain's 5 V (5V for U5, 5V_ISOL for U4), output 9–12 V into the existing
+  resistor + 5.1 V zener (resistor rescaled), or 5 V out into a small LDO if the module's light-load voltage can
+  exceed 5.5 V. Functional insulation is enough (both sides are inside one domain). Pick an in-stock part at JLC
+  and record it.
+- MDATA / ADCLK and MDATA_INU / INU_ADCLK stay on the board as today (R55, R50). **Pins 8 and 10 of all six card
+  headers are no-connects.**
+- J5 and J7 become plain landing terminals (card SW wire + choke lead), like AFE_OUT1 and INU_OUT2.
+- Place each shunt and its ADuM7701 at the choke lead it serves, with the 2.5 mm high-voltage rule around the
+  side-1 parts.
+- Redo the parts of step v6_1 this touches before clearing the strips.
