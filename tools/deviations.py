@@ -122,7 +122,9 @@ def wire_links():
     """[(net, (x, y), (x1, y1), note)] off-board wire links between two pads of one net (kind wire,
     lib/v5_copper.csv): the checks count the two pads as joined (v5 step 6: DC bus past J11)."""
     return [(r["net"], (float(r["x"]), float(r["y"])), (float(r["x1"]), float(r["y1"])), r["note"])
-            for r in copper_rows() if r["kind"] == "wire"]
+            for r in copper_rows() if r["kind"] == "wire"
+            and not any(u["kind"] == "unwire" and (u["x"], u["y"], u["x1"], u["y1"]) == (r["x"], r["y"], r["x1"], r["y1"])
+                        for u in copper_rows())]
 
 
 def unrouted_areas():
@@ -189,13 +191,15 @@ def footprint_changes():
 
 
 def terminal_area(ref):
-    """(x0, y0, x1, y1) of the copper area of a swapped footprint (area row, layer *, note 'REF ...')."""
+    """(x0, y0, x1, y1) of the copper area of a swapped footprint (area row, layer *, note 'REF ...'). The last
+    matching row wins: a later list (v6) may move the terminal (v6 step 3: INU_OUT2)."""
+    found = None
     for r in copper_rows():
         if r["kind"] == "area" and r["layer"] == "*" and kref(r["note"].split(" ", 1)[0]) == kref(ref):
             x0, x1 = sorted((float(r["x"]), float(r["x1"])))
             y0, y1 = sorted((float(r["y"]), float(r["y1"])))
-            return x0, y0, x1, y1
-    return None
+            found = (x0, y0, x1, y1)
+    return found
 
 
 def in_terminal_area(x, y, margin=0.0):

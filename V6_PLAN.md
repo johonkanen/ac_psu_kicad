@@ -101,11 +101,21 @@ and R91 gone, each is one net with the pads of the choke lead or output it serve
 ### Placement
 
 - Card centres at x 32.2, 66.2, 100.2 on each wall, order as in BASEBOARD.md §3.
-- No part taller than 4 mm within 24 mm of either wall inside the card span (the cards hang there, bottom edge 4 mm
-  above the board). No DC or switch-node copper within 2.5 mm of the board edge along the walls.
-- Each card's terminal pair and header: 26–34 mm from the wall, within ±12 mm of the card centre in x, header on
+- No part taller than 4 mm within **18 mm** of either wall inside the card span (the routed card reaches about
+  16 mm from the wall, its bottom edge 4 mm above the board; was 24 mm, planning session 2026-11-23). No DC or
+  switch-node copper within 2.5 mm of the board edge along the walls.
+- Each card's terminal pair and header: bodies **at least 20 mm** from the wall, terminal screw centres at least
+  22 mm (straight screwdriver from above); within ±12 mm of the card centre in x where the board allows, header on
   the DC− side of the pair. Where bulk caps or other fixed parts are in the way, move along x first, then further
-  from the wall, and record the position.
+  from the wall, and record the position. (Was: 26–34 mm.)
+- Lug circles (8 mm, on the 7 mm terminal top): 2.5 mm in plan view from parts taller than 5 mm (headers,
+  terminals, through-hole capacitors) and from other lugs; flat parts and pads below the lug do not count.
+- **Exceptions decided in step 3** (planning session 2026-11-23): the control card stands 5.3 mm above the board
+  with its outline to y 46.36, so inverter leg A and the DAB secondary get **soldered pigtail holes** (two 3.0 mm
+  holes per net, 6.0 mm pads, 10–16 mm from the wall) instead of REDCUBE terminals, and their headers stand
+  horizontal between the control card edge and 18 mm from the wall. The baseboard then has four REDCUBE pairs,
+  two pigtail pairs and six through-hole headers. AFE leg 1's pair stands west of the bulk caps C10 / C7.
+  `tools/v6/check_layout_v6.py` checks these rules.
 - The freed strips are otherwise for routing and for the DC pours.
 
 ### Copper

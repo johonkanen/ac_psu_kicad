@@ -1,0 +1,131 @@
+== v6 step 3: terminals, headers, sense groups placed
+  BUSP1 (ISODC+) at (32.50, 38.50) deleted
+  BUSP2 (ISODC+) at (63.50, 45.50) deleted
+  BUSN1 (ISOPGND) at (33.00, 31.50) deleted
+  BUSN2 (ISOPGND) at (90.50, 45.00) deleted
+  J39: footprint ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm (pigtail holes) instead of the REDCUBE, net ISODC+
+  J40: footprint ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm (pigtail holes) instead of the REDCUBE, net ISOPGND
+  J41: footprint ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm (pigtail holes) instead of the REDCUBE, net ISODC+
+  J42: footprint ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm (pigtail holes) instead of the REDCUBE, net DAB_GROUND
+  J31 pads centred at (13.50, -60.30), rotation 0, side F
+  J32 pads centred at (3.00, -60.30), rotation 0, side F
+  J21 pads centred at (4.00, -50.50), rotation 90, side F
+  J22 pads centred at (53.75, -59.50), rotation 90, side F
+  J34 pads centred at (66.90, -59.50), rotation 0, side F
+  J33 pads centred at (77.40, -59.50), rotation 0, side F
+  J23 pads centred at (90.55, -58.80), rotation 90, side F
+  J36 pads centred at (103.70, -58.80), rotation 0, side F
+  J35 pads centred at (114.20, -58.80), rotation 0, side F
+  J24 pads centred at (13.90, 44.80), rotation 0, side F
+  J38 pads centred at (23.50, 48.00), rotation 0, side F
+  J37 pads centred at (34.00, 48.00), rotation 0, side F
+  J25 pads centred at (62.50, 50.30), rotation 90, side F
+  J39 pads centred at (74.45, 58.50), rotation 0, side F
+  J40 pads centred at (82.95, 58.50), rotation 0, side F
+  J26 pads centred at (94.70, 50.30), rotation 90, side F
+  J41 pads centred at (104.60, 58.50), rotation 0, side F
+  J42 pads centred at (113.10, 58.50), rotation 0, side F
+  group AFE sense: 11 parts turned by 180 degrees about R48, R48 -> (-36.0, -62.4): 1[SHUNT1]@(-33.5, -64.4) 2[SHUNT2]@(-38.5, -64.4) 3[LEMOUT]@(-33.5, -60.3) 4[AFE_CHOKE1]@(-38.5, -60.3)
+  group INV sense: 13 parts turned by 180 degrees about R91, R91 -> (-83.5, 48.3): 1[INU_SHUNT2]@(-86.0, 50.4) 2[INU_SHUNT1]@(-81.0, 50.4) 3[INDUCTOR_OUTPUT]@(-86.0, 46.2) 4[INU_CHOKE]@(-81.0, 46.2)
+  C148 near (2.0, -46.0) side F: at (2.00, -46.00)
+  C149 near (6.0, -46.0) side F: at (6.00, -46.00)
+  C150 near (51.0, -64.3) side F: at (51.00, -64.30)
+  C151 near (56.5, -64.3) side F: at (56.50, -64.30)
+  C152 near (88.0, -63.8) side F: at (88.00, -63.80)
+  C153 near (93.0, -63.8) side F: at (93.00, -63.80)
+  C154 near (9.0, 42.0) side F: at (9.00, 42.00)
+  C155 near (9.0, 46.5) side F: at (9.00, 46.50)
+  C156 near (60.0, 55.5) side F: at (60.00, 55.50)
+  C157 near (65.0, 55.5) side F: at (65.00, 55.50)
+  C158 near (92.5, 55.5) side F: at (92.50, 55.50)
+  C159 near (97.5, 55.5) side F: at (97.50, 55.50)
+  R55 near (-28.0, -76.0) side B: at (-28.00, -76.00)
+  C64 near (-28.0, -78.5) side B: at (-28.00, -78.50)
+  U29 near (-24.0, -72.0) side F: at (-23.50, -72.00)
+  C160 near (-21.0, -66.0) side B: at (-18.50, -66.00)
+  C161 near (-27.0, -66.0) side B: at (-28.41, -65.49)
+  U30 near (-98.0, 56.0) side F: at (-97.25, 52.07)
+  C162 near (-101.0, 50.0) side B: at (-99.15, 44.29)
+  C163 near (-95.0, 50.0) side B: at (-92.50, 50.00)
+  D17 near (102.0, 39.0) side F: at (102.00, 39.00)
+  R257 near (100.5, 40.5) side F: at (101.00, 41.37)
+  INU_OUT2 near (-56.0, 62.0) side F: at (-56.00, 62.00)
+  silkscreen + / - / INV A at the pigtail holes J39 / J40
+  silkscreen + / - / DAB SEC at the pigtail holes J41 / J42
+  track [Net-(U2-+)] under J38 deleted
+  track [Net-(U2--)] under J38 deleted
+  track [15V] under J35 deleted
+  track [15V] under J35 deleted
+  track [15V] under J35 deleted
+  track [15V] under J35 deleted
+  track [15V] under J35 deleted
+  via [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [GND] under J21 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [SHUNT1] under J32 deleted
+  track [15V_ISO] under J38 deleted
+  track [Net-(U7B--)] under J38 deleted
+  track [Net-(U7B-+)] under J38 deleted
+  track [ISO_DAB_SDM_RAW_VOLTAGE] under R257 deleted
+  via [ISO_DAB_SDM_RAW_VOLTAGE] under R257 deleted
+  track [ADCLK] under J21 deleted
+  track [ADCLK] under J21 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  track [INU_SHUNT2] under J24 deleted
+  via [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-VIN-)] under J32 deleted
+  track [Net-(U5-MDAT)] under J21 deleted
+  track [Net-(U5-MDAT)] under J21 deleted
+  track [Net-(U5-VIN+)] under J32 deleted
+  track [Net-(U5-VIN+)] under J32 deleted
+  track [Net-(D8-K)] under J32 deleted
+  track [Net-(D8-K)] under J32 deleted
+  track [Net-(D8-K)] under J32 deleted
+  track [Net-(D8-K)] under J32 deleted
+  track [Net-(D8-K)] under J32 deleted
+  track [Net-(U4-VIN+)] under J24 deleted
+  track [Net-(U4-VIN-)] under J24 deleted
+  67 tracks / vias of the moved groups' own nets deleted: INU_SHUNT1 Net-(D8-K) Net-(D9-K) Net-(U4-MDAT) Net-(U4-VIN+) Net-(U4-VIN-) Net-(U5-VIN+) Net-(U5-VIN-) SHUNT2
+  J31 [DC+]: lug circle 2.50 mm from J32 lug; screw 22.8 mm from the wall
+  J32 [PGND]: lug circle 2.50 mm from J31 lug; screw 22.8 mm from the wall
+  J34 [PGND]: lug circle 2.50 mm from J33 lug; screw 23.5 mm from the wall
+  J33 [DC+]: lug circle 2.50 mm from J34 lug; screw 23.5 mm from the wall
+  J36 [PGND]: lug circle 2.50 mm from J35 lug; screw 24.2 mm from the wall
+  J35 [DC+]: lug circle 2.50 mm from J36 lug; screw 24.2 mm from the wall
+  J38 [ISOPGND]: lug circle 2.50 mm from J37 lug; screw 23.8 mm from the wall
+  J37 [ISODC+]: lug circle 2.50 mm from J38 lug; screw 23.8 mm from the wall
+  ACCEPTED J25: body 18.66 mm from the wall (>= 20; courtyard margin 0.3) -- header body 18.65 mm from the wall: between the control card edge and the 18 mm line (Fable 2026-11-23)
+  ACCEPTED J26: body 18.66 mm from the wall (>= 20; courtyard margin 0.3) -- header body 18.65 mm from the wall: between the control card edge and the 18 mm line (Fable 2026-11-23)

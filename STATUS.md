@@ -2,6 +2,69 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 step 3 – card terminals, headers and the current-sense groups placed (2026-11-23, branch `v6-baseboard`)
+
+`tools/v6/v6_3_placement.py` (seed 6004, log `reports/v6/v6_3_placement.log`; `--dry` checks without saving).
+Decisions "Fable 2026-11-23" (planning session), three rounds of questions in this step.
+
+**Card rule changes** (V6_PLAN.md section 5 updated, `tools/v6/check_layout_v6.py` new, in `tools/check_all.sh`):
+nothing taller than 4 mm within 18 mm of a wall in the card spans (was 24); terminal and header bodies >= 20 mm
+from the wall, terminal screws >= 22 mm (was 26-34 mm); lug circles (8 mm, on the 7 mm terminal top) 2.5 mm in plan
+view from parts taller than 5 mm and from other lugs; nothing tall near the control card outline.
+
+**Placed** (pad centroid, IPC frame; DC+ / DC- 10.5 mm apart = lug to lug 2.5 mm):
+
+| Card | DC+ | DC- | Header | Note |
+|---|---|---|---|---|
+| AFE leg 1 | J31 (13.5, -60.3) | J32 (3.0, -60.3) | J21 (4.0, -50.5) | west of the bulk caps C10 / C7 (a lug under them would overlap the tall discs); 19-29 mm west of the card centre |
+| AFE leg 2 | J33 (77.4, -59.5) | J34 (66.9, -59.5) | J22 (53.75, -59.5) | header west beside C7, pair clear of C12's arc |
+| DAB primary | J35 (114.2, -58.8) | J36 (103.7, -58.8) | J23 (90.55, -58.8) | |
+| Inverter leg B | J37 (34.0, 48.0) | J38 (23.5, 48.0) | J24 (13.9, 44.8) vertical | DC+ lug 5 mm from J11; in the area the U4 group left |
+| Inverter leg A | J39 pigtail (74.45, 58.5) | J40 pigtail (82.95, 58.5) | J25 (62.5, 50.3) | see below |
+| DAB secondary | J41 pigtail (104.6, 58.5) | J42 pigtail (113.1, 58.5) DAB_GROUND | J26 (94.7, 50.3) | see below |
+
+- **Control card:** it stands 5.3 mm above the baseboard with its outline to y 46.36 (V5_LAYOUT_PLAN.md,
+  efinix_soc_board/MECHANICAL.md), its top at about 6.9 mm, the REDCUBE lug at 7 mm. Between its edge and the ISO
+  wall the power card leaves 9.4 mm, too little for an 8 mm lug. So **inverter leg A and the DAB secondary get
+  soldered pigtail holes** (new footprint `ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm`: two 3.0 mm holes per
+  net, 6.0 mm pads, 5 mm apart, the second a spare) below the card's own DC terminals (card x 29 -> card centre
+  + 12.5 mm), 10.75 / 15.75 mm from the wall; the pigtail carries a ring lug to the card's screw terminal.
+  Silkscreen + / - and the card name at each pair. Their headers stand horizontal between the control card edge
+  (0.8 mm) and the 18 mm line (body 18.65 mm from the wall, listed exception).
+- **Current sense groups**, turned by 180 degrees as rigid groups about their shunts: R48 + U5 + 9 parts below
+  FILTER_OUT1 (R48 at (-36.0, -62.4), force pads towards the terminal: AFE_CHOKE1 west, LEMOUT east); R91 + U4 +
+  11 parts west of J9 (R91 at (-83.5, 48.3): INU_CHOKE east towards J9, INDUCTOR_OUTPUT west). R55 and C64 (U5
+  side 2) placed beside the group, U29 / U30 with their capacitors next to each group, D17 / R257 beside R75,
+  INU_OUT2 moved to (-56, 62) beside J7, the 12 header capacitors beside their headers.
+- **Removed:** the wire links BUSP1 / BUSP2 / BUSN1 / BUSN2 (schematic sheet 4, `lib/v6_copper.csv` kind `unwire`;
+  the ISO DC bus becomes copper in step 4). **Moved** rows for the 27 Proteus parts in `lib/v6_deviations.csv`.
+- **Copper:** 66 tracks / vias of other nets under the new pads deleted, 67 of the moved groups' own nets (they are
+  routed again in step 5). The open-layout boxes around FILTER_OUT1 and J9 grow to the group areas.
+  `tools/v6/v6_3b_orphans.py` (seed 6005, as v6_2b): 51 copper items left without a pad deleted.
+- INU_OUT2 is a v4 footprint swap with a terminal area; `lib/v6_copper.csv` gives it a new area at (-56, 62) and
+  `tools/deviations.py` `terminal_area()` now takes the last matching row (a later list may move a terminal).
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED (`reports/v6/v6_3_check_all.log`), including the new
+  `check_layout_v6` (accepted: J25 / J26 header bodies 18.65 mm from the wall). Renders of both bands with the card
+  envelopes, the 20 mm line and the control card outline: `reports/v6/band_{primary,iso}_{F,B}.png`
+  (`tools/v6/render_v6.py`).
+
+Decisions taken by the worker:
+- Sense groups kept as rigid blocks (the Proteus layout of each group routes); only the shunt side faces the
+  terminal. LEMOUT leaves R48 on the east pad (keeps the sign of the AFE current measurement); its path to CM1 is
+  for step 5.
+- Header capacitors on the wall side of the primary headers (short parts may stand there).
+
+To verify:
+- The lower screw terminals of the ISO power cards sit about 7 mm above the baseboard and are driven horizontally
+  from inside the unit, across the control card (top 6.9 mm plus parts): the control card has to be out when an
+  ISO power card east of x 42.6 is connected or pulled.
+- Pigtail wire gauge and M3 ring lug: 2.5 mm2 M3 ring lugs are standard, 4 mm2 for M3 may not be.
+- B0512S-1WR3 minimum load: about 15 mA into R59 / D8 (R94 / D9) is near 10 % of 1 W at 12 V; check the data
+  sheet's minimum load and no-load voltage against the 470R / zener dissipation; add a preload footprint if asked.
+- R48 at FILTER_OUT1 / LEMOUT: no other sensor on the board measures that current. LEMOUT is only a net name;
+  U1:B measures the filter voltage (LEMOUT - FILTER_INPUT), not a current.
+- AFE leg 1 terminals 19-29 mm west of their card centre (wire up to 10 cm, accepted for the AFE).
+
 ## v6 steps 1 and 2 redone: current sense stays on the board at the quiet end of the chokes; `check_all.sh` passes (2026-11-23, branch `v6-baseboard`)
 
 V6_PLAN.md section 9 (user decision 2026-11-23, sent by the planning session). The two entries below describe the

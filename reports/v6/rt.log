@@ -1,6 +1,9 @@
-roundtrip: F.Cu   XOR 5186.71 mm^2, beyond 0.05 mm: only Proteus 4553.64, only KiCad 563.29 mm^2; clusters >= 0.01 mm^2: 504 pad shape, 12 clearance, 1 zone fill, 32 pour refill, 281 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1887 inside v4 areas) (+2 Proteus pour strokes inside zones)
-roundtrip: In1.Cu XOR 3707.04 mm^2, beyond 0.05 mm: only Proteus 2314.02, only KiCad 1332.34 mm^2; clusters >= 0.01 mm^2: 249 pad shape, 138 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+804 inside v4 areas)
-roundtrip: In2.Cu XOR 4031.33 mm^2, beyond 0.05 mm: only Proteus 2396.50, only KiCad 1548.72 mm^2; clusters >= 0.01 mm^2: 201 pad shape, 196 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1065 inside v4 areas)
-roundtrip: B.Cu   XOR 5624.20 mm^2, beyond 0.05 mm: only Proteus 4855.61, only KiCad 682.35 mm^2; clusters >= 0.01 mm^2: 757 pad shape, 4 clearance, 1 zone fill, 12 pour refill, 261 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1415 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: F.Cu   XOR 5218.59 mm^2, beyond 0.05 mm: only Proteus 4371.01, only KiCad 749.59 mm^2; clusters >= 0.01 mm^2: 593 pad shape, 21 clearance, 1 zone fill, 30 pour refill, 279 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1720 inside v4 areas) (+7 Proteus pour strokes inside zones)
+roundtrip: In1.Cu XOR 4006.21 mm^2, beyond 0.05 mm: only Proteus 2238.57, only KiCad 1699.97 mm^2; clusters >= 0.01 mm^2: 345 pad shape, 1 clearance, 135 v4 deviation, 1 other; draws/flashes off the other copper: 1 Proteus, 0 KiCad (+648 inside v4 areas)
+roundtrip: In2.Cu XOR 4288.39 mm^2, beyond 0.05 mm: only Proteus 2293.23, only KiCad 1891.76 mm^2; clusters >= 0.01 mm^2: 344 pad shape, 7 clearance, 2 zone fill, 230 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+888 inside v4 areas)
+roundtrip: B.Cu   XOR 6382.96 mm^2, beyond 0.05 mm: only Proteus 5409.53, only KiCad 859.65 mm^2; clusters >= 0.01 mm^2: 835 pad shape, 7 clearance, 1 zone fill, 11 pour refill, 267 v4 deviation, 1 other; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1364 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: In1.Cu OTHER only Proteus 63.064 mm^2 at (34.790, -57.996), box x 2.68..72.45 y -63.95..-42.78, near C7-1 (PE8) 3.55 mm, via (PWM_G4) 5.39 mm
+roundtrip: B.Cu OTHER only Proteus 8.698 mm^2 at (4.018, -60.327), box x -2.77..10.93 y -62.95..-57.50, near U5-4 (SHUNT1) 0.36 mm, via (GND) 10.65 mm
+roundtrip: In1.Cu MISSING Proteus item at (3.08, -45.73)
 roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
-roundtrip: OK
+roundtrip: FAILED (2 unexplained clusters, 1 draws/flashes without copper in the other set, 0 drill mismatches)

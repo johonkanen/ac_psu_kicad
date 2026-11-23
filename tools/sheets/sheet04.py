@@ -70,13 +70,8 @@ for x, ref, vdd, gnd in ((g(210), "C27", "VCC", "GND"), (g(210), "C87", "3V3_ISO
     _, ct, cb = vert2(sh, "C", ref, x, y, "100n", top=2)
     sh.wire(ct, up(ct, 2)); power_at(sh, vdd, up(ct, 2), "up")
     sh.wire(cb, down(cb, 2)); power_at(sh, gnd, down(cb, 2), "down")
-# v5 step 6: the isolated DC bus is cut at J11 (CTRL domain, 5 mm barriers); two wires on the bottom side
-# join its halves, each soldered into two 3.0 mm holes (user 2026-11-18: 2.5 mm round enamelled copper wire).
-for i, (ref, net) in enumerate((("BUSP1", "ISODC+"), ("BUSP2", "ISODC+"), ("BUSN1", "ISOPGND"), ("BUSN2", "ISOPGND"))):
-    x, y = g(24) + g(16) * i, g(150)
-    terminal(sh, ref, x, y, "up")
-    sh.wire((x, y), (x, y + g(4))); power_at(sh, net, (x, y + g(4)), "down")
-sh.text("DC bus wire link past J11 (bottom side): BUSP1 - BUSP2 (ISODC+) and BUSN1 - BUSN2 (ISOPGND), 2.5 mm round "
-        "enamelled copper wire, soldered; about 10 A. The enamel is not safety insulation: >= 5 mm from CTRL.", g(16), g(164))
+# v6 step 3: the wire links BUSP1 / BUSP2 / BUSN1 / BUSN2 of v5 step 6 are gone; the isolated DC bus passes J11 as
+# copper in the freed card strip along the heatsink wall (V6_PLAN.md section 5, planning session 2026-11-23).
+sh.text("v6: the ISO DC bus passes J11 as copper under the power cards (was: two wire links on the bottom side).", g(16), g(164))
 sh.save()
 print("sheet04: written")

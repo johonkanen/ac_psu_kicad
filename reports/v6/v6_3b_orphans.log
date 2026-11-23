@@ -1,0 +1,66 @@
+21:47:49: Debug: Adding duplicate image handler for 'PNG file'
+21:47:49: Debug: Adding duplicate image handler for 'JPEG file'
+21:47:49: Debug: Adding duplicate image handler for 'TIFF file'
+21:47:49: Debug: Adding duplicate image handler for 'GIF file'
+21:47:49: Debug: Adding duplicate image handler for 'PNM file'
+21:47:49: Debug: Adding duplicate image handler for 'PCX file'
+21:47:49: Debug: Adding duplicate image handler for 'IFF file'
+21:47:49: Debug: Adding duplicate image handler for 'Windows icon file'
+21:47:49: Debug: Adding duplicate image handler for 'Windows cursor file'
+21:47:49: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+21:47:49: Debug: Adding duplicate image handler for 'TGA file'
+21:47:49: Debug: Adding duplicate image handler for 'XPM file'
+21:47:49: Debug: Adding duplicate image handler for 'WebP file'
+== v6 step 3b: copper groups without a pad deleted
+  round 1: track B.Cu(12.397,-66.290)-(11.919,-65.812) [SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(11.053,-64.947)-(10.200,-64.093) [SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(11.919,-65.812)-(11.053,-64.947) [SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(10.200,-64.093)-(10.200,-62.700) [SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(0.498,-63.852)-(1.832,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(1.832,-63.788)-(1.878,-63.741) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(1.832,-63.852)-(1.832,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-0.502,-63.858)-(-0.495,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(2.100,-67.300)-(3.891,-67.300) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(5.225,-63.760)-(5.206,-63.741) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(1.878,-63.741)-(1.884,-63.735) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(4.310,-65.769)-(5.225,-64.854) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(5.225,-64.854)-(5.225,-63.760) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-0.714,-64.070)-(-0.502,-64.070) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(3.891,-67.300)-(4.310,-66.882) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(2.650,-63.735)-(5.200,-63.735) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(4.310,-66.882)-(4.310,-65.769) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-0.502,-63.858)-(-0.714,-64.070) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(1.884,-63.735)-(2.650,-63.735) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-0.502,-64.070)-(-0.502,-63.858) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(0.136,-63.852)-(0.498,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-2.270,-64.070)-(-0.714,-64.070) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(1.832,-63.788)-(1.832,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(5.200,-63.735)-(5.206,-63.741) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(-0.495,-63.852)-(0.136,-63.852) [SHUNT1] deleted: its group has no pad
+  round 1: track B.Cu(19.586,46.814)-(19.600,46.800) [ISO_AFE_SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(19.586,48.131)-(19.586,46.814) [ISO_AFE_SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(19.031,48.686)-(19.586,48.131) [ISO_AFE_SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(19.031,48.831)-(19.031,48.686) [ISO_AFE_SDM_RAW_VOLTAGE] deleted: its group has no pad
+  round 1: track B.Cu(10.652,46.680)-(10.588,46.744) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.473,46.859)-(9.613,46.859) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(13.000,55.000)-(13.272,55.272) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(13.000,53.862)-(13.000,54.145) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.588,46.744)-(12.205,46.744) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.698,45.364)-(10.704,45.358) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.369,47.956)-(10.369,47.491) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(13.000,54.145)-(13.000,54.686) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(9.613,46.859)-(9.238,47.235) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(9.238,47.235)-(9.238,50.100) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(13.000,54.686)-(13.000,55.000) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.369,47.491)-(10.473,47.387) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.704,42.442)-(10.698,42.436) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(9.238,50.100)-(13.000,53.862) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.473,47.387)-(10.473,46.859) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.704,45.358)-(10.704,44.592) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.369,49.512)-(10.369,47.956) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.704,44.592)-(10.704,42.442) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.652,45.410)-(10.652,46.680) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.652,45.410)-(10.698,45.364) [INU_SHUNT2] deleted: its group has no pad
+  round 1: track B.Cu(10.473,46.859)-(10.588,46.744) [INU_SHUNT2] deleted: its group has no pad
+  round 1: zone Proteus B.Cu pour 5 (fix 14) (part 2) B.Cu#0 [ISODC+] deleted: its group has no pad
+  51 items without a pad deleted

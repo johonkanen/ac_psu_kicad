@@ -57,6 +57,12 @@ def base_rows():
     out = []
     for ref in V.REMOVED:
         out.append(dict(kind="remove", ref=ref, pin="", **{"from": ""}, to="", fix=FIX, note=V.REMOVED_NOTE[ref]))
+    import deviations  # noqa: E402
+    back = {b: a for a, b in deviations.refdes_map().items()}
+    for ref, note in V.MOVED.items():
+        if ref in V.MOVED_NOT_PROTEUS:
+            continue          # a v4 part: the Proteus comparison has no position for it
+        out.append(dict(kind="moved", ref=back.get(ref, ref), pin="", **{"from": ""}, to="", fix=FIX, note=note))
     for ref, sheet, sym, value, fp, note in V.PARTS:
         out.append(dict(kind="part", ref=ref, pin="", **{"from": ""}, to=fp, fix=FIX, note=note))
         out.append(dict(kind="value", ref=ref, pin="", **{"from": ""}, to=value, fix=FIX, note=""))

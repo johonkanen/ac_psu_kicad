@@ -10,11 +10,22 @@ SWITCHES = [f"Q{i}" for i in range(1, 13)]
 GATE_HEADERS = "J1 J2 J3 J4 J6 J8".split()
 DAB_TABS = "DAB_PRI_1 DAB_PRI_2 DAB_SEC_1 DAB_SEC_2".split()
 DAB_CAPS = "C1 C35 C45 C46 C47 C48 C49 C50".split()
-REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS
+BUS_LINKS = ["BUSP1", "BUSP2", "BUSN1", "BUSN2"]   # v6 step 3: the ISO DC bus runs as copper in the freed strip
+REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS + BUS_LINKS
 REMOVED_NOTE = {**{r: "v6: switch on the power card" for r in SWITCHES},
                 **{r: "v6: gate-card header replaced by the card CTRL header" for r in GATE_HEADERS},
                 **{r: "v6: DAB leads go from the card to the transformer" for r in DAB_TABS},
-                **{r: "v6: DAB split capacitor on the DAB card" for r in DAB_CAPS}}
+                **{r: "v6: DAB split capacitor on the DAB card" for r in DAB_CAPS},
+                **{r: "v6: ISO DC bus wire link replaced by copper in the freed card strip" for r in BUS_LINKS}}
+# Proteus / v5 parts that v6 step 3 places elsewhere (the two current-sense groups go to the choke-lead terminals,
+# INU_OUT2 leaves the passage north of J11)
+MOVED = {**{r: "v6: AFE current sense at the choke-lead terminal FILTER_OUT1" for r in
+            ("R48", "U5", "D8", "R59", "R57", "R58", "C52", "C53", "C91", "C71", "C73", "C64", "R55")},
+         **{r: "v6: inverter current sense at the choke-lead terminal J9" for r in
+            ("R91", "U4", "D9", "R94", "R92", "R93", "C51", "C54", "C90", "C55", "C78", "C37", "R50")},
+         "INU_OUT2": "v6: landing terminal moved out of the passage north of J11, beside J7"}
+MOVED_NOT_PROTEUS = ("C90", "C91")
+
 # V6_PLAN.md section 9 (user 2026-11-23): the two current-sense circuits R48 / U5 and R91 / U4 STAY on the board
 # with all their parts. Each shunt moves to the other end of its choke (the end that does not switch):
 #   R48: between the choke lead on terminal FILTER_OUT1 (new net AFE_CHOKE1) and the filter node LEMOUT
@@ -27,6 +38,11 @@ PIN_TO = {("R48", "3"): "LEMOUT", ("R48", "4"): "AFE_CHOKE1", ("FILTER_OUT1", "1
 
 HDR = "ac_psu:Samtec_SHF-105-01-L-D-TH"
 TERM = "ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3"
+# Inverter leg A and DAB secondary: the control card (5.3 mm above the board, outline to y 46.36) leaves no room for
+# a REDCUBE and its lug on the ISO wall east of x 42.6, so their DC wires are pigtails soldered into two plated holes
+# per net (planning session 2026-11-23); the pigtail carries a ring lug to the card's own screw terminal.
+PIGTAIL = "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+PIGTAIL_CARDS = ("Inverter leg A", "DAB secondary")
 C0603 = "Capacitor_SMD:C_0603_1608Metric"
 
 # ---- the six cards: (name, header, DC+ terminal, DC- terminal, PWM_HI, PWM_LO, PWM_TRANS, 15 V, 5 V, GND,
@@ -53,8 +69,12 @@ PARTS = []
 for c in CARDS:
     PARTS += [
         (c[1], 2, "HDR_2X5", "CTRL " + c[0], HDR, f"CTRL header of the {c[0]} card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"),
-        (c[2], 2, "PIN", "PIN", TERM, f"{c[12]} terminal of the {c[0]} card: Wuerth 7462810, M3 press-fit"),
-        (c[3], 2, "PIN", "PIN", TERM, f"{c[13]} terminal of the {c[0]} card: Wuerth 7462810, M3 press-fit"),
+        (c[2], 2, "PIN", "PIN", PIGTAIL if c[0] in PIGTAIL_CARDS else TERM,
+         f"{c[12]} pigtail holes of the {c[0]} card (wire soldered, ring lug to the card)" if c[0] in PIGTAIL_CARDS else
+         f"{c[12]} terminal of the {c[0]} card: Wuerth 7462810, M3 press-fit"),
+        (c[3], 2, "PIN", "PIN", PIGTAIL if c[0] in PIGTAIL_CARDS else TERM,
+         f"{c[13]} pigtail holes of the {c[0]} card (wire soldered, ring lug to the card)" if c[0] in PIGTAIL_CARDS else
+         f"{c[13]} terminal of the {c[0]} card: Wuerth 7462810, M3 press-fit"),
         (c[14], 2, "C", "100n", C0603, f"{c[7]} at {c[1]}"),
         (c[15], 2, "C", "100n", C0603, f"{c[8]} at {c[1]}"),
     ]
