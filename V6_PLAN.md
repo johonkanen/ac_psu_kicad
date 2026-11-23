@@ -126,7 +126,7 @@ and R91 gone, each is one net with the pads of the choke lead or output it serve
 3. `v6_3`: place the terminals, headers, U6 regulator and the moved landing terminals. Render both sides with the
    card envelopes drawn. `tools/v5/check_layout.py` gets the v6 rules of §5 (or a `tools/v6/check_layout.py`).
 4. `v6_4`: DC pours and ground pours; island counts before and after.
-5. Routing, as a rerunnable chain on its own branch per pass (`v6-routing-passN`), merged into `v6-baseboard` only
+5. Routing (the aux flyback area goes to a helper agent, see §10), as a rerunnable chain on its own branch per pass (`v6-routing-passN`), merged into `v6-baseboard` only
    when the pass is legal:
    - supplies and grounds first in the aux area (pass 5–7 lesson), then the HV aux nets drawn by script, then the
      CTRL-side buses, then the rest;
@@ -172,3 +172,46 @@ not fit the card (CARD_REV1_PLAN.md §10).
 - Place each shunt and its ADuM7701 at the choke lead it serves, with the 2.5 mm high-voltage rule around the
   side-1 parts.
 - Redo the parts of step v6_1 this touches before clearing the strips.
+
+## 10. Aux flyback area: a helper agent delivers the routes as a script (user 2026-11-23)
+
+One agent owns the routing chain and the board file. The aux flyback area is the one part split off, because it has
+its own boundary, its own high-voltage rules and few nets leaving it, and it was what stayed open in v5 passes 4–7.
+
+**When:** start the helper when step 3 (placement) is committed, so it works while the main worker does step 4
+(pours) and the first chain steps.
+
+**How:** the main worker spawns one helper with the Agent tool in its own worktree. An Agent worktree is cut from
+`main`: tell it to check out the step 3 commit of `v6-baseboard` first.
+
+**Helper's scope**
+- Areas PX and IA of `tools/v5/card_layout.py` (`AUX_AREAS`, `HV_PADS`): T1, U18 and the parts placed by
+  `tools/v5/v5_9_aux_area.py`, `v5_17_aux_gnd_pour.py`, `v5_18_u20_supply_vias.py`, `v5_19_aux_input.py`.
+- Nets that lie wholly inside those areas, plus the stubs of leaving nets up to the area edge.
+- It may move parts inside the areas by script and may add pours on inner layers inside them.
+- It may not touch anything outside the areas, the planes that pass through, or the fixed items of §4.
+
+**What it has to read:** STATUS.md entries for routing passes 4–7 and v5 steps 17–19 (what stayed open there and
+why: AUX_VIN, AUX_LOVP, AUX_GATE, the GND pads beside HV pads, 15V), and `tools/v5/route_pass1/` on branch
+`routing-pass7`.
+
+**Method**
+- Ground and supplies first (GND copper and vias, 15V), then the high-voltage nets drawn by script with the 2.5 mm
+  rule as an explicit per-net clearance, then the remaining signals.
+- Copper for U18's DRAIN pins: try the inner-layer area under T1 (open since v5 step 9) and report the area reached.
+
+**What it delivers** (a script, not a board)
+- `tools/v6/aux_routes.py`: a table of tracks, vias, zones and any part moves, with a fixed seed, that the main
+  chain replays as one step on the current board; it must fail loudly if a pad it expects has moved.
+- A boundary list: for every net leaving the area, the point and layer where it crosses the area edge. The main
+  worker treats these as fixed entry points; if one has to move, the main worker says so and the helper redraws.
+- A report in `reports/v6/aux_routes.md`: open connections inside the area (target 0), DRC and `domain_gaps`
+  result on its own board, island count of every pour it touched before and after, renders per layer.
+
+**Merging:** the main worker replays `aux_routes.py` early in the chain (before the CTRL buses), reruns DRC, parity,
+`domain_gaps` and the island comparison on its own board, and only then keeps the step. The helper's branch is never
+merged as a board file.
+
+**If the chain stalls later:** the same pattern may be used to try two placements side by side (two helpers, each
+reporting an open count; only the winner's script is kept), and for an independent review of a finished pass. Not
+more than two helpers at a time.
