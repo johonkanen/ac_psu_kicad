@@ -131,6 +131,10 @@ def build():
     syms.append(box("HEADER_2X3_43_48", "J", l, r, show_pin_names=False,
                     desc="2x3 50 mil connector numbered 43..48"))
 
+    # v6: CTRL header of a half-bridge power card (keyed shrouded 2x5, 1.27 mm; pinout CARD_REV1_PLAN.md section 4)
+    l, r = header(range(1, 11))
+    syms.append(box("HDR_2X5", "J", l, r, show_pin_names=False, desc="Keyed shrouded header 2x5, 1.27 mm (power card CTRL)"))
+
     syms.append(rename(std_symbol("power", "PWR_FLAG"), "PWR_FLAG"))
     syms += [power(n, True) for n in GROUNDS] + [power(n, False) for n in SUPPLIES]
     return syms

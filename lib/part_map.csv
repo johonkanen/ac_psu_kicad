@@ -10,7 +10,6 @@ BUSN1,4,ac_psu:PIN,PIN
 BUSN2,4,ac_psu:PIN,PIN
 BUSP1,4,ac_psu:PIN,PIN
 BUSP2,4,ac_psu:PIN,PIN
-C1,6,ac_psu:C,
 C2,4,ac_psu:C,
 C3,3,ac_psu:C,
 C4,3,ac_psu:C,
@@ -44,9 +43,7 @@ C31,5,ac_psu:C,
 C32,5,ac_psu:C,
 C33,5,ac_psu:C,
 C34,5,ac_psu:C,
-C35,6,ac_psu:C,
 C36,7,ac_psu:C,
-C37,10,ac_psu:C,
 C38,5,ac_psu:C,
 C39,9,ac_psu:C,
 C40,3,ac_psu:C,
@@ -54,36 +51,21 @@ C41,7,ac_psu:C,
 C42,4,ac_psu:C,
 C43,10,ac_psu:C,
 C44,10,ac_psu:C,
-C45,6,ac_psu:C,
-C46,6,ac_psu:C,
-C47,6,ac_psu:C,
-C48,6,ac_psu:C,
-C49,6,ac_psu:C,
-C50,6,ac_psu:C,
-C51,10,ac_psu:C,
-C52,8,ac_psu:C,
-C53,8,ac_psu:C,
-C54,10,ac_psu:C,
-C55,10,ac_psu:C,
 C56,5,ac_psu:C,
 C57,7,ac_psu:C,
 C58,7,ac_psu:C,
 C59,4,ac_psu:C,
 C60,4,ac_psu:C,
 C61,4,ac_psu:C_Polarized,SNAP_IN_35MM
-C64,8,ac_psu:C,
 C67,7,ac_psu:C,
 C68,7,ac_psu:C,
 C69,3,ac_psu:C,
 C70,3,ac_psu:C,
-C71,8,ac_psu:C,
 C72,4,ac_psu:C_Polarized,SNAP_IN_35MM
-C73,8,ac_psu:C,
 C74,8,ac_psu:C,
 C75,8,ac_psu:C,
 C76,8,ac_psu:C,
 C77,8,ac_psu:C,
-C78,10,ac_psu:C,
 C79,4,ac_psu:C_Polarized,SNAP_IN_35MM
 C80,8,ac_psu:C,
 C81,11,ac_psu:C,
@@ -95,8 +77,6 @@ C86,11,ac_psu:C,
 C87,4,ac_psu:C,
 C88,9,ac_psu:C,
 C89,9,ac_psu:C,
-C90,10,ac_psu:C,
-C91,8,ac_psu:C,
 C92,8,ac_psu:C,
 C93,3,ac_psu:C,
 C94,3,ac_psu:C,
@@ -152,14 +132,24 @@ C144,7,ac_psu:C,75p
 C145,7,ac_psu:C,10n
 C146,7,ac_psu:C,2.2n
 C147,7,ac_psu:C,1n
+C148,2,ac_psu:C,100n
+C149,2,ac_psu:C,100n
+C150,2,ac_psu:C,100n
+C151,2,ac_psu:C,100n
+C152,2,ac_psu:C,100n
+C153,2,ac_psu:C,100n
+C154,2,ac_psu:C,100n
+C155,2,ac_psu:C,100n
+C156,2,ac_psu:C,100n
+C157,2,ac_psu:C,100n
+C158,2,ac_psu:C,100n
+C159,2,ac_psu:C,100n
 CM1,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM2,1,ac_psu:WE-CMBNC,WE-CMBNC
 CM3,5,ac_psu:WE-CMBNC,WE-CMBNC
 D3,10,ac_psu:D_Schottky,ZLLS400TA
 D4,10,ac_psu:D_Schottky,ZLLS400TA
 D5,10,ac_psu:D_Schottky,ZLLS400TA
-D8,8,ac_psu:D_Zener,MM3Z5V1T1
-D9,10,ac_psu:D_Zener,MM3Z5V1T1
 D10,10,ac_psu:D_Schottky,ZLLS400TA
 D11,7,ac_psu:D,BAS16WS
 D12,7,ac_psu:D,US1M
@@ -167,27 +157,36 @@ D13,7,ac_psu:D_TVS,SMBJ150A
 D14,7,ac_psu:D,ES2D
 D15,7,ac_psu:D,ES2D
 D16,7,ac_psu:D_Schottky,SS310
-DAB_PRI_1,6,ac_psu:PIN,PIN
-DAB_PRI_2,6,ac_psu:PIN,PIN
-DAB_SEC_1,6,ac_psu:PIN,PIN
-DAB_SEC_2,6,ac_psu:PIN,PIN
+D17,8,ac_psu:D_Zener,MM3Z5V1T1
 FILTER_IN1,1,ac_psu:PIN,PIN
 FILTER_OUT1,1,ac_psu:PIN,PIN
 INU_OUT2,5,ac_psu:PIN,PIN
-J1,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
-J2,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
-J3,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
-J4,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
 J5,1,ac_psu:PIN,PIN
-J6,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
 J7,5,ac_psu:PIN,PIN
-J8,2,ac_psu:HB_GT_CONNECTOR,HB GT CONNECTOR
 J9,5,ac_psu:PIN,PIN
 J10,5,ac_psu:PIN,PIN
 J11,2,ac_psu:HEADER_38_50MIL,38 PIN HEADER 50TH
 J12,2,ac_psu:HEADER_2X3_43_48,2X3 PIN 50TH CONNECTOR
 J13,7,ac_psu:CONN_2,CTRL 5V link B
 J14,11,ac_psu:CONN_2,CTRL 5V link A
+J21,2,ac_psu:HDR_2X5,CTRL AFE leg 1
+J22,2,ac_psu:HDR_2X5,CTRL AFE leg 2
+J23,2,ac_psu:HDR_2X5,CTRL DAB primary
+J24,2,ac_psu:HDR_2X5,CTRL Inverter leg B
+J25,2,ac_psu:HDR_2X5,CTRL Inverter leg A
+J26,2,ac_psu:HDR_2X5,CTRL DAB secondary
+J31,2,ac_psu:PIN,PIN
+J32,2,ac_psu:PIN,PIN
+J33,2,ac_psu:PIN,PIN
+J34,2,ac_psu:PIN,PIN
+J35,2,ac_psu:PIN,PIN
+J36,2,ac_psu:PIN,PIN
+J37,2,ac_psu:PIN,PIN
+J38,2,ac_psu:PIN,PIN
+J39,2,ac_psu:PIN,PIN
+J40,2,ac_psu:PIN,PIN
+J41,2,ac_psu:PIN,PIN
+J42,2,ac_psu:PIN,PIN
 L1,9,ac_psu:L,L
 L2,7,ac_psu:L,15u
 PE1,1,ac_psu:PIN,PIN
@@ -200,18 +199,6 @@ PE7,5,ac_psu:PIN,PIN
 PE8,4,ac_psu:PIN,PIN
 PEC1,11,ac_psu:PIN,PIN
 PEC2,7,ac_psu:PIN,PIN
-Q1,1,ac_psu:C3M0065090D,C3M0065090D
-Q2,1,ac_psu:C3M0065090D,C3M0065090D
-Q3,1,ac_psu:C3M0065090D,C3M0065090D
-Q4,1,ac_psu:C3M0065090D,C3M0065090D
-Q5,5,ac_psu:C3M0065090D,C3M0065090D
-Q6,5,ac_psu:C3M0065090D,C3M0065090D
-Q7,5,ac_psu:C3M0065090D,C3M0065090D
-Q8,5,ac_psu:C3M0065090D,C3M0065090D
-Q9,6,ac_psu:C3M0065090D,C3M0065090D
-Q10,6,ac_psu:C3M0065090D,C3M0065090D
-Q11,6,ac_psu:C3M0065090D,C3M0065090D
-Q12,6,ac_psu:C3M0065090D,C3M0065090D
 Q13,10,ac_psu:2N7000,2N7000
 Q14,10,ac_psu:2N7000,2N7000
 R1,4,ac_psu:R,
@@ -249,7 +236,6 @@ R40,3,ac_psu:R,
 R41,4,ac_psu:R,
 R42,4,ac_psu:R,
 R46,5,ac_psu:R,
-R48,1,ac_psu:FKK5R0020FE-TR,FKK5R0020FE-TR
 R50,10,ac_psu:R,
 R51,5,ac_psu:R,
 R52,5,ac_psu:R,
@@ -257,9 +243,6 @@ R53,5,ac_psu:R,
 R54,5,ac_psu:R,
 R55,8,ac_psu:R,
 R56,5,ac_psu:R,
-R57,8,ac_psu:R,
-R58,8,ac_psu:R,
-R59,8,ac_psu:R,
 R60,5,ac_psu:R,
 R61,5,ac_psu:R,
 R62,5,ac_psu:R,
@@ -291,10 +274,6 @@ R87,9,ac_psu:RESISTOR_ARRAY_4,RESISTOR_ARRAY
 R88,10,ac_psu:R,
 R89,10,ac_psu:R,
 R90,10,ac_psu:R,
-R91,5,ac_psu:FKK5R0020FE-TR,FKK5R0020FE-TR
-R92,10,ac_psu:R,
-R93,10,ac_psu:R,
-R94,10,ac_psu:R,
 R95,1,ac_psu:R,
 R96,4,ac_psu:R,
 R97,4,ac_psu:R,
@@ -341,6 +320,7 @@ R142,7,ac_psu:R,10M
 R143,7,ac_psu:R,10M
 R144,7,ac_psu:R,180k
 R256,5,ac_psu:R,
+R257,8,ac_psu:R,390R
 REF1,3,ac_psu:REF3025,REF3025
 REF2,3,ac_psu:REF3025,REF3025
 T1,7,ac_psu:EEL19_AUX_TRANS,EEL19 aux flyback
@@ -348,8 +328,6 @@ TR1,6,ac_psu:ETD34_TRAN_1P1S,ETD34 TRAN 1P1S
 U1,1,ac_psu:OPA2353UA,OPA2353UA
 U2,4,ac_psu:TLV316IDBVR,TLV316IDBVR
 U3,3,ac_psu:TPS73033DBVT,TPS73033DBVT
-U4,10,ac_psu:ADUM7701-8BRIZ,ADUM7701-8BRIZ
-U5,8,ac_psu:ADUM7701-8BRIZ,ADUM7701-8BRIZ
 U6,8,ac_psu:ADUM7701-8BRIZ,ADUM7701-8BRIZ
 U7,5,ac_psu:OPA2353UA,OPA2353UA
 U8,3,ac_psu:VXO7805-1000,VXO7805-1000

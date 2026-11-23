@@ -395,10 +395,6 @@
         "pattern": "/01 afe/LEMOUT"
       },
       {
-        "netclass": "DOM_P",
-        "pattern": "/01 afe/SHUNT1_FORCE"
-      },
-      {
         "netclass": "DOM_I",
         "pattern": "/05 VSI/AFE_RELAY"
       },
@@ -647,30 +643,6 @@
         "pattern": "CTRL_W"
       },
       {
-        "netclass": "DOM_P",
-        "pattern": "DAB_CAP_PRI"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "DAB_CAP_SEC"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "DAB_GATE_HI_PRI"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "DAB_GATE_HI_SEC"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "DAB_GATE_LO_PRI"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "DAB_GATE_LO_SEC"
-      },
-      {
         "netclass": "DOM_I",
         "pattern": "DAB_GROUND"
       },
@@ -716,39 +688,7 @@
       },
       {
         "netclass": "DOM_P",
-        "pattern": "DAB_SOURCE_HI_PRI"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "DAB_SOURCE_HI_SEC"
-      },
-      {
-        "netclass": "DOM_P",
         "pattern": "DC+"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G1_GATE_HI"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G1_SOURCE_HI"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G2_GATE_LO"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G3_GATE_HI"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G3_SOURCE_HI"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "G4_GATE_LO"
       },
       {
         "netclass": "DOM_P",
@@ -777,14 +717,6 @@
       {
         "netclass": "DOM_C",
         "pattern": "INU_ADCLK_CTRL"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "INU_SHUNT1"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "INU_SHUNT2"
       },
       {
         "netclass": "DOM_I",
@@ -896,10 +828,6 @@
       },
       {
         "netclass": "DOM_I",
-        "pattern": "ISO_AFE_SDM_RAW_VOLTAGE"
-      },
-      {
-        "netclass": "DOM_I",
         "pattern": "ISO_DAB_SDM_RAW_VOLTAGE"
       },
       {
@@ -925,6 +853,14 @@
       {
         "netclass": "DOM_C",
         "pattern": "MDATA_ISO"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "MDAT_AFE"
+      },
+      {
+        "netclass": "DOM_I",
+        "pattern": "MDAT_INU_CARD"
       },
       {
         "netclass": "DOM_P",
@@ -976,23 +912,15 @@
       },
       {
         "netclass": "DOM_I",
+        "pattern": "Net-(D17-K)"
+      },
+      {
+        "netclass": "DOM_I",
         "pattern": "Net-(D3-K)"
       },
       {
         "netclass": "DOM_P",
         "pattern": "Net-(D5-K)"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "Net-(D8-K)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Net-(D9-K)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Net-(J7-Pad1)"
       },
       {
         "netclass": "DOM_I",
@@ -1152,35 +1080,7 @@
       },
       {
         "netclass": "DOM_I",
-        "pattern": "Net-(U4-MDAT)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Net-(U4-VIN+)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Net-(U4-VIN-)"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "Net-(U5-MDAT)"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "Net-(U5-VIN+)"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "Net-(U5-VIN-)"
-      },
-      {
-        "netclass": "DOM_I",
         "pattern": "Net-(U6-MDAT)"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Net-(U6-VDD1)"
       },
       {
         "netclass": "DOM_I",
@@ -1355,30 +1255,6 @@
         "pattern": "PWM_TRANS6_CTRL"
       },
       {
-        "netclass": "DOM_I",
-        "pattern": "Q5_G"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Q5_S"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Q6_G"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Q7_G"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Q7_S"
-      },
-      {
-        "netclass": "DOM_I",
-        "pattern": "Q8_G"
-      },
-      {
         "netclass": "DOM_P",
         "pattern": "REF_1V65"
       },
@@ -1404,27 +1280,7 @@
       },
       {
         "netclass": "DOM_P",
-        "pattern": "SDM_RAW_VOLTAGE"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "SHUNT1"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "SHUNT2"
-      },
-      {
-        "netclass": "DOM_P",
         "pattern": "VCC"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "unconnected-(J1-Pad25)"
-      },
-      {
-        "netclass": "DOM_P",
-        "pattern": "unconnected-(J1-Pad39)"
       },
       {
         "netclass": "DOM_C",
@@ -1432,31 +1288,35 @@
       },
       {
         "netclass": "DOM_P",
-        "pattern": "unconnected-(J2-Pad25)"
+        "pattern": "unconnected-(J22-Pad10)"
       },
       {
         "netclass": "DOM_P",
-        "pattern": "unconnected-(J3-Pad25)"
+        "pattern": "unconnected-(J22-Pad8)"
       },
       {
         "netclass": "DOM_P",
-        "pattern": "unconnected-(J3-Pad39)"
+        "pattern": "unconnected-(J23-Pad10)"
+      },
+      {
+        "netclass": "DOM_P",
+        "pattern": "unconnected-(J23-Pad8)"
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(J4-Pad39)"
+        "pattern": "unconnected-(J25-Pad10)"
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(J6-Pad25)"
+        "pattern": "unconnected-(J25-Pad8)"
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(J6-Pad39)"
+        "pattern": "unconnected-(J26-Pad10)"
       },
       {
         "netclass": "DOM_I",
-        "pattern": "unconnected-(J8-Pad25)"
+        "pattern": "unconnected-(J26-Pad8)"
       },
       {
         "netclass": "DOM_P",

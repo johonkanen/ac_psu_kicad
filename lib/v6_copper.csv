@@ -1,0 +1,7 @@
+# v6 board copper (IPC frame, mm, Y up), on top of lib/v4_copper.csv and lib/v5_copper.csv; read by
+# tools/deviations.py (same kinds). The two strips along the heatsink walls lost the power stage in v6 step 1:
+# the switches, gate-card headers, switch-node copper and split capacitors are gone, the half-bridge cards hang
+# there. Until they are laid out again (V6_PLAN.md steps 2-5) they are unrouted areas; afterwards area rows.
+kind,layer,x,y,x1,y1,net,note
+unrouted,*,5.0,-84.0,124.0,-46.0,,primary card strip (AFE leg 1, AFE leg 2, DAB primary): power stage removed in v6 step 1, layout open
+unrouted,*,5.0,40.0,124.0,72.5,,ISO card strip (inverter leg B, inverter leg A, DAB secondary): power stage removed in v6 step 1, layout open

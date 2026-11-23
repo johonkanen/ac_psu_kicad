@@ -1,0 +1,227 @@
+# Intended deviations of the v6 design (baseboard for six half-bridge power cards, V6_PLAN.md) from the Proteus
+# v3 original, on top of lib/v4_deviations.csv and lib/v5_deviations.csv (same kinds, read by tools/deviations.py).
+# Written by tools/v6/make_v6_lists.py from tools/v6/v6_parts.py (remove, part, value) and, with --nets, from the
+# schematic netlist (add, pin).
+kind,ref,pin,from,to,fix,note
+remove,Q1,,,,v6,v6: switch on the power card
+remove,Q2,,,,v6,v6: switch on the power card
+remove,Q3,,,,v6,v6: switch on the power card
+remove,Q4,,,,v6,v6: switch on the power card
+remove,Q5,,,,v6,v6: switch on the power card
+remove,Q6,,,,v6,v6: switch on the power card
+remove,Q7,,,,v6,v6: switch on the power card
+remove,Q8,,,,v6,v6: switch on the power card
+remove,Q9,,,,v6,v6: switch on the power card
+remove,Q10,,,,v6,v6: switch on the power card
+remove,Q11,,,,v6,v6: switch on the power card
+remove,Q12,,,,v6,v6: switch on the power card
+remove,J1,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,J2,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,J3,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,J4,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,J6,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,J8,,,,v6,v6: gate-card header replaced by the card CTRL header
+remove,DAB_PRI_1,,,,v6,v6: DAB leads go from the card to the transformer
+remove,DAB_PRI_2,,,,v6,v6: DAB leads go from the card to the transformer
+remove,DAB_SEC_1,,,,v6,v6: DAB leads go from the card to the transformer
+remove,DAB_SEC_2,,,,v6,v6: DAB leads go from the card to the transformer
+remove,C1,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C35,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C45,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C46,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C47,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C48,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C49,,,,v6,v6: DAB split capacitor on the DAB card
+remove,C50,,,,v6,v6: DAB split capacitor on the DAB card
+remove,R48,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,U5,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,D8,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,R59,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,R57,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,R58,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C52,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C53,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C91,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C71,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C73,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,C64,,,,v6,v6: switch-node current sense on the card (AFE leg 1)
+remove,R91,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,U4,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,D9,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,R94,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,R92,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,R93,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C51,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C54,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C90,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C55,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C78,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+remove,C37,,,,v6,v6: switch-node current sense on the card (inverter leg B)
+part,J21,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the AFE leg 1 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J21,,,CTRL AFE leg 1,v6,
+part,J31,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
+value,J31,,,PIN,v6,
+part,J32,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"PGND terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
+value,J32,,,PIN,v6,
+part,C148,,,Capacitor_SMD:C_0603_1608Metric,v6,15V at J21
+value,C148,,,100n,v6,
+part,C149,,,Capacitor_SMD:C_0603_1608Metric,v6,5V at J21
+value,C149,,,100n,v6,
+part,J22,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the AFE leg 2 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J22,,,CTRL AFE leg 2,v6,
+part,J33,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the AFE leg 2 card: Wuerth 7462810, M3 press-fit"
+value,J33,,,PIN,v6,
+part,J34,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"PGND terminal of the AFE leg 2 card: Wuerth 7462810, M3 press-fit"
+value,J34,,,PIN,v6,
+part,C150,,,Capacitor_SMD:C_0603_1608Metric,v6,15V at J22
+value,C150,,,100n,v6,
+part,C151,,,Capacitor_SMD:C_0603_1608Metric,v6,5V at J22
+value,C151,,,100n,v6,
+part,J23,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the DAB primary card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J23,,,CTRL DAB primary,v6,
+part,J35,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the DAB primary card: Wuerth 7462810, M3 press-fit"
+value,J35,,,PIN,v6,
+part,J36,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"PGND terminal of the DAB primary card: Wuerth 7462810, M3 press-fit"
+value,J36,,,PIN,v6,
+part,C152,,,Capacitor_SMD:C_0603_1608Metric,v6,15V at J23
+value,C152,,,100n,v6,
+part,C153,,,Capacitor_SMD:C_0603_1608Metric,v6,5V at J23
+value,C153,,,100n,v6,
+part,J24,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the Inverter leg B card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J24,,,CTRL Inverter leg B,v6,
+part,J37,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"ISODC+ terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
+value,J37,,,PIN,v6,
+part,J38,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"ISOPGND terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
+value,J38,,,PIN,v6,
+part,C154,,,Capacitor_SMD:C_0603_1608Metric,v6,15V_ISO at J24
+value,C154,,,100n,v6,
+part,C155,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J24
+value,C155,,,100n,v6,
+part,J25,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the Inverter leg A card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J25,,,CTRL Inverter leg A,v6,
+part,J39,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"ISODC+ terminal of the Inverter leg A card: Wuerth 7462810, M3 press-fit"
+value,J39,,,PIN,v6,
+part,J40,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"ISOPGND terminal of the Inverter leg A card: Wuerth 7462810, M3 press-fit"
+value,J40,,,PIN,v6,
+part,C156,,,Capacitor_SMD:C_0603_1608Metric,v6,15V_ISO at J25
+value,C156,,,100n,v6,
+part,C157,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J25
+value,C157,,,100n,v6,
+part,J26,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the DAB secondary card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+value,J26,,,CTRL DAB secondary,v6,
+part,J41,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"ISODC+ terminal of the DAB secondary card: Wuerth 7462810, M3 press-fit"
+value,J41,,,PIN,v6,
+part,J42,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DAB_GROUND terminal of the DAB secondary card: Wuerth 7462810, M3 press-fit"
+value,J42,,,PIN,v6,
+part,C158,,,Capacitor_SMD:C_0603_1608Metric,v6,15V_ISO at J26
+value,C158,,,100n,v6,
+part,C159,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J26
+value,C159,,,100n,v6,
+part,R257,,,Resistor_SMD:R_1206_3216Metric,v6,U6 VDD1 dropper from 15V_ISO (with R75 470R)
+value,R257,,,390R,v6,
+part,D17,,,ac_psu:D_SOD-323_AC,v6,U6 VDD1 5.1 V
+value,D17,,,MM3Z5V1T1,v6,
+add,J21,1,,PWM_G1,v6,
+add,J21,2,,GND,v6,
+add,J21,3,,PWM_G2,v6,
+add,J21,4,,GND,v6,
+add,J21,5,,PWM_TRANS1,v6,
+add,J21,6,,15V,v6,
+add,J21,7,,5V,v6,
+add,J21,8,,ADCLK,v6,
+add,J21,9,,GND,v6,
+add,J21,10,,#00354,v6,
+add,J31,1,,DC+,v6,
+add,J32,1,,PGND,v6,
+add,C148,1,,15V,v6,
+add,C148,2,,GND,v6,
+add,C149,1,,5V,v6,
+add,C149,2,,GND,v6,
+add,J22,1,,PWM_G3,v6,
+add,J22,2,,GND,v6,
+add,J22,3,,PWM_G4,v6,
+add,J22,4,,GND,v6,
+add,J22,5,,PWM_TRANS2,v6,
+add,J22,6,,15V,v6,
+add,J22,7,,5V,v6,
+add,J22,8,,N/C,v6,
+add,J22,9,,GND,v6,
+add,J22,10,,N/C,v6,
+add,J33,1,,DC+,v6,
+add,J34,1,,PGND,v6,
+add,C150,1,,15V,v6,
+add,C150,2,,GND,v6,
+add,C151,1,,5V,v6,
+add,C151,2,,GND,v6,
+add,J23,1,,DAB_PWM_PRI_HI,v6,
+add,J23,2,,GND,v6,
+add,J23,3,,DAB_PWM_PRI_LO,v6,
+add,J23,4,,GND,v6,
+add,J23,5,,PWM_TRANS3,v6,
+add,J23,6,,15V,v6,
+add,J23,7,,5V,v6,
+add,J23,8,,N/C,v6,
+add,J23,9,,GND,v6,
+add,J23,10,,N/C,v6,
+add,J35,1,,DC+,v6,
+add,J36,1,,PGND,v6,
+add,C152,1,,15V,v6,
+add,C152,2,,GND,v6,
+add,C153,1,,5V,v6,
+add,C153,2,,GND,v6,
+add,J24,1,,PWM_Q7,v6,
+add,J24,2,,ISOGND,v6,
+add,J24,3,,PWM_Q8,v6,
+add,J24,4,,ISOGND,v6,
+add,J24,5,,PWM_TRANS6,v6,
+add,J24,6,,15V_ISO,v6,
+add,J24,7,,5V_ISOL,v6,
+add,J24,8,,INU_ADCLK,v6,
+add,J24,9,,ISOGND,v6,
+add,J24,10,,#00431,v6,
+add,J37,1,,ISODC+,v6,
+add,J38,1,,ISOPGND,v6,
+add,C154,1,,15V_ISO,v6,
+add,C154,2,,ISOGND,v6,
+add,C155,1,,5V_ISOL,v6,
+add,C155,2,,ISOGND,v6,
+add,J25,1,,PWM_Q5,v6,
+add,J25,2,,ISOGND,v6,
+add,J25,3,,PWM_Q6,v6,
+add,J25,4,,ISOGND,v6,
+add,J25,5,,PWM_TRANS5,v6,
+add,J25,6,,15V_ISO,v6,
+add,J25,7,,5V_ISOL,v6,
+add,J25,8,,N/C,v6,
+add,J25,9,,ISOGND,v6,
+add,J25,10,,N/C,v6,
+add,J39,1,,ISODC+,v6,
+add,J40,1,,ISOPGND,v6,
+add,C156,1,,15V_ISO,v6,
+add,C156,2,,ISOGND,v6,
+add,C157,1,,5V_ISOL,v6,
+add,C157,2,,ISOGND,v6,
+add,J26,1,,DAB_PWM_HI_SEC,v6,
+add,J26,2,,ISOGND,v6,
+add,J26,3,,DAB_PWM_LO_SEC,v6,
+add,J26,4,,ISOGND,v6,
+add,J26,5,,PWM_TRANS4,v6,
+add,J26,6,,15V_ISO,v6,
+add,J26,7,,5V_ISOL,v6,
+add,J26,8,,N/C,v6,
+add,J26,9,,ISOGND,v6,
+add,J26,10,,N/C,v6,
+add,J41,1,,ISODC+,v6,
+add,J42,1,,DAB_GROUND,v6,
+add,C158,1,,15V_ISO,v6,
+add,C158,2,,ISOGND,v6,
+add,C159,1,,5V_ISOL,v6,
+add,C159,2,,ISOGND,v6,
+add,R257,1,,15V_ISO,v6,
+add,R257,2,,ISO_DAB_SDM_RAW_VOLTAGE,v6,
+add,D17,A,,DAB_SHUNT2,v6,
+add,D17,C,,#00359,v6,
+pin,AFE_OUT,1,G3_SOURCE_HI,N/C,v6,v6 (was G3_SOURCE_HI)
+pin,INU_OUT2,1,Q5_S,N/C,v6,v6 (was Q5_S)
+pin,J5,1,SHUNT1,N/C,v6,v6 (was SHUNT1_FORCE)
+pin,J7,1,INDUCTOR_INPUT,N/C,v6,v6 (was INDUCTOR_INPUT)

@@ -44,7 +44,7 @@ def main():
     unconnected = d.get("unconnected_items", [])
     # v5: unrouted items of the v5 change wait for the GUI layout (lib/v5_copper.csv pending areas)
     v5refs = deviations.v5_parts()
-    moved = {(r["ref"], r["pin"]) for r in deviations.rows() if r["kind"] == "pin" and r.get("fix") == "v5"}
+    moved = {(r["ref"], r["pin"]) for r in deviations.rows() if r["kind"] == "pin" and r.get("fix") in ("v5", "v6")}
     cut = deviations.v5_cut_nets()
 
     def v5_item(i):

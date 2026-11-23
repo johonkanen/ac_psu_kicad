@@ -191,6 +191,17 @@ PROJECT = {
     "Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm": dict(
         pins=[("1", -2.54, 0.0, 2.0, 1.4), ("1", 2.54, 0.0, 2.0, 1.4)], pad=2.0, drill=1.4, body=(8.0, 4.5),
         descr="Vertical FASTON 250 PCB tab TE 62409-1, 2.0 mm pads (2 posts P5.08 mm, 1.4 mm holes, 12.6 mm high)"),
+    # v6 (V6_PLAN.md): the card side parts of ~/dev/hb_power_card-rev1 (tools/gen_footprints.py there has the sources).
+    # Wuerth REDCUBE press-fit WP-BUFU 7462810, M3: body 5 x 5 mm, 4 pins on 2.54 mm, finished hole 1.475 mm.
+    "Wuerth_REDCUBE-PressFit_7462810_M3": dict(
+        pins=[("1", -1.27, -1.27, 2.0, 1.475), ("1", 1.27, -1.27, 2.0, 1.475), ("1", -1.27, 1.27, 2.0, 1.475), ("1", 1.27, 1.27, 2.0, 1.475)],
+        pad=2.0, drill=1.475, body=(5.0, 5.0),
+        descr="Wuerth REDCUBE press-fit WP-BUFU 7462810, M3, 4 pins on 2.54 mm, finished hole 1.475 mm, 7.0 mm high, 70 A"),
+    # Samtec SHF-105-01-L-D-TH: keyed shrouded header 2x5, 1.27 mm, through-hole; body 12.70 x 5.59, 5.33 high.
+    "Samtec_SHF-105-01-L-D-TH": dict(
+        pins=[(str(2 * i + 1 + k), (-0.635, 0.635)[k], (i - 2) * 1.27, 1.05, 0.74) for i in range(5) for k in (0, 1)],
+        pad=1.05, drill=0.74, body=(5.59, 12.70),
+        descr="Samtec SHF-105-01-L-D-TH keyed shrouded header 2x5, 1.27 mm, vertical, through-hole (odd pins left, pin 1 top)"),
     # Infineon PG-DSO-12 of the CoolSET ICE5xRxxxxAG (data sheet V2.3 figure 39): SO-16 narrow outline (3.9 x 9.9 mm,
     # 1.27 mm pitch) with positions 5, 6, 11, 12 empty: 3.81 mm between the control pins and the DRAIN pins.
     "Infineon_PG-DSO-12_CoolSET": dict(
@@ -276,7 +287,7 @@ def assign():
     for ref, p in deviations.added_parts().items():
         if ref not in pm:
             errors.append(f"{ref}: v4 part missing from lib/part_map.csv")
-        out[ref] = (p["footprint"], (f"v4 fix {p['fix']}: " if p["fix"] != "v5" else "v5: ") + p["note"])
+        out[ref] = (p["footprint"], (f"v4 fix {p['fix']}: " if p["fix"] not in ("v5", "v6") else p["fix"] + ": ") + p["note"])
     # v4: footprints swapped on existing parts (lib/v4_deviations.csv kind footprint)
     for ref, (old, new, fix, note) in deviations.footprint_changes().items():
         if ref not in out:
@@ -284,7 +295,7 @@ def assign():
             continue
         if out[ref][0] != old:
             errors.append(f"{ref}: footprint change from {old}, but the rule gives {out[ref][0]}")
-        out[ref] = (new, (f"v4 fix {fix}: " if fix != "v5" else "v5: ") + note)
+        out[ref] = (new, (f"v4 fix {fix}: " if fix not in ("v5", "v6") else fix + ": ") + note)
     return out, errors
 
 
@@ -571,7 +582,12 @@ def main():
     check = "--check" in sys.argv
     assignment, errors = assign()
     used = {fp.split(":", 1)[1] for fp, _ in assignment.values() if fp.startswith("ac_psu:")}
-    unused = sorted(set(PROJECT) - used - {n for n, s in PROJECT.items() if s.get("board_only")})
+    # v6: the power stage left the board; its footprints stay in the library for the Proteus rebuild
+    # (AC_PSU_PROTEUS=1, tools/regen_check.sh), where they are used
+    retired = set() if deviations.proteus_mode() else {
+        "TO-247-3_Vertical_Proteus", "PinHeader_2x24_P1.27mm_Vertical_Pins15-48", "Tab_FASTON250_TE_62409-1_Vertical",
+        "Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm"}
+    unused = sorted(set(PROJECT) - used - retired - {n for n, s in PROJECT.items() if s.get("board_only")})
     undefined = sorted(used - set(PROJECT))
     for n in unused:
         errors.append(f"project footprint {n} is not used")

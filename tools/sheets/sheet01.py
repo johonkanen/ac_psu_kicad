@@ -6,49 +6,13 @@ from _common import *  # noqa: F401,F403
 
 sh = sheet("01_afe.kicad_sch")
 
-# ---- half bridges ----------------------------------------------------------------------------
-DCP, PG, MID = g(28), g(82), g(55)
-for qx, qhi, qlo, g_hi, g_lo, src_hi, src_lo in (
-        (g(40), "Q1", "Q2", "G1_GATE_HI", "G2_GATE_LO", "G1_SOURCE_HI", "G2_SOURCE_LO"),
-        (g(80), "Q3", "Q4", "G3_GATE_HI", "G4_GATE_LO", "G3_SOURCE_HI", "G4_SOURCE_LO")):
-    hi = sh.place("C3M0065090D", qhi, qx, g(40), value="C3M0065090D")
-    lo = sh.place("C3M0065090D", qlo, qx, g(70), value="C3M0065090D")
-    col = hi.pin(2)[0]
-    sh.wire(hi.pin(2), (col, DCP))
-    sh.wire(hi.pin(3), lo.pin(2))
-    sh.wire(lo.pin(3), (col, PG))
-    glabel_left(sh, g_hi, hi.pin(1), 4)
-    glabel_left(sh, g_lo, lo.pin(1), 4)
-    sh.junction(col, MID)
-    sh.wire((col, MID), (col + g(6), MID))
-    if qhi == "Q1":
-        sh.glabel(src_hi, col + g(6), MID, 0)
-        pass
-    else:
-        sh.glabel(src_hi, col + g(6), MID, 90)
-        sh.wire((col + g(6), MID), (col + g(12), MID))
-        terminal(sh, "AFE_OUT1", col + g(12), MID, "right")
-        pass
-sh.wire((g(40) + 2.54, DCP), (g(80) + 2.54, DCP))
-sh.junction(g(60), DCP); flagged_power(sh, "DC+", g(60), DCP)
-sh.wire((g(40) + 2.54, PG), (g(80) + 2.54, PG))
-sh.junction(g(60), PG); flagged_power(sh, "PGND", g(60), PG)
-sh.text("AFE half bridges. Q2/Q4 sources are PGND (Proteus calls them G2_Source_LO / G4_Source_LO at J1).", g(20), g(92))
-
-# ---- R48 shunt in the Q1/Q2 leg, sensed by U5 (sheet 8) ------------------------------------
-SX, SY = g(118), g(36)
-r48 = sh.place("FKK5R0020FE-TR", "R48", SX, SY, value="FKK5R0020FE-TR",
-               ref_at=(SX - g(3), SY - 1.27, 0, "right"), value_at=(SX - g(3), SY + 1.27, 0, "right"))
-j5 = right(r48.pin(3), 16)
-# v4: Kelvin connection restored - pin 1 (sense) = SHUNT1 to U5 only, pin 3 (force) = SHUNT1_FORCE -> J5
-sh.wire(r48.pin(1), up(r48.pin(1), 2)); sh.glabel("SHUNT1", *up(r48.pin(1), 2), 90)
-sh.wire(r48.pin(2), down(r48.pin(2), 2)); sh.glabel("SHUNT2", *down(r48.pin(2), 2), 270)
-sh.wire(r48.pin(3), j5); terminal(sh, "J5", *j5, "right")
-sh.label("SHUNT1_FORCE", *right(r48.pin(3), 2))
-glabel_right(sh, "G1_SOURCE_HI", r48.pin(4), 6)
-sh.text("R48 2 mOhm shunt: 4 = Q1/Q2 midpoint (force), 3 = SHUNT1_FORCE -> J5 (afe_1_out_measured),", SX - g(16), SY + g(14))
-sh.text("1/2 = SHUNT1/SHUNT2 sense to U5 (sheet 8), which floats on SHUNT1.", SX - g(16), SY + g(17))
-sh.text("v4: pins 1 and 3 are no longer tied (v3: both on SHUNT1, Kelvin sense defeated).", SX - g(16), SY + g(20))
+# ---- v6: the AFE half bridges Q1..Q4 and the leg-1 shunt R48 are on two power cards (sheet 2) -----------------
+# J5 and AFE_OUT1 stay as wire landing points: the SW wire of a card and the choke lead meet on the terminal.
+for ref, y in (("J5", g(44)), ("AFE_OUT1", g(60))):
+    t = terminal(sh, ref, g(100), y, "right")
+    sh.no_connect(*t.pin(1))
+sh.text("v6: AFE leg 1 (Q1 / Q2, shunt R48, U5) and leg 2 (Q3 / Q4) are half-bridge power cards (sheet 2).", g(20), g(92))
+sh.text("J5 = SW wire of the leg-1 card + choke lead, AFE_OUT1 = SW wire of the leg-2 card + choke lead: no copper.", g(20), g(95))
 
 # ---- EMI filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)

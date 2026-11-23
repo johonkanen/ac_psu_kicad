@@ -6,44 +6,12 @@ from _common import *  # noqa: F401,F403
 
 sh = sheet("05_vsi.kicad_sch")
 
-# ---- half bridges ----------------------------------------------------------------------------
-DCP, PG, MID = g(28), g(82), g(55)
-for qx, qhi, qlo, g_hi, g_lo, src_hi in (
-        (g(40), "Q5", "Q6", "Q5_G", "Q6_G", "Q5_S"),
-        (g(80), "Q7", "Q8", "Q7_G", "Q8_G", "Q7_S")):
-    hi = sh.place("C3M0065090D", qhi, qx, g(40), value="C3M0065090D")
-    lo = sh.place("C3M0065090D", qlo, qx, g(70), value="C3M0065090D")
-    col = hi.pin(2)[0]
-    sh.wire(hi.pin(2), (col, DCP))
-    sh.wire(hi.pin(3), lo.pin(2))
-    sh.wire(lo.pin(3), (col, PG))
-    glabel_left(sh, g_hi, hi.pin(1), 4)
-    glabel_left(sh, g_lo, lo.pin(1), 4)
-    sh.junction(col, MID)
-    sh.wire((col, MID), (col + g(6), MID))
-    if qhi == "Q5":
-        sh.glabel(src_hi, col + g(6), MID, 90)
-        sh.wire((col + g(6), MID), (col + g(12), MID))
-        terminal(sh, "INU_OUT2", col + g(12), MID, "right")
-    else:
-        sh.glabel(src_hi, col + g(6), MID, 0)
-sh.wire((g(40) + 2.54, DCP), (g(80) + 2.54, DCP))
-sh.junction(g(60), DCP); flagged_power(sh, "ISODC+", g(60), DCP)
-sh.wire((g(40) + 2.54, PG), (g(80) + 2.54, PG))
-sh.junction(g(60), PG); power_at(sh, "ISOPGND", (g(60), PG), "down")
-sh.text("VSI half bridges on the isolated DC link. Q6/Q8 sources are ISOPGND (Proteus: Q6_S / Q8_S at J6).", g(20), g(92))
-sh.text("PDF note: IKZ50N65EH5XKSA1 (alternative switch).", g(20), g(95))
-
-# ---- R91 shunt in the Q7/Q8 leg, sensed by U4 (sheet 10) -----------------------------------
-SX, SY = g(118), g(36)
-r91 = sh.place("FKK5R0020FE-TR", "R91", SX, SY, value="FKK5R0020FE-TR",
-               ref_at=(SX - g(3), SY - 1.27, 0, "right"), value_at=(SX - g(3), SY + 1.27, 0, "right"))
-sh.wire(r91.pin(1), up(r91.pin(1), 2)); sh.glabel("INU_SHUNT2", *up(r91.pin(1), 2), 90)
-sh.wire(r91.pin(2), down(r91.pin(2), 2)); sh.glabel("INU_SHUNT1", *down(r91.pin(2), 2), 270)
-glabel_right(sh, "Q7_S", r91.pin(3), 6)
-sh.wire(r91.pin(4), right(r91.pin(4), 6)); terminal(sh, "J7", *right(r91.pin(4), 6), "right")
-sh.text("R91 2 mOhm shunt: 3 = Q7/Q8 midpoint, 4 = inductor_input -> J7,", SX - g(16), SY + g(14))
-sh.text("1/2 = INU_SHUNT2/INU_SHUNT1 sense -> U4 (sheet 10).", SX - g(16), SY + g(17))
+# ---- v6: the inverter half bridges Q5..Q8 and the leg-B shunt R91 are on two power cards (sheet 2) ------------
+for ref, y in (("INU_OUT2", g(44)), ("J7", g(60))):
+    t = terminal(sh, ref, g(100), y, "right")
+    sh.no_connect(*t.pin(1))
+sh.text("v6: inverter leg A (Q5 / Q6) and leg B (Q7 / Q8, shunt R91, U4) are half-bridge power cards (sheet 2).", g(20), g(92))
+sh.text("INU_OUT2 = SW wire of the leg-A card + output lead, J7 = SW wire of the leg-B card + inductor lead: no copper.", g(20), g(95))
 
 # ---- output filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)

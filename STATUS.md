@@ -2,6 +2,49 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 step 1 – schematic for the six power cards, board staged; check_all NOT passing yet (2026-11-23, branch `v6-baseboard`)
+
+Plan `V6_PLAN.md`; card side `~/dev/hb_power_card-rev1` (its STATUS.md: the card is placed, not fully routed).
+Interface taken from the card: header Samtec SHF-105-01-L-D-TH with the pinout of CARD_REV1_PLAN.md section 4,
+terminals Wuerth 7462810 (press-fit M3).
+
+- **Schematic** (`tools/v6/v6_parts.py`, sheets 1, 2, 5, 6, 8, 10): 54 parts removed (Q1-Q12, J1-J4 / J6 / J8, the four
+  DAB tabs, the eight split capacitors, both switch-node sense circuits with filters and supplies: R48 U5 D8 R59 R57
+  R58 C52 C53 C91 C71 C73 C64, R91 U4 D9 R94 R92 R93 C51 C54 C90 C55 C78 C37). 32 parts added: CTRL headers
+  J21..J26, DC terminals J31..J42, 100 nF C148..C159 on 15 V and 5 V at each header, R257 390R + D17 MM3Z5V1 for the
+  U6 side-1 supply from 15V_ISO. Card map as BASEBOARD.md section 4. ERC 0 errors, 6 warnings; netlist comparison
+  OK (350 parts, 964 pins, 0 wrong); symbols OK; footprint library up to date.
+- **Checked against the netlist:** nothing on the removal list serves a part that stays. After the removal J5,
+  AFE_OUT1, INU_OUT2 and J7 are single pads without a net (no-connect): the card's SW wire and the choke lead or
+  output meet on the terminal, so the board carries **no switch-node copper**. R55 / R50 stay and take the card
+  MDAT (nets MDAT_AFE, MDAT_INU_CARD); ADCLK / INU_ADCLK go to pin 8 of J21 / J24.
+- **Board** (`tools/v6/v6_1_schematic.py`, seed 6001, log `reports/v6/v6_1_schematic.log`): the 54 footprints
+  deleted; tracks, vias and pours of the 37 nets that no longer exist deleted; pads of kept parts follow the
+  netlist; the 32 new parts stand in the staging area below the board. The two strips are `unrouted` rows in
+  `lib/v6_copper.csv`.
+- **`tools/check_all.sh`: SOME CHECKS FAILED** (`reports/v6/v6_1_check_all.log`). Passing: sources, symbols, ERC,
+  netlist comparison, footprints (after a fix), domain classes (after a rerun), DRC with parity (0 shorts, 0
+  unconnected outside the pending areas, parity 0), domain gaps, card-area layout. **Failing:**
+  - `check_board.py`: a Proteus via of PWM_Q7 at (25.794, 42.786) has no KiCad net to map to (every Proteus pad of
+    that net is gone or was re-netted in v5); 13 v4 vias listed, 12 on the board (one stood in a strip);
+  - `assign_nets.py --check`: 38 orphan copper groups, the tracks and pours left in the two strips (step 2 clears
+    the strips; the check has no excuse for orphans in an unrouted area);
+  - `ipc356_diff.py`: 31 errors of the same two kinds (nets whose Proteus pads are all gone, and the footprint-swap
+    pads of J5 / J7 / INU_OUT2 that are now no-connect);
+  - `gerber_roundtrip.py`: not looked at.
+  These need the v6 deviation kinds taught to the three comparison tools (a net that lost all its Proteus pads; a
+  swapped terminal pad that became N/C) and step 2. Not done.
+
+Decisions taken by the worker:
+- U6 supply: R257 390R (1206) from 15V_ISO into the node R75 was fed from, R75 470R stays in series, D17 5.1 V across
+  VDD1 / GND1: the zener regulator of the removed U4 / U5 supplies; 11.5 .. 13.8 mA at 15 .. 17 V (ADuM7701 10 mA max).
+- TR1 stays in the schematic as an off-board part with four no-connect pins (its leads go to the DAB cards).
+- The DC rail power flags moved from the switch symbols (sheets 1, 5) to the card terminals on sheet 2.
+- A `remove` row now cancels earlier rows of the same refdes (v4 parts C90, C91 and v4 values that v6 deletes).
+- The retired power-stage footprints stay in `lib/ac_psu.pretty` for the Proteus rebuild.
+
+Open: steps 2-6 of V6_PLAN.md (clear the strips, place, pours, routing), `regen_check.sh` not run.
+
 ## Routing pass 7 – 16 unconnected, NOT legal: ISODC+ pour cut again (2026-11-20)
 
 Branch `routing-pass7`, commit c5b062f (not pushed), worktree `.claude/worktrees/agent-a3594812f032992fa/`, report

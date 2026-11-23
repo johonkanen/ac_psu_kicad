@@ -7,12 +7,10 @@ from _common import *  # noqa: F401,F403
 sh = sheet("10_inu_sdm_relay_drive.kicad_sch")
 
 # ---- U4 ADuM7701 sigma-delta modulator on the INU shunt --------------------------------
-adum_block(sh, g(150), g(40), "U4", "ADUM7701-8BRIZ-RL7", "ISO_AFE_SDM_RAW_VOLTAGE", ("R94", "470R"),
-           ("D9", "MM3Z5V1T1"), (("C55", "100n"), ("C78", "100n")),
-           (("R92", "12.4R"), "INU_SHUNT1", ("C54", "220p")), (("R93", "12.4R"), "INU_SHUNT2", ("C51", "220p")),
-           "INU_SHUNT2", "3V3_ISO", "ISOGND", "INU_ADCLK", ("R50", "33R"), "MDATA_INU", ("C37", "100n"),
-           note="VDD1/GND1 of U4 float on the INU shunt: VDD1 is 5.1 V from D9 via R94 (Proteus auto-named nets), GND1 = INU_SHUNT2.",
-           cdiff=("C90", "100n C0G"))
+# v6: U4 with its input filter and supply is on the inverter leg-B power card. Its MDAT comes back on the card's
+# CTRL header (sheet 2) and still passes R50 into MDATA_INU; INU_ADCLK goes out on the same header.
+part2(sh, "R", "R50", g(150), g(40), "33R", "MDAT_INU_CARD", "MDATA_INU", horizontal=True)
+sh.text("v6: the inverter leg-B shunt and its ADuM7701 are on the power card; MDAT_INU_CARD = pin 10 of J24 (sheet 2).", g(56), g(52))
 
 
 # ---- relay drivers -----------------------------------------------------------------------

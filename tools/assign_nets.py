@@ -354,7 +354,7 @@ def run_check(board, layers, vianets):
     # v5: opens of nets touched by the v5 change are pending GUI layout (lib/v5_copper.csv)
     import deviations
     v5refs = deviations.v5_parts()
-    moved = {(r["ref"], r["pin"]) for r in deviations.rows() if r["kind"] == "pin" and r.get("fix") == "v5"}
+    moved = {(r["ref"], r["pin"]) for r in deviations.rows() if r["kind"] == "pin" and r.get("fix") in ("v5", "v6")}
     cut = deviations.v5_cut_nets()
     pending = []
 

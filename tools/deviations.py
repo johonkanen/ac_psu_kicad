@@ -10,6 +10,8 @@ lib/v5_deviations.csv  v5 (aux flyback, CTRL isolation): the same kinds plus
                        the rows of the other kinds keep the Proteus refdes, rows() maps them
                        moved  = Proteus part placed elsewhere (v5 card-area layout): its pads are
                        not compared with the Proteus positions, pad numbers and nets still are
+lib/v6_deviations.csv  v6 (baseboard for the half-bridge power cards, V6_PLAN.md): the same kinds
+lib/v6_copper.csv      v6 board copper: the same kinds as lib/v5_copper.csv
 lib/v5_copper.csv      v5 board copper: area rows as above, and pending = rectangle where the
                        layout is left to the KiCad GUI (unrouted new parts, re-cut planes): DRC
                        clearance/unconnected items, opens and domain gaps there are reported as
@@ -32,8 +34,8 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEV_CSV = os.path.join(ROOT, "lib", "v4_deviations.csv")
 COPPER_CSV = os.path.join(ROOT, "lib", "v4_copper.csv")
-DEV_CSVS = [DEV_CSV, os.path.join(ROOT, "lib", "v5_deviations.csv")]
-COPPER_CSVS = [COPPER_CSV, os.path.join(ROOT, "lib", "v5_copper.csv")]
+DEV_CSVS = [DEV_CSV, os.path.join(ROOT, "lib", "v5_deviations.csv"), os.path.join(ROOT, "lib", "v6_deviations.csv")]
+COPPER_CSVS = [COPPER_CSV, os.path.join(ROOT, "lib", "v5_copper.csv"), os.path.join(ROOT, "lib", "v6_copper.csv")]
 IPC_JSON = os.path.join(ROOT, "reference", "ipc356_pads.json")
 
 
@@ -65,7 +67,8 @@ def kref(ref):
 
 
 def rows():
-    """Deviation rows, refdes in the KiCad naming."""
+    """Deviation rows, refdes in the KiCad naming. A part removed by a later revision (kind remove) takes the
+    rows an earlier revision wrote for it along (a v4 part or value that v6 deletes again)."""
     if proteus_mode():
         return []
     m = refdes_map()
@@ -74,7 +77,8 @@ def rows():
         if r.get("ref") in m:
             r = dict(r, ref=m[r["ref"]])
         out.append(r)
-    return out
+    gone = {r["ref"] for r in out if r["kind"] == "remove"}
+    return [r for r in out if r["kind"] == "remove" or r.get("ref") not in gone]
 
 
 def copper_rows():
@@ -139,12 +143,12 @@ def v5_cut_nets():
     """IPC nets (after merges/renames) whose copper chain was cut off a v5-moved pad
     (tools/v5/v5_1_aux_ctrl.py step 3): their Proteus vias/copper may be gone outside the
     pending areas too (the ISO-side PWM bundle J11 -> J4/J6/J8 is re-routed in the GUI)."""
-    return {new_net(r["from"]) for r in rows() if r["kind"] == "pin" and r.get("fix") == "v5"}
+    return {new_net(r["from"]) for r in rows() if r["kind"] == "pin" and r.get("fix") in ("v5", "v6")}
 
 
 def v5_parts():
     """refdes of parts added in v5 (part rows of lib/v5_deviations.csv)."""
-    return {r["ref"] for r in _read(DEV_CSVS[1]) if r["kind"] == "part"} if not proteus_mode() else set()
+    return {r["ref"] for p in DEV_CSVS[1:] for r in _read(p) if r["kind"] == "part"} if not proteus_mode() else set()
 
 
 def merges():
@@ -310,7 +314,7 @@ def validate():
         elif k == "value":
             pass
         elif k == "remove":
-            if r["ref"] not in refs:
+            if r["ref"] not in refs and not any(a["kind"] == "part" and a["ref"] == r["ref"] for a in allrows):
                 errs.append(f"remove {r['ref']}: refdes is not in the IPC")
         elif k == "rename":
             if r["from"] not in nets:

@@ -10,7 +10,6 @@ BUSN1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISOPGND
 BUSN2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISOPGND, east end"
 BUSP1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISODC+, west end (2.5 mm enamelled wire, soldered)"
 BUSP2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,"v5: DC bus wire link ISODC+, east end"
-C1,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C2,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C3,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C4,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -44,9 +43,7 @@ C31,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Prote
 C32,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C33,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
 C34,ac_psu:C,ac_psu:C_Rect_L33.0mm_W20.0mm_P27.50mm_MKS4_Proteus,"7u film, P27.5, Proteus 1.27 mm drill"
-C35,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
 C36,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
-C37,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C38,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C39,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C40,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -54,36 +51,21 @@ C41,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C42,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C43,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C44,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C45,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C46,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C47,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C48,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C49,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C50,ac_psu:C,Capacitor_SMD:C_2220_5750Metric_Pad1.97x5.40mm_HandSolder,2220
-C51,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C52,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C53,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C54,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C55,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C56,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C57,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C58,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C59,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C60,ac_psu:C,Capacitor_THT:C_Disc_D12.5mm_W5.0mm_P7.50mm,"2n2 Y cap, P7.5 (Proteus silk ~13 x 6 mm)"
 C61,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
-C64,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C67,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C68,ac_psu:C,Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder,1206
 C69,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C70,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
-C71,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C72,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
-C73,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C74,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C75,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C76,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C77,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
-C78,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,0603
 C79,ac_psu:C_Polarized,ac_psu:CP_Radial_D35.0mm_P10.00mm_SnapIn_Proteus,"SNAP_IN_35MM, Proteus pads/drills"
 C80,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C81,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
@@ -95,8 +77,6 @@ C86,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C87,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,0402
 C88,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA2 (like C42 on ADA1)
 C89,ac_psu:C,Capacitor_SMD:C_0402_1005Metric,v4 fix 3: 1n filter cap on mux input ADA3
-C90,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U4 differential 100n C0G (shunt L compensation)
-C91,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U5 differential 100n C0G
 C92,ac_psu:C,Capacitor_SMD:C_1206_3216Metric,v4 fix 4: U6 differential 100n C0G
 C93,ac_psu:C,Capacitor_SMD:C_1210_3225Metric,v4 fix 10: U8 input cap (K7805-2000R3 datasheet Fig. 2)
 C94,ac_psu:C,Capacitor_SMD:C_0805_2012Metric,v4 fix 10: U8 output cap (K7805-2000R3 datasheet Fig. 2)
@@ -152,14 +132,24 @@ C144,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB feed-forward
 C145,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB compensation (with R140)
 C146,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: FB to GND (100 kHz ripple filter)
 C147,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v5: VIN filter
+C148,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V at J21
+C149,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V at J21
+C150,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V at J22
+C151,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V at J22
+C152,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V at J23
+C153,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V at J23
+C154,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V_ISO at J24
+C155,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V_ISOL at J24
+C156,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V_ISO at J25
+C157,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V_ISOL at J25
+C158,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 15V_ISO at J26
+C159,ac_psu:C,Capacitor_SMD:C_0603_1608Metric,v6: 5V_ISOL at J26
 CM1,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM2,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 CM3,ac_psu:WE-CMBNC,ac_psu:L_CommonMode_WE-CMBNC,WE-CMBNC 4-pin choke
 D3,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D4,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D5,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
-D8,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
-D9,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,SOD-323 (MM3Z5V1T1)
 D10,ac_psu:D_Schottky,ac_psu:D_SOD-323_AC,SOD-323 (ZLLS400TA)
 D11,ac_psu:D,ac_psu:D_SOD-323_AC,v5: VCC feed diode (blocks towards the 15V rail during the start)
 D12,ac_psu:D,ac_psu:D_SMA_AC,v5: clamp diode 1000 V
@@ -167,27 +157,36 @@ D13,ac_psu:D_TVS,ac_psu:D_SMB_AC,"v5: clamp TVS (~190 V at 1.2 A): drain peak ~4
 D14,ac_psu:D,ac_psu:D_SMA_AC,v5: Out1 rectifier 200 V 2 A
 D15,ac_psu:D,ac_psu:D_SMA_AC,v5: Out2 rectifier 200 V 2 A
 D16,ac_psu:D_Schottky,ac_psu:D_SMA_AC,v5: CTRL rectifier 100 V 3 A
-DAB_PRI_1,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
-DAB_PRI_2,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
-DAB_SEC_1,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
-DAB_SEC_2,ac_psu:PIN,ac_psu:Tab_FASTON250_TE_62409-1_Vertical,v5: vertical blade tab for the DAB transformer wire instead of the soldered lead pin (user 2026-11-19)
+D17,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,v6: U6 VDD1 5.1 V
 FILTER_IN1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
 FILTER_OUT1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
 INU_OUT2,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (inverter half-bridge output)
-J1,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J2,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J3,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
-J4,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J5,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (AFE shunt R48 force lead)
-J6,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J7,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
-J8,ac_psu:HB_GT_CONNECTOR,ac_psu:PinHeader_2x24_P1.27mm_Vertical_Pins15-48,"2x24 1.27 mm, pins 15-26/29-40/43-48 only"
 J9,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
 J10,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output filter input lead)
 J11,ac_psu:HEADER_38_50MIL,ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus,2x19 1.27 mm
 J12,ac_psu:HEADER_2X3_43_48,ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48,"2x3 1.27 mm, pads 43-48"
 J13,ac_psu:CONN_2,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,v5: 5V_CTRL/CTRLGND to island A (double-insulated wire to J14)
 J14,ac_psu:CONN_2,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,v5: 5V_CTRL_A/CTRLGND_A from island B (J13)
+J21,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the AFE leg 1 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J22,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the AFE leg 2 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J23,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the DAB primary card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J24,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the Inverter leg B card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J25,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the Inverter leg A card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J26,ac_psu:HDR_2X5,ac_psu:Samtec_SHF-105-01-L-D-TH,"v6: CTRL header of the DAB secondary card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
+J31,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: DC+ terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
+J32,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: PGND terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
+J33,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: DC+ terminal of the AFE leg 2 card: Wuerth 7462810, M3 press-fit"
+J34,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: PGND terminal of the AFE leg 2 card: Wuerth 7462810, M3 press-fit"
+J35,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: DC+ terminal of the DAB primary card: Wuerth 7462810, M3 press-fit"
+J36,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: PGND terminal of the DAB primary card: Wuerth 7462810, M3 press-fit"
+J37,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISODC+ terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
+J38,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISOPGND terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
+J39,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISODC+ terminal of the Inverter leg A card: Wuerth 7462810, M3 press-fit"
+J40,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISOPGND terminal of the Inverter leg A card: Wuerth 7462810, M3 press-fit"
+J41,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISODC+ terminal of the DAB secondary card: Wuerth 7462810, M3 press-fit"
+J42,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: DAB_GROUND terminal of the DAB secondary card: Wuerth 7462810, M3 press-fit"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 L2,ac_psu:L,Inductor_SMD:L_Sunlord_SWPA6045S,v5: buck inductor 15 uH (SWPA6045S150MT)
 PE1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
@@ -200,18 +199,6 @@ PE7,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal
 PE8,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: 3.0 mm hole for the M3 PE screw (user 2026-11-19)
 PEC1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: PE bond of CTRL island A (CTRLGND_A)
 PEC2,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,v5: PE bond of CTRL island B (CTRLGND)
-Q1,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q2,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q3,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q4,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q5,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q6,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q7,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q8,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q9,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q10,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q11,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
-Q12,ac_psu:C3M0065090D,ac_psu:TO-247-3_Vertical_Proteus,"TO-247-3, 1=G 2=D 3=S"
 Q13,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 Q14,ac_psu:2N7000,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 R1,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
@@ -249,7 +236,6 @@ R40,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R41,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R42,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R46,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R48,ac_psu:FKK5R0020FE-TR,ac_psu:R_Shunt_FKK5R0020FE,4-terminal shunt
 R50,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R51,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R52,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
@@ -257,9 +243,6 @@ R53,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R54,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R55,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
 R56,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R57,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R58,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R59,ac_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R60,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R61,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R62,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
@@ -291,10 +274,6 @@ R87,ac_psu:RESISTOR_ARRAY_4,ac_psu:R_Array_Convex_4x0402_Proteus,4x0402 array
 R88,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R89,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
 R90,ac_psu:R,Resistor_SMD:R_0603_1608Metric,0603
-R91,ac_psu:FKK5R0020FE-TR,ac_psu:R_Shunt_FKK5R0020FE,4-terminal shunt
-R92,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R93,ac_psu:R,Resistor_SMD:R_0402_1005Metric,0402
-R94,ac_psu:R,Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder,0805
 R95,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R96,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R97,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
@@ -341,6 +320,7 @@ R142,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
 R143,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
 R144,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)
 R256,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
+R257,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v6: U6 VDD1 dropper from 15V_ISO (with R75 470R)
 REF1,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 REF2,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 T1,ac_psu:EEL19_AUX_TRANS,ac_psu:Transformer_EEL19_V_4+6_SideLeads,"v5: EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW (reports/aux_flyback; v5 step 8)"
@@ -348,8 +328,6 @@ TR1,ac_psu:ETD34_TRAN_1P1S,,not on the board
 U1,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U2,ac_psu:TLV316IDBVR,ac_psu:SOT-23-5_TLV316,"SOT-23-5 (DBV), Proteus pad rows 2.39 mm apart"
 U3,ac_psu:TPS73033DBVT,ac_psu:SOT-23-5_TPS73033,"SOT-23-5 (DBV), Proteus pad rows 2.50 mm apart"
-U4,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
-U5,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U6,ac_psu:ADUM7701-8BRIZ,ac_psu:SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701,SOIC127P1031X265-8N
 U7,ac_psu:OPA2353UA,ac_psu:TSSOP-8_3x3mm_P0.65mm_Proteus,pads are MSOP/TSSOP-8 (not the SO-8 of the UA suffix)
 U8,ac_psu:VXO7805-1000,ac_psu:Converter_DCDC_RECOM_R-78E-0.5_THT_Proteus,"SIP-3 P2.54 (1 Vin, 2 GND, 3 Vout)"
