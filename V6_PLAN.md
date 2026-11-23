@@ -249,3 +249,36 @@ session 0.3–0.5 GB, and other projects' sessions and router runs share the mac
   main session only what needs the whole picture (placement decisions, the chain order, merging).
 - The memory rule of §10a still counts subagents' heavy jobs: one router run, zone fill or check run at a time.
 - Reports to the planning session at milestones only, in a few lines; questions with two options and a pick.
+
+## 11. Where the planning session left off (2026-11-23, 23:00)
+
+For whoever continues: the planning session (Fable) reviews the worker's milestones and answers its questions; the
+worker (Opus 5.5 since the evening of 2026-11-23) owns both worktrees.
+
+**Done and accepted**
+- Card (`~/dev/hb_power_card-rev1`, branch `card-rev1`, 2d4ebeb): routed, 0 unconnected, DRC clean, 33 × 58 mm,
+  two populations (standard, DAB), no current sense, MID lead soldered on DAB cards, no damper footprint, R_off
+  10R from the loop simulation. Simulation tables in `sim/results.txt`.
+- Baseboard (`v6-baseboard`, 4b2d4c2): steps 1–3 (schematic with the sense at the choke ends, strips cleared,
+  terminals / pigtails / headers / sense groups placed); `check_all.sh` passes.
+
+**In progress when the day ended (worker, uncommitted in this worktree)**
+- Moving AFE_OUT1 out from under the AFE leg 2 card (my review note on `band_primary_F.png`).
+- Then step 4: DC pours, ISO DC bus into the freed strip, In4 ground; then the aux-area helper of §10 on Opus,
+  under the memory rule of §10a; then the routing chain.
+
+**Open with the user**
+1. All six baseboard DC connections as soldered pigtails, or only the two beside the control card (INV A, DAB sec)?
+2. Where the AFE and inverter choke leads come down in the built unit (fixes the landing terminals J5, AFE_OUT1,
+   INU_OUT2, J7 and the sense positions at FILTER_OUT1 / J9).
+3. Infineon's SPICE model of the IMLT65R020M2H, downloaded by hand into the card repo's `reference/`.
+4. Wire gauge and M3 ring lug (4 mm² on M3 may not exist as a standard lug).
+
+**To check on the first review tomorrow**
+- Step 4: pour widths at each terminal pair (≥ 10 mm or doubled), island counts before / after, the smallest
+  distance from bus copper to the wall-side edge and to the PE screws, whether the BUSP / BUSN links are really
+  replaced by 8 mm on two layers along the whole run.
+- The card's To-verify list in its STATUS.md (press-fit hole tolerance at JLC, 2 oz stack, T1 pins 5 / 8 gap,
+  EP7 core and turns, Samtec header stock).
+
+Nothing is pushed: `card-rev1` has no remote, and `v6-baseboard` stays local until the user says to push.
