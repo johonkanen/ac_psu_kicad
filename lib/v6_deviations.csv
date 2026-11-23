@@ -62,6 +62,7 @@ moved,C78,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,C37,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,R50,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,INU_OUT2,,,,v6,"v6: landing terminal moved out of the passage north of J11, beside J7"
+moved,AFE_OUT,,,,v6,"v6: landing terminal moved out of the AFE leg 2 card envelope, beside FILTER_IN1"
 part,J21,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the AFE leg 1 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
 value,J21,,,CTRL AFE leg 1,v6,
 part,J31,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
@@ -104,9 +105,9 @@ part,C155,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J24
 value,C155,,,100n,v6,
 part,J25,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the Inverter leg A card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
 value,J25,,,CTRL Inverter leg A,v6,
-part,J39,,,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,v6,"ISODC+ pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
+part,J39,,,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,v6,"ISODC+ pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
 value,J39,,,PIN,v6,
-part,J40,,,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,v6,"ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
+part,J40,,,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,v6,"ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
 value,J40,,,PIN,v6,
 part,C156,,,Capacitor_SMD:C_0603_1608Metric,v6,15V_ISO at J25
 value,C156,,,100n,v6,
@@ -114,9 +115,9 @@ part,C157,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J25
 value,C157,,,100n,v6,
 part,J26,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the DAB secondary card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
 value,J26,,,CTRL DAB secondary,v6,
-part,J41,,,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,v6,"ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+part,J41,,,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,v6,"ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
 value,J41,,,PIN,v6,
-part,J42,,,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,v6,"DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+part,J42,,,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,v6,"DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
 value,J42,,,PIN,v6,
 part,C158,,,Capacitor_SMD:C_0603_1608Metric,v6,15V_ISO at J26
 value,C158,,,100n,v6,

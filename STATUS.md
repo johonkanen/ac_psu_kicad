@@ -2,6 +2,67 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Where the work stopped (end of session 2026-11-23)
+
+- Done and committed: card rev 1 routed and checked (`~/dev/hb_power_card-rev1`, branch `card-rev1`, last
+  commit 2d4ebeb: R_off 10R); baseboard steps 1, 2, 3 (4b2d4c2), steps 3c and 4 (this commit, see the entry below).
+  Nothing is pushed (plan rule: do not push).
+- Running when the session ended: an Opus helper routing the aux flyback areas PX / IA in its own Agent worktree
+  (branch `aux-routes`, started from 4b2d4c2), delivering `tools/v6/aux_routes.py`, a boundary list and
+  `reports/v6/aux_routes.md` (V6_PLAN section 10). If it did not finish, start it again from the brief in this
+  section of the plan; its result is replayed onto this board only after DRC, parity, domain_gaps and the island
+  comparison pass.
+- Next: step 5, routing passes on branches `v6-routing-passN` (V6_PLAN section 6: aux area first (helper script),
+  then the HV aux nets drawn by script, the CTRL-side buses, then the rest; the two current-sense groups at
+  FILTER_OUT1 / J9 and the card headers are new routing work). One heavy job at a time, `free -g` >= 6 GB, shared
+  lock `flock ~/.cache/ac_psu_heavy.lock` (V6_PLAN section 10a); helpers on Opus (section 10b).
+- Open questions for the user are the "To verify" lists of the entries below (choke lead positions, control card out
+  when an ISO card is pulled, pigtail gauge / lug, module minimum load, ISO lane current rating, double-pulse test).
+
+## v6 steps 3c and 4 – AFE_OUT1 out of the envelope; DC bus pours and strip ground (2026-11-23, branch `v6-baseboard`)
+
+**Step 3c** (`tools/v6/v6_3c_afe_out1.py`, seed 6006): AFE_OUT1 (soldered landing pin of the AFE leg 2 SW wire and
+choke lead, no net) moved from (47.5, -73.6), 10 mm from the wall under the AFE leg 2 card, to (-4.0, -62.5): outside
+the card spans, 20.55 mm from the wall, between FILTER_IN1 and J32 (pad gaps 2.7 / 3.9 mm). Planning session
+2026-11-23. No other landing terminal or wire hole is left under an envelope (J5, J7, INU_OUT2 are west of the card
+spans); the pigtails are meant to be there. The lug rule now skips flat soldered pins and pigtail holes.
+
+**Step 4** (`tools/v6/v6_4_pours.py`, seed 6007, log `reports/v6/v6_4_pours.log`). Every new zone has 2.5 mm
+clearance (the high-voltage rule) and fills as one island; no existing pour lost or gained an island except the
+small v5 DAB_GROUND F pour 12, now covered by the larger v6 one.
+
+| Bus | Layers | Band | Width | Ends |
+|---|---|---|---|---|
+| DC+ (primary) | F.Cu + In1.Cu | y -80.0 ... -66.5, x 9 ... 116 | 13.5 mm | tongues 10 mm to J31, J33, J35 and into DC+ F pour 5 |
+| PGND (primary) | B.Cu + In2.Cu | y -80.0 ... -66.5, x -2 ... 116 | 13.5 mm | tongues 10 mm to J32, J34, J36 and into PGND B pour 0 |
+| ISODC+ | B.Cu + In1.Cu | y 61.3 ... 69.2, x 5 ... 108 | 7.9 mm | tongues to J37 (inverter leg B), J39 and J41 (pigtails), into ISODC+ B pour 5 |
+| ISOPGND | F.Cu + In2.Cu | y 61.3 ... 69.2, x 5 ... 86.5 | 7.9 mm | tongues to J38, J40, into ISOPGND F pour 8 |
+| DAB_GROUND | F.Cu | x 110.1 ... 116.1, y 41.9 ... 58.75 | 6 mm | R64 pad 4 to J42 |
+| GND / ISOGND | In4.Cu | primary strip / ISO strip north of the CTRL barrier | | |
+
+- The layer of each net follows the v5 pours it joins (DC+ on F, PGND on B; ISODC+ on B, ISOPGND on F).
+- The ISO lane lies between the pigtail holes and the wall: 2.55 mm from the board edge, 2.5 mm from the pigtail
+  pads. **The wire links are not needed:** 7.9 mm on each of two layers per net along the whole run (0.1 mm under
+  the 8 mm of V6_PLAN section 5 because of the 2.5 mm to the edge and to the pigtail pads; recorded).
+- Small part moves: header capacitors C150-C159 out of the bus paths (C152 / C153 also off a 15V track); the
+  four pigtails one hole per net (footprint `WirePigtail_D6.0mm_Drill3.0mm`, schematic changed: the spare hole
+  did not fit beside the lane) at 16 mm from the wall: J39 (75.0, 55.75), J40 (83.5, 55.75), J41 (104.6, 55.75),
+  J42 (113.1, 55.75); silkscreen + / - / card name moved with them.
+- Smallest distance from bus copper to the wall-side board edge: primary 3.05 mm, ISO 2.55 mm. PE screw holes
+  keep 2.5 mm through the domain rules (domain_gaps OK).
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED (`reports/v6/v6_4_check_all.log`): DRC 0 errors, assign_nets 0 shorts / 0 opens, domain_gaps OK, check_layout_v6 OK, IPC and Gerber comparisons OK.
+
+Decisions taken by the worker:
+- Bus pours on two layers each (outer + inner), stacked as plane pairs (DC+ F / PGND B, In1 / In2) for low
+  inductance; In3 stays free for routing.
+- One pigtail hole per net (planning allowed the second "if it fits").
+
+To verify:
+- Where the AFE and inverter choke leads physically come down in the built unit (the user has to say): FILTER_OUT1,
+  J9, AFE_OUT1, J5, J7 and INU_OUT2 are placed from the net names.
+- 20 A RMS in the 7.9 mm ISO lane on 2 layers (outer and one inner, copper weights of JLC06161H-3313): temperature
+  rise against IPC-2152 before ordering.
+
 ## v6 step 3 – card terminals, headers and the current-sense groups placed (2026-11-23, branch `v6-baseboard`)
 
 `tools/v6/v6_3_placement.py` (seed 6004, log `reports/v6/v6_3_placement.log`; `--dry` checks without saving).

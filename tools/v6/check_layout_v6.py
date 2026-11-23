@@ -37,7 +37,7 @@ TERMINALS = [f"J{n}" for n in range(31, 39)]     # REDCUBE; J39 ... J42 are pigt
 HEADERS = [f"J{n}" for n in range(21, 27)]
 HEIGHT = dict(L.HEIGHT)
 # soldered wire landings (pigtail holes, the SW landing pins AFE_OUT1 / J5 / J7 / INU_OUT2): 0 mm, the wire is not checked
-HEIGHT.update({"WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm": 0.0, "Terminal_D4.0mm_Drill2.55mm": 0.0, "Wuerth_REDCUBE-PressFit_7462810_M3": 7.0, "Samtec_SHF-105-01-L-D-TH": 5.33,
+HEIGHT.update({"WirePigtail_D6.0mm_Drill3.0mm": 0.0, "Terminal_D4.0mm_Drill2.55mm": 0.0, "Wuerth_REDCUBE-PressFit_7462810_M3": 7.0, "Samtec_SHF-105-01-L-D-TH": 5.33,
                "Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4": 10.2, "R_0603_1608Metric": 0.55, "C_0603_1608Metric": 0.9,
                "D_SOD-323": 1.1, "D_SOD-123": 1.35})
 # finding prefix -> reason (planning session decisions)
@@ -145,8 +145,8 @@ def main():
         worst = (99.0, "")
         for o in fps:
             oref = o.GetReference()
-            if oref == ref or not tht(o):
-                continue
+            if oref == ref or not tht(o) or HEIGHT.get(str(o.GetFPID().GetLibItemName()), 99) < 5.0:
+                continue      # flat soldered landing pins and pigtail holes lie under the lug
             if oref in TERMINALS:
                 ox, oy = pads_c(o)
                 d, what = math.hypot(ox - cx, oy - cy) - 2 * LUG_R, f"{oref} lug"

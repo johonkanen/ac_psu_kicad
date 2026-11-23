@@ -9447,7 +9447,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+		(property "Footprint" "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 			(at 246.38 116.84 0)
 			(effects
 				(font
@@ -9589,7 +9589,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+		(property "Footprint" "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 			(at 246.38 132.08 0)
 			(effects
 				(font
@@ -10753,7 +10753,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+		(property "Footprint" "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 			(at 386.08 116.84 0)
 			(effects
 				(font
@@ -10895,7 +10895,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+		(property "Footprint" "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 			(at 386.08 132.08 0)
 			(effects
 				(font

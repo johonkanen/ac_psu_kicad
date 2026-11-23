@@ -197,10 +197,10 @@ J35,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: DC+ terminal of th
 J36,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: PGND terminal of the DAB primary card: Wuerth 7462810, M3 press-fit"
 J37,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISODC+ terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
 J38,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,"v6: ISOPGND terminal of the Inverter leg B card: Wuerth 7462810, M3 press-fit"
-J39,ac_psu:PIN,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,"v6: ISODC+ pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
-J40,ac_psu:PIN,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,"v6: ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
-J41,ac_psu:PIN,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,"v6: ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
-J42,ac_psu:PIN,ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm,"v6: DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+J39,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
+J40,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
+J41,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+J42,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 L2,ac_psu:L,Inductor_SMD:L_Sunlord_SWPA6045S,v5: buck inductor 15 uH (SWPA6045S150MT)
 PE1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal

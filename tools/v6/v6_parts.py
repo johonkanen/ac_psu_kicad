@@ -23,7 +23,8 @@ MOVED = {**{r: "v6: AFE current sense at the choke-lead terminal FILTER_OUT1" fo
             ("R48", "U5", "D8", "R59", "R57", "R58", "C52", "C53", "C91", "C71", "C73", "C64", "R55")},
          **{r: "v6: inverter current sense at the choke-lead terminal J9" for r in
             ("R91", "U4", "D9", "R94", "R92", "R93", "C51", "C54", "C90", "C55", "C78", "C37", "R50")},
-         "INU_OUT2": "v6: landing terminal moved out of the passage north of J11, beside J7"}
+         "INU_OUT2": "v6: landing terminal moved out of the passage north of J11, beside J7",
+         "AFE_OUT1": "v6: landing terminal moved out of the AFE leg 2 card envelope, beside FILTER_IN1"}
 MOVED_NOT_PROTEUS = ("C90", "C91")
 
 # V6_PLAN.md section 9 (user 2026-11-23): the two current-sense circuits R48 / U5 and R91 / U4 STAY on the board
@@ -41,7 +42,9 @@ TERM = "ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3"
 # Inverter leg A and DAB secondary: the control card (5.3 mm above the board, outline to y 46.36) leaves no room for
 # a REDCUBE and its lug on the ISO wall east of x 42.6, so their DC wires are pigtails soldered into two plated holes
 # per net (planning session 2026-11-23); the pigtail carries a ring lug to the card's own screw terminal.
-PIGTAIL = "ac_psu:WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm"
+# One hole per net (step 4): with a spare hole per net the pads fill y 53..64 and leave no 8 mm lane for the ISO DC
+# bus between the holes and the wall; with one hole at 16 mm from the wall the lane y 61.25 ... 69.25 is free.
+PIGTAIL = "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 PIGTAIL_CARDS = ("Inverter leg A", "DAB secondary")
 C0603 = "Capacitor_SMD:C_0603_1608Metric"
 

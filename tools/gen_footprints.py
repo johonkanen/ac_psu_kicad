@@ -202,12 +202,12 @@ PROJECT = {
         pins=[("1", -6.35, 0.0, 1.6, 0.9), ("2", -3.81, 0.0, 1.6, 0.9), ("4", 1.27, 0.0, 1.6, 0.9), ("6", 6.35, 0.0, 1.6, 0.9)],
         pad=1.6, drill=0.9, body=(11.6, 6.0),
         descr="Mornsun B05xxS-1WR3 isolated DC/DC 1 W, SIP-4: pins 1 Vin, 2 GND, 4 0V, 6 +Vo on a 2.54 mm grid, 10.2 mm high"),
-    # Pigtail holes for a soldered DC wire (2.5 or 4 mm2 stranded): two plated 3.0 mm holes of one net 5 mm apart (the
-    # second is a spare), 6.0 mm pads (planning session 2026-11-23, inverter leg A and DAB secondary cards)
-    "WirePigtail_2x_D6.0mm_Drill3.0mm_P5.0mm": dict(
-        pins=[("1", 0.0, -2.5, 6.0, 3.0), ("1", 0.0, 2.5, 6.0, 3.0)],
-        pad=6.0, drill=3.0, body=(6.0, 11.0),
-        descr="Two plated 3.0 mm holes, 6.0 mm pads, 5 mm apart, one net: soldered DC pigtail (2.5 / 4 mm2) for a power card"),
+    # Pigtail hole for a soldered DC wire (2.5 or 4 mm2 stranded): one plated 3.0 mm hole, 6.0 mm pad (planning session
+    # 2026-11-23, inverter leg A and DAB secondary cards; the spare second hole did not fit beside the ISO bus lane)
+    "WirePigtail_D6.0mm_Drill3.0mm": dict(
+        pins=[("1", 0.0, 0.0, 6.0, 3.0)],
+        pad=6.0, drill=3.0, body=(6.0, 6.0),
+        descr="Plated 3.0 mm hole, 6.0 mm pad: soldered DC pigtail (2.5 / 4 mm2) for a power card"),
     # Samtec SHF-105-01-L-D-TH: keyed shrouded header 2x5, 1.27 mm, through-hole; body 12.70 x 5.59, 5.33 high.
     "Samtec_SHF-105-01-L-D-TH": dict(
         pins=[(str(2 * i + 1 + k), (-0.635, 0.635)[k], (i - 2) * 1.27, 1.05, 0.74) for i in range(5) for k in (0, 1)],
