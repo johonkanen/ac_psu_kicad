@@ -22,6 +22,19 @@ aux supply and card area placed, not routed).
    chain to start from.
 6. `~/dev/efinix_soc_board/AGENTIC_PCB_ROUTING.md` and the `kicad-agentic-routing` skill.
 
+## 2a. Environment (facts that are not in the repo)
+
+- KiCad 10.0.7 exists only as `~/kicad/kicad-10.0.7-x86_64.AppImage`. Do not run it directly (the GUI hangs);
+  use `tools/p2k/bin/kipy` (pcbnew Python) and the scripts in `tools/`, which mount it. `tools/check_all.sh`
+  passed in this worktree on 2026-11-22 and takes about 8 minutes.
+- Router: `~/dev/KiCadRoutingTools` (KRT).
+- Control card (ordered, fixed): `~/dev/efinix_soc_board`; its real hole positions are in
+  `kicad/ti135_card.kicad_pcb`, not in its MECHANICAL.md.
+- Today's gate card: `~/dev/ac_psu_gate_drive`.
+- The board edge is about 2 mm from each heatsink face (measured on the built unit).
+- An Agent-tool worktree is cut from `main`, not from this branch: tell a routing subagent to start from the
+  commit you want.
+
 ## 3. Working rules
 
 - The schematic is generated: change `tools/sheets/sheetNN.py`, never the `.kicad_sch` files.
