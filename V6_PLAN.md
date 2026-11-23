@@ -230,3 +230,12 @@ session 0.3–0.5 GB, and other projects' sessions and router runs share the mac
 - The helper is optional: if memory stays short, the main worker does the aux area itself as the first chain steps,
   with the method of §10.
 - Do not kill or pause processes of other projects to make room.
+
+### 10b. Models (user 2026-11-23: conserve the Fable limit)
+
+- Every helper or subagent is spawned with the Agent tool's `model: "opus"` (Opus 5.5). No Fable helpers.
+- Hand to an Opus subagent whatever is long and mechanical: reading router and check logs, the aux-area routes of
+  §10, DRC-fix rounds on drawn tracks, renders and their description, the simulation runs on the card. Keep in the
+  main session only what needs the whole picture (placement decisions, the chain order, merging).
+- The memory rule of §10a still counts subagents' heavy jobs: one router run, zone fill or check run at a time.
+- Reports to the planning session at milestones only, in a few lines; questions with two options and a pick.
