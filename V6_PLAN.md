@@ -282,3 +282,11 @@ worker (Opus 5.5 since the evening of 2026-11-23) owns both worktrees.
   EP7 core and turns, Samtec header stock).
 
 Nothing is pushed: `card-rev1` has no remote, and `v6-baseboard` stays local until the user says to push.
+
+**Added at 23:15 after the worker's step 4 report (4704efe, check_all passes):** first thing to review tomorrow is
+the current rating of the new bus lanes, before routing builds on them. The ISO lane is 7.9 mm on two layers and
+feeds three cards from one end, so its first section carries the sum of the three card currents; inner layers of
+JLC06161H-3313 are 0.5 oz. Ask for the lane cross-section per layer, the RMS current per section (inverter 2 × up
+to 20 A RMS bus current, DAB about 12 A RMS AC), the temperature-rise estimate, and where a third layer or a wider
+lane is possible. Same table for the 13.5 mm primary bus. The aux-area helper's script must be replayed onto
+4704efe.
