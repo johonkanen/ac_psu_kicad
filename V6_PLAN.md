@@ -215,3 +215,18 @@ merged as a board file.
 **If the chain stalls later:** the same pattern may be used to try two placements side by side (two helpers, each
 reporting an open count; only the winner's script is kept), and for an independent review of a finished pass. Not
 more than two helpers at a time.
+
+### 10a. Memory limit (user 2026-11-23: the machine is almost out of memory)
+
+Measured that day inside WSL: 19 GB in total, a single KRT router run of another project holds 4.4 GB, each Claude
+session 0.3–0.5 GB, and other projects' sessions and router runs share the machine.
+
+- **Never two router runs (KRT or `route.py`), zone fills or `check_all.sh` runs at the same time**, counting the
+  helper's and the card's. Run them one after another.
+- Before every router run, zone fill, `check_all.sh` or helper spawn: `free -g`. Start only if "available" is at
+  least 6 GB; otherwise wait and look again, or do work that needs no memory (scripts, STATUS, reading).
+- **At most one helper**, not two (this replaces the last paragraph of §10), and only while the main worker itself
+  is not routing. While the helper runs a router, the main worker edits scripts and documents only.
+- The helper is optional: if memory stays short, the main worker does the aux area itself as the first chain steps,
+  with the method of §10.
+- Do not kill or pause processes of other projects to make room.
