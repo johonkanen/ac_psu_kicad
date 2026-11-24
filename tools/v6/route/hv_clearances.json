@@ -39,5 +39,6 @@
  "PE6": 2.5,
  "PE7": 2.5,
  "SDM_RAW_VOLTAGE": 2.5,
- "SHUNT1": 2.5
+ "SHUNT1": 2.5,
+ "SHUNT2": 2.5
 }

@@ -91,7 +91,8 @@ fi
 
 # --- pass 1 (planning session rules 2026-11-24): lock, then the drawn structures, then router steps by group ------
 if run_it 04; then
-    echo "== 04 lock the existing copper"; kp "$H/fence.py" lock "$BOARD" "$BOARD"; keep 04_lock
+    echo "== 04 lock the existing copper; per-net clearance files from hv.py"
+    kp "$H/fence.py" lock "$BOARD" "$BOARD"; kp "$H/gen_clearances.py" "$BOARD"; keep 04_lock
 fi
 #     the two sigma-delta links, drawn (rule 2), with their guard tracks; before the supplies so that the passage past
 #     J37 / J38 and the run to U4 / U5 are theirs

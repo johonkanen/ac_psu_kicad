@@ -10,12 +10,14 @@ script 06 west 06_west.py
 #     a via next to every SMD pad of a plane net inside its plane; the J11 west-row escape stubs
 script 07 planes 07_planes.py
 script 08 j11 08_j11.py
+#     the copper of the two current-sense blocks replayed from their Proteus layout (turned with the blocks)
+script 09 sense_replay 09_sense_replay.py
 
 # --- rule 3, part 1: the current-sense groups (side-1 HV nets among themselves at 0.15 mm, 2.5 mm to everything
 #     else: sense_clearances.json gives every low-voltage net 2.5 mm), the shunt force paths 2 mm wide --------------
 rstep 10 sense_p P 600 $SENSE "SHUNT1,Net-(U5-VIN+),Net-(U5-VIN-),SDM_RAW_VOLTAGE,Net-(D8-K),AFE_CHOKE1,/01 afe/LEMOUT" \
     --layers B.Cu F.Cu In3.Cu --layer-costs 1 1.5 3 --power-nets AFE_CHOKE1 "/01 afe/LEMOUT" --power-nets-widths 2.0 2.0
-rstep 11 sense_i I 600 $SENSE "INU_SHUNT1,INU_SHUNT2,Net-(U4-VIN+),Net-(U4-VIN-),ISO_AFE_SDM_RAW_VOLTAGE,Net-(D9-K),INU_CHOKE,/05 VSI/INDUCTOR_OUTPUT" \
+rstep 11 sense_i I 900 $SENSE "INU_SHUNT1,INU_SHUNT2,Net-(U4-VIN+),Net-(U4-VIN-),ISO_AFE_SDM_RAW_VOLTAGE,Net-(D9-K),INU_CHOKE,/05 VSI/INDUCTOR_OUTPUT" \
     --layers B.Cu F.Cu In3.Cu --layer-costs 1 1.5 3 --power-nets INU_CHOKE "/05 VSI/INDUCTOR_OUTPUT" --power-nets-widths 2.0 2.0
 rstep 12 sense_lv_p P 300 $HV "Net-(U5-MDAT)" "${SIG3[@]}"
 rstep 13 sense_lv_i I 300 $HV "Net-(U4-MDAT),Net-(D17-K),ISO_DAB_SDM_RAW_VOLTAGE" "${SIG3[@]}"

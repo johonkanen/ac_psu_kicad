@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import geo  # noqa: E402
 from geo import F, T, P, xy  # noqa: E402
 
-from drawlib import (IN1, IN2, IN3, SIG_W, GUARD_W, AVOID, say, strip, end_via, via_near, run, straight,  # noqa: E402
+from drawlib import (IN1, IN2, IN3, B, SIG_W, GUARD_W, AVOID, say, strip, end_via, via_near, run, straight,  # noqa: E402
                      east_pad_of, chain, end_at_track)
 
 FC = pcbnew.F_Cu
@@ -159,6 +159,11 @@ def afe_link(b):
     cx.pierce = {"/01 afe/FILTER_INPUT", "/01 afe/LEMOUT"}
     total = {}
     made = []
+    # the modulator's data output U5-6 -> R55-1 (33R at the source), B.Cu, before the pair's end vias crowd U5
+    m = run(cx, "Net-(U5-MDAT)", B, geo.pad_xy(b, "U5", "6"), geo.pad_xy(b, "R55", "1"), SIG_W, (-42.0, -83.6, -24.0, -70.0),
+            made=made, what="U5-6 -> R55-1")
+    if m is None:
+        say("sdm: Net-(U5-MDAT) left to the router")
     e_dat = end_via(cx, "U15", "10", prefer=(0, -1), made=made)
     e_clk = end_via(cx, "R22", "2", prefer=(0, -1), made=made)
     e_gnd = via_near(cx, "GND", 51.0, -1.2, made=made)
