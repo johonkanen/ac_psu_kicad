@@ -52,7 +52,7 @@ rstep() {   # rstep NN name DOMAIN TMO NETCLR NETS [route.py options]: one KRT s
     local nn="$1" name="$2" d="$3" tmo="$4" nc="$5" nets="$6"; shift 6
     run_it "$nn" || return 0
     echo "== $nn $name (domain $d, $tmo s)"; local t=$SECONDS
-    kp "$H/fence.py" domain "$BOARD" "$W/_in.kicad_pcb" "$d" > /dev/null
+    kp "$H/fence.py" domain "$BOARD" "$W/_in.kicad_pcb" "$d" "$nets" "${LATE:-}" > /dev/null
     memwait
     set +e
     flock "$LOCK" timeout "$tmo" python3 -I "$SK/route_step.py" "$W/_in.kicad_pcb" "$W/_out.kicad_pcb" "$nets" "$@" \
@@ -94,9 +94,9 @@ if run_it 04; then
     echo "== 04 lock the existing copper; per-net clearance files from hv.py"
     kp "$H/fence.py" lock "$BOARD" "$BOARD"; kp "$H/gen_clearances.py" "$BOARD"; keep 04_lock
 fi
-#     the two sigma-delta links, drawn (rule 2), with their guard tracks; before the supplies so that the passage past
-#     J37 / J38 and the run to U4 / U5 are theirs
-script 05 sdm 05_sdm.py
+#     the six divider taps (U7 / U2 -> west of J24), drawn through the via column between the J37 / J38 tongues;
+#     keep-outs reserve the room of the late ISO sigma-delta link
+script 05 taps 05_sdm.py taps
 source "$H/steps.sh"
 
 if [ "$((10#$LAST))" -ge 90 ]; then

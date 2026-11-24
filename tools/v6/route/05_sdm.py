@@ -37,7 +37,7 @@ FC = pcbnew.F_Cu
 # the via column x 28.75 between the J37 / J38 tongues: ten slots at 0.612 mm from y 52.99 (lanes from the east on
 # F / In2 must keep 2.5 mm from the J37 pads: y >= 52.89) to 58.48 (2.5 mm from the ISO lane); 06_west.py takes
 # the other six for the divider taps
-COLUMN = {"ISOGND": 52.99, "3V3_ISO": 53.602, "INU_ADCLK": 54.214, "MDATA_INU": 54.826}
+COLUMN = {"ISOGND": 52.99, "3V3_ISO": 53.602, "MDATA_INU": 54.214, "INU_ADCLK": 54.826}
 # the six divider taps (U7 / U2 block -> the old track ends west of J24), slots from the south (inner lane at the
 # corner of the barrier strip) to the north; they are drawn before the pair, which then stays south of them
 TAPS = [  # net, source (pad or old track end), west end (old track end), column slot y; in nesting order: the
@@ -79,6 +79,7 @@ def taps(b):
                          (IN3, SIG_W, (56.0, 10.0, 119.5, 59.0), (60.0, ys)),
                          (IN3, SIG_W, "straight", [(41.6, ys)]),
                          (FC, SIG_W, "straight", [(28.75, ys)]),
+                         (IN1, SIG_W, "straight", [(27.4, ys)]),
                          (IN1, SIG_W, (-20.0, 18.0, 31.0, 61.0), e)], f"tap {i + 1}",
             leaders=[None, (SIG_W, prev[1])] if prev else None)
         if ok[net]:
@@ -105,7 +106,7 @@ def iso_link(b):
     ck = east_pad_of(b, "INU_ADCLK", "U4")
     e_clk = end_via(cx, *ck, prefer=(0, 1))
     e_dat = end_via(cx, "U21", "12", prefer=(0, 1))
-    e_3v3 = via_near(cx, "3V3_ISO", 59.7, 47.4)      # the plane's corner at the barrier strip: the inner lane
+    e_3v3 = via_near(cx, "3V3_ISO", 59.4, 44.3)      # the plane's corner at the barrier strip: the inner lane
     if None in (e_clk, e_dat, e_3v3):
         return cx, total, made
     # transition vias: In3 -> In2 east of J37 (x 40.4), In2 -> In3 in the column between the tongues (x 28.75)
@@ -128,9 +129,9 @@ def iso_link(b):
     cx.commit(g)
     box_e = (37.0, 36.0, 82.0, 60.0)
     p_3v3 = run(cx, "3V3_ISO", IN3, e_3v3, tv["3V3_ISO"], GUARD_W, box_e, what="east, plane -> x 40.4")
-    p_clk = p_3v3 and run(cx, "INU_ADCLK", IN3, e_clk, tv["INU_ADCLK"], SIG_W, box_e, leader=(GUARD_W, p_3v3), what="east, U21 side -> x 40.4")
-    p_dat = p_clk and run(cx, "MDATA_INU", IN3, e_dat, tv["MDATA_INU"], SIG_W, box_e, leader=(SIG_W, p_clk), what="east, U21 -> x 40.4")
-    if not p_dat:
+    p_dat = p_3v3 and run(cx, "MDATA_INU", IN3, e_dat, tv["MDATA_INU"], SIG_W, box_e, leader=(GUARD_W, p_3v3), what="east, U21 -> x 40.4")
+    p_clk = p_dat and run(cx, "INU_ADCLK", IN3, e_clk, tv["INU_ADCLK"], SIG_W, box_e, leader=(SIG_W, p_dat), what="east, U21 side -> x 40.4")
+    if not p_clk:
         return cx, total, made
     for n, w in (("INU_ADCLK", SIG_W), ("MDATA_INU", SIG_W), ("3V3_ISO", GUARD_W)):
         if not straight(cx, n, IN2, [tv[n], cv[n]], w, "past J37 on In2"):
@@ -138,15 +139,18 @@ def iso_link(b):
     # west ends at U4
     w_clk = end_via(cx, "U4", "7", prefer=(1, 0), made=made)
     w_dat = end_via(cx, "R50", "2", prefer=(0, 1), made=made)
-    w_gnd = end_via(cx, "U30", "2", made=made)          # through-hole: the ISOGND of U4 / C37 / C162 is routed from it
+    w_gnd = end_via(cx, "C162", "2", net="ISOGND", prefer=(0, -1), w=0.25, made=made)   # U30 input capacitor (U30-2 is
+    #       within 2.5 mm of its own HV output pins: the router joins it to C162 later)
     w_3v3 = end_via(cx, "C37", "2", net="3V3_ISO", prefer=(0, -1), w=0.25, made=made)
     if None in (w_clk, w_dat, w_gnd, w_3v3):
         return cx, total, made
-    box_w = (-101.0, 38.0, 31.0, 71.4)
+    box_w = (-101.0, 26.0, 31.0, 71.4)
     q_clk = run(cx, "INU_ADCLK", IN3, cv["INU_ADCLK"], w_clk, SIG_W, box_w, avoid=AVOID, what="west, column -> U4-7")
     q_dat = q_clk and run(cx, "MDATA_INU", IN3, cv["MDATA_INU"], w_dat, SIG_W, box_w, leader=(SIG_W, q_clk), avoid=AVOID, what="west, column -> R50")
     q_3v3 = q_dat and run(cx, "3V3_ISO", IN3, cv["3V3_ISO"], w_3v3, GUARD_W, box_w, leader=(SIG_W, q_clk), avoid=AVOID, what="guard, column -> C37-2")
-    q_gnd = q_3v3 and run(cx, "ISOGND", IN3, g0, w_gnd, GUARD_W, box_w, leader=(GUARD_W, q_3v3), avoid=AVOID, what="guard, column -> U30-2")
+    # (the guard leaves the column straight west above the J38 pads: the grid cannot hit that 0.05 mm gap)
+    q_gnd = q_3v3 and straight(cx, "ISOGND", IN3, [g0, (17.5, g0[1])], GUARD_W, "guard, column -> x 17.5") and \
+        run(cx, "ISOGND", IN3, (17.5, g0[1]), w_gnd, GUARD_W, box_w, leader=(GUARD_W, q_3v3), avoid=AVOID, what="guard, x 17.5 -> C162-2")
     if q_clk and q_dat:
         total["INU_ADCLK"] = geo.plen(p_clk) + 11.65 + geo.plen(q_clk)
         total["MDATA_INU"] = geo.plen(p_dat) + 11.65 + geo.plen(q_dat)
@@ -184,15 +188,45 @@ def afe_link(b):
     return cx, total, made
 
 
+RESERVE = "v6 route reserve sdm "
+# the room the late ISO link step needs (planning update 2026-11-24: the sense groups and their links are routed
+# last, as steps that can be dropped): kept free of the steps in between by keep-outs (tracks and vias), deleted by
+# the links step itself. (name, rectangle x0 y0 x1 y1, layers)
+RESERVES = [
+    ("column and In2 north of J37", (27.6, 52.6, 41.0, 55.1), None),
+    ("corridor In3", (40.4, 52.6, 58.5, 55.1), ("In3.Cu",)),
+    ("U21 to the corridor In3", (58.5, 40.0, 78.0, 47.0), ("In3.Cu",)),
+    ("north of J38 In3", (5.0, 52.6, 28.4, 56.6), ("In3.Cu",)),
+    ("west run In3", (-62.0, 52.6, 5.0, 60.0), ("In3.Cu",)),
+]
+
+
+def reserve(b):
+    import fence
+    for name, r, layers in RESERVES:
+        fence.keepout(b, name, r, list(layers) if layers else fence.AL, prefix=RESERVE)
+    say(f"sdm: {len(RESERVES)} keep-outs reserve the room of the late ISO link")
+
+
 def main():
-    src, dst = sys.argv[1:3]
+    src, dst, mode = sys.argv[1:4]
     b = pcbnew.LoadBoard(src)
+    if mode == "taps":
+        reserve(b)
+        taps(b)
+        b.Save(dst)
+        return
+    import fence
+    say(f"sdm: {fence.clear(b, RESERVE)} reserve keep-outs removed")
     strip(b, {"MDATA", "ADCLK", "MDATA_INU", "INU_ADCLK", "INU_ADCLK_U21"})
-    cxi, ti, madei = iso_link(b)
-    n = geo.hv_holes(cxi, madei, "sdm")
-    taps(b)
-    cx, ta, made = afe_link(b)
-    n += geo.hv_holes(cx, made, "sdm")
+    n = 0
+    ti, ta = {}, {}
+    if mode in ("links", "iso"):
+        cxi, ti, madei = iso_link(b)
+        n += geo.hv_holes(cxi, madei, "sdm")
+    if mode in ("links", "afe"):
+        cx, ta, made = afe_link(b)
+        n += geo.hv_holes(cx, made, "sdm")
     say(f"sdm: {n} HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours")
     for k, v in {**ti, **ta}.items():
         say(f"sdm: length {k} {v:.1f} mm")
