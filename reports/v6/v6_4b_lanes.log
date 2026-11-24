@@ -1,0 +1,36 @@
+== v6 step 4b: bus lanes on more layers, HV clearance on the card DC pads
+  zone v6 bus ISODC+ In3 In3.Cu ISODC+ prio 6: (108.0,61.3) (107.6,61.3) (107.6,53.0) (101.6,53.0) (101.6,61.3) (78.0,61.3) (78.0,53.0) (72.0,53.0) (72.0,61.3) (36.5,61.3) (36.5,48.0) (31.5,48.0) (31.5,61.3) (5.0,61.3) (5.0,69.2) (108.0,69.2)
+  zone v6 bus ISOPGND In4 In4.Cu ISOPGND prio 6: (86.5,61.4) (86.5,53.0) (80.5,53.0) (80.5,61.3) (26.0,61.3) (26.0,48.0) (21.0,48.0) (21.0,61.3) (5.0,61.3) (5.0,69.2) (86.5,69.2)
+  zone v6 bus DC+ In3 In3.Cu DC+ prio 6: (116.0,-66.5) (116.0,-80.0) (9.0,-80.0) (9.0,-66.599999) (8.5,-66.599999) (8.5,-57.5) (18.5,-57.5) (18.5,-66.5) (72.4,-66.5) (72.4,-56.7) (82.4,-56.7) (82.4,-66.5) (109.2,-66.5) (109.2,-56.0) (116.0,-56.0)
+  zone v6 strip In4 ISOGND priority 4 (the In4 ISOPGND lane has 6 and wins)
+  C154 moved (18.80, 42.00) -> (8.5, 41.5)
+  C155 moved (18.80, 45.00) -> (8.5, 44.5)
+  C152 moved (96.50, -63.00) -> (93.5, -63.3)
+  C153 moved (99.50, -63.00) -> (96.5, -63.3)
+  local clearance 2.5 mm on 36 pads of J31 ... J42
+  via [ISOGND] 1.79 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 1.94 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 1.96 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 0.64 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 0.72 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 1.87 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 1.94 mm from J38 [ISOPGND] deleted
+  track [ISOGND] 1.94 mm from J37 [ISODC+] deleted
+  track [ISOGND] 1.76 mm from J37 [ISODC+] deleted
+  track [Net-(U2-+)] 1.93 mm from J38 [ISOPGND] deleted
+  track [Net-(U2--)] 2.16 mm from J38 [ISOPGND] deleted
+  track [3V3_ISO] 0.63 mm from J38 [ISOPGND] deleted
+  track [3V3_ISO] 1.03 mm from J38 [ISOPGND] deleted
+  track [DC+] 1.71 mm from J34 [PGND] deleted
+  track [15V] 2.35 mm from J36 [PGND] deleted
+  track [15V] 2.35 mm from J36 [PGND] deleted
+  track [15V] 0.63 mm from J35 [DC+] deleted
+  track [GND] 1.13 mm from J35 [DC+] deleted
+  track [GND] 1.10 mm from J35 [DC+] deleted
+  track [5V] 1.01 mm from J34 [PGND] deleted
+  track [PGND] 2.45 mm from J31 [DC+] deleted
+  track [PGND] 2.42 mm from J31 [DC+] deleted
+  track [Net-(U7B--)] 2.26 mm from J38 [ISOPGND] deleted
+  track [PWM_TRANS3] 2.19 mm from J35 [DC+] deleted
+  track [PWM_TRANS3] 0.55 mm from J35 [DC+] deleted
+  25 tracks / vias closer than 2.5 mm to the card DC pads deleted

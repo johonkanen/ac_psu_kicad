@@ -2,6 +2,44 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 step 4b – bus lanes on three layers per net, HV clearance on the card DC pads (2026-11-24, branch `v6-baseboard`)
+
+`tools/v6/v6_4b_lanes.py` (seed 6008, log `reports/v6/v6_4b_lanes.log`), zones refilled with `kicad-cli pcb drc
+--refill-zones --save-board` (the board rules). Decision "Fable 2026-11-24" after the current-rating estimate.
+
+**Rating** (IPC-2221, the stacked layers of one net taken as one conductor; JLC06161H-3313 35 um outer, 15.2 um inner):
+
+| Section | Copper per net | 12 A | 20 A | 23 A | 32 A |
+|---|---|---|---|---|---|
+| ISO lane 7.9 mm, 2 layers (step 4) | 35 + 15 um | 7 K | 23 K | 31 K | 67 K |
+| ISO lane 7.9 mm, 3 layers (now) | 35 + 15 + 15 um | 5 K | 15 K | **20 K** | 43 K |
+| primary bus 13.5 mm, 2 layers (PGND, now) | 35 + 15 um | 3 K | 9 K | 13 K | 28 K |
+| primary bus 13.5 mm, 3 layers (DC+, now) | 35 + 15 + 15 um | 2 K | 6 K | 8 K | 18 K |
+
+- Design case: 23 A RMS in the ISO lane between inverter leg A and the west end (inverter A and DAB secondary
+  currents adding as uncorrelated) gives about 20 K. Between DAB and inverter A: 12 A, 5 K.
+- The 32 A column is an upper bound, not a physical case: at the inverter A node the DAB feeds in and the inverter
+  draws out, so the direct currents subtract (about 9 A in from the DAB, about half of it taken by leg A) and only the
+  uncorrelated ripple parts add.
+- To confirm: IPC-2152 or a measurement. 2 oz outer copper is not an option on this board as it stands (the
+  0.127 mm tracks of the v5 escapes need 1 oz).
+
+**Changes**
+- ISO lane on all six layers, three per net: ISOPGND F + In2 + In4 (new "v6 bus ISOPGND In4"), ISODC+ In1 + In3 + B
+  (new "v6 bus ISODC+ In3"); the In4 strip ISOGND gives way under the lane only (priority 4 against 6).
+- Primary DC+ also on In3 ("v6 bus DC+ In3"). No In3 routing is needed in either band: the header signals leave
+  northwards (primary) and southwards (ISO), away from the bus.
+- **Found while replaying the aux script:** the pads of the card DC terminals and pigtails had no local clearance,
+  so other-net pours filled to 0.3 ... 0.6 mm from DC+ pads (PGND B.Cu pour 0 at J33, the In4 strip GND). All 36 pads
+  of J31 ... J42 now carry the 2.5 mm high-voltage clearance; 25 tracks / vias of other nets that came closer were
+  deleted (old runs in the strips, among them a v5 DC+ track 0.55 mm from J34's PGND pad and PWM_TRANS3 0.55 mm from
+  J35); they are routed again in step 5. C152 / C153 / C154 / C155 moved off the new clearances.
+- Islands: every v6 bus and strip zone 1. Smallest distances: lane copper to the wall-side edge 2.55 mm (ISO) and
+  3.05 mm (primary); to the other net's pigtail pad 3.12 mm; to a PE screw pad 6.4 mm (In4 GND to PE8), 17.9 mm
+  for any bus copper. `tools/check_all.sh` (`reports/v6/v6_4b_check_all.log`): every check passed except the Gerber
+  round trip (two clusters of the deleted J38 tracks); with an area row for them in `lib/v6_copper.csv` the round
+  trip passes on its own (CSV change only, the board is the same).
+
 ## Where the work stopped (end of session 2026-11-23)
 
 - Done and committed: card rev 1 routed and checked (`~/dev/hb_power_card-rev1`, branch `card-rev1`, last
