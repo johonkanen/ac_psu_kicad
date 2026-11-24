@@ -1,0 +1,6 @@
+  Single-ended:  0/1 routed
+  Multi-point:   9/13 pads connected (4 FAILED)
+  Total vias:    3
+  Single-ended:  0/1 routed
+  Multi-point:   9/13 pads connected (4 FAILED)
+  not routed: {'net_name': '5V_ISOL', 'failed_pads': [{'x': 13.265, 'y': -43.53, 'component_ref': 'J24', 'pad_number': '7'}, {'x': 8.5, 'y': -43.725, 'component_ref': 'C155', 'pad_number': '1'}, {'x': -99.9209, 'y': -44.2937, 'component_ref': 'C162', 'pad_number': '1'}, {'x': -58.25, 'y': -50.584, 'component_ref': 'U30', 'pad_number': '1'}]}, {'net': '5V_ISOL', 'pairs_connected': 8, 'pairs_total': 12, 'outcome': 'open', 'open_subtype': 'partial'}

@@ -1,0 +1,20 @@
+roundtrip: F.Cu   XOR 4438.01 mm^2, beyond 0.05 mm: only Proteus 2879.17, only KiCad 1420.12 mm^2; clusters >= 0.01 mm^2: 553 pad shape, 24 clearance, 1 zone fill, 29 pour refill, 349 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+1608 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: In1.Cu XOR 5007.85 mm^2, beyond 0.05 mm: only Proteus 1523.16, only KiCad 3383.20 mm^2; clusters >= 0.01 mm^2: 311 pad shape, 1 clearance, 185 v4 deviation, 1 other; draws/flashes off the other copper: 1 Proteus, 0 KiCad (+635 inside v4 areas)
+roundtrip: In2.Cu XOR 5653.90 mm^2, beyond 0.05 mm: only Proteus 1672.78, only KiCad 3816.97 mm^2; clusters >= 0.01 mm^2: 302 pad shape, 7 clearance, 2 zone fill, 279 v4 deviation, 5 other; draws/flashes off the other copper: 3 Proteus, 0 KiCad (+845 inside v4 areas)
+roundtrip: B.Cu   XOR 5890.28 mm^2, beyond 0.05 mm: only Proteus 3743.86, only KiCad 1977.89 mm^2; clusters >= 0.01 mm^2: 737 pad shape, 7 clearance, 2 zone fill, 11 pour refill, 330 v4 deviation, 3 other; draws/flashes off the other copper: 1 Proteus, 0 KiCad (+1237 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: In1.Cu OTHER only Proteus 80.776 mm^2 at (43.763, -55.343), box x 1.03..110.85 y -63.95..-24.55, near C7-2 (DC+) 0.56 mm, via (PWM_G4) 4.90 mm
+roundtrip: In2.Cu OTHER only Proteus 30.200 mm^2 at (-27.780, -81.184), box x -55.32..-0.37 y -81.48..-80.05, near J5-1 (SHUNT1) 13.62 mm, via (GND) 44.09 mm
+roundtrip: In2.Cu OTHER only Proteus 4.437 mm^2 at (19.804, 36.414), box x 14.08..23.70 y 27.38..46.23, near J8-48 (20V_ISO_SEC) 14.57 mm, via (GPIO_BYPASS_RLY_ISO) 3.31 mm
+roundtrip: In2.Cu OTHER only Proteus 3.660 mm^2 at (19.232, 37.468), box x 14.20..22.30 y 29.52..45.67, near J8-48 (20V_ISO_SEC) 13.59 mm, via (GPIO_BYPASS_RLY_ISO) 3.18 mm
+roundtrip: In2.Cu OTHER only Proteus 3.528 mm^2 at (5.073, -38.712), box x 4.80..6.78 y -47.62..-28.70, near C11-2 (PGND) 12.69 mm, via (MDATA) 8.79 mm
+roundtrip: In2.Cu OTHER only Proteus 2.215 mm^2 at (19.598, 40.610), box x 17.43..21.53 y 35.55..45.67, near J8-48 (20V_ISO_SEC) 10.43 mm, via (GPIO_BYPASS_RLY_ISO) 3.14 mm
+roundtrip: B.Cu OTHER only Proteus 24.083 mm^2 at (-58.045, 47.155), box x -68.25..-20.80 y 42.58..51.05, near J10-1 (INU_FILTER_INPUT) 6.89 mm, via (GPIO_BYPASS_RLY_ISO) 34.69 mm
+roundtrip: B.Cu OTHER only Proteus 0.536 mm^2 at (-0.173, 47.019), box x -1.27..0.75 y 46.38..47.98, near R256-1 (#00270) 6.55 mm, via (#00270) 0.79 mm
+roundtrip: B.Cu OTHER only Proteus 0.398 mm^2 at (0.199, 44.851), box x -0.52..0.75 y 44.17..45.35, near R71-1 (#00269) 6.99 mm, via (#00269) 0.39 mm
+roundtrip: In1.Cu MISSING Proteus item at (2.09, -41.59)
+roundtrip: In2.Cu MISSING Proteus item at (4.90, -37.00)
+roundtrip: In2.Cu MISSING Proteus item at (17.59, 30.89)
+roundtrip: In2.Cu MISSING Proteus item at (17.29, 32.59)
+roundtrip: B.Cu MISSING Proteus item at (-0.08, 44.62)
+roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: FAILED (9 unexplained clusters, 5 draws/flashes without copper in the other set, 0 drill mismatches)

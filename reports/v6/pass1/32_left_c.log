@@ -1,0 +1,7 @@
+  Single-ended:  1/12 routed (11 FAILED)
+  Total vias:    1
+  Single-ended:  0/11 routed (11 FAILED)
+  Total vias:    0
+  Single-ended:  1/12 routed (11 FAILED)
+  Multi-point:   8/8 pads connected
+  not routed: DAB_PWM_HI_SEC_CTRL, DAB_PWM_LO_SEC_CTRL, GPIO_BYPASS_RLY_ISOLATED, INU_ADCLK_CTRL, ISOADA1_CTRL, MDATA_ISO, PWM_Q6_CTRL, PWM_Q7_CTRL, PWM_Q8_CTRL, PWM_TRANS4_CTRL, PWM_TRANS5_CTRL, {'net': 'DAB_PWM_HI_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_PWM_LO_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'GPIO_BYPASS_RLY_ISOLATED', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'INU_ADCLK_CTRL', 'pairs_connected': 0, 'pairs_t

@@ -1,0 +1,9 @@
+planes: CTRLGND_A: 36 vias, 0 pads on a shared via, 0 left
+planes: 3V3_CTRL: 23 vias, 2 pads on a shared via, 0 left
+planes: CTRLGND: 10 vias, 0 pads on a shared via, 0 left
+planes: 5V_CTRL: 5 vias, 0 pads on a shared via, 0 left
+planes: ISOGND: 19 vias, 1 pads on a shared via, 4 left: C156-2, C158-2, C159-2, C125-2
+planes: 3V3_ISO: 10 vias, 0 pads on a shared via, 1 left: C122-1
+planes: GND: 8 vias, 0 pads on a shared via, 0 left
+planes: VCC: 6 vias, 0 pads on a shared via, 0 left
+planes: 117 vias in all

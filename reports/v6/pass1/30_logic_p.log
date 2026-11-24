@@ -1,0 +1,8 @@
+  Single-ended:  10/11 routed (1 FAILED)
+  Multi-point:   12/12 pads connected (3 nets)
+  Total vias:    9
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  10/11 routed (1 FAILED)
+  Multi-point:   13/13 pads connected
+  not routed: CLK1, {'net': 'CLK1', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}

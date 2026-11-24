@@ -1,0 +1,8 @@
+  Single-ended:  1/2 routed (1 FAILED)
+  Multi-point:   5/5 pads connected (1 nets)
+  Total vias:    3
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  1/2 routed (1 FAILED)
+  Multi-point:   5/5 pads connected
+  not routed: ISO_DAB_SDM_RAW_VOLTAGE, {'net': 'ISO_DAB_SDM_RAW_VOLTAGE', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}

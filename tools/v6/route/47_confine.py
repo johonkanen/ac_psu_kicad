@@ -73,6 +73,14 @@ def main():
                                             or (me.GetClass() == "PCB_VIA" and me.HitTest(t.GetEnd()))):
                 return True
         return False
+    def touched_fixed(net, layer, pt):     # a pad or a same-net pour fill at pt
+        for p in pads:
+            if p.GetNetname() == net and p.IsOnLayer(layer) and p.HitTest(pt):
+                return True
+        for z in zones:
+            if z.GetNetname() == net and z.IsOnLayer(layer) and z.HitTestFilledArea(layer, pt):
+                return True
+        return False
     total, pnets = 0, {}
     for rnd in range(300):
         items = {}
@@ -97,6 +105,47 @@ def main():
         total += len(kill)
     print(f"confine: {total} new items left dangling pulled back in {rnd} rounds: " +
           " ".join(f"{k} ({v})" for k, v in sorted(pnets.items())))
+    # new copper that no longer reaches any pad (a chain of short router pieces whose ends touch each other)
+    items = {}
+    for t in b.GetTracks():
+        items.setdefault(t.GetNetname(), []).append(t)
+    orph = []
+    for net, ts in items.items():
+        if not net or all(key(t) in old for t in ts):
+            continue
+
+        def ends(t):
+            return [t.GetPosition()] if t.Type() == pcbnew.PCB_VIA_T else [t.GetStart(), t.GetEnd()]
+
+        def layers(t):
+            return list(t.GetLayerSet().CuStack()) if t.Type() == pcbnew.PCB_VIA_T else [t.GetLayer()]
+        anchored = []
+        for i, t in enumerate(ts):
+            if any(touched_fixed(net, L, p) for p in ends(t) for L in layers(t)):
+                anchored.append(i)
+        adj = {i: [] for i in range(len(ts))}
+        for i, t in enumerate(ts):
+            for j in range(i + 1, len(ts)):
+                u = ts[j]
+                if not (set(layers(t)) & set(layers(u))):
+                    continue
+                if any(u.HitTest(p, 1) for p in ends(t)) or any(t.HitTest(p, 1) for p in ends(u)):
+                    adj[i].append(j)
+                    adj[j].append(i)
+        seen = set(anchored)
+        stack = list(anchored)
+        while stack:
+            i = stack.pop()
+            for j in adj[i]:
+                if j not in seen:
+                    seen.add(j)
+                    stack.append(j)
+        orph += [t for i, t in enumerate(ts) if i not in seen and key(t) not in old]
+    onets = {}
+    for t in orph:
+        onets[t.GetNetname().split("/")[-1]] = onets.get(t.GetNetname().split("/")[-1], 0) + 1
+        b.Delete(t)
+    print(f"confine: {len(orph)} new items without a pad deleted: " + " ".join(f"{k} ({v})" for k, v in sorted(onets.items())))
     b.Save(dst)
 
 
