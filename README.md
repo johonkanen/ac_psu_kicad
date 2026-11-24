@@ -1,5 +1,20 @@
 # ac_psu_kicad
 
+> **This is v6: the baseboard for six half-bridge power cards** (branch `v6-baseboard`, merged into main from
+> 2026-11-24). The switches, gate drivers and switch nodes moved off this board onto six vertical cards
+> (`johonkanen/hb_power_card`, branch `card-rev1`): two AFE legs, two inverter legs, DAB primary and secondary. The
+> baseboard carries the bulk capacitors, filters, measurement, isolation, the aux flyback, the control card sockets,
+> the card DC terminals / pigtails and CTRL headers, and the DC bus pours to them.
+>
+> **State (2026-11-24):** routing pass 1 is legal (DRC 0 shorts / 0 clearance errors, parity 0, domain gaps and both
+> layout checks OK, no pour split, `tools/check_all.sh` passes); **102 connections are still open** and listed as
+> pending: supplies and grounds to the headers and sense groups (about 52), the CTRL area under the control card
+> (13), card PWM nets (12), the two sigma-delta links (7), and a few more; details at the top of `STATUS.md`.
+> Plans: `V6_PLAN.md` (baseboard), the card's `CARD_REV1_PLAN.md`. Nothing here is ordered.
+>
+> **The v5 TO-247 layout is abandoned** (it did not route); it is kept on branch `v5-layout`. The text below
+> describes the Proteus-to-KiCad migration this repository started with (v1 ... v5).
+
 Migration of the **single_phase_inverter_psu_v3** board ("Inverter PSU") from Proteus 8.12
 to KiCad 10. The KiCad schematic is redrawn from the Proteus PDF, and the PCB is rebuilt
 from the Proteus gerbers, so that every pad, track, via and pour carries a net from the new

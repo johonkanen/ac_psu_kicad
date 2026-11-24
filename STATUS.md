@@ -1,6 +1,41 @@
 # Status
 
-Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+**v6 (power-card baseboard), routing pass 1 legal with 102 connections pending: see the first entry below.**
+
+Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
+
+## Routing pass 1 merged: legal board, 102 connections pending (2026-11-24, `v6-baseboard`)
+
+**This is v6** (V6_PLAN.md): the baseboard for six half-bridge power cards (card repo `johonkanen/hb_power_card`,
+branch `card-rev1`). The v5 TO-247 layout is abandoned and kept on branch `v5-layout`. Per V6_PLAN section 13 this
+legal pass goes to main.
+
+- **Routing pass 1** (branch `v6-routing-pass1c`, merged here): the chain `tools/v6/route/chain.sh` rebuilds the
+  routed board from the step-4d board (steps 00-03 aux replay / fixes / prune, 04-47 drawn structures and router
+  steps by group by an Opus helper on branch `pass1-routes`, 98 copper groups without a pad). 405 open connections
+  at the start, **102 open** now.
+- **Checks:** `tools/check_all.sh` ALL CHECKS PASSED on this branch (`reports/v6/pass1/check_all_baseboard.log`):
+  DRC 0 shorts, 0 clearance errors, 0 unconnected outside the pending areas, parity 0 (the 35 accepted courtyard
+  overlaps of the Proteus placement remain); domain_gaps, check_layout, check_layout_v6, assign_nets, IPC and Gerber
+  comparisons OK; no pour has more islands than before the pass.
+- **Open, by group** (from the helper's final count, `reports/v6/pass1/final_open_by_group.log`): supplies and
+  grounds, primary 26 (GND 17) and ISO 26 (ISOGND 17), run out of time because their pads inside the fenced sense
+  blocks are reached late; CTRL area under the control card 13 (J11 bottom fan 6 of 14: the plane vias of step 07
+  took its lanes); card PWM primary 9 and ISO 3 (routed, but deleted by step 47 where they left the open-layout
+  rows: corridor rows would close them); sigma-delta links 7 (steps 40 / 41 dropped: drawn late, their end vias at
+  U21 / R22 were boxed in; drawn early they work: ISO 184 / 186 mm, AFE 139 / 150 mm with guard tracks); ISO runs
+  west of J11 5; DC buses / pour stitching 5; sense groups 4 (SHUNT1, INDUCTOR_OUTPUT, ISO_DAB_SDM_RAW_VOLTAGE,
+  U5 MDAT); ISO logic 4; CLK1 1.
+- **What pass 2 should change** (helper's findings): draw the sigma-delta pairs early again; plane vias after the
+  J11 fan; open-layout corridor rows for the primary PWM and taps paths (x 7 ... 66, y -60 ... -19) instead of
+  deleting the routed copper; supplies routed before the sense blocks are fenced; one placement change: J37 / J38
+  3 mm further apart (or J37 west), the pinch beside J37 is 0.64 mm and caps the west-going ISO nets.
+- Found and fixed while merging: the helper's final board failed assign_nets (an MDATA In2 run left without a pad
+  by the prune) and the Gerber round trip (copper pulled back by steps 01-03 outside the listed areas); both came
+  from steps 01-03. Step 98 deletes groups without a pad; the copper removed by steps 01-03 is listed as v6 areas.
+- Renders: `reports/v6/pass1/render/` (per layer, the six headers, both sense groups, the J37 passage).
+- Branches: `v6-routing-pass1` (pushed, c3057f5) is superseded by `v6-routing-pass1b` / `pass1-routes` /
+  `v6-routing-pass1c`; none of them is rebased after a push.
 
 ## Routing pass 1, prep: aux routes replayed, fixed, dangling copper pruned (2026-11-24, branch `v6-routing-pass1b`)
 
