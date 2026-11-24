@@ -2,6 +2,27 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Routing pass 1, prep: aux routes replayed, fixed, dangling copper pruned (2026-11-24, branch `v6-routing-pass1`)
+
+Chain `tools/v6/route/chain.sh` (rerunnable from the committed `v6-baseboard` board; steps kept in `build/v6route/`):
+- **01** `tools/v6/aux_routes.py` (the helper's script from `aux-routes` 879aa02): all 81 pads matched on the step-4b
+  board; 140 tracks, 21 vias, 4 zones, C68 moved. Zones refilled with kicad-cli. **Kept:** DRC 0 errors, parity 0,
+  domain_gaps OK, every pour touching the areas 1 -> 1 island, 0 opens inside PX / IA.
+- **02** `tools/v6/route/02_aux_fixes.py`: the DC+ via of R98-1 sat in the pad and **0.50 mm from the In2 GND pour**
+  (the helper had lowered that pour's clearance to 0.5 mm) and 1.85 mm from PGND on B.Cu. Moved out of the pad to
+  (67.6, -51.4) with a 0.6 mm B.Cu link and pour keep-outs of via radius + 2.6 mm on In1 ... In4 and B.Cu: now
+  2.59 mm to both. No filled / capped via-in-pad needed.
+- In2 GND pour (clearance 0.5 mm) to the high-voltage nets on In2, measured: DC+ 2.36 mm (C12-1), AUX_VIN 2.00 mm
+  (T1-11), AUX_DRAIN 2.50 mm (T1-12), AUX_CLAMP has no copper near it. All >= 2.0 mm.
+- **03** `tools/v6/route/03_prune.py`: 58 dangling items in the v6 areas pulled back to their last pad / junction /
+  pour (15V 7, 3V3_ISO 8, GND 8, MDATA 5, U7A / U7B / U2 inputs 18, PWM_TRANS3 4, ISOGND 3, 15V_ISO 2, PWM_G1,
+  5V, ADCLK, INDUCTOR_OUTPUT). These nets, and PWM_TRANS2, are routed by the chain.
+- C68 (100 nF DC+ to GND, kept from v4 on sheet 7): a general DC+ to GND capacitor, not the flyback's input
+  capacitor (that is C111 / C112, 47 nF 1 kV on AUX_VIN at T1, unchanged). Its move to (70.4, -13.0) is harmless.
+- U18 drain copper 171 mm2 (In1 77, In4 77, B.Cu 17) against the 230 mm2 of the v5 loss estimate: accepted for the
+  draft; for the user's list (U18 temperature at 450 V full load).
+- After step 03: 404 unconnected items on the board (the v5 card area under the control card was never routed on
+  `v5-layout`; the passes stayed on their branches), the v6 card headers, sense groups, U29 / U30, D17 / R257.
 ## v6 step 4c – R258 33R in INU_ADCLK at U21 (2026-11-24, branch `v6-baseboard`)
 
 Planning session 2026-11-24 (rules for the two sigma-delta links): the clock gets a series resistor at its driving
