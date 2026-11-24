@@ -37,6 +37,8 @@ remove,BUSP1,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card
 remove,BUSP2,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card strip
 remove,BUSN1,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card strip
 remove,BUSN2,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card strip
+remove,AFE_OUT,,,,v6,"v6: SW landing terminal deleted, the card's SW wire lands on FILTER_IN1 / J10 (user 2026-11-24)"
+remove,INU_OUT2,,,,v6,"v6: SW landing terminal deleted, the card's SW wire lands on FILTER_IN1 / J10 (user 2026-11-24)"
 moved,R48,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
 moved,U5,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
 moved,D8,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
@@ -61,8 +63,6 @@ moved,C55,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,C78,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,C37,,,,v6,v6: inverter current sense at the choke-lead terminal J9
 moved,R50,,,,v6,v6: inverter current sense at the choke-lead terminal J9
-moved,INU_OUT2,,,,v6,"v6: landing terminal moved out of the passage north of J11, beside J7"
-moved,AFE_OUT,,,,v6,"v6: landing terminal moved out of the AFE leg 2 card envelope, beside FILTER_IN1"
 part,J21,,,ac_psu:Samtec_SHF-105-01-L-D-TH,v6,"CTRL header of the AFE leg 1 card: Samtec SHF-105-01-L-D-TH, ribbon 1:1"
 value,J21,,,CTRL AFE leg 1,v6,
 part,J31,,,ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3,v6,"DC+ terminal of the AFE leg 1 card: Wuerth 7462810, M3 press-fit"
@@ -265,8 +265,6 @@ pin,R48,3,SHUNT1,LEMOUT,v6,v6: current sense at the quiet end of the choke (was 
 pin,R48,4,G1_SOURCE_HI,AFE_CHOKE1,v6,v6: current sense at the quiet end of the choke (was G1_SOURCE_HI)
 pin,R91,3,Q7_S,INDUCTOR_OUTPUT,v6,v6: current sense at the quiet end of the choke (was Q7_S)
 pin,R91,4,INDUCTOR_INPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was INDUCTOR_INPUT)
-pin,AFE_OUT,1,G3_SOURCE_HI,N/C,v6,v6 (was G3_SOURCE_HI)
-pin,INU_OUT2,1,Q5_S,N/C,v6,v6 (was Q5_S)
 pin,J5,1,SHUNT1,N/C,v6,v6 (was SHUNT1_FORCE)
 pin,J7,1,INDUCTOR_INPUT,N/C,v6,v6 (was INDUCTOR_INPUT)
 add,U21,14,,INU_ADCLK_U21,v6,v6 (was INU_ADCLK)

@@ -1,0 +1,5 @@
+== v6 step 4d: U29 / U30 on the bottom side
+  AFE_OUT1 at (-4.00, -62.50) deleted
+  INU_OUT2 at (-56.00, 62.00) deleted
+  U29 top (-23.50, -72.00) -> bottom (-23.50, -72.00) rot 90, 15.8 mm from its shunt
+  U30 top (-97.25, 52.07) -> bottom (-58.25, 56.30) rot 90, 26.5 mm from its shunt

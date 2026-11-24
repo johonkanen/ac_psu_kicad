@@ -290,3 +290,10 @@ JLC06161H-3313 are 0.5 oz. Ask for the lane cross-section per layer, the RMS cur
 to 20 A RMS bus current, DAB about 12 A RMS AC), the temperature-rise estimate, and where a third layer or a wider
 lane is possible. Same table for the 13.5 mm primary bus. The aux-area helper's script must be replayed onto
 4704efe.
+
+### 12. Inductors and landing terminals (user 2026-11-24, recorded by the worker)
+
+One AFE choke between J5 and FILTER_OUT1 and one inverter inductor between J7 and J9 (a toroid of about 55 mm
+diameter standing upright at the ISO wall; photo `reference/photos/`). The SW wire of the AFE leg 2 card lands on
+FILTER_IN1, that of the inverter leg A card on J10; AFE_OUT1 and INU_OUT2 are deleted (step 4d). U29 / U30 stand on
+the bottom side (10.2 mm, accepted exception to the 10 mm bottom limit). Wiring list: STATUS.md, step 4d.

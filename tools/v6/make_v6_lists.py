@@ -55,8 +55,11 @@ def write_part_map():
 
 def base_rows():
     out = []
-    for ref in V.REMOVED:
-        out.append(dict(kind="remove", ref=ref, pin="", **{"from": ""}, to="", fix=FIX, note=V.REMOVED_NOTE[ref]))
+    import deviations  # noqa: E402
+    proteus_of = {b: a for a, b in deviations.refdes_map().items()}
+    for ref in V.REMOVED:   # rows keep the Proteus refdes (AFE_OUT1 is AFE_OUT in the IPC)
+        out.append(dict(kind="remove", ref=proteus_of.get(ref, ref), pin="", **{"from": ""}, to="", fix=FIX,
+                        note=V.REMOVED_NOTE[ref]))
     import deviations  # noqa: E402
     back = {b: a for a, b in deviations.refdes_map().items()}
     for ref, note in V.MOVED.items():

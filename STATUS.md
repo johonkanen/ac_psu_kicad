@@ -2,6 +2,49 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 step 4d – U29 / U30 on the bottom side, AFE_OUT1 / INU_OUT2 deleted; wiring list (2026-11-24, branch `v6-baseboard`)
+
+User 2026-11-24 (photo `reference/photos/built_unit_inductor_iso_wall_2026-11-24.jpg`, decisions via the planning
+session): **one AFE choke between J5 and FILTER_OUT1, one inverter inductor between J7 and J9** (a toroid of about
+55 mm diameter standing upright at the ISO wall); the SW wire of the AFE leg 2 card lands on **FILTER_IN1**, that of
+the inverter leg A card on **J10** (the existing M4 terminals), so their landing terminals AFE_OUT1 and INU_OUT2 go.
+The terminals at the inductor landings stay M4 REDCUBE (v4 fix 13).
+
+- Schematic: AFE_OUT1 (sheet 1) and INU_OUT2 (sheet 5) removed, sheet notes updated; `v6_parts.LANDINGS` in
+  REMOVED (remove rows keep the Proteus refdes AFE_OUT). `tools/deviations.py` `removed()` returns a renamed part in
+  both namings (AFE_OUT / AFE_OUT1), so the IPC-keyed checks find it.
+- `tools/v6/v6_4d_modules_bottom.py` (seed 6010): both terminals deleted; U29 to the bottom at (-23.5, -72.0)
+  rot 90, 15.8 mm from R48; U30 to the bottom at (-58.25, 56.3) rot 90, 26.5 mm from R91, between J9 and J10 (the
+  agreed (-59, 55) moved 1.3 mm: its through-hole pins keep 2.5 mm to the pads and to the 10 mm M4 lug circles of
+  J7 / J9 / J10 on top). The module pins keep 2.5 mm to every pad of another node group or high-voltage net.
+- **Exception recorded:** the B0512S is 10.2 mm tall on the bottom side, where V5_LAYOUT_PLAN.md allows 10 mm
+  (board on 15 mm standoffs; planning session 2026-11-24).
+- Provisional inverter inductor envelope (top side, parts over 4 mm; x -102 ... -42, y 36 ... 72, planning session):
+  in it stand J7, J9, J10 (M4 REDCUBE, 7 mm), CM3 (to y 42.5), and C59 / C60 at its east edge; PE5 just outside;
+  U30 was in it before this step. Nothing moved for the envelope yet (the user gives the toroid's position).
+
+**Wiring list** (card terminal -> baseboard terminal; rough length: straight line from the card terminal, about 12 mm
+from the wall and 4 mm + its card height above the board, to the baseboard terminal, plus 15 % and 15 mm for
+the bends):
+
+| Card | Card terminal | Baseboard terminal | Rough length |
+|---|---|---|---|
+| AFE leg 1 | J3 SW | J5 (AFE choke lead) | 70 mm |
+| AFE leg 1 | J1 DC+ / J2 DC- | J31 / J32 | 30 / 40 mm |
+| AFE leg 2 | J3 SW | FILTER_IN1 | 105 mm |
+| AFE leg 2 | J1 DC+ / J2 DC- | J33 / J34 | 45 / 40 mm |
+| DAB primary | J1 DC+ / J2 DC- | J35 / J36 | 50 / 40 mm |
+| DAB primary | J3 SW, MID | DAB transformer (off the board) | - |
+| Inverter leg B | J3 SW | J7 (inverter inductor lead) | 150 mm |
+| Inverter leg B | J1 DC+ / J2 DC- | J37 / J38 | 35 / 45 mm |
+| Inverter leg A | J3 SW | J10 | 175 mm |
+| Inverter leg A | J1 DC+ / J2 DC- | J39 / J40 pigtails | 20 / 30 mm |
+| DAB secondary | J1 DC+ / J2 DC- | J41 / J42 pigtails (DAB_GROUND) | 25 / 30 mm |
+| DAB secondary | J3 SW, MID | DAB transformer (off the board) | - |
+
+The original board had copper for the long SW runs (inverter legs to J7 / J10, AFE leg 2 to FILTER_IN1); in v6 they
+are wires.
+
 ## v6 step 4c – R258 33R in INU_ADCLK at U21 (2026-11-24, branch `v6-baseboard`)
 
 Planning session 2026-11-24 (rules for the two sigma-delta links): the clock gets a series resistor at its driving

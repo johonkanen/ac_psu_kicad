@@ -14,7 +14,6 @@ area,B.Cu,-75.0,47.0,2.0,70.0,,copper of INDUCTOR_INPUT (J7 to the old place of 
 area,In2.Cu,60.0,-29.0,68.0,-20.0,,tracks of a removed gate-card net deleted with the net (v6 step 1)
 unwire,*,32.5,38.5,63.5,45.5,ISODC+,v6 step 3: wire link BUSP1 - BUSP2 removed, the ISO DC bus runs as copper in the freed card strip
 unwire,*,33.0,31.5,90.5,45.0,ISOPGND,v6 step 3: wire link BUSN1 - BUSN2 removed, the ISO DC bus runs as copper in the freed card strip
-area,*,-61.500,56.500,-50.500,67.500,,INU_OUT2 M4 terminal moved to (-56.00,62.00) beside J7 (v6 step 3: out of the passage north of J11 and out of the card envelope)
 area,*,-4.0,-65.0,73.0,-42.0,,copper of the AFE sense group at its old place (R48 / U5) and the copper groups it left without a pad deleted (v6 step 3); the area is routed again in step 5
-unrouted,*,-7.0,-65.5,-1.0,-59.5,,AFE_OUT1 landing pin at its v6 place (-4.0,-62.5), moved out of the AFE leg 2 card envelope (v6 step 3c)
 area,*,19.0,33.0,27.0,47.0,,tracks of 3V3_ISO / ISOGND / U2 / U7B within 2.5 mm of the J38 (ISOPGND) terminal pads deleted (v6 step 4b); routed again in step 5
+unrouted,*,-63.0,47.0,-53.0,67.0,,U30 (B0512S, bottom side) moved here in v6 step 4d, between J9 and J10: routed in step 5

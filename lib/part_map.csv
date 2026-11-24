@@ -5,7 +5,6 @@ ACIN2,1,ac_psu:PIN,PIN
 ACOUT1,5,ac_psu:PIN,PIN
 ACOUT2,5,ac_psu:PIN,PIN
 AD1,9,ac_psu:ADS7056,ADS7056
-AFE_OUT1,1,ac_psu:PIN,PIN
 C2,4,ac_psu:C,
 C3,3,ac_psu:C,
 C4,3,ac_psu:C,
@@ -174,7 +173,6 @@ D16,7,ac_psu:D_Schottky,SS310
 D17,8,ac_psu:D_Zener,MM3Z5V1T1
 FILTER_IN1,1,ac_psu:PIN,PIN
 FILTER_OUT1,1,ac_psu:PIN,PIN
-INU_OUT2,5,ac_psu:PIN,PIN
 J5,1,ac_psu:PIN,PIN
 J7,5,ac_psu:PIN,PIN
 J9,5,ac_psu:PIN,PIN

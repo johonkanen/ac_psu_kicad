@@ -597,7 +597,7 @@ def main():
     # (AC_PSU_PROTEUS=1, tools/regen_check.sh), where they are used
     retired = set() if deviations.proteus_mode() else {
         "TO-247-3_Vertical_Proteus", "PinHeader_2x24_P1.27mm_Vertical_Pins15-48", "Tab_FASTON250_TE_62409-1_Vertical",
-        "Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm"}
+        "Tab_FASTON250_TE_62409-1_Vertical_Pad2.0mm", "Terminal_D4.0mm_Drill2.55mm"}   # last: AFE_OUT1, deleted in v6 step 4d
     unused = sorted(set(PROJECT) - used - retired - {n for n, s in PROJECT.items() if s.get("board_only")})
     undefined = sorted(used - set(PROJECT))
     for n in unused:

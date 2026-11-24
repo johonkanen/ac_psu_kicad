@@ -7,12 +7,11 @@ from _common import *  # noqa: F401,F403
 sh = sheet("01_afe.kicad_sch")
 
 # ---- v6: the AFE half bridges Q1..Q4 and the leg-1 shunt R48 are on two power cards (sheet 2) -----------------
-# J5 and AFE_OUT1 stay as wire landing points: the SW wire of a card and the choke lead meet on the terminal.
-for ref, y in (("J5", g(44)), ("AFE_OUT1", g(60))):
-    t = terminal(sh, ref, g(100), y, "right")
-    sh.no_connect(*t.pin(1))
-sh.text("v6: AFE leg 1 (Q1 / Q2) and leg 2 (Q3 / Q4) are half-bridge power cards (sheet 2).", g(20), g(92))
-sh.text("J5 = SW wire of the leg-1 card + choke lead, AFE_OUT1 = SW wire of the leg-2 card + choke lead: no copper.", g(20), g(95))
+# J5 stays as a wire landing point: the SW wire of the AFE leg 1 card and the lead of the AFE choke (J5 - FILTER_OUT1)
+# meet on it. AFE_OUT1 is deleted (user 2026-11-24): the leg 2 card's SW wire lands on FILTER_IN1 directly.
+t = terminal(sh, "J5", g(100), g(44), "right")
+sh.no_connect(*t.pin(1))
+sh.text("J5 = SW wire of the leg-1 card + lead of the AFE choke (J5 - FILTER_OUT1); the leg-2 card's SW wire lands on FILTER_IN1.", g(20), g(95))
 
 # ---- R48 shunt, v6: at the filter end of the leg-1 choke (V6_PLAN.md section 9), sensed by U5 (sheet 8) -------
 SX, SY = g(118), g(36)

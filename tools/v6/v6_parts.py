@@ -10,21 +10,24 @@ SWITCHES = [f"Q{i}" for i in range(1, 13)]
 GATE_HEADERS = "J1 J2 J3 J4 J6 J8".split()
 DAB_TABS = "DAB_PRI_1 DAB_PRI_2 DAB_SEC_1 DAB_SEC_2".split()
 DAB_CAPS = "C1 C35 C45 C46 C47 C48 C49 C50".split()
-BUS_LINKS = ["BUSP1", "BUSP2", "BUSN1", "BUSN2"]   # v6 step 3: the ISO DC bus runs as copper in the freed strip
-REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS + BUS_LINKS
+BUS_LINKS = ["BUSP1", "BUSP2", "BUSN1", "BUSN2"]
+# user 2026-11-24: the leg 2 / leg A SW wires land on FILTER_IN1 / J10; their own landing terminals go
+LANDINGS = ["AFE_OUT1", "INU_OUT2"]   # v6 step 3: the ISO DC bus runs as copper in the freed strip
+REMOVED = SWITCHES + GATE_HEADERS + DAB_TABS + DAB_CAPS + BUS_LINKS + LANDINGS
 REMOVED_NOTE = {**{r: "v6: switch on the power card" for r in SWITCHES},
                 **{r: "v6: gate-card header replaced by the card CTRL header" for r in GATE_HEADERS},
                 **{r: "v6: DAB leads go from the card to the transformer" for r in DAB_TABS},
                 **{r: "v6: DAB split capacitor on the DAB card" for r in DAB_CAPS},
-                **{r: "v6: ISO DC bus wire link replaced by copper in the freed card strip" for r in BUS_LINKS}}
+                **{r: "v6: ISO DC bus wire link replaced by copper in the freed card strip" for r in BUS_LINKS},
+                **{r: "v6: SW landing terminal deleted, the card's SW wire lands on FILTER_IN1 / J10 (user 2026-11-24)"
+                   for r in LANDINGS}}
 # Proteus / v5 parts that v6 step 3 places elsewhere (the two current-sense groups go to the choke-lead terminals,
 # INU_OUT2 leaves the passage north of J11)
 MOVED = {**{r: "v6: AFE current sense at the choke-lead terminal FILTER_OUT1" for r in
             ("R48", "U5", "D8", "R59", "R57", "R58", "C52", "C53", "C91", "C71", "C73", "C64", "R55")},
          **{r: "v6: inverter current sense at the choke-lead terminal J9" for r in
             ("R91", "U4", "D9", "R94", "R92", "R93", "C51", "C54", "C90", "C55", "C78", "C37", "R50")},
-         "INU_OUT2": "v6: landing terminal moved out of the passage north of J11, beside J7",
-         "AFE_OUT1": "v6: landing terminal moved out of the AFE leg 2 card envelope, beside FILTER_IN1"}
+}
 MOVED_NOT_PROTEUS = ("C90", "C91")
 
 # V6_PLAN.md section 9 (user 2026-11-23): the two current-sense circuits R48 / U5 and R91 / U4 STAY on the board

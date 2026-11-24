@@ -7,9 +7,10 @@ from _common import *  # noqa: F401,F403
 sh = sheet("05_vsi.kicad_sch")
 
 # ---- v6: the inverter half bridges Q5..Q8 and the leg-B shunt R91 are on two power cards (sheet 2) ------------
-for ref, y in (("INU_OUT2", g(44)), ("J7", g(60))):
-    t = terminal(sh, ref, g(100), y, "right")
-    sh.no_connect(*t.pin(1))
+# J7 stays as a wire landing point (SW wire of the leg B card + lead of the inverter inductor J7 - J9). INU_OUT2 is
+# deleted (user 2026-11-24): the leg A card's SW wire lands on J10 directly.
+t = terminal(sh, "J7", g(100), g(60), "right")
+sh.no_connect(*t.pin(1))
 sh.text("v6: inverter leg A (Q5 / Q6) and leg B (Q7 / Q8) are half-bridge power cards (sheet 2).", g(20), g(92))
 
 # ---- R91 shunt, v6: at the output end of the inverter choke (V6_PLAN.md section 9), sensed by U4 (sheet 10) ---
@@ -22,7 +23,7 @@ sh.wire(r91.pin(3), right(r91.pin(3), 6)); sh.label("INDUCTOR_OUTPUT", *right(r9
 glabel_right(sh, "INU_CHOKE", r91.pin(4), 6)
 sh.text("R91 2 mOhm shunt, v6: 4 = INU_CHOKE (choke lead on terminal J9), 3 = INDUCTOR_OUTPUT (output filter),", SX - g(16), SY + g(14))
 sh.text("1/2 = INU_SHUNT2/INU_SHUNT1 sense -> U4 (sheet 10), which floats on the filter node (line frequency).", SX - g(16), SY + g(17))
-sh.text("INU_OUT2 = SW wire of the leg-A card + output lead, J7 = SW wire of the leg-B card + inductor lead: no copper.", g(20), g(95))
+sh.text("J7 = SW wire of the leg-B card + lead of the inverter inductor (J7 - J9); the leg-A card's SW wire lands on J10.", g(20), g(95))
 
 # ---- output filter ---------------------------------------------------------------------------
 X0, TOP, BOT = g(170), g(40), g(48)

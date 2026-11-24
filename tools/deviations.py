@@ -93,8 +93,11 @@ def gone_vias():
 
 
 def removed():
-    """refdes of Proteus parts deleted in v5 (kind remove)."""
-    return {r["ref"] for r in rows() if r["kind"] == "remove"}
+    """Refdes of removed parts, in the KiCad naming and, for a renamed part (AFE_OUT -> AFE_OUT1), also in the
+    Proteus naming, so that callers keyed by either find it (v6 deletes the renamed AFE_OUT1)."""
+    gone = {r["ref"] for r in rows() if r["kind"] == "remove"}
+    back = {k: p for p, k in refdes_map().items()}
+    return gone | {back[g] for g in gone if g in back}
 
 
 def renames():
