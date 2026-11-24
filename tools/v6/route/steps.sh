@@ -21,9 +21,9 @@ PW=(--power-nets ISOGND 3V3_ISO 15V_ISO 5V_ISOL GND VCC 5V 15V CTRLGND_A 3V3_CTR
     --power-nets-widths 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4)
 SUPC=(--layers F.Cu In3.Cu B.Cu In1.Cu In2.Cu In4.Cu --layer-costs 1 2 1 3 3 3)
 n=14
-for net in ISOGND 3V3_ISO 15V_ISO 5V_ISOL; do rstep $n "sup_$net" I 600 $HV "$net" "${SUPC[@]}" "${PW[@]}" --quick; n=$((n + 1)); done
-for net in GND VCC 5V 15V; do rstep $n "sup_$net" P 600 $HV "$net" "${SUPC[@]}" "${PW[@]}" --quick; n=$((n + 1)); done
-rstep 22 sup_ctrl C 600 $HV "CTRLGND_A,3V3_CTRL,CTRLGND,5V_CTRL,5V_CTRL_A" "${SUPC[@]}" "${PW[@]}" --quick
+for net in ISOGND 3V3_ISO 15V_ISO 5V_ISOL; do rstep $n "sup_$net" I 600 $HV "$net" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000; n=$((n + 1)); done
+for net in GND VCC 5V 15V; do rstep $n "sup_$net" P 600 $HV "$net" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000; n=$((n + 1)); done
+rstep 22 sup_ctrl C 600 $HV "CTRLGND_A,3V3_CTRL,CTRLGND,5V_CTRL,5V_CTRL_A" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000
 rstep 23 u6_supply I 300 $HV "Net-(D17-K),ISO_DAB_SDM_RAW_VOLTAGE" "${SIG3[@]}"
 
 # --- rule 3, part 3: card PWM per card group --------------------------------------------------------------------------
@@ -61,5 +61,5 @@ LATE=late rstep 43 sense_p P 600 $SENSE "SHUNT1,SHUNT2,Net-(U5-VIN+),Net-(U5-VIN
     --layers B.Cu F.Cu In3.Cu --layer-costs 1 1.5 3 --power-nets AFE_CHOKE1 "/01 afe/LEMOUT" --power-nets-widths 2.0 2.0
 LATE=late rstep 44 sense_i I 900 $SENSE "INU_SHUNT1,INU_SHUNT2,Net-(U4-VIN+),Net-(U4-VIN-),ISO_AFE_SDM_RAW_VOLTAGE,Net-(D9-K),INU_CHOKE,/05 VSI/INDUCTOR_OUTPUT" \
     --layers In3.Cu F.Cu B.Cu --layer-costs 1 2 4 --power-nets INU_CHOKE "/05 VSI/INDUCTOR_OUTPUT" --power-nets-widths 2.0 2.0
-LATE=late rstep 45 sense_lv_p P 600 $HV "Net-(U5-MDAT),GND,VCC,5V" "${SUPC[@]}" "${PW[@]}" --quick
-LATE=late rstep 46 sense_lv_i I 600 $HV "Net-(U4-MDAT),ISOGND,3V3_ISO,5V_ISOL" "${SUPC[@]}" "${PW[@]}" --quick
+LATE=late rstep 45 sense_lv_p P 600 $HV "Net-(U5-MDAT),GND,VCC,5V" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000
+LATE=late rstep 46 sense_lv_i I 600 $HV "Net-(U4-MDAT),ISOGND,3V3_ISO,5V_ISOL" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000
