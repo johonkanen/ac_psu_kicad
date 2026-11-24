@@ -4,6 +4,33 @@
 
 Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## Where the work stopped (end of session 2026-11-24)
+
+- **State:** main = `v6-baseboard` (4134e5b, pushed by the planning session): v6 power-card baseboard, routing
+  pass 1 legal (check_all passes), **102 connections open**. Card: `johonkanen/hb_power_card`, branch `card-rev1`
+  (2d4ebeb, routed, R_off 10R).
+- **Pass 2 (approved by the planning session, Fable 2026-11-24), on a new branch `v6-routing-pass2` from
+  `v6-baseboard`; baseboard steps come into pushed pass branches by merge, never rebase:**
+  1. Baseboard step first: move **J37 west by 3 mm** (J38 stays); check the lug and wall rules and that the ISODC+
+     tongue still reaches J37 at full width. If a rule fails, move the pair 3 mm further apart the other way and
+     record which.
+  2. Chain order: the 52 open supply / ground connections first, **as plane vias, not tracks**; a pad without a legal
+     via site is listed with what blocks it, not routed around. Then the sigma-delta pairs drawn early (they worked
+     early in pass 1: ISO 184 / 186 mm, AFE 139 / 150 mm with guard tracks); the plane vias of step 07 after the J11
+     fan; open-layout corridor rows for the primary PWM / tap paths (x 7 ... 66, y -60 ... -19) so routed copper is
+     kept; supplies before the sense blocks are fenced.
+  3. Clean-up step at the end: the 46 dangling track ends and the dangling via in `reports/drc.json`.
+  4. Each legal pass: merge into `v6-baseboard`, check_all, tell the planning session (it fast-forwards main).
+  5. Limit: if pass 3 still leaves nets open, stop and propose one placement change.
+- Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
+  zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push (permission blocked in its
+  session), the user or the planning session pushes.
+- **Open questions for the user:** size and standing position of the inverter toroid (about 55 mm, upright) and the
+  place of the AFE choke (the two sense groups may move with them); pigtail wire gauge and M3 ring lug; B0512S
+  minimum load; IPC-2152 check or measurement of the ISO lane (20 K at 23 A estimated); U18 temperature at 450 V full
+  load (drain copper 171 mm2); double-pulse test of the card at 25 / 50 A; control card out when an ISO card east of
+  J11 is pulled; Infineon SPICE model of the IMLT65R020M2H to download by hand.
+
 ## Routing pass 1 merged: legal board, 102 connections pending (2026-11-24, `v6-baseboard`)
 
 **This is v6** (V6_PLAN.md): the baseboard for six half-bridge power cards (card repo `johonkanen/hb_power_card`,
