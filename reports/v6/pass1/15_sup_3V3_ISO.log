@@ -1,0 +1,6 @@
+  Single-ended:  0/1 routed
+  Multi-point:   23/26 pads connected (3 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed
+  Multi-point:   23/26 pads connected (3 FAILED)
+  not routed: {'net_name': '3V3_ISO', 'failed_pads': [{'x': 66.72, 'y': -40.15, 'component_ref': 'C122', 'pad_number': '1'}, {'x': -93.073, 'y': -60.771, 'component_ref': 'C37', 'pad_number': '2'}, {'x': -94.065, 'y': -65.72, 'component_ref': 'U4', 'pad_number': '8'}]}, {'net': '3V3_ISO', 'pairs_connected': 22, 'pairs_total': 25, 'outcome': 'open', 'open_subtype': 'partial'}

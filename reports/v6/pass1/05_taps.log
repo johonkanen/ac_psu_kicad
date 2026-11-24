@@ -1,0 +1,38 @@
+sdm: 5 keep-outs reserve the room of the late ISO link
+sdm: Net-(U7B--) tap 1 leg 1: 6.0 mm on In3.Cu, 3 segments [1 s]
+sdm: Net-(U7B--) tap 1 leg 2: 69.3 mm on In3.Cu, 6 segments [7 s]
+west: Net-(U7B--) tap 1 leg 3: straight, 18.4 mm
+west: Net-(U7B--) tap 1 leg 4: straight, 12.9 mm
+west: Net-(U7B--) tap 1 leg 5: straight, 1.4 mm
+sdm: Net-(U7B--) tap 1 leg 6: 26.0 mm on In1.Cu, 7 segments [-2 s]
+sdm: Net-(U7B-+) tap 2 leg 1: 8.4 mm on In3.Cu, 6 segments [1 s]
+sdm: Net-(U7B-+) tap 2 leg 2: 70.2 mm on In3.Cu, 8 segments [4 s]
+west: Net-(U7B-+) tap 2 leg 3: straight, 18.4 mm
+west: Net-(U7B-+) tap 2 leg 4: straight, 12.9 mm
+west: Net-(U7B-+) tap 2 leg 5: straight, 1.4 mm
+sdm: Net-(U7B-+) tap 2 leg 6: 33.0 mm on In1.Cu, 4 segments [1 s]
+sdm: Net-(U7A--) tap 3 leg 1: 15.9 mm on In3.Cu, 7 segments [1 s]
+sdm: Net-(U7A--) tap 3 leg 2: 71.0 mm on In3.Cu, 8 segments [4 s]
+west: Net-(U7A--) tap 3 leg 3: straight, 18.4 mm
+west: Net-(U7A--) tap 3 leg 4: straight, 12.9 mm
+west: Net-(U7A--) tap 3 leg 5: straight, 1.4 mm
+sdm: Net-(U7A--) tap 3 leg 6: 35.6 mm on In1.Cu, 4 segments [1 s]
+sdm: Net-(U7A-+) tap 4 leg 1: 16.6 mm on In3.Cu, 5 segments [1 s]
+sdm: Net-(U7A-+) tap 4 leg 2: 71.9 mm on In3.Cu, 9 segments [4 s]
+west: Net-(U7A-+) tap 4 leg 3: straight, 18.4 mm
+west: Net-(U7A-+) tap 4 leg 4: straight, 12.9 mm
+west: Net-(U7A-+) tap 4 leg 5: straight, 1.4 mm
+sdm: Net-(U7A-+) tap 4 leg 6: 40.6 mm on In1.Cu, 4 segments [1 s]
+sdm: Net-(U2--) tap 5 leg 1: 19.5 mm on In3.Cu, 7 segments [1 s]
+sdm: Net-(U2--) tap 5 leg 2: 72.7 mm on In3.Cu, 9 segments [4 s]
+west: Net-(U2--) tap 5 leg 3: straight, 18.4 mm
+west: Net-(U2--) tap 5 leg 4: straight, 12.9 mm
+west: Net-(U2--) tap 5 leg 5: straight, 1.4 mm
+sdm: Net-(U2--) tap 5 leg 6: 58.4 mm on In1.Cu, 5 segments [1 s]
+sdm: Net-(U2-+) tap 6 leg 1: 26.0 mm on In3.Cu, 10 segments [3 s]
+sdm: Net-(U2-+) tap 6 leg 2: 73.6 mm on In3.Cu, 10 segments [2 s]
+west: Net-(U2-+) tap 6 leg 3: straight, 18.4 mm
+west: Net-(U2-+) tap 6 leg 4: straight, 12.9 mm
+west: Net-(U2-+) tap 6 leg 5: straight, 1.4 mm
+sdm: Net-(U2-+) tap 6 leg 6: 58.6 mm on In1.Cu, 4 segments [1 s]
+sdm: taps drawn: 6 of 6; 23 HV keep-outs at their west ends

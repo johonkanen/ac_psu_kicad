@@ -1,0 +1,12 @@
+total 103
+   5  DC buses and pour stitching: ISOPGND 3, DC+ 1, PGND 1
+   4  Current-sense groups, U29 / U30, D17 / R257 (side-1 HV nets): INDUCTOR_OUTPUT 1, ISO_DAB_SDM_RAW_VOLTAGE 1, SHUNT1 1, Net-(U5-MDAT) 1
+   7  Sigma-delta links (drawn): MDATA 2, ADCLK 2, INU_ADCLK_U21 1, INU_ADCLK 1, MDATA_INU 1
+  26  Primary supplies and grounds (headers J21..J23, U29, U5): GND 17, 5V 4, VCC 3, 15V 2
+  26  ISO supplies and grounds (headers J24..J26, U30, U4, relay): ISOGND 17, 5V_ISOL 4, 3V3_ISO 3, 15V_ISO 2
+   9  Card PWM, primary (U13 / U15 / U16 -> J21 / J22 / J23): PWM_G3 1, PWM_G4 1, PWM_TRANS2 1, PWM_G1 1, PWM_G2 1, PWM_TRANS1 1, DAB_PWM_PRI_HI 1, DAB_PWM_PRI_LO 1, PWM_TRANS3 1
+   3  Card PWM, ISO (U19 / U20 -> J24 / J25 / J26): PWM_Q7 1, PWM_Q8 1, DAB_PWM_LO_SEC 1
+   5  ISO runs west of J11 (divider taps, relay): Net-(U2-+) 1, Net-(U2--) 1, Net-(U7A--) 1, Net-(U7B--) 1, Net-(U7A-+) 1
+   1  Primary logic (ADC, reference, isolator P side): CLK1 1
+   4  ISO logic (U22..U24 inputs, U6, reference, DAB sense): MDATA_DAB 1, DAB_SHUNT2 1, REF_1V65_ISO 1, ADCLK_DAB 1
+  13  CTRL area under the control card (J11 / J12 fan-outs, analog chain, buck, CTRL supplies): ISOADA1_CTRL 1, MDATA_ISO 1, GPIO_BYPASS_RLY_ISOLATED 1, ADASEL2_ISO 1, PWM_TRANS1_ISO 1, PWM_TRANS4_CTRL 1, DAB_PWM_HI_SEC_CTRL 1, DAB_PWM_LO_SEC_CTRL 1, PWM_Q6_CTRL 1, INU_ADCLK_CTRL 1, PWM_Q8_CTRL 1, PWM_TRANS5_CTRL 1, PWM_Q7_CTRL 1

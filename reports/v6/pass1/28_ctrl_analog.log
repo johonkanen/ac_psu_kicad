@@ -1,0 +1,8 @@
+  Single-ended:  19/20 routed
+  Multi-point:   35/36 pads connected (1 FAILED)
+  Total vias:    28
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  19/20 routed (1 FAILED)
+  Multi-point:   33/33 pads connected
+  not routed: ISOADA1_CTRL, {'net': 'ISOADA1_CTRL', 'pairs_connected': 1, 'pairs_total': 2, 'outcome': 'open', 'open_subtype': 'unrouted'}

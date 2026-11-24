@@ -1,0 +1,9 @@
+== route 02: aux fixes
+  DC+ via of R98-1 moved (68.04, -49.7) -> (67.6, -51.4) (out of the pad)
+  track B.Cu DC+ w0.6: (68.037,-50.000)-(68.037,-50.800)
+  track B.Cu DC+ w0.6: (68.037,-50.800)-(67.600,-51.400)
+  pour keep-out v6 route HV keep-out R98-1 via In1.Cu In1.Cu circle r2.829 at (67.600,-51.400)
+  pour keep-out v6 route HV keep-out R98-1 via In2.Cu In2.Cu circle r2.829 at (67.600,-51.400)
+  pour keep-out v6 route HV keep-out R98-1 via In3.Cu In3.Cu circle r2.829 at (67.600,-51.400)
+  pour keep-out v6 route HV keep-out R98-1 via In4.Cu In4.Cu circle r2.829 at (67.600,-51.400)
+  pour keep-out v6 route HV keep-out R98-1 via B.Cu B.Cu circle r2.829 at (67.600,-51.400)

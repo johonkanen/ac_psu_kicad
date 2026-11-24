@@ -1,0 +1,6 @@
+  Single-ended:  0/1 routed
+  Multi-point:   14/15 pads connected (1 FAILED)
+  Total vias:    4
+  Single-ended:  0/1 routed
+  Multi-point:   14/15 pads connected (1 FAILED)
+  not routed: {'net_name': '15V', 'failed_pads': [{'x': 50.225, 'y': 55.0, 'component_ref': 'C150', 'pad_number': '1'}]}, {'net': '15V', 'pairs_connected': 13, 'pairs_total': 14, 'outcome': 'open', 'open_subtype': 'partial'}

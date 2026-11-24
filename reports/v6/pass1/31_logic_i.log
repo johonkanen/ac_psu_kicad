@@ -1,0 +1,8 @@
+  Single-ended:  7/10 routed (3 FAILED)
+  Multi-point:   19/19 pads connected (5 nets)
+  Total vias:    6
+  Single-ended:  0/3 routed (3 FAILED)
+  Total vias:    0
+  Single-ended:  7/10 routed (3 FAILED)
+  Multi-point:   25/25 pads connected
+  not routed: ADCLK_DAB, DAB_SHUNT2, MDATA_DAB, {'net': 'ADCLK_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_SHUNT2', 'pairs_connected': 6, 'pairs_total': 7, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'MDATA_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}

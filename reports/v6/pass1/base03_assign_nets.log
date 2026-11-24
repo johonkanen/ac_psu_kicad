@@ -1,0 +1,16 @@
+assign_nets: after zone fill: 683 groups, 0 shorts, 11 orphans, 0 opens, 3 items with a foreign net; 145 v5 opens pending GUI layout
+assign_nets:  orphan group 2288 (2 track, 1 via) net from vias ['PWM_G1']: track F.Cu(65.869,-22.164)-(65.869,-19.281)
+assign_nets:  orphan group 2507 (3 track) net from vias -: track In2.Cu(42.142,-19.875)-(34.517,-27.500)
+assign_nets:  orphan group 2727 (8 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
+assign_nets:  orphan group 3094 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#0
+assign_nets:  orphan group 3095 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#1
+assign_nets:  orphan group 3096 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#2
+assign_nets:  orphan group 3097 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#3
+assign_nets:  orphan group 3098 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#4
+assign_nets:  orphan group 3099 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#5
+assign_nets:  orphan group 3100 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#6
+assign_nets:  orphan group 3101 (1 zone) net from vias -: zone v5 card CA In2.Cu 3V3_CTRL In2.Cu#7
+assign_nets:  track In2.Cu(42.142,-19.875)-(34.517,-27.500): net 'MDATA', group has no pad
+assign_nets:  track In2.Cu(34.517,-27.500)-(6.000,-27.500): net 'MDATA', group has no pad
+assign_nets:  track In2.Cu(6.000,-27.500)-(4.896,-28.604): net 'MDATA', group has no pad
+assign_nets: FAILED (report reports/assign_nets.txt)

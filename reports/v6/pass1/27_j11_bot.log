@@ -1,0 +1,6 @@
+  Single-ended:  6/14 routed (5 FAILED, 3 OPEN)
+  Total vias:    13
+  Single-ended:  0/8 routed (8 FAILED)
+  Total vias:    0
+  Single-ended:  6/14 routed (8 FAILED)
+  not routed: DAB_PWM_HI_SEC_CTRL, DAB_PWM_LO_SEC_CTRL, INU_ADCLK_CTRL, PWM_Q6_CTRL, PWM_Q7_CTRL, PWM_Q8_CTRL, PWM_TRANS4_CTRL, PWM_TRANS5_CTRL, {'net': 'DAB_PWM_HI_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_PWM_LO_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'INU_ADCLK_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'PWM_Q6_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net'

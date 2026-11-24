@@ -1,0 +1,16 @@
+{
+  "_comment": "v6 baseboard routing pass 1 (tools/v6/route/chain.sh). Rules as the v5 passes: 0.2 mm tracks, 0.15 mm clearance, 0.4572 / 0.3 vias, 0.05 mm grid. Per-net 2.5 mm high-voltage clearances: hv_clearances.json (route steps), sense_clearances.json (the side-1 HV nets of U4 / U5 among themselves).",
+  "project": "../../../kicad/ac_psu",
+  "krt": "~/dev/KiCadRoutingTools",
+  "route_args": ["--track-width", "0.2", "--via-size", "0.4572", "--via-drill", "0.3", "--clearance", "0.15",
+                 "--grid-step", "0.05", "--escalation", "off", "--no-fix-drc-settings", "--keep-input-copper",
+                 "--max-iterations", "6000000"],
+  "default_layer_costs": [1, 1.5, 1],
+  "planes": {"In1.Cu": ["CTRLGND_A", "CTRLGND", "ISOGND", "GND"],
+             "In2.Cu": ["3V3_CTRL", "5V_CTRL", "3V3_ISO", "VCC", "GND"],
+             "In4.Cu": ["CTRLGND_A", "CTRLGND", "ISOGND", "GND"]},
+  "signal_layers": ["F.Cu", "In3.Cu", "B.Cu"],
+  "power_nets": ["GND", "PGND", "VCC", "CTRLGND", "CTRLGND_A", "ISOGND", "ISOPGND", "ISODC+", "DC+", "3V3_CTRL",
+                 "3V3_ISO", "5V_CTRL", "5V_CTRL_A", "5V_ISOL", "15V", "15V_ISO", "5V", "DAB_GROUND"],
+  "groups": {}
+}

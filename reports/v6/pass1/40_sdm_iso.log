@@ -1,0 +1,5 @@
+sdm: 5 reserve keep-outs removed
+sdm: 12 old tracks / vias of ADCLK, INU_ADCLK, INU_ADCLK_U21, MDATA, MDATA_INU deleted
+sdm: 3V3_ISO east, plane -> x 40.4: 24.6 mm on In3.Cu, 5 segments [0 s]
+sdm: MDATA_INU east, U21 -> x 40.4: NO PATH on In3.Cu from (73.44, 38.88) to (40.40, 54.21) [1 s]
+sdm: 0 HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours

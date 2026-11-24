@@ -1,0 +1,71 @@
+== resume from 42_sense_replay.kicad_pcb
+== 43 sense_p (domain P, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   9/10 pads connected (1 FAILED)
+     Total vias:    0
+     Single-ended:  4/5 routed
+     Multi-point:   27/28 pads connected (1 FAILED)
+     not routed: {'net_name': 'SHUNT1', 'failed_pads': [{'x': -36.656, 'y': 67.999, 'component_ref': 'R58', 'pad_number': '2'}]}, {'net': 'SHUNT1', 'pairs_connected': 8, 'pairs_total': 9, 'outcome': 'open', 'open_subtype': 'partial'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 46; unconnected 94; parity 0
+   total 94
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/43_sense_p.kicad_pcb
+   189 s
+== 44 sense_i (domain I, 900 s)
+     Single-ended:  4/4 routed
+     Multi-point:   24/24 pads connected (4 nets)
+     Total vias:    7
+     Single-ended:  4/4 routed
+     Multi-point:   24/24 pads connected
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 46; unconnected 81; parity 0
+   total 81
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/44_sense_i.kicad_pcb
+   418 s
+== 45 sense_lv_p (domain P, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 46; unconnected 81; parity 0
+   total 81
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/45_sense_lv_p.kicad_pcb
+   610 s
+== 46 sense_lv_i (domain I, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 46; unconnected 81; parity 0
+   total 81
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/46_sense_lv_i.kicad_pcb
+   609 s
+== 47 confine
+21:07:07: Debug: Adding duplicate image handler for 'PNG file'
+21:07:07: Debug: Adding duplicate image handler for 'JPEG file'
+21:07:07: Debug: Adding duplicate image handler for 'TIFF file'
+21:07:07: Debug: Adding duplicate image handler for 'GIF file'
+21:07:07: Debug: Adding duplicate image handler for 'PNM file'
+21:07:07: Debug: Adding duplicate image handler for 'PCX file'
+21:07:07: Debug: Adding duplicate image handler for 'IFF file'
+21:07:07: Debug: Adding duplicate image handler for 'Windows icon file'
+21:07:07: Debug: Adding duplicate image handler for 'Windows cursor file'
+21:07:07: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+21:07:07: Debug: Adding duplicate image handler for 'TGA file'
+21:07:07: Debug: Adding duplicate image handler for 'XPM file'
+21:07:07: Debug: Adding duplicate image handler for 'WebP file'
+confine: 144 new tracks / vias outside the open-layout rows deleted: 15V (40) 15V_ISO (5) DAB_PWM_PRI_LO (4) INDUCTOR_OUTPUT (7) Net-(U2-+) (2) Net-(U2--) (4) Net-(U7A-+) (4) Net-(U7A--) (3) Net-(U7B--) (3) PWM_G1 (53) PWM_G2 (1) PWM_G3 (6) PWM_G4 (3) PWM_Q7 (2) PWM_TRANS1 (2) PWM_TRANS2 (1) PWM_TRANS3 (4)
+confine: 180 new items left dangling pulled back in 10 rounds: 15V_ISO (2) 3V3_CTRL (1) 3V3_ISO (4) ADASEL2_ISO (7) CTRLGND_A (3) DAB_PWM_LO_SEC (10) DAB_PWM_PRI_HI (10) DAB_PWM_PRI_LO (16) GPIO_BYPASS_RLY_ISO (1) GPIO_BYPASS_RLY_ISOLATED (2) INDUCTOR_OUTPUT (2) INU_ADCLK_CTRL (2) ISOADA1_CTRL (2) MDATA_ISO (2) Net-(U2-+) (1) Net-(U2--) (1) Net-(U5-VIN-) (2) Net-(U7A-+) (1) Net-(U7A--) (1) Net-(U7B--) (10) PWM_G1 (2) PWM_G2 (11) PWM_G3 (11) PWM_G4 (9) PWM_Q7 (8) PWM_Q8 (7) PWM_Q8_CTRL (4) PWM_TRANS1 (12) PWM_TRANS1_ISO (5) PWM_TRANS2 (14) PWM_TRANS3 (15) PWM_TRANS6 (1) REF_1V65_ISO (1)
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 51; unconnected 104; parity 0
+   total 104
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/47_confine.kicad_pcb
+   29 s
+clear: 0 temporary keep-outs removed
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 51; unconnected 104; parity 0
+   total 104
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/99_final.kicad_pcb
+chain: 1863 s

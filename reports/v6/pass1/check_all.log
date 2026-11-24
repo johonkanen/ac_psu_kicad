@@ -1,0 +1,157 @@
+== KiCad environment
+pcbnew 10.0.7
+== IPC-D-356A parser self-check
+ipc356: nets=208, records=1075, refdes_raw=265, tht_records=562, smd_records=513, smd_top=341, smd_bottom=172, nc_pads=34, vias=173, free_pads=0, holes=4, parts=267
+ipc356: OK
+== Gerber X2 export vs IPC (pads, vias, drills, outline)
+  14 gerbers, one SameCoordinates id
+  Top Copper: Draw:Conductor 5311, Draw:NonConductor 3, Draw:Profile 4, Flash:ComponentPad 385, Flash:OtherPad,Unknown 4, Flash:SMDPad,CuDef 341, Flash:ViaPad 173, Region:- 187
+  Inner  1: Draw:Conductor 2520, Draw:Profile 4, Flash:ComponentPad 385, Flash:OtherPad,Unknown 4, Flash:ViaPad 173, Region:- 136
+  Inner  2: Draw:Conductor 3061, Draw:Profile 4, Flash:ComponentPad 385, Flash:OtherPad,Unknown 4, Flash:ViaPad 173, Region:- 128
+  Bottom Copper: Draw:Conductor 3468, Draw:Profile 4, Flash:ComponentPad 385, Flash:OtherPad,Unknown 4, Flash:SMDPad,CuDef 172, Flash:ViaPad 173, Region:- 95
+  drills: 562 plated, 0 non-plated
+  outline 246.8 x 154.7 mm at (-128.20, -83.00)
+check_sources: OK
+== Symbol library up to date
+gen_symbols: lib/ac_psu.kicad_sym up to date (60 symbols)
+== Symbol pin sets vs IPC (+ v4 deviations)
+  2N7000                 2  pins  3  Q13 Q14
+  ADS7056                1  pins  8  AD1
+  ADUM7701-8BRIZ         3  pins  8  U4 U5 U6
+  AMC1311                3  pins  8  U22 U23 U24
+  B05XXS                 2  pins  4  U29 U30
+  C                    138  pins  2  C2 C3 C4 C5 C6 C7 C9 C10 ...
+  CA-IS3742              1  pins 16  U21
+  CONN_2                 2  pins  2  J13 J14
+  CTRL_WINDING           1  pins  2  W1
+  C_Polarized           12  pins  2  C8 C11 C12 C15 C28 C61 C72 C79 ...
+  D                      4  pins  2  D11 D12 D14 D15
+  D_Schottky             5  pins  2  D3 D4 D5 D10 D16
+  D_TVS                  1  pins  2  D13
+  D_Zener                3  pins  2  D8 D9 D17
+  EEL19_AUX_TRANS        1  pins  6  T1
+  ETD34_TRAN_1P1S        1  pins  4  TR1
+  FKK5R0020FE-TR         3  pins  4  R48 R64 R91
+  HDR_2X5                6  pins 10  J21 J22 J23 J24 J25 J26
+  HEADER_2X3_43_48       1  pins  6  J12
+  HEADER_38_50MIL        1  pins 38  J11
+  ICE5AR0680AG           1  pins 12  U18
+  ISO7760F               2  pins 16  U19 U20
+  L                      2  pins  2  L1 L2
+  OPA2350EA              2  pins  8  U25 U26
+  OPA2353UA              2  pins  8  U1 U7
+  PIN                   32  pins  1  ACIN1 ACIN2 ACOUT1 ACOUT2 FILTER_IN1 FILTER_OUT1 J5 J7 ...
+  R                    123  pins  2  R1 R2 R3 R4 R5 R6 R7 R8 ...
+  REF3025                2  pins  3  REF1 REF2
+  RESISTOR_ARRAY_4       1  pins  8  R87
+  SLA-12VDC-SL-A         2  pins  5  R20 R79
+  SN74LV4051             1  pins 16  U11
+  Si8660BD-B-IS          1  pins 16  U16
+  Si8661BD-B-IS          2  pins 16  U13 U15
+  TLV316IDBVR            3  pins  5  U2 U12 U14
+  TPS54202               1  pins  6  U28
+  TPS73033DBVT           3  pins  5  U3 U10 U27
+  VXO7805-1000           1  pins  3  U8
+  VXO7805-500            1  pins  3  U9
+  WE-CMBNC               3  pins  4  CM1 CM2 CM3
+symbols: 39 part types, 376 refdes, 18 power symbols, unused: C3M0065090D HB_GT_CONNECTOR
+symbols: OK
+== ERC
+erc: 0 errors, 10 warnings (reports/erc.rpt)
+== Netlist comparison vs IPC (+ v4 deviations)
+v4/v5 deviations: 2 net merges, 2 net renames, 3 refdes renames, 47 pin moves, 60 removed parts, 164 new parts (460 pins), 178 values, 10 footprints, 69 moved parts; copper: 20 new vias, 74 changed areas, 1 pending-layout areas, 10 unrouted areas
+compare_v4: 178 deviation values checked against the schematic
+compare: parts 375/375 present, 0 missing, 0 extra; pins compared 1040, wrong-net pins 0; IPC nets touched 266, complete 266
+compare: per sheet (drawn/total) 1:47/47 2:32/32 3:22/22 4:41/41 5:44/44 7:58/58 8:29/29 9:12/12 10:27/27 11:63/63
+compare: OK
+== Footprint library and map up to date
+gen_footprints: 375 parts, 57 footprints (37 project), up to date
+== Footprints vs IPC pad geometry
+check_footprints: pcbnew placement of 201 parts, worst pad offset 0.030 mm
+check_footprints: 201/267 parts fitted, 575 pads, 32 footprints, worst residual 0.030 mm (limit 0.05); v4 parts without IPC pads (footprint/pads checked): C100 C101 C102 C103 C104 C105 C106 C107 C108 C109 C110 C111 C112 C113 C114 C116 C117 C118 C119 C120 C121 C122 C123 C124 C125 C126 C127 C128 C129 C130 C131 C132 C133 C134 C135 C136 C137 C138 C139 C140 C141 C142 C143 C144 C145 C146 C147 C148 C149 C150 C151 C152 C153 C154 C155 C156 C157 C158 C159 C160 C161 C162 C163 C88 C89 C90 C91 C92 C93 C94 C95 C96 C97 C98 C99 D11 D12 D13 D14 D15 D16 D17 J13 J14 J21 J22 J23 J24 J25 J26 J31 J32 J33 J34 J35 J36 J37 J38 J39 J40 J41 J42 L2 PEC1 PEC2 R100 R101 R102 R105 R108 R109 R110 R111 R112 R113 R114 R115 R116 R117 R118 R119 R120 R121 R122 R123 R124 R125 R126 R127 R128 R129 R130 R131 R132 R133 R134 R135 R136 R137 R138 R139 R140 R141 R142 R143 R144 R257 R258 R98 T1 U18 U19 U20 U21 U22 U23 U24 U25 U26 U27 U28 U29 U30 W1; v4 footprint swaps (pad numbers checked): FILTER_IN1 FILTER_OUT1 J10 J5 J7 J9 PE2 PE3 PE4 PE8
+check_footprints: OK
+== Board pads, holes, vias vs IPC (+ v4 deviations)
+check_board: v4 pads without Proteus pad (nets checked): R136-1@(68.037,-7.700) R136-2@(70.963,-7.700) R142-1@(72.838,-5.300) R142-2@(75.763,-5.300) C156-1@(59.225,45.500) C156-2@(60.775,45.500) R137-1@(72.838,-7.700) R137-2@(75.763,-7.700) C101-1@(94.787,6.530) C101-2@(94.787,5.570) J22-1@(51.210,-60.135) J22-2@(51.210,-58.865) J22-3@(52.480,-60.135) J22-4@(52.480,-58.865) J22-5@(53.750,-60.135) J22-6@(53.750,-58.865) J22-7@(55.020,-60.135) J22-8@(55.020,-58.865) J22-9@(56.290,-60.135) J22-10@(56.290,-58.865) C158-1@(91.725,45.500) C158-2@(93.275,45.500) J38-1@(22.230,49.270) J38-1@(22.230,46.730) J38-1@(24.770,49.270) J38-1@(24.770,46.730) R131-1@(116.600,-22.562) R131-2@(116.600,-19.637) C140-1@(115.525,-0.100) C140-2@(117.075,-0.100) J14-1@(69.000,23.500) J14-2@(71.540,23.500) C120-1@(89.515,40.150) C120-2@(90.475,40.150) D11-A@(78.900,-20.500) D11-C@(76.300,-20.500) C143-1@(108.425,-22.700) C143-2@(111.375,-22.700) C144-1@(114.150,-8.925) C144-2@(114.150,-7.375) C129-1@(48.600,25.120) C129-2@(48.600,26.080) C108-1@(105.987,14.517) C108-2@(105.987,13.557) J39-1@(75.000,55.750) PEC1-1@(51.000,17.600) J40-1@(83.500,55.750) C111-1@(77.525,-52.600) C111-2@(80.475,-52.600) PEC2-1@(105.600,-30.750) R141-1@(68.037,-5.300) R141-2@(70.963,-5.300) C159-1@(96.725,45.500) C159-2@(98.275,45.500) R135-1@(109.600,0.025) R135-2@(109.600,1.675) J25-1@(59.960,49.665) J25-2@(59.960,50.935) J25-3@(61.230,49.665) J25-4@(61.230,50.935) J25-5@(62.500,49.665) J25-6@(62.500,50.935) J25-7@(63.770,49.665) J25-8@(63.770,50.935) J25-9@(65.040,49.665) J25-10@(65.040,50.935) J21-1@(1.460,-51.135) J21-2@(1.460,-49.865) J21-3@(2.730,-51.135) J21-4@(2.730,-49.865) J21-5@(4.000,-51.135) J21-6@(4.000,-49.865) J21-7@(5.270,-51.135) J21-8@(5.270,-49.865) J21-9@(6.540,-51.135) J21-10@(6.540,-49.865) J42-1@(113.100,55.750) C150-1@(50.225,-55.000) C150-2@(51.775,-55.000) C122-1@(66.720,40.150) C122-2@(67.680,40.150) R128-1@(48.600,23.090) R128-2@(48.600,24.110) C128-1@(91.795,25.005) C128-2@(92.755,25.005) R100-1@(82.025,-20.500) R100-2@(80.375,-20.500) R133-1@(114.600,-21.325) R133-2@(114.600,-19.675) C139-1@(112.100,-9.625) C139-2@(112.100,-6.675) J32-1@(1.730,-59.030) J32-1@(1.730,-61.570) J32-1@(4.270,-59.030) J32-1@(4.270,-61.570) C149-1@(5.225,-46.000) C149-2@(6.775,-46.000) C110-1@(114.443,12.395) C110-2@(113.483,12.395) C151-1@(55.725,-55.000) C151-2@(57.275,-55.000) J24-1@(13.265,47.340) J24-2@(14.535,47.340) J24-3@(13.265,46.070) J24-4@(14.535,46.070) J24-5@(13.265,44.800) J24-6@(14.535,44.800) J24-7@(13.265,43.530) J24-8@(14.535,43.530) J24-9@(13.265,42.260) J24-10@(14.535,42.260) R129-1@(50.200,23.090) R129-2@(50.200,24.110) C126-1@(91.795,31.605) C126-2@(92.755,31.605) T1-1@(81.150,-33.350) T1-2@(81.150,-36.850) T1-9@(93.650,-34.550) T1-10@(93.650,-31.850) T1-11@(76.800,-48.900) T1-12@(76.800,-44.100) C152-1@(92.725,-63.300) C152-2@(94.275,-63.300) C102-1@(100.987,4.280) C102-2@(100.987,3.320) C109-1@(78.640,-1.080) C109-2@(78.640,-0.120) U28-1@(111.650,-0.287) U28-2@(112.600,-0.287) U28-3@(113.550,-0.287) U28-4@(113.550,1.988) U28-5@(112.600,1.988) U28-6@(111.650,1.988) D16-A@(113.050,-25.800) D16-C@(108.950,-25.800) C103-1@(95.687,10.257) C103-2@(95.687,11.217) C148-1@(1.225,-46.000) C148-2@(2.775,-46.000) C130-1@(50.200,25.120) C130-2@(50.200,26.080) C154-1@(8.500,40.725) C154-2@(8.500,42.275) R134-1@(108.000,0.025) R134-2@(108.000,1.675) C105-1@(99.857,9.037) C105-2@(100.817,9.037) J41-1@(104.600,55.750) W1-1@(110.060,-31.600) W1-2@(115.140,-31.600) J31-1@(12.230,-59.030) J31-1@(12.230,-61.570) J31-1@(14.770,-59.030) J31-1@(14.770,-61.570) R143-1@(77.638,-5.300) R143-2@(80.562,-5.300) C141-1@(115.525,1.700) C141-2@(117.075,1.700) J23-1@(88.010,-59.435) J23-2@(88.010,-58.165) J23-3@(89.280,-59.435) J23-4@(89.280,-58.165) J23-5@(90.550,-59.435) J23-6@(90.550,-58.165) J23-7@(91.820,-59.435) J23-8@(91.820,-58.165) J23-9@(93.090,-59.435) J23-10@(93.090,-58.165) C97-1@(54.230,-0.139) C97-2@(53.270,-0.139) C155-1@(8.500,43.725) C155-2@(8.500,45.275) R257-1@(99.537,41.366) R257-2@(102.462,41.366) J36-1@(102.430,-57.530) J36-1@(102.430,-60.070) J36-1@(104.970,-57.530) J36-1@(104.970,-60.070) R258-1@(76.500,42.375) R258-2@(76.500,44.025) R138-1@(77.638,-7.700) R138-2@(80.562,-7.700) J33-1@(76.130,-58.230) J33-1@(76.130,-60.770) J33-1@(78.670,-58.230) J33-1@(78.670,-60.770) C95-1@(54.230,-6.439) C95-2@(53.270,-6.439) C157-1@(64.225,45.500) C157-2@(65.775,45.500) C153-1@(95.725,-63.300) C153-2@(97.275,-63.300) J37-1@(32.730,49.270) J37-1@(32.730,46.730) J37-1@(35.270,49.270) J37-1@(35.270,46.730) J35-1@(112.930,-57.530) J35-1@(112.930,-60.070) J35-1@(115.470,-57.530) J35-1@(115.470,-60.070) R130-1@(51.800,23.090) R130-2@(51.800,24.110) C118-1@(78.565,40.150) C118-2@(79.525,40.150) J34-1@(65.630,-58.230) J34-1@(65.630,-60.770) J34-1@(68.170,-58.230) J34-1@(68.170,-60.770) C142-1@(108.425,-20.200) C142-2@(111.375,-20.200) C131-1@(51.800,25.120) C131-2@(51.800,26.080) R132-1@(113.050,-21.325) R132-2@(113.050,-19.675) J26-1@(92.160,49.665) J26-2@(92.160,50.935) J26-3@(93.430,49.665) J26-4@(93.430,50.935) J26-5@(94.700,49.665) J26-6@(94.700,50.935) J26-7@(95.970,49.665) J26-8@(95.970,50.935) J26-9@(97.240,49.665) J26-10@(97.240,50.935) D17-A@(103.300,39.000) D17-C@(100.700,39.000) J13-1@(117.000,-8.300) J13-2@(117.000,-10.840) C104-1@(95.687,13.117) C104-2@(95.687,12.157) R102-1@(78.450,-34.175) R102-2@(78.450,-32.525) C147-1@(75.975,-31.000) C147-2@(74.425,-31.000) C123-1@(95.245,15.155) C123-2@(96.205,15.155) C96-1@(50.200,-6.900) C96-2@(51.160,-6.900) C161-1@(-29.185,-65.487) C161-2@(-27.635,-65.487) U22-1@(93.325,15.155) U22-2@(93.325,13.885) U22-3@(93.325,12.615) U22-4@(93.325,11.345) U22-5@(82.675,11.345) U22-6@(82.675,12.615) U22-7@(82.675,13.885) U22-8@(82.675,15.155) R111-1@(97.175,10.900) R111-2@(98.825,10.900) C125-1@(104.620,31.605) C125-2@(105.580,31.605) C135-1@(65.400,20.725) C135-2@(65.400,22.275) U26-1@(74.388,25.025) U26-2@(74.388,25.675) U26-3@(74.388,26.325) U26-4@(74.388,26.975) U26-5@(78.612,26.975) U26-6@(78.612,26.325) U26-7@(78.612,25.675) U26-8@(78.612,25.025) R126-1@(81.075,23.000) R126-2@(82.725,23.000) R113-1@(106.975,28.800) R113-2@(108.625,28.800) C91-1@(-39.550,-69.200) C91-2@(-39.550,-66.250) U29-1@(-23.500,-77.715) U29-2@(-23.500,-75.175) U29-4@(-23.500,-70.095) U29-6@(-23.500,-65.015) D15-A@(95.050,-28.500) D15-C@(90.950,-28.500) C119-1@(89.515,28.950) C119-2@(90.475,28.950) R139-1@(79.875,-35.100) R139-2@(81.525,-35.100) U24-1@(102.925,25.005) U24-2@(102.925,23.735) U24-3@(102.925,22.465) U24-4@(102.925,21.195) U24-5@(92.275,21.195) U24-6@(92.275,22.465) U24-7@(92.275,23.735) U24-8@(92.275,25.005) R144-1@(78.300,-28.025) R144-2@(78.300,-26.375) R117-1@(73.175,16.900) R117-2@(74.825,16.900) C113-1@(73.600,-28.000) C113-2@(73.600,-22.400) R115-1@(106.975,22.200) R115-2@(108.625,22.200) U19-1@(68.095,30.850) U19-2@(66.825,30.850) U19-3@(65.555,30.850) U19-4@(64.285,30.850) U19-5@(63.015,30.850) U19-6@(61.745,30.850) U19-7@(60.475,30.850) U19-8@(59.205,30.850) U19-9@(59.205,40.150) U19-10@(60.475,40.150) U19-11@(61.745,40.150) U19-12@(63.015,40.150) U19-13@(64.285,40.150) U19-14@(65.555,40.150) U19-15@(66.825,40.150) U19-16@(68.095,40.150) C136-1@(61.525,24.100) C136-2@(63.075,24.100) C99-1@(61.950,-13.800) C99-2@(61.950,-14.760) R121-1@(84.275,27.600) R121-2@(85.925,27.600) C146-1@(78.450,-35.625) C146-2@(78.450,-37.175) R124-1@(87.475,23.000) R124-2@(89.125,23.000) R98-1@(68.037,-48.600) R98-2@(73.963,-48.600) R112-1@(106.975,30.500) R112-2@(108.625,30.500) C93-1@(90.565,-22.900) C93-2@(93.515,-22.900) R140-1@(78.300,-24.925) R140-2@(78.300,-23.275) R122-1@(87.475,25.300) R122-2@(89.125,25.300) R125-1@(84.275,23.000) R125-2@(85.925,23.000) C106-1@(104.130,11.800) C106-2@(104.130,10.840) C137-1@(109.400,-1.600) C137-2@(115.900,-1.600) C107-1@(98.560,14.820) C107-2@(99.520,14.820) L2-1@(108.550,-10.600) L2-2@(113.050,-10.600) C100-1@(59.810,-15.300) C100-2@(58.850,-15.300) C92-1@(110.075,33.000) C92-2@(107.125,33.000) C89-1@(57.600,-7.550) C89-2@(57.600,-8.510) C121-1@(67.615,28.950) C121-2@(68.575,28.950) C90-1@(-82.311,68.321) C90-2@(-79.361,68.321) R110-1@(97.175,12.600) R110-2@(98.825,12.600) R109-1@(90.300,-32.587) R109-2@(90.300,-34.413) R105-1@(81.600,-38.888) R105-2@(81.600,-41.812) C145-1@(78.300,-21.775) C145-2@(78.300,-20.225) C160-1@(-19.275,-66.000) C160-2@(-17.725,-66.000) C138-1@(109.400,-23.300) C138-2@(115.900,-23.300) C117-1@(78.565,28.950) C117-2@(79.525,28.950) C162-1@(-99.921,44.294) C162-2@(-98.371,44.294) R119-1@(73.175,14.600) R119-2@(74.825,14.600) R123-1@(84.275,25.300) R123-2@(85.925,25.300) R118-1@(76.375,14.600) R118-2@(78.025,14.600) C114-1@(70.825,-31.000) C114-2@(72.375,-31.000) D14-A@(81.050,-30.850) D14-C@(81.050,-26.750) U25-1@(75.888,18.925) U25-2@(75.888,19.575) U25-3@(75.888,20.225) U25-4@(75.888,20.875) U25-5@(80.112,20.875) U25-6@(80.112,20.225) U25-7@(80.112,19.575) U25-8@(80.112,18.925) C163-1@(-93.275,50.000) C163-2@(-91.725,50.000) U20-1@(89.995,30.850) U20-2@(88.725,30.850) U20-3@(87.455,30.850) U20-4@(86.185,30.850) U20-5@(84.915,30.850) U20-6@(83.645,30.850) U20-7@(82.375,30.850) U20-8@(81.105,30.850) U20-9@(81.105,40.150) U20-10@(82.375,40.150) U20-11@(83.645,40.150) U20-12@(84.915,40.150) U20-13@(86.185,40.150) U20-14@(87.455,40.150) U20-15@(88.725,40.150) U20-16@(89.995,40.150) C112-1@(73.475,-52.300) C112-2@(70.525,-52.300) U18-1@(76.175,-32.805) U18-2@(76.175,-34.075) U18-3@(76.175,-35.345) U18-4@(76.175,-36.615) U18-5@(76.175,-40.425) U18-6@(76.175,-41.695) U18-7@(71.225,-41.695) U18-8@(71.225,-40.425) U18-9@(71.225,-36.615) U18-10@(71.225,-35.345) U18-11@(71.225,-34.075) U18-12@(71.225,-32.805) C132-1@(73.400,19.420) C132-2@(73.400,20.380) R108-1@(80.088,-23.000) R108-2@(81.912,-23.000) U30-1@(-58.250,50.584) U30-2@(-58.250,53.124) U30-4@(-58.250,58.204) U30-6@(-58.250,63.284) D12-A@(80.900,-45.150) D12-C@(80.900,-49.250) C134-1@(61.520,18.500) C134-2@(62.480,18.500) C124-1@(79.795,15.155) C124-2@(80.755,15.155) C127-1@(104.620,25.005) C127-2@(105.580,25.005) D13-A@(77.050,-53.300) D13-C@(81.350,-53.300) C116-1@(93.000,-38.950) C116-2@(93.000,-45.450) C88-1@(59.600,-9.350) C88-2@(60.560,-9.350) R101-1@(78.300,-29.475) R101-2@(78.300,-31.125) R127-1@(81.075,25.300) R127-2@(82.725,25.300) R120-1@(87.475,27.600) R120-2@(89.125,27.600) U21-1@(79.045,30.850) U21-2@(77.775,30.850) U21-3@(76.505,30.850) U21-4@(75.235,30.850) U21-5@(73.965,30.850) U21-6@(72.695,30.850) U21-7@(71.425,30.850) U21-8@(70.155,30.850) U21-9@(70.155,40.150) U21-10@(71.425,40.150) U21-11@(72.695,40.150) U21-12@(73.965,40.150) U21-13@(75.235,40.150) U21-14@(76.505,40.150) U21-15@(77.775,40.150) U21-16@(79.045,40.150) U27-1@(60.862,20.550) U27-2@(60.862,21.500) U27-3@(60.862,22.450) U27-4@(63.138,22.450) U27-5@(63.138,20.550) U23-1@(102.925,31.605) U23-2@(102.925,30.335) U23-3@(102.925,29.065) U23-4@(102.925,27.795) U23-5@(92.275,27.795) U23-6@(92.275,29.065) U23-7@(92.275,30.335) U23-8@(92.275,31.605) C94-1@(96.080,-22.350) C94-2@(96.080,-24.250) R116-1@(76.375,16.900) R116-2@(78.025,16.900) C98-1@(51.200,1.580) C98-2@(51.200,0.620) C133-1@(76.020,23.600) C133-2@(76.980,23.600) R114-1@(106.975,23.900) R114-2@(108.625,23.900)
+check_board: 225 pads of 69 v5 moved parts (pad numbers and nets checked, not positions)
+check_board: 34 pads of 10 v4 footprint swaps in their terminal areas (nets checked): FILTER_IN1 FILTER_OUT1 J10 J5 J7 J9 PE2 PE3 PE4 PE8
+check_board: 379 footprints, 1092 pads, worst pad offset 0.030 mm (limit 0.05), 188 IPC nets mapped 1:1, 4 mounting holes, 0 cable-tie anchors
+check_board: 12 v4 vias (lib/v4_copper.csv) at their positions and nets
+check_board: 285 new vias and 8 deleted v4 vias in the unrouted areas (lib/v5_copper.csv)
+check_board: 109 Proteus vias deleted by v5 (pending-layout areas or cut v5 chains: #00242, #00244, #00269, #00270, #00275, #00276, #00343, #00344, 15V, 15V_ISO, 3V3_ISO, 5V, ADCLK, AUX_FB, DAB_PWM_HI_SEC, DAB_PWM_LO_SEC, DAB_PWM_PRI_HI, DAB_PWM_PRI_LO, GND, INU_ADCLK, ISOADA1, ISOADA2, ISOADA3, ISOGND, ISO_DAB_SDM_RAW_VOLTAGE, MDATA, MDATA_INU, PWM_G1, PWM_G2, PWM_G3, PWM_G4, PWM_Q5, PWM_Q7, PWM_TRANS1, PWM_TRANS2, PWM_TRANS3, PWM_TRANS4, PWM_TRANS6, REF_1V65, REF_1V65_ISO, VCC)
+check_board: 4299 tracks, 361 vias, 103 zones
+check_board: OK
+== Board copper connectivity after zone fill
+assign_nets: after zone fill: 373 groups, 0 shorts, 2 orphans, 0 opens, 3 items with a foreign net; 55 v5 opens pending GUI layout
+assign_nets:  orphan group 4752 (3 track) net from vias -: track In2.Cu(42.142,-19.875)-(34.517,-27.500)
+assign_nets:  orphan group 5042 (8 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
+assign_nets:  track In2.Cu(42.142,-19.875)-(34.517,-27.500): net 'MDATA', group has no pad
+assign_nets:  track In2.Cu(34.517,-27.500)-(6.000,-27.500): net 'MDATA', group has no pad
+assign_nets:  track In2.Cu(6.000,-27.500)-(4.896,-28.604): net 'MDATA', group has no pad
+assign_nets: FAILED (report reports/assign_nets.txt)
+!! FAILED: tools/p2k/bin/kipy tools/assign_nets.py --check
+== Domain net classes and DRC rules up to date
+domain_rules: 107 nets DOM_P, 85 DOM_I, 8 DOM_E, 64 DOM_C, 6 without domain
+domain_rules: OK
+== DRC with schematic parity
+drc: 487 violations, 0 shorts, 0 unconnected, 0 parity issues (reports/drc.json); 103 unconnected v5 items and 0 v5 clearance violations pending GUI layout
+drc:     35 error    courtyards_overlap  accepted: KiCad courtyards vs the Proteus placement
+drc:    199 warning  silk_overlap
+drc:    199 warning  silk_over_copper
+drc:     48 warning  track_dangling
+drc:      4 warning  silk_edge_clearance
+drc:      1 warning  via_dangling
+drc:      1 warning  lib_footprint_mismatch
+drc: OK
+== Insulation spacing between domains (IEC 61010-1: P-I 5.0 mm, P/I-PE 2.5 mm)
+domain_gaps: 0 violations (P<->I, P/I<->C >= 5.0 mm, P/I<->E >= 2.5 mm on every layer, no P/I/C overlap between adjacent layers)
+domain_gaps: OK
+== Card-area layout (domain areas, heights, card keep-outs, slots; V5_LAYOUT_PLAN.md)
+check_layout: v4 part U6 (SOIC-8W_7.5x5.85mm_P1.27mm_ADuM7701) is 2.8 mm on top under the card (fixed, as on the built board)
+check_layout: v4 parts under card tails (fixed, tails trimmed): C36 C74 C75 C76 C77 D17 H4 R257 R37 R64 R74 R75 U6
+check_layout: 158 placed / moved parts in their domain areas, 15 slots, 10 plane zones; 0 errors
+check_layout: OK
+== Power-card layout (envelope, terminals, lugs, control card; V6_PLAN.md section 5)
+check_layout_v6: J31: lug circle 2.50 mm from J32 lug
+check_layout_v6: J32: lug circle 2.50 mm from J31 lug
+check_layout_v6: J33: lug circle 2.50 mm from J34 lug
+check_layout_v6: J34: lug circle 2.50 mm from J33 lug
+check_layout_v6: J35: lug circle 2.50 mm from J36 lug
+check_layout_v6: J36: lug circle 2.50 mm from J35 lug
+check_layout_v6: J37: lug circle 2.50 mm from J38 lug
+check_layout_v6: J38: lug circle 2.50 mm from J37 lug
+check_layout_v6: accepted J25: body 18.66 mm from the wall (>= 20.0)
+check_layout_v6: accepted J26: body 18.66 mm from the wall (>= 20.0)
+check_layout_v6: OK
+== IPC-D-356 from the board vs Proteus (+ v4 deviations)
+ipc356_diff: 225 pads of 69 v5 moved parts (nets checked, not positions); 284 new vias and 8 deleted v4 vias in the unrouted areas
+ipc356_diff: Proteus 527 records, KiCad 1457; matched 419 (350 pads incl. 4 N/C, 65 vias, 4 holes), worst position offset 0.031 mm (limit 0.05)
+ipc356_diff: 108 Proteus vias deleted by v5 (pending-layout areas / cut v5 chains)
+ipc356_diff: 188 Proteus nets mapped 1:1 onto KiCad nets, 0 mismatches
+ipc356_diff: v4 deviations applied (v4/v5 deviations: 2 net merges, 2 net renames, 3 refdes renames, 47 pin moves, 60 removed parts, 164 new parts (460 pins), 178 values, 10 footprints, 69 moved parts; copper: 20 new vias, 74 changed areas, 1 pending-layout areas, 10 unrouted areas); 495 KiCad records of v4 parts/vias, 34 of v4 footprint swaps (10 Proteus pad records replaced), nets checked
+ipc356_diff: KiCad drill larger (footprint kept): 6x 0.558->0.65, 28x 0.812->1.001, 2x 1.01->1.199, 2x 1.016->1.199
+ipc356_diff: pads with another size in KiCad (info): C 68, D 8, J 6, R 116, U 16
+ipc356_diff: OK
+== Gerber round trip vs Proteus (copper, drills; v4 areas)
+roundtrip: F.Cu   XOR 4687.28 mm^2, beyond 0.05 mm: only Proteus 2854.48, only KiCad 1661.33 mm^2; clusters >= 0.01 mm^2: 487 pad shape, 28 clearance, 2 zone fill, 30 pour refill, 894 v4 deviation; draws/flashes off the other copper: 0 Proteus, 0 KiCad (+2487 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: In1.Cu XOR 5074.26 mm^2, beyond 0.05 mm: only Proteus 1567.84, only KiCad 3380.43 mm^2; clusters >= 0.01 mm^2: 312 pad shape, 1 clearance, 330 v4 deviation, 1 other; draws/flashes off the other copper: 1 Proteus, 0 KiCad (+745 inside v4 areas)
+roundtrip: In2.Cu XOR 5724.03 mm^2, beyond 0.05 mm: only Proteus 1727.92, only KiCad 3804.11 mm^2; clusters >= 0.01 mm^2: 303 pad shape, 7 clearance, 2 zone fill, 493 v4 deviation, 5 other; draws/flashes off the other copper: 3 Proteus, 0 KiCad (+952 inside v4 areas)
+roundtrip: B.Cu   XOR 6263.89 mm^2, beyond 0.05 mm: only Proteus 3794.87, only KiCad 2273.83 mm^2; clusters >= 0.01 mm^2: 586 pad shape, 10 clearance, 1 zone fill, 12 pour refill, 656 v4 deviation, 3 other; draws/flashes off the other copper: 1 Proteus, 0 KiCad (+2187 inside v4 areas) (+1 Proteus pour strokes inside zones)
+roundtrip: In1.Cu OTHER only Proteus 80.514 mm^2 at (43.713, -55.321), box x 1.03..110.85 y -63.95..-24.55, near C7-2 (DC+) 0.58 mm, via (PWM_G4) 4.87 mm
+roundtrip: In2.Cu OTHER only Proteus 30.200 mm^2 at (-27.780, -81.184), box x -55.32..-0.37 y -81.48..-80.05, near J5-1 (SHUNT1) 13.62 mm, via (GND) 44.09 mm
+roundtrip: In2.Cu OTHER only Proteus 4.437 mm^2 at (19.804, 36.414), box x 14.08..23.70 y 27.38..46.23, near J8-48 (20V_ISO_SEC) 14.57 mm, via (GPIO_BYPASS_RLY_ISO) 3.31 mm
+roundtrip: In2.Cu OTHER only Proteus 3.660 mm^2 at (19.232, 37.468), box x 14.20..22.30 y 29.52..45.67, near J8-48 (20V_ISO_SEC) 13.59 mm, via (GPIO_BYPASS_RLY_ISO) 3.18 mm
+roundtrip: In2.Cu OTHER only Proteus 3.528 mm^2 at (5.073, -38.712), box x 4.80..6.78 y -47.62..-28.70, near C11-2 (PGND) 12.69 mm, via (MDATA) 8.79 mm
+roundtrip: In2.Cu OTHER only Proteus 2.215 mm^2 at (19.598, 40.610), box x 17.43..21.53 y 35.55..45.67, near J8-48 (20V_ISO_SEC) 10.43 mm, via (GPIO_BYPASS_RLY_ISO) 3.14 mm
+roundtrip: B.Cu OTHER only Proteus 24.083 mm^2 at (-58.045, 47.155), box x -68.25..-20.80 y 42.58..51.05, near J10-1 (INU_FILTER_INPUT) 6.89 mm, via (GPIO_BYPASS_RLY_ISO) 34.69 mm
+roundtrip: B.Cu OTHER only Proteus 0.536 mm^2 at (-0.173, 47.019), box x -1.27..0.75 y 46.38..47.98, near R256-1 (#00270) 6.55 mm, via (#00270) 0.79 mm
+roundtrip: B.Cu OTHER only Proteus 0.398 mm^2 at (0.199, 44.851), box x -0.52..0.75 y 44.17..45.35, near R71-1 (#00269) 6.99 mm, via (#00269) 0.39 mm
+roundtrip: In1.Cu MISSING Proteus item at (2.09, -41.59)
+roundtrip: In2.Cu MISSING Proteus item at (4.90, -37.00)
+roundtrip: In2.Cu MISSING Proteus item at (17.59, 30.89)
+roundtrip: In2.Cu MISSING Proteus item at (17.29, 32.59)
+roundtrip: B.Cu MISSING Proteus item at (-0.08, 44.62)
+roundtrip: drills 0 mismatches; report reports/roundtrip/roundtrip.txt, overlays reports/roundtrip/*.png
+roundtrip: FAILED (9 unexplained clusters, 5 draws/flashes without copper in the other set, 0 drill mismatches)
+!! FAILED: python3 tools/gerber_roundtrip.py --check
+
+SOME CHECKS FAILED

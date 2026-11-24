@@ -1,0 +1,1 @@
+prune: 58 dangling items deleted in 6 rounds; nets: INDUCTOR_OUTPUT (1) 15V (7) 15V_ISO (2) 3V3_ISO (8) 5V (1) ADCLK (1) GND (8) ISOGND (3) MDATA (5) Net-(U2-+) (1) Net-(U2--) (1) Net-(U7A-+) (5) Net-(U7A--) (5) Net-(U7B-+) (4) Net-(U7B--) (1) PWM_G1 (1) PWM_TRANS3 (4)

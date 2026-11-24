@@ -1,0 +1,5 @@
+sdm: 0 reserve keep-outs removed
+sdm: 4 old tracks / vias of ADCLK, INU_ADCLK, INU_ADCLK_U21, MDATA, MDATA_INU deleted
+sdm: Net-(U5-MDAT) U5-6 -> R55-1: 10.4 mm on B.Cu, 6 segments [1 s]
+sdm: NO via site within 4.0 mm of R22-2 (ADCLK)
+sdm: 14 HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours

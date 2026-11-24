@@ -1,0 +1,8 @@
+  Single-ended:  13/18 routed (5 FAILED)
+  Total vias:    8
+  Single-ended:  3/5 routed (2 FAILED)
+  Total vias:    6
+  Single-ended:  0/2 routed (2 FAILED)
+  Total vias:    0
+  Single-ended:  16/18 routed (2 FAILED)
+  not routed: GPIO_BYPASS_RLY_ISOLATED, MDATA_ISO, {'net': 'GPIO_BYPASS_RLY_ISOLATED', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'MDATA_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}

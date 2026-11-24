@@ -1,0 +1,9 @@
+  Single-ended:  4/5 routed
+  Multi-point:   27/28 pads connected (1 FAILED)
+  Total vias:    0
+  Single-ended:  0/1 routed
+  Multi-point:   9/10 pads connected (1 FAILED)
+  Total vias:    0
+  Single-ended:  4/5 routed
+  Multi-point:   27/28 pads connected (1 FAILED)
+  not routed: {'net_name': 'SHUNT1', 'failed_pads': [{'x': -36.656, 'y': 67.999, 'component_ref': 'R58', 'pad_number': '2'}]}, {'net': 'SHUNT1', 'pairs_connected': 8, 'pairs_total': 9, 'outcome': 'open', 'open_subtype': 'partial'}

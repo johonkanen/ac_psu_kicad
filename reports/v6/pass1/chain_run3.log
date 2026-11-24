@@ -1,0 +1,441 @@
+   -> build/v6route/00_base.kicad_pcb
+== 01 aux routes (helper script, V6_PLAN section 10)
+aux_routes: added 140 tracks, 21 vias, 4 zones
+aux_routes: saved /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7fb40ec73bf2f06b/kicad/ac_psu.kicad_pcb
+   -> build/v6route/01_aux.kicad_pcb
+== 02 aux fixes
+  DC+ via of R98-1 moved (68.04, -49.7) -> (67.6, -51.4) (out of the pad)
+   -> build/v6route/02_aux_fixes.kicad_pcb
+== 03 prune dangling copper in the v6 areas
+prune: 58 dangling items deleted in 6 rounds; nets: INDUCTOR_OUTPUT (1) 15V (7) 15V_ISO (2) 3V3_ISO (8) 5V (1) ADCLK (1) GND (8) ISOGND (3) MDATA (5) Net-(U2-+) (1) Net-(U2--) (1) Net-(U7A-+) (5) Net-(U7A--) (5) Net-(U7B-+) (4) Net-(U7B--) (1) PWM_G1 (1) PWM_TRANS3 (4)
+   -> build/v6route/03_prune.kicad_pcb
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 405; parity 0
+   total 405
+   islands: 62 pour layers, 73 islands; none worse than the base
+== 04 lock the existing copper; per-net clearance files from hv.py
+lock: 1797 tracks / vias locked
+clearances: 43 HV / PE nets, 207 low-voltage nets
+   -> build/v6route/04_lock.kicad_pcb
+== 05 taps
+sdm: Net-(U7A--) tap 3 leg 1: 15.9 mm on In3.Cu, 7 segments [1 s]
+sdm: Net-(U7A--) tap 3 leg 2: 71.0 mm on In3.Cu, 8 segments [4 s]
+west: Net-(U7A--) tap 3 leg 3: straight, 18.4 mm
+west: Net-(U7A--) tap 3 leg 4: straight, 12.9 mm
+west: Net-(U7A--) tap 3 leg 5: straight, 1.4 mm
+sdm: Net-(U7A--) tap 3 leg 6: 35.6 mm on In1.Cu, 4 segments [1 s]
+sdm: Net-(U7A-+) tap 4 leg 1: 16.6 mm on In3.Cu, 5 segments [1 s]
+sdm: Net-(U7A-+) tap 4 leg 2: 71.9 mm on In3.Cu, 9 segments [4 s]
+west: Net-(U7A-+) tap 4 leg 3: straight, 18.4 mm
+west: Net-(U7A-+) tap 4 leg 4: straight, 12.9 mm
+west: Net-(U7A-+) tap 4 leg 5: straight, 1.4 mm
+sdm: Net-(U7A-+) tap 4 leg 6: 40.6 mm on In1.Cu, 4 segments [1 s]
+sdm: Net-(U2--) tap 5 leg 1: 19.5 mm on In3.Cu, 7 segments [1 s]
+sdm: Net-(U2--) tap 5 leg 2: 72.7 mm on In3.Cu, 9 segments [4 s]
+west: Net-(U2--) tap 5 leg 3: straight, 18.4 mm
+west: Net-(U2--) tap 5 leg 4: straight, 12.9 mm
+west: Net-(U2--) tap 5 leg 5: straight, 1.4 mm
+sdm: Net-(U2--) tap 5 leg 6: 58.4 mm on In1.Cu, 5 segments [1 s]
+sdm: Net-(U2-+) tap 6 leg 1: 26.0 mm on In3.Cu, 10 segments [3 s]
+sdm: Net-(U2-+) tap 6 leg 2: 73.6 mm on In3.Cu, 10 segments [2 s]
+west: Net-(U2-+) tap 6 leg 3: straight, 18.4 mm
+west: Net-(U2-+) tap 6 leg 4: straight, 12.9 mm
+west: Net-(U2-+) tap 6 leg 5: straight, 1.4 mm
+sdm: Net-(U2-+) tap 6 leg 6: 58.6 mm on In1.Cu, 4 segments [1 s]
+sdm: taps drawn: 6 of 6; 23 HV keep-outs at their west ends
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 42; unconnected 399; parity 0
+   total 399
+   islands: 62 pour layers, 73 islands; none worse than the base
+   -> build/v6route/05_taps.kicad_pcb
+   46 s
+== 06 west
+sdm: 15V_ISO C156-1 -> corridor via leg 1: 7.2 mm on B.Cu, 4 segments [0 s]
+west: 15V_ISO C156-1 -> corridor via leg 2: straight, 10.8 mm
+sdm: PWM_Q8 U19-11 -> corridor via leg 1: 16.6 mm on B.Cu, 4 segments [1 s]
+west: PWM_Q8 U19-11 -> corridor via leg 2: straight, 12.7 mm
+sdm: GPIO_BYPASS_RLY_ISO U19-15 -> corridor via leg 1: 18.9 mm on B.Cu, 11 segments [1 s]
+west: GPIO_BYPASS_RLY_ISO U19-15 -> corridor via leg 2: straight, 14.4 mm
+sdm: PWM_TRANS6 U20-10 -> corridor via leg 1: 32.1 mm on B.Cu, 5 segments [1 s]
+west: PWM_TRANS6 U20-10 -> corridor via leg 2: straight, 16.0 mm
+sdm: PWM_Q7 U20-11 -> corridor via leg 1: 33.1 mm on B.Cu, 6 segments [1 s]
+west: PWM_Q7 U20-11 -> corridor via leg 2: straight, 17.8 mm
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 1: 5.4 mm on In1.Cu, 3 segments [0 s]
+west: PWM_Q7 PWM_Q7: corridor via -> path A leg 2: straight, 1.5 mm
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 3: 33.2 mm on In1.Cu, 6 segments [4 s]
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 4: 9.5 mm on In1.Cu, 5 segments [2 s]
+sdm: PWM_Q8 PWM_Q8: corridor via -> path A leg 1: NO PATH on In1.Cu from (43.15, 51.40) to (38.87, 46.80) [0 s]
+west: PWM_Q8 PWM_Q8: corridor via -> path A: NOT drawn (0 pieces taken out again)
+sdm: GPIO_BYPASS_RLY_ISO GPIO_BYPASS_RLY_ISO: corridor via -> path A leg 1: 23.9 mm on In2.Cu, 8 segments [2 s]
+sdm: PWM_TRANS6 PWM_TRANS6: corridor via -> path A leg 1: 32.2 mm on In4.Cu, 5 segments [3 s]
+west: PWM_TRANS6 PWM_TRANS6: corridor via -> path A leg 2: straight, 8.2 mm
+sdm: 15V_ISO 15V_ISO: corridor via -> path A leg 1: 37.4 mm on In3.Cu, 13 segments [1 s]
+sdm: 15V_ISO 15V_ISO: corridor via -> path A leg 2: 28.9 mm on In3.Cu, 5 segments [2 s]
+west: 1 HV keep-outs at the 15V_ISO end via
+west: drawn 15V_ISO, GPIO_BYPASS_RLY_ISO, PWM_TRANS6, PWM_Q7; NOT drawn: PWM_Q8
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 47; unconnected 394; parity 0
+   total 394
+   islands: 62 pour layers, 73 islands; none worse than the base
+   -> build/v6route/06_west.kicad_pcb
+   22 s
+== 07 planes
+planes: CTRLGND_A: 36 vias, 0 pads on a shared via, 0 left
+planes: 3V3_CTRL: 23 vias, 2 pads on a shared via, 0 left
+planes: CTRLGND: 10 vias, 0 pads on a shared via, 0 left
+planes: 5V_CTRL: 5 vias, 0 pads on a shared via, 0 left
+planes: ISOGND: 19 vias, 1 pads on a shared via, 4 left: C156-2, C158-2, C159-2, C125-2
+planes: 3V3_ISO: 10 vias, 0 pads on a shared via, 1 left: C122-1
+planes: GND: 8 vias, 0 pads on a shared via, 0 left
+planes: VCC: 6 vias, 0 pads on a shared via, 0 left
+planes: 117 vias in all
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 47; unconnected 275; parity 0
+   total 275
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/07_planes.kicad_pcb
+   14 s
+== 08 j11
+j11: 17 west-row escape stubs drawn
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 64; unconnected 275; parity 0
+   total 275
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/08_j11.kicad_pcb
+   8 s
+== 14 sup_ISOGND (domain I, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 64; unconnected 275; parity 0
+   total 275
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/14_sup_ISOGND.kicad_pcb
+   560 s
+== 15 sup_3V3_ISO (domain I, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   23/26 pads connected (3 FAILED)
+     Total vias:    0
+     Single-ended:  0/1 routed
+     Multi-point:   23/26 pads connected (3 FAILED)
+     not routed: {'net_name': '3V3_ISO', 'failed_pads': [{'x': 66.72, 'y': -40.15, 'component_ref': 'C122', 'pad_number': '1'}, {'x': -93.073, 'y': -60.771, 'component_ref': 'C37', 'pad_number': '2'}, {'x': -94.065, 'y': -65.72, 'component_ref': 'U4', 'pad_number': '8'}]}, {'net': '3V3_ISO', 'pairs_connected': 22, 'pairs_total': 25, 'outcome': 'open', 'open_subtype': 'partial'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 64; unconnected 274; parity 0
+   total 274
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/15_sup_3V3_ISO.kicad_pcb
+   429 s
+== 16 sup_15V_ISO (domain I, 600 s)
+     Single-ended:  1/1 routed
+     Multi-point:   16/16 pads connected (1 nets)
+     Total vias:    3
+     Single-ended:  1/1 routed
+     Multi-point:   16/16 pads connected
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 64; unconnected 265; parity 0
+   total 265
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/16_sup_15V_ISO.kicad_pcb
+   132 s
+== 17 sup_5V_ISOL (domain I, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   9/13 pads connected (4 FAILED)
+     Total vias:    3
+     Single-ended:  0/1 routed
+     Multi-point:   9/13 pads connected (4 FAILED)
+     not routed: {'net_name': '5V_ISOL', 'failed_pads': [{'x': 13.265, 'y': -43.53, 'component_ref': 'J24', 'pad_number': '7'}, {'x': 8.5, 'y': -43.725, 'component_ref': 'C155', 'pad_number': '1'}, {'x': -99.9209, 'y': -44.2937, 'component_ref': 'C162', 'pad_number': '1'}, {'x': -58.25, 'y': -50.584, 'component_ref': 'U30', 'pad_number': '1'}]}, {'net': '5V_ISOL', 'pairs_connected': 8, 'pairs_total':
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 63; unconnected 258; parity 0
+   total 258
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/17_sup_5V_ISOL.kicad_pcb
+   136 s
+== 18 sup_GND (domain P, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 63; unconnected 258; parity 0
+   total 258
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/18_sup_GND.kicad_pcb
+   561 s
+== 19 sup_VCC (domain P, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 63; unconnected 258; parity 0
+   total 258
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/19_sup_VCC.kicad_pcb
+   560 s
+== 20 sup_5V (domain P, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   8/15 pads connected (7 FAILED)
+     Total vias:    3
+     Single-ended:  0/1 routed
+     Multi-point:   8/15 pads connected (7 FAILED)
+     not routed: {'net_name': '5V', 'failed_pads': [{'x': 111.74, 'y': 41.2, 'component_ref': 'U9', 'pad_number': '3'}, {'x': 108.4875, 'y': 49.0, 'component_ref': 'C57', 'pad_number': '2'}, {'x': 108.4875, 'y': 44.0, 'component_ref': 'C67', 'pad_number': '2'}, {'x': 55.725, 'y': 55.0, 'component_ref': 'C151', 'pad_number': '1'}, {'x': 108.4875, 'y': 46.5, 'component_ref': 'C58', 'pad_number': '2'}, 
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 63; unconnected 253; parity 0
+   total 253
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/20_sup_5V.kicad_pcb
+   58 s
+== 21 sup_15V (domain P, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   14/15 pads connected (1 FAILED)
+     Total vias:    4
+     Single-ended:  0/1 routed
+     Multi-point:   14/15 pads connected (1 FAILED)
+     not routed: {'net_name': '15V', 'failed_pads': [{'x': 50.225, 'y': 55.0, 'component_ref': 'C150', 'pad_number': '1'}]}, {'net': '15V', 'pairs_connected': 13, 'pairs_total': 14, 'outcome': 'open', 'open_subtype': 'partial'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 62; unconnected 246; parity 0
+   total 246
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/21_sup_15V.kicad_pcb
+   71 s
+== 22 sup_ctrl (domain C, 600 s)
+     Single-ended:  1/1 routed
+     Multi-point:   4/4 pads connected (1 nets)
+     Total vias:    0
+     Single-ended:  1/1 routed
+     Multi-point:   4/4 pads connected
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 62; unconnected 243; parity 0
+   total 243
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/22_sup_ctrl.kicad_pcb
+   60 s
+== 23 u6_supply (domain I, 300 s)
+     Total vias:    3
+     Single-ended:  0/1 routed (1 FAILED)
+     Total vias:    0
+     Single-ended:  1/2 routed (1 FAILED)
+     Multi-point:   5/5 pads connected
+     not routed: ISO_DAB_SDM_RAW_VOLTAGE, {'net': 'ISO_DAB_SDM_RAW_VOLTAGE', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 62; unconnected 239; parity 0
+   total 239
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/23_u6_supply.kicad_pcb
+   147 s
+== 24 pwm_p (domain P, 600 s)
+     Single-ended:  9/9 routed
+     Multi-point:   2/2 pads connected (1 nets)
+     Total vias:    25
+     Single-ended:  9/9 routed
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 62; unconnected 229; parity 0
+   total 229
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/24_pwm_p.kicad_pcb
+   84 s
+== 25 pwm_i (domain I, 600 s)
+     Single-ended:  6/7 routed (1 FAILED)
+     Total vias:    6
+     Single-ended:  0/1 routed (1 FAILED)
+     Total vias:    0
+     Single-ended:  6/7 routed (1 FAILED)
+     not routed: PWM_Q8, {'net': 'PWM_Q8', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 62; unconnected 223; parity 0
+   total 223
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/25_pwm_i.kicad_pcb
+   184 s
+== 26 j11_top (domain C, 600 s)
+     Single-ended:  3/5 routed (2 FAILED)
+     Total vias:    6
+     Single-ended:  0/2 routed (2 FAILED)
+     Total vias:    0
+     Single-ended:  16/18 routed (2 FAILED)
+     not routed: GPIO_BYPASS_RLY_ISOLATED, MDATA_ISO, {'net': 'GPIO_BYPASS_RLY_ISOLATED', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'MDATA_ISO', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 55; unconnected 207; parity 0
+   total 207
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/26_j11_top.kicad_pcb
+   213 s
+== 27 j11_bot (domain C, 600 s)
+     Single-ended:  6/14 routed (5 FAILED, 3 OPEN)
+     Total vias:    13
+     Single-ended:  0/8 routed (8 FAILED)
+     Total vias:    0
+     Single-ended:  6/14 routed (8 FAILED)
+     not routed: DAB_PWM_HI_SEC_CTRL, DAB_PWM_LO_SEC_CTRL, INU_ADCLK_CTRL, PWM_Q6_CTRL, PWM_Q7_CTRL, PWM_Q8_CTRL, PWM_TRANS4_CTRL, PWM_TRANS5_CTRL, {'net': 'DAB_PWM_HI_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_PWM_LO_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'INU_ADCL
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 50; unconnected 201; parity 0
+   total 201
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/27_j11_bot.kicad_pcb
+   324 s
+== 28 ctrl_analog (domain C, 600 s)
+     Total vias:    28
+     Single-ended:  0/1 routed (1 FAILED)
+     Total vias:    0
+     Single-ended:  19/20 routed (1 FAILED)
+     Multi-point:   33/33 pads connected
+     not routed: ISOADA1_CTRL, {'net': 'ISOADA1_CTRL', 'pairs_connected': 1, 'pairs_total': 2, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 50; unconnected 170; parity 0
+   total 170
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/28_ctrl_analog.kicad_pcb
+   132 s
+== 29 buck (domain C, 600 s)
+     Total vias:    9
+     Single-ended:  0/1 routed (1 FAILED)
+     Total vias:    0
+     Single-ended:  5/6 routed (1 FAILED)
+     Multi-point:   10/10 pads connected
+     not routed: CTRL_RAW, {'net': 'CTRL_RAW', 'pairs_connected': 6, 'pairs_total': 7, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 50; unconnected 155; parity 0
+   total 155
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/29_buck.kicad_pcb
+   141 s
+== 30 logic_p (domain P, 600 s)
+     Total vias:    9
+     Single-ended:  0/1 routed (1 FAILED)
+     Total vias:    0
+     Single-ended:  10/11 routed (1 FAILED)
+     Multi-point:   13/13 pads connected
+     not routed: CLK1, {'net': 'CLK1', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 142; parity 0
+   total 142
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/30_logic_p.kicad_pcb
+   121 s
+== 31 logic_i (domain I, 600 s)
+     Total vias:    6
+     Single-ended:  0/3 routed (3 FAILED)
+     Total vias:    0
+     Single-ended:  7/10 routed (3 FAILED)
+     Multi-point:   25/25 pads connected
+     not routed: ADCLK_DAB, DAB_SHUNT2, MDATA_DAB, {'net': 'ADCLK_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_SHUNT2', 'pairs_connected': 6, 'pairs_total': 7, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'MDATA_DAB', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 129; parity 0
+   total 129
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/31_logic_i.kicad_pcb
+   217 s
+== 32 left_c (domain C, 600 s)
+     Total vias:    1
+     Single-ended:  0/11 routed (11 FAILED)
+     Total vias:    0
+     Single-ended:  1/12 routed (11 FAILED)
+     Multi-point:   8/8 pads connected
+     not routed: DAB_PWM_HI_SEC_CTRL, DAB_PWM_LO_SEC_CTRL, GPIO_BYPASS_RLY_ISOLATED, INU_ADCLK_CTRL, ISOADA1_CTRL, MDATA_ISO, PWM_Q6_CTRL, PWM_Q7_CTRL, PWM_Q8_CTRL, PWM_TRANS4_CTRL, PWM_TRANS5_CTRL, {'net': 'DAB_PWM_HI_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}, {'net': 'DAB_PWM_LO_SEC_CTRL', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'op
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 128; parity 0
+   total 128
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/32_left_c.kicad_pcb
+   302 s
+== 33 left_p (domain P, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 128; parity 0
+   total 128
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/33_left_p.kicad_pcb
+   565 s
+== 34 left_i (domain I, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 44; unconnected 128; parity 0
+   total 128
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/34_left_i.kicad_pcb
+   564 s
+== 40 sdm_iso
+sdm: 5 reserve keep-outs removed
+sdm: 12 old tracks / vias of ADCLK, INU_ADCLK, INU_ADCLK_U21, MDATA, MDATA_INU deleted
+sdm: 3V3_ISO east, plane -> x 40.4: 24.6 mm on In3.Cu, 5 segments [0 s]
+sdm: MDATA_INU east, U21 -> x 40.4: NO PATH on In3.Cu from (73.44, 38.88) to (40.40, 54.21) [1 s]
+sdm: 0 HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 50; unconnected 126; parity 0
+   total 126
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/40_sdm_iso.kicad_pcb
+   12 s
+== 41 sdm_afe
+sdm: 0 reserve keep-outs removed
+sdm: 4 old tracks / vias of ADCLK, INU_ADCLK, INU_ADCLK_U21, MDATA, MDATA_INU deleted
+sdm: Net-(U5-MDAT) U5-6 -> R55-1: 10.4 mm on B.Cu, 6 segments [1 s]
+sdm: NO via site within 4.0 mm of R22-2 (ADCLK)
+sdm: 14 HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 54; unconnected 125; parity 0
+   total 125
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/41_sdm_afe.kicad_pcb
+   13 s
+== 42 sense_replay
+19:25:40: Debug: Adding duplicate image handler for 'PNG file'
+19:25:40: Debug: Adding duplicate image handler for 'JPEG file'
+19:25:40: Debug: Adding duplicate image handler for 'TIFF file'
+19:25:40: Debug: Adding duplicate image handler for 'GIF file'
+19:25:40: Debug: Adding duplicate image handler for 'PNM file'
+19:25:40: Debug: Adding duplicate image handler for 'PCX file'
+19:25:40: Debug: Adding duplicate image handler for 'IFF file'
+19:25:40: Debug: Adding duplicate image handler for 'Windows icon file'
+19:25:40: Debug: Adding duplicate image handler for 'Windows cursor file'
+19:25:40: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+19:25:40: Debug: Adding duplicate image handler for 'TGA file'
+19:25:40: Debug: Adding duplicate image handler for 'XPM file'
+19:25:40: Debug: Adding duplicate image handler for 'WebP file'
+sense: AFE sense: 40 of 42 pieces of the Proteus copper replayed; left out: via Net-(U5-VIN-) (-35.6, -69.0); via Net-(U5-VIN-) (-40.8, -66.2)
+sense: INV sense: 42 of 42 pieces of the Proteus copper replayed
+sense: 82 of 84 pieces in all
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 104; parity 0
+   total 104
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/42_sense_replay.kicad_pcb
+   9 s
+== 43 sense_p (domain P, 600 s)
+     Single-ended:  0/1 routed
+     Multi-point:   9/10 pads connected (1 FAILED)
+     Total vias:    0
+     Single-ended:  4/5 routed
+     Multi-point:   27/28 pads connected (1 FAILED)
+     not routed: {'net_name': 'SHUNT1', 'failed_pads': [{'x': -36.656, 'y': 67.999, 'component_ref': 'R58', 'pad_number': '2'}]}, {'net': 'SHUNT1', 'pairs_connected': 8, 'pairs_total': 9, 'outcome': 'open', 'open_subtype': 'partial'}
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 91; parity 0
+   total 91
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/43_sense_p.kicad_pcb
+   173 s
+== 44 sense_i (domain I, 900 s)
+     Single-ended:  4/4 routed
+     Multi-point:   24/24 pads connected (4 nets)
+     Total vias:    6
+     Single-ended:  4/4 routed
+     Multi-point:   24/24 pads connected
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 78; parity 0
+   total 78
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/44_sense_i.kicad_pcb
+   469 s
+== 45 sense_lv_p (domain P, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 78; parity 0
+   total 78
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/45_sense_lv_p.kicad_pcb
+   564 s
+== 46 sense_lv_i (domain I, 600 s)
+   TIMED OUT after 600 s: step skipped
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 78; parity 0
+   total 78
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/46_sense_lv_i.kicad_pcb
+   608 s
+clear: 0 temporary keep-outs removed
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 56; unconnected 78; parity 0
+   total 78
+   islands: better v5 card CA In2.Cu 3V3_CTRL|In2.Cu: 8 -> 1
+   islands: 62 pour layers, 66 islands; none worse than the base
+   -> build/v6route/99_final.kicad_pcb
+chain: 7551 s

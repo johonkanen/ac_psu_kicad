@@ -1,0 +1,23 @@
+sdm: 15V_ISO C156-1 -> corridor via leg 1: 7.2 mm on B.Cu, 4 segments [0 s]
+west: 15V_ISO C156-1 -> corridor via leg 2: straight, 10.8 mm
+sdm: PWM_Q8 U19-11 -> corridor via leg 1: 16.6 mm on B.Cu, 4 segments [1 s]
+west: PWM_Q8 U19-11 -> corridor via leg 2: straight, 12.7 mm
+sdm: GPIO_BYPASS_RLY_ISO U19-15 -> corridor via leg 1: 18.9 mm on B.Cu, 11 segments [1 s]
+west: GPIO_BYPASS_RLY_ISO U19-15 -> corridor via leg 2: straight, 14.4 mm
+sdm: PWM_TRANS6 U20-10 -> corridor via leg 1: 32.1 mm on B.Cu, 5 segments [1 s]
+west: PWM_TRANS6 U20-10 -> corridor via leg 2: straight, 16.0 mm
+sdm: PWM_Q7 U20-11 -> corridor via leg 1: 33.1 mm on B.Cu, 6 segments [1 s]
+west: PWM_Q7 U20-11 -> corridor via leg 2: straight, 17.8 mm
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 1: 5.4 mm on In1.Cu, 3 segments [0 s]
+west: PWM_Q7 PWM_Q7: corridor via -> path A leg 2: straight, 1.5 mm
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 3: 33.2 mm on In1.Cu, 6 segments [4 s]
+sdm: PWM_Q7 PWM_Q7: corridor via -> path A leg 4: 9.5 mm on In1.Cu, 5 segments [2 s]
+sdm: PWM_Q8 PWM_Q8: corridor via -> path A leg 1: NO PATH on In1.Cu from (43.15, 51.40) to (38.87, 46.80) [0 s]
+west: PWM_Q8 PWM_Q8: corridor via -> path A: NOT drawn (0 pieces taken out again)
+sdm: GPIO_BYPASS_RLY_ISO GPIO_BYPASS_RLY_ISO: corridor via -> path A leg 1: 23.9 mm on In2.Cu, 8 segments [2 s]
+sdm: PWM_TRANS6 PWM_TRANS6: corridor via -> path A leg 1: 32.2 mm on In4.Cu, 5 segments [3 s]
+west: PWM_TRANS6 PWM_TRANS6: corridor via -> path A leg 2: straight, 8.2 mm
+sdm: 15V_ISO 15V_ISO: corridor via -> path A leg 1: 37.4 mm on In3.Cu, 13 segments [1 s]
+sdm: 15V_ISO 15V_ISO: corridor via -> path A leg 2: 28.9 mm on In3.Cu, 5 segments [2 s]
+west: 1 HV keep-outs at the 15V_ISO end via
+west: drawn 15V_ISO, GPIO_BYPASS_RLY_ISO, PWM_TRANS6, PWM_Q7; NOT drawn: PWM_Q8

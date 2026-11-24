@@ -1,0 +1,8 @@
+  Single-ended:  5/6 routed
+  Multi-point:   17/18 pads connected (1 FAILED)
+  Total vias:    9
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  5/6 routed (1 FAILED)
+  Multi-point:   10/10 pads connected
+  not routed: CTRL_RAW, {'net': 'CTRL_RAW', 'pairs_connected': 6, 'pairs_total': 7, 'outcome': 'open', 'open_subtype': 'unrouted'}

@@ -1,0 +1,16 @@
+20:15:46: Debug: Adding duplicate image handler for 'PNG file'
+20:15:46: Debug: Adding duplicate image handler for 'JPEG file'
+20:15:46: Debug: Adding duplicate image handler for 'TIFF file'
+20:15:46: Debug: Adding duplicate image handler for 'GIF file'
+20:15:46: Debug: Adding duplicate image handler for 'PNM file'
+20:15:46: Debug: Adding duplicate image handler for 'PCX file'
+20:15:46: Debug: Adding duplicate image handler for 'IFF file'
+20:15:46: Debug: Adding duplicate image handler for 'Windows icon file'
+20:15:46: Debug: Adding duplicate image handler for 'Windows cursor file'
+20:15:46: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+20:15:46: Debug: Adding duplicate image handler for 'TGA file'
+20:15:46: Debug: Adding duplicate image handler for 'XPM file'
+20:15:46: Debug: Adding duplicate image handler for 'WebP file'
+sense: AFE sense: 40 of 42 pieces of the Proteus copper replayed; left out: via Net-(U5-VIN-) (-35.6, -69.0); via Net-(U5-VIN-) (-40.8, -66.2)
+sense: INV sense: 42 of 42 pieces of the Proteus copper replayed
+sense: 82 of 84 pieces in all

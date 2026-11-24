@@ -1,0 +1,6 @@
+  Single-ended:  6/7 routed (1 FAILED)
+  Total vias:    6
+  Single-ended:  0/1 routed (1 FAILED)
+  Total vias:    0
+  Single-ended:  6/7 routed (1 FAILED)
+  not routed: PWM_Q8, {'net': 'PWM_Q8', 'pairs_connected': 0, 'pairs_total': 1, 'outcome': 'open', 'open_subtype': 'unrouted'}
