@@ -52,6 +52,7 @@ class Ctx:
     def __init__(self, b):
         self.b = b
         self.pierce = set()     # nets whose pours a new piece may enter: hv_holes() then cuts the pour back
+        self.via_pierce = set()  # nets whose pours (planes) a new via may perforate (the refill makes the antipad)
         self.layers = list(b.GetEnabledLayers().CuStack())
         self.items = {l: [] for l in self.layers}      # (net, shape, bbox, kind, local clearance mm)
         self.zones = {l: [] for l in self.layers}      # (net, fill, bbox, clearance mm)
@@ -113,7 +114,8 @@ class Ctx:
                 return self._why(why, f"{o[3]} {o[0]}", o)
         if zones:
             for znet, fill, zb, zc in self.zones[layer]:
-                if znet != net and znet not in self.pierce and box.Intersects(zb) and fill.OutlineCount():
+                if znet != net and znet not in self.pierce and not (is_via and znet in self.via_pierce) \
+                        and box.Intersects(zb) and fill.OutlineCount():
                     if fill.Collide(shape, F(max(self.rule(net, znet), zc, 0.25) + MARGIN)):
                         return self._why(why, f"pour {znet}", None)
         if keep:
@@ -128,14 +130,23 @@ class Ctx:
             why.append(s)
         return False
 
-    def via_ok(self, net, x, y, why=None):
-        v = self.mkvia(net, x, y)
-        for l in self.layers:
-            if not self.clear(net, v.GetEffectiveShape(l), v.GetBoundingBox(), l, is_via=True, why=why):
-                if why is not None:
-                    why[-1] = f"{self.b.GetLayerName(l)}: {why[-1]}"
-                return None
-        return v
+    def via_ok(self, net, x, y, why=None, margin=None):
+        """A legal via of `net` at (x, y) or None. margin: a smaller safety margin than MARGIN (the column between
+        the J37 / J38 tongues holds its vias at 0.61 mm pitch, 0.003 mm over the 0.15 mm rule)."""
+        global MARGIN
+        keep = MARGIN
+        if margin is not None:
+            MARGIN = margin
+        try:
+            v = self.mkvia(net, x, y)
+            for l in self.layers:
+                if not self.clear(net, v.GetEffectiveShape(l), v.GetBoundingBox(), l, is_via=True, why=why):
+                    if why is not None:
+                        why[-1] = f"{self.b.GetLayerName(l)}: {why[-1]}"
+                    return None
+            return v
+        finally:
+            MARGIN = keep
 
     def mkvia(self, net, x, y):
         v = pcbnew.PCB_VIA(self.b)
@@ -216,7 +227,12 @@ G = 0.1
 
 
 class Grid:
-    def __init__(self, cx, layer, box, w, net, planview_hv=True):
+    def __init__(self, cx, layer, box, w, net, planview_hv=True, step=None):
+        global G
+        if step:
+            G = step
+        else:
+            G = 0.1
         self.cx, self.layer, self.net, self.w = cx, layer, net, w
         self.planview_hv = planview_hv
         self.x0, self.y0, x1, y1 = box

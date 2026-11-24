@@ -28,200 +28,109 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import geo  # noqa: E402
 from geo import F, T, P, xy  # noqa: E402
 
-IN2, IN3, B = pcbnew.In2_Cu, pcbnew.In3_Cu, pcbnew.B_Cu
-SIG_W, GUARD_W = 0.2, 0.3
-AVOID = ["J7", "J9", "INU_OUT2", "CM1", "CM2", "CM3", "FILTER_OUT1", "FILTER_IN1", "J5", "AFE_OUT1"]
-LOG = []
+from drawlib import (IN1, IN2, IN3, SIG_W, GUARD_W, AVOID, say, strip, end_via, via_near, run, straight,  # noqa: E402
+                     east_pad_of, chain, end_at_track)
+
+FC = pcbnew.F_Cu
 
 
-def say(s):
-    print(s)
-    LOG.append(s)
+# the via column x 28.75 between the J37 / J38 tongues: ten slots at 0.612 mm from y 52.99 (lanes from the east on
+# F / In2 must keep 2.5 mm from the J37 pads: y >= 52.89) to 58.48 (2.5 mm from the ISO lane); 06_west.py takes
+# the other six for the divider taps
+COLUMN = {"ISOGND": 52.99, "3V3_ISO": 53.602, "INU_ADCLK": 54.214, "MDATA_INU": 54.826}
+# the six divider taps (U7 / U2 block -> the old track ends west of J24), slots from the south (inner lane at the
+# corner of the barrier strip) to the north; they are drawn before the pair, which then stays south of them
+TAPS = [  # net, source (pad or old track end), west end (old track end), column slot y; in nesting order: the
+    #       east exit of the U7 / U2 block at (104 + 0.5 i, 17), the waypoint (69, 46.8 + 0.5 i) north of U21, the
+    #       corridor slot, and on In1 west of the column the south lane peels off first
+    ("Net-(U7B--)", ("U7", "6"), (17.39, 35.51), 55.438),
+    ("Net-(U7B-+)", (100.77, 9.72), (2.87, 37.30), 56.05),
+    ("Net-(U7A--)", (96.69, 12.13), (-4.57, 48.00), 56.662),
+    ("Net-(U7A-+)", (96.69, 11.25), (-6.25, 44.15), 57.274),
+    ("Net-(U2--)", ("U2", "4"), (-6.51, 27.37), 57.886),
+    ("Net-(U2-+)", ("C101", "2"), (-10.84, 29.48), 58.498),
+]
 
 
-def strip(b, nets):
-    dead = [t for t in b.GetTracks() if t.GetNetname() in nets]
-    for t in dead:
-        b.Delete(t)
-    say(f"sdm: {len(dead)} old tracks / vias of {', '.join(sorted(nets))} deleted")
-
-
-def ring(x, y, r0, r1, step=0.1, n=32):
-    r = r0
-    while r <= r1 + 1e-9:
-        for k in range(n):
-            a = 2 * math.pi * k / n
-            yield x + r * math.cos(a), y + r * math.sin(a), r
-        r += step
-
-
-def end_via(cx, ref, num, net=None, rmax=4.0, w=SIG_W, prefer=None, made=None):
-    """A via with a straight stub from pad ref-num (SMD); returns the via centre. For a through-hole pad the pad
-    itself is the end. prefer=(dx, dy): try the ring points in that direction first."""
-    p = geo.pad(cx.b, ref, num)
-    net = net or p.GetNetname()
-    x, y = xy(p.GetPosition())
-    if p.HasHole():
-        return (x, y)
-    layer = B if p.GetParentFootprint().IsFlipped() else pcbnew.F_Cu
-    s = p.GetSize(layer)
-    r0 = min(T(s.x), T(s.y)) / 2 + geo.VIA / 2 + 0.05
-    pts = list(ring(x, y, r0, rmax))
-    if prefer:
-        pts.sort(key=lambda q: (round(q[2], 1), -(prefer[0] * (q[0] - x) + prefer[1] * (q[1] - y))))
-    for vx, vy, r in pts:
-        v = cx.via_ok(net, vx, vy)
-        if v is None:
-            continue
-        if p.GetEffectiveShape(layer).Collide(v.GetEffectiveShape(layer), F(0.02)):
-            continue
-        t = cx.mktrack(net, layer, (x, y), (vx, vy), min(w, 0.25))
-        if not cx.clear(net, t.GetEffectiveShape(layer), t.GetBoundingBox(), layer):
-            continue
-        cx.commit(t, v)
-        if made is not None:
-            made += [t, v]
-        return (vx, vy)
-    say(f"sdm: NO via site within {rmax} mm of {ref}-{num} ({net})")
-    return None
-
-
-def via_near(cx, net, x, y, rmax=3.0, made=None):
-    for vx, vy, r in ring(x, y, 0.0, rmax, n=24):
-        v = cx.via_ok(net, vx, vy)
-        if v is not None:
-            cx.commit(v)
-            if made is not None:
-                made.append(v)
-            return (vx, vy)
-    say(f"sdm: NO via site for {net} within {rmax} mm of ({x:.2f}, {y:.2f})")
-    return None
-
-
-def avoid_cost(g, b, refs, r=4.0, c=1.5):
-    for ref in refs:
-        fp = b.FindFootprintByReference(ref)
-        if fp is None:
-            continue
-        for p in fp.Pads():
-            px, py = xy(p.GetPosition())
-            bb = p.GetBoundingBox()
-            hx = T(bb.GetWidth()) / 2 + r
-            hy = T(bb.GetHeight()) / 2 + r
-            ia, ja = g.ij(px - hx, py - hy)
-            ib, jb = g.ij(px + hx, py + hy)
-            for j in range(max(0, ja), min(g.ny, jb + 1)):
-                for i in range(max(0, ia), min(g.nx, ib + 1)):
-                    g.cost[j * g.nx + i] = max(g.cost[j * g.nx + i], c)
-
-
-def follow_cost(g, pts, d0, d1, far=4.0):
-    """Cells between d0 and d1 from the polyline cost 0, the rest `far` (side by side with the leader)."""
-    for k in range(len(g.cost)):
-        g.cost[k] = max(g.cost[k], far) if g.cost[k] < far else g.cost[k]
-    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
-        L = math.hypot(x1 - x0, y1 - y0)
-        ia, ja = g.ij(min(x0, x1) - d1, min(y0, y1) - d1)
-        ib, jb = g.ij(max(x0, x1) + d1, max(y0, y1) + d1)
-        for j in range(max(0, ja), min(g.ny, jb + 1)):
-            for i in range(max(0, ia), min(g.nx, ib + 1)):
-                x, y = g.xy(i, j)
-                if L < 1e-9:
-                    d = math.hypot(x - x0, y - y0)
-                else:
-                    t = max(0.0, min(1.0, ((x - x0) * (x1 - x0) + (y - y0) * (y1 - y0)) / (L * L)))
-                    d = math.hypot(x - (x0 + t * (x1 - x0)), y - (y0 + t * (y1 - y0)))
-                k = j * g.nx + i
-                if d0 <= d <= d1 and g.cost[k] <= far:
-                    g.cost[k] = 0.0
-
-
-def simplify(pts):
-    out = [pts[0]]
-    for p in pts[1:]:
-        if math.hypot(p[0] - out[-1][0], p[1] - out[-1][1]) < 1e-6:
-            continue
-        if len(out) >= 2:
-            (ax, ay), (bx, by) = out[-2], out[-1]
-            if abs((bx - ax) * (p[1] - ay) - (by - ay) * (p[0] - ax)) < 1e-6:
-                out[-1] = p
-                continue
-        out.append(p)
-    return out
-
-
-def run(cx, net, layer, a, c, w, box, leader=None, avoid=(), made=None, what=""):
-    t0 = time.time()
-    g = geo.Grid(cx, layer, box, w, net)
-    g.cost = [2.0 if v else 0.0 for v in g.soft]
-    if avoid:
-        avoid_cost(g, cx.b, avoid)
-    if leader:
-        lw, lpts = leader
-        follow_cost(g, lpts, lw / 2 + w / 2 + 0.15 + 0.03, lw / 2 + w / 2 + 0.15 + 0.17)
-    pts = g.route(a, c)
-    if pts is None:
-        say(f"sdm: {net} {what}: NO PATH on {cx.b.GetLayerName(layer)} from ({a[0]:.2f}, {a[1]:.2f}) to ({c[0]:.2f}, {c[1]:.2f}) [{time.time() - t0:.0f} s]")
-        return None
-    pts = simplify(pts)
-    err = cx.poly(net, layer, pts, w)
-    if err:
-        # the grid ends sit on the exact end points: retry without the first / last grid kink
-        say(f"sdm: {net} {what}: path found but {err}")
-        return None
-    if made is not None:
-        made += cx.last
-    say(f"sdm: {net} {what}: {geo.plen(pts):.1f} mm on {cx.b.GetLayerName(layer)}, {len(pts) - 1} segments [{time.time() - t0:.0f} s]")
-    return pts
-
-
-def straight(cx, net, layer, pts, w, what=""):
-    err = cx.poly(net, layer, pts, w)
-    say(f"sdm: {net} {what}: " + (err or f"{geo.plen(pts):.1f} mm on {cx.b.GetLayerName(layer)}"))
-    return None if err else pts
-
-
-def east_pad_of(b, net, west_ref):
-    for fp in b.GetFootprints():
-        for p in fp.Pads():
-            if p.GetNetname() == net and fp.GetReference() != west_ref:
-                return fp.GetReference(), p.GetNumber()
-    return None
+def taps(b):
+    """In3 from the U7 / U2 block up the east column and west along the band north of U21 (waypoint x 69, the
+    south lane first), round J25 to (60, slot y), straight west in the corridor north of where the pair will run to
+    a via at x 41.6, F
+    west to the column, In1 from the column west (north of J38) to a via at the old track end."""
+    cx = geo.Ctx(b)
+    cx.via_pierce = {"ISOGND", "3V3_ISO", "ISOPGND"}
+    holes, ok = [], {}
+    prev = None
+    for i, (net, src_, wend, ys) in enumerate(TAPS):
+        mine = []
+        s = (end_via(cx, src_[0], src_[1], net=net, made=mine) if isinstance(src_[0], str)
+             else end_at_track(cx, net, *src_, made=mine))
+        c = cx.via_ok(net, 28.75, ys, margin=0.003)
+        v = cx.via_ok(net, 41.6, ys, margin=0.003)
+        e = None
+        if s is not None and c is not None and v is not None:
+            cx.commit(c, v)
+            mine += [c, v]
+            e = end_at_track(cx, net, *wend, made=mine, pierce={"/05 VSI/INDUCTOR_OUTPUT", "ISODC+"})
+        else:
+            say(f"sdm: tap {net}: no source via / column via (28.75, {ys}) / corridor via (41.6, {ys})")
+        ok[net] = e is not None and chain(
+            cx, net, s, [(IN3, SIG_W, (90.0, -6.0, 119.5, 22.0), (104.0 + 0.6 * i, 17.0)),
+                         (IN3, SIG_W, (56.0, 10.0, 119.5, 59.0), (60.0, ys)),
+                         (IN3, SIG_W, "straight", [(41.6, ys)]),
+                         (FC, SIG_W, "straight", [(28.75, ys)]),
+                         (IN1, SIG_W, (-20.0, 18.0, 31.0, 61.0), e)], f"tap {i + 1}",
+            leaders=[None, (SIG_W, prev[1])] if prev else None)
+        if ok[net]:
+            holes += mine
+            prev = cx.paths
+        else:                       # take the source / column / corridor / end vias out again
+            for o in mine:
+                b.Delete(o)
+            keep = cx.via_pierce
+            cx.__init__(b)
+            cx.via_pierce = keep
+    cx.pierce = {"/05 VSI/INDUCTOR_OUTPUT", "ISODC+"}
+    n = geo.hv_holes(cx, holes, "tap")
+    say(f"sdm: taps drawn: {sum(ok.values())} of {len(ok)}; {n} HV keep-outs at their west ends")
 
 
 def iso_link(b):
     cx = geo.Ctx(b)
-    cx.pierce = {"ISOGND", "3V3_ISO", "/05 VSI/INDUCTOR_OUTPUT", "/05 VSI/INU_FILTER_INPUT"}   # ISO planes: antipads by
+    cx.via_pierce = {"ISOGND", "3V3_ISO", "ISOPGND"}
+    cx.pierce = {"/05 VSI/INDUCTOR_OUTPUT", "/05 VSI/INU_FILTER_INPUT"}   # ISO planes: antipads by
     total = {}                                 # the refill; the HV pours at U4: cut back by hv_holes
     made = []
     # east ends
     ck = east_pad_of(b, "INU_ADCLK", "U4")
     e_clk = end_via(cx, *ck, prefer=(0, 1))
     e_dat = end_via(cx, "U21", "12", prefer=(0, 1))
-    e_3v3 = via_near(cx, "3V3_ISO", 61.0, 46.8)
+    e_3v3 = via_near(cx, "3V3_ISO", 59.7, 47.4)      # the plane's corner at the barrier strip: the inner lane
     if None in (e_clk, e_dat, e_3v3):
         return cx, total, made
     # transition vias: In3 -> In2 east of J37 (x 40.4), In2 -> In3 in the column between the tongues (x 28.75)
-    ys = {"ISOGND": 54.6, "INU_ADCLK": 55.25, "MDATA_INU": 55.9, "3V3_ISO": 56.55}
+    ys = COLUMN
     tv, cv = {}, {}
     for n in ("INU_ADCLK", "MDATA_INU", "3V3_ISO"):
-        v = cx.via_ok(n, 40.4, ys[n])
-        c = cx.via_ok(n, 28.75, ys[n])
+        w1, w2 = [], []
+        v = cx.via_ok(n, 40.4, ys[n], margin=0.003, why=w1)
+        c = cx.via_ok(n, 28.75, ys[n], margin=0.003, why=w2)
         if v is None or c is None:
-            say(f"sdm: transition via of {n} at x 40.4 / 28.75, y {ys[n]} NOT legal")
+            say(f"sdm: transition via of {n} at x 40.4 / 28.75, y {ys[n]} NOT legal: {w1} {w2}")
             return cx, total, made
         cx.commit(v, c)
         tv[n], cv[n] = (40.4, ys[n]), (28.75, ys[n])
-    g = cx.via_ok("ISOGND", 28.75, ys["ISOGND"])
+    g0 = (28.75, ys["ISOGND"])                     # the guard starts on the In4 ISOGND strip in the column
+    g = cx.via_ok("ISOGND", *g0, margin=0.003)                   # (east of the J38 tongue, which cuts the strip on In4)
     if g is None:
         say("sdm: ISOGND column via NOT legal")
         return cx, total, made
     cx.commit(g)
     box_e = (37.0, 36.0, 82.0, 60.0)
-    p_clk = run(cx, "INU_ADCLK", IN3, e_clk, tv["INU_ADCLK"], SIG_W, box_e, what="east, U21 side -> x 40.4")
+    p_3v3 = run(cx, "3V3_ISO", IN3, e_3v3, tv["3V3_ISO"], GUARD_W, box_e, what="east, plane -> x 40.4")
+    p_clk = p_3v3 and run(cx, "INU_ADCLK", IN3, e_clk, tv["INU_ADCLK"], SIG_W, box_e, leader=(GUARD_W, p_3v3), what="east, U21 side -> x 40.4")
     p_dat = p_clk and run(cx, "MDATA_INU", IN3, e_dat, tv["MDATA_INU"], SIG_W, box_e, leader=(SIG_W, p_clk), what="east, U21 -> x 40.4")
-    p_3v3 = p_dat and run(cx, "3V3_ISO", IN3, e_3v3, tv["3V3_ISO"], GUARD_W, box_e, leader=(SIG_W, p_dat), what="east, plane -> x 40.4")
-    if not p_3v3:
+    if not p_dat:
         return cx, total, made
     for n, w in (("INU_ADCLK", SIG_W), ("MDATA_INU", SIG_W), ("3V3_ISO", GUARD_W)):
         if not straight(cx, n, IN2, [tv[n], cv[n]], w, "past J37 on In2"):
@@ -236,8 +145,8 @@ def iso_link(b):
     box_w = (-101.0, 38.0, 31.0, 71.4)
     q_clk = run(cx, "INU_ADCLK", IN3, cv["INU_ADCLK"], w_clk, SIG_W, box_w, avoid=AVOID, what="west, column -> U4-7")
     q_dat = q_clk and run(cx, "MDATA_INU", IN3, cv["MDATA_INU"], w_dat, SIG_W, box_w, leader=(SIG_W, q_clk), avoid=AVOID, what="west, column -> R50")
-    q_gnd = q_dat and run(cx, "ISOGND", IN3, (28.75, ys["ISOGND"]), w_gnd, GUARD_W, box_w, leader=(SIG_W, q_clk), avoid=AVOID, what="guard, column -> U30-2")
-    q_3v3 = q_gnd and run(cx, "3V3_ISO", IN3, cv["3V3_ISO"], w_3v3, GUARD_W, box_w, leader=(SIG_W, q_dat), avoid=AVOID, what="guard, column -> C37-2")
+    q_3v3 = q_dat and run(cx, "3V3_ISO", IN3, cv["3V3_ISO"], w_3v3, GUARD_W, box_w, leader=(SIG_W, q_clk), avoid=AVOID, what="guard, column -> C37-2")
+    q_gnd = q_3v3 and run(cx, "ISOGND", IN3, g0, w_gnd, GUARD_W, box_w, leader=(GUARD_W, q_3v3), avoid=AVOID, what="guard, column -> U30-2")
     if q_clk and q_dat:
         total["INU_ADCLK"] = geo.plen(p_clk) + 11.65 + geo.plen(q_clk)
         total["MDATA_INU"] = geo.plen(p_dat) + 11.65 + geo.plen(q_dat)
@@ -246,7 +155,8 @@ def iso_link(b):
 
 def afe_link(b):
     cx = geo.Ctx(b)
-    cx.pierce = {"GND", "VCC", "FILTER_INPUT", "/01 afe/FILTER_INPUT", "/01 afe/LEMOUT", "LEMOUT"}
+    cx.via_pierce = {"GND", "VCC"}
+    cx.pierce = {"/01 afe/FILTER_INPUT", "/01 afe/LEMOUT"}
     total = {}
     made = []
     e_dat = end_via(cx, "U15", "10", prefer=(0, -1), made=made)
@@ -275,6 +185,7 @@ def main():
     strip(b, {"MDATA", "ADCLK", "MDATA_INU", "INU_ADCLK", "INU_ADCLK_U21"})
     cxi, ti, madei = iso_link(b)
     n = geo.hv_holes(cxi, madei, "sdm")
+    taps(b)
     cx, ta, made = afe_link(b)
     n += geo.hv_holes(cx, made, "sdm")
     say(f"sdm: {n} HV keep-outs (pour cut back 2.5 mm) for the link vias / stubs in HV pours")
