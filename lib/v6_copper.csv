@@ -17,3 +17,9 @@ unwire,*,33.0,31.5,90.5,45.0,ISOPGND,v6 step 3: wire link BUSN1 - BUSN2 removed,
 area,*,-4.0,-65.0,73.0,-42.0,,copper of the AFE sense group at its old place (R48 / U5) and the copper groups it left without a pad deleted (v6 step 3); the area is routed again in step 5
 area,*,19.0,33.0,27.0,47.0,,tracks of 3V3_ISO / ISOGND / U2 / U7B within 2.5 mm of the J38 (ISOPGND) terminal pads deleted (v6 step 4b); routed again in step 5
 unrouted,*,-63.0,47.0,-53.0,67.0,,U30 (B0512S, bottom side) moved here in v6 step 4d, between J9 and J10: routed in step 5
+area,In1.Cu,0.0,-65.0,112.0,-23.5,,v6 routing pass 1 chain steps 01-03: an In1 run of a removed gate-card net (PWM_G4 side) cut at the aux area edge and pulled back by the prune; the chain routes the area again
+area,In2.Cu,-56.5,-82.5,1.0,-79.0,,v6 routing pass 1 chain step 03: In2 run along the primary wall pulled back by the prune (dangling after step 4b)
+area,In2.Cu,13.0,26.0,25.0,47.5,,v6 routing pass 1 chain step 03: 3V3_ISO / GPIO_BYPASS_RLY_ISO / U7 inputs pulled back by the prune (cut by step 4b at J38)
+area,In2.Cu,3.5,-48.8,43.5,-19.0,,v6 routing pass 1 chain steps 03 / 98: MDATA In2 run left without a pad by the prune, deleted
+area,B.Cu,-69.5,41.5,-19.5,52.0,,v6 routing pass 1 chain step 03: INDUCTOR_OUTPUT run to R62 pulled back by the prune (cut at J9 in step 1)
+area,B.Cu,-2.5,43.0,2.0,49.5,,v6 routing pass 1 chain step 03: short stubs of #00269 / #00270 pulled back by the prune

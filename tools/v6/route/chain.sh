@@ -99,6 +99,10 @@ fi
 script 05 taps 05_sdm.py taps
 source "$H/steps.sh"
 
+if run_it 98; then
+    echo "== 98 copper groups without a pad (left by steps 01 / 03)"
+    heavy "$KIPY" "$H/98_orphans.py" 2>&1 | grep -v Debug | grep "items without"; fill; keep 98_orphans
+fi
 if [ "$((10#$LAST))" -ge 90 ]; then
     kp "$H/fence.py" clear "$BOARD" "$BOARD"
     check 99_final; keep 99_final
