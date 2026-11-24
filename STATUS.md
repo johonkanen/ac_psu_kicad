@@ -2,7 +2,11 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Routing pass 1, prep: aux routes replayed, fixed, dangling copper pruned (2026-11-24, branch `v6-routing-pass1`)
+## Routing pass 1, prep: aux routes replayed, fixed, dangling copper pruned (2026-11-24, branch `v6-routing-pass1b`)
+
+Branch note: `v6-routing-pass1` was pushed at c3057f5 (by the planning session) before the worker rebased it onto
+steps 4c / 4d; the rebased work lives on `v6-routing-pass1b`, and `origin/v6-routing-pass1` stays as it is. From
+now on baseboard steps come into a pushed pass branch by `git merge v6-baseboard`, never by a rebase.
 
 Chain `tools/v6/route/chain.sh` (rerunnable from the committed `v6-baseboard` board; steps kept in `build/v6route/`):
 - **01** `tools/v6/aux_routes.py` (the helper's script from `aux-routes` 879aa02): all 81 pads matched on the step-4b
