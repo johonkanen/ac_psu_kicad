@@ -724,6 +724,10 @@
       },
       {
         "netclass": "DOM_I",
+        "pattern": "INU_ADCLK_U21"
+      },
+      {
+        "netclass": "DOM_I",
         "pattern": "INU_CHOKE"
       },
       {

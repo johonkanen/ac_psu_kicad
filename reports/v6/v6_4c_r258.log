@@ -1,0 +1,6 @@
+== v6 step 4c: R258 at U21-14
+  new net INU_ADCLK_U21
+  R258 33R Resistor_SMD:R_0603_1608Metric B at (76.500,43.200) rot 90: pad1 INU_ADCLK_U21 (76.5, 42.375), pad2 INU_ADCLK (76.5, 44.025)
+  U21-14 -> INU_ADCLK_U21
+  R258-1 [INU_ADCLK_U21] at (76.50, 42.38)
+  R258-2 [INU_ADCLK] at (76.50, 44.02)

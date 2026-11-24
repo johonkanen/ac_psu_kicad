@@ -343,6 +343,7 @@ R143,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v5: line over-voltage divider
 R144,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v5: line over-voltage divider bottom: stop at 2.85 V x 30.18M / 180k = 478 V (461 .. 495)
 R256,ac_psu:R,Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder,1206 (Proteus pads 3.15 mm apart)
 R257,ac_psu:R,Resistor_SMD:R_1206_3216Metric,v6: U6 VDD1 dropper from 15V_ISO (with R75 470R)
+R258,ac_psu:R,Resistor_SMD:R_0603_1608Metric,v6: INU_ADCLK series resistor at the U21 output
 REF1,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 REF2,ac_psu:REF3025,ac_psu:SOT-23_Proteus,"SOT-23, Proteus pad numbering"
 T1,ac_psu:EEL19_AUX_TRANS,ac_psu:Transformer_EEL19_V_4+6_SideLeads,"v5: EEL19 PC40, vertical 4+6 bobbin, Lp 322 uH, primary 70 T on fly leads / Out1 11 / Out2 11 TIW / CTRL 7 TIW (reports/aux_flyback; v5 step 8)"

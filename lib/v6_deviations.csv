@@ -125,6 +125,8 @@ part,C159,,,Capacitor_SMD:C_0603_1608Metric,v6,5V_ISOL at J26
 value,C159,,,100n,v6,
 part,R257,,,Resistor_SMD:R_1206_3216Metric,v6,U6 VDD1 dropper from 15V_ISO (with R75 470R)
 value,R257,,,390R,v6,
+part,R258,,,Resistor_SMD:R_0603_1608Metric,v6,INU_ADCLK series resistor at the U21 output
+value,R258,,,33R,v6,
 part,D17,,,ac_psu:D_SOD-323_AC,v6,U6 VDD1 5.1 V
 value,D17,,,MM3Z5V1T1,v6,
 part,U29,,,ac_psu:Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4,v6,U5 side-1 supply from 5V (AFE current sense at the choke's filter end)
@@ -237,6 +239,8 @@ add,C159,1,,5V_ISOL,v6,
 add,C159,2,,ISOGND,v6,
 add,R257,1,,15V_ISO,v6,
 add,R257,2,,ISO_DAB_SDM_RAW_VOLTAGE,v6,
+add,R258,1,,INU_ADCLK_U21,v6,
+add,R258,2,,INU_ADCLK,v6,
 add,D17,A,,DAB_SHUNT2,v6,
 add,D17,C,,#00359,v6,
 add,U29,1,,5V,v6,
@@ -265,3 +269,4 @@ pin,AFE_OUT,1,G3_SOURCE_HI,N/C,v6,v6 (was G3_SOURCE_HI)
 pin,INU_OUT2,1,Q5_S,N/C,v6,v6 (was Q5_S)
 pin,J5,1,SHUNT1,N/C,v6,v6 (was SHUNT1_FORCE)
 pin,J7,1,INDUCTOR_INPUT,N/C,v6,v6 (was INDUCTOR_INPUT)
+add,U21,14,,INU_ADCLK_U21,v6,v6 (was INU_ADCLK)

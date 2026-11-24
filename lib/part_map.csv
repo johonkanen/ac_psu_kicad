@@ -343,6 +343,7 @@ R143,7,ac_psu:R,10M
 R144,7,ac_psu:R,180k
 R256,5,ac_psu:R,
 R257,8,ac_psu:R,390R
+R258,11,ac_psu:R,33R
 REF1,3,ac_psu:REF3025,REF3025
 REF2,3,ac_psu:REF3025,REF3025
 T1,7,ac_psu:EEL19_AUX_TRANS,EEL19 aux flyback

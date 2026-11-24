@@ -2,6 +2,17 @@
 
 Updated: 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
+## v6 step 4c – R258 33R in INU_ADCLK at U21 (2026-11-24, branch `v6-baseboard`)
+
+Planning session 2026-11-24 (rules for the two sigma-delta links): the clock gets a series resistor at its driving
+end. ADCLK has R22 39R at U15 (sheet 11); INU_ADCLK (U21 pin 14 to U4 beside J9, over 100 mm) had none. New part R258
+33R 0603 (sheet 11, `tools/v6/v6_parts.py`): U21-14 is net INU_ADCLK_U21 -> R258 -> INU_ADCLK.
+`tools/v6/v6_4c_r258.py` (seed 6009) places R258 on B.Cu at (76.5, 43.2), right at U21 pin 14. `make_v6_lists.py`
+now writes an `add` row (not a `pin` row) when a pin of a part added after Proteus changes net (U21-14).
+ADCLK_DAB (U21 pin 13 to U6, about 35 mm) has no series resistor either; not asked, not changed.
+The new net needed its domain class: `tools/v4/domain_rules.py` rerun (INU_ADCLK_U21 -> DOM_I).
+Checks: `tools/check_all.sh` ALL CHECKS PASSED (`reports/v6/v6_4c_check_all.log`).
+
 ## v6 step 4b – bus lanes on three layers per net, HV clearance on the card DC pads (2026-11-24, branch `v6-baseboard`)
 
 `tools/v6/v6_4b_lanes.py` (seed 6008, log `reports/v6/v6_4b_lanes.log`), zones refilled with `kicad-cli pcb drc

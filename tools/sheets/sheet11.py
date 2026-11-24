@@ -104,8 +104,10 @@ for ref, y, sig in (("U19", g(36), PW[0]), ("U20", g(76), PW[1])):
 sh.text("U19 INB/INC unused (tied to CTRLGND_A), OUTB/OUTC open.", g(240), g(52))
 ic(sh, "CA-IS3742", "U21", g(262), g(118),
    {1: "3V3_CTRL", 2: "CTRLGND_A", 8: "CTRLGND_A", 3: "INU_ADCLK_CTRL", 4: "ADCLK_DAB_CTRL", 5: "MDATA_INU_CTRL",
-    6: "MDATA_DAB_CTRL", 7: "3V3_CTRL", 16: "3V3_ISO", 9: "ISOGND", 15: "ISOGND", 14: "INU_ADCLK", 13: "ADCLK_DAB",
+    6: "MDATA_DAB_CTRL", 7: "3V3_CTRL", 16: "3V3_ISO", 9: "ISOGND", 15: "ISOGND", 14: "INU_ADCLK_U21", 13: "ADCLK_DAB",
     12: "MDATA_INU", 11: "MDATA_DAB", 10: "3V3_ISO"}, value=V["U21"])
+part2(sh, "R", "R258", g(300), g(126), "33R", "INU_ADCLK_U21", "INU_ADCLK", horizontal=True)
+sh.text("v6: R258 33R in INU_ADCLK at the U21 output (the run to U4 at J9 is over 100 mm).", g(286), g(130))
 sh.text("U21: clocks CTRL -> ISO (U4/U6 MCLKIN), data ISO -> CTRL; firmware samples MDATA_INU/MDATA_DAB with the "
         "same phase offset as MDATA_ISO.", g(220), g(136))
 row(g(30), g(330), [(("C"), r, V[r], vdd, gnd, 1) for r, vdd, gnd in (

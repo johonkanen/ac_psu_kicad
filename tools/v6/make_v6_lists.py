@@ -116,6 +116,9 @@ def net_rows():
         if k is None or k == image.get(n):
             continue
         proteus = {b: a for a, b in deviations.refdes_map().items()}.get(r, r)   # rows keep the Proteus refdes
+        if (r, p) not in ipc:     # a part added in v4 / v5 (no Proteus pin): a later add row replaces the earlier one
+            out.append(dict(kind="add", ref=r, pin=p, **{"from": ""}, to=inverse.get(k, k), fix=FIX, note=f"v6 (was {n})"))
+            continue
         out.append(dict(kind="pin", ref=proteus, pin=p, **{"from": ipc.get((r, p), n)}, to=inverse.get(k, k), fix=FIX,
                         note=f"v6 (was {n})"))
     return out

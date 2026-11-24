@@ -86,6 +86,9 @@ for c in CARDS:
 # (15..17 V - 5.1 V) / (390 + 470) = 11.5..13.8 mA; ADuM7701 I_DD1 10 mA max.
 PARTS += [
     ("R257", 8, "R", "390R", "Resistor_SMD:R_1206_3216Metric", "U6 VDD1 dropper from 15V_ISO (with R75 470R)"),
+    # planning session 2026-11-24: the inverter sigma-delta clock gets a series resistor at the driving end (U21
+    # pin 14), like ADCLK has R22 at U15; the run to U4 at J9 is over 100 mm
+    ("R258", 11, "R", "33R", "Resistor_SMD:R_0603_1608Metric", "INU_ADCLK series resistor at the U21 output"),
     ("D17", 8, "D_Zener", "MM3Z5V1T1", "ac_psu:D_SOD-323_AC", "U6 VDD1 5.1 V"),
 ]
 # Side-1 supplies of U5 / U4: Mornsun B0512S-1WR3 (5 V in, 12 V out, 1 W, 1.5 kV; JLC C7465188, 10680 in stock on
