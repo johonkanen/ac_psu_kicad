@@ -133,9 +133,14 @@ def simplify(pts):
     return out
 
 
-def run(cx, net, layer, a, c, w, box, leader=None, avoid=(), made=None, what="", step=None):
+def run(cx, net, layer, a, c, w, box, leader=None, avoid=(), made=None, what="", step=None, walls=()):
     t0 = time.time()
     g = geo.Grid(cx, layer, box, w, net, step=step)
+    for r in walls:
+        if isinstance(r[0], (list, tuple)):  # (polyline, radius): block the band along a polyline
+            g.block_poly(r[0], r[1])
+        else:
+            g.wall(*r)
     g.cost = [2.0 if v else 0.0 for v in g.soft]
     if avoid:
         avoid_cost(g, cx.b, avoid)
@@ -182,7 +187,7 @@ def remove(b, objs):
             pass
 
 
-def chain(cx, net, start, legs, what, leaders=None):
+def chain(cx, net, start, legs, what, leaders=None, walls=None):
     """start: (x, y) of a via / pad already on the board; legs: [(layer, w, box, target)], target = (x, y) of the
     next transfer point ('via:' prefix in a tuple ('via', x, y) asks for a new via near x, y) or of an existing end.
     Returns True when every leg is drawn; on a failure the net's new copper of this call is removed."""
@@ -207,7 +212,9 @@ def chain(cx, net, start, legs, what, leaders=None):
             continue
         fine = 0.05 if box[2] - box[0] < 70 else None      # the pinches west of the corridor need the fine grid
         ld = leaders[k] if leaders and k < len(leaders) else None
-        pts = run(cx, net, layer, cur, tgt, w, box, made=made, what=f"{what} leg {k + 1}", step=fine, leader=ld)
+        wl = walls[k] if walls and k < len(walls) else ()
+        pts = run(cx, net, layer, cur, tgt, w, box, made=made, what=f"{what} leg {k + 1}", step=fine, leader=ld,
+                  walls=wl)
         if pts is None:
             break
         cx.paths.append(pts)
