@@ -25,6 +25,7 @@
  "INU_SHUNT2": 2.5,
  "ISODC+": 2.5,
  "ISO_AFE_SDM_RAW_VOLTAGE": 2.5,
+ "Net-(C10-Pad2)": 2.5,
  "Net-(D8-K)": 2.5,
  "Net-(D9-K)": 2.5,
  "Net-(U4-VIN+)": 2.5,
