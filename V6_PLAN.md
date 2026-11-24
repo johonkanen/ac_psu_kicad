@@ -297,3 +297,18 @@ One AFE choke between J5 and FILTER_OUT1 and one inverter inductor between J7 an
 diameter standing upright at the ISO wall; photo `reference/photos/`). The SW wire of the AFE leg 2 card lands on
 FILTER_IN1, that of the inverter leg A card on J10; AFE_OUT1 and INU_OUT2 are deleted (step 4d). U29 / U30 stand on
 the bottom side (10.2 mm, accepted exception to the 10 mm bottom limit). Wiring list: STATUS.md, step 4d.
+
+### 13. v6 goes to main once roughly routed (user 2026-11-24, recorded by the worker)
+
+Main still holds the v5 design that will not route, so v6 replaces it as soon as a routing pass is legal.
+- **Roughly routed** = a pass that is legal: 0 shorts, 0 clearance errors, parity 0, `domain_gaps` and both layout
+  checks (`tools/v5/check_layout.py`, `tools/v6/check_layout_v6.py`) OK, no pour split, `tools/check_all.sh` passing
+  with the open connections listed as pending. Open connections may remain; their count is given by net group.
+- When pass 1 (or the first later pass) reaches that, the worker merges it into `v6-baseboard`, runs `check_all`
+  there and updates the top of STATUS.md and the README so that a reader landing on main sees: this is v6, the
+  power-card baseboard; the state of the routing and what is open; the v5 TO-247 layout is abandoned and kept on
+  branch `v5-layout`. Then the worker tells the planning session.
+- The planning session fast-forwards main to `v6-baseboard` and pushes; the worker never pushes to main.
+- Later passes keep merging into `v6-baseboard`; main is fast-forwarded at each legal milestone.
+- So a legal board with most of it routed comes before closing the last nets.
+- Pass branches that are pushed take baseboard steps by `git merge v6-baseboard`, never by a rebase.
