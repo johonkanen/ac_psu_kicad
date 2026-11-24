@@ -54,8 +54,12 @@ rstep 34 left_i I 600 $HV "$LOGI,PWM_Q5,PWM_Q6,PWM_TRANS5,DAB_PWM_HI_SEC,DAB_PWM
 # === LAST, droppable (planning update 2026-11-24): the two sense blocks and their sigma-delta links ===================
 #     40 / 41: the links drawn (rule 2); 42: the blocks' Proteus copper replayed; 43 / 44: side-1 HV nets (0.15 mm
 #     among themselves, 2.5 mm to the rest), shunt force paths 2 mm; 45 / 46: the blocks' low-voltage side and supplies
-script 40 sdm_iso 05_sdm.py iso
-script 41 sdm_afe 05_sdm.py afe
+#     40 / 41 DROPPED in pass 1: drawn after the router steps, both links found their way blocked (U21 / R22 end
+#     vias crowded by the router's copper) and the steps delete the old link copper first, which then left the
+#     Proteus copper changed outside the open-layout rows. Their nets stay as they were (open). The links were drawn
+#     successfully when they came first (05_sdm.py iso / afe on the step-05 board); see report.md.
+# script 40 sdm_iso 05_sdm.py iso
+# script 41 sdm_afe 05_sdm.py afe
 script 42 sense_replay 09_sense_replay.py
 LATE=late rstep 43 sense_p P 600 $SENSE "SHUNT1,SHUNT2,Net-(U5-VIN+),Net-(U5-VIN-),SDM_RAW_VOLTAGE,Net-(D8-K),AFE_CHOKE1,/01 afe/LEMOUT" \
     --layers B.Cu F.Cu In3.Cu --layer-costs 1 1.5 3 --power-nets AFE_CHOKE1 "/01 afe/LEMOUT" --power-nets-widths 2.0 2.0
@@ -63,3 +67,7 @@ LATE=late rstep 44 sense_i I 900 $SENSE "INU_SHUNT1,INU_SHUNT2,Net-(U4-VIN+),Net
     --layers In3.Cu F.Cu B.Cu --layer-costs 1 2 4 --power-nets INU_CHOKE "/05 VSI/INDUCTOR_OUTPUT" --power-nets-widths 2.0 2.0
 LATE=late rstep 45 sense_lv_p P 600 $HV "Net-(U5-MDAT),GND,VCC,5V" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000
 LATE=late rstep 46 sense_lv_i I 600 $HV "Net-(U4-MDAT),ISOGND,3V3_ISO,5V_ISOL" "${SUPC[@]}" "${PW[@]}" --quick --max-iterations 1500000
+
+# --- V6_PLAN section 13: legal first. New copper that reaches outside the open-layout rows is taken out again (its
+#     connections stay open, excused there as pending); the rows are not widened.
+script 47 confine 47_confine.py "$W/03_prune.kicad_pcb"
