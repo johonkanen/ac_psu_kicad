@@ -31,7 +31,7 @@ DOMAIN_FENCES = {
 }
 # the two current-sense blocks with U29 / U30 (planning update 2026-11-24: routed last, in steps that can be dropped):
 # fenced for every step before those
-GROUPS = [(-46.0, -84.5, -17.0, -42.0), (-104.0, 38.0, -62.0, 71.8)]
+GROUPS = [(-46.0, -84.5, -17.0, -42.0), (-104.0, 38.0, -54.0, 71.8)]   # U30 at (-58.25, 56.9) since step 4d
 PLANES = [(44.4, 10.8, 95.1, 33.0), (58.9, -9.4, 118.1, 48.8), (102.5, -34.5, 118.1, 3.0), (42.5, -20.7, 85.5, 5.8),
           (67.0, -54.6, 82.9, -4.2)]
 
