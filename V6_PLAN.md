@@ -377,3 +377,38 @@ before routing pass 2, as a numbered step on `v6-baseboard`:
   landing of the AFE leg 2 SW wire and may go anywhere near the filter input) and the AFE leg 1 pair J32 / J31 if
   their lug circles reach the envelope. Report what moved.
 - Then check_all, and routing pass 2 as planned in STATUS.md.
+
+## 16. Routing by blocks (user 2026-11-26: "do it", the worker's proposal with its picks)
+
+Routing pass 2 onwards is done block by block instead of one long chain over the whole board.
+
+**Blocks** (IPC frame, mm; picture `reports/v6/blocks/blocks_F.png`, data `tools/v6/route/blocks.py`):
+
+| Block | Area x / y | Contents | Start from |
+|---|---|---|---|
+| A AFE input / filter / AFE sense (P) | -128 ... -2 / -83 ... -12 | AC input, CM chokes, filter caps, AFE choke holes, R48 / U5 / U29 | clean |
+| B Inverter filter / AC out / INV sense (I) | -128 ... -38 / -12 ... 72 | J7 / J9 / J10, CM3, output caps, relay, R91 / U4 / U30 | clean |
+| C Primary card band (P) | -2 ... 119 / -83 ... -46 | headers J21-J23, terminals J31-J36, DC bus | pass-1 copper kept |
+| D ISO card band + west of J11 (I) | -38 ... 119 / 46 ... 72 | headers J24-J26, J37-J42, ISO lane | pass-1 copper kept |
+| E Control-card area (C / I / P) | 40 ... 119 / -46 ... 46 | J11 / J12 fan-out, isolators, analog chain, buck | clean |
+| F Bulk caps / dividers / op-amps (P / I) | -38 ... 40 / -46 ... 46 | snap-in caps, divider chains, U7 / U2, taps | clean |
+| G Aux flyback | 67 ... 97.5 / -55 ... -4 | aux area of section 10 | routed, frozen |
+
+"Clean" means the routed signal copper of earlier passes inside the block is removed before the block is routed;
+the v4 / v5 power pours and planes stay in every block.
+
+**Method**
+1. Area reservation: block outlines and the inter-block corridors in `tools/v6/route/blocks.py`; a check fails if
+   new copper lies outside its block or corridor.
+2. Ports: every net crossing a block edge gets a fixed point and layer on that edge, placed by the worker from the
+   corridor lane counts before routing (a corridor short of lanes is reported before any routing).
+3. Each block is routed on its own, fenced to its outline and its ports, and delivered as a replay script with a pad
+   check (as `tools/v6/aux_routes.py`), never as a board file.
+4. Trunks: the crossing nets are routed or drawn port to port inside the corridors (the two sigma-delta pairs and the
+   PWM bundles drawn by script).
+5. Integration chain: base board -> blocks in a fixed order -> trunks -> plane vias and stitching -> clean-up ->
+   check_all; island counts and the 2.5 mm high-voltage rule at every step, as before.
+
+**Order:** the inductor landings of section 15 first (they change A and B); then E (29 connections open inside, its
+lanes fix the ports to C and D); then F; then A and B (sense groups last, they may still move with the toroids);
+C and D last. One router run at a time (section 10a); a block run is minutes, not hours.
