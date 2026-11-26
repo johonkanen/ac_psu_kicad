@@ -44,11 +44,11 @@ and coordinates. Every check in this repo compares against that file.
 <td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/3d_bottom.png" width="400"><br><b>3D, bottom (seen from below)</b></td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/F_Cu.svg" width="400"><br><b>F.Cu: signal, FILTER_INPUT, DC+, GND, ISOPGND, DAB_GROUND and 13 more pours (top)</b></td>
-<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In1_Cu.svg" width="400"><br><b>In1.Cu: signal, CTRLGND_A, ISOGND, AUX_DRAIN, GND, DC+ and 2 more pours</b></td>
+<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/F_Cu.svg" width="400"><br><b>F.Cu: signal, FILTER_INPUT, DC+, GND, ISOPGND, DAB_GROUND and 14 more pours (top)</b></td>
+<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In1_Cu.svg" width="400"><br><b>In1.Cu: signal, CTRLGND_A, ISOGND, SW_INV_B, AUX_DRAIN, FILTER_INPUT and 5 more pours</b></td>
 </tr>
 <tr>
-<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In2_Cu.svg" width="400"><br><b>In2.Cu: signal, 3V3_ISO, GND, ISOPGND, 3V3_CTRL, 5V_CTRL and 2 more pours</b></td>
+<td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In2_Cu.svg" width="400"><br><b>In2.Cu: signal, 3V3_ISO, INU_FILTER_INPUT, GND, ISOPGND, 3V3_CTRL and 5 more pours</b></td>
 <td align="center"><img src="https://raw.githubusercontent.com/johonkanen/ac_psu_kicad/renders/ac_psu/In3_Cu.svg" width="400"><br><b>In3.Cu: signal, DC+, ISODC+ pours</b></td>
 </tr>
 <tr>
