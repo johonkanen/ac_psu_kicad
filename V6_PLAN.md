@@ -312,3 +312,44 @@ Main still holds the v5 design that will not route, so v6 replaces it as soon as
 - Later passes keep merging into `v6-baseboard`; main is fast-forwarded at each legal milestone.
 - So a legal board with most of it routed comes before closing the last nets.
 - Pass branches that are pushed take baseboard steps by `git merge v6-baseboard`, never by a rebase.
+
+## 14. Magnetics of the built unit (user 2026-11-26; files in `reference/magnetics/`, top-view photo in `reference/photos/`)
+
+**AFE choke and inverter inductor: the same part, one each.** Listing "184125-1MH", upright toroid
+(`inductor_184125-1MH_listing.jpg`): outer diameter 53.2 mm, thickness 27.9 mm, two leads of 2.0 mm wire, 22 mm
+long, lead pitch 23.8 mm (adjustable), one lead on each side of the thickness. Nominal 1 mH at 1 kHz / 0.3 V.
+
+- In the unit both stand upright with the plane of the toroid parallel to the heatsink wall, so the leads are
+  spaced across the wall direction: inverter inductor on J7 / J9 (17.2 mm apart in y), AFE choke between J5 and
+  FILTER_OUT1.
+- **Envelope for the layout check (top side, 56 mm tall, nothing taller than the lead standoff inside):**
+  54 × 28 mm, long side along the wall, centred on the midpoint of its two leads. Inverter: about x −99 … −45,
+  y 43 … 71. AFE: about x −51 … +3, y −78 … −50. This replaces the provisional 60 × 36 mm rectangle of step 4d.
+- To check against it: the M4 terminals under the toroids themselves (J7, J9, J5, FILTER_OUT1), FILTER_IN1 inside
+  the AFE envelope, the AFE leg 1 pair J32 / J31 at its east edge, C19 / C21 at FILTER_OUT1.
+- Not known: the core material and how much inductance is left at 25 A and at the 50 A peaks (planning session's
+  rough estimate for a µ125 powder core of this size: a small fraction of 1 mH, which would make the switching
+  ripple large at the peaks). To measure or to read from the seller's data.
+
+**DAB transformer:** two stacked Metglas MICROLITE MP7109MDGC toroids (`metglas_microlite_toroids_bulletin.pdf`,
+table on page 5), about 20 turns, wound so that the leakage is the DAB's series inductance (user).
+
+| Per core | Value | Two stacked |
+|---|---|---|
+| OD / ID / height | 57.21 / 37.44 / 15.32 mm | height about 31 mm |
+| Path length | 14.64 cm | same |
+| Cross-section | 1.03 cm² | 2.06 cm² |
+| A_L | 217.4 nH/N² (µ 245) | about 435 nH/N² |
+| Volume / mass | 15.13 cm³ / about 109 g | about 217 g |
+
+Planning session's arithmetic from the bulletin, for 20 turns and ±200 V on the primary (half bridge on split
+capacitors at a 400 V bus); estimates to be checked against the real turns and a temperature measurement:
+
+| | 60 kHz | 120 kHz |
+|---|---|---|
+| Magnetising inductance | about 174 µH | same |
+| Peak flux density | 0.20 T | 0.10 T |
+| Peak magnetising current | 4.8 A | 2.4 A |
+| Core loss by the bulletin's formula | about 275 W/kg, about 60 W | about 100 W/kg, about 22 W |
+
+The magnetising inductance and the split-capacitor reactance belong in the DAB model of the card's `sim/`.
