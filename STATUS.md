@@ -25,6 +25,14 @@ Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see 
 - Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
   zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push (permission blocked in its
   session), the user or the planning session pushes.
+- Inductor core (user 2026-11-26): likely Kool Mu or a similar sendust powder core (common in these listings). Rough
+  estimate by the worker, nothing measured: a core of about 46.7 / 24.1 / 18 mm fits the 53.2 x 27.9 mm wound size;
+  1 mH then needs about 77 turns (125 u, 59 % window fill with 2.0 mm wire; 60 u would need 111 turns at 84 %, too
+  full, so 125 u is the likely grade). Magnetising force about 90 / 230 / 450 Oe at 10 / 25 / 50 A, where a 125 u
+  sendust core keeps roughly 30 / 12-15 / 5-6 % of its permeability: about 0.3 mH at 10 A, 0.15 mH at 25 A and
+  0.06 mH at 50 A. Half-bridge ripple at D = 0.5, 400 V, 50 kHz: 13 A pp at 0.15 mH, 33 A pp at 0.06 mH. To pin it
+  down: count the turns and measure the core (or measure L with a DC bias / a pulse test). Affects the inverter / AFE
+  ripple, the card current rating and the current-sense range, not the layout.
 - **Open questions for the user:** size and standing position of the inverter toroid (about 55 mm, upright) and the
   place of the AFE choke (the two sense groups may move with them); pigtail wire gauge and M3 ring lug; B0512S
   minimum load; IPC-2152 check or measurement of the ISO lane (20 K at 23 A estimated); U18 temperature at 450 V full
