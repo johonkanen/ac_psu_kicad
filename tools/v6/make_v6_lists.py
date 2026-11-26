@@ -61,6 +61,13 @@ def base_rows():
         out.append(dict(kind="remove", ref=proteus_of.get(ref, ref), pin="", **{"from": ""}, to="", fix=FIX,
                         note=V.REMOVED_NOTE[ref]))
     import deviations  # noqa: E402
+    for a_, b_ in V.RENAME.items():
+        out.append(dict(kind="rename", ref="", pin="", **{"from": a_}, to=b_, fix=FIX,
+                        note="v6: switch-node net of the inverter leg B (V6_PLAN section 15)"))
+    for ref, fp in V.FOOTPRINT.items():
+        old = next((r["from"] for r in deviations.rows() if r["kind"] == "footprint"   # the rule footprint (v4 swaps from it too)
+                    and deviations.kref(r["ref"]) == deviations.kref(ref)), "")
+        out.append(dict(kind="footprint", ref=ref, pin="", **{"from": old}, to=fp, fix=FIX, note=V.FOOTPRINT_NOTE))
     back = {b: a for a, b in deviations.refdes_map().items()}
     for ref, note in V.MOVED.items():
         if ref in V.MOVED_NOT_PROTEUS:

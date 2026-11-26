@@ -4,40 +4,62 @@
 
 Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Where the work stopped (end of session 2026-11-24)
+## Where the work stopped (end of session 2026-11-26)
 
-- **State:** main = `v6-baseboard` (4134e5b, pushed by the planning session): v6 power-card baseboard, routing
-  pass 1 legal (check_all passes), **102 connections open**. Card: `johonkanen/hb_power_card`, branch `card-rev1`
-  (2d4ebeb, routed, R_off 10R).
-- **Pass 2 (approved by the planning session, Fable 2026-11-24), on a new branch `v6-routing-pass2` from
-  `v6-baseboard`; baseboard steps come into pushed pass branches by merge, never rebase:**
-  1. Baseboard step first: move **J37 west by 3 mm** (J38 stays); check the lug and wall rules and that the ISODC+
-     tongue still reaches J37 at full width. If a rule fails, move the pair 3 mm further apart the other way and
-     record which.
-  2. Chain order: the 52 open supply / ground connections first, **as plane vias, not tracks**; a pad without a legal
-     via site is listed with what blocks it, not routed around. Then the sigma-delta pairs drawn early (they worked
-     early in pass 1: ISO 184 / 186 mm, AFE 139 / 150 mm with guard tracks); the plane vias of step 07 after the J11
-     fan; open-layout corridor rows for the primary PWM / tap paths (x 7 ... 66, y -60 ... -19) so routed copper is
-     kept; supplies before the sense blocks are fenced.
-  3. Clean-up step at the end: the 46 dangling track ends and the dangling via in `reports/drc.json`.
-  4. Each legal pass: merge into `v6-baseboard`, check_all, tell the planning session (it fast-forwards main).
-  5. Limit: if pass 3 still leaves nets open, stop and propose one placement change.
+- **State:** `v6-baseboard` = step 5 (inductor landings, entry below) on top of 6226a75 (block outlines and port
+  windows). Main = 4134e5b + the planning session's §14 / §15 commits. Card: `card-rev1` with the Infineon model,
+  its ngspice conversion (`sim/pspice2ngspice.py`) and the loop study rerun with it (b8340c5).
+- **Step 5 changed:** J5 / J7 / J9 / FILTER_OUT1 to 2.3 mm lead holes (`WireHole_D5.0mm_Drill2.3mm`); new J7S (M4,
+  SW_INV_B) at (−47, 64.6) with a 5.15 mm band to J7 on F.Cu / In1 / In2; J10 to (−49.5, 48.5) and FILTER_IN1 to
+  (−58.5, −68.5) as a soldered pigtail hole, each with an 8 mm L on In1 / In2 to its choke pin; U30 3 mm south; both
+  inductors on 5 mm spacers; the round-profile check is rule 5 of `tools/v6/check_layout_v6.py`. Net rename
+  INDUCTOR_INPUT → SW_INV_B in `lib/v6_deviations.csv`; the IPC diff and round trip accept the deliberate hole sizes
+  and the moved terminals (`deviations.terminal_areas`, `hole_swap`).
+- **Check result:** check_all passes (full run 2026-11-26; its one failure, the v6 footprint rows listing the v4
+  terminal instead of the rule footprint as "from", fixed, and the footprint / board / IPC checks rerun: OK).
+- **Open in step 5: J5S**, the SW_AFE_1 landing of the AFE leg 1 SW wire (planning item 6: north of the bus band
+  beside J21). No legal place found yet; J5 is unconnected on sheet 1 until it is placed. Next: search beside J21
+  with the step's `legal()` (profile, 2.5 mm, lug rule against J21's shroud); if nothing fits, send the planning
+  session the two best options with a pick. Then sheet 1 (J5 + J5S on SW_AFE_1) and a `v6_5c` script.
+- **Block routing (V6_PLAN §16):** blocks A–G with port windows in `tools/v6/route/blocks.py`
+  (`reports/v6/blocks/blocks_F.png`). Order G → A … ; **block E (control-card area) is next / in progress**: an
+  Opus helper worked on branch `block-E` (from 6226a75, worktree
+  `~/dev/ac_psu_kicad/.claude/worktrees/agent-a1472ef4603fca580`), stopped 2026-11-26 evening as WIP at 1b3c1c9
+  (scripts a5aa781, not pushed). Inside E: 262 → 181 open, 0 DRC errors (J11 both fans complete, C analog chain
+  18 / 21, buck 6 / 6); `block_E.py` replays only the clean-up so far. Next for E: rerun `block_E_chain.sh` from
+  step 14 (P logic, ports, plane vias, supplies, leftovers), write the copper into `block_E_copper.csv`, replay on a
+  fresh 6226a75 board, checks, finish `reports/v6/blocks/block_E.md` (has the brief corrections: the E-B / E-F
+  windows lie in the C|I barrier so all ISO nets leave north; 34 crossing nets; `BASE_REV=870c026` for the step-03
+  board; J11 needs the `08_j11.py` stubs first). Then merge into `v6-baseboard`.
+  Then F, then A / B (sense groups last), C / D, then trunks between the ports and the integration chain. Blocks A
+  and B start clean (step 5 deleted one more pass-1 track at J7).
 - Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
-  zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push (permission blocked in its
-  session), the user or the planning session pushes.
-- Inductor core (user 2026-11-26): likely Kool Mu or a similar sendust powder core (common in these listings). Rough
-  estimate by the worker, nothing measured: a core of about 46.7 / 24.1 / 18 mm fits the 53.2 x 27.9 mm wound size;
-  1 mH then needs about 77 turns (125 u, 59 % window fill with 2.0 mm wire; 60 u would need 111 turns at 84 %, too
-  full, so 125 u is the likely grade). Magnetising force about 90 / 230 / 450 Oe at 10 / 25 / 50 A, where a 125 u
-  sendust core keeps roughly 30 / 12-15 / 5-6 % of its permeability: about 0.3 mH at 10 A, 0.15 mH at 25 A and
-  0.06 mH at 50 A. Half-bridge ripple at D = 0.5, 400 V, 50 kHz: 13 A pp at 0.15 mH, 33 A pp at 0.06 mH. To pin it
-  down: count the turns and measure the core (or measure L with a DC bias / a pulse test). Affects the inverter / AFE
-  ripple, the card current rating and the current-sense range, not the layout.
-- **Open questions for the user:** size and standing position of the inverter toroid (about 55 mm, upright) and the
-  place of the AFE choke (the two sense groups may move with them); pigtail wire gauge and M3 ring lug; B0512S
-  minimum load; IPC-2152 check or measurement of the ISO lane (20 K at 23 A estimated); U18 temperature at 450 V full
-  load (drain copper 171 mm2); double-pulse test of the card at 25 / 50 A; control card out when an ISO card east of
-  J11 is pulled; Infineon SPICE model of the IMLT65R020M2H to download by hand.
+  zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push, the user or the
+  planning session pushes; pushed branches take changes by merge.
+- Inductor core (user 2026-11-26): likely Kool Mu / sendust, worker's estimate about 77 turns of 125 u, roughly
+  0.3 / 0.15 / 0.06 mH at 10 / 25 / 50 A (13 A pp ripple at 0.15 mH, 33 A pp at 0.06 mH, 400 V, 50 kHz). To pin
+  down: count the turns, measure L with DC bias or a pulse test.
+- **Open questions for the user:** inductance at current (above); disc cap height (16 mm assumed under the AFE
+  choke); the 5 mm inductor spacers as an assembly item; pigtail wire gauge and M3 ring lug (FILTER_IN1 is a pigtail
+  now too); B0512S minimum load; IPC-2152 check or measurement of the ISO lane; U18 temperature at 450 V full load;
+  double-pulse test of the card (decides R_off); control card out when an ISO card east of J11 is pulled.
+
+## v6 step 5 – inductor leads in plain holes, SW landings outside the round profiles (2026-11-26, `v6-baseboard`)
+
+V6_PLAN §15 with the planning session's decisions of 2026-11-26 (round profile, items 1-6). Scripts
+`tools/v6/v6_5_inductors.py` + `v6_5b_orphans.py` (logs in `reports/v6/`), renders
+`reports/v6/blocks/inductor_afe_F.png` / `inductor_inv_F.png` (profile drawn: 6 / 11 / 16 mm free lines).
+
+- J5 / J7 / J9 / FILTER_OUT1 are 2.3 mm holes (new footprint `WireHole_D5.0mm_Drill2.3mm`, footprint rows in
+  `lib/v6_deviations.csv` via `make_v6_lists.py`).
+- New J7S (M4, net SW_INV_B, sheet 5) at (−47, 64.6); SW_INV_B band along the wall on three layers (5.15 mm wide:
+  wall edge rule to U30). U30 3 mm south (not west / north as offered: the band runs past its pins).
+- Both inductors on 5 mm spacers (inverter: needed by J7S beside H1, item 5).
+- J10 to (−49.5, 48.5), FILTER_IN1 to (−58.5, −68.5) as a soldered pigtail hole (no legal M4 place in the filter
+  area), each with an 8 mm L on In1 / In2 to its choke pin. One pass-1 track (ISO_AFE_SDM_RAW_VOLTAGE at J7) deleted.
+- `check_layout_v6` rule 5: the round profile with part heights. DRC clean, check_all passes.
+- **Open:** J5S (SW_AFE_1 landing for the AFE leg 1 SW wire): no legal place found beside J21 yet, question to the
+  planning session; J5 is unconnected until then.
 
 ## Routing pass 1 merged: legal board, 102 connections pending (2026-11-24, `v6-baseboard`)
 

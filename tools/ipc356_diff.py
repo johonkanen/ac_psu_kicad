@@ -232,6 +232,9 @@ def main():
     for r, tref in swaprecs:   # swapped footprints: in their terminal area, on the IPC pin's net
         if swap_net.get(tref) == "N/C" and kicad_unconnected(r["net"]):
             continue   # v6: a terminal that became a wire landing point without a net (pin row ... -> N/C)
+        want = deviations.new_net(swap_net.get(tref) or "")
+        if want not in pnets and r["net"] == want:
+            continue   # v6: the terminal's net renamed (INDUCTOR_INPUT -> SW_INV_B, section 15)
         if mapping.get(swap_net.get(tref)) != r["net"]:
             errors.append(f"v4 footprint swap {tref} pad at ({r['x_mm']:.3f}, {r['y_mm']:.3f}): KiCad net {r['net']}, "
                           f"IPC net {swap_net.get(tref)} -> {mapping.get(swap_net.get(tref))}")

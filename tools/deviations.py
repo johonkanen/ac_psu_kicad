@@ -205,13 +205,33 @@ def terminal_area(ref):
     return found
 
 
+def terminal_areas(ref):
+    """All terminal areas of a swapped footprint, the v4 one and those of later moves (v6 step 5: J10, FILTER_IN)."""
+    out = []
+    for r in copper_rows():
+        if r["kind"] == "area" and r["layer"] == "*" and kref(r["note"].split(" ", 1)[0]) == kref(ref):
+            x0, x1 = sorted((float(r["x"]), float(r["x1"])))
+            y0, y1 = sorted((float(r["y"]), float(r["y1"])))
+            out.append((x0, y0, x1, y1))
+    return out
+
+
 def in_terminal_area(x, y, margin=0.0):
-    """refdes of the swapped footprint whose terminal area holds (x, y), or None."""
+    """refdes of the swapped footprint whose terminal area (any of them: the old lead pin's drill stays in the
+    first, a moved terminal's drills are in the last) holds (x, y), or None."""
     for ref in footprint_changes():
-        a = terminal_area(ref)
-        if a and a[0] - margin <= x <= a[2] + margin and a[1] - margin <= y <= a[3] + margin:
-            return ref
+        for a in terminal_areas(ref):
+            if a[0] - margin <= x <= a[2] + margin and a[1] - margin <= y <= a[3] + margin:
+                return ref
     return None
+
+
+def hole_swap(x, y):
+    """refdes of a v6 footprint row back to a plain lead hole (V6_PLAN section 15: 2.3 mm on purpose, smaller than
+    the Proteus 2.55 mm lead pin) whose terminal area holds (x, y), or None."""
+    ref = in_terminal_area(x, y)
+    ch = footprint_changes().get(ref) if ref else None
+    return ref if ch and ch[2] == "v6" and "WireHole" in ch[1] else None
 
 
 def tie_anchors():

@@ -469,6 +469,8 @@ def compare_drills(kdir, report):
         used[i] = True
         dk = K[i][2]
         pairs[(d, dk)] += 1
+        if dk < d - DRILL_TOL and deviations.hole_swap(x, y):
+            continue            # v6 step 5: inductor lead hole 2.3 mm (V6_PLAN section 15)
         if dk < d - DRILL_TOL:
             errors.append(f"drill at ({x}, {y}): Proteus {d} mm, KiCad {dk} mm is smaller")
     v4 = deviations.vias()

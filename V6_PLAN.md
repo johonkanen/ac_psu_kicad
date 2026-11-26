@@ -322,9 +322,13 @@ long, lead pitch 23.8 mm (adjustable), one lead on each side of the thickness. N
 - In the unit both stand upright with the plane of the toroid parallel to the heatsink wall, so the leads are
   spaced across the wall direction: inverter inductor on J7 / J9 (17.2 mm apart in y), AFE choke between J5 and
   FILTER_OUT1.
-- **Envelope for the layout check (top side, 56 mm tall, nothing taller than the lead standoff inside):**
-  54 × 28 mm, long side along the wall, centred on the midpoint of its two leads. Inverter: about x −99 … −45,
-  y 43 … 71. AFE: about x −51 … +3, y −78 … −50. This replaces the provisional 60 × 36 mm rectangle of step 4d.
+- **Profile for the layout check (corrected 2026-11-26, planning session; replaces the 54 × 28 mm box):** the toroid
+  is round, so the free height under it falls off towards its centre. Strip 27.9 mm wide across the wall, centred
+  between the two leads; along the wall at distance d from the centre the free height is
+  s + R − sqrt(R² − d²), R = 26.6 mm, s = standoff. Centres chosen from the parts around them: AFE x −17
+  (y −77.8 … −49.9), inverter x −72 (y 43 … 71). Both stand on a **5 mm insulating spacer** (or are tied to the
+  wall sheet), height 58 mm under the 70 mm lid: an assembly requirement. The check is in
+  `tools/v6/check_layout_v6.py` (rule 5) with real part heights; disc caps 16 mm is an assumption to verify.
 - To check against it: the M4 terminals under the toroids themselves (J7, J9, J5, FILTER_OUT1), FILTER_IN1 inside
   the AFE envelope, the AFE leg 1 pair J32 / J31 at its east edge, C19 / C21 at FILTER_OUT1.
 - Not known: the core material and how much inductance is left at 25 A and at the 50 A peaks (planning session's
@@ -377,6 +381,22 @@ before routing pass 2, as a numbered step on `v6-baseboard`:
   landing of the AFE leg 2 SW wire and may go anywhere near the filter input) and the AFE leg 1 pair J32 / J31 if
   their lug circles reach the envelope. Report what moved.
 - Then check_all, and routing pass 2 as planned in STATUS.md.
+
+**Done in step 5 (`tools/v6/v6_5_inductors.py`, 2026-11-26), what moved:**
+
+- J5, J7, J9, FILTER_OUT1: `WireHole_D5.0mm_Drill2.3mm`, positions unchanged.
+- J7S (M4, SW_INV_B) at (−47, 64.6), east of the inverter inductor (14 mm free over its 11 mm); joined to the J7
+  hole by a 5.15 mm band along the wall on F.Cu / In1.Cu / In2.Cu (three layers because the band between the wall
+  edge rule and U30 is narrower than 8 mm). The inverter inductor takes the 5 mm spacer for this (item 5).
+- U30 3 mm south (pins clear of the band by 2.5 mm), still within 30 mm of R91.
+- J10 (M4, inverter leg A SW) to (−49.5, 48.5), 11.5 mm free over 11 mm; joined to CM3 pin 2 by an 8 mm L on
+  In1.Cu / In2.Cu plus the existing F.Cu pour.
+- FILTER_IN1 (AFE leg 2 SW): no legal place for an M4 terminal outside the AFE profile in the filter area, so it is a
+  soldered pigtail hole (`WirePigtail_D6.0mm_Drill3.0mm`, as the ISO pigtails) at (−58.5, −68.5), joined to CM1
+  pin 1 by an 8 mm L on In1.Cu / In2.Cu plus the F.Cu pour.
+- J32 / J21 stay under the AFE choke's rim (11.0 in 11.4 mm, 5.3 in 9.2 mm free).
+- **Open: J5S** (SW_AFE_1 landing beside J21, north of the bus band): no legal place found yet; J5 is unconnected
+  until it is placed.
 
 ## 16. Routing by blocks (user 2026-11-26: "do it", the worker's proposal with its picks)
 

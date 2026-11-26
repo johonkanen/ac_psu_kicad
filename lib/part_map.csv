@@ -199,6 +199,7 @@ J39,2,ac_psu:PIN,PIN
 J40,2,ac_psu:PIN,PIN
 J41,2,ac_psu:PIN,PIN
 J42,2,ac_psu:PIN,PIN
+J7S,5,ac_psu:PIN,PIN
 L1,9,ac_psu:L,L
 L2,7,ac_psu:L,15u
 PE1,1,ac_psu:PIN,PIN

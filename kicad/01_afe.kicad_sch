@@ -1855,7 +1855,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
+		(property "Footprint" "ac_psu:WireHole_D5.0mm_Drill2.3mm"
 			(at 127 60.96 0)
 			(effects
 				(font
@@ -2147,7 +2147,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
+		(property "Footprint" "ac_psu:WireHole_D5.0mm_Drill2.3mm"
 			(at 187.96 30.48 0)
 			(effects
 				(font
@@ -2243,7 +2243,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH"
+		(property "Footprint" "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"
 			(at 210.82 60.96 0)
 			(effects
 				(font

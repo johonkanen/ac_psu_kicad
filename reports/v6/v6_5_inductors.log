@@ -1,0 +1,20 @@
+== v6 step 5: inductor holes, SW landings outside the inductor profiles
+  new net SW_INV_B
+  J5: ac_psu:WireHole_D5.0mm_Drill2.3mm at (-14.70, -75.65), net unconnected-(J5-Pad1)
+  J7: ac_psu:WireHole_D5.0mm_Drill2.3mm at (-71.80, 65.60), net SW_INV_B
+  J9: ac_psu:WireHole_D5.0mm_Drill2.3mm at (-71.90, 48.40), net INU_CHOKE
+  FILTER_OUT1: ac_psu:WireHole_D5.0mm_Drill2.3mm at (-33.00, -52.00), net AFE_CHOKE1
+  FILTER_IN1: ac_psu:WirePigtail_D6.0mm_Drill3.0mm at (-14.40, -57.30), net /01 afe/FILTER_INPUT
+  J10 (-58.20, 42.15) -> (-49.50, 48.50), 22.4 mm from its choke pin
+  FILTER_IN1 (-14.40, -57.30) -> (-58.50, -68.50), 12.7 mm from its choke pin
+  U30 (-58.25, 56.30) -> (-58.25, 53.30) CHECK track INU_SHUNT2
+  J7S at (-47.0, 64.6)
+  zone v6 SW_INV_B F.Cu F.Cu SW_INV_B prio 40: (-74.3,64.1) (-41.5,64.1) (-41.5,69.25) (-74.3,69.25)
+  zone v6 SW_INV_B In1.Cu In1.Cu SW_INV_B prio 40: (-74.3,64.1) (-41.5,64.1) (-41.5,69.25) (-74.3,69.25)
+  zone v6 SW_INV_B In2.Cu In2.Cu SW_INV_B prio 40: (-74.3,64.1) (-41.5,64.1) (-41.5,69.25) (-74.3,69.25)
+  zone v6 J10 link In1.Cu In1.Cu /05 VSI/INU_FILTER_INPUT prio 40: (-45.5,36.41) (-53.5,36.41) (-74.34,36.41) (-74.34,44.41) (-53.5,44.41) (-53.5,52.5) (-45.5,52.5)
+  zone v6 J10 link In2.Cu In2.Cu /05 VSI/INU_FILTER_INPUT prio 40: (-45.5,36.41) (-53.5,36.41) (-74.34,36.41) (-74.34,44.41) (-53.5,44.41) (-53.5,52.5) (-45.5,52.5)
+  zone v6 FILTER_IN1 link In1.Cu In1.Cu /01 afe/FILTER_INPUT prio 40: (-54.5,-80.55) (-62.5,-80.55) (-68.5,-80.55) (-68.5,-75.7) (-62.5,-75.7) (-62.5,-64.5) (-54.5,-64.5)
+  zone v6 FILTER_IN1 link In2.Cu In2.Cu /01 afe/FILTER_INPUT prio 40: (-54.5,-80.55) (-62.5,-80.55) (-68.5,-80.55) (-68.5,-75.7) (-62.5,-75.7) (-62.5,-64.5) (-54.5,-64.5)
+  track [ISO_AFE_SDM_RAW_VOLTAGE] near J7 deleted
+  1 tracks / vias within 2.5 mm of the high-voltage pads deleted

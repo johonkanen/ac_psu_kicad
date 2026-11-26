@@ -171,11 +171,11 @@ D14,ac_psu:D,ac_psu:D_SMA_AC,v5: Out1 rectifier 200 V 2 A
 D15,ac_psu:D,ac_psu:D_SMA_AC,v5: Out2 rectifier 200 V 2 A
 D16,ac_psu:D_Schottky,ac_psu:D_SMA_AC,v5: CTRL rectifier 100 V 3 A
 D17,ac_psu:D_Zener,ac_psu:D_SOD-323_AC,v6: U6 VDD1 5.1 V
-FILTER_IN1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter input lead)
-FILTER_OUT1,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (EMI filter output lead)
-J5,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (AFE shunt R48 force lead)
-J7,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
-J9,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output inductor lead)
+FILTER_IN1,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+FILTER_OUT1,ac_psu:PIN,ac_psu:WireHole_D5.0mm_Drill2.3mm,"v6: v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+J5,ac_psu:PIN,ac_psu:WireHole_D5.0mm_Drill2.3mm,"v6: v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+J7,ac_psu:PIN,ac_psu:WireHole_D5.0mm_Drill2.3mm,"v6: v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+J9,ac_psu:PIN,ac_psu:WireHole_D5.0mm_Drill2.3mm,"v6: v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
 J10,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v4 fix 13: M4 ring-lug terminal instead of the soldered lead pin (output filter input lead)
 J11,ac_psu:HEADER_38_50MIL,ac_psu:PinHeader_2x19_P1.27mm_Vertical_Proteus,2x19 1.27 mm
 J12,ac_psu:HEADER_2X3_43_48,ac_psu:PinHeader_2x03_P1.27mm_Vertical_Pins43-48,"2x3 1.27 mm, pads 43-48"
@@ -199,6 +199,7 @@ J39,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of
 J40,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
 J41,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
 J42,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+J7S,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,"v6: SW wire landing of the inverter leg B card, joined to the inductor lead hole J7 (net SW_INV_B)"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 L2,ac_psu:L,Inductor_SMD:L_Sunlord_SWPA6045S,v5: buck inductor 15 uH (SWPA6045S150MT)
 PE1,ac_psu:PIN,ac_psu:Terminal_D4.0mm_Drill3.0mm,PIN terminal

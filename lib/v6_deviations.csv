@@ -39,6 +39,12 @@ remove,BUSN1,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card
 remove,BUSN2,,,,v6,v6: ISO DC bus wire link replaced by copper in the freed card strip
 remove,AFE_OUT,,,,v6,"v6: SW landing terminal deleted, the card's SW wire lands on FILTER_IN1 / J10 (user 2026-11-24)"
 remove,INU_OUT2,,,,v6,"v6: SW landing terminal deleted, the card's SW wire lands on FILTER_IN1 / J10 (user 2026-11-24)"
+rename,,,INDUCTOR_INPUT,SW_INV_B,v6,v6: switch-node net of the inverter leg B (V6_PLAN section 15)
+footprint,J7,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:WireHole_D5.0mm_Drill2.3mm,v6,"v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+footprint,J9,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:WireHole_D5.0mm_Drill2.3mm,v6,"v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+footprint,J5,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:WireHole_D5.0mm_Drill2.3mm,v6,"v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+footprint,FILTER_OUT,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:WireHole_D5.0mm_Drill2.3mm,v6,"v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+footprint,FILTER_IN,,ac_psu:Terminal_D4.0mm_Drill2.55mm,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,v6,"v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
 moved,R48,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
 moved,U5,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
 moved,D8,,,,v6,v6: AFE current sense at the choke-lead terminal FILTER_OUT1
@@ -141,6 +147,8 @@ part,C162,,,Capacitor_SMD:C_0603_1608Metric,v6,U30 input
 value,C162,,,1u,v6,
 part,C163,,,Capacitor_SMD:C_0603_1608Metric,v6,U30 output
 value,C163,,,1u 25V,v6,
+part,J7S,,,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,v6,"SW wire landing of the inverter leg B card, joined to the inductor lead hole J7 (net SW_INV_B)"
+value,J7S,,,PIN,v6,
 add,J21,1,,PWM_G1,v6,
 add,J21,2,,GND,v6,
 add,J21,3,,PWM_G2,v6,
@@ -259,12 +267,12 @@ add,C162,1,,5V_ISOL,v6,
 add,C162,2,,ISOGND,v6,
 add,C163,1,,ISO_AFE_SDM_RAW_VOLTAGE,v6,
 add,C163,2,,INU_SHUNT2,v6,
+add,J7S,1,,SW_INV_B,v6,
 pin,FILTER_OUT,1,LEMOUT,AFE_CHOKE1,v6,v6: current sense at the quiet end of the choke (was LEMOUT)
 pin,J9,1,INDUCTOR_OUTPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was INDUCTOR_OUTPUT)
 pin,R48,3,SHUNT1,LEMOUT,v6,v6: current sense at the quiet end of the choke (was SHUNT1_FORCE)
 pin,R48,4,G1_SOURCE_HI,AFE_CHOKE1,v6,v6: current sense at the quiet end of the choke (was G1_SOURCE_HI)
 pin,R91,3,Q7_S,INDUCTOR_OUTPUT,v6,v6: current sense at the quiet end of the choke (was Q7_S)
-pin,R91,4,INDUCTOR_INPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was INDUCTOR_INPUT)
+pin,R91,4,INDUCTOR_INPUT,INU_CHOKE,v6,v6: current sense at the quiet end of the choke (was SW_INV_B)
 pin,J5,1,SHUNT1,N/C,v6,v6 (was SHUNT1_FORCE)
-pin,J7,1,INDUCTOR_INPUT,N/C,v6,v6 (was INDUCTOR_INPUT)
 add,U21,14,,INU_ADCLK_U21,v6,v6 (was INU_ADCLK)

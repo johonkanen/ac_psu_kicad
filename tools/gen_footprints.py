@@ -208,6 +208,11 @@ PROJECT = {
         pins=[("1", 0.0, 0.0, 6.0, 3.0)],
         pad=6.0, drill=3.0, body=(6.0, 6.0),
         descr="Plated 3.0 mm hole, 6.0 mm pad: soldered DC pigtail (2.5 / 4 mm2) for a power card"),
+    # Plain soldered hole for an inductor lead (2.0 mm wire): 2.3 mm finished, 5.0 mm pad (V6_PLAN section 15)
+    "WireHole_D5.0mm_Drill2.3mm": dict(
+        pins=[("1", 0.0, 0.0, 5.0, 2.3)],
+        pad=5.0, drill=2.3, body=(5.0, 5.0),
+        descr="Plated 2.3 mm hole, 5.0 mm pad: soldered lead of the AFE choke / inverter inductor (2.0 mm wire)"),
     # Samtec SHF-105-01-L-D-TH: keyed shrouded header 2x5, 1.27 mm, through-hole; body 12.70 x 5.59, 5.33 high.
     "Samtec_SHF-105-01-L-D-TH": dict(
         pins=[(str(2 * i + 1 + k), (-0.635, 0.635)[k], (i - 2) * 1.27, 1.05, 0.74) for i in range(5) for k in (0, 1)],

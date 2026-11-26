@@ -107,4 +107,15 @@ PARTS += [
     ("C162", 10, "C", "1u", C0603_, "U30 input"),
     ("C163", 10, "C", "1u 25V", C0603_, "U30 output"),
 ]
+# V6_PLAN section 15 (user / planning session 2026-11-26): the inductor leads go into plain soldered holes again
+# (2.3 mm finished, 5 mm pad); the inverter leg B SW wire lands on J7S (M4) outside the inductor profile
+HOLE = "ac_psu:WireHole_D5.0mm_Drill2.3mm"
+FOOTPRINT = {"J7": HOLE, "J9": HOLE, "J5": HOLE, "FILTER_OUT": HOLE,     # Proteus refdes -> new footprint
+             # the AFE leg 2 SW wire lands on FILTER_IN1: no legal place for an M4 terminal outside the AFE choke
+             # profile in the crowded filter area, so it is a soldered pigtail hole like the ISO pigtails (step 5)
+             "FILTER_IN": "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"}
+RENAME = {"INDUCTOR_INPUT": "SW_INV_B"}   # J7 (inductor lead) + J7S (leg B SW wire): the switch node, section 15
+FOOTPRINT_NOTE = "v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
+PARTS += [("J7S", 5, "PIN", "PIN", "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH",
+           "SW wire landing of the inverter leg B card, joined to the inductor lead hole J7 (net SW_INV_B)")]
 VALUE = {p[0]: p[3] for p in PARTS}

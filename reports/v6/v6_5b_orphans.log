@@ -1,0 +1,16 @@
+21:33:41: Debug: Adding duplicate image handler for 'PNG file'
+21:33:41: Debug: Adding duplicate image handler for 'JPEG file'
+21:33:41: Debug: Adding duplicate image handler for 'TIFF file'
+21:33:41: Debug: Adding duplicate image handler for 'GIF file'
+21:33:41: Debug: Adding duplicate image handler for 'PNM file'
+21:33:41: Debug: Adding duplicate image handler for 'PCX file'
+21:33:41: Debug: Adding duplicate image handler for 'IFF file'
+21:33:41: Debug: Adding duplicate image handler for 'Windows icon file'
+21:33:41: Debug: Adding duplicate image handler for 'Windows cursor file'
+21:33:41: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+21:33:41: Debug: Adding duplicate image handler for 'TGA file'
+21:33:41: Debug: Adding duplicate image handler for 'XPM file'
+21:33:41: Debug: Adding duplicate image handler for 'WebP file'
+== v6 step 5b: copper groups without a pad deleted
+  round 1: track In3.Cu(-60.800,60.750)-(-58.250,63.300) [ISO_AFE_SDM_RAW_VOLTAGE] deleted: its group has no pad
+  1 items without a pad deleted

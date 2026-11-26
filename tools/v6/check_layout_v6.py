@@ -40,6 +40,16 @@ HEIGHT = dict(L.HEIGHT)
 HEIGHT.update({"WirePigtail_D6.0mm_Drill3.0mm": 0.0, "Terminal_D4.0mm_Drill2.55mm": 0.0, "Wuerth_REDCUBE-PressFit_7462810_M3": 7.0, "Samtec_SHF-105-01-L-D-TH": 5.33,
                "Converter_DCDC_Mornsun_B05xxS-1WR3_SIP-4": 10.2, "R_0603_1608Metric": 0.55, "C_0603_1608Metric": 0.9,
                "D_SOD-323": 1.1, "D_SOD-123": 1.35})
+# 5. inductor profiles (V6_PLAN sections 14 / 15, planning session 2026-11-26): upright toroids, R 26.6 mm, 27.9 mm
+#    thick across the wall, centred between their leads, standing on a 5 mm spacer; under the rim at distance d along
+#    the wall the free height is s + R - sqrt(R^2 - d^2). Top-side parts in the body's strip must fit under it; a part
+#    reaching less than 1 mm into the strip is tangent. Heights of parts not in HEIGHT: assumptions below.
+INDUCTORS = {"AFE choke": (-17.0, -63.85, 5.0, ("J5", "FILTER_OUT1")), "inverter inductor": (-72.0, 57.0, 5.0, ("J7", "J9"))}
+IND_R, IND_HALF, IND_TOL = 26.6, 27.9 / 2, 1.0
+IND_HEIGHT = {"C_Disc_D12.5mm_W5.0mm_P7.50mm": 16.0,          # assumption (to verify)
+              "Terminal_D4.0mm_Drill3.0mm": 6.0, "Wuerth_REDCUBE-THR_74650074_M4_PTH": 11.0,
+              "Wuerth_REDCUBE-PressFit_7462810_M3": 11.0, "WireHole_D5.0mm_Drill2.3mm": 0.0,
+              "WirePigtail_D6.0mm_Drill3.0mm": 99.0}          # a soldered wire rises from a pigtail: wholly outside
 # finding prefix -> reason (planning session decisions)
 EXCEPT = {
     "J25: body": "header between the control card edge and the 18 mm line (Fable 2026-11-23)",
@@ -168,6 +178,36 @@ def main():
         dx, dy = max(cx0 - x1, x0 - cx1, 0), max(cy0 - y1, y0 - cy1, 0)
         if math.hypot(dx, dy) < LUG_GAP and not (dx > 0 or dy > 0) or math.hypot(dx, dy) < 0.5:
             err.append(f"{ref}: header under or at the control card outline ({math.hypot(dx, dy):.2f} mm)")
+    # 5. inductor profiles
+    for name, (xc, yc, s_, leads) in INDUCTORS.items():
+        for f in fps:
+            if f.IsFlipped() or f.GetReference() in leads:
+                continue
+            c = f.GetCourtyard(pcbnew.F_CrtYd)
+            pts = poly(f)
+            xs = []
+            for i in range(len(pts)):
+                (x1, y1), (x2, y2) = pts[i], pts[(i + 1) % len(pts)]
+                for k in range(21):
+                    x, y = x1 + (x2 - x1) * k / 20, y1 + (y2 - y1) * k / 20
+                    if yc - IND_HALF + IND_TOL <= y <= yc + IND_HALF - IND_TOL:
+                        xs.append(x)
+            if not xs:
+                continue
+            d = max(min(xs) - xc, xc - max(xs), 0.0)
+            if d >= IND_R:
+                continue
+            free = s_ + IND_R - math.sqrt(IND_R * IND_R - d * d)
+            name_fp = str(f.GetFPID().GetLibItemName())
+            h = IND_HEIGHT.get(name_fp, HEIGHT.get(name_fp))
+            if h is None:
+                h = 35.0 if name_fp.startswith("CP_Radial_D35") else (30.0 if name_fp.startswith("C_Rect") else None)
+            if h is None:
+                err.append(f"{f.GetReference()}: under the {name} (free {free:.1f} mm) with no height known for {name_fp}")
+            elif h > free:
+                err.append(f"{f.GetReference()}: {h} mm tall under the {name}, free {free:.1f} mm at d {d:.1f} mm")
+            else:
+                info.append(f"{f.GetReference()}: under the {name}, {h} mm in {free:.1f} mm free (d {d:.1f} mm)")
     acc = [e for e in err if any(e.startswith(k) for k in EXCEPT)]
     err = [e for e in err if e not in acc]
     for line in info:

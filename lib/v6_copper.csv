@@ -23,3 +23,7 @@ area,In2.Cu,13.0,26.0,25.0,47.5,,v6 routing pass 1 chain step 03: 3V3_ISO / GPIO
 area,In2.Cu,3.5,-48.8,43.5,-19.0,,v6 routing pass 1 chain steps 03 / 98: MDATA In2 run left without a pad by the prune, deleted
 area,B.Cu,-69.5,41.5,-19.5,52.0,,v6 routing pass 1 chain step 03: INDUCTOR_OUTPUT run to R62 pulled back by the prune (cut at J9 in step 1)
 area,B.Cu,-2.5,43.0,2.0,49.5,,v6 routing pass 1 chain step 03: short stubs of #00269 / #00270 pulled back by the prune
+area,*,-55.50,42.50,-43.50,54.50,,J10 M4 terminal moved to (-49.50,48.50) out of the inverter inductor profile (v6 step 5; inverter leg A SW landing, linked to CM3 pin 2 on In1 / In2)
+area,*,-62.50,-72.50,-54.50,-64.50,,FILTER_IN M4 terminal (now a soldered pigtail hole) moved to (-58.50,-68.50) out of the AFE choke profile (v6 step 5; AFE leg 2 SW landing, linked to CM1 pin 1 on In1 / In2)
+unrouted,*,-77.0,34.0,-40.0,70.0,,inverter inductor area after v6 step 5: J7 / J9 holes, J7S, SW_INV_B copper along the wall, J10 and its link to CM3, U30 moved: routed in the block routing
+unrouted,*,-72.0,-81.0,-50.0,-62.0,,AFE filter area after v6 step 5: FILTER_IN1 pigtail and its link to CM1 pin 1: routed in the block routing
