@@ -353,3 +353,27 @@ capacitors at a 400 V bus); estimates to be checked against the real turns and a
 | Core loss by the bulletin's formula | about 275 W/kg, about 60 W | about 100 W/kg, about 22 W |
 
 The magnetising inductance and the split-capacitor reactance belong in the DAB model of the card's `sim/`.
+
+## 15. Inductor leads land in plain holes; the power cards are the mainline design (user 2026-11-26)
+
+**User: "The half bridge boards that are connected to the walls is going to be the mainline design what we will
+move forward."** v6 with the six wall-mounted power cards is the design from here on; v5 stays on `v5-layout`
+for reference only.
+
+**Inductor landings (user: go with the planning session's recommendation).** First step of the next session,
+before routing pass 2, as a numbered step on `v6-baseboard`:
+
+- J7, J9 (inverter inductor) and J5, FILTER_OUT1 (AFE choke) change from M4 REDCUBE terminals back to plain
+  soldered holes for the 2.0 mm leads: 2.3 mm finished hole, 5 mm pad. Positions stay unless the envelope check
+  asks for a move; the listing's lead pitch is 23.8 mm and adjustable, the holes are 17.2 mm (J7 / J9) and about
+  30 mm (J5 / FILTER_OUT1) apart, which bent leads reach.
+- The switch-node ends J7 and J5 each get a wire landing for the card's SW wire **outside** the inductor envelope
+  of §14: an M4 REDCUBE (the part these had), joined to the lead hole by copper at least 8 mm wide on two layers,
+  2.5 mm from everything else. These two short pieces are the only switch-node copper on the baseboard; give them
+  the net names SW_INV_B and SW_AFE_1 so the rule checks see them.
+- J9 and FILTER_OUT1 are the quiet ends and keep their nets (INU_CHOKE, AFE_CHOKE1) to the shunts; holes only.
+- Layout check: the two envelopes of §14 (54 × 28 mm, 56 mm tall, top side) with nothing taller than 3 mm inside
+  except the lead holes. Move what stands inside: expected FILTER_IN1 (M4, inside the AFE envelope; it is the
+  landing of the AFE leg 2 SW wire and may go anywhere near the filter input) and the AFE leg 1 pair J32 / J31 if
+  their lug circles reach the envelope. Report what moved.
+- Then check_all, and routing pass 2 as planned in STATUS.md.
