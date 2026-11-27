@@ -28,3 +28,4 @@ area,*,-62.50,-72.50,-54.50,-64.50,,FILTER_IN M4 terminal (now a soldered pigtai
 unrouted,*,-77.0,34.0,-40.0,70.0,,inverter inductor area after v6 step 5: J7 / J9 holes, J7S, SW_INV_B copper along the wall, J10 and its link to CM3, U30 moved: routed in the block routing
 unrouted,*,-72.0,-81.0,-50.0,-62.0,,AFE filter area after v6 step 5: FILTER_IN1 pigtail and its link to CM1 pin 1: routed in the block routing
 unrouted,*,-20.0,-83.0,5.0,-70.0,,J5S pigtail hole and its SW_AFE_1 link to the J5 lead hole on F.Cu / In1.Cu (v6 step 5c, user 2026-11-27)
+unrouted,*,40.0,-46.0,66.0,-19.0,,block E part of the primary PWM / tap corridor (x 7 ... 66, y -60 ... -19, STATUS pass 2 plan): routed by the block E replay (V6_PLAN section 16)
