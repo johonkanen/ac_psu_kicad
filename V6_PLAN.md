@@ -395,8 +395,11 @@ before routing pass 2, as a numbered step on `v6-baseboard`:
   soldered pigtail hole (`WirePigtail_D6.0mm_Drill3.0mm`, as the ISO pigtails) at (−58.5, −68.5), joined to CM1
   pin 1 by an 8 mm L on In1.Cu / In2.Cu plus the F.Cu pour.
 - J32 / J21 stay under the AFE choke's rim (11.0 in 11.4 mm, 5.3 in 9.2 mm free).
-- **Open: J5S** (SW_AFE_1 landing beside J21, north of the bus band): no legal place found yet; J5 is unconnected
-  until it is placed.
+- **J5S (step 5c, `tools/v6/v6_5c_j5s.py`, user 2026-11-27):** no legal M4 place north of the bus band beside J21
+  (5 mm between the band and the C79 / C11 cans, the M4 pads span 9 mm). The AFE leg 1 SW wire is soldered into a
+  pigtail hole J5S (6 mm pad) at (−1, −77.5), between J32 and the wall, under the AFE choke's rim (10 mm free, the
+  wire needs about 8). West enough that the PGND band on B / In2 feeds J32 at full width east of it. Linked to J5
+  by 8 mm copper along the wall on F.Cu / In1.Cu (net SW_AFE_1, renamed from SHUNT1_FORCE).
 
 ## 16. Routing by blocks (user 2026-11-26: "do it", the worker's proposal with its picks)
 

@@ -63,7 +63,7 @@ def base_rows():
     import deviations  # noqa: E402
     for a_, b_ in V.RENAME.items():
         out.append(dict(kind="rename", ref="", pin="", **{"from": a_}, to=b_, fix=FIX,
-                        note="v6: switch-node net of the inverter leg B (V6_PLAN section 15)"))
+                        note=f"v6: switch-node net {b_} (V6_PLAN section 15)"))
     for ref, fp in V.FOOTPRINT.items():
         old = next((r["from"] for r in deviations.rows() if r["kind"] == "footprint"   # the rule footprint (v4 swaps from it too)
                     and deviations.kref(r["ref"]) == deviations.kref(ref)), "")
@@ -118,7 +118,7 @@ def net_rows():
         proteus = {b: a for a, b in deviations.refdes_map().items()}.get(r, r)
         assert pin_net.get((r, p), "").split("/")[-1] == V.PIN_TO[(r, p)], (r, p, pin_net.get((r, p)))   # sheet-local nets
         out.append(dict(kind="pin", ref=proteus, pin=p, **{"from": ipc.get((r, p), n)}, to=V.PIN_TO[(r, p)], fix=FIX,
-                        note=f"v6: current sense at the quiet end of the choke (was {n})"))
+                        note=V.PIN_NOTE.get((r, p), f"v6: current sense at the quiet end of the choke (was {ipc.get((r, p), n)})")))
     for (r, p), n in sorted(ref_nets.items()):
         if r in V.REMOVED or not n:
             continue

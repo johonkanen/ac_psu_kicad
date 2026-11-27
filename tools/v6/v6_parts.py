@@ -38,7 +38,9 @@ MOVED_NOT_PROTEUS = ("C90", "C91")
 
 # pins of kept parts that change net (KiCad refdes): stated here, because nets this small cannot be matched by members
 PIN_TO = {("R48", "3"): "LEMOUT", ("R48", "4"): "AFE_CHOKE1", ("FILTER_OUT1", "1"): "AFE_CHOKE1",
-          ("R91", "3"): "INDUCTOR_OUTPUT", ("R91", "4"): "INU_CHOKE", ("J9", "1"): "INU_CHOKE"}
+          ("R91", "3"): "INDUCTOR_OUTPUT", ("R91", "4"): "INU_CHOKE", ("J9", "1"): "INU_CHOKE",
+          ("J5", "1"): "SW_AFE_1"}      # step 5c: the AFE choke lead hole on the leg 1 switch node with J5S
+PIN_NOTE = {("J5", "1"): "v6 step 5c: AFE choke lead hole on the leg 1 switch node, with the SW landing J5S (was SHUNT1_FORCE)"}
 
 HDR = "ac_psu:Samtec_SHF-105-01-L-D-TH"
 TERM = "ac_psu:Wuerth_REDCUBE-PressFit_7462810_M3"
@@ -114,8 +116,12 @@ FOOTPRINT = {"J7": HOLE, "J9": HOLE, "J5": HOLE, "FILTER_OUT": HOLE,     # Prote
              # the AFE leg 2 SW wire lands on FILTER_IN1: no legal place for an M4 terminal outside the AFE choke
              # profile in the crowded filter area, so it is a soldered pigtail hole like the ISO pigtails (step 5)
              "FILTER_IN": "ac_psu:WirePigtail_D6.0mm_Drill3.0mm"}
-RENAME = {"INDUCTOR_INPUT": "SW_INV_B"}   # J7 (inductor lead) + J7S (leg B SW wire): the switch node, section 15
+RENAME = {"INDUCTOR_INPUT": "SW_INV_B"}   # J7 + J7S: switch node of the inverter leg B, section 15
 FOOTPRINT_NOTE = "v6: plain soldered hole for the inductor lead (2.0 mm wire), V6_PLAN section 15"
 PARTS += [("J7S", 5, "PIN", "PIN", "ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH",
            "SW wire landing of the inverter leg B card, joined to the inductor lead hole J7 (net SW_INV_B)")]
+# step 5c (user 2026-11-27): no legal M4 place north of the bus band beside J21; the AFE leg 1 SW wire is soldered
+# into a pigtail hole between J32 and the wall
+PARTS += [("J5S", 1, "PIN", "PIN", "ac_psu:WirePigtail_D6.0mm_Drill3.0mm",
+           "SW wire landing of the AFE leg 1 card (soldered pigtail), joined to the choke lead hole J5 (net SW_AFE_1)")]
 VALUE = {p[0]: p[3] for p in PARTS}

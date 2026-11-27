@@ -50,6 +50,9 @@ IND_HEIGHT = {"C_Disc_D12.5mm_W5.0mm_P7.50mm": 16.0,          # assumption (to v
               "Terminal_D4.0mm_Drill3.0mm": 6.0, "Wuerth_REDCUBE-THR_74650074_M4_PTH": 11.0,
               "Wuerth_REDCUBE-PressFit_7462810_M3": 11.0, "WireHole_D5.0mm_Drill2.3mm": 0.0,
               "WirePigtail_D6.0mm_Drill3.0mm": 99.0}          # a soldered wire rises from a pigtail: wholly outside
+# J5S (step 5c, user 2026-11-27): the AFE leg 1 SW wire is soldered in under the choke rim and bends out towards the
+# wall; about 8 mm of wire height there instead of a wire standing up
+IND_REF_HEIGHT = {"J5S": 8.0}
 # finding prefix -> reason (planning session decisions)
 EXCEPT = {
     "J25: body": "header between the control card edge and the 18 mm line (Fable 2026-11-23)",
@@ -199,7 +202,7 @@ def main():
                 continue
             free = s_ + IND_R - math.sqrt(IND_R * IND_R - d * d)
             name_fp = str(f.GetFPID().GetLibItemName())
-            h = IND_HEIGHT.get(name_fp, HEIGHT.get(name_fp))
+            h = IND_REF_HEIGHT.get(f.GetReference(), IND_HEIGHT.get(name_fp, HEIGHT.get(name_fp)))
             if h is None:
                 h = 35.0 if name_fp.startswith("CP_Radial_D35") else (30.0 if name_fp.startswith("C_Rect") else None)
             if h is None:

@@ -199,6 +199,7 @@ J39,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of
 J40,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISOPGND pigtail holes of the Inverter leg A card (wire soldered, ring lug to the card)"
 J41,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: ISODC+ pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
 J42,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: DAB_GROUND pigtail holes of the DAB secondary card (wire soldered, ring lug to the card)"
+J5S,ac_psu:PIN,ac_psu:WirePigtail_D6.0mm_Drill3.0mm,"v6: SW wire landing of the AFE leg 1 card (soldered pigtail), joined to the choke lead hole J5 (net SW_AFE_1)"
 J7S,ac_psu:PIN,ac_psu:Wuerth_REDCUBE-THR_74650074_M4_PTH,"v6: SW wire landing of the inverter leg B card, joined to the inductor lead hole J7 (net SW_INV_B)"
 L1,ac_psu:L,Inductor_SMD:L_0805_2012Metric,0805
 L2,ac_psu:L,Inductor_SMD:L_Sunlord_SWPA6045S,v5: buck inductor 15 uH (SWPA6045S150MT)

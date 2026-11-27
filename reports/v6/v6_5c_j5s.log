@@ -1,0 +1,5 @@
+== v6 step 5c: J5S pigtail, SW_AFE_1 link to J5
+  new net SW_AFE_1
+  J5S (pigtail) at (-1.00, -77.50)
+  zone v6 SW_AFE_1 F.Cu F.Cu SW_AFE_1 prio 40: (-17.2,-80.55) (2.0,-80.55) (2.0,-72.55) (-17.2,-72.55)
+  zone v6 SW_AFE_1 In1.Cu In1.Cu SW_AFE_1 prio 40: (-17.2,-80.55) (2.0,-80.55) (2.0,-72.55) (-17.2,-72.55)

@@ -4,7 +4,7 @@
 
 Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Where the work stopped (end of session 2026-11-26)
+## Where the work stopped (2026-11-27, updated during the session)
 
 - **State:** `v6-baseboard` = step 5 (inductor landings, entry below) on top of 6226a75 (block outlines and port
   windows). Main = 4134e5b + the planning session's §14 / §15 commits. Card: `card-rev1` with the Infineon model,
@@ -17,10 +17,8 @@ Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see 
   and the moved terminals (`deviations.terminal_areas`, `hole_swap`).
 - **Check result:** check_all passes (full run 2026-11-26; its one failure, the v6 footprint rows listing the v4
   terminal instead of the rule footprint as "from", fixed, and the footprint / board / IPC checks rerun: OK).
-- **Open in step 5: J5S**, the SW_AFE_1 landing of the AFE leg 1 SW wire (planning item 6: north of the bus band
-  beside J21). No legal place found yet; J5 is unconnected on sheet 1 until it is placed. Next: search beside J21
-  with the step's `legal()` (profile, 2.5 mm, lug rule against J21's shroud); if nothing fits, send the planning
-  session the two best options with a pick. Then sheet 1 (J5 + J5S on SW_AFE_1) and a `v6_5c` script.
+- **Step 5c (2026-11-27):** J5S placed as a soldered pigtail hole at (−1, −77.5) between J32 and the wall (user's
+  pick from three options), linked to J5 on F.Cu / In1.Cu, net SW_AFE_1. Both SW landings are on the board now.
 - **Block routing (V6_PLAN §16):** blocks A–G with port windows in `tools/v6/route/blocks.py`
   (`reports/v6/blocks/blocks_F.png`). Order G → A … ; **block E (control-card area) is next / in progress**: an
   Opus helper worked on branch `block-E` (from 6226a75, worktree
@@ -58,8 +56,7 @@ V6_PLAN §15 with the planning session's decisions of 2026-11-26 (round profile,
 - J10 to (−49.5, 48.5), FILTER_IN1 to (−58.5, −68.5) as a soldered pigtail hole (no legal M4 place in the filter
   area), each with an 8 mm L on In1 / In2 to its choke pin. One pass-1 track (ISO_AFE_SDM_RAW_VOLTAGE at J7) deleted.
 - `check_layout_v6` rule 5: the round profile with part heights. DRC clean, check_all passes.
-- **Open:** J5S (SW_AFE_1 landing for the AFE leg 1 SW wire): no legal place found beside J21 yet, question to the
-  planning session; J5 is unconnected until then.
+- J5S: step 5c (2026-11-27), pigtail hole at (−1, −77.5), see V6_PLAN §15.
 
 ## Routing pass 1 merged: legal board, 102 connections pending (2026-11-24, `v6-baseboard`)
 
