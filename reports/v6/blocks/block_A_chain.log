@@ -1,0 +1,124 @@
+== 00 base board d639e0e, refilled (reference numbers)
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 76; unconnected 86; parity 0
+   A: open inside 8, open with one end in A 8, DRC errors 0 (-), dangling 2
+     open inside by net: GND 3, 5V 1, VCC 1, AFE_CHOKE1 1, SHUNT1 1, Net-(U5-MDAT) 1
+        Pad 1 [GND] of C64 on B.Cu @(-28.48,-78.50) | PTH pad 2 [GND] of U29 @(-23.50,-75.17)
+        Pad 1 [GND] of C64 on B.Cu @(-28.48,-78.50) | Pad 5 [GND] of U5 on B.Cu @(-35.38,-80.77)
+        Pad 2 [GND] of C160 on B.Cu @(-17.73,-66.00) | PTH pad 2 [GND] of U29 @(-23.50,-75.17)
+        Pad 1 [5V] of C160 on B.Cu @(-19.27,-66.00) | PTH pad 1 [5V] of U29 @(-23.50,-77.72)
+        Pad 8 [VCC] of U5 on B.Cu @(-39.19,-80.77) | Pad 2 [VCC] of C64 on B.Cu @(-27.52,-78.50)
+        PTH pad 1 [AFE_CHOKE1] of FILTER_OUT1 @(-33.00,-52.00) | Track [AFE_CHOKE1] on B.Cu, length 0.5657 mm @(-36.35,-56.70)
+        Pad 2 [SHUNT1] of R58 on B.Cu @(-36.66,-68.00) | Track [SHUNT1] on B.Cu, length 0.3536 mm @(-33.30,-68.00)
+        Pad 6 [Net-(U5-MDAT)] of U5 on B.Cu @(-36.65,-80.77) | Pad 1 [Net-(U5-MDAT)] of R55 on B.Cu @(-28.51,-76.00)
+     open one end in A: GND 3, 15V 1, 5V 1, VCC 1, MDATA 1, ADCLK 1
+        Track [15V] on In2.Cu, length 10.1035 mm @(-55.50,-81.20) | Track [15V] on F.Cu, length 3.3234 mm @(3.55,-49.35)
+        PTH pad 2 [GND] of J21 @(1.46,-49.86) | Pad 2 [GND] of C160 on B.Cu @(-17.73,-66.00)
+        Zone 'v6 strip In4 GND' [GND] on In4.Cu, priority 4 @(-2.00,-80.00) | PTH pad 9 [GND] of J21 @(6.54,-51.13)
+        Zone 'Proteus F.Cu pour 19' [GND] on F.Cu, priority 36 @(102.50,-39.50) | Zone 'v6 strip In4 GND' [GND] on In4.Cu, priority 4 @(-2.00,-80.00)
+        Track [5V] on F.Cu, length 1.0607 mm @(6.00,-51.95) | Pad 1 [5V] of C160 on B.Cu @(-19.27,-66.00)
+        Pad 2 [VCC] of C64 on B.Cu @(-27.52,-78.50) | Track [VCC] on B.Cu, length 0.0691 mm @(2.60,-52.20)
+        Track [MDATA] on In3.Cu, length 40.0000 mm @(38.00,-42.00) | Pad 2 [MDATA] of R55 on B.Cu @(-27.49,-76.00)
+        Pad 7 [ADCLK] of U5 on B.Cu @(-37.92,-80.77) | Track [ADCLK] on In2.Cu, length 5.4130 mm @(3.41,-44.00)
+      track_dangling Track [15V] on In2.Cu, length 10.1035 mm @(-55.50,-81.20)
+      track_dangling Track [AFE_CHOKE1] on B.Cu, length 0.5657 mm @(-36.35,-56.70)
+   islands: 71 pour layers, 76 islands
+   domain_gaps: OK
+   check_layout: OK
+   assign_nets: after zone fill: 356 groups, 0 shorts, 1 orphans, 0 opens, 0 items with a foreign net; 45 v5 opens pending GUI layout
+   assign_nets:  orphan group 5775 (10 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
+   assign_nets: OK (report reports/assign_nets.txt)
+   block_A_hv: 73 pairs closer than the HV rule in A
+== 10 design -> CSV (drawn on the refilled base: geo.Ctx reads the pour fills)
+   dead copper: Counter({'AFE_CHOKE1': 13, '15V': 9, 'Net-(U5-VIN-)': 8, 'GND': 3, 'GPIO_BYPASS_RLY': 3}); 2 kept runs shortened
+   AFE_CHOKE1 field column x -39.6 into R48-4: 3.9 mm on B.Cu
+   AFE_CHOKE1 field column x -38.6 into R48-4: 3.9 mm on B.Cu
+   AFE_CHOKE1 field column x -37.6 into R48-4: 3.9 mm on B.Cu
+   AFE_CHOKE1 field row y -54.7: 3.0 mm on B.Cu
+   AFE_CHOKE1 field row y -55.7: 3.0 mm on B.Cu
+   AFE_CHOKE1 field row y -56.7: 3.0 mm on B.Cu
+   AFE_CHOKE1 field to FILTER_OUT1: 4.5 mm on In1.Cu
+   AFE_CHOKE1: 12 vias, zones on F.Cu, In1.Cu, In2.Cu, B.Cu
+   SHUNT1 R58-2 to C52-2: 3.4 mm on B.Cu
+   Net-(U5-VIN-) C91-2 to its via: 1.5 mm on B.Cu
+   sdm: Net-(U5-VIN-) C91-2 via to the R58-1 via: 6.5 mm on In1.Cu, 4 segments [0 s]
+   Net-(U5-MDAT) U5-6 to R55-1: 12.0 mm on B.Cu
+   GND U5-5 to C64-1: 12.2 mm on B.Cu
+   GND C64-1 to U29-2: 11.8 mm on B.Cu
+   VCC C64-2 to its via: 1.5 mm on B.Cu
+   VCC U5-8 to its via: 2.2 mm on B.Cu
+   ADCLK U5-7 to its via: 3.2 mm on B.Cu
+   MDATA R55-2 to its via: 1.2 mm on B.Cu
+   5V C160-1 to its via: 1.2 mm on B.Cu
+   GND C160-2 to its via: 1.2 mm on B.Cu
+   VCC U5-8 via to C64-2 via: 13.7 mm on In4.Cu
+   sdm: VCC C64-2 via, west of U29: 15.8 mm on In4.Cu, 3 segments [0 s]
+   sdm: VCC on to the C port: 25.6 mm on In4.Cu, 2 segments [0 s]
+   VCC on to the C port: straight onto the port: 4.0 mm on In4.Cu
+   sdm: 5V U29-1 to the C160 via: 14.7 mm on In4.Cu, 5 segments [0 s]
+   sdm: 5V C160 via to the C port: 18.0 mm on In4.Cu, 3 segments [0 s]
+   5V C160 via to the C port: straight onto the port: 4.0 mm on In4.Cu
+   sdm: GND U29-2 to the C160 via: 10.5 mm on In1.Cu, 5 segments [0 s]
+   sdm: GND C160 via to the C port: 22.2 mm on In1.Cu, 3 segments [0 s]
+   GND C160 via to the C port: straight onto the port: 4.0 mm on In1.Cu
+   sdm: ADCLK U5 via to the F port: 53.8 mm on In2.Cu, 5 segments [1 s]
+   ADCLK U5 via to the F port: straight onto the port: 4.0 mm on In2.Cu
+   sdm: MDATA R55 via to the F port: 43.5 mm on In3.Cu, 4 segments [0 s]
+   MDATA R55 via to the F port: straight onto the port: 4.0 mm on In3.Cu
+   sdm: 15V relay via to the C port: 126.3 mm on In4.Cu, 8 segments [1 s]
+   15V relay via to the C port: straight onto the port: 4.0 mm on In4.Cu
+   sdm: GND kept diagonal to y -40.6 west of C21: 55.8 mm on In1.Cu, 3 segments [0 s]
+   GND past C21 pin 1 (2.5 mm) to the kept run: 28.5 mm on In1.Cu
+   sdm: GPIO_BYPASS_RLY kept diagonal to y -39.2 west of C21: 54.3 mm on In1.Cu, 3 segments [0 s]
+   GPIO_BYPASS_RLY past C21 to the kept run: 30.0 mm on In1.Cu
+   fill keep-outs: 15 (F.Cu 11, B.Cu 4)
+   block_A_make: {'pad': 26, 'needtrack': 6, 'needvia': 3, 'needzone': 4, 'deadtrack': 36, 'cuttrack': 2, 'track': 93, 'via': 20, 'zone': 4, 'keepout': 15} -> /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/tools/v6/route/block_A_copper.csv
+   block_A_make: dev board /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/build/blockA/make.kicad_pcb
+== 20 replay on a fresh d639e0e board
+   block_A: 26 pads checked: all at their positions with their nets
+   block_A: 13 kept items (tracks, vias, zones) the new copper joins or keeps: all present
+   block_A: dead kept copper deleted: 36 tracks, 0 vias; 2 tracks shortened
+   block_A: added 93 tracks, 20 vias (locked), 4 copper zones, 15 fill keep-outs; no part moves
+   block_A: saved /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/build/blockA/replay.kicad_pcb
+   same: 5477 / 5477 tracks + vias; only in A 0, only in B 0; zones 131 / 131, only in A 0, only in B 0; footprints differing 0 []
+   (second run refuses: block_A: 57 listed item(s) not found (not the d639e0e board, or A applied already); nothing saved)
+== 30 checks on the replayed board (refilled)
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 76; unconnected 76; parity 0
+   A: open inside 0, open with one end in A 6, DRC errors 0 (-), dangling 4
+     open inside by net: 
+     open one end in A: GND 3, 15V 1, 5V 1, VCC 1
+        Track [15V] on In4.Cu, length 4.0000 mm @(-6.00,-48.60) | Track [15V] on F.Cu, length 3.3234 mm @(3.55,-49.35)
+        Track [GND] on In1.Cu, length 4.0000 mm @(-6.00,-49.86) | PTH pad 2 [GND] of J21 @(1.46,-49.86)
+        Zone 'v6 strip In4 GND' [GND] on In4.Cu, priority 4 @(-2.00,-80.00) | PTH pad 9 [GND] of J21 @(6.54,-51.13)
+        Zone 'Proteus F.Cu pour 19' [GND] on F.Cu, priority 36 @(102.50,-39.50) | Zone 'v6 strip In4 GND' [GND] on In4.Cu, priority 4 @(-2.00,-80.00)
+        Track [5V] on F.Cu, length 1.0607 mm @(6.00,-51.95) | Track [5V] on In4.Cu, length 4.0000 mm @(-6.00,-53.60)
+        Track [VCC] on In4.Cu, length 4.0000 mm @(-6.00,-52.40) | Track [VCC] on B.Cu, length 0.0691 mm @(2.60,-52.20)
+      track_dangling Track [15V] on In4.Cu, length 4.0000 mm @(-6.00,-48.60)
+      track_dangling Track [GND] on In1.Cu, length 4.0000 mm @(-6.00,-49.86)
+      track_dangling Track [5V] on In4.Cu, length 4.0000 mm @(-6.00,-53.60)
+      track_dangling Track [VCC] on In4.Cu, length 4.0000 mm @(-6.00,-52.40)
+   islands: WORSE  v6 AFE_CHOKE1 link B.Cu|B.Cu: None -> 1
+   islands: WORSE  v6 AFE_CHOKE1 link F.Cu|F.Cu: None -> 1
+   islands: WORSE  v6 AFE_CHOKE1 link In1.Cu|In1.Cu: None -> 1
+   islands: WORSE  v6 AFE_CHOKE1 link In2.Cu|In2.Cu: None -> 1
+   islands: better v6 FILTER_IN1 link In2.Cu|In2.Cu: 2 -> 1
+   islands: 75 pour layers, 79 islands; 4 WORSE than the base
+   domain_gaps: OK
+   check_layout: OK
+   assign_nets: after zone fill: 346 groups, 0 shorts, 0 orphans, 0 opens, 0 items with a foreign net; 41 v5 opens pending GUI layout
+   assign_nets: OK (report reports/assign_nets.txt)
+   block_A_hv: 15 pairs closer than the HV rule in A, 0 with block A copper, 15 on the base board
+== 40 renders of A
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_B.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_F.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_In1.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_In2.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_In3.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_In4.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_B.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_F.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_In1.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_In2.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_In3.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A/A_sense_In4.Cu.png
+== 50 rows for lib/v6_copper.csv
+   block_A_rows: 109 unrouted rows, 53 area rows -> /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-ae608c22b33cf9c19/reports/v6/blocks/block_A_copper_rows.csv
