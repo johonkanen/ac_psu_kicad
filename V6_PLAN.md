@@ -447,3 +447,8 @@ User decisions 2026-11-27:
 - **Reserve shrunk:** the In3 rule area "v6 route reserve sdm U21 to the corridor In3" keeps only its part north of E.
 Brief corrections for later blocks (from the helper): the E-B / E-F windows lie in the C|I barrier strip, so all ISO
 nets leave E north; plane vias before ports in the ISO band; supply nets need the router input cut to the block.
+
+**Block F done (2026-11-27, `tools/v6/route/block_F.py`, report `reports/v6/blocks/block_F.md`):** 0 open inside F
+(kept v4 copper already joined it); the 8 crossing nets drawn by script to fixed ports on x -2 (A), x -38 (B) and
+y 38 (D2), no router run. Block shapes as resolved by `block_of` (first block in ORDER wins): A covers F's
+south-west corner (x < -2, y < -12), D2 F's top 8 mm, so F is L-shaped.

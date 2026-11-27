@@ -29,3 +29,13 @@ unrouted,*,-77.0,34.0,-40.0,70.0,,inverter inductor area after v6 step 5: J7 / J
 unrouted,*,-72.0,-81.0,-50.0,-62.0,,AFE filter area after v6 step 5: FILTER_IN1 pigtail and its link to CM1 pin 1: routed in the block routing
 unrouted,*,-20.0,-83.0,5.0,-70.0,,J5S pigtail hole and its SW_AFE_1 link to the J5 lead hole on F.Cu / In1.Cu (v6 step 5c, user 2026-11-27)
 unrouted,*,40.0,-46.0,66.0,-19.0,,block E part of the primary PWM / tap corridor (x 7 ... 66, y -60 ... -19, STATUS pass 2 plan): routed by the block E replay (V6_PLAN section 16)
+unrouted,*,9.27,18.17,17.40,39.00,,block F replay: new 15V_ISO copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,-3.00,-45.00,4.91,-42.50,,block F replay: new ADCLK copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,0.10,-47.00,3.77,-39.60,,block F replay: new GND copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,9.27,18.17,14.27,39.00,,block F replay: new ISOGND copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,38.00,-43.00,41.00,-21.00,,block F replay: new MDATA copper, the leg south along x 39 (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,-3.00,-43.00,41.00,-41.00,,block F replay: new MDATA copper, the leg west along y -42 (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,13.18,28.48,27.60,39.00,,block F replay: new Net-(U2-+) copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,13.07,26.37,28.20,39.00,,block F replay: new Net-(U2--) copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+unrouted,*,16.39,34.51,27.00,39.00,,block F replay: new Net-(U7B--) copper to its ports (V6_PLAN section 16, tools/v6/route/block_F.py)
+area,In1.Cu,12.40,21.30,18.90,27.80,,block F replay: dead v4 ISOGND diagonal on In1 deleted, the new ISOGND run goes up x 12.6 (V6_PLAN section 16)

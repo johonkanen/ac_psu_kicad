@@ -65,7 +65,7 @@ items 5127, groups 447, shorts 0, orphans 16, opens 45
 items 5206, groups 248, shorts 0, orphans 0, opens 0
 == assignment: 4225 tracks/vias got a net, 0 without
 == after zone fill (KiCad pads, tracks, vias, filled zones)
-items 6531, groups 357, shorts 0, orphans 1, opens 0
-  orphan group 5750 (8 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
+items 6558, groups 356, shorts 0, orphans 1, opens 0
+  orphan group 5775 (10 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
 v5 opens pending GUI layout: 45: /05 VSI/INDUCTOR_OUTPUT 15V 15V_ISO 3V3_ISO 5V 5V_ISOL ADA3 ADCLK AFE_CHOKE1 CLK1 CTRLGND_A DAB_PWM_HI_SEC DAB_PWM_LO_SEC DAB_PWM_PRI_HI DAB_PWM_PRI_LO DC+ GND GPIO_BYPASS_RLY GPIO_BYPASS_RLY_ISO INU_ADCLK INU_SHUNT2 ISOGND ISOPGND ISO_AFE_SDM_RAW_VOLTAGE MDATA MDATA_INU Net-(U2-+) Net-(U2--) Net-(U5-MDAT) Net-(U7A-+) Net-(U7A--) Net-(U7B--) PGND PWM_G1 PWM_G2 PWM_G3 PWM_G4 PWM_Q7 PWM_Q8 PWM_TRANS1 PWM_TRANS2 PWM_TRANS3 PWM_TRANS4 SHUNT1 VCC
 items carrying another net than their group: 0

@@ -21,7 +21,9 @@ Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see 
   pick from three options), linked to J5 on F.Cu / In1.Cu, net SW_AFE_1. Both SW landings are on the board now.
 - **Block routing (V6_PLAN §16):** block E done and replayed on `v6-baseboard` (2026-11-27): 262 -> 10 open inside
   E (7 real, listed in V6_PLAN §16), whole board 88 -> about 85 open. Via-in-pad allowed and the U21 reserve shrink
-  accepted by the user. **Next: block F** (middle area x -38 ... 40, y -46 ... 46), then A / B (sense groups last),
+  accepted by the user. Block F done and replayed (2026-11-27, 0 open inside, 8 nets drawn to fixed
+  ports, whole board 86 open; `reports/v6/blocks/block_F.md`). **Next: block A** (south-west, x -128 ... -2,
+  y -83 ... -12: AFE filter, CM1, AFE sense, J5 / J5S / FILTER_IN1), then B (west of F, inverter side),
   C / D (D sorts E's north ports), then trunks and the integration chain. The block helper's lessons are in
   `reports/v6/blocks/block_E.md` ("What was wrong in the brief").
 - Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
