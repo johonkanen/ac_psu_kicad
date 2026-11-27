@@ -1,0 +1,64 @@
+== 00 base board 3227a58, refilled (reference numbers)
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 76; unconnected 87; parity 0
+   F: open inside 0, open with one end in F 9, DRC errors 0 (-), dangling 5
+     open inside by net: 
+     open one end in F: ISOGND 2, Net-(U2-+) 1, Net-(U2--) 1, DC+ 1, 15V 1, 15V_ISO 1, Net-(U7B--) 1, ADCLK 1
+        PTH pad 9 [ISOGND] of J24 @(13.27,42.26) | Track [ISOGND] on In1.Cu, length 18.0041 mm @(10.27,19.17)
+        Track [ISOGND] on In1.Cu, length 18.0041 mm @(10.27,19.17) | Track [ISOGND] on B.Cu, length 1.4886 mm @(59.20,40.15)
+        Track [Net-(U2-+)] on In2.Cu, length 25.0191 mm @(-10.84,29.48) | Track [Net-(U2-+)] on In1.Cu, length 1.3500 mm @(28.75,58.50)
+        Track [Net-(U2--)] on In1.Cu, length 1.3500 mm @(28.75,57.89) | Track [Net-(U2--)] on In2.Cu, length 20.5838 mm @(-6.51,27.37)
+        Zone 'v6 bus DC+ In3' [DC+] on In3.Cu, priority 6 @(116.00,-66.50) | Zone 'Proteus F.Cu pour 5 (fix 14)' [DC+] on F.Cu, priority 22 @(32.90,-21.22)
+        Track [15V] on B.Cu, length 13.8593 mm @(39.10,-44.20) | Pad 1 [15V] of C150 on F.Cu @(50.23,-55.00)
+        Track [15V_ISO] on In2.Cu, length 18.0041 mm @(10.27,19.17) | Track [15V_ISO] on In3.Cu, length 21.0500 mm @(37.45,43.00)
+        Track [Net-(U7B--)] on In2.Cu, length 11.9754 mm @(17.39,35.51) | Track [Net-(U7B--)] on In3.Cu, length 0.0120 mm @(60.00,55.45)
+        Track [ADCLK] on In2.Cu, length 3.0983 mm @(3.91,-45.91) | Pad 7 [ADCLK] of U5 on B.Cu @(-37.92,-80.77)
+      track_dangling Track [ISOGND] on In1.Cu, length 18.0041 mm @(10.27,19.17)
+      track_dangling Track [Net-(U2-+)] on In2.Cu, length 25.0191 mm @(-10.84,29.48)
+      track_dangling Track [Net-(U2--)] on In2.Cu, length 20.5838 mm @(-6.51,27.37)
+      track_dangling Track [15V_ISO] on In2.Cu, length 18.0041 mm @(10.27,19.17)
+      track_dangling Track [Net-(U7B--)] on In2.Cu, length 11.9754 mm @(17.39,35.51)
+   islands: 71 pour layers, 76 islands
+== 10 design -> CSV
+   block_F_make: {'pad': 9, 'needtrack': 10, 'deadtrack': 2, 'needvia': 1, 'track': 24, 'via': 5}
+   block_F_make: every kept / dead / cut item found, every new item inside F or on its edge
+== 20 replay on a fresh 3227a58 board
+   block_F: 9 pads checked: all at their positions with their nets
+   block_F: 11 kept items the new copper joins: all present
+   block_F: dead kept copper deleted: 2 tracks, 0 vias; 0 tracks shortened
+   block_F: added 24 tracks, 5 vias (locked); no zones, no part moves
+   block_F: saved /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/build/blockF/replay.kicad_pcb
+== 30 checks on the replayed board (refilled)
+   drc: 35 errors (courtyards_overlap 35); copper errors 0; dangling 76; unconnected 86; parity 0
+   F: open inside 0, open with one end in F 8, DRC errors 0 (-), dangling 7
+     open inside by net: 
+     open one end in F: ISOGND 1, Net-(U2-+) 1, Net-(U2--) 1, DC+ 1, 15V_ISO 1, Net-(U7B--) 1, MDATA 1, ADCLK 1
+        Track [ISOGND] on In1.Cu, length 0.9475 mm @(12.60,37.33) | PTH pad 9 [ISOGND] of J24 @(13.27,42.26)
+        Track [Net-(U2-+)] on In1.Cu, length 8.0190 mm @(26.60,29.98) | Track [Net-(U2-+)] on In1.Cu, length 1.3500 mm @(28.75,58.50)
+        Track [Net-(U2--)] on In1.Cu, length 10.1280 mm @(27.20,27.87) | Track [Net-(U2--)] on In1.Cu, length 1.3500 mm @(28.75,57.89)
+        Zone 'v6 bus DC+ In1' [DC+] on In1.Cu, priority 6 @(116.00,-66.50) | Zone 'Proteus F.Cu pour 5 (fix 14)' [DC+] on F.Cu, priority 22 @(32.90,-21.22)
+        Track [15V_ISO] on In3.Cu, length 21.0500 mm @(37.45,43.00) | Track [15V_ISO] on In3.Cu, length 15.9310 mm @(16.40,22.07)
+        Track [Net-(U7B--)] on In1.Cu, length 1.9860 mm @(26.00,36.01) | Track [Net-(U7B--)] on In3.Cu, length 0.0120 mm @(60.00,55.45)
+        Track [MDATA] on In3.Cu, length 40.0000 mm @(38.00,-42.00) | Pad 2 [MDATA] of R55 on B.Cu @(-27.49,-76.00)
+        Pad 7 [ADCLK] of U5 on B.Cu @(-37.92,-80.77) | Track [ADCLK] on In2.Cu, length 5.4130 mm @(3.41,-44.00)
+      track_dangling Track [ISOGND] on In1.Cu, length 0.9475 mm @(12.60,37.33)
+      track_dangling Track [Net-(U2-+)] on In1.Cu, length 8.0190 mm @(26.60,29.98)
+      track_dangling Track [Net-(U2--)] on In1.Cu, length 10.1280 mm @(27.20,27.87)
+      track_dangling Track [15V_ISO] on In3.Cu, length 15.9310 mm @(16.40,22.07)
+      track_dangling Track [Net-(U7B--)] on In1.Cu, length 1.9860 mm @(26.00,36.01)
+      track_dangling Track [MDATA] on In3.Cu, length 40.0000 mm @(38.00,-42.00)
+      track_dangling Track [ADCLK] on In2.Cu, length 5.4130 mm @(3.41,-44.00)
+   islands: 71 pour layers, 76 islands; none worse than the base
+   domain_gaps: OK
+   check_layout: 158 placed / moved parts in their domain areas, 15 slots, 10 plane zones; 0 errors
+   check_layout: OK
+   assign_nets: after zone fill: 356 groups, 0 shorts, 1 orphans, 0 opens, 0 items with a foreign net; 45 v5 opens pending GUI layout
+   assign_nets:  orphan group 5775 (10 track, 1 via) net from vias ['ADCLK']: via(7.884,-47.485)
+   assign_nets: OK (report reports/assign_nets.txt)
+== 40 renders of F (x -40 .. 42, y -48 .. 48)
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_B.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_F.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_In1.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_In2.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_In3.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_In4.Cu.png
+   /home/jari/dev/ac_psu_kicad/.claude/worktrees/agent-a7a8886db3517d390/reports/v6/blocks/block_F/F_inner.png
