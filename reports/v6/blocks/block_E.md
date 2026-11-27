@@ -29,10 +29,19 @@ kicad-cli pcb drc --refill-zones --save-board ...                       # the zo
 3. **Rule area.** It shrinks the In3 rule area "v6 route reserve sdm U21 to the corridor In3" from y 40..47 to
    y 46..47, which is its part north of E. The INV sigma-delta pair now leaves E on B.Cu, and the reserve had
    forbidden vias in the isolator I-side band.
-4. **Copper.** It adds 2079 tracks and 290 vias, all locked. There are no zones and no part moves.
+4. **Copper.** It adds 2083 tracks and 290 vias, all locked. There are no zones and no part moves.
 
-`build/blockE/` is rebuilt by `tools/v6/route/block_E_chain.sh` (steps 00-43, then 90 / 91 write the CSV and
-replay). Step 91 confirms that the replay equals the chain board: 5382 of 5382 items, no footprint moved.
+`build/blockE/` is rebuilt by `tools/v6/route/block_E_chain.sh` (steps 00-46, then 90 / 91 write the CSV and
+replay). Step 91 confirms that the replay equals the chain board: 5386 of 5386 items, no footprint moved.
+
+**Fix, 2026-11-27 (coordinator's check_all).** `tools/v5/check_layout.py` rule 6 allows no tracks on In1 / In4
+inside the card outline. The bottom fan (step 09, all six layers) had put three pieces there: PWM_Q6_CTRL on In1 and
+INU_ADCLK_CTRL on In4.
+- Step 44 (`block_E_strip.py`) deletes them.
+- Step 45 routes both nets again on B / In3 / F / In2, INU_ADCLK_CTRL first (in the other order PWM_Q6_CTRL's In2
+  run blocked it).
+- On the replayed board: check_layout OK (0 errors, no In1 / In4 tracks), DRC 0 copper errors, domain_gaps OK,
+  islands 66 → 66. Open counts are unchanged: 10 inside E, 85 on the whole board.
 
 ## Numbers (replayed board, refilled, DRC with the project rules)
 
@@ -46,6 +55,7 @@ replay). Step 91 confirms that the replay equals the chain board: 5382 of 5382 i
 | domain_gaps | — | — | **OK** (0 violations) |
 | Pour islands (`islands.py`, 62 pour layers) | 66 | — | **66** (none worse) |
 | Dangling items, whole board | 47 | 69 | 74 (the 29 port stubs end on the edge) |
+| check_layout (In1 / In4 inside the card, areas, slots) | — | — | **OK** |
 
 **Real open connections inside E (7):**
 
