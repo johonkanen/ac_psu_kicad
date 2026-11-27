@@ -4,38 +4,34 @@
 
 Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see there; v5 step 13: PE6 / PE7 accepted as they are; v5 step 12: PE screw holes 3.0 mm; v5 step 11: cable ties removed, blade tabs for the DAB wires; v5 step 10: spare isolator U17 removed); 2026-11-18 (v5 step 9: aux flyback area placed; v5 step 8: aux flyback on the EEL19 with the SMD controller ICE5AR0680AG; v5 step 7: aux flyback controller ICE5AR0680BZS; v5 step 6: DC bus wire link past J11); 2026-11-17 (v5 step 5: card-area placement revision 2, routing open); 2026-11-15 (v5 steps 3–4: six layers, card area placed in three isolated domains, routing open); 2026-11-15 (BOM complete, REF3125 for REF3025); 2026-11-12 (v5 passives: JLC codes in fab/jlc_bom.csv); 2026-11-09 (v5 step 2: refdes AFE_OUT1, FILTER_IN1, FILTER_OUT1 so the GUI "Update PCB from Schematic" works); 2026-11-05 (v5 step 1: aux flyback + CTRL isolation in the schematic, board staged for the GUI layout); 2026-11-05 (v4 fix 16: pours without holes, KiCad clearances, domain DRC rules); 2026-11-01 (v4 fix 15: cable-tie anchors at 8 soldered lead pins; user confirmed IEC 61010-1 and the 5.0 / 2.5 mm spacing); 2026-10-31 (v4 fix 13/14 on branch `v4-terminals`: M4 terminals on 7 lead connections, insulation spacing P-I 5.0 mm / P,I-PE 2.5 mm; tools/v4/domain_gaps.py in check_all); 2026-10-30 (v4 fix 11/12: measurement filters from reports/noise, AMC1306M05 in the BOM); 2026-10-29: U8 → K7805-2000R3 with C93/C94, fix 10; user answers to the JLC questions recorded; v5 aux flyback planned, decisions taken except D4; board frozen, edited by tools/v4/fix_*.py)
 
-## Where the work stopped (2026-11-27, updated during the session)
+## Where the work stopped (end of session 2026-11-27)
 
-- **State:** `v6-baseboard` = step 5 (inductor landings, entry below) on top of 6226a75 (block outlines and port
-  windows). Main = 4134e5b + the planning session's §14 / §15 commits. Card: `card-rev1` with the Infineon model,
-  its ngspice conversion (`sim/pspice2ngspice.py`) and the loop study rerun with it (b8340c5).
-- **Step 5 changed:** J5 / J7 / J9 / FILTER_OUT1 to 2.3 mm lead holes (`WireHole_D5.0mm_Drill2.3mm`); new J7S (M4,
-  SW_INV_B) at (−47, 64.6) with a 5.15 mm band to J7 on F.Cu / In1 / In2; J10 to (−49.5, 48.5) and FILTER_IN1 to
-  (−58.5, −68.5) as a soldered pigtail hole, each with an 8 mm L on In1 / In2 to its choke pin; U30 3 mm south; both
-  inductors on 5 mm spacers; the round-profile check is rule 5 of `tools/v6/check_layout_v6.py`. Net rename
-  INDUCTOR_INPUT → SW_INV_B in `lib/v6_deviations.csv`; the IPC diff and round trip accept the deliberate hole sizes
-  and the moved terminals (`deviations.terminal_areas`, `hole_swap`).
-- **Check result:** check_all passes (full run 2026-11-26; its one failure, the v6 footprint rows listing the v4
-  terminal instead of the rule footprint as "from", fixed, and the footprint / board / IPC checks rerun: OK).
-- **Step 5c (2026-11-27):** J5S placed as a soldered pigtail hole at (−1, −77.5) between J32 and the wall (user's
-  pick from three options), linked to J5 on F.Cu / In1.Cu, net SW_AFE_1. Both SW landings are on the board now.
-- **Block routing (V6_PLAN §16):** block E done and replayed on `v6-baseboard` (2026-11-27): 262 -> 10 open inside
-  E (7 real, listed in V6_PLAN §16), whole board 88 -> about 85 open. Via-in-pad allowed and the U21 reserve shrink
-  accepted by the user. Block F done and replayed (2026-11-27, 0 open inside, 8 nets drawn to fixed
-  ports, whole board 86 open; `reports/v6/blocks/block_F.md`). **Next: block A** (south-west, x -128 ... -2,
-  y -83 ... -12: AFE filter, CM1, AFE sense, J5 / J5S / FILTER_IN1), then B (west of F, inverter side),
-  C / D (D sorts E's north ports), then trunks and the integration chain. The block helper's lessons are in
-  `reports/v6/blocks/block_E.md` ("What was wrong in the brief").
+- **State:** `v6-baseboard` (not pushed; the user pushes) = steps 5 / 5c (inductor holes, SW landings J7S / J5S) +
+  blocks E, F, A of the block routing (V6_PLAN §16) replayed on top. **76 connections open** on the board (88 at the
+  start of the day). check_all passes after each integration (block A: see the step 8 commit message).
+- **Blocks done:** E (control card, 7 real opens left inside, listed in §16), F (middle, 0 open), A (south-west AFE
+  filter / sense, 0 open inside, 15 fill keep-outs approved by the user). Reports in `reports/v6/blocks/block_*.md`;
+  helper branches `block-E`, `block-F`, `block-A` (merged, worktrees under `~/dev/ac_psu_kicad/.claude/worktrees/`).
+- **Next, in order:**
+  1. Block A follow-ups approved by the user 2026-11-27 (all four): rotate C64 180°, move R90 0.2 mm (2.32 mm gap
+     to R20-3), PGND pour 7 clearance 2.5 mm (2.0 mm gap to DC+ pour 5), rotate R48 (short B.Cu choke-current link
+     instead of the 12-via field). As one numbered step on top of the integrated board, with block A's copper at
+     those parts redrawn (hand to a helper with `reports/v6/blocks/block_A.md`). Also add SW_INV_B / SW_AFE_1 to
+     `tools/v6/route/hv.py` (block A proposal 4) and check what `gen_clearances.py` regenerates.
+  2. Block B (west of F, inverter side: CM3, J7S / J10 links, U30 / R91 sense). Brief as for A, with A's lessons:
+     helpers link `tools/p2k` from the main checkout, never let `chain.sh` overwrite the board, deliver area rows
+     for `lib/v6_copper.csv` (one per new run + one per deleted v4 piece), check the 2.5 mm HV rule with a
+     `block_A_hv.py`-style check (domain_gaps does not cover it).
+  3. Blocks C and D (D sorts E's north ports), then trunks between ports, plane stitching, the integration chain.
 - Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
-  zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push, the user or the
-  planning session pushes; pushed branches take changes by merge.
-- Inductor core (user 2026-11-26): likely Kool Mu / sendust, worker's estimate about 77 turns of 125 u, roughly
-  0.3 / 0.15 / 0.06 mH at 10 / 25 / 50 A (13 A pp ripple at 0.15 mH, 33 A pp at 0.06 mH, 400 V, 50 kHz). To pin
-  down: count the turns, measure L with DC bias or a pulse test.
-- **Open questions for the user:** inductance at current (above); disc cap height (16 mm assumed under the AFE
-  choke); the 5 mm inductor spacers as an assembly item; pigtail wire gauge and M3 ring lug (FILTER_IN1 is a pigtail
-  now too); B0512S minimum load; IPC-2152 check or measurement of the ISO lane; U18 temperature at 450 V full load;
-  double-pulse test of the card (decides R_off); control card out when an ISO card east of J11 is pulled.
+  zone fills with `kicad-cli pcb drc --refill-zones --save-board`; pushed branches take changes by merge.
+- User decisions 2026-11-27: J5S as a pigtail hole; via-in-pad allowed (about 51); U21 reserve shrink accepted;
+  block A keep-outs kept; the four part tweaks above.
+- Inductor core: likely Kool Mu / sendust, about 0.3 / 0.15 / 0.06 mH at 10 / 25 / 50 A (estimate, to measure).
+- **Open questions for the user:** inductance at current; disc cap height (16 mm assumed under the AFE choke); the
+  5 mm inductor spacers as an assembly item; pigtail wire gauge and lug; B0512S minimum load; IPC-2152 rating of the
+  ISO lane; U18 temperature at 450 V; double-pulse test of the card (decides R_off); control card out when an ISO
+  card east of J11 is pulled.
 
 ## v6 step 5 – inductor leads in plain holes, SW landings outside the round profiles (2026-11-26, `v6-baseboard`)
 

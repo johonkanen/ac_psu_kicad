@@ -452,3 +452,9 @@ nets leave E north; plane vias before ports in the ISO band; supply nets need th
 (kept v4 copper already joined it); the 8 crossing nets drawn by script to fixed ports on x -2 (A), x -38 (B) and
 y 38 (D2), no router run. Block shapes as resolved by `block_of` (first block in ORDER wins): A covers F's
 south-west corner (x < -2, y < -12), D2 F's top 8 mm, so F is L-shaped.
+
+**Block A done (2026-11-27, `tools/v6/route/block_A.py`, report `reports/v6/blocks/block_A.md`):** the 8 connections
+inside A closed by script (AFE sense side 2, AFE_CHOKE1 zones and via field, faulty VIN- copper and the dead 15V In2
+run redrawn); ports to C on x = -2 (15V -48.6 In4, GND -49.86 In1, VCC -52.4 In4, 5V -53.6 In4); no B / G ports.
+User 2026-11-27: the 15 fill keep-outs stay; C64 180°, R90 0.2 mm, PGND pour 7 at 2.5 mm and R48 rotated are
+approved as a follow-up step.
