@@ -435,3 +435,15 @@ the v4 / v5 power pours and planes stay in every block.
 **Order:** the inductor landings of section 15 first (they change A and B); then E (29 connections open inside, its
 lanes fix the ports to C and D); then F; then A and B (sense groups last, they may still move with the toroids);
 C and D last. One router run at a time (section 10a); a block run is minutes, not hours.
+
+**Block E done (2026-11-27, `tools/v6/route/block_E.py` + `block_E_copper.csv`, report `reports/v6/blocks/block_E.md`):**
+open inside E 262 -> 10 (7 real: GPIO_BYPASS_RLY_ISO at U19-15, CTRLGND_A at U19-3, CLK1 and ADA3 near U13, the
+kept v4 ends of GPIO_BYPASS_RLY / ADCLK, two GND stubs near U13; PWM_TRANS3 stops short of its port). Ports: south
+y -46 x 41.5 ... 45.5 (In2 / In3), west x 40 (kept v4 copper + MDATA on In3), north y 46 (20 ISO nets, mostly B.Cu;
+block D sorts them). Followed by step 6b (`tools/v6/v6_6b_orphans.py`: D's pass-1 stubs that lost their E end).
+User decisions 2026-11-27:
+- **Via-in-pad allowed:** the about 51 vias inside SMD pads (SOIC pins of U13 / U15 / U16 / U19 / U20 / U21 / U28,
+  some 0603) stay; order filled and capped vias (JLC via-in-pad; check the price on the order page).
+- **Reserve shrunk:** the In3 rule area "v6 route reserve sdm U21 to the corridor In3" keeps only its part north of E.
+Brief corrections for later blocks (from the helper): the E-B / E-F windows lie in the C|I barrier strip, so all ISO
+nets leave E north; plane vias before ports in the ISO band; supply nets need the router input cut to the block.

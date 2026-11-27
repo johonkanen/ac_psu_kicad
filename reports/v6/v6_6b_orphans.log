@@ -1,0 +1,13 @@
+== v6 step 6b: copper groups without a pad deleted
+  round 1: via(41.200,51.400) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(63.900,54.000)-(56.400,54.000) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(56.400,53.950)-(41.200,53.950) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(41.200,53.950)-(41.200,51.400) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(71.900,46.000)-(63.900,54.000) [PWM_Q7] deleted: its group has no pad
+  round 1: track B.Cu(56.400,54.000)-(56.400,53.950) [PWM_Q7] deleted: its group has no pad
+  round 1: track In1.Cu(41.200,51.400)-(39.300,49.500) [PWM_Q7] deleted: its group has no pad
+  round 1: track In1.Cu(39.280,45.300)-(39.250,45.300) [PWM_Q7] deleted: its group has no pad
+  round 1: track In1.Cu(39.300,46.800)-(39.280,46.800) [PWM_Q7] deleted: its group has no pad
+  round 1: track In1.Cu(39.280,46.800)-(39.280,45.300) [PWM_Q7] deleted: its group has no pad
+  round 1: track In1.Cu(39.300,49.500)-(39.300,46.800) [PWM_Q7] deleted: its group has no pad
+  11 items without a pad deleted

@@ -19,18 +19,11 @@ Updated (v5 history): 2026-11-19 (v5 step 14: R108 3.3k; U7 / U2 not moved, see 
   terminal instead of the rule footprint as "from", fixed, and the footprint / board / IPC checks rerun: OK).
 - **Step 5c (2026-11-27):** J5S placed as a soldered pigtail hole at (−1, −77.5) between J32 and the wall (user's
   pick from three options), linked to J5 on F.Cu / In1.Cu, net SW_AFE_1. Both SW landings are on the board now.
-- **Block routing (V6_PLAN §16):** blocks A–G with port windows in `tools/v6/route/blocks.py`
-  (`reports/v6/blocks/blocks_F.png`). Order G → A … ; **block E (control-card area) is next / in progress**: an
-  Opus helper worked on branch `block-E` (from 6226a75, worktree
-  `~/dev/ac_psu_kicad/.claude/worktrees/agent-a1472ef4603fca580`), stopped 2026-11-26 evening as WIP at 1b3c1c9
-  (scripts a5aa781, not pushed). Inside E: 262 → 181 open, 0 DRC errors (J11 both fans complete, C analog chain
-  18 / 21, buck 6 / 6); `block_E.py` replays only the clean-up so far. Next for E: rerun `block_E_chain.sh` from
-  step 14 (P logic, ports, plane vias, supplies, leftovers), write the copper into `block_E_copper.csv`, replay on a
-  fresh 6226a75 board, checks, finish `reports/v6/blocks/block_E.md` (has the brief corrections: the E-B / E-F
-  windows lie in the C|I barrier so all ISO nets leave north; 34 crossing nets; `BASE_REV=870c026` for the step-03
-  board; J11 needs the `08_j11.py` stubs first). Then merge into `v6-baseboard`.
-  Then F, then A / B (sense groups last), C / D, then trunks between the ports and the integration chain. Blocks A
-  and B start clean (step 5 deleted one more pass-1 track at J7).
+- **Block routing (V6_PLAN §16):** block E done and replayed on `v6-baseboard` (2026-11-27): 262 -> 10 open inside
+  E (7 real, listed in V6_PLAN §16), whole board 88 -> about 85 open. Via-in-pad allowed and the U21 reserve shrink
+  accepted by the user. **Next: block F** (middle area x -38 ... 40, y -46 ... 46), then A / B (sense groups last),
+  C / D (D sorts E's north ports), then trunks and the integration chain. The block helper's lessons are in
+  `reports/v6/blocks/block_E.md` ("What was wrong in the brief").
 - Rules that stay: one heavy job at a time, `free -g` >= 6 GB, `flock ~/.cache/ac_psu_heavy.lock`; helpers on Opus;
   zone fills with `kicad-cli pcb drc --refill-zones --save-board`; the worker does not push, the user or the
   planning session pushes; pushed branches take changes by merge.

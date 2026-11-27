@@ -1,0 +1,5 @@
+block_E: 353 pads checked: all at their positions with their nets
+block_E: clean start: 1434 pass-1 tracks and 209 vias inside E deleted, 22 tracks crossing the E edge cut back to it; dead kept copper (no pad): 1 tracks, 0 vias
+block_E: rule area 'v6 route reserve sdm U21 to the corridor In3': (58.5, 40.0, 78.0, 47.0) -> (58.5, 46.0, 78.0, 47.0) (In3)
+block_E: added 2083 tracks, 290 vias, 0 zones
+block_E: saved /home/jari/dev/ac_psu_kicad-v6/kicad/ac_psu.kicad_pcb
