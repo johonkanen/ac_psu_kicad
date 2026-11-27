@@ -5,8 +5,8 @@
                                                     (fence.DOMAIN_FENCES), no tracks on the card planes, no vias in
                                                     foreign pours; one temporary port pad (footprint "TPE...") per
                                                     crossing net of NETS, PORT_IN mm inside its window point
-  kipy block_E_fence.py finish IN OUT               removes the keep-outs and port pads; a routed track that ends on
-                                                    a port pad gets the straight piece to the window point
+  kipy block_E_fence.py finish CUR IN OUT DST       CUR + the router's new copper (OUT minus IN) -> DST; a new track
+                                                    that ends on a port pad gets the straight piece to the window point
   kipy block_E_fence.py domains OUT.json            net -> domain (tools/v4/domains.py), for the chain
 """
 import json
@@ -77,45 +77,119 @@ def prep(src, dst, dom, nets):
     for i, r in enumerate(fence.PLANES):
         fence.keepout(b, f"planes {i}", r, ["In1.Cu", "In2.Cu", "In4.Cu"], vias=False)
     n = fence.pour_vias(b, set(nets))
+    loc = localize(b, set(nets))
     k = 0
     for net in nets:
         if net in PORTS:
             add_port(b, net)
             k += 1
     b.Save(dst)
-    print(f"prep {dom}: {n} pour via keep-outs, {k} port pads")
+    print(f"prep {dom}: {n} pour via keep-outs, {k} port pads; localized: {loc}")
 
 
-def finish(src, dst):
-    b = pcbnew.LoadBoard(src)
-    fence.clear(b)
-    ports = {}
-    for f in [f for f in b.GetFootprints() if f.GetReference().startswith("TPE")]:
+def inE(x, y):
+    return E[0] <= x <= E[2] and E[1] <= y <= E[3] and not (G[0] < x < G[2] and G[1] < y < G[3])
+
+
+def localize(b, nets):
+    """The step's nets end at the block: on the router's input copy their pads outside E lose the net and their
+    copper wholly outside E goes (zones too), so the router neither tries the far pads nor routes to far islands.
+    finish() copies only the new copper back onto the real board."""
+    np = nt = nz = 0
+    for f in b.GetFootprints():
         for p in f.Pads():
-            ports[p.GetNetname()] = p
+            if p.GetNetname() in nets and not inE(*xy(p.GetPosition())):
+                p.SetNetCode(0)
+                np += 1
+    for t in list(b.GetTracks()):
+        if t.GetNetname() not in nets:
+            continue
+        pts = [xy(t.GetPosition())] if t.Type() == pcbnew.PCB_VIA_T else [xy(t.GetStart()), xy(t.GetEnd())]
+        if not any(inE(*q) for q in pts):
+            b.Delete(t)
+            nt += 1
+    for z in list(b.Zones()):
+        if z.GetIsRuleArea() or z.GetNetname() not in nets:
+            continue
+        bb = z.GetBoundingBox()
+        x0, x1, y0, y1 = T(bb.GetX()), T(bb.GetRight()), -T(bb.GetBottom()), -T(bb.GetY())
+        if x1 < E[0] or x0 > E[2] or y1 < E[1] or y0 > E[3] or (G[0] <= x0 and x1 <= G[2] and G[1] <= y0 and y1 <= G[3]):
+            b.Delete(z)
+            nz += 1
+    return f"{np} pads, {nt} tracks / vias, {nz} zones"
+
+
+def xy(v):
+    return T(v.x), -T(v.y)
+
+
+def item_key(b, t):
+    import block_E as BE
+    return BE.item_key(b, t)
+
+
+def finish(cur, inp, outp, dst):
+    """cur + (copper of outp not in inp) -> dst; a new track ending on a port pad gets the piece to the edge."""
+    import collections
+    b, bi, bo = pcbnew.LoadBoard(cur), pcbnew.LoadBoard(inp), pcbnew.LoadBoard(outp)
+    have = collections.Counter(item_key(bi, t) for t in bi.GetTracks())
+    new = []
+    for t in bo.GetTracks():
+        k = item_key(bo, t)
+        if have[k] > 0:
+            have[k] -= 1
+            continue
+        new.append(t)
+    for t in new:
+        if t.Type() == pcbnew.PCB_VIA_T:
+            v = pcbnew.PCB_VIA(b)
+            v.SetViaType(pcbnew.VIATYPE_THROUGH)
+            v.SetPosition(t.GetPosition())
+            v.SetWidth(pcbnew.F_Cu, t.GetWidth(pcbnew.F_Cu))
+            v.SetDrill(t.GetDrill())
+            v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu)
+            v.SetNetCode(b.GetNetcodeFromNetname(t.GetNetname()))
+            b.Add(v)
+        else:
+            c = pcbnew.PCB_TRACK(b)
+            c.SetStart(t.GetStart())
+            c.SetEnd(t.GetEnd())
+            c.SetWidth(t.GetWidth())
+            c.SetLayer(t.GetLayer())
+            c.SetNetCode(b.GetNetcodeFromNetname(t.GetNetname()))
+            b.Add(c)
+    ports = {}
+    for f in bo.GetFootprints():
+        if f.GetReference().startswith("TPE"):
+            for p in f.Pads():
+                ports[p.GetNetname()] = p
     reached = []
+    allt = list(bo.GetTracks())
+    edge_have = {(t.GetNetname(), t.GetStart().x, t.GetStart().y, t.GetEnd().x, t.GetEnd().y) for t in b.GetTracks()
+                 if t.Type() != pcbnew.PCB_VIA_T}
     for net, p in ports.items():
         q = p.GetPosition()
-        L = p.GetLayer() if p.GetLayerSet().Seq().size() == 1 else None
         L = p.GetLayerSet().Seq()[0]
-        hit = [t for t in b.GetTracks() if t.GetNetname() == net and t.Type() != pcbnew.PCB_VIA_T
-               and t.GetLayer() == L and (t.GetStart() == q or t.GetEnd() == q)]
-        hitv = [t for t in b.GetTracks() if t.GetNetname() == net and t.Type() == pcbnew.PCB_VIA_T and t.GetPosition() == q]
+        near = lambda v: math.hypot(T(v.x - q.x), T(v.y - q.y)) <= 0.2  # noqa: E731 (track end on the pad)
+        hit = [t for t in allt if t.GetNetname() == net and t.Type() != pcbnew.PCB_VIA_T
+               and t.GetLayer() == L and (near(t.GetStart()) or near(t.GetEnd()))]
+        hitv = [t for t in allt if t.GetNetname() == net and t.Type() == pcbnew.PCB_VIA_T and near(t.GetPosition())]
+        e = P(*PORTS[net]["at"])
+        if (net, q.x, q.y, e.x, e.y) in edge_have:      # the piece to the edge is there already (an earlier step)
+            reached.append(net)
+            continue
         if hit or hitv:
-            w = hit[0].GetWidth() if hit else F(0.2)
             t = pcbnew.PCB_TRACK(b)
             t.SetStart(q)
             t.SetEnd(P(*PORTS[net]["at"]))
-            t.SetWidth(w)
+            t.SetWidth(hit[0].GetWidth() if hit else F(0.2))
             t.SetLayer(L)
-            t.SetNet(p.GetNet())
+            t.SetNetCode(b.GetNetcodeFromNetname(net))
             b.Add(t)
             reached.append(net)
-    for f in [f for f in b.GetFootprints() if f.GetReference().startswith("TPE")]:
-        b.Delete(f)
     b.Save(dst)
     missing = sorted(set(ports) - set(reached))
-    print(f"finish: {len(reached)} ports reached" + (f"; not reached: {', '.join(missing)}" if missing else ""))
+    print(f"finish: {len(new)} new items, {len(reached)} ports reached" + (f"; not reached: {', '.join(missing)}" if missing else ""))
 
 
 def domains_json(out):
@@ -131,6 +205,6 @@ if __name__ == "__main__":
     if m == "prep":
         prep(sys.argv[2], sys.argv[3], sys.argv[4], [n for n in sys.argv[5].split(",") if n])
     elif m == "finish":
-        finish(sys.argv[2], sys.argv[3])
+        finish(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     else:
         domains_json(sys.argv[2])

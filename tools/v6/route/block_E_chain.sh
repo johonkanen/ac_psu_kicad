@@ -36,9 +36,9 @@ rstep() {   # rstep NN name DOMAIN TMO NETS [route.py options]
     flock "$LOCK" timeout "$tmo" python3 -I "$SK/route_step.py" "$W/_in.kicad_pcb" "$W/_out.kicad_pcb" "$nets" "$@" \
         --net-clearances "$H/hv_clearances.json" > "$L/${nn}_$name.log" 2>&1
     local rc=$?; set -e
-    grep -E "Routed|routed|FAILED|failed|open" "$L/${nn}_$name.log" | cut -c1-300 | tail -4 | sed 's/^/   /'
+    grep -E "Routed|routed|FAILED|failed|open" "$L/${nn}_$name.log" | cut -c1-300 | tail -4 | sed 's/^/   /' || true
     if [ "$rc" = 0 ]; then
-        kp "$H/block_E_fence.py" finish "$W/_out.kicad_pcb" "$B" | sed 's/^/   /'
+        kp "$H/block_E_fence.py" finish "$B" "$W/_in.kicad_pcb" "$W/_out.kicad_pcb" "$B" | sed 's/^/   /'
         kp "$H/fence.py" lock "$B" "$B" > /dev/null
     else
         echo "   router failed or timed out ($rc): step skipped (if it died without output, rerun it)"
@@ -86,30 +86,53 @@ script 08 j11_stubs 08_j11.py
 # J11 bottom fan first (most constrained: its pin order is scrambled against U19 / U21 / U20): all six layers; the
 # card planes fence In1 / In2 / In4 except in the J11 column (x 44.4 .. 53.5, y 33 .. 46), where the fan untangles
 rstep 09 j11_bot C 1200 "$J11BOT" --layers B.Cu In3.Cu F.Cu In1.Cu In2.Cu In4.Cu --layer-costs 1 1.2 1.5 1.6 1.6 1.6
+# the analog filters beside J11 pins 1..4 (R128-R130, C129-C131) and the C analog chain before the top fan, whose
+# lanes otherwise box them in; then the CTRLGND_A / 3V3_CTRL vias of the parts west of x 56
+rstep 10 c_analog C 600 "$CANA" "${S3[@]}" --layer-costs 2 2 1
+script 11 planes_j11 block_E_planes.py CTRLGND_A,3V3_CTRL 44,10,56,34
 # J11 top fan: the inner-column (even) pins first on In3 / B (vias at the isolator end), then the odd pins on F.Cu
 J11TE="ADASEL1_ISO,CLK1_ISO,DAB_PWM_PRI_HI_ISO,GPIO_BYPASS_RLY_ISOLATED,MDATA_ISO,PWM_G1_ISO,PWM_G4_ISO,PWM_TRANS2_ISO,SDATA1_ISO"
-rstep 10 j11_top_even C 900 "$J11TE" "${S3[@]}" --layer-costs 6 1 1.5
-rstep 11 j11_top C 900 "$J11TOP" "${S3[@]}" --layer-costs 1 2 3 --ordering original
-rstep 12 c_analog C 600 "$CANA" "${S3[@]}" --layer-costs 2 2 1
-rstep 13 buck C 600 "$BUCK" "${S3[@]}" --layer-costs 1 3 1 --power-nets CTRL_SW CTRL_RAW CTRL_W --power-nets-widths 1.0 1.0 1.0
-rstep 14 p_logic P 600 "$PLOG" "${S3[@]}" --layer-costs 1 1.5 1
-rstep 15 p_ports P 900 "$PPORT" "${S3[@]}" --layer-costs 3 1 3
-rstep 16 i_logic I 600 "$ILOG" "${S3[@]}" --layer-costs 1 1.5 1
-rstep 17 i_ports I 900 "$IPORT" "${S3[@]}" --layer-costs 2 1.5 1
+rstep 12 j11_top_even C 900 "$J11TE" "${S3[@]}" --layer-costs 6 1 1.5
+rstep 13 j11_top C 900 "$J11TOP" "${S3[@]}" --layer-costs 1 2 3 --ordering original
+rstep 14 buck C 600 "$BUCK" "${S3[@]}" --layer-costs 1 3 1 --power-nets CTRL_SW CTRL_RAW CTRL_W --power-nets-widths 1.0 1.0 1.0
+rstep 15 p_logic P 600 "$PLOG" "${S3[@]}" --layer-costs 1 1.5 1
+rstep 16 p_ports P 900 "$PPORT" --layers F.Cu In3.Cu B.Cu In1.Cu In2.Cu In4.Cu --layer-costs 3 1 3 2 1.5 2
+rstep 17 i_logic I 600 "$ILOG" "${S3[@]}" --layer-costs 1 1.5 1
+# the ISO plane vias of the isolator I-side band (y 38 .. 46) before the ISO ports, which otherwise take its room
+script 18 planes_i block_E_planes.py ISOGND,3V3_ISO
+rstep 19 i_ports I 900 "$IPORT" "${S3[@]}" --layer-costs 2 1.5 1
 # --- planes: a via beside every SMD pad of a plane net in its plane (after the fans) -------------------------------
-script 20 planes block_E_planes.py
+script 20 planes block_E_planes.py all -200,-200,200,200 3.0
 # --- supplies (pads outside the planes, rails), per domain --------------------------------------------------------
-SUPC=(--layers F.Cu In3.Cu B.Cu --layer-costs 1 2 1)
+SUPC=(--layers F.Cu In3.Cu B.Cu --layer-costs 1 2 1 --quick --max-iterations 1500000)
 rstep 21 sup_c C 600 "$CSUP,5V_CTRL_A" "${SUPC[@]}" "${PW[@]}"
-rstep 22 sup_p P 600 "$PSUP" "${SUPC[@]}" "${PW[@]}"
+rstep 22 sup_p P 300 "VCC,5V,15V" "${SUPC[@]}" "${PW[@]}"
 rstep 23 sup_i I 600 "$ISUP" "${SUPC[@]}" "${PW[@]}"
 # --- leftovers per domain ------------------------------------------------------------------------------------------
 rstep 30 left_c C 900 "$J11TOP,$J11BOT,$CANA,$BUCK,$CSUP" "${S3[@]}" --layer-costs 1 1.5 1 "${PW[@]}"
-rstep 31 left_p P 900 "$PLOG,$PPORT,$PSUP" "${S3[@]}" --layer-costs 1 1.5 1 "${PW[@]}"
+rstep 31 left_p P 900 "$PLOG,$PPORT,VCC" --layers F.Cu In3.Cu B.Cu In1.Cu In2.Cu In4.Cu --layer-costs 1 1.5 1 2 2 2 "${PW[@]}"
 rstep 32 left_i I 900 "$ILOG,$IPORT,$ISUP" "${S3[@]}" --layer-costs 1 1.5 1 "${PW[@]}"
+
+# --- last tries: the In3 sdm reserve shrunk to its part north of E (frees vias in the isolator I-side band), then the
+#     remaining nets with every layer the fences allow
+script 33 reserve block_E_reserve.py
+rstep 34 fix_i I 300 "GPIO_BYPASS_RLY_ISO,INU_ADCLK_U21,DAB_SHUNT2,ISO_DAB_SDM_RAW_VOLTAGE" --layers B.Cu In3.Cu F.Cu --layer-costs 1 1 2
+rstep 35 fix_p P 300 "ADA3,CLK1,GPIO_BYPASS_RLY,ADCLK" --layers F.Cu In3.Cu B.Cu In1.Cu In2.Cu In4.Cu --layer-costs 1 1 1 1.5 1.5 1.5
+rstep 36 fix_c C 300 "CTRLGND_A" --layers B.Cu In3.Cu F.Cu --layer-costs 1 1 1 "${PW[@]}"
+
+# --- dead kept copper (signal-net pieces that end at no pad) ---------------------------------------------------------
+script 40 dead block_E_dead.py "$R/build/v6route/03_prune.kicad_pcb"
+# --- the 5V_ISOL F.Cu run that cut the band's ISOPGND pour goes to In3 -----------------------------------------------
+script 41 fix block_E_fix.py
+rstep 42 fix_5visol I 300 "5V_ISOL" --layers B.Cu In3.Cu --layer-costs 1 1 --power-nets 5V_ISOL --power-nets-widths 0.4
+script 43 dead2 block_E_dead.py "$R/build/v6route/03_prune.kicad_pcb"
 
 if [ "$((10#$LAST))" -ge 90 ]; then
     echo "== 90 copper -> CSV"
     kp "$H/block_E_make.py" copper "$W/00_clean.kicad_pcb" "$B"
+    echo "== 91 replay on a fresh 6226a75 board, compared with the chain board"
+    git -C "$R" show 6226a75:kicad/ac_psu.kicad_pcb > "$W/fresh.kicad_pcb"
+    kp "$H/block_E.py" --board "$W/fresh.kicad_pcb" --out "$W/replay.kicad_pcb" | sed 's/^/   /'
+    kp "$H/block_E_same.py" "$W/replay.kicad_pcb" "$B" | sed 's/^/   /'
 fi
 echo "chain: $((SECONDS - T0)) s"

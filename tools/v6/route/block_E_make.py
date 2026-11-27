@@ -21,6 +21,7 @@ import block_E as BE  # noqa: E402
 
 FIELDS = ["kind", "net", "layer", "x1", "y1", "x2", "y2", "w", "tag"]
 CLEAN_KINDS = {"deltrack", "delvia", "cuttrack"}
+DEAD_KINDS = {"deadtrack", "deadvia"}
 
 
 def in_box(p, r, eps=1e-6):
@@ -179,6 +180,20 @@ def make_copper(basep, routedp):
                     pads[(fp.GetReference(), pad.GetNumber())] = dict(kind="pad", net=n, x1=f3(q[0]), y1=f3(q[1]),
                                                                        tag=f"{fp.GetReference()}-{pad.GetNumber()}")
                     break
+    # kept copper of BASE that ROUTED no longer has (deleted as dead by block_E_dead.py)
+    gone = collections.Counter(BE.item_key(rb, t) for t in rb.GetTracks())
+    for t in base.GetTracks():
+        k = BE.item_key(base, t)
+        if gone[k] > 0:
+            gone[k] -= 1
+            continue
+        if t.Type() == pcbnew.PCB_VIA_T:
+            p = BE.xy(t.GetPosition())
+            out.append(dict(kind="deadvia", net=t.GetNetname(), x1=f3(p[0]), y1=f3(p[1])))
+        else:
+            a, c = BE.xy(t.GetStart()), BE.xy(t.GetEnd())
+            out.append(dict(kind="deadtrack", net=t.GetNetname(), layer=base.GetLayerName(t.GetLayer()),
+                            x1=f3(a[0]), y1=f3(a[1]), x2=f3(c[0]), y2=f3(c[1])))
     rs = [r for r in load() if r["kind"] in CLEAN_KINDS or r["kind"] == "move"]
     rs = sorted(pads.values(), key=lambda r: r["tag"]) + rs + out
     save(rs)

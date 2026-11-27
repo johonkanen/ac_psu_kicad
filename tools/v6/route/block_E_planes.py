@@ -3,7 +3,8 @@
 inside block E (E minus block G). Original description of step 07: a via with a short stub next to every SMD pad of a plane net that lies inside its
 plane and has no track yet (as the v5 pass-7 helper scripted.py planes); a same-net via within 1.2 mm is shared.
 
-  kipy block_E_planes.py IN OUT
+  kipy block_E_planes.py IN OUT [NETS|all [X0,Y0,X1,Y1 [RMAX]]]   (NETS: comma list; a box limits the pads;
+                                                                   RMAX: farthest via, default 2.0 mm)
 
 Plane nets: the card-area planes on In1 / In2 / In4 (CTRLGND_A, 3V3_CTRL, CTRLGND, 5V_CTRL, ISOGND, 3V3_ISO, GND,
 VCC) and the v6 In4 strips (GND primary, ISOGND ISO). Vias may perforate the other planes (the refill makes the
@@ -32,6 +33,9 @@ def inE(x, y):
 
 def main():
     src, dst = sys.argv[1:3]
+    only = set(sys.argv[3].split(",")) if len(sys.argv) > 3 and sys.argv[3] != "all" else set(PLANE_NETS)
+    box = tuple(float(v) for v in sys.argv[4].split(",")) if len(sys.argv) > 4 else None
+    rmax = float(sys.argv[5]) if len(sys.argv) > 5 else 2.0
     b = pcbnew.LoadBoard(src)
     cx = geo.Ctx(b)
     cx.via_pierce = set(PLANE_NETS)
@@ -46,7 +50,7 @@ def main():
     for t in b.GetTracks():
         tracks.setdefault(t.GetNetname(), []).append(t)
     total = 0
-    for net in PLANE_NETS:
+    for net in [n for n in PLANE_NETS if n in only]:
         fs = fills.get(net, [])
 
         def inplane(x, y, fs=fs):      # a via there lands in the fill with margin (not on its edge)
@@ -58,7 +62,7 @@ def main():
                 if p.GetNetname() != net or p.HasHole():
                     continue
                 x, y = xy(p.GetPosition())
-                if not inE(x, y):
+                if not inE(x, y) or (box and not (box[0] <= x <= box[2] and box[1] <= y <= box[3])):
                     continue
                 if not any(f.Contains(P(x, y)) for f in fs):
                     continue
@@ -87,7 +91,7 @@ def main():
                     continue
                 r0 = smin / 2 + geo.VIA / 2 + 0.06
                 ok = False
-                for vx, vy, r in ring(x, y, r0, 2.0, n=24):
+                for vx, vy, r in ring(x, y, r0, rmax, n=24):
                     if not inplane(vx, vy):
                         continue
                     v = cx.via_ok(net, vx, vy)

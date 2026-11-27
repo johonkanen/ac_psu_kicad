@@ -13,10 +13,12 @@ Order:
   2. clean start: the copper that routing pass 1 (chain steps 04-98) added inside block E (E minus block G) is
      removed. Rows "deltrack" (net, layer, ends) / "delvia" (net, position) name each item; rows "cuttrack" are
      pass-1 tracks that cross the E edge: the part inside E goes, the part outside (x1 y1 - x2 y2 kept, w = the
-     original end inside E "ex ey") stays. A row whose item is not on the board -> exit 1, nothing saved.
+     original end inside E "ex ey") stays. Rows "deadtrack" / "deadvia": kept (v4 / v5) copper inside E that ends at
+     no pad (block_E_dead.py). A row whose item is not on the board -> exit 1, nothing saved.
      The list was made by block_E_make.py against build/v6route/03_prune.kicad_pcb (chain.sh 00 03 with
      BASE_REV=870c026, the board pass 1 started from): matching by net, layer and geometry (0.001 mm).
-  3. part moves (rows "move": ref, x, y, rotation, side), then tracks and vias (locked) and zones
+  3. the In3 sdm reserve shrunk to its part north of E (RESERVE), part moves (rows "move": ref, x, y, rotation,
+     side), then tracks and vias (locked) and zones
 
 Every copper item of block E lies inside E (x 40 .. 118.7, y -46 .. 46, block G excluded) except the stub ends of the
 crossing nets, which end exactly on their window (PORTS below; block_E.md has the list).
@@ -46,9 +48,14 @@ def xy(v):
     return T(v.x), -T(v.y)
 
 
+_ROWS = []
+
+
 def rows(kind=None):
-    with open(CSV) as fh:
-        return [r for r in csv.DictReader(fh) if kind is None or r["kind"] == kind]
+    if not _ROWS:
+        with open(CSV) as fh:
+            _ROWS.extend(csv.DictReader(fh))
+    return [r for r in _ROWS if kind is None or r["kind"] == kind]
 
 
 def check_pads(b, pads):
@@ -96,10 +103,21 @@ def clean(b, log):
     for t in b.GetTracks():
         index.setdefault(item_key(b, t), []).append(t)
     todo, missing = [], []
-    for r in rows("deltrack") + rows("cuttrack") + rows("delvia"):
-        if r["kind"] == "delvia":
+    # a dead row may name the piece a cut leaves (a pass-1 run left dangling inside block G): that cut deletes
+    cutres = {tkey(r["net"], r["layer"], (float(r["x1"]), float(r["y1"])), (float(r["x2"]), float(r["y2"]))): r
+              for r in rows("cuttrack")}
+    dead_cut = set()
+    for r in rows("deadtrack"):
+        k = tkey(r["net"], r["layer"], (float(r["x1"]), float(r["y1"])), (float(r["x2"]), float(r["y2"])))
+        if k in cutres and not index.get(k):
+            dead_cut.add(id(cutres[k]))
+    for r in rows("deltrack") + rows("cuttrack") + rows("delvia") + rows("deadtrack") + rows("deadvia"):
+        if r["kind"] == "deadtrack" and id(cutres.get(tkey(r["net"], r["layer"], (float(r["x1"]), float(r["y1"])),
+                                                         (float(r["x2"]), float(r["y2"]))))) in dead_cut:
+            continue
+        if r["kind"] in ("delvia", "deadvia"):
             k = vkey(r["net"], (float(r["x1"]), float(r["y1"])))
-        elif r["kind"] == "deltrack":
+        elif r["kind"] in ("deltrack", "deadtrack"):
             k = tkey(r["net"], r["layer"], (float(r["x1"]), float(r["y1"])), (float(r["x2"]), float(r["y2"])))
         else:   # cuttrack: tag = original "ax ay bx by"
             o = [float(v) for v in r["tag"].split()]
@@ -111,17 +129,49 @@ def clean(b, log):
         todo.append((r, lst.pop()))
     if missing:
         return missing
-    n = {"deltrack": 0, "delvia": 0, "cuttrack": 0}
+    n = {"deltrack": 0, "delvia": 0, "cuttrack": 0, "deadtrack": 0, "deadvia": 0}
     for r, t in todo:
         n[r["kind"]] += 1
-        if r["kind"] == "cuttrack":
+        if r["kind"] == "cuttrack" and id(r) in dead_cut:
+            n["cuttrack"] -= 1
+            n["deadtrack"] += 1
+            b.Delete(t)
+        elif r["kind"] == "cuttrack":
             t.SetStart(P(float(r["x1"]), float(r["y1"])))
             t.SetEnd(P(float(r["x2"]), float(r["y2"])))
         else:
             b.Delete(t)
     log.append(f"clean start: {n['deltrack']} pass-1 tracks and {n['delvia']} vias inside E deleted, "
-               f"{n['cuttrack']} tracks crossing the E edge cut back to it")
+               f"{n['cuttrack']} tracks crossing the E edge cut back to it; dead kept copper (no pad): "
+               f"{n['deadtrack']} tracks, {n['deadvia']} vias")
     return []
+
+
+# The In3 reserve for the INV sigma-delta pair (v6 step 4b) also forbade vias in the isolator I-side band of E
+# (x 58.5 .. 78, y 40 .. 46), where INU_ADCLK_U21 (R258-1 top / U21-14 bottom) needs one. The pair now leaves E on
+# B.Cu (ports at x 73.5 / 74.0), so the reserve keeps only its part north of the E edge.
+RESERVE = ("v6 route reserve sdm U21 to the corridor In3", (58.5, 40.0, 78.0, 47.0), (58.5, 46.0, 78.0, 47.0))
+
+
+def shrink_reserve(b, log):
+    name, old, new = RESERVE
+    zs = [z for z in b.Zones() if z.GetIsRuleArea() and z.GetZoneName() == name]
+    if len(zs) != 1:
+        sys.exit(f"block_E: rule area {name!r} not found once (found {len(zs)}); nothing saved")
+    z = zs[0]
+    bb = z.GetBoundingBox()
+    got = (T(bb.GetX()), -T(bb.GetBottom()), T(bb.GetRight()), -T(bb.GetY()))
+    if all(abs(a - c) < 0.02 for a, c in zip(got, new)):
+        return
+    if not all(abs(a - c) < 0.02 for a, c in zip(got, old)):
+        sys.exit(f"block_E: rule area {name!r} is {got}, expected {old}; nothing saved")
+    o = z.Outline()
+    o.RemoveAllContours()
+    o.NewOutline()
+    x0, y0, x1, y1 = new
+    for x, y in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+        o.Append(F(x), F(-y))
+    log.append(f"rule area {name!r}: {old} -> {new} (In3)")
 
 
 def move(b, r):
@@ -199,6 +249,7 @@ def replay(b, log, clean_only=False):
                  "nothing saved")
     if clean_only:
         return
+    shrink_reserve(b, log)
     for r in rows("move"):
         move(b, r)
         log.append(f"move {r['tag']} -> ({r['x1']}, {r['y1']}) rot {r['x2']} side {r['y2']}")
@@ -244,4 +295,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:2] == ["reserve"]:          # chain step: kipy block_E.py reserve IN OUT
+        _b = pcbnew.LoadBoard(sys.argv[2])
+        _log = []
+        shrink_reserve(_b, _log)
+        print("block_E:", *_log)
+        pcbnew.SaveBoard(sys.argv[3], _b)
+    else:
+        main()
