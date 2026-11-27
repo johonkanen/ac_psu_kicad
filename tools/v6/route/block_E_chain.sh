@@ -86,6 +86,7 @@ script 08 j11_stubs 08_j11.py
 # J11 bottom fan first (most constrained: its pin order is scrambled against U19 / U21 / U20): all six layers; the
 # card planes fence In1 / In2 / In4 except in the J11 column (x 44.4 .. 53.5, y 33 .. 46), where the fan untangles
 rstep 09 j11_bot C 1200 "$J11BOT" --layers B.Cu In3.Cu F.Cu In1.Cu In2.Cu In4.Cu --layer-costs 1 1.2 1.5 1.6 1.6 1.6
+# (its In1 / In4 pieces inside the card outline are rerouted by steps 44 / 45)
 # the analog filters beside J11 pins 1..4 (R128-R130, C129-C131) and the C analog chain before the top fan, whose
 # lanes otherwise box them in; then the CTRLGND_A / 3V3_CTRL vias of the parts west of x 56
 rstep 10 c_analog C 600 "$CANA" "${S3[@]}" --layer-costs 2 2 1
@@ -126,6 +127,11 @@ script 40 dead block_E_dead.py "$R/build/v6route/03_prune.kicad_pcb"
 script 41 fix block_E_fix.py
 rstep 42 fix_5visol I 300 "5V_ISOL" --layers B.Cu In3.Cu --layer-costs 1 1 --power-nets 5V_ISOL --power-nets-widths 0.4
 script 43 dead2 block_E_dead.py "$R/build/v6route/03_prune.kicad_pcb"
+# --- no In1 / In4 tracks inside the card outline (check_layout rule 6): the two bottom-fan nets that used them again on
+#     F / In2 / In3 / B, then vias left without a purpose
+script 44 strip block_E_strip.py
+rstep 45 fan_fix C 600 "INU_ADCLK_CTRL,PWM_Q6_CTRL" --layers B.Cu In3.Cu F.Cu In2.Cu --layer-costs 1 1.2 1.5 1.6 --ordering original
+script 46 dead3 block_E_dead.py "$R/build/v6route/03_prune.kicad_pcb"
 
 if [ "$((10#$LAST))" -ge 90 ]; then
     echo "== 90 copper -> CSV"
